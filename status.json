@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-07-30T19:33:31.1087507+00:00",
+    "updatedAt":  "2026-07-31T01:08:48.4502679+05:30",
     "updateIntervalHours":  6,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -23,10 +23,24 @@
                 },
     "highWave":  {
                      "alert":  [
-
+                                   "DAMAN AND DIU",
+                                   "GOA",
+                                   "GUJARAT",
+                                   "KARNATAKA",
+                                   "KERALA",
+                                   "LAKSHADWEEP",
+                                   "MAHARASHTRA",
+                                   "PUDUCHERRY"
                                ],
                      "watch":  [
-
+                                   "ANDAMAN AND NICOBAR",
+                                   "ANDHRA PRADESH",
+                                   "DAMAN AND DIU",
+                                   "GUJARAT",
+                                   "KERALA",
+                                   "ODISHA",
+                                   "TAMIL NADU",
+                                   "WEST BENGAL"
                                ],
                      "warning":  [
 
@@ -37,10 +51,15 @@
                  },
     "swellSurge":  {
                        "alert":  [
-
+                                     "ANDAMAN AND NICOBAR",
+                                     "LAKSHADWEEP",
+                                     "TAMIL NADU",
+                                     "WEST BENGAL"
                                  ],
                        "watch":  [
-
+                                     "ANDAMAN AND NICOBAR",
+                                     "MAHARASHTRA",
+                                     "WEST BENGAL"
                                  ],
                        "warning":  [
 

@@ -80,11 +80,25 @@ try {
 
 try {
     $hwa = Invoke-RestMethod -Uri 'https://sarat.incois.gov.in/incoismobileappdata/rest/incois/hwassalatestdata' -TimeoutSec 45
+    $items = @()
+    if ($hwa.PSObject.Properties.Name -contains 'HWAJson') {
+        if ("$($hwa.HWAJson)".Trim()) {
+            foreach ($record in ($hwa.HWAJson | ConvertFrom-Json)) { $items += $record }
+        }
+        if ("$($hwa.SSAJson)".Trim()) {
+            foreach ($record in ($hwa.SSAJson | ConvertFrom-Json)) { $items += $record }
+        }
+    } elseif ($hwa -is [System.Collections.IEnumerable] -and $hwa -isnot [string]) {
+        $items = @($hwa)
+    } elseif ($hwa.PSObject.Properties.Name -contains 'data') {
+        $items = @($hwa.data)
+    }
+    if (-not $items.Count) { throw 'INCOIS returned no high-wave or swell-surge records' }
+
     # A successful response replaces the previous snapshot; do not retain expired alerts.
     foreach ($group in @($status.highWave, $status.swellSurge)) {
         foreach ($level in @('alert','watch','warning','noThreat')) { $group.$level = @() }
     }
-    $items = if ($hwa -is [System.Collections.IEnumerable] -and $hwa -isnot [string]) { @($hwa) } else { @($hwa.data) }
     foreach ($item in $items) {
         $state = Get-StateName $item
         $alert = Get-AlertName $item
