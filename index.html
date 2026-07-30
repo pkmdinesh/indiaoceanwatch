@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Click to know today’s coastal advisory status of India: tsunami, high wave, swell and storm surge, and potential fishing zones.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pkmdinesh.github.io/indiaoceanwatch/">
+  <meta property="og:title" content="Ocean Watch">
+  <meta property="og:description" content="Click to Know Today’s Coastal Advisory Status of India — Tsunami, High Wave, Swell & Storm Surge, Potential Fishing Zone">
+  <meta property="og:image" content="https://pkmdinesh.github.io/indiaoceanwatch/social-banner-ocean-watch.png">
+  <meta property="og:image:width" content="1717">
+  <meta property="og:image:height" content="916">
+  <meta property="og:image:alt" content="Ocean Watch — Today’s Coastal Advisory Status of India">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ocean Watch">
+  <meta name="twitter:description" content="Click to Know Today’s Coastal Advisory Status of India — Tsunami, High Wave, Swell & Storm Surge, Potential Fishing Zone">
+  <meta name="twitter:image" content="https://pkmdinesh.github.io/indiaoceanwatch/social-banner-ocean-watch.png">
+  <title>Bharat Coastal Advisory Status | Ocean Watch</title>
+  <style>
+    :root{--ink:#082f3c;--muted:#5b7279;--paper:#eef3ef;--white:#fff;--line:#d9e5e1;--teal:#087f84;--green:#238269;--amber:#dd932a;--red:#d95842;--gray:#819195;--violet:#69578f}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 0 0,#c9eeea 0,transparent 32rem),var(--paper)}
+    body{padding:12px}.dashboard{width:min(1440px,100%);height:calc(100dvh - 24px);min-height:660px;margin:auto;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;border:1px solid rgba(8,47,60,.13);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:0 20px 60px rgba(8,47,60,.12)}
+    a{color:inherit}.header{position:relative;display:flex;align-items:center;gap:18px;padding:13px 20px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#fff,#f7fbf9)}.incois-logo{width:min(390px,31vw);height:52px;object-fit:contain;object-position:left center}.title{position:absolute;left:50%;transform:translateX(-50%);width:max-content;max-width:42vw;text-align:center}.title h1{margin:0;white-space:nowrap;font:700 clamp(21px,2.25vw,35px)/1 Georgia,"Times New Roman",serif;letter-spacing:-.03em}.title p{margin:5px 0 0;color:var(--ink);font-size:11px;font-weight:800}.stamp{margin-left:auto;text-align:right;color:var(--muted);font-size:10px;line-height:1.45}.stamp time{color:var(--ink);font-size:11px;font-weight:800}.live{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:800}.live:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px #dcefe9}.refresh-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border:0;border-radius:10px;color:#fff;background:var(--teal);font:800 11px/1 inherit;cursor:pointer;box-shadow:0 5px 14px rgba(8,127,132,.2)}.refresh-btn:hover,.refresh-btn:focus-visible{background:var(--ink);outline:2px solid #8ddbd5;outline-offset:2px}.refresh-btn:disabled{cursor:wait;opacity:.65}.refresh-btn .spin{display:inline-block}.refresh-btn.busy .spin{animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    .content{min-height:0;display:grid;grid-template-columns:1.45fr 1fr 1fr}.panel{min-width:0;min-height:0;padding:14px 16px;border-right:1px solid var(--line)}.panel:last-child{border-right:0}.panel-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}.service-img{width:58px;height:42px;flex:none;object-fit:cover;border-radius:10px}.service-logo{width:58px;height:42px;flex:none;object-fit:contain}.panel h2{margin:0;white-space:nowrap;font:700 clamp(18px,1.8vw,27px)/1 Georgia,"Times New Roman",serif}.panel-kicker{margin:3px 0 0;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}.source{margin-left:auto;flex:none;text-decoration:none;padding:7px 9px;border-radius:8px;background:#e7f0ed;font-size:11px;font-weight:800}.source:hover,.source:focus-visible{color:#fff;background:var(--teal);outline:0}
+    .forecast{display:grid;grid-template-columns:1fr 1fr;gap:10px;height:calc(100% - 55px)}.forecast-card{min-height:0;padding:11px;border-radius:15px;background:#f5f8f6;border:1px solid var(--line)}.forecast-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px}.forecast-title h3{margin:0;font-size:17px}.kind{font-size:11px;color:var(--ink);font-weight:800;text-transform:uppercase}.status{display:grid;grid-template-columns:78px 1fr;gap:7px;align-items:start;padding:7px 0;border-top:1px solid var(--line)}.status-name{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:900;text-transform:uppercase}.dot{width:8px;height:8px;border-radius:50%;background:currentColor}.alert{color:var(--red)}.watch{color:var(--amber)}.warning{color:#a82e2e}.nothreat{color:#52666c}.states{display:flex;flex-wrap:wrap;gap:4px}.tag{padding:4px 6px;border-radius:5px;background:#e4ece9;color:var(--ink);font-size:11px;font-weight:800;line-height:1.2}.empty{color:var(--ink);font-size:11px;font-weight:700;line-height:1.35}
+    .tsunami-status{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:#e0f2eb}.safe-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;color:#fff;background:var(--green);font-size:22px}.tsunami-status strong{display:block;color:var(--green);font-size:22px}.tsunami-status span{color:var(--ink);font-size:11px;font-weight:700}.seismic{display:grid;grid-template-columns:48px 1fr;gap:9px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}.seismic img{width:48px;height:48px;border-radius:10px;object-fit:cover}.seismic h3,.mini h3{margin:0 0 6px;font-size:13px}.seismic p,.mini p{margin:0;color:var(--ink);font-size:11px;font-weight:700;line-height:1.45}.seismic b{color:var(--ink)}
+    .right{padding:0}.mini{min-height:0;padding:14px 16px}.mini .panel-head{margin-bottom:8px}.mini h2{margin:0;white-space:nowrap;font:700 clamp(18px,1.7vw,26px)/1 Georgia,"Times New Roman",serif}.storm-block{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.storm-block .panel-head{margin-bottom:7px}.mini-status{display:inline-flex;align-items:center;gap:6px;margin:2px 0 7px;padding:5px 8px;border-radius:999px;background:#e0f2eb;color:var(--green);font-size:11px;font-weight:900}.mini-status:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}.pfz-title{font-size:clamp(16px,1.35vw,21px)!important}.pfz-date{color:var(--green)!important;font-weight:800}.pfz-states{margin-top:7px}.footer{display:flex;justify-content:space-between;gap:20px;padding:8px 18px;border-top:1px solid var(--line);background:#f7f9f7;color:var(--muted);font-size:9px;line-height:1.4}.footer strong{color:var(--ink)}
+    @media(max-height:760px){body{padding:6px}.dashboard{height:calc(100dvh - 12px);min-height:600px}.header{padding:9px 16px}.incois-logo{height:44px}.panel,.mini{padding:10px 12px}.status{padding:5px 0}.forecast-card{padding:8px}.footer{padding:5px 14px}}
+    @media(max-width:850px){body{padding:0}.dashboard{height:auto;min-height:100dvh;border-radius:0}.header{flex-wrap:wrap}.incois-logo{width:280px;max-width:100%}.title{position:static;order:3;transform:none;width:100%;max-width:none;padding:8px 0 0;border:0}.title h1{white-space:normal}.content{grid-template-columns:1fr}.panel{border-right:0;border-bottom:1px solid var(--line)}.forecast{height:auto}.right{grid-template-rows:auto}.stamp{font-size:9px}}
+    @media(max-width:520px){.forecast{grid-template-columns:1fr}.header{gap:10px}.stamp{margin-left:0}.service-img,.service-logo{width:48px}.panel-head{align-items:flex-start}.source{margin-left:0}}
+  </style>
+</head>
+<body>
+  <main class="dashboard">
+    <header class="header">
+      <img class="incois-logo" src="https://incois.gov.in/site/assets/images/logo.png" alt="Indian National Centre for Ocean Information Services">
+      <div class="title"><h1>Bharat Coastal Advisory Status</h1><p>Tsunami · Ocean State Forecast · Storm Surge · Potential Fishing Zone</p></div>
+      <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated" datetime="2026-07-30T22:15:00+05:30">Checked 30 July 2026 · 10:15 PM IST</time></div>
+      <button class="refresh-btn" id="refreshButton" type="button" aria-label="Check official status now"><span class="spin" aria-hidden="true">↻</span><span id="refreshLabel">Check now</span></button>
+    </header>
+
+    <div class="content">
+      <section class="panel ocean" aria-labelledby="ocean-title">
+        <div class="panel-head">
+          <img class="service-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMZCZdzFbMV0uqDa1ZxGNxQ0Uff8dOprnsZiNRTv8gtw&amp;s=10" alt="Wave icon supplied by the user">
+          <div><h2 id="ocean-title">Ocean State Forecast</h2><p class="panel-kicker">High Wave & Swell Surge advisories</p></div>
+          <a class="source" href="https://incois.gov.in/site/services/hwa.jsp" target="_blank" rel="noopener">Official map ↗</a>
+        </div>
+        <div class="forecast">
+          <article class="forecast-card">
+            <div class="forecast-title"><h3>High Wave</h3><span class="kind">Wave height</span></div>
+            <div class="status"><span class="status-name alert"><i class="dot"></i>Alert</span><div class="states" id="highWaveAlert"><span class="tag">Daman & Diu</span><span class="tag">Goa</span><span class="tag">Gujarat</span><span class="tag">Karnataka</span><span class="tag">Kerala</span><span class="tag">Lakshadweep</span><span class="tag">Maharashtra</span><span class="tag">Puducherry</span></div></div>
+            <div class="status"><span class="status-name watch"><i class="dot"></i>Watch</span><div class="states" id="highWaveWatch"><span class="tag">A&N Islands</span><span class="tag">Andhra Pradesh</span><span class="tag">Daman & Diu</span><span class="tag">Gujarat</span><span class="tag">Kerala</span><span class="tag">Odisha</span><span class="tag">Tamil Nadu</span><span class="tag">West Bengal</span></div></div>
+            <div class="status"><span class="status-name warning"><i class="dot"></i>Warning</span><span class="empty" id="highWaveWarning">No state listed</span></div>
+            <div class="status"><span class="status-name nothreat"><i class="dot"></i>No Threat</span><span class="empty" id="highWaveNoThreat">Coasts without Watch, Alert or Warning</span></div>
+          </article>
+          <article class="forecast-card">
+            <div class="forecast-title"><h3>Swell Surge</h3><span class="kind">Long-period swell</span></div>
+            <div class="status"><span class="status-name alert"><i class="dot"></i>Alert</span><div class="states" id="swellAlert"><span class="tag">Andaman & Nicobar</span><span class="tag">Lakshadweep</span><span class="tag">Tamil Nadu</span><span class="tag">West Bengal*</span></div></div>
+            <div class="status"><span class="status-name watch"><i class="dot"></i>Watch</span><div class="states" id="swellWatch"><span class="tag">Andaman & Nicobar</span><span class="tag">Maharashtra</span><span class="tag">West Bengal</span></div></div>
+            <div class="status"><span class="status-name warning"><i class="dot"></i>Warning</span><span class="empty" id="swellWarning">No state listed</span></div>
+            <div class="status"><span class="status-name nothreat"><i class="dot"></i>No Threat</span><span class="empty" id="swellNoThreat">Coasts without Watch, Alert or Warning</span></div>
+            <p class="empty">*West Bengal alert begins 1 August. Open the official table for district timings.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="tsunami-title">
+        <div class="panel-head">
+          <img class="service-logo" src="https://cdn-icons-png.flaticon.com/512/2910/2910105.png" alt="Tsunami icon supplied by the user">
+          <div><h2 id="tsunami-title">Tsunami Advisory</h2><p class="panel-kicker">Indian Tsunami Early Warning System</p></div>
+          <a class="source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWS ↗</a>
+        </div>
+        <div class="tsunami-status"><span class="safe-mark" aria-hidden="true">✓</span><div><strong id="tsunamiMessage">No Tsunami</strong><span>Official homepage message when checked</span></div></div>
+        <div class="seismic"><img src="https://img.magnific.com/free-vector/background-scene-with-big-waves-earthquake-ocean_1308-39098.jpg" alt="Seismic activity artwork supplied by the user"><div><h3>Latest seismic activity</h3><p id="seismicMessage"><b>No event listed</b> in the national past-90-day table for magnitude ≥ 6.5M.</p><p><a href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Seismic activity & national bulletins ↗</a></p></div></div>
+        <section class="storm-block" aria-labelledby="surge-title">
+          <div class="panel-head">
+            <img class="service-img" src="https://static.vecteezy.com/system/resources/previews/008/516/741/non_2x/natural-disaster-concept-with-rainy-sky-and-impending-storm-and-tsunami-wave-with-house-vector.jpg" alt="Storm surge artwork supplied by the user">
+            <div><h2 id="surge-title">Storm Surge</h2><p class="panel-kicker">Coastal inundation</p></div>
+            <a class="source" href="https://incois.gov.in/site/services/StormSurge.jsp" target="_blank" rel="noopener">Map ↗</a>
+          </div>
+          <span class="mini-status" id="stormMessage">No alert shown</span><p class="empty">Official storm-surge status when checked.</p>
+        </section>
+      </section>
+
+      <div class="right">
+        <section class="mini" aria-labelledby="pfz-title">
+          <div class="panel-head">
+            <img class="service-img" src="https://img.magnific.com/free-vector/school-fishes-background-hand-drawn-style_23-2147792685.jpg" alt="Potential Fishing Zone artwork supplied by the user">
+            <div><h2 id="pfz-title" class="pfz-title">Potential Fishing Zone</h2><p class="panel-kicker">Today’s advisory sectors</p></div>
+            <a class="source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a>
+          </div>
+          <p class="pfz-date" id="pfzDate">Forecast 30 Jul · Valid through 31 Jul 2026</p>
+          <div class="states pfz-states" id="pfzStates"><span class="tag">Gujarat</span><span class="tag">Maharashtra</span><span class="tag">Goa</span><span class="tag">Karnataka</span><span class="tag">Kerala</span><span class="tag">Lakshadweep</span><span class="tag">N/S Tamil Nadu</span><span class="tag">N/S Andhra Pradesh</span><span class="tag">Odisha</span><span class="tag">West Bengal</span><span class="tag">Andaman</span><span class="tag">Nicobar</span></div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="footer"><div><strong>Auto-update:</strong> Every 6 hours · <span id="updateState">Latest saved snapshot loaded</span> · Time-stamped summary—not an emergency bulletin.</div><div>INCOIS · MoES · Images: <a href="https://www.flaticon.com/free-icon/tsunami_2910105" target="_blank" rel="noopener">Flaticon</a>, <a href="https://www.vecteezy.com/vector-art/8516741-natural-disaster-concept-with-rainy-sky-and-impending-storm-and-tsunami-wave-with-house" target="_blank" rel="noopener">Vecteezy</a>, <a href="https://www.magnific.com/" target="_blank" rel="noopener">Magnific</a></div></footer>
+  </main>
+  <script>
+    const ids = id => document.getElementById(id);
+    const titleCase = value => String(value).toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace('And Nicobar','& Nicobar');
+    function tags(id, values, fallback) {
+      const el = ids(id); if (!el) return;
+      if (!values || !values.length) { el.innerHTML = `<span class="empty">${fallback}</span>`; return; }
+      el.innerHTML = values.map(value => `<span class="tag">${titleCase(value)}</span>`).join('');
+    }
+    function textList(id, values, fallback) { ids(id).textContent = values && values.length ? values.map(titleCase).join(', ') : fallback; }
+    function render(data) {
+      const checked = new Date(data.updatedAt);
+      ids('lastUpdated').dateTime = data.updatedAt;
+      ids('lastUpdated').textContent = `Checked ${checked.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+      ids('tsunamiMessage').textContent = data.tsunami.message;
+      ids('seismicMessage').textContent = data.seismic.message;
+      ids('stormMessage').textContent = data.stormSurge.message;
+      tags('highWaveAlert',data.highWave.alert,'No state listed'); tags('highWaveWatch',data.highWave.watch,'No state listed');
+      textList('highWaveWarning',data.highWave.warning,'No state listed'); textList('highWaveNoThreat',data.highWave.noThreat,'Coasts without Watch, Alert or Warning');
+      tags('swellAlert',data.swellSurge.alert,'No state listed'); tags('swellWatch',data.swellSurge.watch,'No state listed');
+      textList('swellWarning',data.swellSurge.warning,'No state listed'); textList('swellNoThreat',data.swellSurge.noThreat,'Coasts without Watch, Alert or Warning');
+      ids('pfzDate').textContent = `Forecast ${data.pfz.forecastDate || '—'} · Valid through ${data.pfz.validUntil || '—'}`;
+      tags('pfzStates',data.pfz.sectors,'No sectors listed');
+      ids('updateState').textContent = data.errors?.length ? `Updated with ${data.errors.length} source warning(s)` : 'All sources checked successfully';
+    }
+    async function loadStatus(url='status.json') { const response = await fetch(`${url}?t=${Date.now()}`,{cache:'no-store'}); if(!response.ok) throw new Error('Status unavailable'); const data=await response.json(); render(data); }
+    const workflowUrl='https://github.com/pkmdinesh/indiaoceanwatch/actions/workflows/update-status.yml';
+    function refreshNow() {
+      const opened=window.open(workflowUrl,'_blank','noopener,noreferrer');
+      ids('refreshLabel').textContent=opened ? 'Run on GitHub' : 'Allow pop-up';
+      ids('updateState').textContent='In GitHub, select Run workflow; this page reloads the saved status when you return';
+      setTimeout(()=>ids('refreshLabel').textContent='Check now',5000);
+    }
+    ids('refreshButton').addEventListener('click',refreshNow);
+    loadStatus().catch(()=>ids('updateState').textContent='Saved status is temporarily unavailable');
+    window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
+    setInterval(()=>loadStatus().catch(()=>{}),21600000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+dashboard-server.log
+dashboard-server-error.log
+*.tmp

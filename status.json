@@ -1,0 +1,79 @@
+﻿{
+    "updatedAt":  "2026-07-31T00:58:42.3288363+05:30",
+    "updateIntervalHours":  6,
+    "source":  "INCOIS / ITEWS",
+    "tsunami":  {
+                    "message":  "No Tsunami",
+                    "ok":  true
+                },
+    "seismic":  {
+                    "message":  "Latest: M6.7, Kyushu, Japan, 2026-07-28 12:57:00, depth 10 km",
+                    "count":  10,
+                    "latest":  {
+                                   "EVID":  "incois2026outm",
+                                   "BULNO":  1,
+                                   "ORIGINTIME":  "2026-07-28 12:57:00",
+                                   "MAGNITUDE":  6.7,
+                                   "LONGITUDE":  130.78,
+                                   "LATITUDE":  32.61,
+                                   "DEPTH":  10,
+                                   "REGIONNAME":  "Kyushu, Japan",
+                                   "detail":  "https://tsunami.incois.gov.in/itews/DSSProducts/OPR/incois2026outm/NTWC/B1/incois2026outm_B1_NTWC_Pub.json"
+                               }
+                },
+    "highWave":  {
+                     "alert":  [
+
+                               ],
+                     "watch":  [
+
+                               ],
+                     "warning":  [
+
+                                 ],
+                     "noThreat":  [
+
+                                  ]
+                 },
+    "swellSurge":  {
+                       "alert":  [
+
+                                 ],
+                       "watch":  [
+
+                                 ],
+                       "warning":  [
+
+                                   ],
+                       "noThreat":  [
+
+                                    ]
+                   },
+    "stormSurge":  {
+                       "message":  "No active alert message displayed",
+                       "ok":  true
+                   },
+    "pfz":  {
+                "forecastDate":  "30 JUL 2026",
+                "validUntil":  "31 JUL 2026",
+                "sectors":  [
+                                "Gujarat",
+                                "Maharashtra",
+                                "Goa",
+                                "Karnataka",
+                                "Kerala",
+                                "Lakshadweep",
+                                "North Tamil Nadu",
+                                "South Tamil Nadu",
+                                "North Andhra Pradesh",
+                                "South Andhra Pradesh",
+                                "Odisha",
+                                "West Bengal",
+                                "Andaman",
+                                "Nicobar"
+                            ]
+            },
+    "errors":  [
+
+               ]
+}
