@@ -1,8 +1,22 @@
-param([switch]$Quiet)
+param(
+    [switch]$Quiet,
+    [double]$MinimumAgeHours = 0
+)
 
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $outputPath = Join-Path $projectRoot 'status.json'
+
+if ($MinimumAgeHours -gt 0 -and (Test-Path -LiteralPath $outputPath)) {
+    try {
+        $existingStatus = Get-Content -Raw -LiteralPath $outputPath | ConvertFrom-Json
+        $lastUpdate = [DateTimeOffset]::Parse("$($existingStatus.updatedAt)")
+        if (([DateTimeOffset]::Now - $lastUpdate).TotalHours -lt $MinimumAgeHours) {
+            if (-not $Quiet) { Write-Output "Snapshot is newer than $MinimumAgeHours hours; no update required." }
+            exit 0
+        }
+    } catch { }
+}
 
 function Get-TextContent([string]$Url) {
     (Invoke-WebRequest -UseBasicParsing -Uri $Url -TimeoutSec 45).Content

@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    <footer class="footer"><div><strong>Auto-update:</strong> Every 6 hours · <span id="updateState">Latest saved snapshot loaded</span> · Time-stamped summary—not an emergency bulletin.</div><div>INCOIS · MoES · Images: <a href="https://www.flaticon.com/free-icon/tsunami_2910105" target="_blank" rel="noopener">Flaticon</a>, <a href="https://www.vecteezy.com/vector-art/8516741-natural-disaster-concept-with-rainy-sky-and-impending-storm-and-tsunami-wave-with-house" target="_blank" rel="noopener">Vecteezy</a>, <a href="https://www.magnific.com/" target="_blank" rel="noopener">Magnific</a></div></footer>
+    <footer class="footer"><div><strong>Auto-update:</strong> Every 6 hours · <span id="updateState">Latest saved snapshot loaded</span> · Time-stamped summary—not an emergency bulletin. <a href="https://github.com/pkmdinesh/indiaoceanwatch/actions/workflows/update-status.yml" target="_blank" rel="noopener">Owner update ↗</a></div><div>INCOIS · MoES · Images: <a href="https://www.flaticon.com/free-icon/tsunami_2910105" target="_blank" rel="noopener">Flaticon</a>, <a href="https://www.vecteezy.com/vector-art/8516741-natural-disaster-concept-with-rainy-sky-and-impending-storm-and-tsunami-wave-with-house" target="_blank" rel="noopener">Vecteezy</a>, <a href="https://www.magnific.com/" target="_blank" rel="noopener">Magnific</a></div></footer>
   </main>
   <script>
     const ids = id => document.getElementById(id);
@@ -124,12 +124,12 @@
       ids('updateState').textContent = data.errors?.length ? `Updated with ${data.errors.length} source warning(s)` : 'All sources checked successfully';
     }
     async function loadStatus(url='status.json') { const response = await fetch(`${url}?t=${Date.now()}`,{cache:'no-store'}); if(!response.ok) throw new Error('Status unavailable'); const data=await response.json(); render(data); }
-    const workflowUrl='https://github.com/pkmdinesh/indiaoceanwatch/actions/workflows/update-status.yml';
-    function refreshNow() {
-      const opened=window.open(workflowUrl,'_blank','noopener,noreferrer');
-      ids('refreshLabel').textContent=opened ? 'Run on GitHub' : 'Allow pop-up';
-      ids('updateState').textContent='In GitHub, select Run workflow; this page reloads the saved status when you return';
-      setTimeout(()=>ids('refreshLabel').textContent='Check now',5000);
+    async function refreshNow() {
+      const button=ids('refreshButton'); button.disabled=true; button.classList.add('busy');
+      ids('refreshLabel').textContent='Refreshing…'; ids('updateState').textContent='Loading the latest saved status…';
+      try { await loadStatus(); ids('refreshLabel').textContent='Refreshed'; }
+      catch { ids('refreshLabel').textContent='Try again'; ids('updateState').textContent='Saved status is temporarily unavailable'; }
+      finally { button.disabled=false; button.classList.remove('busy'); setTimeout(()=>ids('refreshLabel').textContent='Check now',3000); }
     }
     ids('refreshButton').addEventListener('click',refreshNow);
     loadStatus().catch(()=>ids('updateState').textContent='Saved status is temporarily unavailable');

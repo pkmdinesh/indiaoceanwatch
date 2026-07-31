@@ -2,7 +2,9 @@ name: Update coastal advisory status
 
 on:
   schedule:
-    - cron: "17 */6 * * *"
+    # Retry twice an hour because GitHub schedules are best-effort. The script
+    # itself suppresses scheduled updates until the saved snapshot is 6h old.
+    - cron: "17,47 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -19,7 +21,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Read official INCOIS sources
         shell: powershell
-        run: .\update-status.ps1 -Quiet
+        run: |
+          if ("${{ github.event_name }}" -eq "schedule") {
+            .\update-status.ps1 -Quiet -MinimumAgeHours 6
+          } else {
+            .\update-status.ps1 -Quiet
+          }
       - name: Commit updated snapshot
         shell: powershell
         run: |
