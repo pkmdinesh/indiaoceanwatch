@@ -2,9 +2,8 @@ name: Update coastal advisory status
 
 on:
   schedule:
-    # Retry twice an hour because GitHub schedules are best-effort. The script
-    # itself suppresses scheduled updates until the saved snapshot is 6h old.
-    - cron: "17,47 * * * *"
+    # Run away from the top of the hour because GitHub schedules are best-effort.
+    - cron: "3,13,23,33,43,53 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -23,7 +22,7 @@ jobs:
         shell: powershell
         run: |
           if ("${{ github.event_name }}" -eq "schedule") {
-            .\update-status.ps1 -Quiet -MinimumAgeHours 6
+            .\update-status.ps1 -Quiet -MinimumAgeHours 0.15
           } else {
             .\update-status.ps1 -Quiet
           }

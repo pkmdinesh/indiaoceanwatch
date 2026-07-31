@@ -29,6 +29,7 @@
     @media(max-height:760px){body{padding:6px}.dashboard{height:calc(100dvh - 12px);min-height:600px}.header{padding:9px 16px}.incois-logo{height:44px}.panel,.mini{padding:10px 12px}.status{padding:5px 0}.forecast-card{padding:8px}.footer{padding:5px 14px}}
     @media(max-width:850px){body{padding:0}.dashboard{height:auto;min-height:100dvh;border-radius:0}.header{flex-wrap:wrap}.incois-logo{width:280px;max-width:100%}.title{position:static;order:3;transform:none;width:100%;max-width:none;padding:8px 0 0;border:0}.title h1{white-space:normal}.content{grid-template-columns:1fr}.panel{border-right:0;border-bottom:1px solid var(--line)}.forecast{height:auto}.right{grid-template-rows:auto}.stamp{font-size:9px}}
     @media(max-width:520px){.forecast{grid-template-columns:1fr}.header{gap:10px}.stamp{margin-left:0}.service-img,.service-logo{width:48px}.panel-head{align-items:flex-start}.source{margin-left:0}}
+    .storm-block .source{transform:translateY(5px)}
   </style>
 </head>
 <body>
@@ -100,7 +101,7 @@
       </div>
     </div>
 
-    <footer class="footer"><div><strong>Auto-update:</strong> Every 6 hours · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Fetched from official sources only. For more information, check the official links.</div><div>INCOIS · MoES</div></footer>
+    <footer class="footer"><div><strong>Auto-update:</strong> Every 10 minutes · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Fetched from official sources only. For more information, check the official links.</div><div>INCOIS · MoES</div></footer>
   </main>
   <script>
     const ids = id => document.getElementById(id);
@@ -202,7 +203,7 @@
     async function loadStatus(url='status.json') { const response = await fetch(`${url}?t=${Date.now()}`,{cache:'no-store'}); if(!response.ok) throw new Error('Status unavailable'); const data=await response.json(); render(data); }
     loadStatus().catch(()=>ids('updateState').textContent='Saved status is temporarily unavailable');
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
-    setInterval(()=>loadStatus().catch(()=>{}),21600000);
+    setInterval(()=>loadStatus().catch(()=>{}),600000);
   </script>
 </body>
 </html>
