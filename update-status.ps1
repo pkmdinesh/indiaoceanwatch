@@ -86,7 +86,7 @@ $status = [ordered]@{
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
-    cyclone = [ordered]@{ title = 'No active cyclone advisory'; message = 'No matching IMD CAP message'; level = 'safe'; issuedAt = $null; link = $null; items = @() }
+    cyclone = [ordered]@{ title = 'No active cyclone advisory'; message = ''; level = 'safe'; issuedAt = $null; link = $null; items = @() }
     pfz = [ordered]@{
         forecastDate = $null
         validUntil = $null
@@ -114,7 +114,7 @@ if (Test-Path -LiteralPath $outputPath) {
             }
         }
         if ($status.PSObject.Properties.Name -notcontains 'cyclone') {
-            $status | Add-Member -NotePropertyName cyclone -NotePropertyValue ([pscustomobject]@{ title = 'No active cyclone advisory'; message = 'No matching IMD CAP message'; level = 'safe'; issuedAt = $null; link = $null; items = @() })
+            $status | Add-Member -NotePropertyName cyclone -NotePropertyValue ([pscustomobject]@{ title = 'No active cyclone advisory'; message = ''; level = 'safe'; issuedAt = $null; link = $null; items = @() })
         }
         foreach ($propertyName in @('bulletin','recentBulletin')) {
             if ($status.stormSurge.PSObject.Properties.Name -notcontains $propertyName) {
@@ -261,7 +261,7 @@ try {
         $status.cyclone.link = $latestCyclone.link
     } else {
         $status.cyclone.title = 'No active cyclone advisory'
-        $status.cyclone.message = 'No Cyclone Warning, Cyclone Alert, Pre-Cyclone Watch or Post-Landfall Outlook message in the current IMD CAP feed.'
+        $status.cyclone.message = ''
         $status.cyclone.level = 'safe'
         $status.cyclone.issuedAt = $null
         $status.cyclone.link = $null
