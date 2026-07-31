@@ -109,8 +109,9 @@
     function textList(id, values, fallback) { ids(id).textContent = values && values.length ? values.map(titleCase).join(', ') : fallback; }
     function advisoryLevel(message) {
       const value = String(message || '').toLowerCase();
+      if (/\b(no|none|without)\b.*\b(tsunami|threat|watch|alert|warning|advisory)\b/.test(value) || value.includes('all clear')) return 'safe';
       if (value.includes('warning')) return 'warning';
-      if (value.includes('alert')) return value.includes('no alert') ? 'safe' : 'alert';
+      if (value.includes('alert')) return 'alert';
       if (value.includes('watch')) return 'watch';
       return 'safe';
     }
