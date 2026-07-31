@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-07-31T22:37:50.2755618+05:30",
+    "updatedAt":  "2026-07-31T23:59:30.7149287+05:30",
     "updateIntervalHours":  6,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -117,5 +117,15 @@
             },
     "errors":  [
 
-               ]
+               ],
+    "cyclone":  {
+                    "title":  "No active cyclone advisory",
+                    "message":  "No Cyclone Warning, Cyclone Alert, Pre-Cyclone Watch or Post-Landfall Outlook message in the current IMD CAP feed.",
+                    "level":  "safe",
+                    "issuedAt":  null,
+                    "link":  null,
+                    "items":  [
+
+                              ]
+                }
 }

@@ -86,6 +86,7 @@ $status = [ordered]@{
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
+    cyclone = [ordered]@{ title = 'No active cyclone advisory'; message = 'No matching IMD CAP message'; level = 'safe'; issuedAt = $null; link = $null; items = @() }
     pfz = [ordered]@{
         forecastDate = $null
         validUntil = $null
@@ -111,6 +112,9 @@ if (Test-Path -LiteralPath $outputPath) {
             if ($status.tsunami.PSObject.Properties.Name -notcontains $propertyName) {
                 $status.tsunami | Add-Member -NotePropertyName $propertyName -NotePropertyValue $null
             }
+        }
+        if ($status.PSObject.Properties.Name -notcontains 'cyclone') {
+            $status | Add-Member -NotePropertyName cyclone -NotePropertyValue ([pscustomobject]@{ title = 'No active cyclone advisory'; message = 'No matching IMD CAP message'; level = 'safe'; issuedAt = $null; link = $null; items = @() })
         }
         foreach ($propertyName in @('bulletin','recentBulletin')) {
             if ($status.stormSurge.PSObject.Properties.Name -notcontains $propertyName) {
@@ -223,6 +227,46 @@ try {
         }
     }
 } catch { $status.errors += "Storm surge: $($_.Exception.Message)" }
+
+try {
+    [xml]$cycloneRss = Get-TextContent 'https://cap-sources.s3.amazonaws.com/in-imd-en/rss.xml'
+    $cycloneItems = @()
+    foreach ($item in @($cycloneRss.rss.channel.item)) {
+        $title = "$($item.title)".Trim()
+        $description = "$($item.description)".Trim()
+        $searchText = "$title $description"
+        $level = $null
+        if ($searchText -match '(?i)post[\s-]*landfall\s+(out\s*look|outlook)') { $level = 'red' }
+        elseif ($searchText -match '(?i)cyclone\s+warning') { $level = 'orange' }
+        elseif ($searchText -match '(?i)(cyclone\s+alert|pre[\s-]*cyclone\s+watch)') { $level = 'yellow' }
+        if (-not $level) { continue }
+        $published = [DateTimeOffset]::MinValue
+        [DateTimeOffset]::TryParse("$($item.pubDate)", [ref]$published) | Out-Null
+        $cycloneItems += [pscustomobject][ordered]@{
+            title = $title
+            message = $description
+            level = $level
+            issuedAt = if ($published -ne [DateTimeOffset]::MinValue) { $published.ToString('o') } else { "$($item.pubDate)" }
+            link = "$($item.link)".Trim()
+        }
+    }
+    $cycloneItems = @($cycloneItems | Sort-Object { [DateTimeOffset]::Parse("$($_.issuedAt)") } -Descending)
+    $status.cyclone.items = $cycloneItems
+    if ($cycloneItems.Count -gt 0) {
+        $latestCyclone = $cycloneItems[0]
+        $status.cyclone.title = $latestCyclone.title
+        $status.cyclone.message = $latestCyclone.message
+        $status.cyclone.level = $latestCyclone.level
+        $status.cyclone.issuedAt = $latestCyclone.issuedAt
+        $status.cyclone.link = $latestCyclone.link
+    } else {
+        $status.cyclone.title = 'No active cyclone advisory'
+        $status.cyclone.message = 'No Cyclone Warning, Cyclone Alert, Pre-Cyclone Watch or Post-Landfall Outlook message in the current IMD CAP feed.'
+        $status.cyclone.level = 'safe'
+        $status.cyclone.issuedAt = $null
+        $status.cyclone.link = $null
+    }
+} catch { $status.errors += "Cyclone: $($_.Exception.Message)" }
 
 try {
     $pfzHtml = Get-TextContent 'https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&request_locale=en'
