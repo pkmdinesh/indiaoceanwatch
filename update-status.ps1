@@ -62,6 +62,21 @@ function Get-BulletinSummary([string]$DetailUrl, [string]$EventId, [int]$Bulleti
     }
 }
 
+function Get-StormSurgeBulletinSummary([string]$CycloneName, [int]$BulletinNumber) {
+    $url = "https://tsunami.incois.gov.in/TEWS/SSMBulletin.jsp?cyclone=$([uri]::EscapeDataString($CycloneName))&bno=$BulletinNumber"
+    $html = Get-TextContent $url
+    $plainText = [Net.WebUtility]::HtmlDecode(($html -replace '(?is)<script\b.*?</script>', ' ' -replace '(?is)<style\b.*?</style>', ' ' -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+    $advice = if ($plainText -match '(?is)\bADVICE\b\s*(.*?)\s*\bNEXT\s+ADVISORY\b') { $Matches[1].Trim() } else { 'Open the official bulletin for the latest advice.' }
+    $issuedAt = if ($plainText -match '(?i)Issued\s+Time\s*\(IST\)\s*:\s*([0-9]{4}-[0-9]{2}-[0-9]{2}\s+[0-9:.]+)') { $Matches[1].Trim() } else { $null }
+    [ordered]@{
+        number = $BulletinNumber
+        cyclone = $CycloneName
+        issuedAt = $issuedAt
+        message = $advice
+        url = $url
+    }
+}
+
 $status = [ordered]@{
     updatedAt = (Get-Date).ToString('o')
     updateIntervalHours = 6
@@ -70,7 +85,7 @@ $status = [ordered]@{
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
-    stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false }
+    stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     pfz = [ordered]@{
         forecastDate = $null
         validUntil = $null
@@ -95,6 +110,11 @@ if (Test-Path -LiteralPath $outputPath) {
         foreach ($propertyName in @('bulletin','recentBulletin')) {
             if ($status.tsunami.PSObject.Properties.Name -notcontains $propertyName) {
                 $status.tsunami | Add-Member -NotePropertyName $propertyName -NotePropertyValue $null
+            }
+        }
+        foreach ($propertyName in @('bulletin','recentBulletin')) {
+            if ($status.stormSurge.PSObject.Properties.Name -notcontains $propertyName) {
+                $status.stormSurge | Add-Member -NotePropertyName $propertyName -NotePropertyValue $null
             }
         }
     } catch { }
@@ -183,12 +203,24 @@ try {
 } catch { $status.errors += "High wave/swell: $($_.Exception.Message)" }
 
 try {
-    $stormHtml = Get-TextContent 'https://incois.gov.in/site/services/StormSurge.jsp'
-    $status.stormSurge.message = 'No active alert message displayed'
+    [xml]$surgeXml = Get-TextContent ('https://tsunami.incois.gov.in/itews/homexmls/SurgeEvents.xml?currentTime=' + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())
+    $surgeEvents = @($surgeXml.SelectNodes('//event'))
+    $status.stormSurge.message = 'No active storm surge bulletin'
     $status.stormSurge.ok = $true
-    if ($stormHtml -match '(?i)(storm\s+surge\s+(warning|alert)[^<]{1,180})') {
-        $candidate = ($Matches[1] -replace '\s+', ' ').Trim()
-        if ($candidate -notmatch '(?i)advisory|about|service') { $status.stormSurge.message = $candidate; $status.stormSurge.ok = $false }
+    $status.stormSurge.bulletin = $null
+    if ($surgeEvents.Count -gt 0) {
+        $latestSurgeEvent = $surgeEvents | Select-Object -Last 1
+        $cycloneName = "$($latestSurgeEvent.cycloneName)".Trim()
+        $bulletinNumber = [int]"$($latestSurgeEvent.latestBulletinNum)".Trim()
+        $summary = Get-StormSurgeBulletinSummary $cycloneName $bulletinNumber
+        $status.stormSurge.recentBulletin = $summary
+        $issuedDate = [DateTime]::MinValue
+        $hasIssuedDate = $summary.issuedAt -and [DateTime]::TryParse("$($summary.issuedAt)", [ref]$issuedDate)
+        if ($hasIssuedDate -and ((Get-Date) - $issuedDate).TotalDays -le 14) {
+            $status.stormSurge.message = $summary.message
+            $status.stormSurge.bulletin = $summary
+            $status.stormSurge.ok = $false
+        }
     }
 } catch { $status.errors += "Storm surge: $($_.Exception.Message)" }
 
