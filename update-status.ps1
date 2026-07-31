@@ -36,14 +36,21 @@ function Get-AlertName($Item) {
     return $null
 }
 
+function Convert-IncoisDate([string]$Value) {
+    if ($Value -match '^\d{8}$') {
+        return [DateTime]::ParseExact($Value, 'yyyyMMdd', [Globalization.CultureInfo]::InvariantCulture).ToString('dd MMM yyyy')
+    }
+    return $Value
+}
+
 $status = [ordered]@{
     updatedAt = (Get-Date).ToString('o')
     updateIntervalHours = 6
     source = 'INCOIS / ITEWS'
     tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null }
-    highWave = [ordered]@{ alert = @(); watch = @(); warning = @(); noThreat = @() }
-    swellSurge = [ordered]@{ alert = @(); watch = @(); warning = @(); noThreat = @() }
+    highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
+    swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false }
     pfz = [ordered]@{
         forecastDate = $null
@@ -61,6 +68,11 @@ if (Test-Path -LiteralPath $outputPath) {
         $savedStatus.updateIntervalHours = 6
         $savedStatus.errors = @()
         $status = $savedStatus
+        foreach ($groupName in @('highWave','swellSurge')) {
+            if ($status.$groupName.PSObject.Properties.Name -notcontains 'issueDate') {
+                $status.$groupName | Add-Member -NotePropertyName issueDate -NotePropertyValue $null
+            }
+        }
     } catch { }
 }
 
@@ -94,6 +106,8 @@ try {
 
 try {
     $hwa = Invoke-RestMethod -Uri 'https://sarat.incois.gov.in/incoismobileappdata/rest/incois/hwassalatestdata' -TimeoutSec 45
+    $status.highWave.issueDate = Convert-IncoisDate "$($hwa.LatestHWADate)"
+    $status.swellSurge.issueDate = Convert-IncoisDate "$($hwa.LatestSSADate)"
     $items = @()
     if ($hwa.PSObject.Properties.Name -contains 'HWAJson') {
         if ("$($hwa.HWAJson)".Trim()) {

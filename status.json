@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-07-31T14:22:25.7542770+05:30",
+    "updatedAt":  "2026-07-31T15:16:57.7423191+05:30",
     "updateIntervalHours":  6,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -47,7 +47,8 @@
                                  ],
                      "noThreat":  [
 
-                                  ]
+                                  ],
+                     "issueDate":  "30 Jul 2026"
                  },
     "swellSurge":  {
                        "alert":  [
@@ -66,7 +67,8 @@
                                    ],
                        "noThreat":  [
 
-                                    ]
+                                    ],
+                       "issueDate":  "30 Jul 2026"
                    },
     "stormSurge":  {
                        "message":  "No active alert message displayed",
