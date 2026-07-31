@@ -52,14 +52,14 @@
             <div class="status"><span class="status-name alert"><i class="dot"></i>Alert</span><div class="states" id="highWaveAlert"><span class="tag">Daman & Diu</span><span class="tag">Goa</span><span class="tag">Gujarat</span><span class="tag">Karnataka</span><span class="tag">Kerala</span><span class="tag">Lakshadweep</span><span class="tag">Maharashtra</span><span class="tag">Puducherry</span></div></div>
             <div class="status"><span class="status-name watch"><i class="dot"></i>Watch</span><div class="states" id="highWaveWatch"><span class="tag">A&N Islands</span><span class="tag">Andhra Pradesh</span><span class="tag">Daman & Diu</span><span class="tag">Gujarat</span><span class="tag">Kerala</span><span class="tag">Odisha</span><span class="tag">Tamil Nadu</span><span class="tag">West Bengal</span></div></div>
             <div class="status"><span class="status-name warning"><i class="dot"></i>Warning</span><span class="empty" id="highWaveWarning">No state listed</span></div>
-            <div class="status"><span class="status-name nothreat"><i class="dot"></i>No Threat</span><span class="empty" id="highWaveNoThreat">Coasts without Watch, Alert or Warning</span></div>
+            <div class="status"><span class="status-name nothreat"><i class="dot"></i>No Threat</span><span class="empty" id="highWaveNoThreat">No state listed</span></div>
           </article>
           <article class="forecast-card">
             <div class="forecast-title"><h3>Swell Surge</h3><span class="kind">Long-period swell</span></div>
             <div class="status"><span class="status-name alert"><i class="dot"></i>Alert</span><div class="states" id="swellAlert"><span class="tag">Andaman & Nicobar</span><span class="tag">Lakshadweep</span><span class="tag">Tamil Nadu</span><span class="tag">West Bengal*</span></div></div>
             <div class="status"><span class="status-name watch"><i class="dot"></i>Watch</span><div class="states" id="swellWatch"><span class="tag">Andaman & Nicobar</span><span class="tag">Maharashtra</span><span class="tag">West Bengal</span></div></div>
             <div class="status"><span class="status-name warning"><i class="dot"></i>Warning</span><span class="empty" id="swellWarning">No state listed</span></div>
-            <div class="status"><span class="status-name nothreat"><i class="dot"></i>No Threat</span><span class="empty" id="swellNoThreat">Coasts without Watch, Alert or Warning</span></div>
+            <div class="status"><span class="status-name nothreat"><i class="dot"></i>No Threat</span><span class="empty" id="swellNoThreat">No state listed</span></div>
             <p class="empty">*West Bengal alert begins 1 August. Open the official table for district timings.</p>
           </article>
         </div>
@@ -75,7 +75,7 @@
         <div class="seismic"><img src="assets/earthquake-network-icon.png" alt="Earthquake Network icon"><div><h3>Latest seismic activity</h3><p id="seismicMessage"><b>No event listed</b> in the national past-90-day table for magnitude ≥ 6.5M.</p><p><a href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Seismic activity & national bulletins ↗</a></p></div></div>
         <section class="storm-block" aria-labelledby="surge-title">
           <div class="panel-head">
-            <img class="service-img" src="https://static.vecteezy.com/system/resources/previews/008/516/741/non_2x/natural-disaster-concept-with-rainy-sky-and-impending-storm-and-tsunami-wave-with-house-vector.jpg" alt="Storm surge artwork supplied by the user">
+            <img class="service-logo" src="assets/storm-surge-icon.png" alt="Storm surge icon">
             <div><h2 id="surge-title">Storm Surge</h2><p class="panel-kicker">Coastal inundation</p></div>
             <a class="source" href="https://incois.gov.in/site/services/StormSurge.jsp" target="_blank" rel="noopener">Map ↗</a>
           </div>
@@ -115,9 +115,9 @@
       ids('seismicMessage').textContent = data.seismic.message;
       ids('stormMessage').textContent = data.stormSurge.message;
       tags('highWaveAlert',data.highWave.alert,'No state listed'); tags('highWaveWatch',data.highWave.watch,'No state listed');
-      textList('highWaveWarning',data.highWave.warning,'No state listed'); textList('highWaveNoThreat',data.highWave.noThreat,'Coasts without Watch, Alert or Warning');
+      textList('highWaveWarning',data.highWave.warning,'No state listed'); textList('highWaveNoThreat',data.highWave.noThreat,'No state listed');
       tags('swellAlert',data.swellSurge.alert,'No state listed'); tags('swellWatch',data.swellSurge.watch,'No state listed');
-      textList('swellWarning',data.swellSurge.warning,'No state listed'); textList('swellNoThreat',data.swellSurge.noThreat,'Coasts without Watch, Alert or Warning');
+      textList('swellWarning',data.swellSurge.warning,'No state listed'); textList('swellNoThreat',data.swellSurge.noThreat,'No state listed');
       ids('pfzDate').textContent = `Forecast ${data.pfz.forecastDate || '—'} · Valid through ${data.pfz.validUntil || '—'}`;
       tags('pfzStates',data.pfz.sectors,'No sectors listed');
       ids('updateState').textContent = data.errors?.length ? `Updated with ${data.errors.length} source warning(s)` : 'All sources checked successfully';
