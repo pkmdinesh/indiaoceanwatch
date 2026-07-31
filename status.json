@@ -1,10 +1,24 @@
 ﻿{
-    "updatedAt":  "2026-07-31T14:51:13.3984392+00:00",
+    "updatedAt":  "2026-07-31T22:26:14.9011468+05:30",
     "updateIntervalHours":  6,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
                     "message":  "No Tsunami",
-                    "ok":  true
+                    "ok":  true,
+                    "bulletin":  null,
+                    "recentBulletin":  {
+                                           "number":  1,
+                                           "type":  "I",
+                                           "issuedAt":  "1307 IST Tuesday 28 July 2026",
+                                           "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
+                                           "eventId":  "incois2026outm",
+                                           "magnitude":  "6.7",
+                                           "location":  "Kyushu, Japan",
+                                           "originDate":  "28 Jul 2026",
+                                           "originTime":  "1257 IST",
+                                           "depth":  "10  km",
+                                           "url":  "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC\u0026eventId=incois2026outm\u0026aos=public\u0026currBullNo=1\u0026latestBullNo=1"
+                                       }
                 },
     "seismic":  {
                     "message":  "Latest: M6.7, Kyushu, Japan, 2026-07-28 12:57:00, depth 10 km",
@@ -22,6 +36,7 @@
                                }
                 },
     "highWave":  {
+                     "issueDate":  "31 Jul 2026",
                      "alert":  [
                                    "DAMAN AND DIU",
                                    "GOA",
@@ -30,7 +45,8 @@
                                    "KERALA",
                                    "LAKSHADWEEP",
                                    "MAHARASHTRA",
-                                   "PUDUCHERRY"
+                                   "PUDUCHERRY",
+                                   "TAMIL NADU"
                                ],
                      "watch":  [
                                    "ANDAMAN AND NICOBAR",
@@ -39,27 +55,25 @@
                                    "GUJARAT",
                                    "KERALA",
                                    "ODISHA",
-                                   "TAMIL NADU",
-                                   "WEST BENGAL"
+                                   "TAMIL NADU"
                                ],
                      "warning":  [
 
                                  ],
                      "noThreat":  [
 
-                                  ],
-                     "issueDate":  "30 Jul 2026"
+                                  ]
                  },
     "swellSurge":  {
+                       "issueDate":  "31 Jul 2026",
                        "alert":  [
                                      "ANDAMAN AND NICOBAR",
-                                     "LAKSHADWEEP",
-                                     "TAMIL NADU",
-                                     "WEST BENGAL"
+                                     "TAMIL NADU"
                                  ],
                        "watch":  [
                                      "ANDAMAN AND NICOBAR",
                                      "MAHARASHTRA",
+                                     "ODISHA",
                                      "WEST BENGAL"
                                  ],
                        "warning":  [
@@ -67,8 +81,7 @@
                                    ],
                        "noThreat":  [
 
-                                    ],
-                       "issueDate":  "30 Jul 2026"
+                                    ]
                    },
     "stormSurge":  {
                        "message":  "No active alert message displayed",

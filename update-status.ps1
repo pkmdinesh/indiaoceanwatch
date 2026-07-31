@@ -43,11 +43,30 @@ function Convert-IncoisDate([string]$Value) {
     return $Value
 }
 
+function Get-BulletinSummary([string]$DetailUrl, [string]$EventId, [int]$BulletinNumber) {
+    $bulletin = Invoke-RestMethod -Uri $DetailUrl -TimeoutSec 45
+    $info = @($bulletin.event_info) | Select-Object -First 1
+    if ($null -eq $info) { throw 'ITEWS bulletin contains no event information' }
+    [ordered]@{
+        number = $BulletinNumber
+        type = if ("$($info.bulletinType)".Trim()) { "$($info.bulletinType)".Trim() } else { "$BulletinNumber" }
+        issuedAt = "$($info.bulletinIssueTime)".Trim()
+        message = "$($info.evaluation)".Trim()
+        eventId = $EventId
+        magnitude = "$($info.eventMagnitude)".Trim()
+        location = "$($info.Location)".Trim()
+        originDate = "$($info.EQDate)".Trim()
+        originTime = "$($info.EQTime)".Trim()
+        depth = "$($info.eventDepth)".Trim()
+        url = "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC&eventId=$EventId&aos=public&currBullNo=$BulletinNumber&latestBullNo=$BulletinNumber"
+    }
+}
+
 $status = [ordered]@{
     updatedAt = (Get-Date).ToString('o')
     updateIntervalHours = 6
     source = 'INCOIS / ITEWS'
-    tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false }
+    tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
@@ -73,14 +92,31 @@ if (Test-Path -LiteralPath $outputPath) {
                 $status.$groupName | Add-Member -NotePropertyName issueDate -NotePropertyValue $null
             }
         }
+        foreach ($propertyName in @('bulletin','recentBulletin')) {
+            if ($status.tsunami.PSObject.Properties.Name -notcontains $propertyName) {
+                $status.tsunami | Add-Member -NotePropertyName $propertyName -NotePropertyValue $null
+            }
+        }
     } catch { }
 }
 
 try {
     $tsunamiHtml = Get-TextContent 'https://tsunami.incois.gov.in/TEWS/'
-    if ($tsunamiHtml -match 'No\s*Tsunami\.?') {
+    [xml]$activeXml = Get-TextContent ('https://tsunami.incois.gov.in/itews/homexmls/LatestEvents.xml?currentTime=' + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())
+    $activeEvents = @($activeXml.SelectNodes('//event'))
+    if ($activeEvents.Count -eq 0) {
         $status.tsunami.message = 'No Tsunami'
         $status.tsunami.ok = $true
+        $status.tsunami.bulletin = $null
+    } else {
+        $active = $activeEvents | Select-Object -Last 1
+        $eventId = "$($active.ChildNodes[0].InnerText)".Trim()
+        $bulletinNumber = [int]"$($active.ChildNodes[9].InnerText)".Trim()
+        $aos = "$($active.ChildNodes[11].InnerText)".Trim()
+        $detailUrl = "https://tsunami.incois.gov.in/itews/DSSProducts/OPR/$eventId/$aos/B$bulletinNumber/${eventId}_B${bulletinNumber}_${aos}_Pub.json"
+        $status.tsunami.bulletin = Get-BulletinSummary $detailUrl $eventId $bulletinNumber
+        $status.tsunami.message = $status.tsunami.bulletin.message
+        $status.tsunami.ok = $false
     }
 } catch { $status.errors += "Tsunami: $($_.Exception.Message)" }
 
@@ -98,6 +134,9 @@ try {
         $status.seismic.latest = $latest
         if ($latest.PSObject.Properties.Name -contains 'MAGNITUDE') {
             $status.seismic.message = "Latest: M$($latest.MAGNITUDE), $($latest.REGIONNAME), $($latest.ORIGINTIME), depth $($latest.DEPTH) km"
+            if ($latest.PSObject.Properties.Name -contains 'detail' -and "$($latest.detail)".Trim()) {
+                $status.tsunami.recentBulletin = Get-BulletinSummary "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO)
+            }
         } else {
             $status.seismic.message = "$($eventList.Count) event(s) listed; open the national table for details"
         }
