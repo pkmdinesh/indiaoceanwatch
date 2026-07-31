@@ -31,7 +31,7 @@
     @media(max-width:520px){.forecast{grid-template-columns:1fr}.header{gap:10px}.stamp{margin-left:0}.service-img,.service-logo{width:48px}.panel-head{align-items:flex-start}.source{margin-left:0}}
     .storm-block .panel-head{grid-template-columns:auto minmax(0,1fr)}
     .storm-block .service-logo{grid-row:1 / span 2}
-    .storm-block .source{grid-column:2;grid-row:2;justify-self:start;transform:none}
+    .storm-block .source{grid-column:2;grid-row:2;justify-self:end;transform:none}
   </style>
 </head>
 <body>
@@ -80,7 +80,7 @@
           <div class="panel-head">
             <img class="service-logo" src="assets/storm-surge-icon.png?v=2" alt="Storm surge icon">
             <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
-            <a class="source" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletins ↗</a>
+            <a class="source" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
           </div>
           <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><strong id="stormMessage">No active storm surge bulletin</strong><span id="stormCaption">Official ITEWS bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
         </section>
