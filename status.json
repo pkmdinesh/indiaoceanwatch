@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-07-31T15:16:57.7423191+05:30",
+    "updatedAt":  "2026-07-31T13:52:19.0742181+00:00",
     "updateIntervalHours":  6,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -75,8 +75,8 @@
                        "ok":  true
                    },
     "pfz":  {
-                "forecastDate":  "30 JUL 2026",
-                "validUntil":  "31 JUL 2026",
+                "forecastDate":  "31 JUL 2026",
+                "validUntil":  "1 AUG 2026",
                 "sectors":  [
                                 "Gujarat",
                                 "Maharashtra",
