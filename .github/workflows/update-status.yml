@@ -3,7 +3,7 @@ name: Update coastal advisory status
 on:
   schedule:
     # Run away from the top of the hour because GitHub schedules are best-effort.
-    - cron: "3,13,23,33,43,53 * * * *"
+    - cron: "13 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
         shell: powershell
         run: |
           if ("${{ github.event_name }}" -eq "schedule") {
-            .\update-status.ps1 -Quiet -MinimumAgeHours 0.15
+            .\update-status.ps1 -Quiet -MinimumAgeHours 0.9
           } else {
             .\update-status.ps1 -Quiet
           }
