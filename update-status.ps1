@@ -82,7 +82,7 @@ $status = [ordered]@{
     updateIntervalHours = 1
     source = 'INCOIS / ITEWS'
     tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
-    seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null }
+    seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
     stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
@@ -112,6 +112,9 @@ if (Test-Path -LiteralPath $outputPath) {
             if ($status.tsunami.PSObject.Properties.Name -notcontains $propertyName) {
                 $status.tsunami | Add-Member -NotePropertyName $propertyName -NotePropertyValue $null
             }
+        }
+        if ($status.seismic.PSObject.Properties.Name -notcontains 'recentEvents') {
+            $status.seismic | Add-Member -NotePropertyName recentEvents -NotePropertyValue @()
         }
         if ($status.PSObject.Properties.Name -notcontains 'cyclone') {
             $status | Add-Member -NotePropertyName cyclone -NotePropertyValue ([pscustomobject]@{ title = 'No active cyclone advisory'; message = ''; level = 'safe'; issuedAt = $null; link = $null; items = @() })
@@ -151,13 +154,23 @@ try {
     if ($null -ne $eventRoot -and $eventRoot.PSObject.Properties.Name -contains 'features') { $eventList = @($eventRoot.features) }
     elseif ($null -ne $eventRoot -and $eventRoot.PSObject.Properties.Name -contains 'datasets') { $eventList = @($eventRoot.datasets) }
     $status.seismic.count = $eventList.Count
+    $status.seismic.recentEvents = @()
     if ($eventList.Count -eq 0) {
-        $status.seismic.message = 'No event listed in the past 90 days with magnitude >= 6.5M'
+        $status.seismic.message = 'No Seismic Activity for the past 90 days with magnitude >= 6.5M'
+        $status.seismic.latest = $null
     } else {
+        $eventList = @($eventList | Sort-Object { [DateTime]::ParseExact("$($_.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture) } -Descending)
         $latest = $eventList | Select-Object -First 1
         $status.seismic.latest = $latest
         if ($latest.PSObject.Properties.Name -contains 'MAGNITUDE') {
             $status.seismic.message = "Latest: M$($latest.MAGNITUDE), $($latest.REGIONNAME), $($latest.ORIGINTIME), depth $($latest.DEPTH) km"
+            $latestTime = [DateTime]::ParseExact("$($latest.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
+            $status.seismic.recentEvents = @($eventList | Select-Object -Skip 1 | Where-Object {
+                $eventTime = [DateTime]::ParseExact("$($_.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
+                ($latestTime - $eventTime).TotalHours -ge 0 -and ($latestTime - $eventTime).TotalHours -le 24
+            } | ForEach-Object {
+                [pscustomobject][ordered]@{ magnitude = $_.MAGNITUDE; region = $_.REGIONNAME; originTime = $_.ORIGINTIME; depth = $_.DEPTH }
+            })
             if ($latest.PSObject.Properties.Name -contains 'detail' -and "$($latest.detail)".Trim()) {
                 $status.tsunami.recentBulletin = Get-BulletinSummary "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO)
             }
