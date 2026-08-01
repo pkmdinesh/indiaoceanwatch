@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-07-31T22:43:15.2637968+00:00",
+    "updatedAt":  "2026-08-01T07:42:06.9039414+00:00",
     "updateIntervalHours":  1,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -33,7 +33,10 @@
                                    "DEPTH":  10,
                                    "REGIONNAME":  "Kyushu, Japan",
                                    "detail":  "https://tsunami.incois.gov.in/itews/DSSProducts/OPR/incois2026outm/NTWC/B1/incois2026outm_B1_NTWC_Pub.json"
-                               }
+                               },
+                    "recentEvents":  [
+
+                                     ]
                 },
     "highWave":  {
                      "issueDate":  "31 Jul 2026",
