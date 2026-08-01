@@ -32,7 +32,7 @@
     .storm-block .panel-head{grid-template-columns:auto minmax(0,1fr)}
     .storm-block .service-logo{grid-row:1 / span 2}
     .storm-block .source{grid-column:2;grid-row:2;justify-self:end;transform:none}
-    .panel-head .pfz-source{margin-left:auto}
+    .panel-head .pfz-source,.panel-head .itews-source{margin-left:auto}
   </style>
 </head>
 <body>
@@ -73,7 +73,7 @@
         <div class="panel-head">
           <img class="service-logo" src="https://cdn-icons-png.flaticon.com/512/2910/2910105.png" alt="Tsunami icon supplied by the user">
           <div><h2 id="tsunami-title">Tsunami Advisory</h2><p class="panel-kicker">Indian Tsunami Early Warning System</p></div>
-          <a class="source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWS ↗</a>
+          <a class="source itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWS ↗</a>
         </div>
         <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><strong id="tsunamiMessage">No Tsunami</strong><span id="tsunamiCaption">Official homepage message when checked</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
         <div class="seismic"><img src="assets/earthquake-network-icon.png" alt="Earthquake Network icon"><div><div class="seismic-heading"><h3>Latest seismic activity with magnitude ≥ 6.5M</h3><a class="earthquake-chip" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div><p id="seismicMessage">No Seismic Activity for the past 90 days with magnitude &gt;= 6.5M</p><div class="seismic-additional" id="seismicAdditional"></div></div></div>
