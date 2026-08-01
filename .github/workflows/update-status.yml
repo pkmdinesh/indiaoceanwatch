@@ -2,8 +2,9 @@ name: Update coastal advisory status
 
 on:
   schedule:
-    # Run away from the top of the hour because GitHub schedules are best-effort.
-    - cron: "13 * * * *"
+    # Try four staggered times per hour because GitHub schedules are best-effort.
+    # The MinimumAgeHours gate below still limits status updates to about hourly.
+    - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
 
 permissions:
