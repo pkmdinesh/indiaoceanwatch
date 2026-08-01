@@ -249,9 +249,11 @@ try {
         $description = "$($item.description)".Trim()
         $searchText = "$title $description"
         $level = $null
-        if ($searchText -match '(?i)post[\s-]*landfall\s+(out\s*look|outlook)') { $level = 'red' }
-        elseif ($searchText -match '(?i)cyclone\s+warning') { $level = 'orange' }
-        elseif ($searchText -match '(?i)(cyclone\s+alert|pre[\s-]*cyclone\s+watch)') { $level = 'yellow' }
+        # Check the most specific cyclone titles first because names such as
+        # "Extremely Severe Cyclonic Storm" also contain "Cyclonic Storm".
+        if ($searchText -match '(?i)post[\s-]*landfall\s+(out\s*look|outlook)|super\s+cyclonic\s+storm|extremely\s+severe\s+cyclonic\s+storm') { $level = 'red' }
+        elseif ($searchText -match '(?i)cyclone\s+warning|very\s+severe\s+cyclonic\s+storm|severe\s+cyclonic\s+storm|(?<!severe\s)cyclonic\s+storm') { $level = 'orange' }
+        elseif ($searchText -match '(?i)cyclone\s+alert|pre[\s-]*cyclone\s+watch|deep\s+depression|(?<!deep\s)depression|low[\s-]*pressure\s+area') { $level = 'yellow' }
         if (-not $level) { continue }
         $published = [DateTimeOffset]::MinValue
         [DateTimeOffset]::TryParse("$($item.pubDate)", [ref]$published) | Out-Null
