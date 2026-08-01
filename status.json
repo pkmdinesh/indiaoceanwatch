@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-08-01T11:50:47.8268062+00:00",
+    "updatedAt":  "2026-08-01T14:43:01.5985590+00:00",
     "updateIntervalHours":  1,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -39,7 +39,7 @@
                                      ]
                 },
     "highWave":  {
-                     "issueDate":  "31 Jul 2026",
+                     "issueDate":  "01 Aug 2026",
                      "alert":  [
                                    "DAMAN AND DIU",
                                    "GOA",
@@ -48,12 +48,10 @@
                                    "KERALA",
                                    "LAKSHADWEEP",
                                    "MAHARASHTRA",
-                                   "PUDUCHERRY",
-                                   "TAMIL NADU"
+                                   "PUDUCHERRY"
                                ],
                      "watch":  [
                                    "ANDAMAN AND NICOBAR",
-                                   "ANDHRA PRADESH",
                                    "DAMAN AND DIU",
                                    "GUJARAT",
                                    "KERALA",
@@ -68,13 +66,15 @@
                                   ]
                  },
     "swellSurge":  {
-                       "issueDate":  "31 Jul 2026",
+                       "issueDate":  "01 Aug 2026",
                        "alert":  [
                                      "ANDAMAN AND NICOBAR",
                                      "TAMIL NADU"
                                  ],
                        "watch":  [
                                      "ANDAMAN AND NICOBAR",
+                                     "ANDHRA PRADESH",
+                                     "GUJARAT",
                                      "MAHARASHTRA",
                                      "ODISHA",
                                      "WEST BENGAL"
@@ -99,8 +99,8 @@
                                           }
                    },
     "pfz":  {
-                "forecastDate":  "31 JUL 2026",
-                "validUntil":  "1 AUG 2026",
+                "forecastDate":  "1 AUG 2026",
+                "validUntil":  "2 AUG 2026",
                 "sectors":  [
                                 "Gujarat",
                                 "Maharashtra",
