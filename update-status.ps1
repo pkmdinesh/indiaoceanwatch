@@ -83,8 +83,8 @@ $status = [ordered]@{
     source = 'INCOIS / ITEWS'
     tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
-    highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
-    swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @() }
+    highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
+    swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
     stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     cyclone = [ordered]@{ title = 'No active cyclone advisory'; message = ''; level = 'safe'; issuedAt = $null; link = $null; items = @() }
     pfz = [ordered]@{
@@ -106,6 +106,9 @@ if (Test-Path -LiteralPath $outputPath) {
         foreach ($groupName in @('highWave','swellSurge')) {
             if ($status.$groupName.PSObject.Properties.Name -notcontains 'issueDate') {
                 $status.$groupName | Add-Member -NotePropertyName issueDate -NotePropertyValue $null
+            }
+            if ($status.$groupName.PSObject.Properties.Name -notcontains 'states') {
+                $status.$groupName | Add-Member -NotePropertyName states -NotePropertyValue @()
             }
         }
         foreach ($propertyName in @('bulletin','recentBulletin')) {
@@ -202,20 +205,51 @@ try {
     # A successful response replaces the previous snapshot; do not retain expired alerts.
     foreach ($group in @($status.highWave, $status.swellSurge)) {
         foreach ($level in @('alert','watch','warning','noThreat')) { $group.$level = @() }
+        $group.states = @()
     }
+    $highWaveDetails = @()
+    $swellSurgeDetails = @()
     foreach ($item in $items) {
         $state = Get-StateName $item
         $alert = Get-AlertName $item
         if (-not $state -or -not $alert) { continue }
         $target = if ($alert -like 'HIGH WAVE*') { $status.highWave } elseif ($alert -like 'SWELL SURGE*') { $status.swellSurge } else { $null }
         if ($null -eq $target) { continue }
-        if ($alert -like '*WARNING*') { $target.warning += $state }
-        elseif ($alert -like '*ALERT*') { $target.alert += $state }
-        elseif ($alert -like '*WATCH*') { $target.watch += $state }
-        elseif ($alert -like '*NO THREAT*') { $target.noThreat += $state }
+        $severity = if ($alert -like '*WARNING*') { 'warning' }
+            elseif ($alert -like '*ALERT*') { 'alert' }
+            elseif ($alert -like '*WATCH*') { 'watch' }
+            elseif ($alert -like '*NO THREAT*') { 'noThreat' }
+            else { $null }
+        if (-not $severity) { continue }
+        $target.$severity += $state
+        $detail = [pscustomobject][ordered]@{
+            state = $state
+            district = if ($null -ne $item.District -and "$($item.District)".Trim()) { "$($item.District)".Trim().ToUpperInvariant() } else { 'COASTAL AREA' }
+            severity = $severity
+            color = if ($null -ne $item.Color) { "$($item.Color)".Trim() } else { $null }
+            issueDate = if ($null -ne $item.'Issue Date') { "$($item.'Issue Date')".Trim() } else { $null }
+            message = if ($null -ne $item.Message) { "$($item.Message)".Trim() } else { $null }
+        }
+        if ($alert -like 'HIGH WAVE*') { $highWaveDetails += $detail } else { $swellSurgeDetails += $detail }
     }
-    foreach ($group in @($status.highWave, $status.swellSurge)) {
+    $severityRank = @{ warning = 4; alert = 3; watch = 2; noThreat = 1 }
+    foreach ($pair in @(
+        [pscustomobject]@{ group = $status.highWave; details = $highWaveDetails },
+        [pscustomobject]@{ group = $status.swellSurge; details = $swellSurgeDetails }
+    )) {
+        $group = $pair.group
         foreach ($level in @('alert','watch','warning','noThreat')) { $group.$level = @($group.$level | Sort-Object -Unique) }
+        $group.states = @($pair.details | Group-Object state | ForEach-Object {
+            $advisories = @($_.Group | Sort-Object @{ Expression = { $severityRank[$_.severity] }; Descending = $true }, district)
+            $counts = [ordered]@{ warning = 0; alert = 0; watch = 0; noThreat = 0 }
+            foreach ($advisory in $advisories) { $counts[$advisory.severity]++ }
+            [pscustomobject][ordered]@{
+                name = $_.Name
+                highestSeverity = $advisories[0].severity
+                counts = [pscustomobject]$counts
+                advisories = $advisories
+            }
+        } | Sort-Object @{ Expression = { $severityRank[$_.highestSeverity] }; Descending = $true }, name)
     }
 } catch { $status.errors += "High wave/swell: $($_.Exception.Message)" }
 

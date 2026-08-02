@@ -23,12 +23,14 @@
     body{padding:12px}.dashboard{width:min(1440px,100%);height:calc(100dvh - 24px);min-height:660px;margin:auto;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;border:1px solid rgba(8,47,60,.13);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:0 20px 60px rgba(8,47,60,.12)}
     a{color:inherit}.header{position:relative;display:flex;align-items:center;gap:18px;padding:13px 20px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#fff,#f7fbf9)}.incois-logo{width:min(390px,31vw);height:52px;object-fit:contain;object-position:left center}.title{position:absolute;left:50%;transform:translateX(-50%);width:max-content;max-width:42vw;text-align:center}.title h1{margin:0;white-space:nowrap;font:700 clamp(21px,2.25vw,35px)/1 Georgia,"Times New Roman",serif;letter-spacing:-.03em}.title p{margin:5px 0 0;color:var(--ink);font-size:11px;font-weight:800}.stamp{margin-left:auto;text-align:right;color:var(--muted);font-size:10px;line-height:1.45}.stamp time{color:var(--ink);font-size:11px;font-weight:800}.live{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:800}.live:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px #dcefe9}
     .content{min-height:0;display:grid;grid-template-columns:1.45fr 1fr 1fr}.panel{min-width:0;min-height:0;padding:14px 16px;border-right:1px solid var(--line)}.panel:last-child{border-right:0}.panel-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}.service-img{width:58px;height:42px;flex:none;object-fit:cover;border-radius:10px}.service-logo{width:58px;height:42px;flex:none;object-fit:contain}.panel h2{margin:0;white-space:nowrap;font:700 clamp(18px,1.8vw,27px)/1 Georgia,"Times New Roman",serif}.panel-kicker{margin:3px 0 0;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}.source{margin-left:auto;flex:none;text-decoration:none;padding:7px 9px;border-radius:8px;background:#e7f0ed;font-size:11px;font-weight:800}.source:hover,.source:focus-visible{color:#fff;background:var(--teal);outline:0}
-    .forecast{display:grid;grid-template-columns:1fr 1fr;gap:10px;height:calc(100% - 55px)}.forecast-card{min-height:0;padding:11px;border-radius:15px;background:#f5f8f6;border:1px solid var(--line)}.forecast-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px}.forecast-title h3{margin:0;font-size:17px}.forecast-meta{display:grid;gap:2px;text-align:right}.kind{font-size:11px;color:var(--ink);font-weight:800;text-transform:uppercase}.issue-date{color:var(--green);font-size:10px;font-weight:900;white-space:nowrap}.status{display:grid;grid-template-columns:78px 1fr;gap:7px;align-items:start;padding:7px 0;border-top:1px solid var(--line)}.status-name{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:900;text-transform:uppercase}.dot{width:8px;height:8px;border-radius:50%;background:currentColor}.alert{color:var(--orange)}.watch{color:var(--yellow)}.warning{color:var(--red)}.nothreat{color:var(--green)}.states{display:flex;flex-wrap:wrap;gap:4px}.tag{padding:4px 6px;border:1px solid transparent;border-radius:5px;background:#e4ece9;color:var(--ink);font-size:11px;font-weight:800;line-height:1.2}.status-alert .tag{color:#93400c;background:var(--alert-bg);border-color:#f2bd91}.status-watch .tag{color:#765900;background:var(--watch-bg);border-color:#e5ce69}.status-warning .tag{color:#8f241d;background:var(--warning-bg);border-color:#e9a29c}.status-safe .tag{color:#17634f;background:var(--safe-bg);border-color:#9fd2c1}.empty{color:var(--ink);font-size:11px;font-weight:700;line-height:1.35}
+    .forecast{display:grid;grid-template-columns:1fr 1fr;gap:10px;height:calc(100% - 55px)}.forecast-card{display:flex;min-height:0;flex-direction:column;padding:11px;border-radius:15px;background:#f5f8f6;border:1px solid var(--line)}.forecast-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px}.forecast-title h3{margin:0;font-size:17px}.forecast-meta{display:grid;gap:2px;text-align:right}.kind{font-size:11px;color:var(--ink);font-weight:800;text-transform:uppercase}.issue-date{color:var(--green);font-size:10px;font-weight:900;white-space:nowrap}.dot{width:8px;height:8px;flex:none;border-radius:50%;background:currentColor}.alert{color:var(--orange)}.watch{color:var(--yellow)}.warning{color:var(--red)}.nothreat{color:var(--green)}.states{display:flex;flex-wrap:wrap;gap:4px}.tag{padding:4px 6px;border:1px solid transparent;border-radius:5px;background:#e4ece9;color:var(--ink);font-size:11px;font-weight:800;line-height:1.2}.empty{color:var(--ink);font-size:11px;font-weight:700;line-height:1.35}
+    .state-summary-list{display:grid;gap:5px;min-height:0;overflow:auto;padding-right:3px;scrollbar-width:thin}.state-summary{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:7px;width:100%;padding:7px 8px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);text-align:left;cursor:pointer}.state-summary:hover,.state-summary:focus-visible{border-color:var(--teal);box-shadow:0 0 0 2px rgba(8,127,132,.1);outline:0}.state-summary-name{overflow:hidden;font-size:11px;font-weight:900;text-overflow:ellipsis;white-space:nowrap}.state-summary-counts{color:var(--muted);font-size:9px;font-weight:800;white-space:nowrap}.state-summary-arrow{color:var(--teal);font-size:15px;font-weight:900}.state-summary.severity-warning .dot{color:var(--red)}.state-summary.severity-alert .dot{color:var(--orange)}.state-summary.severity-watch .dot{color:var(--yellow)}.state-summary.severity-noThreat .dot{color:var(--green)}
+    .advisory-dialog{width:min(620px,calc(100% - 28px));max-height:min(760px,calc(100dvh - 36px));padding:0;border:0;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 25px 80px rgba(8,47,60,.28)}.advisory-dialog::backdrop{background:rgba(4,28,36,.52);backdrop-filter:blur(3px)}.advisory-dialog-head{position:sticky;top:0;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:17px 18px 13px;border-bottom:1px solid var(--line);background:#fff}.advisory-dialog-head h2{margin:0;font:700 23px/1.15 Georgia,"Times New Roman",serif}.advisory-dialog-head p{margin:4px 0 0;color:var(--muted);font-size:11px;font-weight:800}.dialog-close{display:grid;place-items:center;width:34px;height:34px;flex:none;border:0;border-radius:50%;background:#e7f0ed;color:var(--ink);font-size:20px;cursor:pointer}.dialog-close:hover,.dialog-close:focus-visible{color:#fff;background:var(--teal);outline:0}.advisory-details{display:grid;gap:9px;padding:14px 18px 19px}.district-advisory{padding:11px 12px;border:1px solid var(--line);border-left-width:5px;border-radius:11px;background:#f8faf9}.district-advisory.severity-warning{border-left-color:var(--red)}.district-advisory.severity-alert{border-left-color:var(--orange)}.district-advisory.severity-watch{border-left-color:var(--yellow)}.district-advisory.severity-noThreat{border-left-color:var(--green)}.district-advisory-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.district-advisory h3{margin:0;font-size:13px}.severity-pill{padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900;text-transform:uppercase}.severity-pill.warning{color:#8f241d;background:var(--warning-bg)}.severity-pill.alert{color:#93400c;background:var(--alert-bg)}.severity-pill.watch{color:#765900;background:var(--watch-bg)}.severity-pill.noThreat{color:#17634f;background:var(--safe-bg)}.district-advisory p{margin:7px 0 0;color:#294b55;font-size:11px;font-weight:650;line-height:1.45}
     .tsunami-status{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:var(--safe-bg);color:var(--green)}.safe-mark{display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:50%;color:#fff!important;background:var(--green);font-size:22px;font-weight:900}.tsunami-status strong{display:block;color:currentColor;font-size:22px}.tsunami-copy>span{display:block;margin-top:2px;color:var(--ink);font-size:11px;font-weight:700}.tsunami-copy{min-width:0}.bulletin-link{display:none;margin-top:6px;color:var(--ink);font-size:11px;font-weight:900}.bulletin-link.is-visible{display:inline-block}.advisory-alert{color:var(--orange)!important;background:var(--alert-bg)!important}.advisory-watch{color:var(--yellow)!important;background:var(--watch-bg)!important}.advisory-warning{color:var(--red)!important;background:var(--warning-bg)!important}.advisory-safe{color:var(--green)!important;background:var(--safe-bg)!important}.advisory-other{color:var(--ink)!important;background:#edf1f2!important}.advisory-other strong{font-size:14px;line-height:1.35}.advisory-alert .safe-mark{background:var(--orange)}.advisory-watch .safe-mark{background:var(--yellow)}.advisory-warning .safe-mark{background:var(--red)}.advisory-safe .safe-mark{background:var(--green)}.advisory-other .safe-mark{background:var(--red)}.seismic{display:grid;grid-template-columns:48px 1fr;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}.seismic img{width:48px;height:48px;border-radius:10px;object-fit:contain}.seismic-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.seismic h3{margin:0;font-size:16px}.seismic p{margin:0;color:var(--ink);font-size:12px;font-weight:700;line-height:1.45}.seismic-additional{display:grid;gap:3px;margin-top:4px}.seismic-additional:empty{display:none}.seismic-additional p{padding-left:8px;border-left:3px solid var(--orange);font-size:10px}.earthquake-chip{display:inline-flex;flex:none;padding:5px 8px;border-radius:7px;background:#e7f0ed;text-decoration:none;font-size:10px;font-weight:900}.earthquake-chip:hover,.earthquake-chip:focus-visible{color:#fff;background:var(--teal);outline:0}.mini h3{margin:0 0 6px;font-size:13px}.mini p{margin:0;color:var(--ink);font-size:11px;font-weight:700;line-height:1.45}.seismic b{color:var(--ink)}
     .right{padding:0}.mini{min-height:0;padding:14px 16px}.mini .panel-head{margin-bottom:8px}.mini h2{margin:0;white-space:nowrap;font:700 clamp(18px,1.7vw,26px)/1 Georgia,"Times New Roman",serif}.storm-block{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.storm-block .panel-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:9px;margin-bottom:7px}.storm-block .panel-head>div{min-width:0}.storm-block .source{margin-left:0;justify-self:end}.storm-block #surge-title{font-size:clamp(16px,1.45vw,22px)}.storm-status{display:flex;align-items:center;gap:9px;padding:9px;border-radius:12px;background:var(--safe-bg);color:var(--green)}.storm-mark{display:grid;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;color:#fff;background:var(--green);font-size:16px;font-weight:900}.storm-copy{min-width:0}.storm-copy strong,.storm-copy span{display:block}.storm-copy strong{font-size:12px;line-height:1.35}.storm-copy span{margin-top:2px;color:var(--ink);font-size:10px;font-weight:700}.storm-status.advisory-other{background:#edf1f2!important}.storm-status.advisory-other .storm-mark{background:var(--red)}.storm-status.advisory-safe .storm-mark{background:var(--green)}.pfz-title{font-size:clamp(16px,1.35vw,21px)!important}.pfz-date{color:var(--green)!important;font-weight:800}.pfz-states{margin-top:7px}.cyclone-card{border-top:1px solid var(--line)}.cyclone-card .panel-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.cyclone-heading{display:flex;align-items:center;gap:9px;min-width:0}.cyclone-icon{width:38px;height:38px;flex:none;object-fit:contain}.cyclone-card h2{font-size:clamp(16px,1.35vw,21px)}.cyclone-status{padding:9px 10px;border-radius:12px;background:var(--safe-bg)}.cyclone-status strong{display:block;font-size:13px;line-height:1.3}.cyclone-status p{margin:4px 0 0;font-size:10px;line-height:1.4}.cyclone-status p[hidden]{display:none}.cyclone-status time{display:block;margin-top:5px;color:var(--muted);font-size:9px;font-weight:800}.cyclone-status.level-yellow{background:var(--watch-bg);border-left:5px solid var(--yellow)}.cyclone-status.level-yellow strong{color:#765900}.cyclone-status.level-orange{background:var(--alert-bg);border-left:5px solid var(--orange)}.cyclone-status.level-orange strong{color:#93400c}.cyclone-status.level-red{background:var(--warning-bg);border-left:5px solid var(--red)}.cyclone-status.level-red strong{color:#8f241d}.cyclone-status.level-safe{border-left:5px solid var(--green)}.cyclone-status.level-safe strong{color:var(--green)}.footer{display:flex;justify-content:space-between;gap:20px;padding:8px 18px;border-top:1px solid var(--line);background:#f7f9f7;color:var(--muted);font-size:9px;line-height:1.4}.footer strong{color:var(--ink)}
     @media(max-height:760px){body{padding:6px}.dashboard{height:calc(100dvh - 12px);min-height:600px}.header{padding:9px 16px}.incois-logo{height:44px}.panel,.mini{padding:10px 12px}.status{padding:5px 0}.forecast-card{padding:8px}.footer{padding:5px 14px}}
     @media(max-width:850px){body{padding:0}.dashboard{height:auto;min-height:100dvh;border-radius:0}.header{flex-wrap:wrap}.incois-logo{width:280px;max-width:100%}.title{position:static;order:3;transform:none;width:100%;max-width:none;padding:8px 0 0;border:0}.title h1{white-space:normal}.content{grid-template-columns:1fr}.panel{border-right:0;border-bottom:1px solid var(--line)}.forecast{height:auto}.right{grid-template-rows:auto}.stamp{font-size:9px}}
-    @media(max-width:520px){.forecast{grid-template-columns:1fr}.header{gap:10px}.stamp{margin-left:auto;text-align:right}.service-img,.service-logo{width:48px}.panel-head{align-items:flex-start}.source{margin-left:0}}
+    @media(max-width:520px){.forecast{grid-template-columns:1fr}.header{gap:10px}.stamp{margin-left:auto;text-align:right}.service-img,.service-logo{width:48px}.panel-head{align-items:flex-start}.source{margin-left:0}.state-summary{grid-template-columns:auto minmax(0,1fr) auto}.state-summary-counts{grid-column:2}.state-summary-arrow{grid-column:3;grid-row:1 / span 2}.advisory-dialog{width:100%;max-width:none;max-height:88dvh;margin:auto 0 0;border-radius:20px 20px 0 0}.advisory-dialog-head{padding:15px}.advisory-details{padding:12px 15px 18px}}
     .storm-block .panel-head{grid-template-columns:auto minmax(0,1fr)}
     .storm-block .service-logo{grid-row:1 / span 2}
     .storm-block .source{grid-column:2;grid-row:2;justify-self:end;transform:none}
@@ -53,18 +55,11 @@
         <div class="forecast">
           <article class="forecast-card">
             <div class="forecast-title"><h3>High Wave</h3><div class="forecast-meta"><span class="kind">Wave height</span><span class="issue-date" id="highWaveIssueDate">Issue date —</span></div></div>
-            <div class="status status-warning"><span class="status-name warning"><i class="dot"></i>Warning</span><div class="states" id="highWaveWarning"><span class="empty">No state listed</span></div></div>
-            <div class="status status-alert"><span class="status-name alert"><i class="dot"></i>Alert</span><div class="states" id="highWaveAlert"><span class="tag">Daman & Diu</span><span class="tag">Goa</span><span class="tag">Gujarat</span><span class="tag">Karnataka</span><span class="tag">Kerala</span><span class="tag">Lakshadweep</span><span class="tag">Maharashtra</span><span class="tag">Puducherry</span></div></div>
-            <div class="status status-watch"><span class="status-name watch"><i class="dot"></i>Watch</span><div class="states" id="highWaveWatch"><span class="tag">A&N Islands</span><span class="tag">Andhra Pradesh</span><span class="tag">Daman & Diu</span><span class="tag">Gujarat</span><span class="tag">Kerala</span><span class="tag">Odisha</span><span class="tag">Tamil Nadu</span><span class="tag">West Bengal</span></div></div>
-            <div class="status status-safe"><span class="status-name nothreat"><i class="dot"></i>No Threat</span><div class="states" id="highWaveNoThreat"><span class="empty">No state listed</span></div></div>
+            <div class="state-summary-list" id="highWaveStates"><span class="empty">No active district advisory</span></div>
           </article>
           <article class="forecast-card">
             <div class="forecast-title"><h3>Swell Surge</h3><div class="forecast-meta"><span class="kind">Long-period swell</span><span class="issue-date" id="swellIssueDate">Issue date —</span></div></div>
-            <div class="status status-warning"><span class="status-name warning"><i class="dot"></i>Warning</span><div class="states" id="swellWarning"><span class="empty">No state listed</span></div></div>
-            <div class="status status-alert"><span class="status-name alert"><i class="dot"></i>Alert</span><div class="states" id="swellAlert"><span class="tag">Andaman & Nicobar</span><span class="tag">Lakshadweep</span><span class="tag">Tamil Nadu</span><span class="tag">West Bengal*</span></div></div>
-            <div class="status status-watch"><span class="status-name watch"><i class="dot"></i>Watch</span><div class="states" id="swellWatch"><span class="tag">Andaman & Nicobar</span><span class="tag">Maharashtra</span><span class="tag">West Bengal</span></div></div>
-            <div class="status status-safe"><span class="status-name nothreat"><i class="dot"></i>No Threat</span><div class="states" id="swellNoThreat"><span class="empty">No state listed</span></div></div>
-            <p class="empty">*West Bengal alert begins 1 August. Open the official table for district timings.</p>
+            <div class="state-summary-list" id="swellStates"><span class="empty">No active district advisory</span></div>
           </article>
         </div>
       </section>
@@ -104,7 +99,11 @@
       </div>
     </div>
 
-    <footer class="footer"><div><strong>Auto-update:</strong> Every 30 mins · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Fetched from official sources only. For detailed information, check the embeded official links.</div><div>INCOIS · MoES</div></footer>
+    <footer class="footer"><div><strong>Auto-update:</strong> Every 1 hour · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Fetched from official sources only. For more information, check the official links.</div><div>INCOIS · MoES</div></footer>
+    <dialog class="advisory-dialog" id="advisoryDialog" aria-labelledby="advisoryDialogTitle">
+      <div class="advisory-dialog-head"><div><h2 id="advisoryDialogTitle">District advisories</h2><p id="advisoryDialogMeta"></p></div><button class="dialog-close" id="advisoryDialogClose" type="button" aria-label="Close district advisories">&times;</button></div>
+      <div class="advisory-details" id="advisoryDetails"></div>
+    </dialog>
   </main>
   <script>
     const ids = id => document.getElementById(id);
@@ -113,6 +112,57 @@
       const el = ids(id); if (!el) return;
       if (!values || !values.length) { el.innerHTML = `<span class="empty">${fallback}</span>`; return; }
       el.innerHTML = values.map(value => `<span class="tag">${titleCase(value)}</span>`).join('');
+    }
+    const severityOrder = ['warning','alert','watch','noThreat'];
+    const severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No threat'};
+    function legacyStateSummaries(group) {
+      const names = [...new Set(severityOrder.flatMap(level => group?.[level] || []))];
+      return names.map(name => {
+        const levels = severityOrder.filter(level => (group[level] || []).includes(name));
+        const counts = Object.fromEntries(severityOrder.map(level => [level,(group[level] || []).includes(name) ? 1 : 0]));
+        return {name,highestSeverity:levels[0] || 'noThreat',counts,advisories:[]};
+      });
+    }
+    function countSummary(counts = {}) {
+      return severityOrder.filter(level => counts[level]).map(level => `${counts[level]} ${severityLabel[level]}`).join(' Â· ');
+    }
+    function openAdvisoryDetails(hazardName, issueDate, state) {
+      ids('advisoryDialogTitle').textContent = `${titleCase(state.name)} â€” ${hazardName}`;
+      ids('advisoryDialogMeta').textContent = `${countSummary(state.counts)}${issueDate ? ` Â· Issued ${issueDate}` : ''}`;
+      const advisories = state.advisories || [];
+      if (!advisories.length) {
+        ids('advisoryDetails').innerHTML = '<p class="empty">District details will appear after the next source update.</p>';
+      } else {
+        ids('advisoryDetails').replaceChildren(...advisories.map(advisory => {
+          const article = document.createElement('article');
+          article.className = `district-advisory severity-${advisory.severity}`;
+          const head = document.createElement('div'); head.className = 'district-advisory-head';
+          const district = document.createElement('h3'); district.textContent = titleCase(advisory.district || 'Coastal area');
+          const pill = document.createElement('span'); pill.className = `severity-pill ${advisory.severity}`; pill.textContent = severityLabel[advisory.severity] || advisory.severity;
+          head.append(district,pill);
+          const message = document.createElement('p'); message.textContent = advisory.message || 'Open the official map for full details.';
+          article.append(head,message);
+          return article;
+        }));
+      }
+      ids('advisoryDialog').showModal();
+    }
+    function renderStateSummaries(id, hazardName, group) {
+      const el = ids(id); if (!el) return;
+      const states = group?.states?.length ? group.states : legacyStateSummaries(group || {});
+      if (!states.length) { el.innerHTML = '<span class="empty">No active district advisory</span>'; return; }
+      el.replaceChildren(...states.map(state => {
+        const button = document.createElement('button');
+        button.type = 'button'; button.className = `state-summary severity-${state.highestSeverity}`;
+        button.setAttribute('aria-label', `View ${hazardName} district advisories for ${titleCase(state.name)}`);
+        const dot = document.createElement('i'); dot.className = 'dot'; dot.setAttribute('aria-hidden','true');
+        const name = document.createElement('span'); name.className = 'state-summary-name'; name.textContent = titleCase(state.name);
+        const counts = document.createElement('span'); counts.className = 'state-summary-counts'; counts.textContent = countSummary(state.counts);
+        const arrow = document.createElement('span'); arrow.className = 'state-summary-arrow'; arrow.textContent = 'â€º'; arrow.setAttribute('aria-hidden','true');
+        button.append(dot,name,counts,arrow);
+        button.addEventListener('click',() => openAdvisoryDetails(hazardName,group.issueDate,state));
+        return button;
+      }));
     }
     function renderTsunami(message, bulletin) {
       const safe = /^no\s+tsunami\.?$/i.test(String(message || '').trim());
@@ -199,10 +249,8 @@
       renderStormSurge(stormDemoBulletin?.message || data.stormSurge.message,stormDemoBulletin || data.stormSurge.bulletin);
       ids('highWaveIssueDate').textContent = `Issue date ${data.highWave.issueDate || '—'}`;
       ids('swellIssueDate').textContent = `Issue date ${data.swellSurge.issueDate || '—'}`;
-      tags('highWaveAlert',data.highWave.alert,'No state listed'); tags('highWaveWatch',data.highWave.watch,'No state listed');
-      tags('highWaveWarning',data.highWave.warning,'No state listed'); tags('highWaveNoThreat',data.highWave.noThreat,'No state listed');
-      tags('swellAlert',data.swellSurge.alert,'No state listed'); tags('swellWatch',data.swellSurge.watch,'No state listed');
-      tags('swellWarning',data.swellSurge.warning,'No state listed'); tags('swellNoThreat',data.swellSurge.noThreat,'No state listed');
+      renderStateSummaries('highWaveStates','High Wave',data.highWave);
+      renderStateSummaries('swellStates','Swell Surge',data.swellSurge);
       ids('pfzDate').textContent = `Forecast ${data.pfz.forecastDate || '—'} · Valid through ${data.pfz.validUntil || '—'}`;
       tags('pfzStates',data.pfz.sectors,'No sectors listed');
       renderCyclone(data.cyclone);
@@ -210,6 +258,8 @@
     }
     async function loadStatus(url='status.json') { const response = await fetch(`${url}?t=${Date.now()}`,{cache:'no-store'}); if(!response.ok) throw new Error('Status unavailable'); const data=await response.json(); render(data); }
     loadStatus().catch(()=>ids('updateState').textContent='Saved status is temporarily unavailable');
+    ids('advisoryDialogClose').addEventListener('click',()=>ids('advisoryDialog').close());
+    ids('advisoryDialog').addEventListener('click',event=>{ if (event.target === ids('advisoryDialog')) ids('advisoryDialog').close(); });
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     setInterval(()=>loadStatus().catch(()=>{}),3600000);
   </script>
