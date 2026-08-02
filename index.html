@@ -46,13 +46,15 @@
     .header-actions{display:flex;align-items:center;gap:10px;margin-left:auto}.header-actions .stamp{margin-left:0}.install-button{display:inline-flex;align-items:center;gap:5px;padding:7px 9px;border:1px solid #b8d2cd;border-radius:9px;background:#edf6f3;color:var(--ink);font:900 10px/1 inherit;cursor:pointer;white-space:nowrap}.install-button:hover,.install-button:focus-visible{color:#fff;background:var(--teal);border-color:var(--teal);outline:0}.install-button[hidden]{display:none}.install-icon{font-size:15px;line-height:1}.install-dialog{width:min(430px,calc(100% - 28px))}.install-dialog .advisory-details{gap:8px}.install-dialog p{margin:0;color:#294b55;font-size:12px;font-weight:700;line-height:1.55}.install-steps{margin:0;padding-left:20px;color:#294b55;font-size:12px;font-weight:700;line-height:1.6}
     @media(max-width:520px){.header-actions{gap:7px}.install-button{width:34px;height:34px;justify-content:center;padding:0}.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
     .install-button{color:#fff;background:#082f3c;border-color:#082f3c;box-shadow:0 5px 14px rgba(8,47,60,.22)}.install-button .install-icon{color:#68e0e5}.install-button:hover,.install-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;box-shadow:0 7px 18px rgba(8,127,132,.3)}
+    .ocean-brand{display:flex;align-items:center;gap:10px;flex:none;text-decoration:none}.brand-monogram{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;color:#fff;background:linear-gradient(145deg,#082f3c,#087f84);box-shadow:0 7px 18px rgba(8,47,60,.2);font:900 14px/1 Georgia,"Times New Roman",serif;letter-spacing:-.04em}.brand-copy{display:grid;gap:2px}.brand-copy strong{font:700 20px/1 Georgia,"Times New Roman",serif}.brand-copy small{color:var(--muted);font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.ocean-brand:hover .brand-monogram,.ocean-brand:focus-visible .brand-monogram{background:linear-gradient(145deg,#075f68,#0da0a6)}.ocean-brand:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:14px}
+    @media(max-width:520px){.brand-monogram{width:42px;height:42px}.brand-copy strong{font-size:17px}.brand-copy small{display:none}}
     @media(min-width:851px){.ocean .forecast{height:calc(100% - 74px)}}
   </style>
 </head>
 <body>
   <main class="dashboard">
     <header class="header">
-      <img class="incois-logo" src="https://incois.gov.in/site/assets/images/logo.png" alt="Indian National Centre for Ocean Information Services">
+      <a class="ocean-brand" href="./" aria-label="Ocean Watch home"><span class="brand-monogram" aria-hidden="true">OW</span><span class="brand-copy"><strong>Ocean Watch</strong><small>Independent coastal dashboard</small></span></a>
       <div class="title"><h1>Coastal Advisory Status</h1><p>Tsunami · Ocean State Forecast · Storm Surge · Potential Fishing Zone</p></div>
       <div class="header-actions">
         <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated" datetime="2026-07-30T22:15:00+05:30">Checked 30 July 2026 · 10:15 PM IST</time></div>
@@ -115,7 +117,7 @@
       </div>
     </div>
 
-    <footer class="footer"><div><strong>Auto-update:</strong> Every 1 hour · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Fetched from official sources only. For more information, check the official links.</div><div>INCOIS · MoES</div></footer>
+    <footer class="footer"><div><strong>Auto-update:</strong> Every 1 hour · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Independent dashboard:</strong> Not affiliated with or endorsed by INCOIS/MoES. Always verify official bulletins.</div><div><a href="https://incois.gov.in/" target="_blank" rel="noopener"><strong>Data source:</strong> INCOIS–MoES ↗</a></div></footer>
     <dialog class="advisory-dialog install-dialog" id="installDialog" aria-labelledby="installDialogTitle">
       <div class="advisory-dialog-head"><div><h2 id="installDialogTitle">Install Ocean Watch</h2><p>Keep the coastal advisory dashboard on this device.</p></div><button class="dialog-close" id="installDialogClose" type="button" aria-label="Close install instructions">&times;</button></div>
       <div class="advisory-details"><p id="installGuidance"></p><ol class="install-steps" id="installSteps"></ol></div>
