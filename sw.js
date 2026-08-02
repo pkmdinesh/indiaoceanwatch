@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ocean-watch-v3';
+const CACHE_NAME = 'ocean-watch-v4';
 const APP_SHELL = [
   './',
   './index.html',
@@ -8,6 +8,9 @@ const APP_SHELL = [
   './icons/ocean-watch-v3-maskable.png',
   './icons/ocean-watch-v3-apple.png',
   './assets/earthquake-network-icon.png',
+  './assets/ocean-wave-service-icon.png',
+  './assets/tsunami-service-icon.png',
+  './assets/cyclone-service-icon.png',
   './assets/storm-surge-icon.png',
   './assets/underwater-fish-icon.png'
 ];
