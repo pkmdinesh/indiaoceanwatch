@@ -50,6 +50,9 @@
     .brand-image{width:48px;height:48px;flex:none;border-radius:14px;object-fit:cover;box-shadow:0 7px 18px rgba(8,47,60,.2)}
     @media(max-width:520px){.brand-image{width:42px;height:42px}.brand-copy strong{font-size:17px}}
     @media(min-width:851px){.ocean .forecast{height:calc(100% - 74px)}}
+    .content{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start;padding:14px 16px}.content>.panel{padding:14px 16px;border:1px solid var(--line);border-radius:15px;background:#f5f8f6}.content>.panel:last-child{border:1px solid var(--line)}.content .ocean,.content .pfz-card{grid-column:1/-1}.content .ocean .forecast{height:auto}.content .panel-head{min-height:42px}.content .tsunami-status,.content .storm-status,.content .cyclone-status{height:100%;min-height:72px}.seismic-card .seismic{grid-template-columns:48px 1fr;margin:0;padding:0;border:0}.seismic-card .seismic-heading{margin-bottom:6px}.seismic-card .seismic-heading h2{white-space:normal;font:700 clamp(16px,1.45vw,21px)/1.15 Georgia,"Times New Roman",serif}.storm-card .panel-head{display:flex;grid-template-columns:none}.pfz-card .pfz-states{margin-top:10px}
+    @media(max-width:1100px){.content{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px}.content .ocean,.content .pfz-card{grid-column:1/-1}}
+    @media(max-width:700px){.content{grid-template-columns:1fr;padding:10px}.content .ocean,.content .pfz-card{grid-column:auto}.content>.panel{padding:13px}.content .panel-head{min-height:0}}
   </style>
 </head>
 <body>
@@ -83,39 +86,42 @@
         <p class="advisory-note">A state may appear under multiple levels because district and coastal-stretch conditions differ.</p>
       </section>
 
-      <section class="panel" aria-labelledby="tsunami-title">
+      <section class="panel advisory-card" aria-labelledby="tsunami-title">
         <div class="panel-head">
           <img class="service-logo" src="https://cdn-icons-png.flaticon.com/512/2910/2910105.png" alt="Tsunami icon supplied by the user">
           <div><h2 id="tsunami-title">Tsunami Advisory</h2><p class="panel-kicker">Indian Tsunami Early Warning System</p></div>
           <a class="source itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWS ↗</a>
         </div>
         <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><strong id="tsunamiMessage">No Tsunami</strong><span id="tsunamiCaption">Official homepage message when checked</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
-        <div class="seismic"><img src="assets/earthquake-network-icon.png" alt="Earthquake Network icon"><div><div class="seismic-heading"><h3>Latest seismic activity with magnitude ≥ 6.5M</h3><a class="earthquake-chip" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div><p id="seismicMessage">No Seismic Activity for the past 90 days with magnitude &gt;= 6.5M</p><div class="seismic-additional" id="seismicAdditional"></div></div></div>
-        <section class="storm-block" aria-labelledby="surge-title">
-          <div class="panel-head">
-            <img class="service-logo" src="assets/storm-surge-icon.png?v=2" alt="Storm surge icon">
-            <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
-            <a class="source" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
-          </div>
-          <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><strong id="stormMessage">No active storm surge bulletin</strong><span id="stormCaption">Official ITEWS bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
-        </section>
       </section>
 
-      <div class="right">
-        <section class="mini" aria-labelledby="pfz-title">
-          <div class="panel-head">
-            <img class="service-logo" src="assets/underwater-fish-icon.png" alt="Underwater fish icon">
-            <div><h2 id="pfz-title" class="pfz-title">Potential Fishing Zone</h2><p class="panel-kicker">Today’s advisory sectors</p></div>
-            <a class="source pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a>
-          </div>
-          <p class="pfz-date" id="pfzDate">Forecast 30 Jul · Valid through 31 Jul 2026</p>
-          <div class="states pfz-states" id="pfzStates"><span class="tag">Gujarat</span><span class="tag">Maharashtra</span><span class="tag">Goa</span><span class="tag">Karnataka</span><span class="tag">Kerala</span><span class="tag">Lakshadweep</span><span class="tag">N/S Tamil Nadu</span><span class="tag">N/S Andhra Pradesh</span><span class="tag">Odisha</span><span class="tag">West Bengal</span><span class="tag">Andaman</span><span class="tag">Nicobar</span></div>
-        </section>
-        <section class="mini cyclone-card" aria-labelledby="cyclone-title">
-          <div class="panel-head"><div class="cyclone-heading"><img class="cyclone-icon" src="https://cdn-icons-png.flaticon.com/512/3436/3436669.png" alt="Cyclone icon"><h2 id="cyclone-title">Cyclone Advisory</h2></div><a class="source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
-          <div class="cyclone-status level-safe" id="cycloneStatus"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage" hidden></p><time id="cycloneIssued"></time></div>
-        </section>
-      </div>
+      <section class="panel seismic-card" aria-labelledby="seismic-title">
+        <div class="seismic"><img src="assets/earthquake-network-icon.png" alt="Earthquake Network icon"><div><div class="seismic-heading"><h2 id="seismic-title">Latest seismic activity ≥ 6.5M</h2><a class="earthquake-chip" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div><p id="seismicMessage">No Seismic Activity for the past 90 days with magnitude &gt;= 6.5M</p><div class="seismic-additional" id="seismicAdditional"></div></div></div>
+      </section>
+
+      <section class="panel cyclone-card" aria-labelledby="cyclone-title">
+        <div class="panel-head"><div class="cyclone-heading"><img class="cyclone-icon" src="https://cdn-icons-png.flaticon.com/512/3436/3436669.png" alt="Cyclone icon"><h2 id="cyclone-title">Cyclone Advisory</h2></div><a class="source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
+        <div class="cyclone-status level-safe" id="cycloneStatus"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage" hidden></p><time id="cycloneIssued"></time></div>
+      </section>
+
+      <section class="panel storm-card" aria-labelledby="surge-title">
+        <div class="panel-head">
+          <img class="service-logo" src="assets/storm-surge-icon.png?v=2" alt="Storm surge icon">
+          <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
+          <a class="source" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
+        </div>
+        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><strong id="stormMessage">No active storm surge bulletin</strong><span id="stormCaption">Official ITEWS bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
+      </section>
+
+      <section class="panel pfz-card" aria-labelledby="pfz-title">
+        <div class="panel-head">
+          <img class="service-logo" src="assets/underwater-fish-icon.png" alt="Underwater fish icon">
+          <div><h2 id="pfz-title" class="pfz-title">Potential Fishing Zone</h2><p class="panel-kicker">Today’s advisory sectors</p></div>
+          <a class="source pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a>
+        </div>
+        <p class="pfz-date" id="pfzDate">Forecast 30 Jul · Valid through 31 Jul 2026</p>
+        <div class="states pfz-states" id="pfzStates"><span class="tag">Gujarat</span><span class="tag">Maharashtra</span><span class="tag">Goa</span><span class="tag">Karnataka</span><span class="tag">Kerala</span><span class="tag">Lakshadweep</span><span class="tag">N/S Tamil Nadu</span><span class="tag">N/S Andhra Pradesh</span><span class="tag">Odisha</span><span class="tag">West Bengal</span><span class="tag">Andaman</span><span class="tag">Nicobar</span></div>
+      </section>
     </div>
 
     <footer class="footer"><div><strong>Auto-update:</strong> Every 30 mins · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Information is fetched from official sources; however, there may be a delay before updates are reflected. For accuracy, always verify the latest official bulletins.</div><div><a href="https://incois.gov.in/" target="_blank" rel="noopener"><strong>Data source:</strong> INCOIS–MoES ↗</a></div></footer>
