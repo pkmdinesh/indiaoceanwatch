@@ -124,11 +124,11 @@
       });
     }
     function countSummary(counts = {}) {
-      return severityOrder.filter(level => counts[level]).map(level => `${counts[level]} ${severityLabel[level]}`).join(' Â· ');
+      return severityOrder.filter(level => counts[level]).map(level => `${counts[level]} ${severityLabel[level]}`).join(' \u00b7 ');
     }
     function openAdvisoryDetails(hazardName, issueDate, state) {
-      ids('advisoryDialogTitle').textContent = `${titleCase(state.name)} â€” ${hazardName}`;
-      ids('advisoryDialogMeta').textContent = `${countSummary(state.counts)}${issueDate ? ` Â· Issued ${issueDate}` : ''}`;
+      ids('advisoryDialogTitle').textContent = `${titleCase(state.name)} \u2014 ${hazardName}`;
+      ids('advisoryDialogMeta').textContent = `${countSummary(state.counts)}${issueDate ? ` \u00b7 Issued ${issueDate}` : ''}`;
       const advisories = state.advisories || [];
       if (!advisories.length) {
         ids('advisoryDetails').innerHTML = '<p class="empty">District details will appear after the next source update.</p>';
@@ -158,7 +158,7 @@
         const dot = document.createElement('i'); dot.className = 'dot'; dot.setAttribute('aria-hidden','true');
         const name = document.createElement('span'); name.className = 'state-summary-name'; name.textContent = titleCase(state.name);
         const counts = document.createElement('span'); counts.className = 'state-summary-counts'; counts.textContent = countSummary(state.counts);
-        const arrow = document.createElement('span'); arrow.className = 'state-summary-arrow'; arrow.textContent = 'â€º'; arrow.setAttribute('aria-hidden','true');
+        const arrow = document.createElement('span'); arrow.className = 'state-summary-arrow'; arrow.textContent = '\u203a'; arrow.setAttribute('aria-hidden','true');
         button.append(dot,name,counts,arrow);
         button.addEventListener('click',() => openAdvisoryDetails(hazardName,group.issueDate,state));
         return button;
