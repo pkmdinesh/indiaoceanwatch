@@ -172,7 +172,10 @@ try {
                 $eventTime = [DateTime]::ParseExact("$($_.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
                 ($latestTime - $eventTime).TotalHours -ge 0 -and ($latestTime - $eventTime).TotalHours -le 24
             } | ForEach-Object {
-                [pscustomobject][ordered]@{ magnitude = $_.MAGNITUDE; region = $_.REGIONNAME; originTime = $_.ORIGINTIME; depth = $_.DEPTH }
+                $bulletinUrl = if ("$($_.EVID)".Trim() -and "$($_.BULNO)".Trim()) {
+                    "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC&eventId=$($_.EVID)&aos=public&currBullNo=$($_.BULNO)&latestBullNo=$($_.BULNO)"
+                } else { $null }
+                [pscustomobject][ordered]@{ magnitude = $_.MAGNITUDE; region = $_.REGIONNAME; originTime = $_.ORIGINTIME; depth = $_.DEPTH; bulletinUrl = $bulletinUrl }
             })
             if ($latest.PSObject.Properties.Name -contains 'detail' -and "$($latest.detail)".Trim()) {
                 $status.tsunami.recentBulletin = Get-BulletinSummary "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO)
