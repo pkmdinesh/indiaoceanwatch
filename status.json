@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-08-02T11:30:19.0405851+00:00",
+    "updatedAt":  "2026-08-02T17:12:57.0722044+05:30",
     "updateIntervalHours":  0.5,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -62,7 +62,13 @@
 
                                  ],
                      "noThreat":  [
-
+                                      "ANDAMAN AND NICOBAR",
+                                      "ANDHRA PRADESH",
+                                      "GUJARAT",
+                                      "ODISHA",
+                                      "PUDUCHERRY",
+                                      "TAMIL NADU",
+                                      "WEST BENGAL"
                                   ],
                      "states":  [
                                     {
@@ -128,7 +134,7 @@
                                                        "warning":  0,
                                                        "alert":  6,
                                                        "watch":  6,
-                                                       "noThreat":  0
+                                                       "noThreat":  3
                                                    },
                                         "advisories":  [
                                                            {
@@ -226,6 +232,30 @@
                                                                "color":  "Yellow",
                                                                "issueDate":  "01-08-2026",
                                                                "message":  "High Wave Watch for the coast of VALSAD SOUTH,GUJARAT from Kalai To Umargam. High waves in the range of 2.7 - 3.0  meters are forecasted during 17:30 hours on 01-08-2026 to 23:30 hours on 03-08-2026. It advised that no immediate action is required. Check for updates."
+                                                           },
+                                                           {
+                                                               "state":  "GUJARAT",
+                                                               "district":  "ANAND",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "GUJARAT",
+                                                               "district":  "BHARUCH",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "GUJARAT",
+                                                               "district":  "JAMNAGAR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
                                                            }
                                                        ]
                                     },
@@ -460,7 +490,7 @@
                                                        "warning":  0,
                                                        "alert":  1,
                                                        "watch":  0,
-                                                       "noThreat":  0
+                                                       "noThreat":  1
                                                    },
                                         "advisories":  [
                                                            {
@@ -470,6 +500,14 @@
                                                                "color":  "Orange",
                                                                "issueDate":  "01-08-2026",
                                                                "message":  "High Wave Alert for the coast of MAHE,PUDUCHERRY from Koloth To Azhikal. High waves in the range of 2.7 - 3.3  meters are forecasted during 17:30 hours on 01-08-2026 to 02:30 hours on 02-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                           },
+                                                           {
+                                                               "state":  "PUDUCHERRY",
+                                                               "district":  "PUDUCHERRY",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
                                                            }
                                                        ]
                                     },
@@ -480,7 +518,7 @@
                                                        "warning":  0,
                                                        "alert":  0,
                                                        "watch":  7,
-                                                       "noThreat":  0
+                                                       "noThreat":  6
                                                    },
                                         "advisories":  [
                                                            {
@@ -538,6 +576,54 @@
                                                                "color":  "Yellow",
                                                                "issueDate":  "01-08-2026",
                                                                "message":  "High Wave Watch for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 2.0 - 2.3  meters are forecasted during 17:30 hours on 01-08-2026 to 20:30 hours on 02-08-2026. It advised that no immediate action is required. Check for updates."
+                                                           },
+                                                           {
+                                                               "state":  "ANDAMAN AND NICOBAR",
+                                                               "district":  "BARREN ISLAND",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDAMAN AND NICOBAR",
+                                                               "district":  "DIGLIPUR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDAMAN AND NICOBAR",
+                                                               "district":  "HAVELOCK",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDAMAN AND NICOBAR",
+                                                               "district":  "NARCONDAM ISLAND",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDAMAN AND NICOBAR",
+                                                               "district":  "PORT BLAIR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDAMAN AND NICOBAR",
+                                                               "district":  "RANGATH BAY",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
                                                            }
                                                        ]
                                     },
@@ -548,7 +634,7 @@
                                                        "warning":  0,
                                                        "alert":  0,
                                                        "watch":  3,
-                                                       "noThreat":  0
+                                                       "noThreat":  3
                                                    },
                                         "advisories":  [
                                                            {
@@ -574,6 +660,30 @@
                                                                "color":  "Yellow",
                                                                "issueDate":  "01-08-2026",
                                                                "message":  "High Wave Watch for the coast of PURI,ODISHA from Ramalanka To Nuagar. High waves in the range of 1.7 - 2.3  meters are forecasted during 17:30 hours on 01-08-2026 to 08:30 hours on 02-08-2026. It advised that no immediate action is required. Check for updates."
+                                                           },
+                                                           {
+                                                               "state":  "ODISHA",
+                                                               "district":  "BALESHWAR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ODISHA",
+                                                               "district":  "BHADRAK",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ODISHA",
+                                                               "district":  "KENDRAPARA",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
                                                            }
                                                        ]
                                     },
@@ -584,7 +694,7 @@
                                                        "warning":  0,
                                                        "alert":  0,
                                                        "watch":  3,
-                                                       "noThreat":  0
+                                                       "noThreat":  12
                                                    },
                                         "advisories":  [
                                                            {
@@ -610,6 +720,222 @@
                                                                "color":  "Yellow",
                                                                "issueDate":  "01-08-2026",
                                                                "message":  "High Wave Watch for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. High waves in the range of 2.3 - 2.8  meters are forecasted during 17:30 hours on 01-08-2026 to 23:30 hours on 03-08-2026. It advised that no immediate action is required. Check for updates."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "CHENNAI",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "CUDDALORE",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "KANCHEEPURAM",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "KARAIKAL",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "NAGAPPATTINAM NORTH",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "NAGAPPATTINAM SOUTH",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "PUDUKKOTTAI",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "RAMANATHAPURAM",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "THANJAVUR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "THIRUVALLUR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "THIRUVARUR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "TAMIL NADU",
+                                                               "district":  "VILUPPURAM",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           }
+                                                       ]
+                                    },
+                                    {
+                                        "name":  "ANDHRA PRADESH",
+                                        "highestSeverity":  "noThreat",
+                                        "counts":  {
+                                                       "warning":  0,
+                                                       "alert":  0,
+                                                       "watch":  0,
+                                                       "noThreat":  9
+                                                   },
+                                        "advisories":  [
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "EAST GODAVARI",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "GUNTUR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "KRISHNA",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "NELLORE",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "PRAKASAM",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "SRIKAKULAM",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "VISAKHAPATNAM",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "VIZIANAGARAM",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
+                                                               "district":  "WEST GODAVARI",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           }
+                                                       ]
+                                    },
+                                    {
+                                        "name":  "WEST BENGAL",
+                                        "highestSeverity":  "noThreat",
+                                        "counts":  {
+                                                       "warning":  0,
+                                                       "alert":  0,
+                                                       "watch":  0,
+                                                       "noThreat":  3
+                                                   },
+                                        "advisories":  [
+                                                           {
+                                                               "state":  "WEST BENGAL",
+                                                               "district":  "NORTH 24 PARGANAS",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "WEST BENGAL",
+                                                               "district":  "PURBA MEDINIPUR",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                           },
+                                                           {
+                                                               "state":  "WEST BENGAL",
+                                                               "district":  "SOUTH 24 PARGANAS",
+                                                               "severity":  "noThreat",
+                                                               "color":  "Green",
+                                                               "issueDate":  "20260801",
+                                                               "message":  "No High Wave threat is indicated for this coastal district in the latest INCOIS dataset."
                                                            }
                                                        ]
                                     }
@@ -633,7 +959,16 @@
 
                                    ],
                        "noThreat":  [
-
+                                        "ANDHRA PRADESH",
+                                        "DAMAN AND DIU",
+                                        "GOA",
+                                        "GUJARAT",
+                                        "KARNATAKA",
+                                        "KERALA",
+                                        "LAKSHADWEEP",
+                                        "MAHARASHTRA",
+                                        "PUDUCHERRY",
+                                        "TAMIL NADU"
                                     ],
                        "states":  [
                                       {
@@ -759,7 +1094,7 @@
                                                          "warning":  0,
                                                          "alert":  4,
                                                          "watch":  0,
-                                                         "noThreat":  0
+                                                         "noThreat":  11
                                                      },
                                           "advisories":  [
                                                              {
@@ -793,6 +1128,94 @@
                                                                  "color":  "Orange",
                                                                  "issueDate":  "01-08-2026",
                                                                  "message":  "Swell Surge Alert for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.6 m height are forecasted during  17:30 hours on 01-08-2026 to 17:30 hours on 03-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "CHENNAI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "CUDDALORE",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "KANCHEEPURAM",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "KARAIKAL",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "NAGAPPATTINAM NORTH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "NAGAPPATTINAM SOUTH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "PUDUKKOTTAI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "THANJAVUR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "THIRUVALLUR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "THIRUVARUR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "VILUPPURAM",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
                                                              }
                                                          ]
                                       },
@@ -803,7 +1226,7 @@
                                                          "warning":  0,
                                                          "alert":  0,
                                                          "watch":  6,
-                                                         "noThreat":  0
+                                                         "noThreat":  3
                                                      },
                                           "advisories":  [
                                                              {
@@ -853,6 +1276,30 @@
                                                                  "color":  "Yellow",
                                                                  "issueDate":  "01-08-2026",
                                                                  "message":  "Swell Surge Watch for the coast of WEST GODAVARI,ANDHRA PRADESH. Swell waves in the range of 12.0 - 20.0 sec period with 0.5 - 0.7 m height are forecasted during  11:30 hours on 03-08-2026 to 23:30 hours on 03-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDHRA PRADESH",
+                                                                 "district":  "GUNTUR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDHRA PRADESH",
+                                                                 "district":  "NELLORE",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDHRA PRADESH",
+                                                                 "district":  "PRAKASAM",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
                                                              }
                                                          ]
                                       },
@@ -863,7 +1310,7 @@
                                                          "warning":  0,
                                                          "alert":  0,
                                                          "watch":  1,
-                                                         "noThreat":  0
+                                                         "noThreat":  14
                                                      },
                                           "advisories":  [
                                                              {
@@ -873,6 +1320,118 @@
                                                                  "color":  "Yellow",
                                                                  "issueDate":  "01-08-2026",
                                                                  "message":  "Swell Surge Watch for the coast of GIR SOMNATH,GUJARAT from Adri To Mul Dwaraka. Swell waves in the range of 11.0 - 12.0 sec period with 2.6 - 2.9 m height are forecasted during  02:30 hours on 02-08-2026 to 23:30 hours on 02-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "AMRELI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "ANAND",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "BHARUCH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "BHAVNAGAR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "DEVBHUMI DWARAKA",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "JAMNAGAR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "JUNAGADH NORTH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "JUNAGADH SOUTH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "KACHCHH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "NAVSARI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "PORBANDAR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "SURAT",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "VALSAD NORTH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GUJARAT",
+                                                                 "district":  "VALSAD SOUTH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
                                                              }
                                                          ]
                                       },
@@ -883,7 +1442,7 @@
                                                          "warning":  0,
                                                          "alert":  0,
                                                          "watch":  1,
-                                                         "noThreat":  0
+                                                         "noThreat":  4
                                                      },
                                           "advisories":  [
                                                              {
@@ -893,6 +1452,38 @@
                                                                  "color":  "Yellow",
                                                                  "issueDate":  "01-08-2026",
                                                                  "message":  "Swell Surge Watch for the coast of RAIGARH,MAHARASHTRA from Ulwa Moha To Bagmandla. Swell waves in the range of 12.0 - 12.0 sec period with 2.3 - 2.5 m height are forecasted during  17:30 hours on 01-08-2026 to 17:30 hours on 03-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "MAHARASHTRA",
+                                                                 "district":  "PALGHAR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "MAHARASHTRA",
+                                                                 "district":  "RATNAGIRI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "MAHARASHTRA",
+                                                                 "district":  "SINDHUDURG",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "MAHARASHTRA",
+                                                                 "district":  "THANE, MUMBAI SUBURBAN, MUMBAI CITY",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
                                                              }
                                                          ]
                                       },
@@ -989,6 +1580,262 @@
                                                                  "color":  "Yellow",
                                                                  "issueDate":  "01-08-2026",
                                                                  "message":  "Swell Surge Watch for the coast of SOUTH 24 PARGANAS,WEST BENGAL from Kakdwip To Lothian Island. Swell waves in the range of 17.0 - 19.0 sec period with 0.8 - 0.9 m height are forecasted during  17:30 hours on 01-08-2026 to 23:30 hours on 03-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             }
+                                                         ]
+                                      },
+                                      {
+                                          "name":  "DAMAN AND DIU",
+                                          "highestSeverity":  "noThreat",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  0,
+                                                         "noThreat":  2
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "DAMAN AND DIU",
+                                                                 "district":  "DAMAN",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "DAMAN AND DIU",
+                                                                 "district":  "DIU",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             }
+                                                         ]
+                                      },
+                                      {
+                                          "name":  "GOA",
+                                          "highestSeverity":  "noThreat",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  0,
+                                                         "noThreat":  2
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "GOA",
+                                                                 "district":  "NORTH GOA",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "GOA",
+                                                                 "district":  "SOUTH GOA",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             }
+                                                         ]
+                                      },
+                                      {
+                                          "name":  "KARNATAKA",
+                                          "highestSeverity":  "noThreat",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  0,
+                                                         "noThreat":  3
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "KARNATAKA",
+                                                                 "district":  "DAKSHINA KANNADA",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KARNATAKA",
+                                                                 "district":  "UDUPI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KARNATAKA",
+                                                                 "district":  "UTTARA KANNADA",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             }
+                                                         ]
+                                      },
+                                      {
+                                          "name":  "KERALA",
+                                          "highestSeverity":  "noThreat",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  0,
+                                                         "noThreat":  9
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "ALAPPUZHA",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "ERNAKULAM",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "KANNUR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "KASARAGOD, KANNUR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "KOLLAM",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "KOZHIKODE",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "MALAPPURAM",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "THIRUVANANTHAPURAM",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "THRISSUR",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             }
+                                                         ]
+                                      },
+                                      {
+                                          "name":  "LAKSHADWEEP",
+                                          "highestSeverity":  "noThreat",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  0,
+                                                         "noThreat":  5
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
+                                                                 "district":  "AGATTI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
+                                                                 "district":  "AMINI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
+                                                                 "district":  "ANDROTH",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
+                                                                 "district":  "KAVARATTI",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
+                                                                 "district":  "MINICOY",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             }
+                                                         ]
+                                      },
+                                      {
+                                          "name":  "PUDUCHERRY",
+                                          "highestSeverity":  "noThreat",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  0,
+                                                         "noThreat":  2
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "PUDUCHERRY",
+                                                                 "district":  "MAHE",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
+                                                             },
+                                                             {
+                                                                 "state":  "PUDUCHERRY",
+                                                                 "district":  "PUDUCHERRY",
+                                                                 "severity":  "noThreat",
+                                                                 "color":  "Green",
+                                                                 "issueDate":  "20260801",
+                                                                 "message":  "No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset."
                                                              }
                                                          ]
                                       }

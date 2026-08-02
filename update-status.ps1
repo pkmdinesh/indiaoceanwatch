@@ -201,6 +201,13 @@ try {
         $items = @($hwa.data)
     }
     if (-not $items.Count) { throw 'INCOIS returned no high-wave or swell-surge records' }
+    $districtPolygons = Invoke-RestMethod -Uri 'https://samudra.incois.gov.in/incoismobileappdata/rest/incois/districtpolygons' -TimeoutSec 45
+    $coastalAreas = @($districtPolygons.features | ForEach-Object {
+        $district = "$($_.properties.District)".Trim().ToUpperInvariant()
+        $state = "$($_.properties.STATE)".Trim().ToUpperInvariant()
+        if ($district -and $state) { [pscustomobject]@{ state = $state; district = $district } }
+    } | Sort-Object state, district -Unique)
+    if (-not $coastalAreas.Count) { throw 'INCOIS returned no coastal district polygons' }
 
     # A successful response replaces the previous snapshot; do not retain expired alerts.
     foreach ($group in @($status.highWave, $status.swellSurge)) {
@@ -231,6 +238,22 @@ try {
             message = if ($null -ne $item.Message) { "$($item.Message)".Trim() } else { $null }
         }
         if ($alert -like 'HIGH WAVE*') { $highWaveDetails += $detail } else { $swellSurgeDetails += $detail }
+    }
+    foreach ($area in $coastalAreas) {
+        if (-not @($highWaveDetails | Where-Object { $_.state -eq $area.state -and $_.district -eq $area.district }).Count) {
+            $status.highWave.noThreat += $area.state
+            $highWaveDetails += [pscustomobject][ordered]@{
+                state = $area.state; district = $area.district; severity = 'noThreat'; color = 'Green'
+                issueDate = "$($hwa.LatestHWADate)"; message = 'No High Wave threat is indicated for this coastal district in the latest INCOIS dataset.'
+            }
+        }
+        if (-not @($swellSurgeDetails | Where-Object { $_.state -eq $area.state -and $_.district -eq $area.district }).Count) {
+            $status.swellSurge.noThreat += $area.state
+            $swellSurgeDetails += [pscustomobject][ordered]@{
+                state = $area.state; district = $area.district; severity = 'noThreat'; color = 'Green'
+                issueDate = "$($hwa.LatestSSADate)"; message = 'No Swell Surge threat is indicated for this coastal district in the latest INCOIS dataset.'
+            }
+        }
     }
     $severityRank = @{ warning = 4; alert = 3; watch = 2; noThreat = 1 }
     foreach ($pair in @(
