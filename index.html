@@ -3,6 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#082f3c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ocean Watch">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <meta name="description" content="Click to know today’s coastal advisory status of India: tsunami, high wave, swell and storm surge, and potential fishing zones.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://pkmdinesh.github.io/indiaoceanwatch/">
@@ -36,6 +43,8 @@
     .storm-block .source{grid-column:2;grid-row:2;justify-self:end;transform:none}
     .panel-head .pfz-source,.panel-head .itews-source{margin-left:auto}
     .severity-row-label.noThreat{color:var(--green)}
+    .header-actions{display:flex;align-items:center;gap:10px;margin-left:auto}.header-actions .stamp{margin-left:0}.install-button{display:inline-flex;align-items:center;gap:5px;padding:7px 9px;border:1px solid #b8d2cd;border-radius:9px;background:#edf6f3;color:var(--ink);font:900 10px/1 inherit;cursor:pointer;white-space:nowrap}.install-button:hover,.install-button:focus-visible{color:#fff;background:var(--teal);border-color:var(--teal);outline:0}.install-button[hidden]{display:none}.install-icon{font-size:15px;line-height:1}.install-dialog{width:min(430px,calc(100% - 28px))}.install-dialog .advisory-details{gap:8px}.install-dialog p{margin:0;color:#294b55;font-size:12px;font-weight:700;line-height:1.55}.install-steps{margin:0;padding-left:20px;color:#294b55;font-size:12px;font-weight:700;line-height:1.6}
+    @media(max-width:520px){.header-actions{gap:7px}.install-button{width:34px;height:34px;justify-content:center;padding:0}.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
     @media(min-width:851px){.ocean .forecast{height:calc(100% - 74px)}}
   </style>
 </head>
@@ -44,7 +53,10 @@
     <header class="header">
       <img class="incois-logo" src="https://incois.gov.in/site/assets/images/logo.png" alt="Indian National Centre for Ocean Information Services">
       <div class="title"><h1>Coastal Advisory Status</h1><p>Tsunami · Ocean State Forecast · Storm Surge · Potential Fishing Zone</p></div>
-      <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated" datetime="2026-07-30T22:15:00+05:30">Checked 30 July 2026 · 10:15 PM IST</time></div>
+      <div class="header-actions">
+        <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch app"><span class="install-icon" aria-hidden="true">&#8681;</span><span class="install-label">Install app</span></button>
+        <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated" datetime="2026-07-30T22:15:00+05:30">Checked 30 July 2026 · 10:15 PM IST</time></div>
+      </div>
     </header>
 
     <div class="content">
@@ -103,6 +115,10 @@
     </div>
 
     <footer class="footer"><div><strong>Auto-update:</strong> Every 1 hour · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Fetched from official sources only. For more information, check the official links.</div><div>INCOIS · MoES</div></footer>
+    <dialog class="advisory-dialog install-dialog" id="installDialog" aria-labelledby="installDialogTitle">
+      <div class="advisory-dialog-head"><div><h2 id="installDialogTitle">Install Ocean Watch</h2><p>Keep the coastal advisory dashboard on this device.</p></div><button class="dialog-close" id="installDialogClose" type="button" aria-label="Close install instructions">&times;</button></div>
+      <div class="advisory-details"><p id="installGuidance"></p><ol class="install-steps" id="installSteps"></ol></div>
+    </dialog>
     <dialog class="advisory-dialog" id="advisoryDialog" aria-labelledby="advisoryDialogTitle">
       <div class="advisory-dialog-head"><div><h2 id="advisoryDialogTitle">District advisories</h2><p id="advisoryDialogMeta"></p></div><button class="dialog-close" id="advisoryDialogClose" type="button" aria-label="Close district advisories">&times;</button></div>
       <div class="advisory-details" id="advisoryDetails"></div>
@@ -110,6 +126,42 @@
   </main>
   <script>
     const ids = id => document.getElementById(id);
+    let deferredInstallPrompt = null;
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    function showInstallInstructions() {
+      const guidance = ids('installGuidance');
+      const steps = ids('installSteps');
+      if (isIOS) {
+        guidance.textContent = 'Safari installs this site from its Share menu:';
+        steps.replaceChildren(...['Tap the Share button.','Choose Add to Home Screen.','Tap Add.'].map(text => { const item=document.createElement('li'); item.textContent=text; return item; }));
+      } else {
+        guidance.textContent = 'If the browser install prompt is unavailable, use the browser menu:';
+        steps.replaceChildren(...['Open the browser menu.','Choose Install Ocean Watch, Install app, or Create shortcut.','Confirm the installation.'].map(text => { const item=document.createElement('li'); item.textContent=text; return item; }));
+      }
+      ids('installDialog').showModal();
+    }
+    if (!isStandalone) {
+      if (isIOS) ids('installApp').hidden = false;
+      else setTimeout(() => { ids('installApp').hidden = false; },1500);
+    }
+    window.addEventListener('beforeinstallprompt',event => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      ids('installApp').hidden = false;
+    });
+    window.addEventListener('appinstalled',() => {
+      deferredInstallPrompt = null;
+      ids('installApp').hidden = true;
+      if (ids('installDialog').open) ids('installDialog').close();
+    });
+    ids('installApp').addEventListener('click',async () => {
+      if (!deferredInstallPrompt) { showInstallInstructions(); return; }
+      deferredInstallPrompt.prompt();
+      const choice = await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      if (choice.outcome === 'accepted') ids('installApp').hidden = true;
+    });
     const titleCase = value => String(value).toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace('And Nicobar','& Nicobar');
     function tags(id, values, fallback) {
       const el = ids(id); if (!el) return;
@@ -279,8 +331,11 @@
     loadStatus().catch(()=>ids('updateState').textContent='Saved status is temporarily unavailable');
     ids('advisoryDialogClose').addEventListener('click',()=>ids('advisoryDialog').close());
     ids('advisoryDialog').addEventListener('click',event=>{ if (event.target === ids('advisoryDialog')) ids('advisoryDialog').close(); });
+    ids('installDialogClose').addEventListener('click',()=>ids('installDialog').close());
+    ids('installDialog').addEventListener('click',event=>{ if (event.target === ids('installDialog')) ids('installDialog').close(); });
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     setInterval(()=>loadStatus().catch(()=>{}),3600000);
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
   </script>
 </body>
 </html>
