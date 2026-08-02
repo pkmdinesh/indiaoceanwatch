@@ -1,12 +1,12 @@
-const CACHE_NAME = 'ocean-watch-v1';
+const CACHE_NAME = 'ocean-watch-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png',
+  './icons/ocean-watch-v2-192.png',
+  './icons/ocean-watch-v2-512.png',
+  './icons/ocean-watch-v2-maskable.png',
+  './icons/ocean-watch-v2-apple.png',
   './assets/earthquake-network-icon.png',
   './assets/storm-surge-icon.png',
   './assets/underwater-fish-icon.png'
