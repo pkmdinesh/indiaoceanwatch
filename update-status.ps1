@@ -79,7 +79,7 @@ function Get-StormSurgeBulletinSummary([string]$CycloneName, [int]$BulletinNumbe
 
 $status = [ordered]@{
     updatedAt = (Get-Date).ToString('o')
-    updateIntervalHours = 1
+    updateIntervalHours = 0.5
     source = 'INCOIS / ITEWS'
     tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
@@ -100,7 +100,7 @@ if (Test-Path -LiteralPath $outputPath) {
     try {
         $savedStatus = Get-Content -Raw -LiteralPath $outputPath | ConvertFrom-Json
         $savedStatus.updatedAt = (Get-Date).ToString('o')
-        $savedStatus.updateIntervalHours = 1
+        $savedStatus.updateIntervalHours = 0.5
         $savedStatus.errors = @()
         $status = $savedStatus
         foreach ($groupName in @('highWave','swellSurge')) {
