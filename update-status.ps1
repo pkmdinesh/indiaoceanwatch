@@ -85,6 +85,7 @@ $status = [ordered]@{
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
+    oceanCurrent = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
     stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     cyclone = [ordered]@{ title = 'No active cyclone advisory'; message = ''; level = 'safe'; issuedAt = $null; link = $null; items = @() }
     pfz = [ordered]@{
@@ -103,7 +104,10 @@ if (Test-Path -LiteralPath $outputPath) {
         $savedStatus.updateIntervalHours = 0.5
         $savedStatus.errors = @()
         $status = $savedStatus
-        foreach ($groupName in @('highWave','swellSurge')) {
+        if ($status.PSObject.Properties.Name -notcontains 'oceanCurrent') {
+            $status | Add-Member -NotePropertyName oceanCurrent -NotePropertyValue ([pscustomobject]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() })
+        }
+        foreach ($groupName in @('highWave','swellSurge','oceanCurrent')) {
             if ($status.$groupName.PSObject.Properties.Name -notcontains 'issueDate') {
                 $status.$groupName | Add-Member -NotePropertyName issueDate -NotePropertyValue $null
             }
@@ -254,6 +258,55 @@ try {
         } | Sort-Object @{ Expression = { $severityRank[$_.highestSeverity] }; Descending = $true }, name)
     }
 } catch { $status.errors += "High wave/swell: $($_.Exception.Message)" }
+
+try {
+    $currentFeed = Invoke-RestMethod -Uri 'https://samudra.incois.gov.in/incoismobileappdata/rest/incois/currentslatestdata' -TimeoutSec 45
+    foreach ($level in @('alert','watch','warning','noThreat')) { $status.oceanCurrent.$level = @() }
+    $status.oceanCurrent.states = @()
+    if ("$($currentFeed.LatestCurrentsDate)".Trim() -eq 'None') {
+        $status.oceanCurrent.issueDate = $null
+    } else {
+        $status.oceanCurrent.issueDate = Convert-IncoisDate "$($currentFeed.LatestCurrentsDate)"
+        $currentItems = @()
+        if ("$($currentFeed.CurrentsJson)".Trim() -and "$($currentFeed.CurrentsJson)".Trim() -ne 'None') {
+            foreach ($record in ($currentFeed.CurrentsJson | ConvertFrom-Json)) { $currentItems += $record }
+        }
+        $currentDetails = @()
+        foreach ($item in $currentItems) {
+            $state = Get-StateName $item
+            $alert = Get-AlertName $item
+            if (-not $state -or $alert -notlike 'OCEAN CURRENT*') { continue }
+            $severity = if ($alert -like '*WARNING*') { 'warning' }
+                elseif ($alert -like '*ALERT*') { 'alert' }
+                elseif ($alert -like '*WATCH*') { 'watch' }
+                elseif ($alert -like '*NO THREAT*') { 'noThreat' }
+                else { $null }
+            if (-not $severity) { continue }
+            $status.oceanCurrent.$severity += $state
+            $currentDetails += [pscustomobject][ordered]@{
+                state = $state
+                district = if ($null -ne $item.District -and "$($item.District)".Trim()) { "$($item.District)".Trim().ToUpperInvariant() } else { 'COASTAL AREA' }
+                severity = $severity
+                color = if ($null -ne $item.Color) { "$($item.Color)".Trim() } else { $null }
+                issueDate = if ($null -ne $item.'Issue Date') { "$($item.'Issue Date')".Trim() } else { $null }
+                message = if ($null -ne $item.Message) { "$($item.Message)".Trim() } else { $null }
+            }
+        }
+        foreach ($level in @('alert','watch','warning','noThreat')) { $status.oceanCurrent.$level = @($status.oceanCurrent.$level | Sort-Object -Unique) }
+        $severityRank = @{ warning = 4; alert = 3; watch = 2; noThreat = 1 }
+        $status.oceanCurrent.states = @($currentDetails | Group-Object state | ForEach-Object {
+            $advisories = @($_.Group | Sort-Object @{ Expression = { $severityRank[$_.severity] }; Descending = $true }, district)
+            $counts = [ordered]@{ warning = 0; alert = 0; watch = 0; noThreat = 0 }
+            foreach ($advisory in $advisories) { $counts[$advisory.severity]++ }
+            [pscustomobject][ordered]@{
+                name = $_.Name
+                highestSeverity = $advisories[0].severity
+                counts = [pscustomobject]$counts
+                advisories = $advisories
+            }
+        } | Sort-Object @{ Expression = { $severityRank[$_.highestSeverity] }; Descending = $true }, name)
+    }
+} catch { $status.errors += "Ocean current: $($_.Exception.Message)" }
 
 try {
     [xml]$surgeXml = Get-TextContent ('https://tsunami.incois.gov.in/itews/homexmls/SurgeEvents.xml?currentTime=' + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())
