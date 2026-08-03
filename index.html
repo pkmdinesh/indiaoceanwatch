@@ -413,7 +413,27 @@
       updateState.textContent = failedSources.length ? `Error: ${failedSources.join('/')} not updated — unable to connect` : 'All sources checked successfully';
       updateState.classList.toggle('footer-error',failedSources.length > 0);
     }
-    async function loadStatus(url='status.json') { const response = await fetch(`${url}?t=${Date.now()}`,{cache:'no-store'}); if(!response.ok) throw new Error('Status unavailable'); const data=await response.json(); render(data); }
+    let statusRefreshTimer;
+    function scheduleStatusRefresh(data, retryDelay = 0) {
+      clearTimeout(statusRefreshTimer);
+      const intervalMs = Math.max(60000,Number(data?.updateIntervalHours || 0.25) * 3600000);
+      const baseTime = new Date(data?.updatedAt || data?.lastAttemptAt || Date.now()).getTime();
+      const now = Date.now();
+      const nextUpdate = Number.isFinite(baseTime)
+        ? baseTime + (Math.floor(Math.max(0,now - baseTime) / intervalMs) + 1) * intervalMs
+        : now + intervalMs;
+      const delay = retryDelay || Math.max(1000,nextUpdate - now + 5000);
+      const previousUpdate = data?.updatedAt;
+      statusRefreshTimer = setTimeout(async () => {
+        try {
+          const fresh = await loadStatus();
+          if (previousUpdate && fresh?.updatedAt === previousUpdate) scheduleStatusRefresh(fresh,60000);
+        } catch {
+          statusRefreshTimer = setTimeout(()=>loadStatus().catch(()=>{}),60000);
+        }
+      },delay);
+    }
+    async function loadStatus(url='status.json') { const response = await fetch(`${url}?t=${Date.now()}`,{cache:'no-store'}); if(!response.ok) throw new Error('Status unavailable'); const data=await response.json(); render(data); scheduleStatusRefresh(data); return data; }
     loadStatus().catch(()=>ids('updateState').textContent='Saved status is temporarily unavailable');
     window.addEventListener('pageshow',()=>loadStatus().catch(()=>{}));
     document.addEventListener('visibilitychange',()=>{ if (!document.hidden) loadStatus().catch(()=>{}); });
@@ -422,7 +442,6 @@
     ids('installDialogClose').addEventListener('click',()=>ids('installDialog').close());
     ids('installDialog').addEventListener('click',event=>{ if (event.target === ids('installDialog')) ids('installDialog').close(); });
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
-    setInterval(()=>loadStatus().catch(()=>{}),900000);
     if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=10',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
   </script>
 </body>
