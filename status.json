@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-08-03T12:30:12.9852882+00:00",
+    "updatedAt":  "2026-08-03T13:30:22.4505997+00:00",
     "updateIntervalHours":  0.5,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -1004,7 +1004,7 @@
                             ]
             },
     "errors":  [
-                   "Ocean current: Unable to connect to the remote server"
+
                ],
     "oceanCurrent":  {
                          "issueDate":  "02 Aug 2026",
@@ -1465,5 +1465,5 @@
                                         }
                                     ]
                      },
-    "lastAttemptAt":  "2026-08-03T13:00:26.8254329+00:00"
+    "lastAttemptAt":  "2026-08-03T13:30:22.4505997+00:00"
 }
