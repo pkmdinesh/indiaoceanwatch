@@ -266,7 +266,7 @@ try {
 } catch { $status.errors += "High wave/swell: $($_.Exception.Message)" }
 
 try {
-    $currentFeed = Invoke-RestMethod -Uri 'https://samudra.incois.gov.in/incoismobileappdata/rest/incois/currentslatestdata' -TimeoutSec 45
+    $currentFeed = Invoke-RestMethod -Uri 'https://sarat.incois.gov.in/incoismobileappdata/rest/incois/currentslatestdata' -TimeoutSec 45
     foreach ($level in @('alert','watch','warning','noThreat')) { $status.oceanCurrent.$level = @() }
     $status.oceanCurrent.states = @()
     if ("$($currentFeed.LatestCurrentsDate)".Trim() -eq 'None') {
