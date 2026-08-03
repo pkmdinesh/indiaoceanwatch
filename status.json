@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-08-03T06:30:20.8555675+00:00",
+    "updatedAt":  "2026-08-03T12:12:48.4502410+05:30",
     "updateIntervalHours":  0.5,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -994,16 +994,9 @@
                 "forecastDate":  "2 AUG 2026",
                 "validUntil":  "3 AUG 2026",
                 "sectors":  [
-                                "Gujarat",
-                                "Maharashtra",
-                                "Goa",
-                                "Karnataka",
-                                "Kerala",
-                                "Lakshadweep",
                                 "North Tamil Nadu",
-                                "South Tamil Nadu",
-                                "North Andhra Pradesh",
                                 "South Andhra Pradesh",
+                                "North Andhra Pradesh",
                                 "Odisha",
                                 "West Bengal",
                                 "Andaman",

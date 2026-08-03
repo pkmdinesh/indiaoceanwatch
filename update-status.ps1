@@ -90,7 +90,7 @@ $status = [ordered]@{
     pfz = [ordered]@{
         forecastDate = $null
         validUntil = $null
-        sectors = @('Gujarat','Maharashtra','Goa','Karnataka','Kerala','Lakshadweep','North Tamil Nadu','South Tamil Nadu','North Andhra Pradesh','South Andhra Pradesh','Odisha','West Bengal','Andaman','Nicobar')
+        sectors = @()
     }
     errors = @()
 }
@@ -320,10 +320,45 @@ try {
 } catch { $status.errors += "Cyclone: $($_.Exception.Message)" }
 
 try {
-    $pfzHtml = Get-TextContent 'https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&request_locale=en'
+    $pfzSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+    $pfzHtml = (Invoke-WebRequest -UseBasicParsing -WebSession $pfzSession -Uri 'https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&request_locale=en' -TimeoutSec 45).Content
     $dates = [regex]::Matches($pfzHtml, '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') | ForEach-Object { $_.Value.ToUpperInvariant() } | Select-Object -Unique
     if ($dates.Count -ge 1) { $status.pfz.forecastDate = $dates[0] }
     if ($dates.Count -ge 2) { $status.pfz.validUntil = $dates[1] }
+
+    # INCOIS always lists every sector in the selector, including sectors for
+    # which no PFZ advisory was issued. Follow the session-based detail links
+    # and publish only sectors whose pages contain current advisory data.
+    $sectorNames = @{
+        'SEC001' = 'Gujarat'; 'SEC002' = 'Maharashtra'; 'SEC003' = 'Goa'
+        'SEC004' = 'Karnataka'; 'SEC005' = 'Kerala'; 'SEC006' = 'South Tamil Nadu'
+        'SEC007' = 'North Tamil Nadu'; 'SEC008' = 'South Andhra Pradesh'
+        'SEC009' = 'North Andhra Pradesh'; 'SEC010' = 'Odisha'; 'SEC011' = 'West Bengal'
+        'SEC012' = 'Andaman'; 'SEC013' = 'Nicobar'; 'SEC014' = 'Lakshadweep'
+    }
+    $sectorOptions = [regex]::Matches($pfzHtml, '(?is)<option\s+value=[''"]([^''"]*TextData[^''"]*\?secid=(SEC\d+))[''"][^>]*>')
+    if ($sectorOptions.Count -eq 0) { throw 'PFZ sector links were not found' }
+
+    $issuedSectors = @()
+    $seenSectorIds = @{}
+    foreach ($option in $sectorOptions) {
+        $relativeUrl = $option.Groups[1].Value
+        $sectorId = $option.Groups[2].Value.ToUpperInvariant()
+        if ($seenSectorIds.ContainsKey($sectorId) -or -not $sectorNames.ContainsKey($sectorId)) { continue }
+        $seenSectorIds[$sectorId] = $true
+
+        $detailUrl = "https://incois.gov.in/MarineFisheries/$relativeUrl"
+        $detailHtml = (Invoke-WebRequest -UseBasicParsing -WebSession $pfzSession -Uri $detailUrl -TimeoutSec 45).Content
+        $detailText = [Net.WebUtility]::HtmlDecode(($detailHtml -replace '(?is)<script\b.*?</script>', ' ' -replace '(?is)<style\b.*?</style>', ' ' -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+        if ($detailText -match '(?i)no\s+data\s+available\s+for\s+this\s+sector') { continue }
+
+        # Requiring a dated advisory avoids treating a redirect or generic
+        # background page as an issued sector.
+        if ($detailText -match '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') {
+            $issuedSectors += $sectorNames[$sectorId]
+        }
+    }
+    $status.pfz.sectors = @($issuedSectors)
 } catch { $status.errors += "PFZ: $($_.Exception.Message)" }
 
 $tempPath = "$outputPath.tmp"
