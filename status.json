@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-08-03T16:30:17.2644181+00:00",
+    "updatedAt":  "2026-08-03T16:45:33.4923180+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -1473,5 +1473,5 @@
                                         }
                                     ]
                      },
-    "lastAttemptAt":  "2026-08-03T16:30:17.2644181+00:00"
+    "lastAttemptAt":  "2026-08-03T16:45:33.4923180+00:00"
 }
