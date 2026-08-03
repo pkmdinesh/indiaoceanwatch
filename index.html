@@ -140,17 +140,31 @@
     const ids = id => document.getElementById(id);
     let deferredInstallPrompt = null;
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isAndroid = /android/i.test(navigator.userAgent);
+    const isFirefox = /firefox|fxios/i.test(navigator.userAgent);
+    const isLinux = /linux/i.test(navigator.userAgent) && !isAndroid;
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
     function showInstallInstructions() {
       const guidance = ids('installGuidance');
       const steps = ids('installSteps');
+      let instructions;
       if (isIOS) {
         guidance.textContent = 'Safari installs this site from its Share menu:';
-        steps.replaceChildren(...['Tap the Share button.','Choose Add to Home Screen.','Tap Add.'].map(text => { const item=document.createElement('li'); item.textContent=text; return item; }));
+        instructions = ['Tap the Share button.','Choose Add to Home Screen.','Tap Add.'];
+      } else if (isFirefox && isAndroid) {
+        guidance.textContent = 'Firefox for Android installs this app from its menu:';
+        instructions = ['Open the Firefox menu (⋮).','Choose Install or Add to Home screen.','Confirm the installation.'];
+      } else if (isFirefox) {
+        guidance.textContent = 'Firefox desktop does not provide native PWA installation. On Linux, use Chrome, Chromium, or Edge for a native app installation; Firefox requires a PWA extension.';
+        instructions = ['For native installation, open this page in Chrome, Chromium, or Edge.','Select Install Ocean Watch in the address bar or browser menu.','To remain in Firefox, install a trusted PWA extension and use its toolbar action.'];
+      } else if (isLinux) {
+        guidance.textContent = 'Install Ocean Watch on Linux from your Chromium browser:';
+        instructions = ['Open the Chrome, Chromium, or Edge menu.','Choose Install Ocean Watch or Cast, save and share → Install page as app.','Confirm the installation.'];
       } else {
         guidance.textContent = 'If the browser install prompt is unavailable, use the browser menu:';
-        steps.replaceChildren(...['Open the browser menu.','Choose Install Ocean Watch, Install app, or Create shortcut.','Confirm the installation.'].map(text => { const item=document.createElement('li'); item.textContent=text; return item; }));
+        instructions = ['Open the browser menu.','Choose Install Ocean Watch, Install app, or Create shortcut.','Confirm the installation.'];
       }
+      steps.replaceChildren(...instructions.map(text => { const item=document.createElement('li'); item.textContent=text; return item; }));
       ids('installDialog').showModal();
     }
     if (!isStandalone) {
@@ -380,7 +394,7 @@
     ids('installDialog').addEventListener('click',event=>{ if (event.target === ids('installDialog')) ids('installDialog').close(); });
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     setInterval(()=>loadStatus().catch(()=>{}),3600000);
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=5',{updateViaCache:'none'}).catch(()=>{}));
   </script>
 </body>
 </html>
