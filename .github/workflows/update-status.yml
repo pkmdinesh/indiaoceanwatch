@@ -1,6 +1,8 @@
 name: Update coastal advisory status
 
 on:
+  schedule:
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:

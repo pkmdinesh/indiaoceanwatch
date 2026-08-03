@@ -6,6 +6,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $outputPath = Join-Path $projectRoot 'status.json'
+$attemptedAt = (Get-Date).ToString('o')
 
 if ($MinimumAgeHours -gt 0 -and (Test-Path -LiteralPath $outputPath)) {
     try {
@@ -78,7 +79,8 @@ function Get-StormSurgeBulletinSummary([string]$CycloneName, [int]$BulletinNumbe
 }
 
 $status = [ordered]@{
-    updatedAt = (Get-Date).ToString('o')
+    updatedAt = $null
+    lastAttemptAt = $attemptedAt
     updateIntervalHours = 0.5
     source = 'INCOIS / ITEWS'
     tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
@@ -100,7 +102,11 @@ $status = [ordered]@{
 if (Test-Path -LiteralPath $outputPath) {
     try {
         $savedStatus = Get-Content -Raw -LiteralPath $outputPath | ConvertFrom-Json
-        $savedStatus.updatedAt = (Get-Date).ToString('o')
+        if ($savedStatus.PSObject.Properties.Name -notcontains 'lastAttemptAt') {
+            $savedStatus | Add-Member -NotePropertyName lastAttemptAt -NotePropertyValue $attemptedAt
+        } else {
+            $savedStatus.lastAttemptAt = $attemptedAt
+        }
         $savedStatus.updateIntervalHours = 0.5
         $savedStatus.errors = @()
         $status = $savedStatus
@@ -292,6 +298,14 @@ try {
                 message = if ($null -ne $item.Message) { "$($item.Message)".Trim() } else { $null }
             }
         }
+        $recordIssueDates = @($currentDetails.issueDate | Where-Object { $_ })
+        $parsedIssueDates = @($recordIssueDates | ForEach-Object {
+            $parsedDate = [DateTime]::MinValue
+            if ([DateTime]::TryParseExact("$_", 'dd-MM-yyyy', [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::None, [ref]$parsedDate)) { $parsedDate }
+        })
+        if ($parsedIssueDates.Count -gt 0) {
+            $status.oceanCurrent.issueDate = ($parsedIssueDates | Sort-Object -Descending | Select-Object -First 1).ToString('dd MMM yyyy', [Globalization.CultureInfo]::InvariantCulture)
+        }
         foreach ($level in @('alert','watch','warning','noThreat')) { $status.oceanCurrent.$level = @($status.oceanCurrent.$level | Sort-Object -Unique) }
         $severityRank = @{ warning = 4; alert = 3; watch = 2; noThreat = 1 }
         $status.oceanCurrent.states = @($currentDetails | Group-Object state | ForEach-Object {
@@ -415,6 +429,7 @@ try {
 } catch { $status.errors += "PFZ: $($_.Exception.Message)" }
 
 $tempPath = "$outputPath.tmp"
+if (@($status.errors).Count -eq 0) { $status.updatedAt = $attemptedAt }
 $status | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $tempPath -Encoding UTF8
 Move-Item -LiteralPath $tempPath -Destination $outputPath -Force
 if (-not $Quiet) { Write-Output "Updated $outputPath at $($status.updatedAt)" }

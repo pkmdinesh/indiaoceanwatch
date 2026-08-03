@@ -1,5 +1,5 @@
 ﻿{
-    "updatedAt":  "2026-08-03T11:30:21.5265415+00:00",
+    "updatedAt":  "2026-08-03T17:05:24.5481580+05:30",
     "updateIntervalHours":  0.5,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -991,23 +991,23 @@
                               ]
                 },
     "pfz":  {
-                "forecastDate":  "2 AUG 2026",
-                "validUntil":  "3 AUG 2026",
+                "forecastDate":  "3 AUG 2026",
+                "validUntil":  "4 AUG 2026",
                 "sectors":  [
-                                "North Tamil Nadu",
+                                "Gujarat",
+                                "Maharashtra",
+                                "Goa",
                                 "South Andhra Pradesh",
                                 "North Andhra Pradesh",
                                 "Odisha",
-                                "West Bengal",
-                                "Andaman",
-                                "Nicobar"
+                                "West Bengal"
                             ]
             },
     "errors":  [
 
                ],
     "oceanCurrent":  {
-                         "issueDate":  "01 Aug 2026",
+                         "issueDate":  "02 Aug 2026",
                          "alert":  [
                                        "ANDHRA PRADESH",
                                        "TAMIL NADU"
@@ -1464,5 +1464,6 @@
                                                            ]
                                         }
                                     ]
-                     }
+                     },
+    "lastAttemptAt":  "2026-08-03T17:05:24.5481580+05:30"
 }

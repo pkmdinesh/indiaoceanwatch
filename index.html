@@ -10,22 +10,22 @@
   <meta name="apple-mobile-web-app-title" content="Ocean Watch">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/ocean-watch-v3-apple.png">
-  <meta name="description" content="Click to know today’s coastal advisory status of India: tsunami, high wave, swell and storm surge, and potential fishing zones.">
+  <meta name="description" content="Click to know today’s coastal advisory status of India: tsunami, high wave, swell and storm surge, ocean currents, and potential fishing zones.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://pkmdinesh.github.io/indiaoceanwatch/">
   <meta property="og:title" content="Coastal Advisory Status">
-  <meta property="og:description" content="Click to Know Today’s Coastal Advisory Status of India (Tsunami, High Wave, Swell & Storm Surge, Potential Fishing Zone)">
+  <meta property="og:description" content="Click to Know Today’s Coastal Advisory Status of India (Tsunami, High Wave, Swell & Storm Surge, Ocean Current, Potential Fishing Zone)">
   <meta property="og:image" content="https://pkmdinesh.github.io/indiaoceanwatch/social-banner-square.png">
   <meta property="og:image:width" content="1254">
   <meta property="og:image:height" content="1254">
-  <meta property="og:image:alt" content="Coastal Advisory Status of India — Tsunami, High Wave, Swell & Storm Surge, Potential Fishing Zone">
+  <meta property="og:image:alt" content="Coastal Advisory Status of India — Tsunami, High Wave, Swell & Storm Surge, Ocean Current, Potential Fishing Zone">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Coastal Advisory Status">
-  <meta name="twitter:description" content="Click to Know Today’s Coastal Advisory Status of India (Tsunami, High Wave, Swell & Storm Surge, Potential Fishing Zone)">
+  <meta name="twitter:description" content="Click to Know Today’s Coastal Advisory Status of India (Tsunami, High Wave, Swell & Storm Surge, Ocean Current, Potential Fishing Zone)">
   <meta name="twitter:image" content="https://pkmdinesh.github.io/indiaoceanwatch/social-banner-square.png">
   <title>Coastal Advisory Status</title>
   <style>
-    :root{--ink:#082f3c;--muted:#5b7279;--paper:#eef3ef;--white:#fff;--line:#d9e5e1;--teal:#087f84;--green:#238269;--orange:#e87520;--yellow:#c99300;--red:#c9362b;--gray:#819195;--violet:#69578f;--safe-bg:#e0f2eb;--alert-bg:#fff0e4;--watch-bg:#fff7cf;--warning-bg:#fde8e6}
+    :root{--ink:#082f3c;--muted:#5b7279;--paper:#eef3ef;--white:#fff;--line:#d9e5e1;--teal:#087f84;--green:#238269;--orange:#93400c;--yellow:#765900;--red:#c9362b;--gray:#819195;--violet:#69578f;--safe-bg:#e0f2eb;--alert-bg:#fff0e4;--watch-bg:#fff7cf;--warning-bg:#fde8e6}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 0 0,#c9eeea 0,transparent 32rem),var(--paper)}
     body{padding:12px}.dashboard{width:min(1440px,100%);min-height:calc(100dvh - 24px);margin:auto;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;border:1px solid rgba(8,47,60,.13);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:0 20px 60px rgba(8,47,60,.12)}
     a{color:inherit}.header{position:relative;display:flex;align-items:center;gap:18px;padding:13px 20px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#fff,#f7fbf9)}.incois-logo{width:min(390px,31vw);height:52px;object-fit:contain;object-position:left center}.title{position:absolute;left:50%;transform:translateX(-50%);width:max-content;max-width:42vw;text-align:center}.title h1{margin:0;white-space:nowrap;font:700 clamp(21px,2.25vw,35px)/1 Georgia,"Times New Roman",serif;letter-spacing:-.03em}.title p{margin:5px 0 0;color:var(--ink);font-size:11px;font-weight:800}.stamp{margin-left:auto;text-align:right;color:var(--muted);font-size:10px;line-height:1.45}.stamp time{color:var(--ink);font-size:11px;font-weight:800}.live{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:800}.live:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px #dcefe9}
@@ -60,7 +60,7 @@
   <main class="dashboard">
     <header class="header">
       <a class="ocean-brand" href="./" aria-label="Ocean Watch home"><img class="brand-image" src="icons/ocean-watch-v3-192.png" alt=""><span class="brand-copy"><strong>Ocean Watch</strong></span></a>
-      <div class="title"><h1>Coastal Advisory Status</h1><p>Tsunami · Ocean State Forecast · Storm Surge · Potential Fishing Zone</p></div>
+      <div class="title"><h1>Coastal Advisory Status</h1><p>Tsunami · Ocean State Forecast · Storm Surge · Ocean Current · Potential Fishing Zone</p></div>
       <div class="header-actions">
         <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated" datetime="2026-07-30T22:15:00+05:30">Checked 30 July 2026 · 10:15 PM IST</time></div>
         <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch app"><span class="install-icon" aria-hidden="true">&#10515;</span><span class="install-label">Install app</span></button>
@@ -350,9 +350,15 @@
       }
     }
     function render(data) {
-      const checked = new Date(data.updatedAt);
-      ids('lastUpdated').dateTime = data.updatedAt;
-      ids('lastUpdated').textContent = `Checked ${checked.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+      const completeCheck = data.updatedAt ? new Date(data.updatedAt) : null;
+      if (completeCheck && !Number.isNaN(completeCheck.getTime())) {
+        ids('lastUpdated').dateTime = data.updatedAt;
+        const prefix = data.errors?.length ? 'Last complete check' : 'Checked';
+        ids('lastUpdated').textContent = `${prefix} ${completeCheck.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+      } else {
+        ids('lastUpdated').removeAttribute('datetime');
+        ids('lastUpdated').textContent = 'No complete source check available';
+      }
       const demoMode = new URLSearchParams(location.search).get('demo');
       const bulletinTwoDemo = {
         type: 'II',
@@ -366,7 +372,7 @@
       };
       const originText = data.seismic.latest?.ORIGINTIME;
       const originTime = originText ? new Date(`${String(originText).replace(' ','T')}+05:30`) : null;
-      const seismicAge = originTime && !Number.isNaN(originTime.getTime()) ? checked.getTime() - originTime.getTime() : Number.POSITIVE_INFINITY;
+      const seismicAge = completeCheck && originTime && !Number.isNaN(originTime.getTime()) ? completeCheck.getTime() - originTime.getTime() : Number.POSITIVE_INFINITY;
       const isRecentSeismic = demoMode === 'recent' || (seismicAge >= 0 && seismicAge <= 24 * 60 * 60 * 1000);
       const demoBulletin = demoMode === 'bulletin2' ? bulletinTwoDemo : null;
       const relatedBulletin = isRecentSeismic ? data.tsunami.recentBulletin : null;
@@ -406,8 +412,8 @@
     ids('installDialogClose').addEventListener('click',()=>ids('installDialog').close());
     ids('installDialog').addEventListener('click',event=>{ if (event.target === ids('installDialog')) ids('installDialog').close(); });
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
-    setInterval(()=>loadStatus().catch(()=>{}),3600000);
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7',{updateViaCache:'none'}).catch(()=>{}));
+    setInterval(()=>loadStatus().catch(()=>{}),1800000);
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=8',{updateViaCache:'none'}).catch(()=>{}));
   </script>
 </body>
 </html>

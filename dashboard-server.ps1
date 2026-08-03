@@ -9,7 +9,7 @@ $prefix = "http://127.0.0.1:$Port/"
 $refreshJob = Start-Job -ArgumentList $updater -ScriptBlock {
     param($scriptPath)
     while ($true) {
-        Start-Sleep -Seconds 3600
+        Start-Sleep -Seconds 1800
         & $scriptPath -Quiet
     }
 }
@@ -17,8 +17,9 @@ $refreshJob = Start-Job -ArgumentList $updater -ScriptBlock {
 $listener = [System.Net.HttpListener]::new()
 $listener.Prefixes.Add($prefix)
 $listener.Start()
+$rootPath = [System.IO.Path]::GetFullPath($projectRoot).TrimEnd([System.IO.Path]::DirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar
 Write-Host "INCOIS dashboard running at $prefix"
-Write-Host 'Automatic refresh: every 1 hour. Press Ctrl+C to stop.'
+Write-Host 'Automatic refresh: every 30 minutes. Press Ctrl+C to stop.'
 
 try {
     while ($listener.IsListening) {
@@ -35,7 +36,7 @@ try {
                 $relative = $request.Url.AbsolutePath.TrimStart('/')
                 if (-not $relative) { $relative = 'index.html' }
                 $path = [System.IO.Path]::GetFullPath((Join-Path $projectRoot $relative))
-                if (-not $path.StartsWith([System.IO.Path]::GetFullPath($projectRoot))) { throw 'Invalid path' }
+                if (-not $path.StartsWith($rootPath, [StringComparison]::OrdinalIgnoreCase)) { throw 'Invalid path' }
                 if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { $response.StatusCode = 404; $bytes = [Text.Encoding]::UTF8.GetBytes('Not found') }
                 else {
                     $bytes = [System.IO.File]::ReadAllBytes($path)
