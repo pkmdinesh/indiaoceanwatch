@@ -192,7 +192,7 @@
       el.replaceChildren(...values.map(value => {
         const chip = document.createElement('a');
         chip.className = 'tag'; chip.textContent = `${titleCase(value)} ↗`;
-        chip.href = `https://incois.gov.in/MarineFisheries/TextData?secid=${pfzSectorIds[value]}`;
+        chip.href = `https://incois.gov.in/MarineFisheries/TextData?secid=${pfzSectorIds[value]}&request_locale=en`;
         chip.target = '_blank'; chip.rel = 'noopener';
         return chip;
       }));
