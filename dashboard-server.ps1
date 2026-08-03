@@ -9,7 +9,7 @@ $prefix = "http://127.0.0.1:$Port/"
 $refreshJob = Start-Job -ArgumentList $updater -ScriptBlock {
     param($scriptPath)
     while ($true) {
-        Start-Sleep -Seconds 1800
+        Start-Sleep -Seconds 900
         & $scriptPath -Quiet
     }
 }
@@ -19,7 +19,7 @@ $listener.Prefixes.Add($prefix)
 $listener.Start()
 $rootPath = [System.IO.Path]::GetFullPath($projectRoot).TrimEnd([System.IO.Path]::DirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar
 Write-Host "INCOIS dashboard running at $prefix"
-Write-Host 'Automatic refresh: every 30 minutes. Press Ctrl+C to stop.'
+Write-Host 'Automatic refresh: every 15 minutes. Press Ctrl+C to stop.'
 
 try {
     while ($listener.IsListening) {

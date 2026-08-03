@@ -81,7 +81,7 @@ function Get-StormSurgeBulletinSummary([string]$CycloneName, [int]$BulletinNumbe
 $status = [ordered]@{
     updatedAt = $null
     lastAttemptAt = $attemptedAt
-    updateIntervalHours = 0.5
+    updateIntervalHours = 0.25
     source = 'INCOIS / ITEWS'
     tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
@@ -107,7 +107,7 @@ if (Test-Path -LiteralPath $outputPath) {
         } else {
             $savedStatus.lastAttemptAt = $attemptedAt
         }
-        $savedStatus.updateIntervalHours = 0.5
+        $savedStatus.updateIntervalHours = 0.25
         $savedStatus.errors = @()
         $status = $savedStatus
         if ($status.PSObject.Properties.Name -notcontains 'oceanCurrent') {

@@ -137,7 +137,7 @@
       </section>
     </div>
 
-    <footer class="footer"><div><strong>Auto-update:</strong> Every 30 mins · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Information is fetched from official sources; however, there may be a delay before updates are reflected. For accuracy, always verify the latest official bulletins.</div><div><a href="https://incois.gov.in/" target="_blank" rel="noopener"><strong>Data source:</strong> INCOIS–MoES ↗</a></div></footer>
+    <footer class="footer"><div><strong>Auto-update:</strong> Every 15 mins · <span id="updateState">Latest saved snapshot loaded</span> · <strong>Disclaimer:</strong> Information is fetched from official sources; however, there may be a delay before updates are reflected. For accuracy, always verify the latest official bulletins.</div><div><a href="https://incois.gov.in/" target="_blank" rel="noopener"><strong>Data source:</strong> INCOIS–MoES ↗</a></div></footer>
     <dialog class="advisory-dialog install-dialog" id="installDialog" aria-labelledby="installDialogTitle">
       <div class="advisory-dialog-head"><div><h2 id="installDialogTitle">Install Ocean Watch</h2><p>Keep the coastal advisory dashboard on this device.</p></div><button class="dialog-close" id="installDialogClose" type="button" aria-label="Close install instructions">&times;</button></div>
       <div class="advisory-details"><p id="installGuidance"></p><ol class="install-steps" id="installSteps"></ol></div>
@@ -416,7 +416,7 @@
     ids('installDialogClose').addEventListener('click',()=>ids('installDialog').close());
     ids('installDialog').addEventListener('click',event=>{ if (event.target === ids('installDialog')) ids('installDialog').close(); });
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
-    setInterval(()=>loadStatus().catch(()=>{}),1800000);
+    setInterval(()=>loadStatus().catch(()=>{}),900000);
     if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=9',{updateViaCache:'none'}).catch(()=>{}));
   </script>
 </body>
