@@ -403,7 +403,7 @@
       ids('pfzDate').textContent = `Forecast ${data.pfz.forecastDate || '—'} · Valid through ${data.pfz.validUntil || '—'}`;
       renderPfzSectors(data.pfz.sectors);
       renderCyclone(data.cyclone);
-      const sourceLabels = { 'high wave/swell':'OSF', 'ocean current':'OSF', pfz:'PFZ', seismic:'SEISMIC', tsunami:'TSUNAMI', 'storm surge':'STORM SURGE', cyclone:'CYCLONE' };
+      const sourceLabels = { 'high wave/swell':'OSF', 'ocean current':'OSF', pfz:'PFZ', seismic:'ITEWS', tsunami:'ITEWS', 'storm surge':'ITEWS', cyclone:'IMD' };
       const failedSources = [...new Set((data.errors || []).map(error => sourceLabels[String(error).split(':',1)[0].trim().toLowerCase()] || 'SOURCE'))];
       const updateState = ids('updateState');
       updateState.textContent = failedSources.length ? `Error: ${failedSources.join('/')} not updated — unable to connect` : 'All sources checked successfully';
