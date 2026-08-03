@@ -106,7 +106,7 @@
 
       <section class="panel cyclone-card" aria-labelledby="cyclone-title">
         <div class="panel-head"><div class="cyclone-heading"><img class="cyclone-icon" src="assets/cyclone-service-icon.png" alt="Cyclone icon"><h2 id="cyclone-title">Cyclone Advisory</h2></div><a class="source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
-        <div class="cyclone-status level-safe" id="cycloneStatus"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage" hidden></p><time id="cycloneIssued"></time></div>
+        <div class="cyclone-status level-safe" id="cycloneStatus"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage">When checked IMD CAP Alerts feed.</p><time id="cycloneIssued"></time></div>
       </section>
 
       <section class="panel storm-card" aria-labelledby="surge-title">
@@ -341,7 +341,7 @@
       status.classList.add(`level-${level}`);
       ids('cycloneMessageTitle').textContent = cyclone?.title || 'No active cyclone advisory';
       const message = ids('cycloneMessage');
-      message.textContent = cyclone?.message || '';
+      message.textContent = cyclone?.message || (level === 'safe' ? 'When checked IMD CAP Alerts feed.' : '');
       message.hidden = !message.textContent;
       const issued = ids('cycloneIssued');
       if (cyclone?.issuedAt) {
