@@ -191,7 +191,7 @@
       if (!values || !values.length) { el.innerHTML = '<span class="empty">No sectors issued</span>'; return; }
       el.replaceChildren(...values.map(value => {
         const chip = document.createElement('a');
-        chip.className = 'tag'; chip.textContent = titleCase(value);
+        chip.className = 'tag'; chip.textContent = `${titleCase(value)} ↗`;
         chip.href = `https://incois.gov.in/MarineFisheries/TextData?secid=${pfzSectorIds[value]}`;
         chip.target = '_blank'; chip.rel = 'noopener';
         return chip;
