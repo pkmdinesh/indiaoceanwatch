@@ -184,11 +184,8 @@
       const el = ids('pfzStates');
       if (!values || !values.length) { el.innerHTML = '<span class="empty">No sectors issued</span>'; return; }
       el.replaceChildren(...values.map(value => {
-        const chip = document.createElement('a');
-        chip.className = 'tag'; chip.textContent = `${titleCase(value)} ↗`;
-        chip.href = 'https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&request_locale=en';
-        chip.title = `Open the official PFZ page and select ${value}`;
-        chip.target = '_blank'; chip.rel = 'noopener';
+        const chip = document.createElement('span');
+        chip.className = 'tag'; chip.textContent = titleCase(value);
         return chip;
       }));
     }
