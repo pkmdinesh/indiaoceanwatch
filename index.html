@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="theme-color" content="#082f3c">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Ocean Watch">
-  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="manifest" href="manifest.webmanifest?v=10">
   <link rel="apple-touch-icon" href="icons/ocean-watch-v3-apple.png">
   <meta name="description" content="Click to know today’s coastal advisory status of India: tsunami, high wave, swell and storm surge, ocean currents, and potential fishing zones.">
   <meta property="og:type" content="website">
@@ -153,7 +156,8 @@
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
     const isAndroid = /android/i.test(navigator.userAgent);
     const isFirefox = /firefox|fxios/i.test(navigator.userAgent);
-    const isLinux = /linux/i.test(navigator.userAgent) && !isAndroid;
+    const platformHint = navigator.userAgentData?.platform || navigator.platform || '';
+    const isLinux = /linux|x11|cros/i.test(`${navigator.userAgent} ${platformHint}`) && !isAndroid;
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
     function showInstallInstructions() {
       const guidance = ids('installGuidance');
@@ -169,10 +173,10 @@
         guidance.textContent = 'Firefox desktop does not provide native PWA installation. On Linux, use Chrome, Chromium, or Edge for a native app installation; Firefox requires a PWA extension.';
         instructions = ['For native installation, open this page in Chrome, Chromium, or Edge.','Select Install Ocean Watch in the address bar or browser menu.','To remain in Firefox, install a trusted PWA extension and use its toolbar action.'];
       } else if (isLinux) {
-        guidance.textContent = 'Install Ocean Watch on Linux from your Chromium browser:';
-        instructions = ['Open the Chrome, Chromium, or Edge menu.','Choose Install Ocean Watch or Cast, save and share → Install page as app.','Confirm the installation.'];
+        guidance.textContent = 'Install Ocean Watch on Linux using Chrome, Chromium, or Edge:';
+        instructions = ['Open the browser menu.','Choose Install Ocean Watch, Install page as app, or Create shortcut.','If Create shortcut is shown, select Open as window, then confirm.'];
       } else {
-        guidance.textContent = 'If the browser install prompt is unavailable, use the browser menu:';
+        guidance.textContent = 'Install Ocean Watch from your browser menu:';
         instructions = ['Open the browser menu.','Choose Install Ocean Watch, Install app, or Create shortcut.','Confirm the installation.'];
       }
       steps.replaceChildren(...instructions.map(text => { const item=document.createElement('li'); item.textContent=text; return item; }));
@@ -411,13 +415,15 @@
     }
     async function loadStatus(url='status.json') { const response = await fetch(`${url}?t=${Date.now()}`,{cache:'no-store'}); if(!response.ok) throw new Error('Status unavailable'); const data=await response.json(); render(data); }
     loadStatus().catch(()=>ids('updateState').textContent='Saved status is temporarily unavailable');
+    window.addEventListener('pageshow',()=>loadStatus().catch(()=>{}));
+    document.addEventListener('visibilitychange',()=>{ if (!document.hidden) loadStatus().catch(()=>{}); });
     ids('advisoryDialogClose').addEventListener('click',()=>ids('advisoryDialog').close());
     ids('advisoryDialog').addEventListener('click',event=>{ if (event.target === ids('advisoryDialog')) ids('advisoryDialog').close(); });
     ids('installDialogClose').addEventListener('click',()=>ids('installDialog').close());
     ids('installDialog').addEventListener('click',event=>{ if (event.target === ids('installDialog')) ids('installDialog').close(); });
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     setInterval(()=>loadStatus().catch(()=>{}),900000);
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=9',{updateViaCache:'none'}).catch(()=>{}));
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=10',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
   </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ocean-watch-v9';
+const CACHE_NAME = 'ocean-watch-v10';
 const APP_SHELL = [
   './',
   './index.html',
@@ -31,7 +31,7 @@ self.addEventListener('activate',event => {
 async function networkFirst(request, fallbackUrl) {
   const cache = await caches.open(CACHE_NAME);
   try {
-    const response = await fetch(request);
+    const response = await fetch(request,{cache:'no-store'});
     if (response.ok) cache.put(request,response.clone());
     return response;
   } catch {
@@ -47,7 +47,7 @@ self.addEventListener('fetch',event => {
     return;
   }
   if (url.pathname.endsWith('/status.json')) {
-    event.respondWith(networkFirst(event.request));
+    event.respondWith(fetch(event.request,{cache:'no-store'}));
     return;
   }
   event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
