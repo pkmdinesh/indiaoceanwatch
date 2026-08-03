@@ -180,19 +180,14 @@
       if (!values || !values.length) { el.innerHTML = `<span class="empty">${fallback}</span>`; return; }
       el.innerHTML = values.map(value => `<span class="tag">${titleCase(value)}</span>`).join('');
     }
-    const pfzSectorIds = {
-      'Gujarat':'SEC001','Maharashtra':'SEC002','Goa':'SEC003','Karnataka':'SEC004','Kerala':'SEC005',
-      'South Tamil Nadu':'SEC006','North Tamil Nadu':'SEC007','South Andhra Pradesh':'SEC008',
-      'North Andhra Pradesh':'SEC009','Odisha':'SEC010','West Bengal':'SEC011','Andaman':'SEC012',
-      'Nicobar':'SEC013','Lakshadweep':'SEC014'
-    };
     function renderPfzSectors(values) {
       const el = ids('pfzStates');
       if (!values || !values.length) { el.innerHTML = '<span class="empty">No sectors issued</span>'; return; }
       el.replaceChildren(...values.map(value => {
         const chip = document.createElement('a');
         chip.className = 'tag'; chip.textContent = `${titleCase(value)} ↗`;
-        chip.href = `https://incois.gov.in/MarineFisheries/TextData?secid=${pfzSectorIds[value]}&request_locale=en`;
+        chip.href = 'https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&request_locale=en';
+        chip.title = `Open the official PFZ page and select ${value}`;
         chip.target = '_blank'; chip.rel = 'noopener';
         return chip;
       }));
