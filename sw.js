@@ -1,7 +1,8 @@
-const CACHE_NAME = 'ocean-watch-v14';
+const CACHE_NAME = 'ocean-watch-v18';
 const APP_SHELL = [
   './',
   './index.html',
+  './status.json',
   './manifest.webmanifest',
   './icons/ocean-watch-v3-192.png',
   './icons/ocean-watch-v3-512.png',
@@ -38,6 +39,18 @@ async function networkFirst(request, fallbackUrl) {
   }
 }
 
+async function statusNetworkFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cacheKey = new Request(new URL('./status.json',self.location.href));
+  try {
+    const response = await fetch(request,{cache:'no-store'});
+    if (response.ok) await cache.put(cacheKey,response.clone());
+    return response;
+  } catch {
+    return (await cache.match(cacheKey)) || Response.error();
+  }
+}
+
 self.addEventListener('fetch',event => {
   const url = new URL(event.request.url);
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
@@ -46,7 +59,7 @@ self.addEventListener('fetch',event => {
     return;
   }
   if (url.pathname.endsWith('/status.json')) {
-    event.respondWith(fetch(event.request,{cache:'no-store'}));
+    event.respondWith(statusNetworkFirst(event.request));
     return;
   }
   event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
