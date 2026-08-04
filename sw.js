@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ocean-watch-v12';
+const CACHE_NAME = 'ocean-watch-v14';
 const APP_SHELL = [
   './',
   './index.html',
@@ -12,8 +12,7 @@ const APP_SHELL = [
   './assets/tsunami-service-icon.png',
   './assets/cyclone-service-icon.png',
   './assets/storm-surge-icon.png',
-  './assets/potential-fishing-zone-icon.jpg',
-  './assets/ocean-current-icon.png'
+  './assets/potential-fishing-zone-icon.jpg'
 ];
 
 self.addEventListener('install',event => {
