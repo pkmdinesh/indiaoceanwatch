@@ -233,7 +233,10 @@
       ids('pfzMessages').replaceChildren();
       ids('pfzLandingCenters').replaceChildren(...centers.map(center => {
         const chip = document.createElement('button');
-        chip.type = 'button'; chip.className = 'tag landing-chip'; chip.textContent = titleCase(center.name); chip.setAttribute('aria-expanded','false');
+        const messageCount = center.messages?.length || 0;
+        chip.type = 'button'; chip.className = 'tag landing-chip';
+        chip.textContent = `${titleCase(center.name)}${messageCount > 1 ? `(${messageCount})` : ''}`;
+        chip.setAttribute('aria-expanded','false');
         chip.addEventListener('click',() => {
           ids('pfzLandingCenters').querySelectorAll('.landing-chip').forEach(item => item.setAttribute('aria-expanded',String(item === chip)));
           renderPfzMessages(center);
