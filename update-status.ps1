@@ -419,10 +419,36 @@ try {
         $detailText = [Net.WebUtility]::HtmlDecode(($detailHtml -replace '(?is)<script\b.*?</script>', ' ' -replace '(?is)<style\b.*?</style>', ' ' -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
         if ($detailText -match '(?i)no\s+data\s+available\s+for\s+this\s+sector') { continue }
 
-        # Requiring a dated advisory avoids treating a redirect or generic
-        # background page as an issued sector.
-        if ($detailText -match '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') {
-            $issuedSectors += $sectorNames[$sectorId]
+        $landingCenters = [ordered]@{}
+        foreach ($rowMatch in [regex]::Matches($detailHtml, '(?is)<tr\b[^>]*>(.*?)</tr>')) {
+            $cells = @([regex]::Matches($rowMatch.Groups[1].Value, '(?is)<td\b[^>]*>(.*?)</td>') | ForEach-Object {
+                [Net.WebUtility]::HtmlDecode(($_.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+            })
+            if ($cells.Count -ne 7 -or [string]::IsNullOrWhiteSpace($cells[0])) { continue }
+
+            $landingName = $cells[0]
+            if (-not $landingCenters.Contains($landingName)) {
+                $landingCenters[$landingName] = [ordered]@{ name = $landingName; messages = @() }
+            }
+            $landingCenters[$landingName].messages += [ordered]@{
+                direction = $cells[1]
+                bearing = $cells[2]
+                distance = $cells[3]
+                depth = $cells[4]
+                latitude = $cells[5]
+                longitude = $cells[6]
+            }
+        }
+
+        # A parsed advisory row is stronger evidence than a date alone and
+        # prevents redirects or generic background pages becoming sectors.
+        if ($landingCenters.Count -gt 0 -and $detailText -match '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') {
+            $issuedSectors += [ordered]@{
+                id = $sectorId
+                name = $sectorNames[$sectorId]
+                url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
+                landingCenters = @($landingCenters.Values)
+            }
         }
     }
     $status.pfz.sectors = @($issuedSectors)
