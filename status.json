@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-05T11:45:18.3450462+00:00",
-    "lastAttemptAt":  "2026-08-05T11:45:18.3450462+00:00",
+    "updatedAt":  "2026-08-05T12:00:16.8263336+00:00",
+    "lastAttemptAt":  "2026-08-05T12:00:16.8263336+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -1036,7 +1036,7 @@
                                   ]
                    },
     "oceanCurrent":  {
-                         "issueDate":  "04 Aug 2026",
+                         "issueDate":  "05 Aug 2026",
                          "alert":  [
                                        "ANDHRA PRADESH",
                                        "TAMIL NADU"
@@ -1049,12 +1049,13 @@
                                        "KARNATAKA",
                                        "KERALA",
                                        "LAKSHADWEEP",
+                                       "MAHARASHTRA",
                                        "ODISHA",
                                        "PUDUCHERRY",
                                        "TAMIL NADU"
                                    ],
                          "warning":  [
-
+                                         "ANDHRA PRADESH"
                                      ],
                          "noThreat":  [
 
@@ -1062,77 +1063,77 @@
                          "states":  [
                                         {
                                             "name":  "ANDHRA PRADESH",
-                                            "highestSeverity":  "alert",
+                                            "highestSeverity":  "warning",
                                             "counts":  {
-                                                           "warning":  0,
-                                                           "alert":  5,
-                                                           "watch":  3,
+                                                           "warning":  3,
+                                                           "alert":  3,
+                                                           "watch":  2,
                                                            "noThreat":  0
                                                        },
                                             "advisories":  [
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
                                                                    "district":  "EAST GODAVARI",
-                                                                   "severity":  "alert",
-                                                                   "color":  "Orange",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of EAST GODAVARI,ANDHRA PRADESH from Antarvedi To Perumallapuram. Surface current speeds in the range of 1.8 - 2.1  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that Harbour \u0026 marine operations to be careful."
+                                                                   "severity":  "warning",
+                                                                   "color":  "Red",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Warning for the coast of EAST GODAVARI,ANDHRA PRADESH from Antarvedi To Perumallapuram. Surface current speeds in the range of 1.9 - 2.4  m/sec are forecasted during 07:00 hours on 06-08-2026 to 16:00 hours on 07-08-2026. It advised that make exit \u0026 entry at coastline with sufficient caution. Boats flowing against the current to be very careful."
+                                                               },
+                                                               {
+                                                                   "state":  "ANDHRA PRADESH",
+                                                                   "district":  "KRISHNA",
+                                                                   "severity":  "warning",
+                                                                   "color":  "Red",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Warning for the coast of KRISHNA,ANDHRA PRADESH from Nachugunta To Pedda Gollapalem. Surface current speeds in the range of 1.8 - 2.3  m/sec are forecasted during 07:00 hours on 06-08-2026 to 13:00 hours on 07-08-2026. It advised that make exit \u0026 entry at coastline with sufficient caution. Boats flowing against the current to be very careful."
+                                                               },
+                                                               {
+                                                                   "state":  "ANDHRA PRADESH",
+                                                                   "district":  "WEST GODAVARI",
+                                                                   "severity":  "warning",
+                                                                   "color":  "Red",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Warning for the coast of WEST GODAVARI,ANDHRA PRADESH.Surface current speeds in the range of 1.8 - 2.3  m/sec are forecasted during 07:00 hours on 06-08-2026 to 13:00 hours on 07-08-2026. It advised that make exit \u0026 entry at coastline with sufficient caution. Boats flowing against the current to be very careful."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
                                                                    "district":  "GUNTUR",
                                                                    "severity":  "alert",
                                                                    "color":  "Orange",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Surface current speeds in the range of 1.1 - 1.6  m/sec are forecasted during 01:00 hours on 05-08-2026 to 13:00 hours on 06-08-2026. It advised that Harbour \u0026 marine operations to be careful."
-                                                               },
-                                                               {
-                                                                   "state":  "ANDHRA PRADESH",
-                                                                   "district":  "KRISHNA",
-                                                                   "severity":  "alert",
-                                                                   "color":  "Orange",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of KRISHNA,ANDHRA PRADESH from Nachugunta To Pedda Gollapalem. Surface current speeds in the range of 1.6 - 2.1  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that Harbour \u0026 marine operations to be careful."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Alert for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Surface current speeds in the range of 1.3 - 1.8  m/sec are forecasted during 01:00 hours on 06-08-2026 to 19:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
                                                                    "district":  "NELLORE",
                                                                    "severity":  "alert",
                                                                    "color":  "Orange",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of NELLORE,ANDHRA PRADESH from Coromandel To Vatturupapallepalam. Surface current speeds in the range of 1.3 - 1.7  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that Harbour \u0026 marine operations to be careful."
-                                                               },
-                                                               {
-                                                                   "state":  "ANDHRA PRADESH",
-                                                                   "district":  "WEST GODAVARI",
-                                                                   "severity":  "alert",
-                                                                   "color":  "Orange",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of WEST GODAVARI,ANDHRA PRADESH. Surface current speeds in the range of 1.7 - 2.1  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that Harbour \u0026 marine operations to be careful."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Alert for the coast of NELLORE,ANDHRA PRADESH from Coromandel To Vatturupapallepalam. Surface current speeds in the range of 1.5 - 1.8  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
                                                                    "district":  "PRAKASAM",
-                                                                   "severity":  "watch",
-                                                                   "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of PRAKASAM,ANDHRA PRADESH from Ramayapatnam To Vadarevu. Surface current speeds in the range of 0.6 - 1.0  m/sec are forecasted during 22:00 hours on 04-08-2026 to 10:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "severity":  "alert",
+                                                                   "color":  "Orange",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Alert for the coast of PRAKASAM,ANDHRA PRADESH from Ramayapatnam To Vadarevu. Surface current speeds in the range of 0.8 - 1.3  m/sec are forecasted during 04:00 hours on 06-08-2026 to 07:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
                                                                    "district":  "SRIKAKULAM",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of SRIKAKULAM,ANDHRA PRADESH from Ramachandrapuram To Kaviti. Surface current speeds in the range of 0.4 - 0.6  m/sec are forecasted during 10:00 hours on 05-08-2026 to 16:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of SRIKAKULAM,ANDHRA PRADESH from Ramachandrapuram To Kaviti. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 07:00 hours on 07-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
                                                                    "district":  "VISAKHAPATNAM",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of VISAKHAPATNAM,ANDHRA PRADESH from Palmanpeta To Bhimunipatnam. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 07:00 hours on 05-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of VISAKHAPATNAM,ANDHRA PRADESH from Palmanpeta To Bhimunipatnam. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 07:00 hours on 06-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1142,89 +1143,73 @@
                                             "counts":  {
                                                            "warning":  0,
                                                            "alert":  3,
-                                                           "watch":  7,
+                                                           "watch":  5,
                                                            "noThreat":  0
                                                        },
                                             "advisories":  [
                                                                {
                                                                    "state":  "TAMIL NADU",
+                                                                   "district":  "CHENNAI",
+                                                                   "severity":  "alert",
+                                                                   "color":  "Orange",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Alert for the coast of CHENNAI,TAMIL NADU from Palavakkam To Lakshmipuram Odaikuppam. Surface current speeds in the range of 1.1 - 1.2  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
+                                                               },
+                                                               {
+                                                                   "state":  "TAMIL NADU",
                                                                    "district":  "KANCHEEPURAM",
                                                                    "severity":  "alert",
                                                                    "color":  "Orange",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of KANCHEEPURAM,TAMIL NADU from Alambaraikuppam To Chinna Neelankarai. Surface current speeds in the range of 1.0 - 1.2  m/sec are forecasted during 19:00 hours on 05-08-2026 to 19:00 hours on 06-08-2026. It advised that Harbour \u0026 marine operations to be careful."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Alert for the coast of KANCHEEPURAM,TAMIL NADU from Alambaraikuppam To Chinna Neelankarai. Surface current speeds in the range of 1.1 - 1.2  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
                                                                },
                                                                {
                                                                    "state":  "TAMIL NADU",
                                                                    "district":  "THIRUVALLUR",
                                                                    "severity":  "alert",
                                                                    "color":  "Orange",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of THIRUVALLUR,TAMIL NADU from Royapuram To Pulicat. Surface current speeds in the range of 1.1 - 1.3  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that Harbour \u0026 marine operations to be careful."
-                                                               },
-                                                               {
-                                                                   "state":  "TAMIL NADU",
-                                                                   "district":  "VILUPPURAM",
-                                                                   "severity":  "alert",
-                                                                   "color":  "Orange",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of VILUPPURAM,TAMIL NADU from Vaithikuppam To Muttukaduazhagankuppam. Surface current speeds in the range of 1.0 - 1.1  m/sec are forecasted during 19:00 hours on 05-08-2026 to 19:00 hours on 06-08-2026. It advised that Harbour \u0026 marine operations to be careful."
-                                                               },
-                                                               {
-                                                                   "state":  "TAMIL NADU",
-                                                                   "district":  "CHENNAI",
-                                                                   "severity":  "watch",
-                                                                   "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of CHENNAI,TAMIL NADU from Palavakkam To Lakshmipuram Odaikuppam. Surface current speeds in the range of 0.9 - 1.0  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Alert for the coast of THIRUVALLUR,TAMIL NADU from Royapuram To Pulicat. Surface current speeds in the range of 1.3 - 1.4  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
                                                                },
                                                                {
                                                                    "state":  "TAMIL NADU",
                                                                    "district":  "CUDDALORE",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of CUDDALORE,TAMIL NADU from Killai To Moorthipudukuppam. Surface current speeds in the range of 0.8 - 0.9  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of CUDDALORE,TAMIL NADU from Killai To Moorthipudukuppam. Surface current speeds in the range of 0.6 - 0.7  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "TAMIL NADU",
                                                                    "district":  "KANNIYAKUMARI",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of KANNIYAKUMARI,TAMIL NADU from Neerodi To Arockiyapuram. Surface current speeds in the range of 0.4 - 0.6  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
-                                                               },
-                                                               {
-                                                                   "state":  "TAMIL NADU",
-                                                                   "district":  "KARAIKAL",
-                                                                   "severity":  "watch",
-                                                                   "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of KARAIKAL,TAMIL NADU from Nagore To Pattinacherry. Surface current speeds in the range of 0.6 - 0.7  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of KANNIYAKUMARI,TAMIL NADU from Neerodi To Arockiyapuram. Surface current speeds in the range of 0.5 - 0.8  m/sec are forecasted during 16:00 hours on 06-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "TAMIL NADU",
                                                                    "district":  "NAGAPPATTINAM NORTH",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of NAGAPPATTINAM NORTH,TAMIL NADU from Chinnorpettai To Pazhayar. Surface current speeds in the range of 0.7 - 0.9  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
-                                                               },
-                                                               {
-                                                                   "state":  "TAMIL NADU",
-                                                                   "district":  "NAGAPPATTINAM SOUTH",
-                                                                   "severity":  "watch",
-                                                                   "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of NAGAPPATTINAM SOUTH,TAMIL NADU from Point Calimer To Samanthanpettai. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of NAGAPPATTINAM NORTH,TAMIL NADU from Chinnorpettai To Pazhayar. Surface current speeds in the range of 0.6 - 0.7  m/sec are forecasted during 19:00 hours on 05-08-2026 to 07:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "TAMIL NADU",
                                                                    "district":  "TIRUNELVELI",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. Surface current speeds in the range of 0.5 - 0.8  m/sec are forecasted during 16:00 hours on 06-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               },
+                                                               {
+                                                                   "state":  "TAMIL NADU",
+                                                                   "district":  "VILUPPURAM",
+                                                                   "severity":  "watch",
+                                                                   "color":  "Yellow",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of VILUPPURAM,TAMIL NADU from Vaithikuppam To Muttukaduazhagankuppam. Surface current speeds in the range of 0.9 - 1.1  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1243,40 +1228,40 @@
                                                                    "district":  "BARREN ISLAND",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.6 - 0.7  m/sec are forecasted during 01:00 hours on 05-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 04:00 hours on 06-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "ANDAMAN AND NICOBAR",
                                                                    "district":  "DIGLIPUR",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of DIGLIPUR,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.7 - 0.8  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of DIGLIPUR,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.7 - 0.8  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "ANDAMAN AND NICOBAR",
                                                                    "district":  "LITTLE ANDAMAN",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of LITTLE ANDAMAN,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.4 - 0.6  m/sec are forecasted during 01:00 hours on 06-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of LITTLE ANDAMAN,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.4 - 0.6  m/sec are forecasted during 10:00 hours on 07-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "ANDAMAN AND NICOBAR",
                                                                    "district":  "NARCONDAM ISLAND",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of NARCONDAM ISLAND,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of NARCONDAM ISLAND,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.6 - 0.7  m/sec are forecasted during 01:00 hours on 06-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "ANDAMAN AND NICOBAR",
                                                                    "district":  "WEST \u0026 LANDFALL ISLAND",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.6 - 0.8  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. Surface current speeds in the range of 0.8 - 0.9  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1295,16 +1280,16 @@
                                                                    "district":  "NORTH GOA",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of NORTH GOA,GOA from Chapora To Panaji (Malim). Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of NORTH GOA,GOA from Chapora To Panaji (Malim). Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "GOA",
                                                                    "district":  "SOUTH GOA",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of SOUTH GOA,GOA from Santerem Pt (Vasco) To Kolamb. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of SOUTH GOA,GOA from Santerem Pt (Vasco) To Kolamb. Surface current speeds in the range of 0.6 - 0.8  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1323,32 +1308,32 @@
                                                                    "district":  "DEVBHUMI DWARAKA",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of DEVBHUMI DWARAKA,GUJARAT from Vadinar To Harshad Miyani. Surface current speeds in the range of 0.5 - 0.5  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 05-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of DEVBHUMI DWARAKA,GUJARAT from Vadinar To Harshad Miyani. Surface current speeds in the range of 0.5 - 0.5  m/sec are forecasted during 19:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "GUJARAT",
                                                                    "district":  "GIR SOMNATH",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of GIR SOMNATH,GUJARAT from Adri To Mul Dwaraka. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of GIR SOMNATH,GUJARAT from Adri To Mul Dwaraka. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "GUJARAT",
                                                                    "district":  "JUNAGADH NORTH",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of JUNAGADH NORTH,GUJARAT from Shil To Chorwad. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 05-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of JUNAGADH NORTH,GUJARAT from Shil To Chorwad. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "GUJARAT",
                                                                    "district":  "PORBANDAR",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of PORBANDAR,GUJARAT from Tukda Miyani To Madhavpur. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 04-08-2026 to 22:00 hours on 05-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of PORBANDAR,GUJARAT from Tukda Miyani To Madhavpur. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 22:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1367,24 +1352,24 @@
                                                                    "district":  "DAKSHINA KANNADA",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of DAKSHINA KANNADA,KARNATAKA from Mulki To Mangalore. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of DAKSHINA KANNADA,KARNATAKA from Mulki To Mangalore. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 19:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "KARNATAKA",
                                                                    "district":  "UDUPI",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of UDUPI,KARNATAKA from Baindur To Kapu. Surface current speeds in the range of 0.4 - 0.6  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of UDUPI,KARNATAKA from Baindur To Kapu. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 06-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "KARNATAKA",
                                                                    "district":  "UTTARA KANNADA",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of UTTARA KANNADA,KARNATAKA from Majali To Bhatkal. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of UTTARA KANNADA,KARNATAKA from Majali To Bhatkal. Surface current speeds in the range of 0.6 - 0.8  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1394,7 +1379,7 @@
                                             "counts":  {
                                                            "warning":  0,
                                                            "alert":  0,
-                                                           "watch":  7,
+                                                           "watch":  8,
                                                            "noThreat":  0
                                                        },
                                             "advisories":  [
@@ -1403,56 +1388,64 @@
                                                                    "district":  "ALAPPUZHA",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of ALAPPUZHA,KERALA from Chellanum To AzheekalJetty. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of ALAPPUZHA,KERALA from Chellanum To AzheekalJetty. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "KERALA",
                                                                    "district":  "ERNAKULAM",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of ERNAKULAM,KERALA from Munambam FH To Maruvakad. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 19:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of ERNAKULAM,KERALA from Munambam FH To Maruvakad. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "KERALA",
                                                                    "district":  "KANNUR",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of KANNUR,KERALA from Valapattanam To New Mahe. Surface current speeds in the range of 0.6 - 0.8  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of KANNUR,KERALA from Valapattanam To New Mahe. Surface current speeds in the range of 0.6 - 0.8  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "KERALA",
                                                                    "district":  "KASARAGOD, KANNUR",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of KASARAGOD, KANNUR,KERALA from Kunzhathur To Kotte Kunnu. Surface current speeds in the range of 0.5 - 0.8  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
-                                                               },
-                                                               {
-                                                                   "state":  "KERALA",
-                                                                   "district":  "KOLLAM",
-                                                                   "severity":  "watch",
-                                                                   "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of KOLLAM,KERALA from Alappattu To Edava. Surface current speeds in the range of 0.5 - 0.5  m/sec are forecasted during 19:00 hours on 04-08-2026 to 01:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of KASARAGOD, KANNUR,KERALA from Kunzhathur To Kotte Kunnu. Surface current speeds in the range of 0.6 - 0.7  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "KERALA",
                                                                    "district":  "KOZHIKODE",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of KOZHIKODE,KERALA from Chombala FH To Ramanattukara. Surface current speeds in the range of 0.6 - 0.8  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of KOZHIKODE,KERALA from Chombala FH To Ramanattukara. Surface current speeds in the range of 0.6 - 0.7  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "KERALA",
                                                                    "district":  "MALAPPURAM",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of MALAPPURAM,KERALA from Kadaludinagaram To Palappetty. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 19:00 hours on 05-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of MALAPPURAM,KERALA from Kadaludinagaram To Palappetty. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               },
+                                                               {
+                                                                   "state":  "KERALA",
+                                                                   "district":  "THIRUVANANTHAPURAM",
+                                                                   "severity":  "watch",
+                                                                   "color":  "Yellow",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of THIRUVANANTHAPURAM,KERALA from Kappil To Pozhiyoor. Surface current speeds in the range of 0.4 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               },
+                                                               {
+                                                                   "state":  "KERALA",
+                                                                   "district":  "THRISSUR",
+                                                                   "severity":  "watch",
+                                                                   "color":  "Yellow",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of THRISSUR,KERALA from Attupuram To Kodungallur. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1471,8 +1464,28 @@
                                                                    "district":  "ANDROTH",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of ANDROTH,LAKSHADWEEP. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 19:00 hours on 05-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of ANDROTH,LAKSHADWEEP. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 19:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               }
+                                                           ]
+                                        },
+                                        {
+                                            "name":  "MAHARASHTRA",
+                                            "highestSeverity":  "watch",
+                                            "counts":  {
+                                                           "warning":  0,
+                                                           "alert":  0,
+                                                           "watch":  1,
+                                                           "noThreat":  0
+                                                       },
+                                            "advisories":  [
+                                                               {
+                                                                   "state":  "MAHARASHTRA",
+                                                                   "district":  "SINDHUDURG",
+                                                                   "severity":  "watch",
+                                                                   "color":  "Yellow",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of SINDHUDURG,MAHARASHTRA from Vijayadurg Hr To Terekhol. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1491,8 +1504,8 @@
                                                                    "district":  "KENDRAPARA",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of KENDRAPARA,ODISHA from Chumuhani To Ahirajpur. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 22:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of KENDRAPARA,ODISHA from Chumuhani To Ahirajpur. Surface current speeds in the range of 0.5 - 0.6  m/sec are forecasted during 22:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         },
@@ -1511,16 +1524,16 @@
                                                                    "district":  "MAHE",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of MAHE,PUDUCHERRY from Koloth To Azhikal. Surface current speeds in the range of 0.5 - 0.7  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of MAHE,PUDUCHERRY from Koloth To Azhikal. Surface current speeds in the range of 0.6 - 0.7  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "PUDUCHERRY",
                                                                    "district":  "PUDUCHERRY",
                                                                    "severity":  "watch",
                                                                    "color":  "Yellow",
-                                                                   "issueDate":  "04-08-2026",
-                                                                   "message":  "Ocean Currents Watch for the coast of PUDUCHERRY,PUDUCHERRY from Panithittu To Pondicherry. Surface current speeds in the range of 0.8 - 1.0  m/sec are forecasted during 16:00 hours on 04-08-2026 to 19:00 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of PUDUCHERRY,PUDUCHERRY from Panithittu To Pondicherry. Surface current speeds in the range of 0.7 - 0.8  m/sec are forecasted during 16:00 hours on 05-08-2026 to 19:00 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
                                                                }
                                                            ]
                                         }
