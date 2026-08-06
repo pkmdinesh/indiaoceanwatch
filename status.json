@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-06T03:45:14.6798807+00:00",
-    "lastAttemptAt":  "2026-08-06T03:45:14.6798807+00:00",
+    "updatedAt":  "2026-08-06T04:00:15.7743392+00:00",
+    "lastAttemptAt":  "2026-08-06T04:00:15.7743392+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -1122,7 +1122,7 @@
                                        "TAMIL NADU"
                                    ],
                          "warning":  [
-                                         "ANDHRA PRADESH"
+
                                      ],
                          "noThreat":  [
 
@@ -1130,10 +1130,10 @@
                          "states":  [
                                         {
                                             "name":  "ANDHRA PRADESH",
-                                            "highestSeverity":  "warning",
+                                            "highestSeverity":  "alert",
                                             "counts":  {
-                                                           "warning":  3,
-                                                           "alert":  3,
+                                                           "warning":  0,
+                                                           "alert":  6,
                                                            "watch":  2,
                                                            "noThreat":  0
                                                        },
@@ -1141,26 +1141,10 @@
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
                                                                    "district":  "EAST GODAVARI",
-                                                                   "severity":  "warning",
-                                                                   "color":  "Red",
+                                                                   "severity":  "alert",
+                                                                   "color":  "Orange",
                                                                    "issueDate":  "05-08-2026",
-                                                                   "message":  "Ocean Currents Warning for the coast of EAST GODAVARI,ANDHRA PRADESH from Antarvedi To Perumallapuram. Surface current speeds in the range of 1.9 - 2.4  m/sec are forecasted during 07:00 hours on 06-08-2026 to 16:00 hours on 07-08-2026. It advised that make exit \u0026 entry at coastline with sufficient caution. Boats flowing against the current to be very careful."
-                                                               },
-                                                               {
-                                                                   "state":  "ANDHRA PRADESH",
-                                                                   "district":  "KRISHNA",
-                                                                   "severity":  "warning",
-                                                                   "color":  "Red",
-                                                                   "issueDate":  "05-08-2026",
-                                                                   "message":  "Ocean Currents Warning for the coast of KRISHNA,ANDHRA PRADESH from Nachugunta To Pedda Gollapalem. Surface current speeds in the range of 1.8 - 2.3  m/sec are forecasted during 07:00 hours on 06-08-2026 to 13:00 hours on 07-08-2026. It advised that make exit \u0026 entry at coastline with sufficient caution. Boats flowing against the current to be very careful."
-                                                               },
-                                                               {
-                                                                   "state":  "ANDHRA PRADESH",
-                                                                   "district":  "WEST GODAVARI",
-                                                                   "severity":  "warning",
-                                                                   "color":  "Red",
-                                                                   "issueDate":  "05-08-2026",
-                                                                   "message":  "Ocean Currents Warning for the coast of WEST GODAVARI,ANDHRA PRADESH.Surface current speeds in the range of 1.8 - 2.3  m/sec are forecasted during 07:00 hours on 06-08-2026 to 13:00 hours on 07-08-2026. It advised that make exit \u0026 entry at coastline with sufficient caution. Boats flowing against the current to be very careful."
+                                                                   "message":  "Ocean Currents Alert for the coast of EAST GODAVARI,ANDHRA PRADESH from Antarvedi To Perumallapuram. Surface current speeds in the range of 1.5 - 2.0  m/sec are forecasted during 19:00 hours on 05-08-2026 to 01:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
@@ -1169,6 +1153,14 @@
                                                                    "color":  "Orange",
                                                                    "issueDate":  "05-08-2026",
                                                                    "message":  "Ocean Currents Alert for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Surface current speeds in the range of 1.3 - 1.8  m/sec are forecasted during 01:00 hours on 06-08-2026 to 19:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
+                                                               },
+                                                               {
+                                                                   "state":  "ANDHRA PRADESH",
+                                                                   "district":  "KRISHNA",
+                                                                   "severity":  "alert",
+                                                                   "color":  "Orange",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Alert for the coast of KRISHNA,ANDHRA PRADESH from Nachugunta To Pedda Gollapalem. Surface current speeds in the range of 1.4 - 2.0 m/sec are forecasted during 19:00 hours on 05-08-2026 to 01:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
@@ -1185,6 +1177,14 @@
                                                                    "color":  "Orange",
                                                                    "issueDate":  "05-08-2026",
                                                                    "message":  "Ocean Currents Alert for the coast of PRAKASAM,ANDHRA PRADESH from Ramayapatnam To Vadarevu. Surface current speeds in the range of 0.8 - 1.3  m/sec are forecasted during 04:00 hours on 06-08-2026 to 07:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
+                                                               },
+                                                               {
+                                                                   "state":  "ANDHRA PRADESH",
+                                                                   "district":  "WEST GODAVARI",
+                                                                   "severity":  "alert",
+                                                                   "color":  "Orange",
+                                                                   "issueDate":  "05-08-2026",
+                                                                   "message":  "Ocean Currents Alert for the coast of WEST GODAVARI,ANDHRA PRADESH.Surface current speeds in the range of 1.4 - 2.0  m/sec are forecasted during 19:00 hours on 05-08-2026 to 01:00 hours on 07-08-2026. It advised that Harbour \u0026 marine operations to be careful."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
