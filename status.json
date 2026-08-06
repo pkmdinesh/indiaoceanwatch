@@ -1,6 +1,6 @@
 ﻿{
     "updatedAt":  "2026-08-06T10:30:28.7970828+00:00",
-    "lastAttemptAt":  "2026-08-06T10:30:28.7970828+00:00",
+    "lastAttemptAt":  "2026-08-06T10:45:21.8482523+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -4160,6 +4160,6 @@
                             ]
             },
     "errors":  [
-
+                   "Tsunami: Unable to connect to the remote server"
                ]
 }
