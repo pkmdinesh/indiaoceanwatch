@@ -1,4 +1,4 @@
-﻿param(
+param(
     [switch]$Quiet,
     [double]$MinimumAgeHours = 0
 )
@@ -21,238 +21,6 @@ if ($MinimumAgeHours -gt 0 -and (Test-Path -LiteralPath $outputPath)) {
 
 function Get-TextContent([string]$Url) {
     (Invoke-WebRequest -UseBasicParsing -Uri $Url -TimeoutSec 45).Content
-}
-
-
-function Convert-GebcoResponseToElevation([string]$Content) {
-    if ([string]::IsNullOrWhiteSpace($Content)) { return $null }
-
-    try {
-        $payload = $Content | ConvertFrom-Json
-        $candidates = @(
-            $payload.elevation,
-            $payload.value,
-            $payload.value_0,
-            $payload.features[0].properties.elevation,
-            $payload.features[0].properties.value,
-            $payload.features[0].properties.value_0
-        )
-        foreach ($candidate in $candidates) {
-            $number = 0.0
-            if ($null -ne $candidate -and [double]::TryParse(
-                "$candidate",
-                [Globalization.NumberStyles]::Float,
-                [Globalization.CultureInfo]::InvariantCulture,
-                [ref]$number
-            )) { return $number }
-        }
-    } catch { }
-
-    foreach ($pattern in @(
-        '(?i)value_0\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)',
-        '(?i)(?:elevation|depth|bathymetry)\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)',
-        '(?i)Band\s*1\s*(?:Value)?\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)',
-        '(?i)pixel[_\s-]*value\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)'
-    )) {
-        if ($Content -match $pattern) {
-            $number = 0.0
-            if ([double]::TryParse(
-                $Matches[1],
-                [Globalization.NumberStyles]::Float,
-                [Globalization.CultureInfo]::InvariantCulture,
-                [ref]$number
-            )) { return $number }
-        }
-    }
-    return $null
-}
-
-function Get-GebcoElevation([double]$Latitude, [double]$Longitude) {
-    if ($Latitude -lt -90 -or $Latitude -gt 90 -or $Longitude -lt -180 -or $Longitude -gt 360) { return $null }
-
-    $delta = 0.005
-    $bbox = '{0},{1},{2},{3}' -f `
-        ($Longitude - $delta).ToString([Globalization.CultureInfo]::InvariantCulture), `
-        ($Latitude - $delta).ToString([Globalization.CultureInfo]::InvariantCulture), `
-        ($Longitude + $delta).ToString([Globalization.CultureInfo]::InvariantCulture), `
-        ($Latitude + $delta).ToString([Globalization.CultureInfo]::InvariantCulture)
-
-    foreach ($infoFormat in @('text/plain','application/json','text/html')) {
-        $query = (@{
-            service = 'WMS'
-            version = '1.1.1'
-            request = 'GetFeatureInfo'
-            layers = 'gebco_latest'
-            query_layers = 'gebco_latest'
-            styles = ''
-            format = 'image/png'
-            srs = 'EPSG:4326'
-            bbox = $bbox
-            width = '101'
-            height = '101'
-            x = '50'
-            y = '50'
-            feature_count = '1'
-            info_format = $infoFormat
-        }.GetEnumerator() | ForEach-Object {
-            '{0}={1}' -f [uri]::EscapeDataString($_.Key), [uri]::EscapeDataString("$($_.Value)")
-        }) -join '&'
-        $url = 'https://wms.gebco.net/mapserv?' + $query
-
-        try {
-            $response = Invoke-WebRequest -UseBasicParsing -Uri $url -TimeoutSec 30
-            $elevation = Convert-GebcoResponseToElevation "$($response.Content)"
-            if ($null -ne $elevation) { return [double]$elevation }
-        } catch { }
-    }
-    return $null
-}
-
-function Add-GebcoEventMetadata {
-    param(
-        [Parameter(Mandatory=$true)]$Event,
-        [string]$TopoBathy = ''
-    )
-
-    $latitudeText = if ($Event.PSObject.Properties.Name -contains 'LATITUDE') { "$($Event.LATITUDE)" } else { "$($Event.latitude)" }
-    $longitudeText = if ($Event.PSObject.Properties.Name -contains 'LONGITUDE') { "$($Event.LONGITUDE)" } else { "$($Event.longitude)" }
-    $latitude = 0.0
-    $longitude = 0.0
-    $hasLatitude = [double]::TryParse($latitudeText,[Globalization.NumberStyles]::Float,[Globalization.CultureInfo]::InvariantCulture,[ref]$latitude)
-    $hasLongitude = [double]::TryParse($longitudeText,[Globalization.NumberStyles]::Float,[Globalization.CultureInfo]::InvariantCulture,[ref]$longitude)
-    $explicitlyLand = $TopoBathy -match '(?i)\bon\s+land\b|\bland\b' -and $TopoBathy -notmatch '(?i)island'
-
-    $setting = if ($explicitlyLand) { 'LAND' } else { 'OCEANIC / MARINE' }
-    $elevation = $null
-    $bathymetry = $null
-
-    if (-not $explicitlyLand -and $hasLatitude -and $hasLongitude) {
-        $elevation = Get-GebcoElevation -Latitude $latitude -Longitude $longitude
-        if ($null -ne $elevation) {
-            if ([double]$elevation -ge 0) {
-                $setting = 'LAND'
-            } else {
-                $setting = 'OCEANIC / MARINE'
-                $bathymetry = [math]::Round([math]::Abs([double]$elevation))
-            }
-        }
-    }
-
-    $Event | Add-Member -NotePropertyName tectonicSetting -NotePropertyValue $setting -Force
-    $Event | Add-Member -NotePropertyName gebcoElevationMeters -NotePropertyValue $elevation -Force
-    $Event | Add-Member -NotePropertyName bathymetryMeters -NotePropertyValue $bathymetry -Force
-    return $Event
-}
-
-function Convert-HtmlFragmentToText([string]$Html) {
-    if ([string]::IsNullOrWhiteSpace($Html)) { return '' }
-    $text = $Html `
-        -replace '(?is)<script\b.*?</script>', ' ' `
-        -replace '(?is)<style\b.*?</style>', ' ' `
-        -replace '(?is)<br\s*/?>', ' ' `
-        -replace '(?is)<[^>]+>', ' '
-    $text = [Net.WebUtility]::HtmlDecode($text)
-    $text = $text -replace "$([char]0x00A0)", ' ' -replace '\s+', ' '
-    return $text.Trim()
-}
-
-function Resolve-IncoisUrl([string]$Href, [string]$BaseUrl = 'https://incois.gov.in/site/services/jointbulletin.jsp') {
-    $value = [Net.WebUtility]::HtmlDecode("$Href").Trim()
-    if (-not $value) { return $null }
-    try { return ([Uri]::new([Uri]$BaseUrl, $value)).AbsoluteUri }
-    catch { return $value }
-}
-
-function Clean-JointBulletinMessage([string]$Value) {
-    $message = Convert-HtmlFragmentToText $Value
-    if (-not $message) { return '' }
-    $message = $message -replace '(?i)^\s*INCOIS\s*[-\u2013\u2014]\s*IMD\s+Joint(?:\s+Special)?\s+Bulletin\s*[-\u2013\u2014:]?\s*', ''
-    $message = $message -replace '(?i)^\s*Ocean\s+State\s+Forecast\s+associated\s+with\s*[-\u2013\u2014:]?\s*', ''
-    return $message.Trim()
-}
-
-function Get-JointBulletinSummary {
-    $sourcePage = 'https://incois.gov.in/site/services/jointbulletin.jsp'
-    $html = Get-TextContent $sourcePage
-    $candidates = @()
-
-    foreach ($rowMatch in [regex]::Matches($html, '(?is)<tr\b[^>]*>(?<row>.*?)</tr>')) {
-        $rowHtml = $rowMatch.Groups['row'].Value
-        $links = @([regex]::Matches($rowHtml, '(?is)<a\b[^>]*\bhref\s*=\s*([''"])(?<href>.*?)\1[^>]*>(?<label>.*?)</a>'))
-        foreach ($linkMatch in $links) {
-            $href = [Net.WebUtility]::HtmlDecode($linkMatch.Groups['href'].Value).Trim()
-            if ($href -notmatch '(?i)\.pdf(?:$|[?#])') { continue }
-            if ($href -notmatch '(?i)JointBulletin|joint_') { continue }
-
-            $url = Resolve-IncoisUrl $href $sourcePage
-            $cellTexts = @([regex]::Matches($rowHtml, '(?is)<td\b[^>]*>(?<cell>.*?)</td>') | ForEach-Object {
-                Convert-HtmlFragmentToText $_.Groups['cell'].Value
-            } | Where-Object { $_ -and $_ -notmatch '(?i)^\s*(description|bulletin)\s*$' })
-
-            $description = $cellTexts |
-                Where-Object { $_ -notmatch '(?i)^\s*(pdf|download|view|open)\s*$' } |
-                Sort-Object Length -Descending |
-                Select-Object -First 1
-            if (-not $description) { $description = Convert-HtmlFragmentToText $rowHtml }
-            $message = Clean-JointBulletinMessage $description
-            if (-not $message) { $message = 'Latest INCOIS-IMD joint bulletin' }
-
-            $timestampMilliseconds = [int64]0
-            $issued = $null
-            if ($url -match '(?i)joint_(\d{13})(?:\D|$)') {
-                $timestampMilliseconds = [int64]$Matches[1]
-                try { $issued = [DateTimeOffset]::FromUnixTimeMilliseconds($timestampMilliseconds) } catch { $issued = $null }
-            }
-
-            $candidates += [pscustomobject][ordered]@{
-                message = $message
-                url = $url
-                issued = $issued
-                sortValue = $timestampMilliseconds
-            }
-        }
-    }
-
-    if ($candidates.Count -eq 0) {
-        foreach ($linkMatch in [regex]::Matches($html, '(?is)<a\b[^>]*\bhref\s*=\s*([''"])(?<href>.*?)\1[^>]*>(?<label>.*?)</a>')) {
-            $href = [Net.WebUtility]::HtmlDecode($linkMatch.Groups['href'].Value).Trim()
-            if ($href -notmatch '(?i)\.pdf(?:$|[?#])' -or $href -notmatch '(?i)JointBulletin|joint_') { continue }
-            $url = Resolve-IncoisUrl $href $sourcePage
-            $timestampMilliseconds = [int64]0
-            $issued = $null
-            if ($url -match '(?i)joint_(\d{13})(?:\D|$)') {
-                $timestampMilliseconds = [int64]$Matches[1]
-                try { $issued = [DateTimeOffset]::FromUnixTimeMilliseconds($timestampMilliseconds) } catch { $issued = $null }
-            }
-            $candidates += [pscustomobject][ordered]@{
-                message = 'Latest INCOIS-IMD joint bulletin'
-                url = $url
-                issued = $issued
-                sortValue = $timestampMilliseconds
-            }
-        }
-    }
-
-    if ($candidates.Count -eq 0) { throw 'No joint bulletin PDF link was found on the INCOIS page' }
-    $latest = $candidates | Sort-Object sortValue -Descending | Select-Object -First 1
-    $issuedAt = $null
-    $isRecent = $false
-    if ($null -ne $latest.issued) {
-        $issuedAt = $latest.issued.ToOffset([TimeSpan]::FromMinutes(330)).ToString('o')
-        $ageHours = ([DateTimeOffset]::UtcNow - $latest.issued.ToUniversalTime()).TotalHours
-        $isRecent = $ageHours -ge 0 -and $ageHours -lt 24
-    }
-
-    return [ordered]@{
-        message = $latest.message
-        url = $latest.url
-        issuedAt = $issuedAt
-        isRecent = $isRecent
-        fetchedAt = (Get-Date).ToString('o')
-        ok = $true
-        sourcePage = $sourcePage
-        lastError = $null
-    }
 }
 
 function Get-StateName($Item) {
@@ -338,7 +106,6 @@ $status = [ordered]@{
     oceanCurrent = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
     stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     cyclone = [ordered]@{ title = 'No active cyclone advisory'; message = ''; level = 'safe'; issuedAt = $null; link = $null; items = @() }
-    jointBulletin = [ordered]@{ message = 'No INCOIS-IMD joint bulletin is currently available.'; url = 'https://incois.gov.in/site/services/jointbulletin.jsp'; issuedAt = $null; isRecent = $false; fetchedAt = $null; ok = $false; sourcePage = 'https://incois.gov.in/site/services/jointbulletin.jsp'; lastError = $null }
     pfz = [ordered]@{
         forecastDate = $null
         validUntil = $null
@@ -380,34 +147,6 @@ if (Test-Path -LiteralPath $outputPath) {
         }
         if ($status.PSObject.Properties.Name -notcontains 'cyclone') {
             $status | Add-Member -NotePropertyName cyclone -NotePropertyValue ([pscustomobject]@{ title = 'No active cyclone advisory'; message = ''; level = 'safe'; issuedAt = $null; link = $null; items = @() })
-        }
-        if ($status.PSObject.Properties.Name -notcontains 'jointBulletin') {
-            $status | Add-Member -NotePropertyName jointBulletin -NotePropertyValue ([pscustomobject]@{
-                message = 'No INCOIS-IMD joint bulletin is currently available.'
-                url = 'https://incois.gov.in/site/services/jointbulletin.jsp'
-                issuedAt = $null
-                isRecent = $false
-                fetchedAt = $null
-                ok = $false
-                sourcePage = 'https://incois.gov.in/site/services/jointbulletin.jsp'
-                lastError = $null
-            })
-        } else {
-            $jointDefaults = [ordered]@{
-                message = 'No INCOIS-IMD joint bulletin is currently available.'
-                url = 'https://incois.gov.in/site/services/jointbulletin.jsp'
-                issuedAt = $null
-                isRecent = $false
-                fetchedAt = $null
-                ok = $false
-                sourcePage = 'https://incois.gov.in/site/services/jointbulletin.jsp'
-                lastError = $null
-            }
-            foreach ($jointProperty in $jointDefaults.Keys) {
-                if ($status.jointBulletin.PSObject.Properties.Name -notcontains $jointProperty) {
-                    $status.jointBulletin | Add-Member -NotePropertyName $jointProperty -NotePropertyValue $jointDefaults[$jointProperty]
-                }
-            }
         }
         foreach ($propertyName in @('bulletin','recentBulletin')) {
             if ($status.stormSurge.PSObject.Properties.Name -notcontains $propertyName) {
@@ -452,15 +191,7 @@ try {
     } else {
         $eventList = @($eventList | Sort-Object { [DateTime]::ParseExact("$($_.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture) } -Descending)
         $latest = $eventList | Select-Object -First 1
-        $latestTopoBathy = ''
-        if ($latest.PSObject.Properties.Name -contains 'detail' -and "$($latest.detail)".Trim()) {
-            try {
-                $status.tsunami.recentBulletin = Get-BulletinSummary "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO)
-                $status.tsunami.recentBulletin.sequence = @(Get-BulletinSequence "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO))
-                $latestTopoBathy = "$($status.tsunami.recentBulletin.topographyBathymetry)"
-            } catch { }
-        }
-        $status.seismic.latest = Add-GebcoEventMetadata -Event $latest -TopoBathy $latestTopoBathy
+        $status.seismic.latest = $latest
         if ($latest.PSObject.Properties.Name -contains 'MAGNITUDE') {
             $status.seismic.message = "Latest: M$($latest.MAGNITUDE), $($latest.REGIONNAME), $($latest.ORIGINTIME), depth $($latest.DEPTH) km"
             $latestTime = [DateTime]::ParseExact("$($latest.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
@@ -478,10 +209,12 @@ try {
                         $eventBulletin.sequence = @(Get-BulletinSequence "$($_.detail)" "$($_.EVID)" ([int]$_.BULNO))
                     } catch { }
                 }
-                $eventRecord = [pscustomobject][ordered]@{ magnitude = $_.MAGNITUDE; region = $_.REGIONNAME; originTime = $_.ORIGINTIME; depth = $_.DEPTH; latitude = $_.LATITUDE; longitude = $_.LONGITUDE; bulletinUrl = $bulletinUrl; bulletin = $eventBulletin }
-                $eventTopoBathy = if ($null -ne $eventBulletin) { "$($eventBulletin.topographyBathymetry)" } else { '' }
-                Add-GebcoEventMetadata -Event $eventRecord -TopoBathy $eventTopoBathy
+                [pscustomobject][ordered]@{ magnitude = $_.MAGNITUDE; region = $_.REGIONNAME; originTime = $_.ORIGINTIME; depth = $_.DEPTH; latitude = $_.LATITUDE; longitude = $_.LONGITUDE; bulletinUrl = $bulletinUrl; bulletin = $eventBulletin }
             })
+            if ($latest.PSObject.Properties.Name -contains 'detail' -and "$($latest.detail)".Trim()) {
+                $status.tsunami.recentBulletin = Get-BulletinSummary "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO)
+                $status.tsunami.recentBulletin.sequence = @(Get-BulletinSequence "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO))
+            }
         } else {
             $status.seismic.message = "$($eventList.Count) event(s) listed; open the national table for details"
         }
@@ -677,19 +410,6 @@ try {
         $status.cyclone.link = $null
     }
 } catch { $status.errors += "Cyclone: $($_.Exception.Message)" }
-
-try {
-    $status.jointBulletin = Get-JointBulletinSummary
-} catch {
-    $status.errors += "Joint bulletin: $($_.Exception.Message)"
-    if ($null -ne $status.jointBulletin) {
-        $status.jointBulletin.ok = $false
-        $savedIssuedAt = [DateTimeOffset]::MinValue
-        $hasSavedIssuedAt = $status.jointBulletin.issuedAt -and [DateTimeOffset]::TryParse("$($status.jointBulletin.issuedAt)", [ref]$savedIssuedAt)
-        $status.jointBulletin.isRecent = $hasSavedIssuedAt -and (([DateTimeOffset]::UtcNow - $savedIssuedAt.ToUniversalTime()).TotalHours -ge 0) -and (([DateTimeOffset]::UtcNow - $savedIssuedAt.ToUniversalTime()).TotalHours -lt 24)
-        $status.jointBulletin.lastError = $_.Exception.Message
-    }
-}
 
 try {
     $pfzSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
