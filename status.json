@@ -1,6 +1,6 @@
 ﻿{
     "updatedAt":  "2026-08-06T13:15:15.7651032+00:00",
-    "lastAttemptAt":  "2026-08-06T15:00:20.6271788+00:00",
+    "lastAttemptAt":  "2026-08-06T15:15:48.7035405+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -4394,9 +4394,8 @@
                             ]
             },
     "errors":  [
-                   "Tsunami: Unable to connect to the remote server",
-                   "High wave/swell: The remote name could not be resolved: \u0027sarat.incois.gov.in\u0027",
-                   "Ocean current: The remote name could not be resolved: \u0027sarat.incois.gov.in\u0027",
+                   "Tsunami: The remote name could not be resolved: \u0027tsunami.incois.gov.in\u0027",
+                   "Seismic: The remote name could not be resolved: \u0027tsunami.incois.gov.in\u0027",
                    "PFZ: The remote name could not be resolved: \u0027incois.gov.in\u0027"
                ]
 }
