@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-06T01:15:15.3365930+00:00",
-    "lastAttemptAt":  "2026-08-06T01:15:15.3365930+00:00",
+    "updatedAt":  "2026-08-06T01:30:16.6536604+00:00",
+    "lastAttemptAt":  "2026-08-06T01:30:16.6536604+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -190,8 +190,8 @@
                                         "highestSeverity":  "alert",
                                         "counts":  {
                                                        "warning":  0,
-                                                       "alert":  6,
-                                                       "watch":  5,
+                                                       "alert":  5,
+                                                       "watch":  6,
                                                        "noThreat":  0
                                                    },
                                         "advisories":  [
@@ -229,14 +229,6 @@
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
-                                                               "district":  "KACHCHH",
-                                                               "severity":  "alert",
-                                                               "color":  "Orange",
-                                                               "issueDate":  "05-08-2026",
-                                                               "message":  "High Wave Alert for the coast of KACHCHH,GUJARAT from Lakhapat To Kandla. High waves in the range of 2.8 - 3.1  meters are forecasted during 02:30 hours on 07-08-2026 to 14:30 hours on 07-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
-                                                           },
-                                                           {
-                                                               "state":  "GUJARAT",
                                                                "district":  "PORBANDAR",
                                                                "severity":  "alert",
                                                                "color":  "Orange",
@@ -258,6 +250,14 @@
                                                                "color":  "Yellow",
                                                                "issueDate":  "05-08-2026",
                                                                "message":  "High Wave Watch for the coast of BHAVNAGAR,GUJARAT from Gadhada To Kamatalav. High waves in the range of 2.0 - 2.1  meters are forecasted during 20:30 hours on 05-08-2026 to 20:30 hours on 07-08-2026. It advised that no immediate action is required. Check for updates."
+                                                           },
+                                                           {
+                                                               "state":  "GUJARAT",
+                                                               "district":  "KACHCHH",
+                                                               "severity":  "watch",
+                                                               "color":  "Yellow",
+                                                               "issueDate":  "05-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KACHCHH,GUJARAT from Lakhapat To Kandla. High waves in the range of 2.6 - 2.9  meters are forecasted during 17:30 hours on 05-08-2026 to 23:30 hours on 06-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
