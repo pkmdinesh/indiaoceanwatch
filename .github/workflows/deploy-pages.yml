@@ -2,10 +2,7 @@ name: Deploy Ocean Watch
 
 on:
   push:
-    branches: [master, main]
-  workflow_run:
-    workflows: ["Update coastal advisory status"]
-    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -19,11 +16,11 @@ concurrency:
 
 jobs:
   deploy:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
