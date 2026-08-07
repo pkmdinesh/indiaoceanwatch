@@ -361,7 +361,7 @@
     const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
     const SEISMIC_MAP_DEFAULT_ZOOM = 6; // Increase to zoom in; decrease to zoom out.
     // Paste your MapTiler API key here. When configured, labels are forced to English.
-    const MAPTILER_API_KEY = 'X9NBsCeL7wWCLl2ID4nw';
+    const MAPTILER_API_KEY = 'YOUR_MAPTILER_API_KEY';
     const hasMapTilerKey = () => MAPTILER_API_KEY && !MAPTILER_API_KEY.includes('YOUR_MAPTILER_API_KEY');
     let seismicMapMode = '';
     let seismicMap = null;
