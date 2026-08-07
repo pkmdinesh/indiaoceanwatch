@@ -16,6 +16,7 @@
   <meta name="description" content="Click to know today’s coastal advisory status of India: tsunami, high wave, swell and storm surge, ocean currents, and potential fishing zones.">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://cdn.maptiler.com/maptiler-sdk-js/v4.0.2/maptiler-sdk.css">
   <meta property="og:url" content="https://pkmdinesh.github.io/indiaoceanwatch/">
   <meta property="og:title" content="Coastal Advisory Status">
   <meta property="og:description" content="Click to Know Today’s Coastal Advisory Status of India (Tsunami, High Wave, Swell & Storm Surge, Ocean Current, Potential Fishing Zone)">
@@ -66,6 +67,14 @@
     @media(max-width:700px){html{-webkit-text-size-adjust:100%;text-size-adjust:100%}.title p{font-size:12px;line-height:1.45}.stamp{font-size:12px;line-height:1.5}.stamp time{font-size:12px}.live{font-size:12px}.content .panel-head h2{font-size:clamp(18px,5.2vw,21px)!important;line-height:1.15}.panel-kicker{font-size:12px;line-height:1.35}.source{padding:8px 10px;font-size:12px}.forecast-title h3{font-size:18px}.kind{font-size:12px}.issue-date{font-size:13px}.severity-row-label{font-size:12px}.severity-state-chip{padding:6px 8px;font-size:14px;line-height:1.3}.district-count{font-size:1em}.empty{font-size:12px}.advisory-note{font-size:12px;line-height:1.45}.tsunami-status strong{font-size:21px}.tsunami-copy>span,.seismic-event-link{font-size:14px;font-weight:700;line-height:1.5}.storm-copy strong,.cyclone-status strong{font-size:14px}.storm-copy span,.cyclone-status p{font-size:13px;line-height:1.5}.cyclone-status time{font-size:12px}.joint-bulletin-message{font-size:14px;line-height:1.5}.joint-bulletin-link{font-size:13px}.joint-bulletin-time{font-size:12px}.pfz-date{font-size:14px;font-weight:700;line-height:1.45}.tag{padding:6px 8px;font-size:12px}.pfz-chip{font-size:14px;font-weight:700;color:#082f3c}.pfz-landing-centers .tag{font-size:14px}.pfz-message summary,.pfz-message-grid{font-size:13px}.pfz-message-field strong{font-size:13px}.footer{font-size:11px;line-height:1.55}.seismic-dialog{width:100%;max-width:none;max-height:90dvh;margin:auto 0 0;border-radius:20px 20px 0 0}.seismic-dialog-body{padding:12px 15px 18px}.event-map{min-height:210px}.event-map-canvas{min-height:210px}.seismic-dialog .event-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px}.bulletin-section summary,.bulletin-section p,.event-facts dd,.event-setting strong,.event-setting span{font-size:13px}}
     @media(max-width:700px){.seismic-dialog .event-map{height:260px;min-height:0}.seismic-dialog .event-map-canvas{height:260px;min-height:260px}.seismic-dialog .bulletin-section>summary,.seismic-dialog .bulletin-field summary,.seismic-dialog .bulletin-field p{font-size:13px}}
     .share-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:7px 10px;border:1px solid #082f3c;border-radius:9px;background:#082f3c;color:#fff;font:800 11px/1 inherit;cursor:pointer;box-shadow:0 5px 14px rgba(8,47,60,.22)}.share-button .share-icon{color:#68e0e5}.share-button:hover,.share-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;outline:0;box-shadow:0 7px 18px rgba(8,127,132,.3)}.share-icon{font-size:14px;line-height:1}.share-dialog{width:min(390px,calc(100vw - 24px));padding:0;border:0;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 25px 80px rgba(8,47,60,.28)}.share-dialog::backdrop{background:rgba(4,28,36,.52);backdrop-filter:blur(3px)}.share-dialog-body{display:grid;justify-items:center;gap:13px;padding:18px}.share-qr{display:grid;place-items:center;width:220px;height:220px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.share-qr canvas,.share-qr img{display:block!important;max-width:100%;height:auto!important}.share-qr-error{margin:0;padding:12px;color:var(--muted);font-size:11px;font-weight:800;line-height:1.45;text-align:center}.share-url{width:100%;margin:0;padding:9px 10px;border-radius:9px;background:#f3f7f5;color:var(--ink);font-size:11px;font-weight:750;line-height:1.45;text-align:center;overflow-wrap:anywhere}.share-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;width:100%}.share-action{min-width:112px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#e7f0ed;color:var(--ink);font:850 11px/1 inherit;cursor:pointer}.share-action:hover,.share-action:focus-visible{color:#fff;background:var(--teal);border-color:var(--teal);outline:0}.share-copy-status{min-height:1.2em;margin:0;color:var(--green);font-size:10px;font-weight:850;text-align:center}@media(max-width:520px){.share-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.share-button{width:34px;height:34px;padding:0}.share-dialog{width:calc(100vw - 16px);border-radius:18px}.share-qr{width:min(220px,70vw);height:min(220px,70vw)}}
+
+    /* Header action buttons: same desktop size and rounded pill shape. */
+    .share-button,.install-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:88px;min-width:88px;height:36px;min-height:36px;padding:0 12px;border:1px solid #082f3c;border-radius:999px;background:#082f3c;color:#fff;font:800 11px/1 inherit;cursor:pointer;box-shadow:0 5px 14px rgba(8,47,60,.22)}
+    .share-button .share-icon,.install-button .install-icon{color:#68e0e5;font-size:14px;line-height:1}
+    .share-button:hover,.share-button:focus-visible,.install-button:hover,.install-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;outline:0;box-shadow:0 7px 18px rgba(8,127,132,.3)}
+    .share-qr{box-sizing:border-box;aspect-ratio:1/1}
+    .share-qr canvas,.share-qr img{display:block!important;width:200px!important;height:200px!important;max-width:200px!important;max-height:200px!important;aspect-ratio:1/1!important;object-fit:contain!important}
+    @media(max-width:520px){.share-button,.install-button{width:34px;min-width:34px;height:34px;min-height:34px;padding:0}.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.share-qr canvas,.share-qr img{width:min(200px,calc(70vw - 20px))!important;height:min(200px,calc(70vw - 20px))!important;max-width:100%!important;max-height:100%!important}}
   </style>
 </head>
 <body>
@@ -218,15 +227,10 @@
       aria-label="Earthquake location map"
     >
       <div id="eventMapCanvas" class="event-map-canvas" aria-label="Interactive earthquake map"></div>
-      <div id="eventMapLabel" class="event-map-label" hidden>
-        <span id="eventMapMagnitude"></span>
-        <span id="eventMapLatitude"></span>
-        <span id="eventMapLongitude"></span>
-      </div>
     </div>
 
     <p class="map-attribution">
-      Interactive map: OpenStreetMap · Optional bathymetry overlay:
+      Interactive map: MapTiler / OpenStreetMap · Bathymetry reference:
       <a href="https://www.gebco.net/" target="_blank" rel="noopener">GEBCO</a>
       · Event information: ITEWS INCOIS
     </p>
@@ -288,6 +292,7 @@
   </div>
 </dialog>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.0.2/maptiler-sdk.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     const ids = id => document.getElementById(id);
@@ -355,14 +360,37 @@
     }
     const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
     const SEISMIC_MAP_DEFAULT_ZOOM = 6; // Increase to zoom in; decrease to zoom out.
-    let seismicLeafletMap = null;
+    // Paste your MapTiler API key here. When configured, labels are forced to English.
+    const MAPTILER_API_KEY = 'YOUR_MAPTILER_API_KEY_HERE';
+    const hasMapTilerKey = () => MAPTILER_API_KEY && !MAPTILER_API_KEY.includes('YOUR_MAPTILER_API_KEY');
+    let seismicMapMode = '';
+    let seismicMap = null;
     let seismicEpicentreMarker = null;
     let seismicBathymetryLayer = null;
 
     function ensureSeismicMap() {
-      if (seismicLeafletMap || !window.L) return seismicLeafletMap;
+      if (seismicMap) return seismicMap;
 
-      seismicLeafletMap = L.map('eventMapCanvas', {
+      if (hasMapTilerKey() && window.maptilersdk) {
+        seismicMapMode = 'maptiler';
+        maptilersdk.config.apiKey = MAPTILER_API_KEY;
+        seismicMap = new maptilersdk.Map({
+          container: 'eventMapCanvas',
+          style: maptilersdk.MapStyle.STREETS,
+          language: 'en',
+          center: [0,0],
+          zoom: SEISMIC_MAP_DEFAULT_ZOOM,
+          minZoom: 2,
+          maxZoom: 12,
+          navigationControl: true,
+          attributionControl: true
+        });
+        return seismicMap;
+      }
+
+      if (!window.L) return null;
+      seismicMapMode = 'leaflet';
+      seismicMap = L.map('eventMapCanvas', {
         zoomControl: true,
         attributionControl: true,
         minZoom: 2,
@@ -373,7 +401,7 @@
       const labelledBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap contributors'
-      }).addTo(seismicLeafletMap);
+      }).addTo(seismicMap);
 
       seismicBathymetryLayer = L.tileLayer.wms('https://wms.gebco.net/mapserv', {
         layers: 'gebco_latest',
@@ -387,10 +415,11 @@
         { 'Locations / boundaries': labelledBase },
         { 'GEBCO bathymetry': seismicBathymetryLayer },
         { collapsed: true, position: 'topright' }
-      ).addTo(seismicLeafletMap);
+      ).addTo(seismicMap);
 
-      return seismicLeafletMap;
+      return seismicMap;
     }
+
     let deferredInstallPrompt = null;
     window.addEventListener('beforeinstallprompt',event => {
       event.preventDefault();
@@ -861,53 +890,45 @@
       officialLink.hidden = !bulletin?.url;
       if (bulletin?.url) officialLink.href = bulletin.url; else officialLink.removeAttribute('href');
       const map = ids('eventMap');
-      const mapLabel = ids('eventMapLabel');
-      const mapMagnitude = ids('eventMapMagnitude');
-      const mapLatitude = ids('eventMapLatitude');
-      const mapLongitude = ids('eventMapLongitude');
       const hasCoordinates = Number.isFinite(latitude) && Number.isFinite(longitude);
 
       map.hidden = !hasCoordinates;
+      ids('seismicDialog').showModal();
 
       if (hasCoordinates) {
-        mapMagnitude.textContent = `Magnitude: M${magnitude}`;
-        mapLatitude.textContent = `LAT: ${latitude.toFixed(2)}°`;
-        mapLongitude.textContent = `LONG: ${longitude.toFixed(2)}°`;
-        mapLabel.hidden = false;
-
-        ids('seismicDialog').showModal();
-
-        const leafletMap = ensureSeismicMap();
-        if (leafletMap) {
-          leafletMap.invalidateSize();
-          leafletMap.setView([latitude, longitude], SEISMIC_MAP_DEFAULT_ZOOM, { animate: false });
-
-          if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
-          const earthquakeIcon = L.divIcon({
-            className: '',
-            html: '<div class="earthquake-leaflet-marker"></div>',
-            iconSize: [22,22],
-            iconAnchor: [11,11]
-          });
-
-          seismicEpicentreMarker = L.marker([latitude, longitude], {
-            icon: earthquakeIcon,
-            keyboard: false,
-            title: `M${magnitude} earthquake · ${location}`
-          }).addTo(leafletMap);
-
-          seismicEpicentreMarker.bindPopup(
+        const activeMap = ensureSeismicMap();
+        if (activeMap) {
+          const popupHtml =
             `<strong>M${magnitude} · ${escapeHtml(location)}</strong><br>` +
             `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°<br>` +
-            `Depth ${escapeHtml(String(depth).includes('km') ? String(depth) : `${depth} km`)}`
-          );
+            `Depth ${escapeHtml(String(depth).includes('km') ? String(depth) : `${depth} km`)}`;
+
+          if (seismicMapMode === 'maptiler') {
+            activeMap.resize();
+            activeMap.jumpTo({center:[longitude,latitude],zoom:SEISMIC_MAP_DEFAULT_ZOOM});
+            if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
+            seismicEpicentreMarker = new maptilersdk.Marker({color:'#c9362b'})
+              .setLngLat([longitude,latitude])
+              .setPopup(new maptilersdk.Popup({offset:18}).setHTML(popupHtml))
+              .addTo(activeMap);
+          } else {
+            activeMap.invalidateSize();
+            activeMap.setView([latitude, longitude], SEISMIC_MAP_DEFAULT_ZOOM, { animate: false });
+            if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
+            const earthquakeIcon = L.divIcon({
+              className: '',
+              html: '<div class="earthquake-leaflet-marker"></div>',
+              iconSize: [22,22],
+              iconAnchor: [11,11]
+            });
+            seismicEpicentreMarker = L.marker([latitude, longitude], {
+              icon: earthquakeIcon,
+              keyboard: false,
+              title: `M${magnitude} earthquake · ${location}`
+            }).addTo(activeMap);
+            seismicEpicentreMarker.bindPopup(popupHtml);
+          }
         }
-      } else {
-        mapLabel.hidden = true;
-        mapMagnitude.textContent = '';
-        mapLatitude.textContent = '';
-        mapLongitude.textContent = '';
-        ids('seismicDialog').showModal();
       }
     }
     function render(data) {
