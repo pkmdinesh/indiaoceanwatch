@@ -332,12 +332,10 @@
        // 1. Open the modal
   ids('shareDialog').showModal();
   
-  // 2. Double RAF ensures Chrome completes layout and painting
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      renderShareQr(url);
-    });
-  });
+  // 2. Fall completely out of the paint-loop block
+  setTimeout(() => {
+    renderShareQr(url);
+  }, 30); // 30ms forces Chrome to finish painting the native modal layout
     }
     async function copyShareUrl() {
       const url = cleanShareUrl();
@@ -935,6 +933,7 @@
             }).addTo(activeMap);
             seismicEpicentreMarker.bindPopup(popupHtml);
           }
+          marker.openPopup();
         }
       }
     }
