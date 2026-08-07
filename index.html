@@ -329,8 +329,15 @@
       ids('shareUrl').textContent = url;
       ids('shareCopyStatus').textContent = '';
       ids('nativeShare').hidden = !('share' in navigator);
-      ids('shareDialog').showModal();
-      requestAnimationFrame(() => renderShareQr(url));
+       // 1. Open the modal
+  ids('shareDialog').showModal();
+  
+  // 2. Double RAF ensures Chrome completes layout and painting
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      renderShareQr(url);
+    });
+  });
     }
     async function copyShareUrl() {
       const url = cleanShareUrl();
