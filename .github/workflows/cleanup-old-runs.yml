@@ -4,7 +4,9 @@ on:
   schedule:
     - cron: '30 * * * *'   # once every hour
   workflow_dispatch:
-
+concurrency:
+  group: cleanup-old-workflow-runs
+  cancel-in-progress: true
 permissions:
   actions: write
   contents: read
