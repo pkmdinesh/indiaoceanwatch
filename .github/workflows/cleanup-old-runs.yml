@@ -2,7 +2,7 @@ name: Cleanup old workflow runs
 
 on:
   schedule:
-    - cron: '30 * * * *'   # once every hour
+    
   workflow_dispatch:
 
 concurrency:
