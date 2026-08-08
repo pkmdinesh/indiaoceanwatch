@@ -31,7 +31,7 @@ jobs:
 
           $runs = gh run list `
             --repo $env:GH_REPO `
-            --limit 1000 `
+            --limit 500 `
             --json databaseId,status,createdAt,name |
             ConvertFrom-Json
 
