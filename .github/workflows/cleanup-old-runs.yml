@@ -87,9 +87,10 @@ jobs:
 
               Write-Warning "Normal cancellation failed for run $($run.databaseId); trying force cancellation."
 
-              gh run cancel $run.databaseId `
-                --repo $env:GH_REPO `
-                --force
+              gh api `
+        --method POST `
+        "repos/$env:GH_REPO/actions/runs/$($run.databaseId)/force-cancel"
+
 
               if ($LASTEXITCODE -ne 0) {
                   Write-Warning "Force cancellation also failed for run $($run.databaseId)"
