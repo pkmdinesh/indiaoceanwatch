@@ -1,0 +1,46 @@
+name: Cleanup old workflow runs
+
+on:
+  schedule:
+    - cron: '30 * * * *'   # once every hour
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel queued/in-progress runs older than 24 hours
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          $cutoff = [DateTimeOffset]::UtcNow.AddHours(-24)
+
+          Write-Host "Cancelling queued/in-progress runs created before $cutoff"
+
+          $runs = gh run list `
+            --repo $env:GH_REPO `
+            --limit 500 `
+            --json databaseId,status,createdAt,name |
+            ConvertFrom-Json
+
+          $runs |
+          Where-Object {
+              $_.status -in @("queued","in_progress","waiting","pending") -and
+              ([DateTimeOffset]::Parse($_.createdAt) -lt $cutoff)
+          } |
+          ForEach-Object {
+              Write-Host "Cancelling $($_.name) run $($_.databaseId) [$($_.status)] created $($_.createdAt)"
+
+              gh run cancel $_.databaseId --repo $env:GH_REPO
+
+              if ($LASTEXITCODE -ne 0) {
+                  Write-Warning "Could not cancel run $($_.databaseId)"
+              }
+          }
