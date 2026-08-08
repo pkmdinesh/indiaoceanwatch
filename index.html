@@ -70,11 +70,31 @@
 
     /* Header action buttons: same desktop size and rounded pill shape. */
     .share-button,.install-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:88px;min-width:88px;height:36px;min-height:36px;padding:0 12px;border:1px solid #082f3c;border-radius:999px;background:#082f3c;color:#fff;font:800 11px/1 inherit;cursor:pointer;box-shadow:0 5px 14px rgba(8,47,60,.22)}
-    .share-button .share-icon,.install-button .install-icon{color:#68e0e5;font-size:14px;line-height:1}
+    .share-button .share-icon,.install-button .install-icon{display:block;width:clamp(16px,1.35vw,20px);height:clamp(16px,1.35vw,20px);flex:0 0 auto;color:#68e0e5;overflow:visible}
     .share-button:hover,.share-button:focus-visible,.install-button:hover,.install-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;outline:0;box-shadow:0 7px 18px rgba(8,127,132,.3)}
     .share-qr{box-sizing:border-box;aspect-ratio:1/1;display: inline-block}
     .share-qr canvas,.share-qr img{display: inline-block;width:200px!important;height:200px!important;max-width:200px!important;max-height:200px!important;aspect-ratio:1/1!important;object-fit:contain!important}
-    @media(max-width:520px){.share-button,.install-button{width:34px;min-width:34px;height:34px;min-height:34px;padding:0}.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.share-qr canvas,.share-qr img{width:min(200px,calc(70vw - 20px))!important;height:min(200px,calc(70vw - 20px))!important;max-width:100%!important;max-height:100%!important}}
+    @media(max-width:520px){.share-button,.install-button{width:34px;min-width:34px;height:34px;min-height:34px;padding:0}.share-button .share-icon,.install-button .install-icon{width:18px;height:18px}.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}.share-qr canvas,.share-qr img{width:min(200px,calc(70vw - 20px))!important;height:min(200px,calc(70vw - 20px))!important;max-width:100%!important;max-height:100%!important}}
+
+    /* Keep header actions as readable chips and give the share dialog one scroll area. */
+    html:has(.share-dialog[open]),body:has(.share-dialog[open]){overflow:hidden}
+    .share-dialog{width:min(390px,calc(100vw - 24px));max-height:calc(100dvh - 24px);margin:auto;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+    .share-dialog .advisory-dialog-head{top:0}
+    .share-qr{display:grid}
+    .share-qr canvas{display:block!important}
+    .share-qr img{display:none!important}
+    @media(max-width:520px){.header-actions{flex-wrap:wrap}.share-button,.install-button{width:auto;min-width:78px;height:34px;min-height:34px;padding:0 11px}.share-button .share-icon,.install-button .install-icon{width:17px;height:17px}.share-label,.install-label{position:static;width:auto;height:auto;overflow:visible;clip:auto;clip-path:none;white-space:nowrap}.share-dialog{width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}.share-dialog-body{padding:14px}.share-qr{width:min(220px,65vw);height:min(220px,65vw)}.share-qr canvas{width:min(200px,calc(65vw - 20px))!important;height:min(200px,calc(65vw - 20px))!important}}
+
+    /* Compact action chips, bulletin link, and contact details. */
+    .share-button,.install-button{border-radius:8px}
+    .joint-bulletin-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px}
+    .joint-bulletin-copy{min-width:0}
+    .joint-bulletin-link{align-self:center;margin:0;padding:7px 9px;border-radius:7px;background:#fff;color:var(--teal);text-decoration:none;white-space:nowrap;box-shadow:0 1px 4px rgba(8,47,60,.12)}
+    .joint-bulletin-link:hover,.joint-bulletin-link:focus-visible{background:var(--teal);color:#fff;outline:0}
+    .joint-bulletin-card.is-recent .joint-bulletin-link{color:#8f241d}.joint-bulletin-card.is-recent .joint-bulletin-link:hover,.joint-bulletin-card.is-recent .joint-bulletin-link:focus-visible{background:#8f241d;color:#fff}
+    .content .contact-card{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:18px;align-items:stretch;padding:0;overflow:hidden;background:linear-gradient(135deg,#f5f8f6,#e7f3f0)}
+    .contact-copy{align-self:center;padding:20px 22px}.contact-copy h2{margin:5px 0 4px;font:700 clamp(20px,2vw,29px)/1.15 Georgia,"Times New Roman",serif}.contact-organisation{margin:0;color:var(--teal);font-size:13px;font-weight:850}.contact-copy address{margin-top:14px;font-style:normal}.contact-copy address p{margin:7px 0;color:#294b55;font-size:13px;font-weight:700;line-height:1.55}.contact-copy a{color:var(--teal);overflow-wrap:anywhere}.contact-image{width:100%;height:100%;min-height:220px;max-height:290px;object-fit:cover;object-position:center 52%}
+    @media(max-width:700px){.share-button,.install-button{width:40px;min-width:40px;height:34px;min-height:34px;padding:0;border-radius:8px}.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}.joint-bulletin-card{grid-template-columns:minmax(0,1fr) auto}.joint-bulletin-link{padding:7px;font-size:11px}.content .contact-card{grid-template-columns:1fr}.contact-copy{padding:18px}.contact-copy address p{font-size:13px}.contact-image{min-height:180px;max-height:230px;object-position:center 52%}}
   </style>
 </head>
 <body>
@@ -84,8 +104,8 @@
       <div class="title"><h1>Coastal Advisory Status</h1><p>Tsunami · Ocean State Forecast · Storm Surge · Ocean Current · Potential Fishing Zone</p></div>
       <div class="header-actions">
         <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated" datetime="2026-07-30T22:15:00+05:30">Checked 30 July 2026 · 10:15 PM IST</time></div>
-        <button class="share-button" id="shareApp" type="button" aria-label="Share Ocean Watch"><span class="share-icon" aria-hidden="true">&#8599;</span><span class="share-label">Share</span></button>
-        <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch"><span class="install-icon" aria-hidden="true">&#10515;</span><span class="install-label">Install</span></button>
+        <button class="share-button" id="shareApp" type="button" aria-label="Share Ocean Watch"><svg class="share-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="currentColor" d="M13 14h1v1h-1zm1 1h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm-3-1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm3-1h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm-2 2h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm-1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-2 1h1v1h-1zm-2 0h1v1h-1zm1 0h1v1h-1zm-2 0h1v1h-1zm0 1h1v1h-1zm1 1h1v1h-1zm1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-1-2h1v1h-1zm1 0h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm0 3h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm1 3h1v1h-1zm0-2h1v1h-1zm0 1h1v1h-1zm-2-3h1v1h-1zm-6 1h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm-3 0h1v1h-1zm2 0h1v1h-1zm-2 1h1v1h-1zm0 1h1v1h-1zm0-19h1v1h-1zm1 1h1v1h-1zm-1 2h1v1h-1zm1 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm-1 1h1v1h-1zM1 11h1v1H1zm1 1h1v1H2zm2-1h1v1H4zm0 1h1v1H4zm1-1h1v1H5zm1 1h1v1H6zm1-1h1v1H7zm1 1h1v1H8zm0-1h1v1H8zm1 0h1v1H9zm1 0h1v1h-1zm1 1h1v1h-1zm2 0h1v1h-1zm1-1h1v1h-1zm1 0h1v1h-1zm1 0h1v1h-1zm-1 2h1v1h-1zm-2 9h1v1h-1zm-1 0h1v1h-1zm0-9h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm11-1h1v1h-1zm-1 1h1v1h-1zm1 2h1v1h-1zm-5-4h1v1h-1zm1-1h1v1h-1zm4 0h1v1h-1zm0 1h1v1h-1zm-1 0h1v1h-1zm1 8h1v1h-1zm-1 1h1v1h-1zm-2 0h1v1h-1zm3 0h1v1h-1z"/><path stroke="currentColor" stroke-width="2" d="M15 2h7v7h-7zM2 2h7v7H2zm0 13h7v7H2zM18 5h1v1h-1zM5 5h1v1H5zm0 13h1v1H5z"/></g></svg><span class="share-label">Share</span></button>
+        <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch"><svg class="install-icon" aria-hidden="true" focusable="false" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M1664 1664h128v384H128v-384h128v256h1408zm-147-531-557 557-557-557 90-90 403 402V128h128v1317l403-402z"/></svg><span class="install-label">Install</span></button>
     </div>
     </header>
 
@@ -127,6 +147,15 @@
         <div class="seismic-message-wrap" id="seismicMessageWrap"><div class="seismic-message-copy"><button class="seismic-event-link" id="seismicMessage" type="button" disabled>No Seismic Activity for the past 90 days with magnitude &gt;= 6.5M</button><div class="seismic-additional" id="seismicAdditional"></div></div></div>
       </section>
 
+      <section class="panel storm-card" aria-labelledby="surge-title">
+        <div class="panel-head">
+          <img class="service-logo" src="assets/storm-surge-icon.png?v=2" alt="Storm surge icon">
+          <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
+          <a class="source" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
+        </div>
+        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><strong id="stormMessage">No active storm surge bulletin</strong><span id="stormCaption">Official ITEWS bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
+      </section>
+
       <section class="panel cyclone-card" aria-labelledby="cyclone-title">
         <div class="panel-head">
           <div class="cyclone-heading">
@@ -140,19 +169,9 @@
         </div>
         <div class="cyclone-status level-safe" id="cycloneStatus"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage">When checked IMD CAP Alerts feed.</p><time id="cycloneIssued"></time></div>
         <article class="joint-bulletin-card" id="jointBulletinCard" aria-live="polite">
-          <p class="joint-bulletin-message" id="jointBulletinMessage">No INCOIS-IMD joint bulletin is currently available.</p>
-          <time class="joint-bulletin-time" id="jointBulletinTime" hidden></time>
-          <a class="joint-bulletin-link" id="jointBulletinLink" href="https://incois.gov.in/site/services/jointbulletin.jsp" target="_blank" rel="noopener">Open INCOIS joint bulletin page ↗</a>
+          <div class="joint-bulletin-copy"><p class="joint-bulletin-message" id="jointBulletinMessage">No INCOIS-IMD joint bulletin is currently available.</p><time class="joint-bulletin-time" id="jointBulletinTime" hidden></time></div>
+          <a class="joint-bulletin-link" id="jointBulletinLink" href="https://incois.gov.in/site/services/jointbulletin.jsp" target="_blank" rel="noopener">INCOIS-IMD ↗</a>
         </article>
-      </section>
-
-      <section class="panel storm-card" aria-labelledby="surge-title">
-        <div class="panel-head">
-          <img class="service-logo" src="assets/storm-surge-icon.png?v=2" alt="Storm surge icon">
-          <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
-          <a class="source" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
-        </div>
-        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><strong id="stormMessage">No active storm surge bulletin</strong><span id="stormCaption">Official ITEWS bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel pfz-card" aria-labelledby="pfz-title">
@@ -164,6 +183,20 @@
         <p class="pfz-date" id="pfzDate">Forecast 30 Jul · Valid through 31 Jul 2026</p>
         <div class="states pfz-states" id="pfzStates"><span class="empty">Loading issued sectors…</span></div>
         <div class="pfz-details" id="pfzDetails" hidden><h3 id="pfzDetailsTitle"></h3><div class="pfz-landing-centers" id="pfzLandingCenters"></div><div class="pfz-messages" id="pfzMessages"></div></div>
+      </section>
+
+      <section class="panel contact-card" aria-labelledby="contact-title">
+        <div class="contact-copy">
+          <p class="panel-kicker">SYNOPS-INCOIS</p>
+          <h2 id="contact-title">Operational Ocean Services Division</h2>
+          <p class="contact-organisation">Indian National Centre for Ocean Information Services</p>
+          <address>
+            <p>🏛️ Pragathi Nagar (BO), Nizampet (SO), Hyderabad–500090, Telangana</p>
+            <p>📧 <a href="mailto:osf@incois.gov.in">osf@incois.gov.in</a> <span aria-hidden="true">·</span> 📩 <a href="mailto:tsunami@incois.gov.in">tsunami@incois.gov.in</a></p>
+            <p>🌐 <a href="https://www.incois.gov.in" target="_blank" rel="noopener">www.incois.gov.in</a> <span aria-hidden="true">·</span> ☎️ <strong>+91-40-238950XX</strong> <span aria-hidden="true">·</span> 📞 <strong>+91-40-238860XX</strong></p>
+          </address>
+        </div>
+        <img class="contact-image" src="1786177913304.jpg" alt="SYNOPS ocean observation and prediction services display at INCOIS">
       </section>
 
     </div>
@@ -403,9 +436,9 @@
         worldCopyJump: true
       });
 
-      const labelledBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      const labelledBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: 'Tiles &copy; Esri'
       }).addTo(seismicMap);
 
       seismicBathymetryLayer = L.tileLayer.wms('https://wms.gebco.net/mapserv', {
@@ -417,7 +450,7 @@
       });
 
       L.control.layers(
-        { 'Locations / boundaries': labelledBase },
+        { 'Global map (English)': labelledBase },
         { 'GEBCO bathymetry': seismicBathymetryLayer },
         { collapsed: true, position: 'topright' }
       ).addTo(seismicMap);
@@ -694,9 +727,7 @@
       }
 
       link.href = bulletin?.url || JOINT_BULLETIN_PAGE_URL;
-      link.textContent = bulletin?.url && /\.pdf(?:$|[?#])/i.test(bulletin.url)
-        ? 'Open official joint bulletin PDF ↗'
-        : 'Open INCOIS joint bulletin page ↗';
+      link.textContent = 'INCOIS-IMD ↗';
       link.hidden = false;
     }
 
