@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ocean-watch-v22';
+const CACHE_NAME = 'ocean-watch-v23';
 const APP_SHELL = [
   './',
   './index.html',
@@ -13,7 +13,7 @@ const APP_SHELL = [
   './assets/tsunami-service-icon.png',
   './assets/cyclone-service-icon.png',
   './assets/storm-surge-icon.png',
-  './assets/potential-fishing-zone-icon.jpg'
+  './assets/potential-fishing-zone-icon.jpg',
   './1786177913304.png'
 ];
 
