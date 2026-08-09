@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-09T14:45:16.1114250+00:00",
-    "lastAttemptAt":  "2026-08-09T14:45:16.1114250+00:00",
+    "updatedAt":  "2026-08-09T15:00:14.7683318+00:00",
+    "lastAttemptAt":  "2026-08-09T15:00:14.7683318+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -52,7 +52,7 @@
                                        }
                 },
     "seismic":  {
-                    "message":  "Latest: M6.7, Kyushu, Japan, 2026-07-28 12:57:00, depth 10 km",
+                    "message":  "Latest: M6.7, Kyushu, Japan, 2026-07-28 12:57:00 IST",
                     "count":  10,
                     "latest":  {
                                    "EVID":  "incois2026outm",
@@ -1717,7 +1717,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-09T14:45:25.4250136+00:00",
+                          "fetchedAt":  "2026-08-09T15:00:21.9450712+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -1727,9 +1727,21 @@
                 "validUntil":  "10 AUG 2026",
                 "sectors":  [
                                 {
+                                    "id":  "SEC001",
+                                    "name":  "Gujarat",
+                                    "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC001",
+                                    "hasForecast":  false,
+                                    "message":  "No data available for this sector due to excessive cloud cover",
+                                    "landingCenters":  [
+
+                                                       ]
+                                },
+                                {
                                     "id":  "SEC002",
                                     "name":  "Maharashtra",
                                     "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC002",
+                                    "hasForecast":  true,
+                                    "message":  null,
                                     "landingCenters":  [
                                                            {
                                                                "name":  "Varor",
@@ -3895,6 +3907,8 @@
                                     "id":  "SEC003",
                                     "name":  "Goa",
                                     "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC003",
+                                    "hasForecast":  true,
+                                    "message":  null,
                                     "landingCenters":  [
                                                            {
                                                                "name":  "Chapora",
@@ -4003,9 +4017,41 @@
                                                        ]
                                 },
                                 {
+                                    "id":  "SEC004",
+                                    "name":  "Karnataka",
+                                    "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC004",
+                                    "hasForecast":  false,
+                                    "message":  "No data available for this sector due to excessive cloud cover",
+                                    "landingCenters":  [
+
+                                                       ]
+                                },
+                                {
+                                    "id":  "SEC005",
+                                    "name":  "Kerala",
+                                    "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC005",
+                                    "hasForecast":  false,
+                                    "message":  "No data available for this sector due to excessive cloud cover",
+                                    "landingCenters":  [
+
+                                                       ]
+                                },
+                                {
+                                    "id":  "SEC006",
+                                    "name":  "South Tamil Nadu",
+                                    "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC006",
+                                    "hasForecast":  false,
+                                    "message":  "No data available for this sector due to excessive cloud cover",
+                                    "landingCenters":  [
+
+                                                       ]
+                                },
+                                {
                                     "id":  "SEC007",
                                     "name":  "North Tamil Nadu",
                                     "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC007",
+                                    "hasForecast":  true,
+                                    "message":  null,
                                     "landingCenters":  [
                                                            {
                                                                "name":  "Coromandel",
@@ -5690,6 +5736,8 @@
                                     "id":  "SEC008",
                                     "name":  "South Andhra Pradesh",
                                     "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC008",
+                                    "hasForecast":  true,
+                                    "message":  null,
                                     "landingCenters":  [
                                                            {
                                                                "name":  "Pedda Gollapalem",
@@ -6061,6 +6109,8 @@
                                     "id":  "SEC009",
                                     "name":  "North Andhra Pradesh",
                                     "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC009",
+                                    "hasForecast":  true,
+                                    "message":  null,
                                     "landingCenters":  [
                                                            {
                                                                "name":  "Kaviti",
@@ -6536,6 +6586,8 @@
                                     "id":  "SEC010",
                                     "name":  "Odisha",
                                     "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC010",
+                                    "hasForecast":  true,
+                                    "message":  null,
                                     "landingCenters":  [
                                                            {
                                                                "name":  "Talchua",
@@ -6946,6 +6998,8 @@
                                     "id":  "SEC011",
                                     "name":  "West Bengal",
                                     "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC011",
+                                    "hasForecast":  true,
+                                    "message":  null,
                                     "landingCenters":  [
                                                            {
                                                                "name":  "Frasergunje",
@@ -7104,10 +7158,48 @@
                                                                             ]
                                                            }
                                                        ]
+                                },
+                                {
+                                    "id":  "SEC012",
+                                    "name":  "Andaman",
+                                    "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC012",
+                                    "hasForecast":  false,
+                                    "message":  "No data available for this sector due to excessive cloud cover",
+                                    "landingCenters":  [
+
+                                                       ]
+                                },
+                                {
+                                    "id":  "SEC013",
+                                    "name":  "Nicobar",
+                                    "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC013",
+                                    "hasForecast":  false,
+                                    "message":  "No data available for this sector due to excessive cloud cover",
+                                    "landingCenters":  [
+
+                                                       ]
+                                },
+                                {
+                                    "id":  "SEC014",
+                                    "name":  "Lakshadweep",
+                                    "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC014",
+                                    "hasForecast":  false,
+                                    "message":  "No data available for this sector due to excessive cloud cover",
+                                    "landingCenters":  [
+
+                                                       ]
                                 }
                             ]
             },
     "errors":  [
 
-               ]
+               ],
+    "healthAlerts":  [
+
+                     ],
+    "freshness":  {
+                      "thresholdHours":  36,
+                      "osfAgeHours":  3.51,
+                      "pfzAgeHours":  3.51
+                  }
 }
