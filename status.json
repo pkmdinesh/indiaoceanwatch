@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-09T10:00:15.0298169+00:00",
-    "lastAttemptAt":  "2026-08-09T10:00:15.0298169+00:00",
+    "updatedAt":  "2026-08-09T10:15:15.1014811+00:00",
+    "lastAttemptAt":  "2026-08-09T10:15:15.1014811+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -1703,7 +1703,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-09T10:00:24.2458417+00:00",
+                          "fetchedAt":  "2026-08-09T10:15:22.3146288+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
