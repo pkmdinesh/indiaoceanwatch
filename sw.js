@@ -64,6 +64,10 @@ self.addEventListener('fetch',event => {
     event.respondWith(statusNetworkFirst(event.request));
     return;
   }
+  if (url.pathname.endsWith('/announcements.js')) {
+  event.respondWith(networkFirst(event.request, './announcements.js'));
+  return;
+}
   event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
     if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(event.request,response.clone()));
     return response;
