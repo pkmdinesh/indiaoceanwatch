@@ -516,6 +516,11 @@
       });
       const knownNames = new Set(PFZ_SECTOR_NAMES.map(name => name.toLowerCase()));
       sectors.push(...received.filter(sector => !knownNames.has(String(sector.name || '').toLowerCase())));
+      sectors.sort((a,b) => {
+        const aHasForecast = a.hasForecast !== false && Boolean(a.landingCenters?.length);
+        const bHasForecast = b.hasForecast !== false && Boolean(b.landingCenters?.length);
+        return Number(bHasForecast) - Number(aHasForecast);
+      });
       el.replaceChildren(...sectors.map(value => {
         const sector = typeof value === 'string' ? {name:value,landingCenters:[]} : value;
         const hasForecast = sector.hasForecast !== false && Boolean(sector.landingCenters?.length);
