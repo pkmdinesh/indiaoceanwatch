@@ -7,6 +7,7 @@ const APP_SHELL = [
   './icons/ocean-watch-v3-512.png',
   './icons/ocean-watch-v3-maskable.png',
   './icons/ocean-watch-v3-apple.png',
+  './assets/ocean-watch-v3-512.png',
   './assets/earthquake-network-icon.png',
   './assets/ocean-wave-service-icon.png',
   './assets/tsunami-service-icon.png',
