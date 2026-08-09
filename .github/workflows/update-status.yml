@@ -2,8 +2,14 @@ name: Update coastal advisory status
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '30 * * * *'
   workflow_dispatch:
+    inputs:
+      force:
+        description: Ignore the freshness gate and update immediately
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -16,13 +22,16 @@ concurrency:
 jobs:
   update:
     runs-on: windows-latest
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Read official INCOIS sources
         shell: powershell
-        run: .\update-status.ps1 -Quiet
+        run: |
+          $minimumAgeHours = if ('${{ inputs.force }}' -eq 'true') { 0 } else { 0.20 }
+          .\update-status.ps1 -Quiet -MinimumAgeHours $minimumAgeHours
 
       - name: Commit updated snapshot
         id: commit_status

@@ -2,7 +2,7 @@ name: Cleanup old workflow runs
 
 on:
   schedule:
-    
+    - cron: '23 */6 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -16,16 +16,17 @@ permissions:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - name: Cancel queued/in-progress runs older than 24 hours
+      - name: Cancel queued/in-progress runs older than 2 hours
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
 
         run: |
-          $cutoff = [DateTimeOffset]::UtcNow.AddHours(-24)
+          $cutoff = [DateTimeOffset]::UtcNow.AddHours(-2)
 
           Write-Host "Checking queued/in-progress runs created before $cutoff"
 

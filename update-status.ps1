@@ -23,6 +23,34 @@ function Get-TextContent([string]$Url) {
     (Invoke-WebRequest -UseBasicParsing -Uri $Url -TimeoutSec 45).Content
 }
 
+function Get-DailyProductAgeHours([object[]]$DateValues) {
+    [string[]]$formats = @('d MMM yyyy','dd MMM yyyy','d MMMM yyyy','dd MMMM yyyy','d-MMM-yyyy','dd-MMM-yyyy','dd-MM-yyyy','yyyy-MM-dd')
+    $latestIssue = $null
+    foreach ($value in @($DateValues)) {
+        if ([string]::IsNullOrWhiteSpace("$value")) { continue }
+        $parsed = [DateTime]::MinValue
+        if (-not [DateTime]::TryParseExact(
+            ("$value").Trim(),
+            $formats,
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::AllowWhiteSpaces,
+            [ref]$parsed
+        )) { continue }
+
+        # Daily OSF/PFZ products normally arrive between 17:00 and 20:00 IST.
+        # Use 17:00 IST as the conservative start of the publication window.
+        $issueAtFive = [DateTime]::SpecifyKind($parsed.Date.AddHours(17), [DateTimeKind]::Unspecified)
+        $issueOffset = [DateTimeOffset]::new($issueAtFive, [TimeSpan]::FromMinutes(330))
+        if ($null -eq $latestIssue -or $issueOffset -gt $latestIssue) { $latestIssue = $issueOffset }
+    }
+    if ($null -eq $latestIssue) { return $null }
+    return ([DateTimeOffset]::UtcNow - $latestIssue.ToUniversalTime()).TotalHours
+}
+
+function New-HealthAlert([string]$Code, [string]$Message, [string]$LinkLabel, [string]$Url) {
+    [ordered]@{ code = $Code; message = $Message; linkLabel = $LinkLabel; url = $Url }
+}
+
 
 function Convert-GebcoResponseToElevation([string]$Content) {
     if ([string]::IsNullOrWhiteSpace($Content)) { return $null }
@@ -345,6 +373,8 @@ $status = [ordered]@{
         sectors = @()
     }
     errors = @()
+    healthAlerts = @()
+    freshness = [ordered]@{ thresholdHours = 36; osfAgeHours = $null; pfzAgeHours = $null }
 }
 
 # Preserve the last successful values when an official endpoint is temporarily unavailable.
@@ -358,6 +388,13 @@ if (Test-Path -LiteralPath $outputPath) {
         }
         $savedStatus.updateIntervalHours = 0.25
         $savedStatus.errors = @()
+        if ($savedStatus.PSObject.Properties.Name -notcontains 'healthAlerts') {
+            $savedStatus | Add-Member -NotePropertyName healthAlerts -NotePropertyValue @()
+        } else { $savedStatus.healthAlerts = @() }
+        if ($savedStatus.PSObject.Properties.Name -notcontains 'freshness') {
+            $savedStatus | Add-Member -NotePropertyName freshness -NotePropertyValue ([pscustomobject]@{ thresholdHours = 36; osfAgeHours = $null; pfzAgeHours = $null })
+        }
+        $savedStatus.freshness.thresholdHours = 36
         $status = $savedStatus
         if ($status.PSObject.Properties.Name -notcontains 'oceanCurrent') {
             $status | Add-Member -NotePropertyName oceanCurrent -NotePropertyValue ([pscustomobject]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() })
@@ -417,10 +454,15 @@ if (Test-Path -LiteralPath $outputPath) {
     } catch { }
 }
 
+$itewsInformationAccessible = $false
+$stormSurgeAccessible = $false
+$incoisPageAccessible = $false
+
 try {
     $tsunamiHtml = Get-TextContent 'https://tsunami.incois.gov.in/TEWS/'
     [xml]$activeXml = Get-TextContent ('https://tsunami.incois.gov.in/itews/homexmls/LatestEvents.xml?currentTime=' + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())
     $activeEvents = @($activeXml.SelectNodes('//event'))
+    $itewsInformationAccessible = $true
     if ($activeEvents.Count -eq 0) {
         $status.tsunami.message = 'No Tsunami'
         $status.tsunami.ok = $true
@@ -440,6 +482,7 @@ try {
 
 try {
     $events = Invoke-RestMethod -Uri 'https://tsunami.incois.gov.in/itews/DSSProducts/OPR/past90days.json' -TimeoutSec 45
+    $itewsInformationAccessible = $true
     $eventList = @($events)
     $eventRoot = $eventList | Select-Object -First 1
     if ($null -ne $eventRoot -and $eventRoot.PSObject.Properties.Name -contains 'features') { $eventList = @($eventRoot.features) }
@@ -462,7 +505,9 @@ try {
         }
         $status.seismic.latest = Add-GebcoEventMetadata -Event $latest -TopoBathy $latestTopoBathy
         if ($latest.PSObject.Properties.Name -contains 'MAGNITUDE') {
-            $status.seismic.message = "Latest: M$($latest.MAGNITUDE), $($latest.REGIONNAME), $($latest.ORIGINTIME), depth $($latest.DEPTH) km"
+            $originWithZone = "$($latest.ORIGINTIME)".Trim()
+            if ($originWithZone -and $originWithZone -notmatch '(?i)\bIST\b') { $originWithZone += ' IST' }
+            $status.seismic.message = "Latest: M$($latest.MAGNITUDE), $($latest.REGIONNAME), $originWithZone"
             $latestTime = [DateTime]::ParseExact("$($latest.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
             $status.seismic.recentEvents = @($eventList | Select-Object -Skip 1 | Where-Object {
                 $eventTime = [DateTime]::ParseExact("$($_.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
@@ -619,6 +664,7 @@ try {
     $surgeEvents = @($surgeXml.SelectNodes('//event'))
     $status.stormSurge.message = 'No active storm surge bulletin'
     $status.stormSurge.ok = $true
+    $stormSurgeAccessible = $true
     $status.stormSurge.bulletin = $null
     if ($surgeEvents.Count -gt 0) {
         $latestSurgeEvent = $surgeEvents | Select-Object -Last 1
@@ -680,6 +726,7 @@ try {
 
 try {
     $status.jointBulletin = Get-JointBulletinSummary
+    $incoisPageAccessible = $true
 } catch {
     $status.errors += "Joint bulletin: $($_.Exception.Message)"
     if ($null -ne $status.jointBulletin) {
@@ -694,6 +741,7 @@ try {
 try {
     $pfzSession = New-Object Microsoft.PowerShell.Commands.WebRequestSession
     $pfzHtml = (Invoke-WebRequest -UseBasicParsing -WebSession $pfzSession -Uri 'https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&request_locale=en' -TimeoutSec 45).Content
+    $incoisPageAccessible = $true
     $dates = [regex]::Matches($pfzHtml, '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') | ForEach-Object { $_.Value.ToUpperInvariant() } | Select-Object -Unique
     if ($dates.Count -ge 1) { $status.pfz.forecastDate = $dates[0] }
     if ($dates.Count -ge 2) { $status.pfz.validUntil = $dates[1] }
@@ -711,7 +759,7 @@ try {
     $sectorOptions = [regex]::Matches($pfzHtml, '(?is)<option\s+value=[''"]([^''"]*TextData[^''"]*\?secid=(SEC\d+))[''"][^>]*>')
     if ($sectorOptions.Count -eq 0) { throw 'PFZ sector links were not found' }
 
-    $issuedSectors = @()
+    $pfzSectors = @()
     $seenSectorIds = @{}
     foreach ($option in $sectorOptions) {
         $relativeUrl = $option.Groups[1].Value
@@ -722,7 +770,25 @@ try {
         $detailUrl = "https://incois.gov.in/MarineFisheries/$relativeUrl"
         $detailHtml = (Invoke-WebRequest -UseBasicParsing -WebSession $pfzSession -Uri $detailUrl -TimeoutSec 45).Content
         $detailText = [Net.WebUtility]::HtmlDecode(($detailHtml -replace '(?is)<script\b.*?</script>', ' ' -replace '(?is)<style\b.*?</style>', ' ' -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
-        if ($detailText -match '(?i)no\s+data\s+available\s+for\s+this\s+sector') { continue }
+        $noDataMessage = $null
+        foreach ($paragraphMatch in [regex]::Matches($detailHtml, '(?is)<p\b[^>]*>(.*?)</p>')) {
+            $paragraphText = [Net.WebUtility]::HtmlDecode(($paragraphMatch.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+            if ($paragraphText -match '(?i)^no\s+data\s+available\s+for\s+this\s+sector\b') {
+                $noDataMessage = $paragraphText
+                break
+            }
+        }
+        if ($noDataMessage) {
+            $pfzSectors += [ordered]@{
+                id = $sectorId
+                name = $sectorNames[$sectorId]
+                url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
+                hasForecast = $false
+                message = $noDataMessage
+                landingCenters = @()
+            }
+            continue
+        }
 
         $landingCenters = [ordered]@{}
         foreach ($rowMatch in [regex]::Matches($detailHtml, '(?is)<tr\b[^>]*>(.*?)</tr>')) {
@@ -748,16 +814,65 @@ try {
         # A parsed advisory row is stronger evidence than a date alone and
         # prevents redirects or generic background pages becoming sectors.
         if ($landingCenters.Count -gt 0 -and $detailText -match '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') {
-            $issuedSectors += [ordered]@{
+            $pfzSectors += [ordered]@{
                 id = $sectorId
                 name = $sectorNames[$sectorId]
                 url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
+                hasForecast = $true
+                message = $null
                 landingCenters = @($landingCenters.Values)
+            }
+        } else {
+            $pfzSectors += [ordered]@{
+                id = $sectorId
+                name = $sectorNames[$sectorId]
+                url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
+                hasForecast = $false
+                message = 'No forecast is available for this sector in the latest fetched PFZ data.'
+                landingCenters = @()
             }
         }
     }
-    $status.pfz.sectors = @($issuedSectors)
+    $status.pfz.sectors = @($pfzSectors)
 } catch { $status.errors += "PFZ: $($_.Exception.Message)" }
+
+# Public health alerts intentionally differ from the diagnostic scraper errors.
+# OSF/PFZ are daily products, so their saved data remains current for 36 hours.
+$osfAgeHours = Get-DailyProductAgeHours @(
+    $status.highWave.issueDate,
+    $status.swellSurge.issueDate,
+    $status.oceanCurrent.issueDate
+)
+$pfzAgeHours = Get-DailyProductAgeHours @($status.pfz.forecastDate)
+$status.freshness.osfAgeHours = if ($null -eq $osfAgeHours) { $null } else { [math]::Round($osfAgeHours, 2) }
+$status.freshness.pfzAgeHours = if ($null -eq $pfzAgeHours) { $null } else { [math]::Round($pfzAgeHours, 2) }
+
+# Only describe the whole INCOIS website as unavailable when no direct INCOIS
+# page worked and a final main-page probe also fails.
+if (-not $incoisPageAccessible) {
+    try {
+        Get-TextContent 'https://incois.gov.in/' | Out-Null
+        $incoisPageAccessible = $true
+    } catch { }
+}
+
+$status.healthAlerts = @()
+if (-not $incoisPageAccessible) {
+    $status.healthAlerts += New-HealthAlert 'incois-main' 'Error: Unable to access Info' 'Check INCOIS Main page' 'https://incois.gov.in/'
+} else {
+    if ($null -eq $pfzAgeHours -or $pfzAgeHours -gt 36) {
+        $status.healthAlerts += New-HealthAlert 'pfz' 'Error: Unable to fetch PFZ data' 'Check PFZ webpage' 'https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&request_locale=en'
+    }
+    if ($null -eq $osfAgeHours -or $osfAgeHours -gt 36) {
+        $status.healthAlerts += New-HealthAlert 'osf' 'Error: Unable to fetch OSF data' 'Check OSF webpage' 'https://incois.gov.in/site/services/hwa.jsp'
+    }
+    if (-not $itewsInformationAccessible) {
+        $status.healthAlerts += New-HealthAlert 'itews' 'Error: Unable to access Tsunami/Seismic Info' 'Check ITEWS webpage' 'https://tsunami.incois.gov.in/TEWS/'
+    }
+    if (-not $stormSurgeAccessible) {
+        $status.healthAlerts += New-HealthAlert 'storm-surge' 'Error: Unable to access Storm Surge Info' 'Check ITEWS webpage' 'https://tsunami.incois.gov.in/TEWS/'
+    }
+}
 
 $tempPath = "$outputPath.tmp"
 if (@($status.errors).Count -eq 0) { $status.updatedAt = $attemptedAt }
