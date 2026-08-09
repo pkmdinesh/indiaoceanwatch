@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-09T03:00:15.1155519+00:00",
-    "lastAttemptAt":  "2026-08-09T03:15:23.5580257+00:00",
+    "updatedAt":  "2026-08-09T03:30:17.0707546+00:00",
+    "lastAttemptAt":  "2026-08-09T03:30:17.0707546+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -1703,7 +1703,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-09T03:16:16.0560604+00:00",
+                          "fetchedAt":  "2026-08-09T03:30:30.0597577+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -5867,7 +5867,6 @@
                             ]
             },
     "errors":  [
-                   "High wave/swell: Unable to connect to the remote server",
-                   "Ocean current: Unable to connect to the remote server"
+
                ]
 }
