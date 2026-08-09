@@ -14,6 +14,7 @@ const APP_SHELL = [
   './assets/cyclone-service-icon.png',
   './assets/storm-surge-icon.png',
   './assets/potential-fishing-zone-icon.jpg'
+  './1786177913304.png'
 ];
 
 self.addEventListener('install',event => {
