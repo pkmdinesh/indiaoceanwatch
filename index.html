@@ -30,7 +30,7 @@
   <meta name="twitter:image" content="https://pkmdinesh.github.io/indiaoceanwatch/social-banner-square-incois.png">
   <title>Coastal Advisory Status</title>
   <style>
-    :root{--ink:#082f3c;--muted:#5b7279;--paper:#eef3ef;--white:#fff;--line:#d9e5e1;--teal:#087f84;--green:#238269;--orange:#e87520;--yellow:#c99300;--red:#c9362b;--gray:#819195;--violet:#69578f;--safe-bg:#e0f2eb;--alert-bg:#fff0e4;--watch-bg:#fff7cf;--warning-bg:#fde8e6}
+    :root{--ink:#082f3c;--muted:#5b7279;--paper:#eef3ef;--white:#fff;--line:#d9e5e1;--teal:#087f84;--green:#238269;--orange:#FF8C00;--yellow:#FAFA33;--red:#FF0000;--gray:#819195;--violet:#69578f;--safe-bg:#e0f2eb;--alert-bg:#fff0e4;--watch-bg:#fff7cf;--warning-bg:#fde8e6}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 0 0,#c9eeea 0,transparent 32rem),var(--paper)}
     body{padding:12px}
     html:has(.advisory-dialog[open]),
@@ -102,15 +102,20 @@
     @media(max-width:700px){.share-button,.install-button{width:40px;min-width:40px;height:34px;min-height:34px;padding:0;border-radius:8px}.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}.joint-bulletin-card{grid-template-columns:minmax(0,1fr) auto}.joint-bulletin-link{padding:7px;font-size:11px}.content .contact-card{grid-template-columns:1fr}.contact-copy{padding:18px}.contact-copy address p{font-size:13px}.contact-image{min-height:180px;max-height:230px;object-position:center 52%}}
     .tsunami-status.advisory-warning{color:#FF0000!important}.tsunami-status.advisory-warning .safe-mark{background:#FF0000}
     .tsunami-status.advisory-alert{color:#FF8C00!important}.tsunami-status.advisory-alert .safe-mark{background:#FF8C00}
-    .tsunami-status.advisory-watch{color:#8A7800!important;background:#FFFFD6!important}.tsunami-status.advisory-watch .safe-mark{color:#082f3c!important;background:#FAFA33}
+    .tsunami-status.advisory-watch{color:#EDC001!important;background:#FFFFD6!important}.tsunami-status.advisory-watch .safe-mark{color:#8A7800!important;background:#FAFA33}
     .tsunami-status.advisory-safe{color:#238269!important}.tsunami-status.advisory-safe .safe-mark{background:#238269}
-    .forecast-card .alert{color:#FF8C00}.forecast-card .warning{color:#FF0000}.forecast-card .nothreat,.forecast-card .noThreat{color:#238269}.forecast-card .severity-row-label.watch{color:#FAFA33}.forecast-card .severity-state-chip.watch{color:#EDC001}.forecast-card .severity-row-label.watch .dot{color:#FAFA33}
-    .cyclone-status.level-yellow,.cyclone-status.level-yellow strong,.cyclone-status.level-yellow p{color:#FAFA33}
+    .forecast-card .alert{color:#FF8C00}.forecast-card .warning{color:#FF0000}.forecast-card .nothreat,.forecast-card .noThreat{color:#238269}.forecast-card .severity-row-label.watch,.forecast-card .severity-state-chip.watch{color:#EDC001}.forecast-card .severity-row-label.watch .dot{color:#FAFA33}
+    .cyclone-status.level-yellow,.cyclone-status.level-yellow strong,.cyclone-status.level-yellow p{color:#EDC001}
+    .cyclone-status.level-orange,.cyclone-status.level-orange strong,.cyclone-status.level-orange p{color:#FF8C00}
+    .cyclone-status.level-red,.cyclone-status.level-red strong,.cyclone-status.level-red p{color:#FF0000}
     .cyclone-status.level-safe,.cyclone-status.level-safe strong,.cyclone-status.level-safe p{color:#238269}
-    .joint-bulletin-card.level-yellow .joint-bulletin-message{color:#FAFA33}.joint-bulletin-card.level-yellow{border-left-color:#FAFA33;background:var(--watch-bg)}
-    .joint-bulletin-card.level-orange .joint-bulletin-message{color:#FF8C00}.joint-bulletin-card.level-orange{border-left-color:#FF8C00;background:var(--alert-bg)}
-    .joint-bulletin-card.level-red .joint-bulletin-message{color:#FF0000}.joint-bulletin-card.level-red{border-left-color:#FF0000;background:var(--warning-bg)}
+    .joint-bulletin-card.level-yellow .joint-bulletin-message,.joint-bulletin-card.level-yellow .joint-bulletin-time,.joint-bulletin-card.level-yellow .joint-bulletin-link{color:#EDC001}.joint-bulletin-card.level-yellow{border-left-color:#FAFA33;background:var(--watch-bg);box-shadow:0 5px 16px rgba(237,192,1,.14)}
+    .joint-bulletin-card.level-orange .joint-bulletin-message,.joint-bulletin-card.level-orange .joint-bulletin-time,.joint-bulletin-card.level-orange .joint-bulletin-link{color:#FF8C00}.joint-bulletin-card.level-orange{border-left-color:#FF8C00;background:var(--alert-bg);box-shadow:0 5px 16px rgba(255,140,0,.14)}
+    .joint-bulletin-card.level-red .joint-bulletin-message,.joint-bulletin-card.level-red .joint-bulletin-time,.joint-bulletin-card.level-red .joint-bulletin-link{color:#FF0000}.joint-bulletin-card.level-red{border-left-color:#FF0000;background:var(--warning-bg);box-shadow:0 5px 16px rgba(255,0,0,.14)}
+    .joint-bulletin-card.level-safe .joint-bulletin-message,.joint-bulletin-card.level-safe .joint-bulletin-time,.joint-bulletin-card.level-safe .joint-bulletin-link{color:#238269}.joint-bulletin-card.level-safe{border-left-color:#238269;background:var(--safe-bg);box-shadow:0 3px 10px rgba(35,130,105,.10)}
     .joint-bulletin-card.level-expired{border-color:#cbd3d4;border-left-color:#819195;background:#eef1f1}.joint-bulletin-card.level-expired .joint-bulletin-message,.joint-bulletin-card.level-expired .joint-bulletin-time,.joint-bulletin-card.level-expired .joint-bulletin-link{color:#52666b}
+    .advisory-dialog .severity-pill.warning{color:#FF0000}.advisory-dialog .severity-pill.alert{color:#FF8C00}.advisory-dialog .severity-pill.watch{color:#EDC001}.advisory-dialog .severity-pill.noThreat{color:#238269}
+    .seismic-message-wrap.is-recent .seismic-event-link{color:#8F241D}.earthquake-leaflet-marker{background:#8F241D}
   </style>
 </head>
 <body>
@@ -1082,7 +1087,7 @@
             activeMap.resize();
             activeMap.jumpTo({center:[longitude,latitude],zoom:SEISMIC_MAP_DEFAULT_ZOOM});
             if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
-            seismicEpicentreMarker = new maptilersdk.Marker({color:'#c9362b'})
+            seismicEpicentreMarker = new maptilersdk.Marker({color:'#8F241D'})
               .setLngLat([longitude,latitude])
               .setPopup(new maptilersdk.Popup({offset:18}).setHTML(popupHtml))
               .addTo(activeMap);
@@ -1223,7 +1228,7 @@
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     window.addEventListener('offline',()=>{ ids('updateState').textContent='Offline · showing last saved snapshot'; });
     window.addEventListener('online',()=>loadStatus().catch(()=>{}));
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=39',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=44',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
   </script>
 </body>
 </html>
