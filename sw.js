@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ocean-watch-v39';
+const CACHE_NAME = 'ocean-watch-v44';
 const APP_SHELL = [
   './',
   './index.html',
