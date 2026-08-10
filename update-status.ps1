@@ -306,13 +306,13 @@ function Convert-IncoisDate([string]$Value) {
 
 function Get-TsunamiState([string]$Text) {
     $value = "$Text".Trim()
-    if (-not $value) { return 'unknown' }
+    if (-not $value) { return 'watch' }
     if ($value -match '(?i)\bthreat\s+(?:has\s+)?passed\b') { return 'passed' }
     if ($value -match '(?i)(?:^no\s+tsunami\.?$|\btsunami\s+threat\s+does\s+not\s+exist\b|\bno\s+tsunami\s+threat\b|\bno\s+threat\b)') { return 'safe' }
     if ($value -match '(?i)(?:\bwarning\b|\btsunami\s+threat\s+exists\b)') { return 'warning' }
     if ($value -match '(?i)(?:\balert\b|\bmay\s+be\b.*\btsunami\b|\bpossibility\s+of\s+(?:a\s+)?tsunami\b|\bpotential\s+tsunami\b)') { return 'alert' }
     if ($value -match '(?i)\bwatch\b') { return 'watch' }
-    return 'unknown'
+    return 'watch'
 }
 
 function Get-BulletinSummary([string]$DetailUrl, [string]$EventId, [int]$BulletinNumber) {
@@ -373,7 +373,7 @@ $status = [ordered]@{
     lastAttemptAt = $attemptedAt
     updateIntervalHours = 0.25
     source = 'INCOIS / ITEWS'
-    tsunami = [ordered]@{ message = 'Status unavailable'; state = 'unknown'; ok = $false; bulletin = $null; recentBulletin = $null }
+    tsunami = [ordered]@{ message = 'Status unavailable'; state = 'watch'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
@@ -427,7 +427,7 @@ if (Test-Path -LiteralPath $outputPath) {
             }
         }
         if ($status.tsunami.PSObject.Properties.Name -notcontains 'state') {
-            $status.tsunami | Add-Member -NotePropertyName state -NotePropertyValue 'unknown'
+            $status.tsunami | Add-Member -NotePropertyName state -NotePropertyValue 'watch'
         }
         if ($status.seismic.PSObject.Properties.Name -notcontains 'recentEvents') {
             $status.seismic | Add-Member -NotePropertyName recentEvents -NotePropertyValue @()
