@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-10T17:15:27.9799514+00:00",
-    "lastAttemptAt":  "2026-08-10T17:15:27.9799514+00:00",
+    "updatedAt":  "2026-08-10T17:30:16.1073281+00:00",
+    "lastAttemptAt":  "2026-08-10T17:30:16.1073281+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -120,7 +120,7 @@
                                      ]
                 },
     "highWave":  {
-                     "issueDate":  "09 Aug 2026",
+                     "issueDate":  "10 Aug 2026",
                      "alert":  [
                                    "ANDAMAN AND NICOBAR"
                                ],
@@ -160,88 +160,88 @@
                                                                "district":  "CAR NICOBAR",
                                                                "severity":  "alert",
                                                                "color":  "Orange",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Alert for the coast of CAR NICOBAR,ANDAMAN AND NICOBAR. High waves in the range of 3.3 - 3.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Alert for the coast of CAR NICOBAR,ANDAMAN AND NICOBAR. High waves in the range of 3.1 - 3.3  meters are forecasted during 17:30 hours on 10-08-2026 to 08:30 hours on 12-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "FLAT ISLAND",
                                                                "severity":  "alert",
                                                                "color":  "Orange",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Alert for the coast of FLAT ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 3.1 - 3.3  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Alert for the coast of FLAT ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 3.1 - 3.3  meters are forecasted during 17:30 hours on 10-08-2026 to 08:30 hours on 12-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "INDIRA POINT",
                                                                "severity":  "alert",
                                                                "color":  "Orange",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Alert for the coast of INDIRA POINT,ANDAMAN AND NICOBAR. High waves in the range of 3.1 - 3.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Alert for the coast of INDIRA POINT,ANDAMAN AND NICOBAR. High waves in the range of 3.0 - 3.2  meters are forecasted during 08:30 hours on 11-08-2026 to 08:30 hours on 12-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "KOMATRA \u0026 KATCHAL ISLAND",
                                                                "severity":  "alert",
                                                                "color":  "Orange",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Alert for the coast of KOMATRA \u0026 KATCHAL ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 3.1 - 3.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Alert for the coast of KOMATRA \u0026 KATCHAL ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 3.0 - 3.1  meters are forecasted during 17:30 hours on 10-08-2026 to 08:30 hours on 12-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "LITTLE ANDAMAN",
                                                                "severity":  "alert",
                                                                "color":  "Orange",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Alert for the coast of LITTLE ANDAMAN,ANDAMAN AND NICOBAR.High waves in the range of 3.3 - 3.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Alert for the coast of LITTLE ANDAMAN,ANDAMAN AND NICOBAR. High waves in the range of 3.3 - 3.4  meters are forecasted during 17:30 hours on 10-08-2026 to 08:30 hours on 12-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "NORTH SENTINEL ISLAND",
                                                                "severity":  "alert",
                                                                "color":  "Orange",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Alert for the coast of NORTH SENTINEL ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 3.3 - 3.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Alert for the coast of NORTH SENTINEL ISLAND,ANDAMAN AND NICOBAR.High waves in the range of 3.2 - 3.4  meters are forecasted during 20:30 hours on 10-08-2026 to 02:30 hours on 12-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "WEST \u0026 LANDFALL ISLAND",
                                                                "severity":  "alert",
                                                                "color":  "Orange",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Alert for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 3.1 - 3.3  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Alert for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 3.1 - 3.3  meters are forecasted during 17:30 hours on 10-08-2026 to 08:30 hours on 12-08-2026. It advised that to be careful while doing marine operations and nearshore recreation."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "BARREN ISLAND",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 2.4 - 2.5  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 2.5 - 2.5  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "HAVELOCK",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of HAVELOCK,ANDAMAN AND NICOBAR. High waves in the range of 2.3 - 2.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of HAVELOCK,ANDAMAN AND NICOBAR. High waves in the range of 2.2 - 2.4  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "NARCONDAM ISLAND",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of NARCONDAM ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 2.3 - 2.6  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of NARCONDAM ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 2.4 - 2.6  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "PORT BLAIR",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of PORT BLAIR,ANDAMAN AND NICOBAR. High waves in the range of 2.5 - 2.6  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of PORT BLAIR,ANDAMAN AND NICOBAR. High waves in the range of 2.5 - 2.6  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -251,33 +251,41 @@
                                         "counts":  {
                                                        "warning":  0,
                                                        "alert":  0,
-                                                       "watch":  3,
+                                                       "watch":  4,
                                                        "noThreat":  0
                                                    },
                                         "advisories":  [
                                                            {
                                                                "state":  "ANDHRA PRADESH",
+                                                               "district":  "EAST GODAVARI",
+                                                               "severity":  "watch",
+                                                               "color":  "Yellow",
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of EAST GODAVARI,ANDHRA PRADESH from Antarvedi To Perumallapuram. High waves in the range of 1.9 - 2.2  meters are forecasted during 05:30 hours on 12-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                           },
+                                                           {
+                                                               "state":  "ANDHRA PRADESH",
                                                                "district":  "SRIKAKULAM",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of SRIKAKULAM,ANDHRA PRADESH from Ramachandrapuram To Kaviti. High waves in the range of 2.1 - 2.1  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of SRIKAKULAM,ANDHRA PRADESH from Ramachandrapuram To Kaviti. High waves in the range of 2.1 - 2.4  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ANDHRA PRADESH",
                                                                "district":  "VISAKHAPATNAM",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of VISAKHAPATNAM,ANDHRA PRADESH from Palmanpeta To Bhimunipatnam. High waves in the range of 2.0 - 2.2  meters are forecasted during 05:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of VISAKHAPATNAM,ANDHRA PRADESH from Palmanpeta To Bhimunipatnam. High waves in the range of 2.1 - 2.3  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ANDHRA PRADESH",
                                                                "district":  "VIZIANAGARAM",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of VIZIANAGARAM,ANDHRA PRADESH from Mukkam To Chintapalli. High waves in the range of 2.0 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of VIZIANAGARAM,ANDHRA PRADESH from Mukkam To Chintapalli. High waves in the range of 2.1 - 2.3  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -296,16 +304,16 @@
                                                                "district":  "DAMAN",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of DAMAN,DAMAN AND DIU from Kolak To Daman. High waves in the range of 2.0 - 2.1  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of DAMAN,DAMAN AND DIU from Kolak To Daman. High waves in the range of 2.0 - 2.0  meters are forecasted during 11:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "DAMAN AND DIU",
                                                                "district":  "DIU",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of DIU,DAMAN AND DIU from Madhvad Lighthouse To Diu Island. High waves in the range of 2.6 - 2.8  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of DIU,DAMAN AND DIU from Madhvad Lighthouse To Diu Island. High waves in the range of 2.6 - 2.8  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -324,16 +332,16 @@
                                                                "district":  "NORTH GOA",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of NORTH GOA,GOA from Chapora To Panaji (Malim). High waves in the range of 2.5 - 2.5  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of NORTH GOA,GOA from Chapora To Panaji (Malim). High waves in the range of 2.5 - 2.6  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GOA",
                                                                "district":  "SOUTH GOA",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of SOUTH GOA,GOA from Santerem Pt (Vasco) To Kolamb. High waves in the range of 2.4 - 2.5  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of SOUTH GOA,GOA from Santerem Pt (Vasco) To Kolamb. High waves in the range of 2.5 - 2.6  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -352,64 +360,64 @@
                                                                "district":  "AMRELI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of AMRELI,GUJARAT from Rohisha To Patva. High waves in the range of 2.2 - 2.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of AMRELI,GUJARAT from Rohisha To Patva. High waves in the range of 2.2 - 2.4  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
                                                                "district":  "DEVBHUMI DWARAKA",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of DEVBHUMI DWARAKA,GUJARAT from Vadinar To Harshad Miyani. High waves in the range of 2.7 - 2.9  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of DEVBHUMI DWARAKA,GUJARAT from Vadinar To Harshad Miyani. High waves in the range of 2.7 - 2.9  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
                                                                "district":  "GIR SOMNATH",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of GIR SOMNATH,GUJARAT from Adri To Mul Dwaraka. High waves in the range of 2.7 - 2.9  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of GIR SOMNATH,GUJARAT from Adri To Mul Dwaraka. High waves in the range of 2.8 - 3.0  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
                                                                "district":  "JUNAGADH NORTH",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of JUNAGADH NORTH,GUJARAT from Shil To Chorwad. High waves in the range of 2.7 - 2.9  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of JUNAGADH NORTH,GUJARAT from Shil To Chorwad. High waves in the range of 2.8 - 3.0  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
                                                                "district":  "JUNAGADH SOUTH",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of JUNAGADH SOUTH,GUJARAT from Nava Bandar To Saiyad Rajpara. High waves in the range of 2.5 - 2.7  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of JUNAGADH SOUTH,GUJARAT from Nava Bandar To Saiyad Rajpara. High waves in the range of 2.6 - 2.7  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
                                                                "district":  "KACHCHH",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of KACHCHH,GUJARAT from Lakhapat To Kandla. High waves in the range of 2.4 - 2.6  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KACHCHH,GUJARAT from Lakhapat To Kandla. High waves in the range of 2.4 - 2.5  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
                                                                "district":  "PORBANDAR",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of PORBANDAR,GUJARAT from Tukda Miyani To Madhavpur. High waves in the range of 2.7 - 2.9  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of PORBANDAR,GUJARAT from Tukda Miyani To Madhavpur. High waves in the range of 2.7 - 2.9  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "GUJARAT",
                                                                "district":  "VALSAD SOUTH",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of VALSAD SOUTH,GUJARAT from Kalai To Umargam. High waves in the range of 2.2 - 2.3  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of VALSAD SOUTH,GUJARAT from Kalai To Umargam. High waves in the range of 2.2 - 2.3  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -428,24 +436,24 @@
                                                                "district":  "DAKSHINA KANNADA",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of DAKSHINA KANNADA,KARNATAKA from Mulki To Mangalore. High waves in the range of 2.2 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of DAKSHINA KANNADA,KARNATAKA from Mulki To Mangalore. High waves in the range of 2.2 - 2.3  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "KARNATAKA",
                                                                "district":  "UDUPI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of UDUPI,KARNATAKA from Baindur To Kapu. High waves in the range of 2.2 - 2.3  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of UDUPI,KARNATAKA from Baindur To Kapu. High waves in the range of 2.2 - 2.3  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "KARNATAKA",
                                                                "district":  "UTTARA KANNADA",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of UTTARA KANNADA,KARNATAKA from Majali To Bhatkal. High waves in the range of 2.4 - 2.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of UTTARA KANNADA,KARNATAKA from Majali To Bhatkal. High waves in the range of 2.4 - 2.5  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -455,57 +463,49 @@
                                         "counts":  {
                                                        "warning":  0,
                                                        "alert":  0,
-                                                       "watch":  6,
+                                                       "watch":  5,
                                                        "noThreat":  0
                                                    },
                                         "advisories":  [
                                                            {
                                                                "state":  "KERALA",
-                                                               "district":  "ALAPPUZHA",
-                                                               "severity":  "watch",
-                                                               "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of ALAPPUZHA,KERALA from Chellanum To AzheekalJetty. High waves in the range of 1.9 - 2.0  meters are forecasted during 20:30 hours on 09-08-2026 to 08:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
-                                                           },
-                                                           {
-                                                               "state":  "KERALA",
                                                                "district":  "KANNUR",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of KANNUR,KERALA from Valapattanam To New Mahe. High waves in the range of 2.0 - 2.1  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KANNUR,KERALA from Valapattanam To New Mahe. High waves in the range of 2.0 - 2.1  meters are forecasted during 17:30 hours on 10-08-2026 to 11:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "KERALA",
                                                                "district":  "KASARAGOD, KANNUR",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of KASARAGOD, KANNUR,KERALA from Kunzhathur To Kotte Kunnu. High waves in the range of 2.2 - 2.3  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KASARAGOD, KANNUR,KERALA from Kunzhathur To Kotte Kunnu. High waves in the range of 2.2 - 2.3  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "KERALA",
                                                                "district":  "KOLLAM",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of KOLLAM,KERALA from Alappattu To Edava. High waves in the range of 2.1 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KOLLAM,KERALA from Alappattu To Edava. High waves in the range of 2.0 - 2.1  meters are forecasted during 17:30 hours on 10-08-2026 to 17:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "KERALA",
                                                                "district":  "KOZHIKODE",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of KOZHIKODE,KERALA from Chombala FH To Ramanattukara. High waves in the range of 1.9 - 2.0  meters are forecasted during 20:30 hours on 10-08-2026 to 08:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KOZHIKODE,KERALA from Chombala FH To Ramanattukara. High waves in the range of 1.9 - 2.0  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "KERALA",
                                                                "district":  "THIRUVANANTHAPURAM",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of THIRUVANANTHAPURAM,KERALA from Kappil To Pozhiyoor. High waves in the range of 2.2 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of THIRUVANANTHAPURAM,KERALA from Kappil To Pozhiyoor. High waves in the range of 2.1 - 2.2  meters are forecasted during 17:30 hours on 10-08-2026 to 20:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -524,40 +524,40 @@
                                                                "district":  "AGATTI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of AGATTI,LAKSHADWEEP. High waves in the range of 2.4 - 2.6  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of AGATTI,LAKSHADWEEP. High waves in the range of 2.4 - 2.6  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "LAKSHADWEEP",
                                                                "district":  "AMINI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of AMINI,LAKSHADWEEP. High waves in the range of 2.5 - 2.7  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of AMINI,LAKSHADWEEP. High waves in the range of 2.5 - 2.8  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "LAKSHADWEEP",
                                                                "district":  "ANDROTH",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of ANDROTH,LAKSHADWEEP. High waves in the range of 2.2 - 2.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of ANDROTH,LAKSHADWEEP. High waves in the range of 2.3 - 2.5  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "LAKSHADWEEP",
                                                                "district":  "KAVARATTI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of KAVARATTI,LAKSHADWEEP. High waves in the range of 2.3 - 2.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KAVARATTI,LAKSHADWEEP. High waves in the range of 2.3 - 2.5  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "LAKSHADWEEP",
                                                                "district":  "MINICOY",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of MINICOY,LAKSHADWEEP. High waves in the range of 2.1 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of MINICOY,LAKSHADWEEP. High waves in the range of 2.2 - 2.3  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -576,40 +576,40 @@
                                                                "district":  "PALGHAR",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of PALGHAR,MAHARASHTRA from Zai To Vasai. High waves in the range of 2.4 - 2.6  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of PALGHAR,MAHARASHTRA from Zai To Vasai. High waves in the range of 2.5 - 2.6  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "MAHARASHTRA",
                                                                "district":  "RAIGARH",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of RAIGARH,MAHARASHTRA from Ulwa Moha To Bagmandla. High waves in the range of 2.5 - 2.7  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of RAIGARH,MAHARASHTRA from Ulwa Moha To Bagmandla. High waves in the range of 2.6 - 2.7  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "MAHARASHTRA",
                                                                "district":  "RATNAGIRI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of RATNAGIRI,MAHARASHTRA from Veshawi-Bankot To Jambhari. High waves in the range of 2.6 - 2.7  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of RATNAGIRI,MAHARASHTRA from Veshawi-Bankot To Jambhari. High waves in the range of 2.6 - 2.7  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "MAHARASHTRA",
                                                                "district":  "SINDHUDURG",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of SINDHUDURG,MAHARASHTRA from Vijayadurg Hr To Terekhol. High waves in the range of 2.5 - 2.6  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of SINDHUDURG,MAHARASHTRA from Vijayadurg Hr To Terekhol. High waves in the range of 2.6 - 2.7  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "MAHARASHTRA",
                                                                "district":  "THANE, MUMBAI SUBURBAN, MUMBAI CITY",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of THANE, MUMBAI SUBURBAN, MUMBAI CITY,MAHARASHTRA from Dongi Point To Belapur. High waves in the range of 2.5 - 2.7  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of THANE, MUMBAI SUBURBAN, MUMBAI CITY,MAHARASHTRA from Dongi Point To Belapur. High waves in the range of 2.6 - 2.7  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -628,32 +628,32 @@
                                                                "district":  "GANJAM",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of GANJAM,ODISHA from Anantaraipur To Prayagi. High waves in the range of 2.1 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of GANJAM,ODISHA from Anantaraipur To Prayagi. High waves in the range of 2.1 - 2.3  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ODISHA",
                                                                "district":  "JAGATSINGHAPUR",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of JAGATSINGHAPUR,ODISHA from Bandar To Atharabanki. High waves in the range of 2.2 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of JAGATSINGHAPUR,ODISHA from Bandar To Atharabanki. High waves in the range of 2.2 - 2.5  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ODISHA",
                                                                "district":  "KENDRAPARA",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of KENDRAPARA,ODISHA from Chumuhani To Ahirajpur. High waves in the range of 2.0 - 2.1  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KENDRAPARA,ODISHA from Chumuhani To Ahirajpur. High waves in the range of 2.0 - 2.3  meters are forecasted during 20:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ODISHA",
                                                                "district":  "PURI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of PURI,ODISHA from Ramalanka To Nuagar. High waves in the range of 2.2 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of PURI,ODISHA from Ramalanka To Nuagar. High waves in the range of 2.2 - 2.4  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -672,8 +672,8 @@
                                                                "district":  "MAHE",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of MAHE,PUDUCHERRY from Koloth To Azhikal. High waves in the range of 2.0 - 2.1  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of MAHE,PUDUCHERRY from Koloth To Azhikal. High waves in the range of 2.1 - 2.2  meters are forecasted during 17:30 hours on 10-08-2026 to 14:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     },
@@ -692,39 +692,39 @@
                                                                "district":  "KANNIYAKUMARI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of KANNIYAKUMARI,TAMIL NADU from Neerodi To Arockiyapuram. High waves in the range of 2.3 - 2.4  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of KANNIYAKUMARI,TAMIL NADU from Neerodi To Arockiyapuram. High waves in the range of 2.2 - 2.4  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "TAMIL NADU",
                                                                "district":  "RAMANATHAPURAM",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of RAMANATHAPURAM,TAMIL NADU from Rojma Nagar To Theerthaandathanam. High waves in the range of 2.0 - 2.2  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of RAMANATHAPURAM,TAMIL NADU from Rojma Nagar To Theerthaandathanam. High waves in the range of 1.9 - 2.2  meters are forecasted during 20:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "TAMIL NADU",
                                                                "district":  "THOOTHUKKUDI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of THOOTHUKKUDI,TAMIL NADU from Periyathalai To Vembar. High waves in the range of 2.3 - 2.5  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of THOOTHUKKUDI,TAMIL NADU from Periyathalai To Vembar. High waves in the range of 2.3 - 2.6  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "TAMIL NADU",
                                                                "district":  "TIRUNELVELI",
                                                                "severity":  "watch",
                                                                "color":  "Yellow",
-                                                               "issueDate":  "09-08-2026",
-                                                               "message":  "High Wave Watch for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. High waves in the range of 2.3 - 2.5  meters are forecasted during 17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                               "issueDate":  "10-08-2026",
+                                                               "message":  "High Wave Watch for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. High waves in the range of 2.3 - 2.5  meters are forecasted during 17:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                            }
                                                        ]
                                     }
                                 ]
                  },
     "swellSurge":  {
-                       "issueDate":  "09 Aug 2026",
+                       "issueDate":  "10 Aug 2026",
                        "alert":  [
                                      "ANDAMAN AND NICOBAR",
                                      "ANDHRA PRADESH",
@@ -736,8 +736,9 @@
                        "watch":  [
                                      "ANDAMAN AND NICOBAR",
                                      "ANDHRA PRADESH",
-                                     "GUJARAT",
+                                     "KERALA",
                                      "LAKSHADWEEP",
+                                     "PUDUCHERRY",
                                      "TAMIL NADU"
                                  ],
                        "warning":  [
@@ -752,8 +753,8 @@
                                           "highestSeverity":  "alert",
                                           "counts":  {
                                                          "warning":  0,
-                                                         "alert":  10,
-                                                         "watch":  3,
+                                                         "alert":  12,
+                                                         "watch":  1,
                                                          "noThreat":  0
                                                      },
                                           "advisories":  [
@@ -762,104 +763,104 @@
                                                                  "district":  "BARREN ISLAND",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 1.2 - 1.3 m height are forecasted during  20:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 20.0 sec period with 1.1 - 1.4 m height are forecasted during  23:30 hours on 11-08-2026 to 11:30 hours on 13-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "CAR NICOBAR",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of CAR NICOBAR,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 1.6 - 1.7 m height are forecasted during  05:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of CAR NICOBAR,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 19.0 sec period with 2.1 - 2.3 m height are forecasted during 23:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDAMAN AND NICOBAR",
+                                                                 "district":  "FLAT ISLAND",
+                                                                 "severity":  "alert",
+                                                                 "color":  "Orange",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of FLAT ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 21.0 sec period with 1.7 - 1.8 m height are forecasted during  23:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "HAVELOCK",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of HAVELOCK,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 21.0 sec period with 1.3 - 1.4 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of HAVELOCK,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 20.0 sec period with 1.1 - 1.3 m height are forecasted during  23:30 hours on 11-08-2026 to 11:30 hours on 13-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "INDIRA POINT",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of INDIRA POINT,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 1.6 - 1.7 m height are forecasted during  05:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of INDIRA POINT,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 19.0 sec period with 2.3 - 2.7 m height are forecasted during  23:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "KOMATRA \u0026 KATCHAL ISLAND",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KOMATRA \u0026 KATCHAL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 1.6 - 1.7 m height are forecasted during  05:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of KOMATRA \u0026 KATCHAL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 19.0 sec period with 1.9 - 2.3 m height are forecasted during  23:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "LITTLE ANDAMAN",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of LITTLE ANDAMAN,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 1.6 - 1.7 m height are forecasted during  05:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of LITTLE ANDAMAN,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 19.0 sec period with 2.0 - 2.2 m height are forecasted during  23:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "NARCONDAM ISLAND",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of NARCONDAM ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of NARCONDAM ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 20.0 sec period with 1.2 - 1.5 m height are forecasted during  23:30 hours on 11-08-2026 to 11:30 hours on 13-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "NORTH SENTINEL ISLAND",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of NORTH SENTINEL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 1.6 - 1.7 m height are forecasted during  05:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of NORTH SENTINEL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 21.0 sec period with 2.0 - 2.2 m height are forecasted during  23:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "PORT BLAIR",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PORT BLAIR,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 1.6 - 1.7 m height are forecasted during  05:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of PORT BLAIR,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 20.0 sec period with 1.5 - 1.6 m height are forecasted during   23:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "RANGATH BAY",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of RANGATH BAY,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 20.0 sec period with 1.0 - 1.1 m height are forecasted during  02:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of RANGATH BAY,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 20.0 sec period with 1.0 - 1.0 m height are forecasted during  23:30 hours on 11-08-2026 to 05:30 hours on 13-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDAMAN AND NICOBAR",
+                                                                 "district":  "WEST \u0026 LANDFALL ISLAND",
+                                                                 "severity":  "alert",
+                                                                 "color":  "Orange",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 17.0 - 21.0 sec period with 1.7 - 1.8 m height are forecasted during  23:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "DIGLIPUR",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of DIGLIPUR,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 22.0 sec period with 0.8 - 0.9 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
-                                                             },
-                                                             {
-                                                                 "state":  "ANDAMAN AND NICOBAR",
-                                                                 "district":  "FLAT ISLAND",
-                                                                 "severity":  "watch",
-                                                                 "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of FLAT ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 14.0 - 16.0 sec period with 1.8 - 1.9 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
-                                                             },
-                                                             {
-                                                                 "state":  "ANDAMAN AND NICOBAR",
-                                                                 "district":  "WEST \u0026 LANDFALL ISLAND",
-                                                                 "severity":  "watch",
-                                                                 "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 14.0 - 16.0 sec period with 1.8 - 1.9 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of DIGLIPUR,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 21.0 sec period with 0.8 - 0.9 m height are forecasted during  23:30 hours on 11-08-2026 to 11:30 hours on 13-08-2026. It advised that no immediate action is required. Check for updates"
                                                              }
                                                          ]
                                       },
@@ -878,72 +879,72 @@
                                                                  "district":  "EAST GODAVARI",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of EAST GODAVARI,ANDHRA PRADESH from Antarvedi To Perumallapuram. Swell waves in the range of 18.0 - 22.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of EAST GODAVARI,ANDHRA PRADESH from Antarvedi To Perumallapuram. Swell waves in the range of 15.0 - 21.0 sec period with 1.1 - 1.4 m height are forecasted during  23:30 hours on 10-08-2026 to 11:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "KRISHNA",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KRISHNA,ANDHRA PRADESH from Nachugunta To Pedda Gollapalem. Swell waves in the range of 17.0 - 22.0 sec period with 0.9 - 1.1 m height are forecasted during  02:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of KRISHNA, ANDHRA PRADESH from Nachugunta To Pedda Gollapalem. Swell waves in the range of 15.0 - 21.0 sec period with 1.0 - 1.3 m height are forecasted during   20:30 hours on 10-08-2026 to 17:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "SRIKAKULAM",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of SRIKAKULAM,ANDHRA PRADESH from Ramachandrapuram To Kaviti. Swell waves in the range of 17.0 - 18.0 sec period with 1.3 - 1.4 m height are forecasted during  17:30 hours on 09-08-2026 to 17:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of SRIKAKULAM,ANDHRA PRADESH from Ramachandrapuram To Kaviti. Swell waves in the range of 15.0 - 21.0 sec period with 1.3 - 1.4 m height are forecasted during  23:30 hours on 10-08-2026 to 08:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "VISAKHAPATNAM",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of VISAKHAPATNAM,ANDHRA PRADESH from Palmanpeta To Bhimunipatnam. Swell waves in the range of 17.0 - 21.0 sec period with 1.3 - 1.4 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of VISAKHAPATNAM,ANDHRA PRADESH from Palmanpeta To Bhimunipatnam. Swell waves in the range of 15.0 - 21.0 sec period with 1.3 - 1.4 m height are forecasted during  23:30 hours on 10-08-2026 to 08:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "VIZIANAGARAM",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of VIZIANAGARAM,ANDHRA PRADESH from Mukkam To Chintapalli. Swell waves in the range of 16.0 - 18.0 sec period with 1.3 - 1.4 m height are forecasted during  17:30 hours on 09-08-2026 to 14:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of VIZIANAGARAM,ANDHRA PRADESH from Mukkam To Chintapalli. Swell waves in the range of 15.0 - 20.0 sec period with 1.2 - 1.4 m height are forecasted during  23:30 hours on 10-08-2026 to 08:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "WEST GODAVARI",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of WEST GODAVARI,ANDHRA PRADESH. Swell waves in the range of 17.0 - 21.0 sec period with 1.0 - 1.1 m height are forecasted during  02:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of WEST GODAVARI,ANDHRA PRADESH. Swell waves in the range of 15.0 - 21.0 sec period with 1.0 - 1.4 m height are forecasted during  1.0 - 1.3 m height are forecasted during   05:30 hours on 11-08-2026 to 17:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "GUNTUR",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Swell waves in the range of 12.0 - 22.0 sec period with 0.7 - 0.8 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Swell waves in the range of 10.0 - 13.0 sec period with 0.7 - 0.8 m height are forecasted during  20:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "NELLORE",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of NELLORE,ANDHRA PRADESH from Coromandel To Vatturupapallepalam. Swell waves in the range of 12.0 - 22.0 sec period with 0.7 - 0.8 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of NELLORE,ANDHRA PRADESH from Coromandel To Vatturupapallepalam. Swell waves in the range of 11.0 - 20.0 sec period with 0.8 - 0.9 m height are forecasted during  23:30 hours on 10-08-2026 to 17:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "PRAKASAM",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of PRAKASAM,ANDHRA PRADESH from Ramayapatnam To Vadarevu. Swell waves in the range of 12.0 - 22.0 sec period with 0.7 - 0.8 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of PRAKASAM,ANDHRA PRADESH from Ramayapatnam To Vadarevu. Swell waves in the range of 11.0 - 22.0 sec period with 0.8 - 0.9 m height are forecasted during  23:30 hours on 10-08-2026 to 17:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              }
                                                          ]
                                       },
@@ -952,8 +953,8 @@
                                           "highestSeverity":  "alert",
                                           "counts":  {
                                                          "warning":  0,
-                                                         "alert":  5,
-                                                         "watch":  0,
+                                                         "alert":  3,
+                                                         "watch":  3,
                                                          "noThreat":  0
                                                      },
                                           "advisories":  [
@@ -962,40 +963,48 @@
                                                                  "district":  "ALAPPUZHA",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of ALAPPUZHA,KERALA from Chellanum To AzheekalJetty. Swell waves in the range of 15.0 - 20.0 sec period with 1.2 - 1.3 m height are forecasted during  23:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             },
-                                                             {
-                                                                 "state":  "KERALA",
-                                                                 "district":  "ERNAKULAM",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of ERNAKULAM,KERALA from Munambam To Maruvakad. Swell waves in the range of 15.0 - 20.0 sec period with 1.2 - 1.3 m height are forecasted during  23:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of ALAPPUZHA,KERALA from Chellanum To AzheekalJetty. Swell waves in the range of 15.0 - 19.0 sec period with 1.1 - 1.3 m height are forecasted during  20:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "KERALA",
                                                                  "district":  "KOLLAM",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KOLLAM,KERALA from Alappattu To Edava. Swell waves in the range of 16.0 - 20.0 sec period with 1.4 - 1.5 m height are forecasted during  20:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of KOLLAM,KERALA from Alappattu To Edava. Swell waves in the range of 16.0 - 19.0 sec period with 1.3 - 1.5 m height are forecasted during  20:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "KERALA",
                                                                  "district":  "THIRUVANANTHAPURAM",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of THIRUVANANTHAPURAM,KERALA from Kappil To Pozhiyoor. Swell waves in the range of 14.0 - 19.0 sec period with 1.5 - 1.6 m height are forecasted during  05:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of THIRUVANANTHAPURAM,KERALA from Kappil To Pozhiyoor. Swell waves in the range of 16.0 - 19.0 sec period with 1.4 - 1.6 m height are forecasted during  20:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "ERNAKULAM",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of ERNAKULAM,KERALA from Munambam FH To Maruvakad. Swell waves in the range of 12.0 - 18.0 sec period with 1.0 - 1.2 m height are forecasted during  17:30 hours on 10-08-2026 to 11:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "KERALA",
+                                                                 "district":  "KANNUR",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of KANNUR,KERALA from Valapattanam To New Mahe. Swell waves in the range of 10.0 - 11.0 sec period with 1.2 - 1.4 m height are forecasted during   23:30 hours on 10-08-2026 to 05:30 hours on 12-08-2026.  It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "KERALA",
                                                                  "district":  "THRISSUR",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of THRISSUR,KERALA from Attupuram To Kodungallur. Swell waves in the range of 13.0 - 19.0 sec period with 1.0 - 1.1 m height are forecasted during  02:30 hours on 10-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of THRISSUR,KERALA from Attupuram To Kodungallur. Swell waves in the range of 10.0 - 14.0 sec period with 1.0 - 1.1 m height are forecasted during  23:30 hours on 10-08-2026 to 05:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              }
                                                          ]
                                       },
@@ -1014,48 +1023,48 @@
                                                                  "district":  "BALESHWAR",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of BALESHWAR,ODISHA from Panchubisa To Talasari. Swell waves in the range of 17.0 - 18.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of BALESHWAR,ODISHA from Panchubisa To Talasari. Swell waves in the range of 15.0 - 17.0 sec period with 1.1 - 1.2 m height are forecasted during  23:30 hours on 10-08-2026 to 02:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ODISHA",
                                                                  "district":  "BHADRAK",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of BHADRAK,ODISHA from Talchua To Chudamani. Swell waves in the range of 17.0 - 18.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of BHADRAK,ODISHA from Talchua To Chudamani. Swell waves in the range of 15.0 - 17.0 sec period with 1.2 - 1.3  m height are forecasted during  23:30 hours on 10-08-2026 to 02:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ODISHA",
                                                                  "district":  "GANJAM",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of GANJAM,ODISHA from Anantaraipur To Prayagi. Swell waves in the range of 17.0 - 18.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 09-08-2026 to 17:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of GANJAM,ODISHA from Anantaraipur To Prayagi. Swell waves in the range of 15.0 - 17.0 sec period with 1.3 - 1.5 m height are forecasted during  23:30 hours on 10-08-2026 to 02:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ODISHA",
                                                                  "district":  "JAGATSINGHAPUR",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of JAGATSINGHAPUR,ODISHA from Bandar To Atharabanki. Swell waves in the range of 16.0 - 17.0 sec period with 1.5 - 1.6 m height are forecasted during  17:30 hours on 09-08-2026 to 20:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of JAGATSINGHAPUR,ODISHA from Bandar To Atharabanki. Swell waves in the range of 15.0 - 17.0  sec period with 1.4 - 1.6 m height are forecasted during 23:30 hours on 10-08-2026 to 02:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ODISHA",
                                                                  "district":  "KENDRAPARA",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KENDRAPARA,ODISHA from Chumuhani To Ahirajpur. Swell waves in the range of 16.0 - 17.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of KENDRAPARA,ODISHA from Chumuhani To Ahirajpur. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.5 m height are forecasted during 23:30 hours on 10-08-2026 to 02:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ODISHA",
                                                                  "district":  "PURI",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PURI,ODISHA from Ramalanka To Nuagar. Swell waves in the range of 17.0 - 18.0 sec period with 1.5 - 1.6 m height are forecasted during  17:30 hours on 09-08-2026 to 20:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of PURI,ODISHA from Ramalanka To Nuagar. Swell waves in the range of 15.0 - 17.0  sec period with 1.4 - 1.6 m height are forecasted during 23:30 hours on 10-08-2026 to 02:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              }
                                                          ]
                                       },
@@ -1065,7 +1074,7 @@
                                           "counts":  {
                                                          "warning":  0,
                                                          "alert":  4,
-                                                         "watch":  5,
+                                                         "watch":  7,
                                                          "noThreat":  0
                                                      },
                                           "advisories":  [
@@ -1074,72 +1083,88 @@
                                                                  "district":  "KANNIYAKUMARI",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KANNIYAKUMARI,TAMIL NADU from Neerodi To Arockiyapuram. Swell waves in the range of 17.0 - 21.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of KANNIYAKUMARI,TAMIL NADU from Neerodi To Arockiyapuram. Swell waves in the range of 15.0 - 19.0 sec period with 1.3 - 1.7 m height are forecasted during  14:30 hours on 11-08-2026 to 05:30 hours on 13-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "TAMIL NADU",
                                                                  "district":  "RAMANATHAPURAM",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of RAMANATHAPURAM,TAMIL NADU from Rojma Nagar To Theerthaandathanam. Swell waves in the range of 17.0 - 21.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of RAMANATHAPURAM,TAMIL NADU from Rojma Nagar To Theerthaandathanam. Swell waves in the range of 15.0 - 20.0 sec period with 1.1 - 1.5 m height are forecasted during  14:30 hours on 11-08-2026 to 05:30 hours on 13-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "TAMIL NADU",
                                                                  "district":  "THOOTHUKKUDI",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of THOOTHUKKUDI,TAMIL NADU from Periyathalai To Vembar. Swell waves in the range of 17.0 - 21.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of THOOTHUKKUDI,TAMIL NADU from Periyathalai To Vembar. Swell waves in the range of 15.0 - 20.0 sec period with 1.2 - 1.6 m height are forecasted during  14:30 hours on 11-08-2026 to 05:30 hours on 13-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "TAMIL NADU",
                                                                  "district":  "TIRUNELVELI",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. Swell waves in the range of 17.0 - 21.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. Swell waves in the range of 15.0 - 20.0 sec period with 1.4 - 1.7 m height are forecasted during  14:30 hours on 11-08-2026 to 05:30 hours on 13-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "TAMIL NADU",
                                                                  "district":  "CHENNAI",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of CHENNAI,TAMIL NADU from Palavakkam To Lakshmipuram Odaikuppam. Swell waves in the range of 12.0 - 21.0 sec period with 0.7 - 0.8 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of CHENNAI,TAMIL NADU from Palavakkam To Lakshmipuram Odaikuppam. Swell waves in the range of 12.0 - 21.0 sec period with 0.8 - 0.9 m height are forecasted during  08:30 hours on 11-08-2026 to 20:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "CUDDALORE",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of CUDDALORE,TAMIL NADU from Killai To Moorthipudukuppam. Swell waves in the range of 11.0 - 12.0 sec period with 0.5 - 0.6 m height are forecasted during  05:30 hours on 11-08-2026 to 14:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "TAMIL NADU",
                                                                  "district":  "KANCHEEPURAM",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of KANCHEEPURAM,TAMIL NADU from Alambaraikuppam To Chinna Neelankarai. Swell waves in the range of 12.0 - 21.0 sec period with 0.7 - 0.8 m height are forecasted during  05:30 hours on 11-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of KANCHEEPURAM,TAMIL NADU from Alambaraikuppam To Chinna Neelankarai. Swell waves in the range of 10.0 - 20.0 sec period with 0.6 - 0.9 m height are forecasted during  20:30 hours on 10-08-2026 to 17:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "NAGAPPATTINAM NORTH",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of NAGAPPATTINAM NORTH,TAMIL NADU from Chinnorpettai To Pazhayar. Swell waves in the range of 12.0 - 14.0 sec period with 0.4 - 0.5 m height are forecasted during  05:30 hours on 11-08-2026 to 11:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "TAMIL NADU",
                                                                  "district":  "NAGAPPATTINAM SOUTH",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of NAGAPPATTINAM SOUTH,TAMIL NADU from Point Calimer To Samanthanpettai. Swell waves in the range of 15.0 - 16.0 sec period with 0.1 - 0.2 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of NAGAPPATTINAM SOUTH,TAMIL NADU from Point Calimer To Samanthanpettai. Swell waves in the range of 14.0 - 19.0 sec period with 0.2 - 0.3 m height are forecasted during  20:30 hours on 10-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "TAMIL NADU",
                                                                  "district":  "THIRUVALLUR",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of THIRUVALLUR,TAMIL NADU from Royapuram To Pulicat. Swell waves in the range of 11.0 - 12.0 sec period with 0.7 - 0.8 m height are forecasted during  08:30 hours on 11-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of THIRUVALLUR,TAMIL NADU from Royapuram To Pulicat. Swell waves in the range of 12.0 - 12.0 sec period with 0.8 - 0.9 m height are forecasted during  08:30 hours on 11-08-2026 to 20:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "TAMIL NADU",
                                                                  "district":  "VILUPPURAM",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of VILUPPURAM,TAMIL NADU from Vaithikuppam To Muttukaduazhagankuppam. Swell waves in the range of 11.0 - 12.0 sec period with 0.5 - 0.7 m height are forecasted during  05:30 hours on 11-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of VILUPPURAM,TAMIL NADU from Vaithikuppam To Muttukaduazhagankuppam. Swell waves in the range of 12.0 - 12.0 sec period with 0.6 - 0.8 m height are forecasted during  05:30 hours on 11-08-2026 to 17:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              }
                                                          ]
                                       },
@@ -1158,44 +1183,24 @@
                                                                  "district":  "NORTH 24 PARGANAS",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of NORTH 24 PARGANAS,WEST BENGAL. Swell waves in the range of 16.0 - 17.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of NORTH 24 PARGANAS,WEST BENGAL. Swell waves in the range of 15.0 - 17.0 sec period with 1.2 - 1.3 m height are forecasted during  20:30 hours on 10-08-2026 to 05:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "WEST BENGAL",
                                                                  "district":  "PURBA MEDINIPUR",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PURBA MEDINIPUR,WEST BENGAL from DighaMohanaF.F.T.A.(Digha) To Diamond Harbour. Swell waves in the range of 17.0 - 18.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of PURBA MEDINIPUR,WEST BENGAL from DighaMohanaF.F.T.A.(Digha) To Diamond Harbour. Swell waves in the range of 15.0 - 17.0 sec period with 1.1 - 1.2 m height are forecasted during  20:30 hours on 10-08-2026 to 05:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "WEST BENGAL",
                                                                  "district":  "SOUTH 24 PARGANAS",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of SOUTH 24 PARGANAS,WEST BENGAL from Kakdwip To Lothian Island. Swell waves in the range of 17.0 - 18.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 09-08-2026 to 23:30 hours on 11-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             }
-                                                         ]
-                                      },
-                                      {
-                                          "name":  "GUJARAT",
-                                          "highestSeverity":  "watch",
-                                          "counts":  {
-                                                         "warning":  0,
-                                                         "alert":  0,
-                                                         "watch":  1,
-                                                         "noThreat":  0
-                                                     },
-                                          "advisories":  [
-                                                             {
-                                                                 "state":  "GUJARAT",
-                                                                 "district":  "BHAVNAGAR",
-                                                                 "severity":  "watch",
-                                                                 "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of BHAVNAGAR,GUJARAT from Gadhada To Kamatalav. Swell waves in the range of 11.0 - 13.0 sec period with 0.8 - 0.9 m height are forecasted during  17:30 hours on 09-08-2026 to 08:30 hours on 10-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of SOUTH 24 PARGANAS,WEST BENGAL from Kakdwip To Lothian Island. Swell waves in the range of 15.0 - 17.0 sec period with 1.3 - 1.3 m height are forecasted during  20:30 hours on 10-08-2026 to 05:30 hours on 12-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              }
                                                          ]
                                       },
@@ -1205,17 +1210,69 @@
                                           "counts":  {
                                                          "warning":  0,
                                                          "alert":  0,
-                                                         "watch":  1,
+                                                         "watch":  5,
                                                          "noThreat":  0
                                                      },
                                           "advisories":  [
                                                              {
                                                                  "state":  "LAKSHADWEEP",
+                                                                 "district":  "AGATTI",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of AGATTI,LAKSHADWEEP. Swell waves in the range of 11.0 - 12.0 sec period with 1.4 - 1.6 m height are forecasted during  20:30 hours on 11-08-2026 to 20:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
+                                                                 "district":  "AMINI",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of AMINI,LAKSHADWEEP. Swell waves in the range of 12.0 - 18.0 sec period with 1.4 - 1.6 m height are forecasted during  17:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
                                                                  "district":  "ANDROTH",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
-                                                                 "issueDate":  "09-08-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of ANDROTH,LAKSHADWEEP. Swell waves in the range of 11.0 - 12.0 sec period with 1.4 - 1.5 m height are forecasted during  14:30 hours on 11-08-2026 to 23:30 hours on 11-08-2026. It advised that no immediate action is required. Check for updates."
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of ANDROTH,LAKSHADWEEP. Swell waves in the range of 12.0 - 18.0 sec period with 1.5 - 1.6 m height are forecasted during  11:30 hours on 11-08-2026 to 23:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
+                                                                 "district":  "KAVARATTI",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of KAVARATTI,LAKSHADWEEP. Swell waves in the range of 12.0 - 18.0 sec period with 1.5 - 1.6 m height are forecasted during  17:30 hours on 11-08-2026 to 20:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "LAKSHADWEEP",
+                                                                 "district":  "MINICOY",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of MINICOY,LAKSHADWEEP. Swell waves in the range of 11.0 - 12.0 sec period with 1.4 - 1.5 m height are forecasted during  20:30 hours on 11-08-2026 to 05:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             }
+                                                         ]
+                                      },
+                                      {
+                                          "name":  "PUDUCHERRY",
+                                          "highestSeverity":  "watch",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  1,
+                                                         "noThreat":  0
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "PUDUCHERRY",
+                                                                 "district":  "PUDUCHERRY",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "10-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of PUDUCHERRY,PUDUCHERRY from Panithittu To Pondicherry. Swell waves in the range of 11.0 - 12.0 sec period with 0.5 - 0.6 m height are forecasted during  05:30 hours on 11-08-2026 to 14:30 hours on 12-08-2026. It advised that no immediate action is required. Check for updates."
                                                              }
                                                          ]
                                       }
@@ -1780,7 +1837,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-10T17:15:38.4547259+00:00",
+                          "fetchedAt":  "2026-08-10T17:30:25.2612381+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -7211,7 +7268,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  5.76,
-                      "pfzAgeHours":  5.76
+                      "osfAgeHours":  6.01,
+                      "pfzAgeHours":  6.01
                   }
 }
