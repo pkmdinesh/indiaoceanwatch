@@ -100,6 +100,7 @@
     .content .contact-card{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:18px;align-items:stretch;padding:0;overflow:hidden;background:linear-gradient(135deg,#f5f8f6,#e7f3f0)}
     .contact-copy{align-self:center;padding:20px 22px}.contact-copy h2{margin:5px 0 4px;font:700 clamp(20px,2vw,29px)/1.15 Georgia,"Times New Roman",serif}.contact-organisation{margin:0;color:var(--teal);font-size:13px;font-weight:850}.contact-copy address{margin-top:14px;font-style:normal}.contact-copy address p{margin:7px 0;color:#294b55;font-size:13px;font-weight:700;line-height:1.55}.contact-copy a{color:var(--teal);overflow-wrap:anywhere}.contact-image{width:100%;height:100%;min-height:220px;max-height:290px;object-fit:cover;object-position:center 52%}
     @media(max-width:700px){.share-button,.install-button{width:40px;min-width:40px;height:34px;min-height:34px;padding:0;border-radius:8px}.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}.joint-bulletin-card{grid-template-columns:minmax(0,1fr) auto}.joint-bulletin-link{padding:7px;font-size:11px}.content .contact-card{grid-template-columns:1fr}.contact-copy{padding:18px}.contact-copy address p{font-size:13px}.contact-image{min-height:180px;max-height:230px;object-position:center 52%}}
+    .advisory-other .safe-mark{background:var(--gray)}
   </style>
 </head>
 <body>
@@ -715,20 +716,33 @@
       }));
     }
     function renderTsunami(message, bulletin, recentBulletin = null) {
-      const safe = /^no\s+tsunami\.?$/i.test(String(message || '').trim());
-      const recentNotice = safe && Boolean(recentBulletin);
       const supportingBulletin = bulletin || recentBulletin;
+      const text = [supportingBulletin?.state,message,supportingBulletin?.advice].filter(Boolean).join(' ');
+      const classify = value => {
+        if (/\b(?:passed|threat\s+(?:has\s+)?passed)\b/i.test(value)) return 'passed';
+        if (/(?:^no\s+tsunami\.?$|\btsunami\s+threat\s+does\s+not\s+exist\b|\bno\s+tsunami\s+threat\b|\bno\s+threat\b)/i.test(value)) return 'safe';
+        if (/(?:\bwarning\b|\btsunami\s+threat\s+exists\b)/i.test(value)) return 'warning';
+        if (/(?:\balert\b|\bmay\s+be\b.*\btsunami\b|\bpossibility\s+of\s+(?:a\s+)?tsunami\b|\bpotential\s+tsunami\b)/i.test(value)) return 'alert';
+        if (/\bwatch\b/i.test(value)) return 'watch';
+        return 'unknown';
+      };
+      const state = ['warning','alert','watch','passed','safe'].includes(supportingBulletin?.state) ? supportingBulletin.state : classify(text);
       const bulletinLabel = supportingBulletin?.type || supportingBulletin?.number || 'Latest';
       const status = ids('tsunamiStatus');
-      status.classList.remove('advisory-safe','advisory-other','advisory-bulletin');
-      status.classList.add(recentNotice ? 'advisory-bulletin' : safe ? 'advisory-safe' : 'advisory-other');
+      const presentation = {
+        warning: ['advisory-warning','!','WARNING'], alert: ['advisory-alert','⚠','ALERT'],
+        watch: ['advisory-watch','●','WATCH'], passed: ['advisory-safe','✓','THREAT PASSED'],
+        safe: ['advisory-safe','✓','NO THREAT'], unknown: ['advisory-other','…','STATUS BEING EVALUATED']
+      }[state];
+      status.classList.remove('advisory-safe','advisory-other','advisory-bulletin','advisory-warning','advisory-alert','advisory-watch');
+      status.classList.add(presentation[0]);
       const messageLink = ids('tsunamiMessage');
-      messageLink.textContent = recentNotice ? 'Check Issued Bulletin' : message || 'Status unavailable';
-      ids('tsunamiMark').textContent = safe ? '✓' : '!';
+      messageLink.textContent = message || presentation[2];
+      ids('tsunamiMark').textContent = presentation[1];
       const eventParts = supportingBulletin ? [supportingBulletin.magnitude ? `M${supportingBulletin.magnitude}` : '',supportingBulletin.location || '',[supportingBulletin.originDate,supportingBulletin.originTime].filter(Boolean).join(' ')].filter(Boolean) : [];
-      ids('tsunamiCaption').textContent = recentNotice ? '' : safe ? 'Official homepage message when checked' : eventParts.length ? `Event: ${eventParts.join(' · ')}` : 'Official ITEWS evaluation';
+      ids('tsunamiCaption').textContent = eventParts.length ? `${presentation[2]} · Event: ${eventParts.join(' · ')}` : `${presentation[2]} · Official ITEWS evaluation`;
       const link = ids('tsunamiBulletin');
-      if (supportingBulletin?.url && !recentNotice) {
+      if (supportingBulletin?.url) {
         link.textContent = `Issued Bulletin-${bulletinLabel} ↗`;
         link.href = supportingBulletin.url;
         link.classList.add('is-visible');
@@ -1191,7 +1205,7 @@
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     window.addEventListener('offline',()=>{ ids('updateState').textContent='Offline · showing last saved snapshot'; });
     window.addEventListener('online',()=>loadStatus().catch(()=>{}));
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=26',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=27',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
   </script>
 </body>
 </html>
