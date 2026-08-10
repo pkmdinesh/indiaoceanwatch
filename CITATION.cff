@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use Ocean Watch, please cite it using the metadata in this file."
+type: software
+title: "Ocean Watch"
+abstract: "A web dashboard presenting official-source coastal and ocean advisory information for India, including ocean-state forecasts, potential fishing zones, seismic and tsunami information, storm surge, and cyclone advisories."
+authors:
+  - family-names: "K"
+    given-names: "Dinesh"
+repository-code: "https://github.com/pkmdinesh/indiaoceanwatch"
+url: "https://pkmdinesh.github.io/indiaoceanwatch/"
+keywords:
+  - ocean information
+  - coastal advisory
+  - ocean state forecast
+  - potential fishing zone
+  - tsunami
+  - seismic information
+  - storm surge
+  - cyclone advisory
