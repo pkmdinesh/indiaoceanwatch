@@ -304,15 +304,29 @@ function Convert-IncoisDate([string]$Value) {
     return $Value
 }
 
+function Get-TsunamiState([string]$Text) {
+    $value = "$Text".Trim()
+    if (-not $value) { return 'unknown' }
+    if ($value -match '(?i)\bthreat\s+(?:has\s+)?passed\b') { return 'passed' }
+    if ($value -match '(?i)(?:^no\s+tsunami\.?$|\btsunami\s+threat\s+does\s+not\s+exist\b|\bno\s+tsunami\s+threat\b|\bno\s+threat\b)') { return 'safe' }
+    if ($value -match '(?i)(?:\bwarning\b|\btsunami\s+threat\s+exists\b)') { return 'warning' }
+    if ($value -match '(?i)(?:\balert\b|\bmay\s+be\b.*\btsunami\b|\bpossibility\s+of\s+(?:a\s+)?tsunami\b|\bpotential\s+tsunami\b)') { return 'alert' }
+    if ($value -match '(?i)\bwatch\b') { return 'watch' }
+    return 'unknown'
+}
+
 function Get-BulletinSummary([string]$DetailUrl, [string]$EventId, [int]$BulletinNumber) {
     $bulletin = Invoke-RestMethod -Uri $DetailUrl -TimeoutSec 45
     $info = @($bulletin.event_info) | Select-Object -First 1
     if ($null -eq $info) { throw 'ITEWS bulletin contains no event information' }
+    $evaluation = "$($info.evaluation)".Trim()
+    $stateText = @($info.alertStatus, $info.alert_status, $info.status, $evaluation, $info.advice) -join ' '
     [ordered]@{
         number = $BulletinNumber
         type = if ("$($info.bulletinType)".Trim()) { "$($info.bulletinType)".Trim() } else { "$BulletinNumber" }
         issuedAt = "$($info.bulletinIssueTime)".Trim()
-        message = "$($info.evaluation)".Trim()
+        message = $evaluation
+        state = Get-TsunamiState $stateText
         eventId = $EventId
         magnitude = "$($info.eventMagnitude)".Trim()
         location = "$($info.Location)".Trim()
@@ -359,7 +373,7 @@ $status = [ordered]@{
     lastAttemptAt = $attemptedAt
     updateIntervalHours = 0.25
     source = 'INCOIS / ITEWS'
-    tsunami = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
+    tsunami = [ordered]@{ message = 'Status unavailable'; state = 'unknown'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
@@ -411,6 +425,9 @@ if (Test-Path -LiteralPath $outputPath) {
             if ($status.tsunami.PSObject.Properties.Name -notcontains $propertyName) {
                 $status.tsunami | Add-Member -NotePropertyName $propertyName -NotePropertyValue $null
             }
+        }
+        if ($status.tsunami.PSObject.Properties.Name -notcontains 'state') {
+            $status.tsunami | Add-Member -NotePropertyName state -NotePropertyValue 'unknown'
         }
         if ($status.seismic.PSObject.Properties.Name -notcontains 'recentEvents') {
             $status.seismic | Add-Member -NotePropertyName recentEvents -NotePropertyValue @()
@@ -465,6 +482,7 @@ try {
     $itewsInformationAccessible = $true
     if ($activeEvents.Count -eq 0) {
         $status.tsunami.message = 'No Tsunami'
+        $status.tsunami.state = 'safe'
         $status.tsunami.ok = $true
         $status.tsunami.bulletin = $null
     } else {
@@ -476,7 +494,8 @@ try {
         $status.tsunami.bulletin = Get-BulletinSummary $detailUrl $eventId $bulletinNumber
         $status.tsunami.bulletin.sequence = @(Get-BulletinSequence $detailUrl $eventId $bulletinNumber)
         $status.tsunami.message = $status.tsunami.bulletin.message
-        $status.tsunami.ok = $false
+        $status.tsunami.state = $status.tsunami.bulletin.state
+        $status.tsunami.ok = $status.tsunami.state -in @('safe', 'passed')
     }
 } catch { $status.errors += "Tsunami: $($_.Exception.Message)" }
 

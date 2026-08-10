@@ -1,16 +1,17 @@
 ﻿{
-    "updatedAt":  "2026-08-10T13:45:17.6379345+00:00",
-    "lastAttemptAt":  "2026-08-10T13:45:17.6379345+00:00",
+    "updatedAt":  "2026-08-10T19:20:28.3969069+05:30",
+    "lastAttemptAt":  "2026-08-10T19:20:28.3969069+05:30",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
                     "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
-                    "ok":  false,
+                    "ok":  true,
                     "bulletin":  {
                                      "number":  1,
                                      "type":  "I",
                                      "issuedAt":  "1816 IST Monday 10 August 2026",
                                      "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
+                                     "state":  "safe",
                                      "eventId":  "incois2026ptdz",
                                      "magnitude":  "7.4",
                                      "location":  "Colombia",
@@ -29,6 +30,7 @@
                                                           "type":  "I",
                                                           "issuedAt":  "1816 IST Monday 10 August 2026",
                                                           "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
+                                                          "state":  "safe",
                                                           "eventId":  "incois2026ptdz",
                                                           "magnitude":  "7.4",
                                                           "location":  "Colombia",
@@ -54,6 +56,7 @@
                                            "type":  "I",
                                            "issuedAt":  "1816 IST Monday 10 August 2026",
                                            "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
+                                           "state":  "safe",
                                            "eventId":  "incois2026ptdz",
                                            "magnitude":  "7.4",
                                            "location":  "Colombia",
@@ -72,6 +75,7 @@
                                                                 "type":  "I",
                                                                 "issuedAt":  "1816 IST Monday 10 August 2026",
                                                                 "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
+                                                                "state":  "safe",
                                                                 "eventId":  "incois2026ptdz",
                                                                 "magnitude":  "7.4",
                                                                 "location":  "Colombia",
@@ -91,7 +95,8 @@
                                                             }
                                                         ],
                                            "url":  "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC\u0026eventId=incois2026ptdz\u0026aos=public\u0026currBullNo=1\u0026latestBullNo=1"
-                                       }
+                                       },
+                    "state":  "safe"
                 },
     "seismic":  {
                     "message":  "Latest: M7.4, Colombia, 2026-08-10 18:04:00 IST",
@@ -1759,7 +1764,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-10T13:45:26.3182859+00:00",
+                          "fetchedAt":  "2026-08-10T19:20:32.4359116+05:30",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -7190,7 +7195,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  26.26,
-                      "pfzAgeHours":  2.26
+                      "osfAgeHours":  26.34,
+                      "pfzAgeHours":  2.34
                   }
 }
