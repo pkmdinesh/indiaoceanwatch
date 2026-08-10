@@ -100,6 +100,17 @@
     .content .contact-card{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:18px;align-items:stretch;padding:0;overflow:hidden;background:linear-gradient(135deg,#f5f8f6,#e7f3f0)}
     .contact-copy{align-self:center;padding:20px 22px}.contact-copy h2{margin:5px 0 4px;font:700 clamp(20px,2vw,29px)/1.15 Georgia,"Times New Roman",serif}.contact-organisation{margin:0;color:var(--teal);font-size:13px;font-weight:850}.contact-copy address{margin-top:14px;font-style:normal}.contact-copy address p{margin:7px 0;color:#294b55;font-size:13px;font-weight:700;line-height:1.55}.contact-copy a{color:var(--teal);overflow-wrap:anywhere}.contact-image{width:100%;height:100%;min-height:220px;max-height:290px;object-fit:cover;object-position:center 52%}
     @media(max-width:700px){.share-button,.install-button{width:40px;min-width:40px;height:34px;min-height:34px;padding:0;border-radius:8px}.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}.joint-bulletin-card{grid-template-columns:minmax(0,1fr) auto}.joint-bulletin-link{padding:7px;font-size:11px}.content .contact-card{grid-template-columns:1fr}.contact-copy{padding:18px}.contact-copy address p{font-size:13px}.contact-image{min-height:180px;max-height:230px;object-position:center 52%}}
+    .tsunami-status.advisory-warning{color:#FF0000!important}.tsunami-status.advisory-warning .safe-mark{background:#FF0000}
+    .tsunami-status.advisory-alert{color:#FF8C00!important}.tsunami-status.advisory-alert .safe-mark{background:#FF8C00}
+    .tsunami-status.advisory-watch{color:#8A7800!important;background:#FFFFD6!important}.tsunami-status.advisory-watch .safe-mark{color:#082f3c!important;background:#FAFA33}
+    .tsunami-status.advisory-safe{color:#238269!important}.tsunami-status.advisory-safe .safe-mark{background:#238269}
+    .forecast-card .alert{color:#FF8C00}.forecast-card .warning{color:#FF0000}.forecast-card .nothreat,.forecast-card .noThreat{color:#238269}.forecast-card .severity-row-label.watch{color:#FAFA33}.forecast-card .severity-state-chip.watch{color:#EDC001}.forecast-card .severity-row-label.watch .dot{color:#FAFA33}
+    .cyclone-status.level-yellow,.cyclone-status.level-yellow strong,.cyclone-status.level-yellow p{color:#FAFA33}
+    .cyclone-status.level-safe,.cyclone-status.level-safe strong,.cyclone-status.level-safe p{color:#238269}
+    .joint-bulletin-card.level-yellow .joint-bulletin-message{color:#FAFA33}.joint-bulletin-card.level-yellow{border-left-color:#FAFA33;background:var(--watch-bg)}
+    .joint-bulletin-card.level-orange .joint-bulletin-message{color:#FF8C00}.joint-bulletin-card.level-orange{border-left-color:#FF8C00;background:var(--alert-bg)}
+    .joint-bulletin-card.level-red .joint-bulletin-message{color:#FF0000}.joint-bulletin-card.level-red{border-left-color:#FF0000;background:var(--warning-bg)}
+    .joint-bulletin-card.level-expired{border-color:#cbd3d4;border-left-color:#819195;background:#eef1f1}.joint-bulletin-card.level-expired .joint-bulletin-message,.joint-bulletin-card.level-expired .joint-bulletin-time,.joint-bulletin-card.level-expired .joint-bulletin-link{color:#52666b}
   </style>
 </head>
 <body>
@@ -823,10 +834,18 @@
       const sourceLink = ids('jointBulletinLink');
       const bulletinDate = jointBulletinDate(bulletin);
       const computedAge = bulletinDate ? Date.now() - bulletinDate.getTime() : Number.POSITIVE_INFINITY;
-      const computedRecent = computedAge >= 0 && computedAge < 24 * 60 * 60 * 1000;
+      const computedRecent = computedAge >= 0 && computedAge < 48 * 60 * 60 * 1000;
       const isRecent = bulletinDate ? computedRecent : Boolean(bulletin?.isRecent);
+      const bulletinText = String(bulletin?.message || '');
+      const messageLevel = /post[\s-]*landfall|super\s+cyclonic\s+storm|extremely\s+severe\s+cyclonic\s+storm/i.test(bulletinText) ? 'red'
+        : /cyclone\s+warning|very\s+severe\s+cyclonic\s+storm|severe\s+cyclonic\s+storm|cyclonic\s+storm/i.test(bulletinText) ? 'orange'
+        : /cyclone\s+alert|pre[\s-]*cyclone\s+watch|deep\s+depression|depression|low[\s-]*pressure\s+area/i.test(bulletinText) ? 'yellow'
+        : 'safe';
+      const cycloneLevel = bulletinDate && !isRecent ? 'expired' : messageLevel;
 
       card.classList.toggle('is-recent',Boolean(isRecent));
+      card.classList.remove('level-safe','level-yellow','level-orange','level-red','level-expired');
+      card.classList.add(`level-${cycloneLevel}`);
       message.textContent = bulletin?.message || 'No INCOIS-IMD joint bulletin is currently available.';
       if (bulletin?.url) {
         message.href = bulletin.url;
@@ -838,7 +857,7 @@
 
       if (bulletinDate) {
         time.dateTime = bulletinDate.toISOString();
-        time.textContent = `${isRecent ? 'Issued within the past 24 hours' : 'Bulletin time'} · ${bulletinDate.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+        time.textContent = `${isRecent ? 'Issued within the past 48 hours' : 'Bulletin time'} · ${bulletinDate.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
         time.hidden = false;
       } else {
         time.removeAttribute('datetime');
@@ -1204,7 +1223,7 @@
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     window.addEventListener('offline',()=>{ ids('updateState').textContent='Offline · showing last saved snapshot'; });
     window.addEventListener('online',()=>loadStatus().catch(()=>{}));
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=28',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=39',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
   </script>
 </body>
 </html>
