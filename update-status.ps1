@@ -364,6 +364,7 @@ $status = [ordered]@{
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
     swellSurge = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
     oceanCurrent = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
+    osfMap = [ordered]@{ sourcePage = 'https://incois.gov.in/oceanservices/osfforecast.jsp'; issuedDate = $null; datasets = $null }
     stormSurge = [ordered]@{ message = 'Status unavailable'; ok = $false; bulletin = $null; recentBulletin = $null }
     cyclone = [ordered]@{ title = 'No active cyclone advisory'; message = ''; level = 'safe'; issuedAt = $null; link = $null; items = @() }
     jointBulletin = [ordered]@{ message = 'No INCOIS-IMD joint bulletin is currently available.'; url = 'https://incois.gov.in/site/services/jointbulletin.jsp'; issuedAt = $null; isRecent = $false; fetchedAt = $null; ok = $false; sourcePage = 'https://incois.gov.in/site/services/jointbulletin.jsp'; lastError = $null }
@@ -398,6 +399,9 @@ if (Test-Path -LiteralPath $outputPath) {
         $status = $savedStatus
         if ($status.PSObject.Properties.Name -notcontains 'oceanCurrent') {
             $status | Add-Member -NotePropertyName oceanCurrent -NotePropertyValue ([pscustomobject]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() })
+        }
+        if ($status.PSObject.Properties.Name -notcontains 'osfMap') {
+            $status | Add-Member -NotePropertyName osfMap -NotePropertyValue ([pscustomobject]@{ sourcePage = 'https://incois.gov.in/oceanservices/osfforecast.jsp'; issuedDate = $null; datasets = $null })
         }
         foreach ($groupName in @('highWave','swellSurge','oceanCurrent')) {
             if ($status.$groupName.PSObject.Properties.Name -notcontains 'issueDate') {
@@ -736,6 +740,31 @@ try {
         $status.jointBulletin.isRecent = $hasSavedIssuedAt -and (([DateTimeOffset]::UtcNow - $savedIssuedAt.ToUniversalTime()).TotalHours -ge 0) -and (([DateTimeOffset]::UtcNow - $savedIssuedAt.ToUniversalTime()).TotalHours -lt 24)
         $status.jointBulletin.lastError = $_.Exception.Message
     }
+}
+
+# Publish only current WMS metadata; map images remain hosted and rendered by INCOIS.
+try {
+    $osfMapPage = Get-TextContent 'https://incois.gov.in/oceanservices/osfforecast.jsp'
+    $datasetNames = @{}
+    foreach ($variableName in @('currentsFile2','rsmc_combined_ww3','mldnio','sstnio')) {
+        $variablePattern = '(?i)\bvar\s+{0}\s*=\s*[''"]([^''"]+)[''"]' -f [regex]::Escape($variableName)
+        $match = [regex]::Match($osfMapPage, $variablePattern)
+        if ($match.Success) { $datasetNames[$variableName] = $match.Groups[1].Value }
+    }
+    if ($datasetNames.Count -ne 4) { throw 'Current OSF WMS dataset names were not found' }
+    $issuedMatch = [regex]::Match($datasetNames.rsmc_combined_ww3, '(\d{8})')
+    $status.osfMap = [pscustomobject][ordered]@{
+        sourcePage = 'https://incois.gov.in/oceanservices/osfforecast.jsp'
+        issuedDate = if ($issuedMatch.Success) { $issuedMatch.Groups[1].Value } else { $null }
+        datasets = [pscustomobject][ordered]@{
+            waves = "https://incois.gov.in/thredds/wms/osf/ww3/$($datasetNames.rsmc_combined_ww3)"
+            currents = "https://incois.gov.in/thredds/wms/osf/currents/$($datasetNames.currentsFile2)"
+            mld = "https://incois.gov.in/thredds/wms/osf/winds/$($datasetNames.mldnio)"
+            sst = "https://incois.gov.in/thredds/wms/osf/winds/$($datasetNames.sstnio)"
+        }
+    }
+} catch {
+    Write-Warning "OSF map metadata was not refreshed: $($_.Exception.Message)"
 }
 
 try {

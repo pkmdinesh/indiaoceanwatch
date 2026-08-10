@@ -3,6 +3,16 @@
     "lastAttemptAt":  "2026-08-10T09:00:21.3573299+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
+    "osfMap":  {
+                   "sourcePage":  "https://incois.gov.in/oceanservices/osfforecast.jsp",
+                   "issuedDate":  "20260809",
+                   "datasets":  {
+                                    "waves":  "https://incois.gov.in/thredds/wms/osf/ww3/rsmc_combined_ww3_20260809.nc",
+                                    "currents":  "https://incois.gov.in/thredds/wms/osf/currents/CURRENTS_NIO_20260809.nc",
+                                    "mld":  "https://incois.gov.in/thredds/wms/osf/winds/MLD_NIO_20260809.nc",
+                                    "sst":  "https://incois.gov.in/thredds/wms/osf/winds/SST_NIO_20260809.nc"
+                                }
+               },
     "tsunami":  {
                     "message":  "No Tsunami",
                     "ok":  true,
