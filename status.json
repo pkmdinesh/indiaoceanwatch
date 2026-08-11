@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-11T14:00:17.3260597+00:00",
-    "lastAttemptAt":  "2026-08-11T14:15:24.9036907+00:00",
+    "updatedAt":  "2026-08-11T14:30:16.5348306+00:00",
+    "lastAttemptAt":  "2026-08-11T14:30:16.5348306+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -1810,7 +1810,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-11T14:16:19.9990763+00:00",
+                          "fetchedAt":  "2026-08-11T14:30:24.9572897+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -5818,20 +5818,14 @@
                             ]
             },
     "errors":  [
-                   "Tsunami: The remote name could not be resolved: \u0027tsunami.incois.gov.in\u0027",
-                   "Seismic: The remote name could not be resolved: \u0027tsunami.incois.gov.in\u0027"
+
                ],
     "healthAlerts":  [
-                         {
-                             "code":  "itews",
-                             "message":  "Error: Unable to access Tsunami/Seismic Info",
-                             "linkLabel":  "Check ITEWS webpage",
-                             "url":  "https://tsunami.incois.gov.in/TEWS/"
-                         }
+
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  2.77,
-                      "pfzAgeHours":  2.77
+                      "osfAgeHours":  3.01,
+                      "pfzAgeHours":  3.01
                   }
 }
