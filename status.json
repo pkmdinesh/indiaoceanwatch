@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-11T11:00:20.9739297+00:00",
-    "lastAttemptAt":  "2026-08-11T11:00:20.9739297+00:00",
+    "updatedAt":  "2026-08-11T11:15:17.0918309+00:00",
+    "lastAttemptAt":  "2026-08-11T11:15:17.0918309+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWS",
     "tsunami":  {
@@ -1837,7 +1837,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-11T11:00:31.0890453+00:00",
+                          "fetchedAt":  "2026-08-11T11:15:27.8165325+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -5629,10 +5629,217 @@
                                     "id":  "SEC014",
                                     "name":  "Lakshadweep",
                                     "url":  "https://incois.gov.in/MarineFisheries/TextData?secid=SEC014",
-                                    "hasForecast":  false,
-                                    "message":  "No data available for this sector due to excessive cloud cover",
+                                    "hasForecast":  true,
+                                    "message":  null,
                                     "landingCenters":  [
-
+                                                           {
+                                                               "name":  "Valiyapani reef",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SE",
+                                                                                    "bearing":  "119",
+                                                                                    "distance":  "17-22",
+                                                                                    "depth":  "1692-1697",
+                                                                                    "latitude":  "12 11 18 N",
+                                                                                    "longitude":  "72 3 25 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Byramgore",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "NE",
+                                                                                    "bearing":  "40",
+                                                                                    "distance":  "33-38",
+                                                                                    "depth":  "1720-1725",
+                                                                                    "latitude":  "12 6 26 N",
+                                                                                    "longitude":  "72 2 20 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Cheriyapani reef",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "NE",
+                                                                                    "bearing":  "49",
+                                                                                    "distance":  "30-35",
+                                                                                    "depth":  "1721-1726",
+                                                                                    "latitude":  "12 1 31 N",
+                                                                                    "longitude":  "72 2 29 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Chetlat I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SE",
+                                                                                    "bearing":  "107",
+                                                                                    "distance":  "28-33",
+                                                                                    "depth":  "1487-1492",
+                                                                                    "latitude":  "11 37 0 N",
+                                                                                    "longitude":  "72 58 56 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Kiltani",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "NW",
+                                                                                    "bearing":  "323",
+                                                                                    "distance":  "10-15",
+                                                                                    "depth":  "1153-1158",
+                                                                                    "latitude":  "11 35 10 N",
+                                                                                    "longitude":  "72 55 53 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Bitra I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SW",
+                                                                                    "bearing":  "190",
+                                                                                    "distance":  "14-19",
+                                                                                    "depth":  "1563-1568",
+                                                                                    "latitude":  "11 26 54 N",
+                                                                                    "longitude":  "72 9 5 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Perumalpar reef",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "NE",
+                                                                                    "bearing":  "3",
+                                                                                    "distance":  "16-21",
+                                                                                    "depth":  "1661-1666",
+                                                                                    "latitude":  "11 22 5 N",
+                                                                                    "longitude":  "72 6 40 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Kadmath I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "NE",
+                                                                                    "bearing":  "84",
+                                                                                    "distance":  "30-35",
+                                                                                    "depth":  "1741-1746",
+                                                                                    "latitude":  "11 15 0 N",
+                                                                                    "longitude":  "73 4 17 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Amini I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "NE",
+                                                                                    "bearing":  "67",
+                                                                                    "distance":  "30-35",
+                                                                                    "depth":  "1790-1795",
+                                                                                    "latitude":  "11 13 19 N",
+                                                                                    "longitude":  "72 59 39 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Bangaram I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SE",
+                                                                                    "bearing":  "117",
+                                                                                    "distance":  "26-31",
+                                                                                    "depth":  "25-30",
+                                                                                    "latitude":  "10 49 0 N",
+                                                                                    "longitude":  "72 31 31 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Androth I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SW",
+                                                                                    "bearing":  "256",
+                                                                                    "distance":  "17-22",
+                                                                                    "depth":  "1852-1857",
+                                                                                    "latitude":  "10 46 17 N",
+                                                                                    "longitude":  "73 31 56 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Kavaratti I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "NE",
+                                                                                    "bearing":  "78",
+                                                                                    "distance":  "17-22",
+                                                                                    "depth":  "1726-1731",
+                                                                                    "latitude":  "10 35 44 N",
+                                                                                    "longitude":  "72 49 9 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Kalpeni I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SW",
+                                                                                    "bearing":  "226",
+                                                                                    "distance":  "9-14",
+                                                                                    "depth":  "2091-2096",
+                                                                                    "latitude":  "10 0 39 N",
+                                                                                    "longitude":  "73 34 26 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Valiykara",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SW",
+                                                                                    "bearing":  "220",
+                                                                                    "distance":  "15-20",
+                                                                                    "depth":  "226-231",
+                                                                                    "latitude":  "10 0 38 N",
+                                                                                    "longitude":  "72 13 28 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Suheli",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SW",
+                                                                                    "bearing":  "218",
+                                                                                    "distance":  "8-13",
+                                                                                    "depth":  "1368-1373",
+                                                                                    "latitude":  "9 57 59 N",
+                                                                                    "longitude":  "72 13 35 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Cheriyakara",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SW",
+                                                                                    "bearing":  "200",
+                                                                                    "distance":  "11-16",
+                                                                                    "depth":  "1714-1719",
+                                                                                    "latitude":  "9 55 26 N",
+                                                                                    "longitude":  "72 14 23 E"
+                                                                                }
+                                                                            ]
+                                                           }
                                                        ]
                                 }
                             ]
@@ -5645,7 +5852,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  23.51,
-                      "pfzAgeHours":  -0.49
+                      "osfAgeHours":  23.76,
+                      "pfzAgeHours":  -0.24
                   }
 }
