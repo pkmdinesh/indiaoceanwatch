@@ -116,6 +116,8 @@
     .joint-bulletin-card.level-expired{border-color:#cbd3d4;border-left-color:#819195;background:#eef1f1}.joint-bulletin-card.level-expired .joint-bulletin-message,.joint-bulletin-card.level-expired .joint-bulletin-time,.joint-bulletin-card.level-expired .joint-bulletin-link{color:#52666b}
     .advisory-dialog .severity-pill.warning{color:#FF0000}.advisory-dialog .severity-pill.alert{color:#FF8C00}.advisory-dialog .severity-pill.watch{color:#EDC001}.advisory-dialog .severity-pill.noThreat{color:#238269}
     .seismic-message-wrap.is-recent .seismic-event-link{color:#8F241D}.earthquake-leaflet-marker{background:#8F241D}
+    .announcement-card{display:flex;align-items:center;gap:10px;padding:8px 12px!important;border-color:#cbd3d4!important;background:#f5f7f7!important}.announcement-card[hidden]{display:none}.announcement-label{flex:none;color:var(--ink)}.announcement-symbol{color:var(--ink);background:#e4e8e8}.announcement-message{display:flex;flex-wrap:wrap;gap:6px}.active-advisory-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border:1px solid currentColor;border-radius:7px;font-size:11px;font-weight:900;line-height:1.2}.active-advisory-chip.warning{color:#FF0000;background:var(--warning-bg)}.active-advisory-chip.alert{color:#FF8C00;background:var(--alert-bg)}.active-advisory-chip.watch{color:#EDC001;background:var(--watch-bg)}.active-advisory-chip .dot{width:7px;height:7px}.announcement-next{display:none!important}@media(max-width:700px){.announcement-card{align-items:flex-start}.announcement-message{width:100%}.active-advisory-chip{font-size:12px}}
+    .active-advisory-chip.resolved{color:#238269;background:var(--safe-bg)}
   </style>
 </head>
 <body>
@@ -131,10 +133,9 @@
     </header>
 
     <div class="content">
-      <section class="panel announcement-card" id="announcementCard" aria-label="Ocean Watch announcements" aria-live="polite" hidden>
-        <span class="announcement-label"><span class="announcement-symbol" id="announcementSymbol">i</span><span id="announcementLabel">Notice</span></span>
-        <p class="announcement-message" id="announcementMessage"></p>
-        <button class="announcement-next" id="announcementNext" type="button" aria-label="Show next notice" hidden>›</button>
+      <section class="panel announcement-card" id="announcementCard" aria-label="Active and recent ocean advisories" aria-live="polite" hidden>
+        <span class="announcement-label"><span class="announcement-symbol" aria-hidden="true">!</span><span>Active / recent</span></span>
+        <div class="announcement-message" id="announcementMessage"></div>
       </section>
       <section class="panel ocean" aria-labelledby="ocean-title">
         <div class="panel-head">
@@ -348,61 +349,75 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.0.2/maptiler-sdk.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="announcements.js?v=2"></script>
   <script>
     const ids = id => document.getElementById(id);
-    function initializeAnnouncements() {
+    function renderActiveAdvisories(data) {
       const card = ids('announcementCard');
-      const message = ids('announcementMessage');
-      const next = ids('announcementNext');
-      const label = ids('announcementLabel');
-      const symbol = ids('announcementSymbol');
-      const notices = (Array.isArray(window.OCEAN_WATCH_ANNOUNCEMENTS) ? window.OCEAN_WATCH_ANNOUNCEMENTS : [])
-        .filter(notice => notice?.active !== false && String(notice?.text || '').trim());
-      if (!notices.length) return;
-      let current = 0;
-      let paused = false;
-      const show = index => {
-        current = (index + notices.length) % notices.length;
-        const notice = notices[current];
-        label.textContent = notice.label || 'Notice';
-        symbol.textContent = notice.symbol || 'i';
-        const colorOptions = {
-          '--notice-text':notice.textColor,
-          '--notice-label':notice.labelColor,
-          '--notice-symbol':notice.symbolColor,
-          '--notice-accent':notice.accentColor,
-          '--notice-link':notice.linkColor,
-          '--notice-bg':notice.backgroundColor
-        };
-        Object.entries(colorOptions).forEach(([property,value]) => {
-          if (typeof value === 'string' && CSS.supports('color',value)) card.style.setProperty(property,value);
-          else card.style.removeProperty(property);
-        });
-        message.replaceChildren(document.createTextNode(String(notice.text)));
-        if (notice.url) {
-          const link = document.createElement('a');
-          link.className = 'announcement-link';
-          link.href = notice.url;
-          link.target = '_blank';
-          link.rel = 'noopener';
-          link.textContent = notice.linkLabel || 'Open link ↗';
-          message.append(' ',link);
-        }
+      const container = ids('announcementMessage');
+      const active = [];
+      const add = (service,level,detail = '',count = null) => {
+        if (!['warning','alert','watch','resolved'].includes(level)) return;
+        active.push({service,level,detail,count});
       };
-      card.hidden = false;
-      next.hidden = notices.length < 2;
-      next.addEventListener('click',() => show(current + 1));
-      card.addEventListener('pointerenter',() => { paused = true; });
-      card.addEventListener('pointerleave',() => { paused = false; });
-      card.addEventListener('focusin',() => { paused = true; });
-      card.addEventListener('focusout',() => { paused = false; });
-      show(0);
-      if (notices.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        setInterval(() => { if (!paused && !document.hidden) show(current + 1); },8000);
+      const bulletinDate = bulletin => {
+        if (!bulletin) return null;
+        const issued = String(bulletin.issuedAt || '').trim();
+        const compact = issued.match(/\b(\d{2})(\d{2})\s+IST\D+(\d{1,2}\s+[A-Za-z]+\s+\d{4})/i);
+        const origin = `${bulletin.originDate || ''} ${String(bulletin.originTime || '').replace(/\bIST\b/i,'')}`.trim();
+        const candidates = compact ? [`${compact[3]} ${compact[1]}:${compact[2]}:00 GMT+0530`,origin ? `${origin} GMT+0530` : '',issued] : [origin ? `${origin} GMT+0530` : '',issued];
+        for (const candidate of candidates) {
+          if (!candidate) continue;
+          const parsed = new Date(candidate);
+          if (!Number.isNaN(parsed.getTime())) return parsed;
+        }
+        return null;
+      };
+      const isWithinHours = (bulletin,hours) => {
+        const issued = bulletinDate(bulletin);
+        if (!issued) return false;
+        const age = Date.now() - issued.getTime();
+        return age >= 0 && age < hours * 60 * 60 * 1000;
+      };
+      const osfGroups = [data?.highWave,data?.swellSurge,data?.oceanCurrent];
+      ['warning','alert','watch'].forEach(level => {
+        const count = osfGroups.reduce((total,group) => total + (Array.isArray(group?.[level]) ? group[level].length : 0),0);
+        if (count) add('OSF',level,`${count} affected state-service ${count === 1 ? 'entry' : 'entries'}`,count);
+      });
+      const tsunamiLevel = ['warning','alert','watch'].includes(data?.tsunami?.state) ? data.tsunami.state : null;
+      add('Tsunami',tsunamiLevel,data?.tsunami?.message || 'Official ITEWS evaluation');
+      const tsunamiBulletin = data?.tsunami?.bulletin || data?.tsunami?.recentBulletin;
+      if (['safe','passed'].includes(data?.tsunami?.state) && tsunamiBulletin && isWithinHours(tsunamiBulletin,24)) {
+        add('Tsunami','resolved',data?.tsunami?.message || 'No tsunami threat');
       }
+      const cycloneLevel = {red:'warning',orange:'alert',yellow:'watch'}[data?.cyclone?.level];
+      add('Cyclone',cycloneLevel,data?.cyclone?.title || data?.cyclone?.message || 'IMD cyclone advisory');
+      const cycloneResolution = `${data?.cyclone?.title || ''} ${data?.cyclone?.message || ''}`;
+      if (data?.cyclone?.level === 'safe' && /cancel|dissipat|weaken|threat\s+(?:has\s+)?passed/i.test(cycloneResolution) && isWithinHours(data?.cyclone,48)) {
+        add('Cyclone','resolved',cycloneResolution.trim());
+      }
+      if (data?.stormSurge?.ok === false) {
+        const stormText = String(data?.stormSurge?.message || 'Active storm surge bulletin');
+        const stormLevel = /warning|threat\s+exists/i.test(stormText) ? 'warning' : /alert|possibility|potential/i.test(stormText) ? 'alert' : 'watch';
+        add('Storm Surge',stormLevel,stormText);
+      }
+      const stormResolution = data?.stormSurge?.bulletin || data?.stormSurge?.recentBulletin;
+      if (data?.stormSurge?.ok === true && stormResolution && /cancel|threat\s+(?:has\s+)?passed|no\s+(?:active\s+)?(?:storm\s+surge\s+)?threat/i.test(String(stormResolution.message || '')) && isWithinHours(stormResolution,48)) {
+        add('Storm Surge','resolved',stormResolution.message);
+      }
+      const rank = {warning:4,alert:3,watch:2,resolved:1};
+      active.sort((a,b) => rank[b.level] - rank[a.level]);
+      container.replaceChildren(...active.map(item => {
+        const chip = document.createElement('span');
+        chip.className = `active-advisory-chip ${item.level}`;
+        chip.title = item.detail;
+        const dot = document.createElement('i'); dot.className = 'dot'; dot.setAttribute('aria-hidden','true');
+        const labelText = item.level === 'resolved' ? 'No threat' : severityLabel[item.level];
+        const label = `${item.service} · ${labelText}${item.count === null ? '' : ` (${item.count})`}`;
+        chip.append(dot,label);
+        return chip;
+      }));
+      card.hidden = active.length === 0;
     }
-    initializeAnnouncements();
     const cleanShareUrl = () => `${location.origin}${location.pathname}`;
     let shareQrRenderedFor = '';
     function renderShareQr(url) {
@@ -1113,6 +1128,7 @@
       }
     }
     function render(data) {
+      renderActiveAdvisories(data);
       const checkedAtValue = data.lastAttemptAt || data.updatedAt;
       const checkedAt = checkedAtValue ? new Date(checkedAtValue) : null;
       if (checkedAt && !Number.isNaN(checkedAt.getTime())) {
@@ -1228,7 +1244,7 @@
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     window.addEventListener('offline',()=>{ ids('updateState').textContent='Offline · showing last saved snapshot'; });
     window.addEventListener('online',()=>loadStatus().catch(()=>{}));
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=44',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=46',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
   </script>
 </body>
 </html>
