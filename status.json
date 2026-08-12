@@ -2,7 +2,7 @@
     "updatedAt":  "2026-08-11T03:00:13.0106531+00:00",
     "lastAttemptAt":  "2026-08-11T03:00:13.0106531+00:00",
     "updateIntervalHours":  0.25,
-    "source":  "INCOIS / ITEWS",
+    "source":  "INCOIS / ITEWC",
     "tsunami":  {
                     "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
                     "ok":  true,
