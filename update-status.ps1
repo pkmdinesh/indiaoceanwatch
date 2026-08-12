@@ -318,7 +318,7 @@ function Get-TsunamiState([string]$Text) {
 function Get-BulletinSummary([string]$DetailUrl, [string]$EventId, [int]$BulletinNumber) {
     $bulletin = Invoke-RestMethod -Uri $DetailUrl -TimeoutSec 45
     $info = @($bulletin.event_info) | Select-Object -First 1
-    if ($null -eq $info) { throw 'ITEWS bulletin contains no event information' }
+    if ($null -eq $info) { throw 'ITEWC bulletin contains no event information' }
     $evaluation = "$($info.evaluation)".Trim()
     $stateText = @($info.alertStatus, $info.alert_status, $info.status, $evaluation, $info.advice) -join ' '
     [ordered]@{
@@ -372,7 +372,7 @@ $status = [ordered]@{
     updatedAt = $null
     lastAttemptAt = $attemptedAt
     updateIntervalHours = 0.25
-    source = 'INCOIS / ITEWS'
+    source = 'INCOIS / ITEWC'
     tsunami = [ordered]@{ message = 'Status unavailable'; state = 'watch'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
@@ -481,7 +481,7 @@ try {
     $activeEvents = @($activeXml.SelectNodes('//event'))
     $itewsInformationAccessible = $true
     if ($activeEvents.Count -eq 0) {
-        $status.tsunami.message = 'No Tsunami'
+        $status.tsunami.message = 'No Tsunami threat reported by ITEWC'
         $status.tsunami.state = 'safe'
         $status.tsunami.ok = $true
         $status.tsunami.bulletin = $null
@@ -886,10 +886,10 @@ if (-not $incoisPageAccessible) {
         $status.healthAlerts += New-HealthAlert 'osf' 'Error: Unable to fetch OSF data' 'Check OSF webpage' 'https://incois.gov.in/site/services/hwa.jsp'
     }
     if (-not $itewsInformationAccessible) {
-        $status.healthAlerts += New-HealthAlert 'itews' 'Error: Unable to access Tsunami/Seismic Info' 'Check ITEWS webpage' 'https://tsunami.incois.gov.in/TEWS/'
+        $status.healthAlerts += New-HealthAlert 'itewc' 'Error: Unable to access Tsunami/Seismic Info' 'Check ITEWC webpage' 'https://tsunami.incois.gov.in/TEWS/'
     }
     if (-not $stormSurgeAccessible) {
-        $status.healthAlerts += New-HealthAlert 'storm-surge' 'Error: Unable to access Storm Surge Info' 'Check ITEWS webpage' 'https://tsunami.incois.gov.in/TEWS/'
+        $status.healthAlerts += New-HealthAlert 'storm-surge' 'Error: Unable to access Storm Surge Info' 'Check ITEWC webpage' 'https://tsunami.incois.gov.in/TEWS/'
     }
 }
 

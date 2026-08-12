@@ -55,7 +55,7 @@
     .severity-row-label.noThreat{color:var(--green)}
     .header-actions{display:flex;align-items:center;gap:10px;margin-left:auto}.header-actions .stamp{margin-left:0}.install-button,.install-button:hover,.install-button:focus-visible,.install-icon{font-size:14px;line-height:1}}
     @media(max-width:700px){html,body{width:100%;margin:0;padding:0;overflow-x:hidden}.header{grid-template-columns:1fr;padding:12px}.ocean-brand{grid-column:1;grid-row:1}.title{grid-column:1;grid-row:2;width:100%;margin:0;text-align:center}.title h1,.title p{width:100%;text-align:center}.header-actions{grid-column:1;grid-row:3;width:100%;margin-left:0;justify-content:flex-start;padding-top:8px;border-top:1px solid var(--line)}.header-actions .stamp{margin-left:0;text-align:left}.dashboard{width:100%;margin:0}}
-    @media(max-width:520px){.header-actions{gap:7px}.install-button{width:34px;height:34px;justify-content:center;padding:0}.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+    @media(max-width:520px){.header-actions{gap:3px}.header-actions .stamp{margin-right:auto}.install-button{width:34px;height:34px;justify-content:center;padding:0}.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
     .install-button{color:#fff;background:#082f3c;border-color:#082f3c;box-shadow:0 5px 14px rgba(8,47,60,.22)}.install-button .install-icon{color:#68e0e5}.install-button:hover,.install-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;box-shadow:0 7px 18px rgba(8,127,132,.3)}
     .ocean-brand{display:flex;align-items:center;gap:10px;flex:none;text-decoration:none}.brand-monogram{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;color:#fff;background:linear-gradient(145deg,#082f3c,#087f84);box-shadow:0 7px 18px rgba(8,47,60,.2);font:900 14px/1 Georgia,"Times New Roman",serif;letter-spacing:-.04em}.brand-copy{display:grid;gap:2px}.brand-copy strong{font:700 20px/1 Georgia,"Times New Roman",serif}.brand-copy small{color:var(--muted);font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.ocean-brand:hover .brand-monogram,.ocean-brand:focus-visible .brand-monogram{background:linear-gradient(145deg,#075f68,#0da0a6)}.ocean-brand:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:14px}
     .brand-image{width:48px;height:48px;flex:none;border-radius:14px;object-fit:cover;box-shadow:0 7px 18px rgba(8,47,60,.2)}
@@ -163,10 +163,10 @@
       <section class="panel advisory-card" aria-labelledby="tsunami-title">
         <div class="panel-head">
           <img class="service-logo" src="assets/tsunami-service-icon.png" alt="Tsunami icon">
-          <div><h2 id="tsunami-title">Tsunami Advisory</h2><p class="panel-kicker">Indian Tsunami Early Warning System</p></div>
-          <a class="source itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWS ↗</a>
+          <div><h2 id="tsunami-title">Tsunami Advisory</h2><p class="panel-kicker">Indian Tsunami Early Warning Centre</p></div>
+          <a class="source itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWC ↗</a>
         </div>
-        <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage">No Tsunami</strong></div><span id="tsunamiCaption">Official homepage message when checked</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
+        <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage">No Tsunami threat reported by ITEWC</strong></div><span id="tsunamiCaption">Last Checked —</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel seismic-card" aria-labelledby="seismic-title">
@@ -180,7 +180,7 @@
           <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
           <a class="source" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
         </div>
-        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage">No active storm surge bulletin</strong></div><span id="stormCaption">Official ITEWS bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
+        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage">No active storm surge bulletin</strong></div><span id="stormCaption">Official ITEWC bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel cyclone-card" aria-labelledby="cyclone-title">
@@ -206,7 +206,7 @@
           <div><h2 id="pfz-title" class="pfz-title">Potential Fishing Zone</h2><p class="panel-kicker">Today’s advisory sectors</p></div>
           <a class="source pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a>
         </div>
-        <p class="pfz-date" id="pfzDate">Forecast 30 Jul · Valid through 31 Jul 2026</p>
+        <p class="pfz-date" id="pfzDate">Forecast — · Valid through —</p>
         <div class="states pfz-states" id="pfzStates"><span class="empty">Loading issued sectors…</span></div>
         <div class="pfz-details" id="pfzDetails" hidden><h3 id="pfzDetailsTitle"></h3><p class="pfz-inline-message" id="pfzInlineMessage" hidden></p><div class="pfz-landing-centers" id="pfzLandingCenters"></div><div class="pfz-messages" id="pfzMessages"></div></div>
       </section>
@@ -260,7 +260,7 @@
   <div class="advisory-dialog-head">
     <div>
       <h2 id="seismicDialogTitle">Earthquake bulletin details</h2>
-      <p id="seismicDialogMeta">Official ITEWS information</p>
+      <p id="seismicDialogMeta">Official ITEWC information</p>
     </div>
 
     <button
@@ -287,7 +287,7 @@
     <p class="map-attribution">
       Interactive map: OpenStreetMap · Bathymetry reference:
       <a href="https://www.gebco.net/" target="_blank" rel="noopener">GEBCO</a>
-      · Event information: ITEWS INCOIS
+      · Event information: ITEWC INCOIS
     </p>
 
     <div class="event-setting">
@@ -300,7 +300,7 @@
     <div class="bulletin-groups">
 
       <details class="bulletin-section">
-        <summary>ITEWS evaluation</summary>
+        <summary>ITEWC evaluation</summary>
         <div class="bulletin-content">
           <p id="eventEvaluation"></p>
         </div>
@@ -331,7 +331,7 @@
       id="eventBulletinUnavailable"
       hidden
     >
-      No official ITEWS bulletin content is available for this event.
+      No official ITEWC bulletin content is available for this event.
     </p>
 
     <a
@@ -388,7 +388,7 @@
       const tsunamiDemo = new URLSearchParams(location.search).get('demo') === 'bulletin2';
       const tsunamiBulletinNo = tsunamiDemo ? 'II' : tsunamiBulletin?.type || tsunamiBulletin?.number || 'Latest';
       if (tsunamiDemo) add('Tsunami','info','Demo tsunami bulletin evaluation',null,`Bulletin-${tsunamiBulletinNo}`);
-      else if (tsunamiBulletin && isWithinHours(tsunamiBulletin,24)) add('Tsunami','info',data?.tsunami?.message || tsunamiBulletin.message || 'Official ITEWS bulletin',null,`Bulletin-${tsunamiBulletinNo}`);
+      else if (tsunamiBulletin && isWithinHours(tsunamiBulletin,24)) add('Tsunami','info',data?.tsunami?.message || tsunamiBulletin.message || 'Official ITEWC bulletin',null,`Bulletin-${tsunamiBulletinNo}`);
       const cycloneLevel = {red:'warning',orange:'alert',yellow:'watch'}[data?.cyclone?.level];
       add('Cyclone',cycloneLevel,data?.cyclone?.title || data?.cyclone?.message || 'IMD cyclone advisory');
       const jointBulletin = normalizeJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
@@ -400,7 +400,7 @@
         add('Cyclone','resolved',cycloneResolution.trim());
       }
       const stormBulletin = data?.stormSurge?.bulletin || data?.stormSurge?.recentBulletin;
-      if (stormBulletin && isWithinHours(stormBulletin,48)) add('Storm Surge','info',stormBulletin.message || data?.stormSurge?.message || 'Official ITEWS storm surge bulletin',null,`Bulletin-${stormBulletin.number || 'Latest'}`);
+      if (stormBulletin && isWithinHours(stormBulletin,48)) add('Storm Surge','info',stormBulletin.message || data?.stormSurge?.message || 'Official ITEWC storm surge bulletin',null,`Bulletin-${stormBulletin.number || 'Latest'}`);
       const rank = {warning:4,alert:3,watch:2,info:1,resolved:1};
       active.sort((a,b) => rank[b.level] - rank[a.level]);
       container.replaceChildren(...active.map(item => {
@@ -719,7 +719,7 @@
         const matchingStates = states.filter(state => Number(state.counts?.[level] || 0) > 0).sort((a,b) => a.name.localeCompare(b.name));
         if (!matchingStates.length) {
           const none = document.createElement('span');
-          none.className = level === 'warning' ? 'severity-state-chip severity-none-chip' : 'empty';
+          none.className = 'severity-state-chip severity-none-chip';
           none.textContent = 'None';
           stateList.append(none);
         } else {
@@ -742,7 +742,7 @@
         return row;
       }));
     }
-    function renderTsunami(message, bulletin, recentBulletin = null) {
+    function renderTsunami(message, bulletin, recentBulletin = null, checkedAt = null) {
       const candidateBulletin = bulletin || recentBulletin;
       const bulletinDemo = new URLSearchParams(location.search).get('demo') === 'bulletin2';
       const bulletinTime = (() => {
@@ -761,16 +761,17 @@
       const bulletinAge = bulletinTime ? Date.now() - bulletinTime.getTime() : null;
       const bulletinCurrent = Boolean(candidateBulletin) && (bulletinDemo || bulletinAge === null || (bulletinAge >= 0 && bulletinAge < 24 * 60 * 60 * 1000));
       const supportingBulletin = bulletinCurrent ? candidateBulletin : null;
-      const noTsunami = (Boolean(candidateBulletin) && !bulletinCurrent) || (!candidateBulletin && /^no\s+tsunami\.?$/i.test(String(message || '').trim()));
+      const noTsunami = (Boolean(candidateBulletin) && !bulletinCurrent) || (!candidateBulletin && /^no\s+tsunami(?:\s+threat\s+reported\s+by\s+itewc)?\.?$/i.test(String(message || '').trim()));
       const bulletinLabel = supportingBulletin?.type || supportingBulletin?.number || 'Latest';
       const status = ids('tsunamiStatus');
       status.classList.remove('advisory-safe','advisory-info','advisory-other','advisory-bulletin','advisory-warning','advisory-alert','advisory-watch');
       status.classList.add(noTsunami ? 'advisory-safe' : 'advisory-info');
       const messageLink = ids('tsunamiMessage');
-      messageLink.textContent = noTsunami ? 'No Tsunami' : supportingBulletin?.message || message || 'Official ITEWS bulletin information';
+      messageLink.textContent = noTsunami ? 'No Tsunami threat reported by ITEWC' : supportingBulletin?.message || message || 'Official ITEWC bulletin information';
       ids('tsunamiMark').textContent = noTsunami ? '✓' : 'i';
       const eventParts = supportingBulletin ? [supportingBulletin.magnitude ? `M${supportingBulletin.magnitude}` : '',supportingBulletin.location || '',[supportingBulletin.originDate,supportingBulletin.originTime].filter(Boolean).join(' ')].filter(Boolean) : [];
-      ids('tsunamiCaption').textContent = noTsunami ? 'Official homepage message when checked' : eventParts.length ? `Bulletin-${bulletinLabel} evaluation · Event: ${eventParts.join(' · ')}` : `Official ITEWS Bulletin-${bulletinLabel} evaluation`;
+      const checkedText = checkedAt && !Number.isNaN(checkedAt.getTime()) ? checkedAt.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'}) : '—';
+      ids('tsunamiCaption').textContent = noTsunami ? `Last Checked ${checkedText}${checkedText === '—' ? '' : ' IST'}` : eventParts.length ? `Bulletin-${bulletinLabel} evaluation · Event: ${eventParts.join(' · ')}` : `Official ITEWC Bulletin-${bulletinLabel} evaluation`;
       const link = ids('tsunamiBulletin');
       if (supportingBulletin?.url) {
         link.textContent = `Issued Bulletin-${bulletinLabel} ↗`;
@@ -792,10 +793,10 @@
       const status = ids('stormStatus');
       status.classList.remove('advisory-safe','advisory-info','advisory-other');
       status.classList.add(safe ? 'advisory-safe' : 'advisory-info');
-      ids('stormMessage').textContent = safe ? 'No active storm surge bulletin' : supportingBulletin?.message || message || 'Official ITEWS storm surge information';
+      ids('stormMessage').textContent = safe ? 'No active storm surge bulletin' : supportingBulletin?.message || message || 'Official ITEWC storm surge information';
       ids('stormMark').textContent = safe ? '✓' : 'i';
       const eventParts = supportingBulletin ? [supportingBulletin.cyclone ? `Cyclone ${supportingBulletin.cyclone}` : '',supportingBulletin.issuedAt ? `Issued ${supportingBulletin.issuedAt} IST` : ''].filter(Boolean) : [];
-      ids('stormCaption').textContent = safe ? 'Official ITEWS bulletin feed when checked' : eventParts.join(' · ') || 'Official storm surge advice';
+      ids('stormCaption').textContent = safe ? 'Official ITEWC bulletin feed when checked' : eventParts.join(' · ') || 'Official storm surge advice';
       const link = ids('stormBulletin');
       if (!safe && supportingBulletin?.url) {
         link.textContent = `Issued Bulletin-${supportingBulletin.number || 'Latest'} ↗`;
@@ -1060,6 +1061,8 @@
       const savedBathymetry = event?.bathymetryMeters ?? bulletin?.bathymetryMeters;
       const savedSetting = event?.tectonicSetting ?? bulletin?.tectonicSetting;
       const savedElevation = event?.gebcoElevationMeters ?? bulletin?.gebcoElevationMeters;
+      const coastDistanceMatch = topoBathy.match(/(?:distance|distnace)\s+of\s+([\d,.]+)\s*km\s+from\s+(?:the\s+)?coast(?:line)?/i);
+      const coastDistance = coastDistanceMatch ? Number(coastDistanceMatch[1].replace(/,/g,'')) : Number(event?.distanceFromCoastKm ?? bulletin?.distanceFromCoastKm);
       const bathymetryRequestId = ++activeBathymetryRequest;
       ids('seismicDialogTitle').textContent = `M${magnitude} · ${location}`;
       ids('seismicDialogMeta').textContent = bulletin?.issuedAt ? `${bulletinReference(bulletin)} · Issued ${bulletin.issuedAt}` : 'Earthquake event information';
@@ -1068,7 +1071,7 @@
         ['Magnitude',`M${magnitude}`],['Depth',String(depth).includes('km') ? depth : `${depth} km`],
         ['Date',originDate || String(originTime).split(' ')[0] || '—'],['Origin time',originDate ? originTime : String(originTime).replace(/^\d{4}-\d{2}-\d{2}\s*/, '')],
         ['Latitude',Number.isFinite(latitude) ? `${latitude}°` : '—'],['Longitude',Number.isFinite(longitude) ? `${longitude}°` : '—'],
-        ['Location',location],['Bulletin',bulletinReference(bulletin)]
+        ['Location',location],['Distance from nearest coast',Number.isFinite(coastDistance) ? `~${Math.round(coastDistance).toLocaleString('en-US')} km` : 'Unavailable'],['Bulletin',bulletinReference(bulletin)]
       ];
       ids('eventFacts').replaceChildren(...facts.map(([label,value]) => {
         const wrapper=document.createElement('div'); const term=document.createElement('dt'); const detail=document.createElement('dd');
@@ -1108,6 +1111,7 @@
               .setLngLat([longitude,latitude])
               .setPopup(new maptilersdk.Popup({offset:18}).setHTML(popupHtml))
               .addTo(activeMap);
+            seismicEpicentreMarker.togglePopup();
           } else {
             activeMap.invalidateSize();
             activeMap.setView([latitude, longitude], SEISMIC_MAP_DEFAULT_ZOOM, { animate: false });
@@ -1124,8 +1128,8 @@
               title: `M${magnitude} earthquake · ${location}`
             }).addTo(activeMap);
             seismicEpicentreMarker.bindPopup(popupHtml);
+            seismicEpicentreMarker.openPopup();
           }
-          marker.openPopup();
         }
       }
     }
@@ -1157,7 +1161,7 @@
       const isRecentSeismic = demoMode === 'recent' || (seismicAge >= 0 && seismicAge <= 24 * 60 * 60 * 1000);
       const demoBulletin = demoMode === 'bulletin2' ? bulletinTwoDemo : null;
       const relatedBulletin = isRecentSeismic ? data.tsunami.recentBulletin : null;
-      renderTsunami(demoBulletin?.message || data.tsunami.message,demoBulletin || data.tsunami.bulletin,relatedBulletin);
+      renderTsunami(demoBulletin?.message || data.tsunami.message,demoBulletin || data.tsunami.bulletin,relatedBulletin,checkedAt);
       const latestSeismicLink = ids('seismicMessage');
       latestSeismicLink.textContent = data.seismic.latest ? seismicSummary('Latest',data.seismic.latest) : data.seismic.message;
       latestSeismicLink.disabled = !data.seismic.latest;
@@ -1226,7 +1230,7 @@
     wireDialog('shareDialog','shareDialogClose');
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     window.addEventListener('online',()=>loadStatus().catch(()=>{}));
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=59',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=60',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
   </script>
 </body>
 </html>
