@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-14T11:30:18.2585520+00:00",
-    "lastAttemptAt":  "2026-08-14T11:30:18.2585520+00:00",
+    "updatedAt":  "2026-08-14T11:45:19.6884461+00:00",
+    "lastAttemptAt":  "2026-08-14T11:45:19.6884461+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "tsunami":  {
@@ -1707,7 +1707,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-14T11:30:28.8858665+00:00",
+                          "fetchedAt":  "2026-08-14T11:45:27.7542726+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -5084,7 +5084,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  24.01,
-                      "pfzAgeHours":  0.01
+                      "osfAgeHours":  24.26,
+                      "pfzAgeHours":  0.26
                   }
 }
