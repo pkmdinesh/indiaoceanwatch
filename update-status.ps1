@@ -373,6 +373,7 @@ $status = [ordered]@{
     lastAttemptAt = $attemptedAt
     updateIntervalHours = 0.25
     source = 'INCOIS / ITEWC'
+    marineHeatWave = [ordered]@{ message = $null; fetchedAt = $null; ok = $false; url = 'https://incois.gov.in/oceanservices/mhw/index.jsp' }
     tsunami = [ordered]@{ message = 'Status unavailable'; state = 'watch'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
@@ -425,6 +426,9 @@ if (Test-Path -LiteralPath $outputPath) {
             if ($status.tsunami.PSObject.Properties.Name -notcontains $propertyName) {
                 $status.tsunami | Add-Member -NotePropertyName $propertyName -NotePropertyValue $null
             }
+        }
+        if ($status.PSObject.Properties.Name -notcontains 'marineHeatWave') {
+            $status | Add-Member -NotePropertyName marineHeatWave -NotePropertyValue ([pscustomobject]@{ message = $null; fetchedAt = $null; ok = $false; url = 'https://incois.gov.in/oceanservices/mhw/index.jsp' })
         }
         if ($status.tsunami.PSObject.Properties.Name -notcontains 'state') {
             $status.tsunami | Add-Member -NotePropertyName state -NotePropertyValue 'watch'
@@ -854,6 +858,24 @@ try {
     }
     $status.pfz.sectors = @($pfzSectors)
 } catch { $status.errors += "PFZ: $($_.Exception.Message)" }
+
+# Marine Heat Wave is published as a marquee on the official product page.
+try {
+    $mhwUrl = 'https://incois.gov.in/oceanservices/mhw/index.jsp'
+    $mhwHtml = Get-TextContent $mhwUrl
+    $mhwMatch = [regex]::Match($mhwHtml, '(?is)<marquee\b[^>]*>(.*?)</marquee>')
+    if (-not $mhwMatch.Success) { throw 'Marine Heat Wave marquee message was not found.' }
+    $mhwMessage = [Net.WebUtility]::HtmlDecode(($mhwMatch.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+    if ([string]::IsNullOrWhiteSpace($mhwMessage)) { throw 'Marine Heat Wave marquee message was empty.' }
+    $status.marineHeatWave.message = $mhwMessage
+    $status.marineHeatWave.fetchedAt = $attemptedAt
+    $status.marineHeatWave.ok = $true
+    $status.marineHeatWave.url = $mhwUrl
+    $incoisPageAccessible = $true
+} catch {
+    $status.marineHeatWave.ok = $false
+    $status.errors += "Marine Heat Wave: $($_.Exception.Message)"
+}
 
 # Public health alerts intentionally differ from the diagnostic scraper errors.
 # OSF/PFZ are daily products, so their saved data remains current for 36 hours.
