@@ -1,11 +1,11 @@
 ﻿{
-    "updatedAt":  "2026-08-14T21:30:19.4491383+00:00",
-    "lastAttemptAt":  "2026-08-14T21:30:19.4491383+00:00",
+    "updatedAt":  "2026-08-14T21:45:24.1970933+00:00",
+    "lastAttemptAt":  "2026-08-14T21:45:24.1970933+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
                            "message":  "Marine Heatwave event of No Heat Wave category with area of spreading 15.21% has been observed on 2026-08-12 over the Arabian Sea; Marine Heatwave event of Moderate category with area of spreading 25.75% has been observed on 2026-08-12 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 23.64% has been observed on 2026-08-12 over the Rest of Indian Ocean; Marine Heatwave event of Moderate category with area of spreading 32.45% has been observed on 2026-08-12 over the Maharashtra coast; Marine Heatwave event of Moderate category with area of spreading 65.52% has been observed on 2026-08-12 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 79.46% has been observed on 2026-08-12 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 80.86% has been observed on 2026-08-12 over the Lakshadweep coast; Marine Heatwave event of Moderate category with area of spreading 98.38% has been observed on 2026-08-12 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 51.52% has been observed on 2026-08-12 over the Nicobar coast;",
-                           "fetchedAt":  "2026-08-14T21:30:19.4491383+00:00",
+                           "fetchedAt":  "2026-08-14T21:45:24.1970933+00:00",
                            "ok":  true,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
@@ -1615,7 +1615,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-14T21:30:28.6264147+00:00",
+                          "fetchedAt":  "2026-08-14T21:45:32.0012313+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -4992,7 +4992,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  10.02,
-                      "pfzAgeHours":  10.02
+                      "osfAgeHours":  10.27,
+                      "pfzAgeHours":  10.27
                   }
 }
