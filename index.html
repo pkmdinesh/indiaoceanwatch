@@ -118,6 +118,29 @@
     .announcement-card{display:flex;align-items:center;gap:10px;padding:8px 12px!important;border-color:#cbd3d4!important;background:#f5f7f7!important}.announcement-card[hidden]{display:none}.announcement-label{flex:none;color:var(--ink)}.announcement-symbol{color:var(--ink);background:#e4e8e8}.announcement-message{display:flex;flex-wrap:wrap;gap:6px}.active-advisory-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border:1px solid currentColor;border-radius:7px;font-size:11px;font-weight:900;line-height:1.2}.active-advisory-chip.warning{color:#FF0000;background:var(--warning-bg)}.active-advisory-chip.alert{color:#FF8C00;background:var(--alert-bg)}.active-advisory-chip.watch{color:#EDC001;background:var(--watch-bg)}.active-advisory-chip .dot{width:7px;height:7px}.announcement-next{display:none!important}@media(max-width:700px){.announcement-card{align-items:flex-start}.announcement-message{width:100%}.active-advisory-chip{font-size:12px}}
     .active-advisory-chip.resolved{color:#238269;background:var(--safe-bg)}.active-advisory-chip.info{color:var(--ink);background:#fff;border-color:var(--line)}
     .tsunami-status.advisory-info .safe-mark{color:#FF0000!important}.storm-status.advisory-info .storm-mark{color:#FF0000!important}.joint-bulletin-card.level-info{display:flex;align-items:flex-start;gap:9px}.joint-bulletin-info-mark{display:none;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;background:#6f7f83;color:#FF0000;font-size:16px;font-weight:900}.joint-bulletin-card.level-info .joint-bulletin-info-mark{display:grid}
+    .osf-map-actions{display:flex;align-items:center;gap:6px;margin-left:auto}.osf-map-actions .source{margin-left:0!important}.osf-map-button{border:0;font-family:inherit;cursor:pointer}.osf-map-dialog{width:min(980px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:0;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 25px 80px rgba(8,47,60,.28)}.osf-map-dialog::backdrop{background:rgba(4,28,36,.52);backdrop-filter:blur(3px)}.osf-map-body{display:grid;gap:10px;padding:12px 16px 16px}.osf-map-canvas{height:min(620px,68dvh);min-height:380px;border:1px solid var(--line);border-radius:13px;background:#dce8e5}.osf-map-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.osf-map-legend{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;font-weight:800}.osf-map-legend span{display:inline-flex;align-items:center;gap:5px}.osf-map-legend i{width:10px;height:10px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #718287}.osf-map-share{padding:8px 11px;border:0;border-radius:8px;background:var(--ink);color:#fff;font:850 11px/1 inherit;cursor:pointer}.osf-map-share:hover,.osf-map-share:focus-visible{background:var(--teal);outline:0}.osf-map-note{margin:0;color:var(--muted);font-size:10px;font-weight:700}.osf-map-marker-label{display:grid;place-items:center;width:24px;height:24px;border:3px solid #fff;border-radius:50%;color:#082f3c;box-shadow:0 2px 8px rgba(8,47,60,.42);font:900 9px/1 Arial,sans-serif}.osf-popup{min-width:210px}.osf-popup>strong{font-size:13px}.osf-popup section{margin-top:8px;padding-top:7px;border-top:1px solid #d9e5e1}.osf-popup section strong,.osf-popup section small{display:block}.osf-popup section small{margin-top:2px;color:#5b7279;font-size:9px}.osf-popup p{margin:5px 0 0;font-size:11px;line-height:1.4}.osf-popup-messages{max-height:190px;overflow:auto}.osf-popup button{margin-top:8px;padding:6px 8px;border:0;border-radius:6px;background:#e7f0ed;color:var(--ink);font:800 10px/1 Arial,sans-serif;cursor:pointer}@media(max-width:700px){.osf-map-actions{gap:4px}.osf-map-actions .source{padding:7px;font-size:11px}.osf-map-dialog{width:100%;max-width:none;max-height:92dvh;margin:auto 0 0;border-radius:20px 20px 0 0}.osf-map-body{padding:10px}.osf-map-canvas{height:65dvh;min-height:340px}}
+  </style>
+  <style>
+    .osf-popup-toggle{margin-top:7px;border:1px solid #cbd9d5;border-radius:8px;overflow:hidden;background:#fff}
+    .osf-popup-toggle summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 9px;cursor:pointer;list-style:none;color:#18383f;font-size:11px;font-weight:850}
+    .osf-popup-toggle summary::-webkit-details-marker{display:none}
+    .osf-popup-toggle summary::after{content:'+';font-size:15px;line-height:1}
+    .osf-popup-toggle[open] summary::after{content:'\2212'}
+    .osf-popup-toggle summary b{margin-left:auto;font-size:10px;text-transform:uppercase}
+    .osf-popup-toggle.warning summary{background:#ffe5e5}.osf-popup-toggle.warning summary b{color:#b00000}
+    .osf-popup-toggle.alert summary{background:#fff0dc}.osf-popup-toggle.alert summary b{color:#a34e00}
+    .osf-popup-toggle.watch summary{background:#fffbd0}.osf-popup-toggle.watch summary b{color:#8a7800}
+    .osf-popup-toggle.noThreat summary{background:#e4f3ed}.osf-popup-toggle.noThreat summary b{color:#17634f}
+    .osf-popup-toggle-body{max-height:180px;overflow:auto;padding:8px 9px;border-top:1px solid #dce6e3;background:#fff;color:#000}
+    .osf-popup-toggle-body small{display:block;color:#5b7279;font-size:9px}
+    .osf-popup-toggle-body p{margin:5px 0 0;color:#000;font-size:11px;font-weight:600;line-height:1.45}
+    .dialog-head-actions{display:flex;align-items:center;gap:7px;margin-left:auto}
+    button.marine-advisory-chip{font-family:inherit;cursor:pointer}
+    .dialog-share{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 10px;border:0;border-radius:8px;background:#082f3c;color:#fff;font:850 10px/1 inherit;cursor:pointer}
+    .dialog-share:hover,.dialog-share:focus-visible{background:var(--teal);outline:0}
+    .event-setting-copy{display:grid;gap:3px;min-width:0}.event-coast-distance{display:block;color:#082f3c;font-size:11px;font-weight:800}
+    .content .other-advisories-card{grid-column:1/-1}.marine-advisory-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}.marine-advisory-chip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:7px 11px;border:1px solid #8bcce8;border-radius:8px;background:#d9f3ff;color:#082f5b;font-size:12px;font-weight:850;line-height:1.2;text-decoration:none;box-shadow:0 2px 7px rgba(8,47,91,.08)}.marine-advisory-chip:hover,.marine-advisory-chip:focus-visible{border-color:#4aaed6;background:#bfeaff;color:#061f46;outline:0;box-shadow:0 4px 11px rgba(8,47,91,.16)}
+    @media(max-width:520px){.dialog-share{width:36px;padding:0;font-size:0}.dialog-share::before{content:'↗';font-size:16px}.advisory-dialog-head{gap:8px}}
   </style>
 </head>
 <body>
@@ -141,7 +164,7 @@
         <div class="panel-head">
           <img class="service-img" src="assets/ocean-wave-service-icon.png" alt="Ocean wave icon">
           <div><h2 id="ocean-title">Ocean State Forecast</h2><p class="panel-kicker">High Wave, Swell Surge & Ocean Currents advisories</p></div>
-          <a class="source" href="https://incois.gov.in/site/services/hwa.jsp" target="_blank" rel="noopener">Official map ↗</a>
+          <div class="osf-map-actions"><button class="source osf-map-button" id="shareOsfOverall" type="button">Share</button><button class="source osf-map-button" id="openOsfMap" type="button">Visualize</button><a class="source" href="https://incois.gov.in/site/services/hwa.jsp" target="_blank" rel="noopener">OSF ↗</a></div>
         </div>
         <div class="forecast">
           <article class="forecast-card">
@@ -211,6 +234,21 @@
         <div class="pfz-details" id="pfzDetails" hidden><h3 id="pfzDetailsTitle"></h3><p class="pfz-inline-message" id="pfzInlineMessage" hidden></p><div class="pfz-landing-centers" id="pfzLandingCenters"></div><div class="pfz-messages" id="pfzMessages"></div></div>
       </section>
 
+      <section class="panel other-advisories-card" aria-labelledby="other-advisories-title">
+        <div class="panel-head"><div><h2 id="other-advisories-title">Other Marine Advisories</h2></div></div>
+        <nav class="marine-advisory-links" aria-label="Other marine advisory services">
+          <a class="marine-advisory-chip" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=2&amp;request_locale=en" target="_blank" rel="noopener">Tuna ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/oceanservices/Hilsa/index.jsp" target="_blank" rel="noopener">Hilsa ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/coralwarning.jsp" target="_blank" rel="noopener">Coral Bleaching ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/hab_products.jsp" target="_blank" rel="noopener">Harmful Algal Bloom ↗</a>
+          <a class="marine-advisory-chip" href="https://oosa.incois.gov.in/OOSA/" target="_blank" rel="noopener">Oil Spill (OOSA) ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/SVA_overview.jsp" target="_blank" rel="noopener">Small Vessel (SVAS) ↗</a>
+          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/sarat/home.jsp" target="_blank" rel="noopener">SARAT ↗</a>
+          <button class="marine-advisory-chip" id="openMarineHeatWave" type="button">Marine Heat Wave</button>
+          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/OSF/" target="_blank" rel="noopener">Ports &amp; Harbors ↗</a>
+        </nav>
+      </section>
+
       <section class="panel contact-card" aria-labelledby="contact-title">
         <div class="contact-copy">
           <p class="panel-kicker"></p>
@@ -229,9 +267,17 @@
         <h2 id="advisoryDialogTitle">District advisories</h2>
         <p id="advisoryDialogMeta"></p>
       </div>
-      <button class="dialog-close" id="advisoryDialogClose" type="button" aria-label="Close district advisories">&times;</button>
+      <div class="dialog-head-actions"><button class="dialog-share" id="shareAdvisoryDialog" type="button" aria-label="Share this OSF advisory">Share</button><button class="dialog-close" id="advisoryDialogClose" type="button" aria-label="Close district advisories">&times;</button></div>
     </div>
     <div class="advisory-details" id="advisoryDetails"></div>
+  </dialog>
+  <dialog class="advisory-dialog" id="marineHeatWaveDialog" aria-labelledby="marineHeatWaveTitle">
+    <div class="advisory-dialog-head"><div><h2 id="marineHeatWaveTitle">Marine Heat Wave</h2><p>Latest official marquee message</p></div><button class="dialog-close" id="marineHeatWaveClose" type="button" aria-label="Close Marine Heat Wave message">&times;</button></div>
+    <div class="advisory-details"><article class="district-advisory"><p id="marineHeatWaveMessage">Marine Heat Wave message will appear after the next source update.</p></article><a class="source" href="https://incois.gov.in/oceanservices/mhw/index.jsp" target="_blank" rel="noopener">Open Marine Heat Wave page ↗</a></div>
+  </dialog>
+  <dialog class="osf-map-dialog" id="osfMapDialog" aria-labelledby="osfMapTitle">
+    <div class="advisory-dialog-head"><div><h2 id="osfMapTitle">Ocean State Forecast Map</h2><p id="osfMapMeta">High Wave · Swell Surge · Ocean Currents</p></div><div class="dialog-head-actions"><button class="dialog-share" id="shareOsfMap" type="button" aria-label="Share OSF map and advisories">Share</button><button class="dialog-close" id="osfMapClose" type="button" aria-label="Close OSF map">&times;</button></div></div>
+    <div class="osf-map-body"><div class="osf-map-toolbar"><div class="osf-map-legend" aria-label="Severity legend"><span><i style="background:#FF0000"></i>Warning</span><span><i style="background:#FF8C00"></i>Alert</span><span><i style="background:#FAFA33"></i>Watch</span><span><i style="background:#238269"></i>No Threat</span></div></div><div class="osf-map-canvas" id="osfMapCanvas" aria-label="Interactive Ocean State Forecast advisory map"></div><p class="osf-map-note" id="osfMapShareStatus">Markers represent state-level advisory records fetched from INCOIS. Use the layer control to select services.</p></div>
   </dialog>
   <dialog class="share-dialog" id="shareDialog" aria-labelledby="shareDialogTitle">
     <div class="advisory-dialog-head">
@@ -263,14 +309,14 @@
       <p id="seismicDialogMeta">Official ITEWC information</p>
     </div>
 
-    <button
+    <div class="dialog-head-actions"><button class="dialog-share" id="shareSeismicDialog" type="button" aria-label="Share earthquake bulletin and map">Share</button><button
       class="dialog-close"
       id="seismicDialogClose"
       type="button"
       aria-label="Close earthquake details"
     >
       &times;
-    </button>
+    </button></div>
   </div>
 
   <div class="seismic-dialog-body">
@@ -292,7 +338,7 @@
 
     <div class="event-setting">
       <strong id="eventSetting"></strong>
-      <span id="eventBathymetry" aria-live="polite"></span>
+      <span class="event-setting-copy"><span id="eventBathymetry" aria-live="polite"></span><span class="event-coast-distance" id="eventCoastDistance"></span></span>
     </div>
 
     <dl class="event-facts" id="eventFacts"></dl>
@@ -491,6 +537,253 @@
     let seismicMap = null;
     let seismicEpicentreMarker = null;
     let seismicBathymetryLayer = null;
+    let currentSeismicShareData = null;
+    let currentAdvisoryShareData = null;
+    let latestStatusData = null;
+    let osfMap = null;
+    let osfLayerControl = null;
+    let osfMapOpenedFromUrl = false;
+    let osfServiceLayers = {};
+    let osfSelectedServices = new Set();
+    let osfCumulativeLayer = null;
+    let osfRequestedService = null;
+    let osfDistrictPolygonsPromise = null;
+    const OSF_DISTRICT_POLYGONS_URL = 'https://samudra.incois.gov.in/incoismobileappdata/rest/incois/districtpolygons';
+    const OSF_STATE_COORDS = {
+      'ANDAMAN AND NICOBAR':[11.7,92.7],'ANDAMAN & NICOBAR':[11.7,92.7],'ANDHRA PRADESH':[15.7,80.7],
+      'DAMAN AND DIU':[20.4,72.9],'DAMAN & DIU':[20.4,72.9],'GOA':[15.35,73.85],'GUJARAT':[21.1,71.5],
+      'KARNATAKA':[13.0,74.75],'KERALA':[10.2,76.0],'LAKSHADWEEP':[10.6,72.65],'MAHARASHTRA':[18.4,72.9],
+      'ODISHA':[20.0,86.2],'ORISSA':[20.0,86.2],'PUDUCHERRY':[11.9,79.8],'PONDICHERRY':[11.9,79.8],
+      'TAMIL NADU':[10.8,79.6],'WEST BENGAL':[21.7,88.4]
+    };
+    const OSF_SEVERITY_COLORS = {warning:'#FF0000',alert:'#FF8C00',watch:'#FAFA33',noThreat:'#238269'};
+    const OSF_SERVICE_OFFSETS = {'High Wave':[.2,0],'Swell Surge':[-.1,.18],'Ocean Currents':[-.1,-.18]};
+    const OSF_SEVERITY_OFFSETS = {warning:[-.045,-.045],alert:[.045,-.045],watch:[-.045,.045],noThreat:[.045,.045]};
+    const OSF_POLYGON_BORDER = {color:'#263b40',weight:.7,opacity:.8};
+
+    function osfStateCoordinates(name) {
+      const key = String(name || '').toUpperCase().replace(/\s+/g,' ').trim();
+      return OSF_STATE_COORDS[key] || null;
+    }
+
+    const normalizeOsfName = value => String(value || '').toUpperCase().replace(/&/g,' AND ').replace(/[^A-Z0-9]+/g,' ').replace(/\bKANNIYAKUMARI\b/g,'KANYAKUMARI').replace(/\s+/g,' ').trim();
+    function osfDistrictMatches(apiDistrict,advisoryDistrict) {
+      const polygonName = normalizeOsfName(apiDistrict);
+      const advisoryName = normalizeOsfName(advisoryDistrict);
+      if (!polygonName || !advisoryName) return false;
+      if (polygonName === advisoryName) return true;
+      const polygonParts = String(apiDistrict || '').split(/,|&|\bAND\b/i).map(normalizeOsfName).filter(Boolean);
+      return polygonParts.includes(advisoryName) || (advisoryName.length >= 5 && polygonName.includes(advisoryName)) || (polygonName.length >= 5 && advisoryName.includes(polygonName));
+    }
+    function loadOsfDistrictPolygons() {
+      if (!osfDistrictPolygonsPromise) {
+        osfDistrictPolygonsPromise = fetch(OSF_DISTRICT_POLYGONS_URL,{cache:'force-cache'}).then(response => {
+          if (!response.ok) throw new Error(`District polygons unavailable (${response.status})`);
+          return response.json();
+        }).then(data => {
+          if (data?.type !== 'FeatureCollection' || !Array.isArray(data.features)) throw new Error('Invalid district polygon data');
+          return data;
+        }).catch(error => { osfDistrictPolygonsPromise=null; throw error; });
+      }
+      return osfDistrictPolygonsPromise;
+    }
+
+    async function buildOsfMapLayers(data) {
+      if (!osfMap || !window.L) return;
+      ids('osfMapShareStatus').textContent='Loading official INCOIS coastal district polygons…';
+      if (osfLayerControl) osfLayerControl.remove();
+      osfMap.eachLayer(layer => { if (!(layer instanceof L.TileLayer)) osfMap.removeLayer(layer); });
+      const services = [['High Wave',data?.highWave],['Swell Surge',data?.swellSurge],['Ocean Currents',data?.oceanCurrent]];
+      const overlays = {};
+      const bounds = [];
+      let polygonData = null;
+      try { polygonData = await loadOsfDistrictPolygons(); }
+      catch { ids('osfMapShareStatus').textContent='District polygons could not be loaded; showing state-level advisory markers.'; }
+      services.forEach(([service,group]) => {
+        const layer = L.layerGroup();
+        const states = group?.states?.length ? group.states : legacyStateSummaries(group || {});
+        const matchedStateLevels = new Set();
+        if (polygonData) polygonData.features.forEach(feature => {
+          const polygonState = normalizeOsfName(feature?.properties?.STATE);
+          const polygonDistrict = feature?.properties?.District;
+          const matches = [];
+          states.forEach(state => {
+            if (normalizeOsfName(state.name) !== polygonState) return;
+            (state.advisories || []).forEach(advisory => { if (osfDistrictMatches(polygonDistrict,advisory.district)) matches.push({state,advisory}); });
+          });
+          if (!matches.length) return;
+          const level = severityOrder.find(severity => matches.some(match => match.advisory.severity === severity)) || 'noThreat';
+          matches.forEach(match => matchedStateLevels.add(`${normalizeOsfName(match.state.name)}|${match.advisory.severity}`));
+          const polygon = L.geoJSON(feature,{smoothFactor:2.5,style:{...OSF_POLYGON_BORDER,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:.55}});
+          const messages = [...new Set(matches.map(match => match.advisory.message).filter(Boolean))];
+          polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(polygonDistrict))} · ${escapeHtml(service)}</strong><p>${escapeHtml(severityLabel[level])} · ${escapeHtml(titleCase(feature.properties.STATE))}<br>Issue date: ${escapeHtml(group?.issueDate || '—')}</p>${messages[0] ? `<p>${escapeHtml(messages[0])}</p>` : ''}</div>`,{maxWidth:360});
+          polygon.addTo(layer);
+          const polygonBounds = polygon.getBounds(); if (polygonBounds.isValid()) bounds.push(polygonBounds.getSouthWest(),polygonBounds.getNorthEast());
+        });
+        states.forEach(state => {
+          const coordinate = osfStateCoordinates(state.name);
+          if (!coordinate) return;
+          severityOrder.forEach(level => {
+            const count = Number(state.counts?.[level] || 0);
+            if (!count || matchedStateLevels.has(`${normalizeOsfName(state.name)}|${level}`)) return;
+            const serviceOffset = OSF_SERVICE_OFFSETS[service] || [0,0];
+            const severityOffset = OSF_SEVERITY_OFFSETS[level] || [0,0];
+            const position = [coordinate[0] + serviceOffset[0] + severityOffset[0],coordinate[1] + serviceOffset[1] + severityOffset[1]];
+            const marker = L.marker(position,{icon:L.divIcon({className:'',html:`<span class="osf-map-marker-label" style="background:${OSF_SEVERITY_COLORS[level]}">${count}</span>`,iconSize:[24,24],iconAnchor:[12,12]}),title:`${titleCase(state.name)} · ${service} · ${severityLabel[level]}`});
+            marker.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(state.name))} · ${escapeHtml(service)}</strong><p>${escapeHtml(severityLabel[level])}: ${count} district ${count === 1 ? 'advisory' : 'advisories'}<br>Issue date: ${escapeHtml(group?.issueDate || '—')}</p></div>`);
+            marker.addTo(layer); bounds.push(position);
+          });
+        });
+        overlays[service] = layer;
+        layer.addTo(osfMap);
+      });
+      osfLayerControl = L.control.layers(null,overlays,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
+      if (bounds.length) osfMap.fitBounds(bounds,{padding:[28,28],maxZoom:6}); else osfMap.setView([15,79],4);
+      ids('osfMapMeta').textContent = services.map(([name,group]) => `${name}: ${group?.issueDate || '—'}`).join(' · ');
+      if (polygonData) ids('osfMapShareStatus').textContent='Official INCOIS district polygons. Use the layer control to select services.';
+    }
+
+    function osfFeatureAdvisories(feature,group) {
+      const polygonState = normalizeOsfName(feature?.properties?.STATE);
+      const polygonDistrict = feature?.properties?.District;
+      const states = group?.states?.length ? group.states : legacyStateSummaries(group || {});
+      const matches = [];
+      states.forEach(state => {
+        if (normalizeOsfName(state.name) !== polygonState) return;
+        (state.advisories || []).forEach(advisory => { if (osfDistrictMatches(polygonDistrict,advisory.district)) matches.push(advisory); });
+      });
+      return matches;
+    }
+
+    function osfHighestSeverity(advisories) {
+      return severityOrder.find(level => advisories.some(advisory => advisory.severity === level)) || 'noThreat';
+    }
+
+    function osfMessageHtml(service,advisories,group,openLevel=null) {
+      const levels = severityOrder.filter(level => advisories.some(advisory => advisory.severity === level));
+      if (!levels.length) levels.push('noThreat');
+      return levels.map(level => {
+        const messages = [...new Set(advisories.filter(advisory => advisory.severity === level).map(advisory => advisory.message).filter(Boolean))];
+        const messageHtml = messages.length ? messages.map(message => `<p>${escapeHtml(message)}</p>`).join('') : '<p>No Threat</p>';
+        return `<details class="osf-popup-toggle ${level}"${openLevel === level ? ' open' : ''}><summary><span>${escapeHtml(service)}</span><b>${escapeHtml(severityLabel[level])}</b></summary><div class="osf-popup-toggle-body"><small>Issue date: ${escapeHtml(group?.issueDate || '—')}</small>${messageHtml}</div></details>`;
+      }).join('');
+    }
+
+    function updateOsfComposite() {
+      if (!osfMap || !osfCumulativeLayer) return;
+      const selectedServices = [...osfSelectedServices].filter(service => osfServiceLayers[service]);
+      const useCumulative = selectedServices.length >= 2;
+      Object.values(osfServiceLayers).forEach(layer => layer.eachLayer(item => {
+        if (item.setStyle) item.setStyle(useCumulative ? {fillOpacity:0,opacity:0} : {...OSF_POLYGON_BORDER,fillOpacity:1});
+        if (item._path) item._path.style.pointerEvents = useCumulative ? 'none' : 'auto';
+      }));
+      if (useCumulative) {
+        osfCumulativeLayer.eachLayer(polygon => {
+          const services = (polygon._osfServices || []).filter(entry => selectedServices.includes(entry.service));
+          const allAdvisories = services.flatMap(entry => entry.advisories);
+          const level = osfHighestSeverity(allAdvisories);
+          const sections = services.map(entry => osfMessageHtml(entry.service,entry.advisories,entry.group,entry.advisories.some(advisory => advisory.severity === level) ? level : null)).join('');
+          polygon.setStyle({...OSF_POLYGON_BORDER,color:'#111',weight:.5,opacity:1,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:1});
+          polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(polygon.feature.properties.District))} · ${escapeHtml(titleCase(polygon.feature.properties.STATE))}</strong><p><b>Cumulative status:</b> ${escapeHtml(severityLabel[level])}</p>${sections}</div>`,{maxWidth:460,maxHeight:390});
+        });
+        if (!osfMap.hasLayer(osfCumulativeLayer)) osfCumulativeLayer.addTo(osfMap);
+        if (osfCumulativeLayer.bringToFront) osfCumulativeLayer.bringToFront();
+      } else if (osfMap.hasLayer(osfCumulativeLayer)) osfMap.removeLayer(osfCumulativeLayer);
+      ids('osfMapShareStatus').textContent = useCumulative
+        ? `Cumulative priority for ${selectedServices.join(' + ')}: Warning → Alert → Watch → No Threat.`
+        : 'Showing the selected service polygons. Select a second layer for the cumulative priority overlay.';
+    }
+
+    function handleOsfLayerSelection(event) {
+      if (!event?.name || !osfServiceLayers[event.name]) return;
+      if (event.type === 'overlayadd') osfSelectedServices.add(event.name);
+      else if (event.type === 'overlayremove') osfSelectedServices.delete(event.name);
+      updateOsfComposite();
+    }
+
+    async function buildCumulativeOsfMapLayers(data) {
+      if (!osfMap || !window.L) return;
+      ids('osfMapShareStatus').textContent='Loading official INCOIS coastal district polygons…';
+      if (osfLayerControl) osfLayerControl.remove();
+      if (osfCumulativeLayer && osfMap.hasLayer(osfCumulativeLayer)) osfMap.removeLayer(osfCumulativeLayer);
+      Object.values(osfServiceLayers).forEach(layer => { if (osfMap.hasLayer(layer)) osfMap.removeLayer(layer); });
+      const polygonData = await loadOsfDistrictPolygons();
+      const services = [['High Wave',data?.highWave],['Swell Surge',data?.swellSurge],['Ocean Currents',data?.oceanCurrent]];
+      osfServiceLayers = {};
+      osfSelectedServices = new Set();
+      const cumulativeFeatures = new Map();
+      services.forEach(([service,group]) => {
+        const layer = L.geoJSON(polygonData,{
+          smoothFactor:2.5,
+          style:feature => {
+            const level = osfHighestSeverity(osfFeatureAdvisories(feature,group));
+            return {...OSF_POLYGON_BORDER,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:.55};
+          },
+          onEachFeature:(feature,polygon) => {
+            const advisories = osfFeatureAdvisories(feature,group);
+            const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
+            if (!cumulativeFeatures.has(key)) cumulativeFeatures.set(key,{feature,services:[]});
+            cumulativeFeatures.get(key).services.push({service,group,advisories});
+            polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(feature.properties.District))} · ${escapeHtml(titleCase(feature.properties.STATE))}</strong>${osfMessageHtml(service,advisories,group,osfHighestSeverity(advisories))}</div>`,{maxWidth:430,maxHeight:330});
+          }
+        });
+        osfServiceLayers[service]=layer;
+      });
+      osfCumulativeLayer = L.geoJSON({type:'FeatureCollection',features:[...cumulativeFeatures.values()].map(item => item.feature)}, {
+        smoothFactor:2.5,
+        style:feature => {
+          const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
+          const item = cumulativeFeatures.get(key);
+          const allAdvisories = item.services.flatMap(entry => entry.advisories);
+          const level = osfHighestSeverity(allAdvisories);
+          return {...OSF_POLYGON_BORDER,color:'#111',weight:.5,opacity:1,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:1};
+        },
+        onEachFeature:(feature,polygon) => {
+          const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
+          const item = cumulativeFeatures.get(key);
+          const allAdvisories = item.services.flatMap(entry => entry.advisories);
+          const level = osfHighestSeverity(allAdvisories);
+          const sections = item.services.map(entry => osfMessageHtml(entry.service,entry.advisories,entry.group,entry.advisories.some(advisory => advisory.severity === level) ? level : null)).join('');
+          polygon._osfServices = item.services;
+          polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(feature.properties.District))} · ${escapeHtml(titleCase(feature.properties.STATE))}</strong><p><b>Cumulative status:</b> ${escapeHtml(severityLabel[level])}</p>${sections}</div>`,{maxWidth:460,maxHeight:390});
+        }
+      });
+      Object.entries(osfServiceLayers).forEach(([service,layer]) => {
+        if (!osfRequestedService || osfRequestedService === service) {
+          layer.addTo(osfMap);
+          osfSelectedServices.add(service);
+        }
+      });
+      osfLayerControl = L.control.layers(null,osfServiceLayers,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
+      osfMap.off('overlayadd',handleOsfLayerSelection); osfMap.off('overlayremove',handleOsfLayerSelection);
+      osfMap.on('overlayadd',handleOsfLayerSelection); osfMap.on('overlayremove',handleOsfLayerSelection);
+      const mapBounds = L.geoJSON(polygonData).getBounds(); if (mapBounds.isValid()) osfMap.fitBounds(mapBounds,{padding:[20,20],maxZoom:6});
+      ids('osfMapMeta').textContent = services.map(([name,group]) => `${name}: ${group?.issueDate || '—'}`).join(' · ');
+      updateOsfComposite();
+    }
+
+    function ensureOsfMap() {
+      if (!window.L) return null;
+      if (!osfMap) {
+        osfMap = L.map('osfMapCanvas',{zoomControl:true,attributionControl:true,minZoom:3,maxZoom:9});
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(osfMap);
+      }
+      void buildCumulativeOsfMapLayers(latestStatusData).catch(() => buildOsfMapLayers(latestStatusData));
+      return osfMap;
+    }
+
+    function openOsfMap(service = null) {
+      osfRequestedService = typeof service === 'string' ? service : null;
+      ids('osfMapDialog').showModal();
+      requestAnimationFrame(() => { const map=ensureOsfMap(); if (map) map.invalidateSize(); });
+    }
+
+    async function shareOsfMap() {
+      const selected=[...osfSelectedServices];
+      const selectionTitle=selected.length ? selected.join(' + ') : 'No layers selected';
+      const text=selected.length ? osfOverallShareText(selected) : 'OSF map\nNo service layers are currently selected.\nSource: INCOIS\nChecked: ' + shareCheckedText();
+      await shareDialogText(`Ocean Watch · OSF Map · ${selectionTitle}`,text,`${OCEAN_WATCH_PUBLIC_URL}?view=osf-map`);
+    }
 
     function ensureSeismicMap() {
       if (seismicMap) return seismicMap;
@@ -564,10 +857,61 @@
     ids('shareApp').addEventListener('click',openShareDialog);
     ids('copyShareLink').addEventListener('click',copyShareUrl);
     ids('nativeShare').addEventListener('click',nativeShareUrl);
+    ids('openOsfMap').addEventListener('click',()=>openOsfMap());
+    ids('shareOsfMap').addEventListener('click',shareOsfMap);
+    ids('shareOsfOverall').addEventListener('click',() => shareDialogText('Ocean Watch · Ocean State Forecast',osfOverallShareText()));
+    ids('shareAdvisoryDialog').addEventListener('click',shareCurrentAdvisory);
+    ids('shareSeismicDialog').addEventListener('click',shareCurrentSeismic);
+    ids('openMarineHeatWave').addEventListener('click',() => {
+      ids('marineHeatWaveMessage').textContent = latestStatusData?.marineHeatWave?.message || 'Marine Heat Wave message is unavailable. Open the official page for the latest information.';
+      ids('marineHeatWaveDialog').showModal();
+    });
     const dashboard = document.querySelector('.dashboard');
     const advisoryDialog = ids('advisoryDialog');
     let savedZoom = 100;
     const titleCase = value => String(value).toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace('And Nicobar','& Nicobar');
+    const OCEAN_WATCH_PUBLIC_URL = 'https://pkmdinesh.github.io/indiaoceanwatch/';
+    const shareCheckedText = () => {
+      const value = latestStatusData?.lastAttemptAt || latestStatusData?.updatedAt;
+      const date = value ? new Date(value) : null;
+      return date && !Number.isNaN(date.getTime()) ? `${date.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST` : 'Unavailable';
+    };
+    async function shareDialogText(title,text,url=OCEAN_WATCH_PUBLIC_URL) {
+      try {
+        if (navigator.share) await navigator.share({title,text,url});
+        else await navigator.clipboard.writeText(`${text}\nOcean Watch: ${url}`);
+      } catch (error) {
+        if (error?.name !== 'AbortError') {
+          const input=document.createElement('textarea'); input.value=`${text}\nOcean Watch: ${url}`; input.style.position='fixed'; input.style.opacity='0'; document.body.append(input); input.select(); document.execCommand('copy'); input.remove();
+        }
+      }
+    }
+    function osfOverallShareText(serviceFilter=null) {
+      const services=[['High Wave',latestStatusData?.highWave],['Swell Surge',latestStatusData?.swellSurge],['Ocean Currents',latestStatusData?.oceanCurrent]].filter(([name]) => !serviceFilter || serviceFilter.includes(name));
+      const blocks=services.map(([name,group]) => {
+        const states=group?.states?.length ? group.states : legacyStateSummaries(group || {});
+        const counts=Object.fromEntries(severityOrder.map(level => [level,states.reduce((sum,state) => sum + Number(state.counts?.[level] || 0),0)]));
+        const heading=`${name} — ${severityOrder.map(level => `${severityLabel[level]} ${counts[level]}`).join(' · ')}`;
+        const lists=severityOrder.filter(level => counts[level]).map(level => `${severityLabel[level]}: ${states.filter(state => Number(state.counts?.[level] || 0)>0).map(state => titleCase(state.name)).join(', ')}`);
+        return [heading,...lists,`Valid/issued: ${group?.issueDate || 'Unavailable'}`].join('\n');
+      });
+      const heading=serviceFilter ? `OSF map selection — ${services.map(([name]) => name).join(' + ')}` : 'OSF — Overall summary';
+      return [heading,...blocks,'Source: INCOIS',`Checked: ${shareCheckedText()}`].join('\n\n');
+    }
+    function shareCurrentAdvisory() {
+      if (!currentAdvisoryShareData) return;
+      const {hazardName,issueDate,state}=currentAdvisoryShareData;
+      const highest=severityOrder.find(level => Number(state.counts?.[level] || 0)>0) || 'noThreat';
+      const districts=[...new Set((state.advisories || []).map(item => titleCase(item.district)).filter(Boolean))];
+      const text=[`OSF — ${hazardName} ${severityLabel[highest]}`,titleCase(state.name),districts.join(' · ') || 'District details unavailable',`Valid/issued: ${issueDate || 'Unavailable'}`,'Source: INCOIS',`Checked: ${shareCheckedText()}`].join('\n');
+      void shareDialogText(`OSF — ${hazardName} ${severityLabel[highest]}`,text);
+    }
+    function shareCurrentSeismic() {
+      if (!currentSeismicShareData) return;
+      const item=currentSeismicShareData;
+      const text=[`Earthquake bulletin — M${item.magnitude}`,item.location,item.origin ? `Origin: ${item.origin}` : '',item.coordinates ? `Location: ${item.coordinates}` : '',item.coastDistance ? `Distance from nearest coast: ${item.coastDistance}` : '',item.bulletin ? `Bulletin: ${item.bulletin}` : '',item.evaluation || '','Source: ITEWC–INCOIS',`Checked: ${shareCheckedText()}`].filter(Boolean).join('\n');
+      void shareDialogText(`Earthquake bulletin — M${item.magnitude}`,text);
+    }
     const appendIst = value => {
       const text = String(value || '').trim();
       return text && !/\bIST\b/i.test(text) ? `${text} IST` : text;
@@ -677,6 +1021,7 @@
       return severityOrder.filter(level => counts[level]).map(level => `${counts[level]} ${severityLabel[level]}`).join(' \u00b7 ');
     }
     function openAdvisoryDetails(hazardName, issueDate, state) {
+      currentAdvisoryShareData={hazardName,issueDate,state};
       ids('advisoryDialogTitle').textContent = `${titleCase(state.name)} \u2014 ${hazardName}`;
       ids('advisoryDialogMeta').textContent = `${countSummary(state.counts)}${issueDate ? ` \u00b7 Issued ${issueDate}` : ''}`;
       const advisories = state.advisories || [];
@@ -710,11 +1055,11 @@
         label.append(dot,severityLabel[level]);
         const stateList = document.createElement('div'); stateList.className = 'severity-row-states';
         if (level === 'noThreat') {
-          const link = document.createElement('a'); link.className = 'severity-state-chip noThreat';
-          link.href = 'https://incois.gov.in/site/services/hwa.jsp'; link.target = '_blank'; link.rel = 'noopener';
-          link.setAttribute('aria-label',`Check the official INCOIS ${hazardName} map`);
-          link.textContent = 'Check Official Map ↗';
-          stateList.append(link); row.append(label,stateList); return row;
+          const visualize = document.createElement('button'); visualize.type='button'; visualize.className = 'severity-state-chip noThreat';
+          visualize.setAttribute('aria-label',`Visualize the ${hazardName} layer`);
+          visualize.textContent = 'Visualize';
+          visualize.addEventListener('click',()=>openOsfMap(hazardName));
+          stateList.append(visualize); row.append(label,stateList); return row;
         }
         const matchingStates = states.filter(state => Number(state.counts?.[level] || 0) > 0).sort((a,b) => a.name.localeCompare(b.name));
         if (!matchingStates.length) {
@@ -1063,15 +1408,18 @@
       const savedElevation = event?.gebcoElevationMeters ?? bulletin?.gebcoElevationMeters;
       const coastDistanceMatch = topoBathy.match(/(?:distance|distnace)\s+of\s+([\d,.]+)\s*km\s+from\s+(?:the\s+)?coast(?:line)?/i);
       const coastDistance = coastDistanceMatch ? Number(coastDistanceMatch[1].replace(/,/g,'')) : Number(event?.distanceFromCoastKm ?? bulletin?.distanceFromCoastKm);
+      const coastDistanceText = Number.isFinite(coastDistance) ? `~${Math.round(coastDistance).toLocaleString('en-US')} km` : 'Unavailable';
       const bathymetryRequestId = ++activeBathymetryRequest;
       ids('seismicDialogTitle').textContent = `M${magnitude} · ${location}`;
       ids('seismicDialogMeta').textContent = bulletin?.issuedAt ? `${bulletinReference(bulletin)} · Issued ${bulletin.issuedAt}` : 'Earthquake event information';
+      ids('eventCoastDistance').textContent = `Distance from nearest coast: ${coastDistanceText}`;
+      currentSeismicShareData={magnitude,location,origin:[originDate,originTime].filter(Boolean).join(' '),coordinates:Number.isFinite(latitude)&&Number.isFinite(longitude) ? `${latitude}°, ${longitude}°` : '',coastDistance:coastDistanceText,bulletin:bulletinReference(bulletin),evaluation:bulletin?.message || ''};
       void updateTectonicSetting(latitude, longitude, topoBathy, bathymetryRequestId,savedBathymetry,savedSetting,savedElevation);
       const facts = [
         ['Magnitude',`M${magnitude}`],['Depth',String(depth).includes('km') ? depth : `${depth} km`],
         ['Date',originDate || String(originTime).split(' ')[0] || '—'],['Origin time',originDate ? originTime : String(originTime).replace(/^\d{4}-\d{2}-\d{2}\s*/, '')],
         ['Latitude',Number.isFinite(latitude) ? `${latitude}°` : '—'],['Longitude',Number.isFinite(longitude) ? `${longitude}°` : '—'],
-        ['Location',location],['Distance from nearest coast',Number.isFinite(coastDistance) ? `~${Math.round(coastDistance).toLocaleString('en-US')} km` : 'Unavailable'],['Bulletin',bulletinReference(bulletin)]
+        ['Location',location],['Bulletin',bulletinReference(bulletin)]
       ];
       ids('eventFacts').replaceChildren(...facts.map(([label,value]) => {
         const wrapper=document.createElement('div'); const term=document.createElement('dt'); const detail=document.createElement('dd');
@@ -1134,6 +1482,7 @@
       }
     }
     function render(data) {
+      latestStatusData = data;
       renderActiveAdvisories(data);
       const checkedAtValue = data.lastAttemptAt || data.updatedAt;
       const checkedAt = checkedAtValue ? new Date(checkedAtValue) : null;
@@ -1186,6 +1535,7 @@
       renderPfzSectors(data.pfz.sectors);
       renderCyclone(data.cyclone);
       renderJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
+      if (new URLSearchParams(location.search).get('view') === 'osf-map' && !osfMapOpenedFromUrl) { osfMapOpenedFromUrl=true; openOsfMap(); }
     }
     let statusRefreshTimer;
     function scheduleStatusRefresh(data, retryDelay = 0) {
@@ -1226,11 +1576,13 @@
       });
     }
     wireDialog('advisoryDialog','advisoryDialogClose');
+    wireDialog('osfMapDialog','osfMapClose');
     wireDialog('seismicDialog','seismicDialogClose');
     wireDialog('shareDialog','shareDialogClose');
+    wireDialog('marineHeatWaveDialog','marineHeatWaveClose');
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     window.addEventListener('online',()=>loadStatus().catch(()=>{}));
-    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=60',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=64',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
   </script>
 </body>
 </html>
