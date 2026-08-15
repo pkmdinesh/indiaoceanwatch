@@ -13,6 +13,12 @@
 .advisory-dialog{overflow-x:hidden;overflow-y:auto}
 
 @media(max-width:700px){
+  .header{grid-template-columns:minmax(0,1fr)}
+  .ocean-brand{grid-column:1;grid-row:1;width:max-content;max-width:100%}
+  .title{grid-column:1;grid-row:2}
+  .header-actions{grid-column:1;grid-row:3;width:100%;min-width:0;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;padding-top:8px;border-top:1px solid var(--line)}
+  .header-actions .stamp{min-width:0;margin-right:auto;overflow-wrap:anywhere;text-align:left}
+  .header-actions .share-button,.header-actions .install-button{flex:none}
   .title p,.stamp,.stamp time,.live{font-size:13px}
   .panel-kicker,.empty,.advisory-note{font-size:13px}
   .tsunami-status .tsunami-message{font-size:15px;line-height:1.45}
@@ -30,4 +36,19 @@
   .osf-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
   .osf-map-dialog .leaflet-control-layers label{white-space:normal}
   .osf-map-dialog .leaflet-control-zoom{margin-left:8px;margin-top:8px}
+}
+
+@media(max-width:420px){
+  .announcement-card{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
+  .announcement-label,.announcement-message{grid-column:1;width:100%;min-width:0}
+  .announcement-message{display:grid;gap:6px}
+  .active-advisory-chip{width:100%;max-width:100%;box-sizing:border-box;justify-content:flex-start;white-space:normal;overflow-wrap:anywhere}
+  .forecast-card,.forecast-title,.forecast-meta,.severity-board,.severity-row,.severity-row-states{min-width:0;max-width:100%}
+  .forecast-title{align-items:flex-start;flex-wrap:wrap}
+  .forecast-meta{width:100%;text-align:left}
+  .issue-date{white-space:normal}
+  .severity-row{grid-template-columns:minmax(0,1fr);gap:4px}
+  .severity-row-label{width:100%;padding-top:0;white-space:normal}
+  .severity-row-states{width:100%}
+  .severity-state-chip{max-width:100%;white-space:normal;overflow-wrap:anywhere}
 }
