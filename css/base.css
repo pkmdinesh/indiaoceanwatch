@@ -1,7 +1,4 @@
-:root{--ink:#082f3c;--muted:#5b7279;--paper:#eef3ef;--white:#fff;--line:#d9e5e1;--teal:#087f84;--green:#238269;--orange:#FF8C00;--yellow:#FAFA33;--red:#FF0000;--gray:#819195;--violet:#69578f;--safe-bg:#e0f2eb;--alert-bg:#fff0e4;--watch-bg:#fff7cf;--warning-bg:#fde8e6}
-html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 0 0,#c9eeea 0,transparent 32rem),var(--paper)}
-body{padding:12px}
-html:has(.advisory-dialog[open]),
-    body:has(.advisory-dialog[open]){
-    overflow:hidden;}
-a{color:inherit}
+/*
+ * Base styles currently remain in components.css to preserve the verified
+ * production cascade during the gradual modular migration.
+ */

@@ -1,4 +1,22 @@
-@media(max-height:760px){body{padding:6px}.dashboard{min-height:calc(100dvh - 12px)}.header{padding:9px 16px}.incois-logo{height:44px}.panel,.mini{padding:10px 12px}.status{padding:5px 0}.forecast-card{padding:8px}.footer{padding:5px 14px}}
-@media(max-width:1100px){body{padding:0}.dashboard{min-height:100dvh;border-radius:0}.header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px}.ocean-brand{min-width:0}.title{position:static;grid-column:1/-1;grid-row:2;transform:none;width:100%;max-width:none;padding-top:5px}.title h1{white-space:normal}.header-actions{grid-column:2;grid-row:1}.content{grid-template-columns:1fr}.panel{border-right:0;border-bottom:1px solid var(--line)}.forecast{height:auto}.right{grid-template-rows:auto}.stamp{font-size:9px}.panel h2,.mini h2{white-space:normal}.footer{flex-wrap:wrap}}
-@media(max-width:520px){.forecast{grid-template-columns:1fr}.header{grid-template-columns:minmax(0,1fr) auto;padding:12px}.title{grid-row:2}.header-actions{grid-column:1/-1;grid-row:3;width:100%;justify-content:space-between;padding-top:10px;border-top:1px solid var(--line)}.stamp{margin-left:0;text-align:left}.service-img,.service-logo{width:48px}.panel-head{align-items:flex-start;flex-wrap:wrap}.source{margin-left:0}.severity-row{grid-template-columns:72px 1fr}.footer{display:grid;gap:6px}.advisory-dialog{width:calc(100vw - 12px);max-width:none;max-height:calc(100dvh - 12px);margin:auto 0 0;border-radius:18px;overflow-y: auto;overscroll-behavior: contain;touch-action: pan-y}.advisory-dialog-head{padding:12px 14px}.advisory-details{padding:12px 14px 18px;overscroll-behavior: contain}.dialog-close{width: 40px;height: 40px;flex-basis: 40px}}
-@media(max-width:700px){.content .ocean .panel-head{flex-wrap:wrap}.content .ocean .panel-head>div:first-child{flex:1 1 190px}.content .ocean .osf-map-actions{width:100%;min-width:0;margin-left:0;justify-content:flex-end;flex-wrap:wrap}.content .ocean .osf-map-actions .source{min-width:0;max-width:100%}.severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr)}.severity-row-states{min-width:0}.severity-state-chip{max-width:100%;white-space:normal;overflow-wrap:anywhere}.osf-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px)}.osf-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}.osf-map-dialog .leaflet-control-layers label{white-space:normal}.osf-map-dialog .leaflet-control-zoom{margin-left:8px;margin-top:8px}}
+/* Verified overrides added after the original compatibility cascade. */
+.advisory-dialog{overflow-x:hidden;overflow-y:auto}
+
+@media(max-width:700px){
+  .title p,.stamp,.stamp time,.live{font-size:13px}
+  .panel-kicker,.empty,.advisory-note{font-size:13px}
+  .tsunami-status .tsunami-message{font-size:15px;line-height:1.45}
+  .tsunami-status.advisory-safe .tsunami-copy>span,
+  .tsunami-status.advisory-info .tsunami-copy>span{font-size:12px;line-height:1.45}
+  .tsunami-status .bulletin-link{font-size:12px;line-height:1.45}
+  .content .ocean .panel-head{flex-wrap:wrap}
+  .content .ocean .panel-head>div:first-child{flex:1 1 190px}
+  .content .ocean .osf-map-actions{width:100%;min-width:0;margin-left:0;justify-content:flex-end;flex-wrap:wrap}
+  .content .ocean .osf-map-actions .source{min-width:0;max-width:100%}
+  .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr)}
+  .severity-row-states{min-width:0}
+  .severity-state-chip{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+  .osf-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px)}
+  .osf-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
+  .osf-map-dialog .leaflet-control-layers label{white-space:normal}
+  .osf-map-dialog .leaflet-control-zoom{margin-left:8px;margin-top:8px}
+}
