@@ -139,6 +139,7 @@
     @media(max-width:700px){.tsunami-status.advisory-info .tsunami-message{display:block;width:auto;min-width:0;padding-left:0;white-space:normal;animation:none;transform:none}.tsunami-message-window{overflow:visible}}
     .seismic-message-copy>.seismic-event-link,.seismic-additional .seismic-event-link{font-size:14px;font-weight:700;line-height:1.5}
     @media(max-width:700px){.seismic-message-copy>.seismic-event-link,.seismic-additional .seismic-event-link{font-size:16px}}
+    @media(max-width:700px){.osf-map-dialog .leaflet-popup{max-width:calc(100vw - 42px)!important}.osf-map-dialog .leaflet-popup-content-wrapper{max-width:calc(100vw - 42px);border-radius:12px}.osf-map-dialog .leaflet-popup-content{width:auto!important;max-width:calc(100vw - 68px);margin:10px 12px}.osf-map-dialog .osf-popup{min-width:0;width:100%;max-width:calc(100vw - 92px);overflow-wrap:anywhere}.osf-map-dialog .osf-popup-toggle-body{max-height:26dvh}.osf-map-dialog .osf-popup-toggle summary{gap:6px;padding:7px;font-size:10px}}
     .dialog-share{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 10px;border:0;border-radius:8px;background:#082f3c;color:#fff;font:850 10px/1 inherit;cursor:pointer}
     .dialog-share:hover,.dialog-share:focus-visible{background:var(--teal);outline:0}
     .event-setting-copy{display:grid;gap:3px;min-width:0}.event-coast-distance{display:block;color:#082f3c;font-size:11px;font-weight:800}
@@ -398,6 +399,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.0.2/maptiler-sdk.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script>
   <script>
     const ids = id => document.getElementById(id);
     function renderActiveAdvisories(data) {
@@ -641,7 +643,7 @@
         layer.addTo(osfMap);
       });
       osfLayerControl = L.control.layers(null,overlays,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
-      if (bounds.length) osfMap.fitBounds(bounds,{padding:[28,28],maxZoom:6}); else osfMap.setView([15,79],4);
+      if (bounds.length) { osfMap.fitBounds(bounds,{padding:[32,32],maxZoom:5}); osfMap.setZoom(Math.max(osfMap.getMinZoom(),osfMap.getZoom()-1)); } else osfMap.setView([15,79],3);
       ids('osfMapMeta').textContent = services.map(([name,group]) => `${name}: ${group?.issueDate || '—'}`).join(' · ');
       if (polygonData) ids('osfMapShareStatus').textContent='Official INCOIS district polygons. Use the layer control to select services.';
     }
@@ -760,7 +762,7 @@
       osfLayerControl = L.control.layers(null,osfServiceLayers,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
       osfMap.off('overlayadd',handleOsfLayerSelection); osfMap.off('overlayremove',handleOsfLayerSelection);
       osfMap.on('overlayadd',handleOsfLayerSelection); osfMap.on('overlayremove',handleOsfLayerSelection);
-      const mapBounds = L.geoJSON(polygonData).getBounds(); if (mapBounds.isValid()) osfMap.fitBounds(mapBounds,{padding:[20,20],maxZoom:6});
+      const mapBounds = L.geoJSON(polygonData).getBounds(); if (mapBounds.isValid()) { osfMap.fitBounds(mapBounds,{padding:[32,32],maxZoom:5}); osfMap.setZoom(Math.max(osfMap.getMinZoom(),osfMap.getZoom()-1)); }
       ids('osfMapMeta').textContent = services.map(([name,group]) => `${name}: ${group?.issueDate || '—'}`).join(' · ');
       updateOsfComposite();
     }
@@ -768,8 +770,8 @@
     function ensureOsfMap() {
       if (!window.L) return null;
       if (!osfMap) {
-        osfMap = L.map('osfMapCanvas',{zoomControl:true,attributionControl:true,minZoom:3,maxZoom:9});
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(osfMap);
+        osfMap = L.map('osfMapCanvas',{zoomControl:true,attributionControl:true,minZoom:2,maxZoom:9});
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,crossOrigin:true,attribution:'&copy; OpenStreetMap contributors'}).addTo(osfMap);
       }
       void buildCumulativeOsfMapLayers(latestStatusData).catch(() => buildOsfMapLayers(latestStatusData));
       return osfMap;
@@ -784,8 +786,32 @@
     async function shareOsfMap() {
       const selected=[...osfSelectedServices];
       const selectionTitle=selected.length ? selected.join(' + ') : 'No layers selected';
-      const text=selected.length ? osfOverallShareText(selected) : 'OSF map\nNo service layers are currently selected.\nSource: INCOIS\nChecked: ' + shareCheckedText();
-      await shareDialogText(`Ocean Watch · OSF Map · ${selectionTitle}`,text,`${OCEAN_WATCH_PUBLIC_URL}?view=osf-map`);
+      const status=ids('osfMapShareStatus');
+      if (typeof html2canvas !== 'function') { status.textContent='Map image sharing could not be loaded.'; return; }
+      status.textContent='Preparing current map image…';
+      try {
+        const mapCanvas=await html2canvas(ids('osfMapCanvas'),{useCORS:true,allowTaint:false,backgroundColor:'#dce8e5',logging:false,scale:Math.min(window.devicePixelRatio || 1,2)});
+        const headerHeight=64;
+        const output=document.createElement('canvas'); output.width=mapCanvas.width; output.height=mapCanvas.height+headerHeight;
+        const context=output.getContext('2d'); context.fillStyle='#082f3c'; context.fillRect(0,0,output.width,headerHeight); context.drawImage(mapCanvas,0,headerHeight);
+        context.fillStyle='#fff'; context.font=`700 ${Math.max(18,Math.round(output.width/42))}px Arial`; context.fillText(`Ocean Watch · OSF · ${selectionTitle}`,18,29);
+        context.fillStyle='#bfeff1'; context.font=`600 ${Math.max(12,Math.round(output.width/68))}px Arial`; context.fillText(`Source: INCOIS · Checked: ${shareCheckedText()}`,18,51);
+        const blob=await new Promise(resolve => output.toBlob(resolve,'image/png',.95));
+        if (!blob) throw new Error('Map image could not be created');
+        const file=new File([blob],`ocean-watch-osf-${new Date().toISOString().slice(0,10)}.png`,{type:'image/png'});
+        if (navigator.share && (!navigator.canShare || navigator.canShare({files:[file]}))) {
+          await navigator.share({title:`Ocean Watch · OSF · ${selectionTitle}`,text:`Current OSF map selection: ${selectionTitle}`,files:[file]});
+          status.textContent='Map image shared.';
+        } else if (navigator.clipboard && window.ClipboardItem) {
+          await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+          status.textContent='Map image copied to clipboard.';
+        } else {
+          const link=document.createElement('a'); link.href=URL.createObjectURL(blob); link.download=file.name; link.click(); setTimeout(()=>URL.revokeObjectURL(link.href),1000);
+          status.textContent='Map image downloaded.';
+        }
+      } catch (error) {
+        if (error?.name !== 'AbortError') status.textContent='Unable to create the map image. Keep the map open and try again.';
+      }
     }
 
     function ensureSeismicMap() {
@@ -862,7 +888,7 @@
     ids('nativeShare').addEventListener('click',nativeShareUrl);
     ids('openOsfMap').addEventListener('click',()=>openOsfMap());
     ids('shareOsfMap').addEventListener('click',shareOsfMap);
-    ids('shareOsfOverall').addEventListener('click',() => shareDialogText('Ocean Watch · Ocean State Forecast',osfOverallShareText()));
+    ids('shareOsfOverall').addEventListener('click',() => shareDialogText('Ocean Watch · Ocean State Forecast',osfOverallShareText(),null));
     ids('shareAdvisoryDialog').addEventListener('click',shareCurrentAdvisory);
     ids('shareSeismicDialog').addEventListener('click',shareCurrentSeismic);
     ids('openMarineHeatWave').addEventListener('click',() => {
@@ -881,11 +907,13 @@
     };
     async function shareDialogText(title,text,url=OCEAN_WATCH_PUBLIC_URL) {
       try {
-        if (navigator.share) await navigator.share({title,text,url});
-        else await navigator.clipboard.writeText(`${text}\nOcean Watch: ${url}`);
+        const shareData={title,text}; if (url) shareData.url=url;
+        const shareText=url ? `${text}\nOcean Watch: ${url}` : text;
+        if (navigator.share) await navigator.share(shareData);
+        else await navigator.clipboard.writeText(shareText);
       } catch (error) {
         if (error?.name !== 'AbortError') {
-          const input=document.createElement('textarea'); input.value=`${text}\nOcean Watch: ${url}`; input.style.position='fixed'; input.style.opacity='0'; document.body.append(input); input.select(); document.execCommand('copy'); input.remove();
+          const input=document.createElement('textarea'); input.value=url ? `${text}\nOcean Watch: ${url}` : text; input.style.position='fixed'; input.style.opacity='0'; document.body.append(input); input.select(); document.execCommand('copy'); input.remove();
         }
       }
     }
@@ -907,13 +935,13 @@
       const highest=severityOrder.find(level => Number(state.counts?.[level] || 0)>0) || 'noThreat';
       const districts=[...new Set((state.advisories || []).map(item => titleCase(item.district)).filter(Boolean))];
       const text=[`OSF — ${hazardName} ${severityLabel[highest]}`,titleCase(state.name),districts.join(' · ') || 'District details unavailable',`Valid/issued: ${issueDate || 'Unavailable'}`,'Source: INCOIS',`Checked: ${shareCheckedText()}`].join('\n');
-      void shareDialogText(`OSF — ${hazardName} ${severityLabel[highest]}`,text);
+      void shareDialogText(`OSF — ${hazardName} ${severityLabel[highest]}`,text,null);
     }
     function shareCurrentSeismic() {
       if (!currentSeismicShareData) return;
       const item=currentSeismicShareData;
       const text=[`Earthquake bulletin — M${item.magnitude}`,item.location,item.origin ? `Origin: ${item.origin}` : '',item.coordinates ? `Location: ${item.coordinates}` : '',item.coastDistance ? `Distance from nearest coast: ${item.coastDistance}` : '',item.bulletin ? `Bulletin: ${item.bulletin}` : '',item.evaluation || '','Source: ITEWC–INCOIS',`Checked: ${shareCheckedText()}`].filter(Boolean).join('\n');
-      void shareDialogText(`Earthquake bulletin — M${item.magnitude}`,text);
+      void shareDialogText(`Earthquake bulletin — M${item.magnitude}`,text,null);
     }
     const appendIst = value => {
       const text = String(value || '').trim();
