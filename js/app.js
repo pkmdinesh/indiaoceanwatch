@@ -1,0 +1,109 @@
+const ids = id => document.getElementById(id);
+    function renderActiveAdvisories(data) {
+      const card = ids('announcementCard');
+      const container = ids('announcementMessage');
+      const active = [];
+      const add = (service,level,detail = '',count = null,displayLabel = '') => {
+        if (!['warning','alert','watch','resolved','info'].includes(level)) return;
+        active.push({service,level,detail,count,displayLabel});
+      };
+      const bulletinDate = bulletin => {
+        if (!bulletin) return null;
+        const issued = String(bulletin.issuedAt || '').trim();
+        const issuedIso = /^\d{4}-\d{2}-\d{2}\s/.test(issued) ? `${issued.replace(' ','T').replace(/\.\d+$/,'')}+05:30` : issued;
+        const compact = issued.match(/\b(\d{2})(\d{2})\s+IST\D+(\d{1,2}\s+[A-Za-z]+\s+\d{4})/i);
+        const origin = `${bulletin.originDate || ''} ${String(bulletin.originTime || '').replace(/\bIST\b/i,'')}`.trim();
+        const candidates = compact ? [`${compact[3]} ${compact[1]}:${compact[2]}:00 GMT+0530`,origin ? `${origin} GMT+0530` : '',issuedIso] : [origin ? `${origin} GMT+0530` : '',issuedIso];
+        for (const candidate of candidates) {
+          if (!candidate) continue;
+          const parsed = new Date(candidate);
+          if (!Number.isNaN(parsed.getTime())) return parsed;
+        }
+        return null;
+      };
+      const isWithinHours = (bulletin,hours) => {
+        const issued = bulletinDate(bulletin);
+        if (!issued) return false;
+        const age = Date.now() - issued.getTime();
+        return age >= 0 && age < hours * 60 * 60 * 1000;
+      };
+      const osfGroups = [data?.highWave,data?.swellSurge,data?.oceanCurrent];
+      ['warning','alert','watch'].forEach(level => {
+        const count = osfGroups.reduce((total,group) => total + (Array.isArray(group?.[level]) ? group[level].length : 0),0);
+        if (count) add('OSF',level,`${count} affected state-service ${count === 1 ? 'entry' : 'entries'}`,count);
+      });
+      const tsunamiBulletin = data?.tsunami?.bulletin || data?.tsunami?.recentBulletin;
+      const tsunamiDemo = new URLSearchParams(location.search).get('demo') === 'bulletin2';
+      const tsunamiBulletinNo = tsunamiDemo ? 'II' : tsunamiBulletin?.type || tsunamiBulletin?.number || 'Latest';
+      if (tsunamiDemo) add('Tsunami','info','Demo tsunami bulletin evaluation',null,`Bulletin-${tsunamiBulletinNo}`);
+      else if (tsunamiBulletin && isWithinHours(tsunamiBulletin,24)) add('Tsunami','info',data?.tsunami?.message || tsunamiBulletin.message || 'Official ITEWC bulletin',null,`Bulletin-${tsunamiBulletinNo}`);
+      const cycloneLevel = {red:'warning',orange:'alert',yellow:'watch'}[data?.cyclone?.level];
+      add('Cyclone',cycloneLevel,data?.cyclone?.title || data?.cyclone?.message || 'IMD cyclone advisory');
+      const jointBulletin = normalizeJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
+      const jointDate = jointBulletinDate(jointBulletin);
+      const jointCurrent = jointBulletin && (jointDate ? Date.now() - jointDate.getTime() >= 0 && Date.now() - jointDate.getTime() < 48 * 60 * 60 * 1000 : Boolean(jointBulletin.isRecent));
+      if (jointCurrent) add('Cyclone','info',jointBulletin.message,null,`Bulletin-${jointBulletin.number || 1}`);
+      const cycloneResolution = `${data?.cyclone?.title || ''} ${data?.cyclone?.message || ''}`;
+      if (data?.cyclone?.level === 'safe' && /cancel|dissipat|weaken|threat\s+(?:has\s+)?passed/i.test(cycloneResolution) && isWithinHours(data?.cyclone,48)) {
+        add('Cyclone','resolved',cycloneResolution.trim());
+      }
+      const stormBulletin = data?.stormSurge?.bulletin || data?.stormSurge?.recentBulletin;
+      if (stormBulletin && isWithinHours(stormBulletin,48)) add('Storm Surge','info',stormBulletin.message || data?.stormSurge?.message || 'Official ITEWC storm surge bulletin',null,`Bulletin-${stormBulletin.number || 'Latest'}`);
+      const rank = {warning:4,alert:3,watch:2,info:1,resolved:1};
+      active.sort((a,b) => rank[b.level] - rank[a.level]);
+      container.replaceChildren(...active.map(item => {
+        const chip = document.createElement('span');
+        chip.className = `active-advisory-chip ${item.level}`;
+        chip.title = item.detail;
+        const dot = document.createElement('i'); dot.className = 'dot'; dot.setAttribute('aria-hidden','true');
+        const labelText = item.displayLabel || (item.level === 'resolved' ? 'No threat' : item.level === 'info' ? 'Bulletin' : severityLabel[item.level]);
+        const label = `${item.service} · ${labelText}${item.count === null ? '' : ` (${item.count})`}`;
+        chip.append(dot,label);
+        return chip;
+      }));
+      card.hidden = active.length === 0;
+    }
+
+const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
+    const SEISMIC_MAP_DEFAULT_ZOOM = 6; // Increase to zoom in; decrease to zoom out.
+    // Paste your MapTiler API key here. When configured, labels are forced to English.
+    const MAPTILER_API_KEY = 'YOUR_MAPTILER_API_KEY';
+    const hasMapTilerKey = () => MAPTILER_API_KEY && !MAPTILER_API_KEY.includes('YOUR_MAPTILER_API_KEY');
+    let seismicMapMode = '';
+    let seismicMap = null;
+    let seismicEpicentreMarker = null;
+    let seismicBathymetryLayer = null;
+    let currentSeismicShareData = null;
+    let currentAdvisoryShareData = null;
+    let latestStatusData = null;
+    let osfMap = null;
+    let osfLayerControl = null;
+    let osfMapOpenedFromUrl = false;
+    let osfServiceLayers = {};
+    let osfSelectedServices = new Set();
+    let osfCumulativeLayer = null;
+    let osfRequestedService = null;
+    let osfDistrictPolygonsPromise = null;
+    const OSF_DISTRICT_POLYGONS_URL = 'https://samudra.incois.gov.in/incoismobileappdata/rest/incois/districtpolygons';
+    const OSF_STATE_COORDS = {
+      'ANDAMAN AND NICOBAR':[11.7,92.7],'ANDAMAN & NICOBAR':[11.7,92.7],'ANDHRA PRADESH':[15.7,80.7],
+      'DAMAN AND DIU':[20.4,72.9],'DAMAN & DIU':[20.4,72.9],'GOA':[15.35,73.85],'GUJARAT':[21.1,71.5],
+      'KARNATAKA':[13.0,74.75],'KERALA':[10.2,76.0],'LAKSHADWEEP':[10.6,72.65],'MAHARASHTRA':[18.4,72.9],
+      'ODISHA':[20.0,86.2],'ORISSA':[20.0,86.2],'PUDUCHERRY':[11.9,79.8],'PONDICHERRY':[11.9,79.8],
+      'TAMIL NADU':[10.8,79.6],'WEST BENGAL':[21.7,88.4]
+    };
+    const OSF_SEVERITY_COLORS = {warning:'#FF0000',alert:'#FF8C00',watch:'#FAFA33',noThreat:'#238269'};
+    const OSF_SERVICE_OFFSETS = {'High Wave':[.2,0],'Swell Surge':[-.1,.18],'Ocean Currents':[-.1,-.18]};
+    const OSF_SEVERITY_OFFSETS = {warning:[-.045,-.045],alert:[.045,-.045],watch:[-.045,.045],noThreat:[.045,.045]};
+    const OSF_POLYGON_BORDER = {color:'#263b40',weight:.7,opacity:.8};
+
+const dashboard = document.querySelector('.dashboard');
+    const advisoryDialog = ids('advisoryDialog');
+    let savedZoom = 100;
+    const titleCase = value => String(value).toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace('And Nicobar','& Nicobar');
+    const OCEAN_WATCH_PUBLIC_URL = 'https://pkmdinesh.github.io/indiaoceanwatch/';
+    const shareCheckedText = () => {
+      const value = latestStatusData?.lastAttemptAt || latestStatusData?.updatedAt;
+      const date = value ? new Date(value) : null;
+      return date && !Number.isNaN(date.getTime()) ? `${date.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST` : 'Unavailable';
+    };

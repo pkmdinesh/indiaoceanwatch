@@ -1,0 +1,44 @@
+name: Validate Ocean Watch
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JavaScript, JSON, and local asset paths
+        run: node tests/validation/validate-assets.mjs
+
+      - name: Validate status snapshots
+        shell: pwsh
+        run: ./tests/validation/validate-status.ps1
+
+      - name: Check PowerShell syntax
+        shell: pwsh
+        run: |
+          $failed = $false
+          Get-ChildItem scripts,tests -Recurse -Filter *.ps1 | ForEach-Object {
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$tokens,[ref]$errors) | Out-Null
+            if ($errors.Count) {
+              $failed = $true
+              Write-Error "$($_.FullName): $($errors.Message -join '; ')"
+            }
+          }
+          if ($failed) { exit 1 }

@@ -1,0 +1,56 @@
+.dashboard{width:min(1440px,100%);min-height:calc(100dvh - 24px);margin:auto;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;border:1px solid rgba(8,47,60,.13);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:0 20px 60px rgba(8,47,60,.12)}
+.header{position:relative;display:flex;align-items:center;gap:18px;padding:13px 20px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#fff,#f7fbf9)}
+.title{position:absolute;left:50%;transform:translateX(-50%);width:max-content;max-width:42vw;text-align:center}
+.title h1{margin:0;white-space:nowrap;font:700 clamp(21px,2.25vw,35px)/1 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.title p{margin:5px 0 0;color:var(--ink);font-size:11px;font-weight:800}
+.stamp{margin-left:auto;text-align:right;color:var(--muted);font-size:10px;line-height:1.45}
+.stamp time{color:var(--ink);font-size:11px;font-weight:800}
+.live{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:800}
+.live:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px #dcefe9}
+.content{min-height:0;display:grid;grid-template-columns:1.45fr 1fr 1fr}
+.panel{min-width:0;min-height:0;padding:14px 16px;border-right:1px solid var(--line)}
+.panel:last-child{border-right:0}
+.panel-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.panel h2{margin:0;white-space:nowrap;font:700 clamp(18px,1.8vw,27px)/1 Georgia,"Times New Roman",serif}
+.panel-kicker{margin:3px 0 0;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.right{padding:0}
+.mini .panel-head{margin-bottom:8px}
+.storm-block .panel-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:9px;margin-bottom:7px}
+.storm-block .panel-head>div{min-width:0}
+.cyclone-card .panel-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.cyclone-heading-copy .panel-kicker{margin-top:3px}
+.footer{display:flex;justify-content:space-between;gap:20px;padding:8px 18px;border-top:1px solid var(--line);background:#f7f9f7;color:var(--muted);font-size:9px;line-height:1.4}
+.footer strong{color:var(--ink)}
+.footer-error{color:var(--red);font-weight:850}
+.footer-error a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.storm-block .panel-head{grid-template-columns:auto minmax(0,1fr)}
+.panel-head .pfz-source,.panel-head .itews-source{margin-left:auto}
+.header-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.header-actions .stamp{margin-left:0}
+.header{grid-template-columns:1fr;padding:12px}
+.title{grid-column:1;grid-row:2;width:100%;margin:0;text-align:center}
+.title h1,.title p{width:100%;text-align:center}
+.header-actions{grid-column:1;grid-row:3;width:100%;margin-left:0;justify-content:flex-start;padding-top:8px;border-top:1px solid var(--line)}
+.header-actions .stamp{margin-left:0;text-align:left}
+.dashboard{width:100%;margin:0}
+.header-actions .stamp{margin-right:auto}
+}
+    .content{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start;padding:14px 16px}.content>.panel{padding:14px 16px;border:1px solid var(--line);border-radius:15px;background:#f5f8f6}.content>.panel:last-child{border:1px solid var(--line)}.content .ocean,.content .pfz-card{grid-column:1/-1}.content .ocean .forecast{height:auto}.content .panel-head{display:flex;min-height:42px;align-items:center;flex-wrap:nowrap;padding-top:0}.content .panel-head>div{min-width:0}.content .panel-head h2{font-size:clamp(17px,1.65vw,23px)!important;white-space:normal;overflow-wrap:anywhere}.content .panel-head>.source{position:static;margin-left:auto;flex:none}.content .advisory-card,.content .cyclone-card,.content .storm-card,.content .seismic-card{display:flex;min-width:0;flex-direction:column}.content .tsunami-status,.content .storm-status,.content .cyclone-status{height:auto;min-height:72px;flex:1}.tsunami-status.advisory-bulletin{color:var(--green)!important;background:var(--safe-bg)!important}.advisory-bulletin .safe-mark{color:#fff!important;background:var(--green)!important}.tsunami-message{display:block;color:currentColor;font-size:22px;font-weight:800}.seismic-message-wrap{display:flex;min-height:72px;flex:1;align-items:center;padding:9px 10px;border-radius:12px;background:var(--safe-bg)}.seismic-message-copy{min-width:0}.seismic-event-link{display:block;color:var(--ink);font-size:12px;font-weight:700;line-height:1.45;text-decoration:underline;text-underline-offset:2px}.seismic-message-wrap .seismic-additional{margin-top:4px}.seismic-additional .seismic-event-link{font-size:10px}.seismic-message-wrap .seismic-additional p{padding-left:0;border-left:0}.seismic-message-wrap.is-recent .seismic-event-link{color:var(--red);font-weight:850}.pfz-card .pfz-states{margin-top:10px}
+    @media(max-width:1100px){.content{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px}
+.content .ocean{grid-column:1/-1}
+.content .ocean,.content .pfz-card{grid-column:auto}
+.content>.panel{padding:13px}
+.content .panel-head{min-height:0}
+.title p{font-size:12px;line-height:1.45}
+.stamp{font-size:12px;line-height:1.5}
+.stamp time{font-size:12px}
+.live{font-size:12px}
+.content .panel-head h2{font-size:clamp(18px,5.2vw,21px)!important;line-height:1.15}
+.panel-kicker{font-size:12px;line-height:1.35}
+.footer{font-size:11px;line-height:1.55}
+}
+    .content .contact-card{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:18px;align-items:stretch;padding:0;overflow:hidden;background:linear-gradient(135deg,#f5f8f6,#e7f3f0)}
+    .contact-copy{align-self:center;padding:20px 22px}.contact-copy h2{margin:5px 0 4px;font:700 clamp(20px,2vw,29px)/1.15 Georgia,"Times New Roman",serif}.contact-organisation{margin:0;color:var(--teal);font-size:13px;font-weight:850}.contact-copy address{margin-top:14px;font-style:normal}.contact-copy address p{margin:7px 0;color:#294b55;font-size:13px;font-weight:700;line-height:1.55}.contact-copy a{color:var(--teal);overflow-wrap:anywhere}.contact-image{width:100%;height:100%;min-height:220px;max-height:290px;object-fit:cover;object-position:center 52%}
+    @media(max-width:700px){.share-button,.install-button{width:40px;min-width:40px;height:34px;min-height:34px;padding:0;border-radius:8px}
+.content .contact-card{grid-template-columns:1fr}
+.panel-kicker,.empty,.advisory-note{font-size:13px}

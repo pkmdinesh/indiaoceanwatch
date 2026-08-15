@@ -1,0 +1,19 @@
+{
+  "updatedAt": "2026-08-15T12:00:00+05:30",
+  "lastAttemptAt": "2026-08-15T12:00:00+05:30",
+  "updateIntervalHours": 0.25,
+  "source": "Test fixture",
+  "tsunami": { "ok": true, "message": "No Tsunami threat reported by ITEWC" },
+  "seismic": { "count": 0, "latest": null, "recentEvents": [] },
+  "highWave": { "issueDate": null, "warning": [], "alert": [], "watch": [], "noThreat": [], "states": [] },
+  "swellSurge": { "issueDate": null, "warning": [], "alert": [], "watch": [], "noThreat": [], "states": [] },
+  "oceanCurrent": { "issueDate": null, "warning": [], "alert": [], "watch": [], "noThreat": [], "states": [] },
+  "stormSurge": { "ok": true, "message": "No active storm surge bulletin" },
+  "cyclone": { "ok": true, "message": "No active cyclone advisory" },
+  "jointBulletin": null,
+  "marineHeatWave": null,
+  "pfz": { "forecastDate": null, "validUntil": null, "sectors": [] },
+  "errors": [],
+  "healthAlerts": [],
+  "freshness": {}
+}
