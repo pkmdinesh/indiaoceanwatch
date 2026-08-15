@@ -478,6 +478,7 @@ if (Test-Path -LiteralPath $outputPath) {
 $itewsInformationAccessible = $false
 $stormSurgeAccessible = $false
 $incoisPageAccessible = $false
+$activeEventId = $null
 
 try {
     $tsunamiHtml = Get-TextContent 'https://tsunami.incois.gov.in/TEWS/'
@@ -490,8 +491,15 @@ try {
         $status.tsunami.ok = $true
         $status.tsunami.bulletin = $null
     } else {
-        $active = $activeEvents | Select-Object -Last 1
+        # Prefer the event with the most advanced bulletin sequence. When
+        # bulletin numbers tie, prefer the highest magnitude, then newest time.
+        $active = $activeEvents | Sort-Object `
+            @{ Expression = { [int]"$($_.ChildNodes[9].InnerText)".Trim() }; Descending = $true }, `
+            @{ Expression = { [double]("$($_.ChildNodes[6].InnerText)" -replace '[^0-9.]', '') }; Descending = $true }, `
+            @{ Expression = { [DateTime]::ParseExact("$($_.ChildNodes[1].InnerText)".Trim(), 'dd MMM yyyy HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture) }; Descending = $true } |
+            Select-Object -First 1
         $eventId = "$($active.ChildNodes[0].InnerText)".Trim()
+        $activeEventId = $eventId
         $bulletinNumber = [int]"$($active.ChildNodes[9].InnerText)".Trim()
         $aos = "$($active.ChildNodes[11].InnerText)".Trim()
         $detailUrl = "https://tsunami.incois.gov.in/itews/DSSProducts/OPR/$eventId/$aos/B$bulletinNumber/${eventId}_B${bulletinNumber}_${aos}_Pub.json"
@@ -534,7 +542,7 @@ try {
             $latestTime = [DateTime]::ParseExact("$($latest.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
             $status.seismic.recentEvents = @($eventList | Select-Object -Skip 1 | Where-Object {
                 $eventTime = [DateTime]::ParseExact("$($_.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
-                ($latestTime - $eventTime).TotalHours -ge 0 -and ($latestTime - $eventTime).TotalHours -le 24
+                [math]::Abs(($latestTime - $eventTime).TotalHours) -le 24
             } | ForEach-Object {
                 $bulletinUrl = if ("$($_.EVID)".Trim() -and "$($_.BULNO)".Trim()) {
                     "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC&eventId=$($_.EVID)&aos=public&currBullNo=$($_.BULNO)&latestBullNo=$($_.BULNO)"
