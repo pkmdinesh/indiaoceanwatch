@@ -136,6 +136,9 @@
     .osf-popup-toggle-body p{margin:5px 0 0;color:#000;font-size:11px;font-weight:600;line-height:1.45}
     .dialog-head-actions{display:flex;align-items:center;gap:7px;margin-left:auto}
     button.marine-advisory-chip{font-family:inherit;cursor:pointer}
+    @media(max-width:700px){.tsunami-status.advisory-info .tsunami-message{display:block;width:auto;min-width:0;padding-left:0;white-space:normal;animation:none;transform:none}.tsunami-message-window{overflow:visible}}
+    .seismic-message-copy>.seismic-event-link,.seismic-additional .seismic-event-link{font-size:14px;font-weight:700;line-height:1.5}
+    @media(max-width:700px){.seismic-message-copy>.seismic-event-link,.seismic-additional .seismic-event-link{font-size:16px}}
     .dialog-share{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 10px;border:0;border-radius:8px;background:#082f3c;color:#fff;font:850 10px/1 inherit;cursor:pointer}
     .dialog-share:hover,.dialog-share:focus-visible{background:var(--teal);outline:0}
     .event-setting-copy{display:grid;gap:3px;min-width:0}.event-coast-distance{display:block;color:#082f3c;font-size:11px;font-weight:800}
@@ -916,11 +919,11 @@
       const text = String(value || '').trim();
       return text && !/\bIST\b/i.test(text) ? `${text} IST` : text;
     };
-    function seismicSummary(prefix,event) {
+    function seismicSummary(event) {
       const magnitude = event?.MAGNITUDE ?? event?.magnitude ?? '—';
       const region = event?.REGIONNAME ?? event?.region ?? 'Location unavailable';
       const originTime = appendIst(event?.ORIGINTIME ?? event?.originTime ?? '');
-      return `${prefix}: M${magnitude}, ${region}${originTime ? `, ${originTime}` : ''}`;
+      return `M${magnitude}, ${region}${originTime ? `, ${originTime}` : ''}`;
     }
     function bulletinReference(bulletin) {
       if (!bulletin) return 'Not issued';
@@ -1512,14 +1515,14 @@
       const relatedBulletin = isRecentSeismic ? data.tsunami.recentBulletin : null;
       renderTsunami(demoBulletin?.message || data.tsunami.message,demoBulletin || data.tsunami.bulletin,relatedBulletin,checkedAt);
       const latestSeismicLink = ids('seismicMessage');
-      latestSeismicLink.textContent = data.seismic.latest ? seismicSummary('Latest',data.seismic.latest) : data.seismic.message;
+      latestSeismicLink.textContent = data.seismic.latest ? seismicSummary(data.seismic.latest) : data.seismic.message;
       latestSeismicLink.disabled = !data.seismic.latest;
       latestSeismicLink.onclick = data.seismic.latest ? () => openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin) : null;
       ids('seismicMessageWrap').classList.toggle('is-recent',isRecentSeismic);
       ids('seismicMessageWrap').classList.toggle('is-older',Boolean(data.seismic.latest) && !isRecentSeismic);
       ids('seismicAdditional').replaceChildren(...(data.seismic.recentEvents || []).map(event => {
         const item = document.createElement('button'); item.type = 'button'; item.className = 'seismic-event-link';
-        item.textContent = seismicSummary('Also',event);
+        item.textContent = seismicSummary(event);
         item.addEventListener('click',() => openSeismicDetails(event,event.bulletin));
         return item;
       }));
