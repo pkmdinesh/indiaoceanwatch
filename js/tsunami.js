@@ -15,7 +15,7 @@ function renderTsunami(message, bulletin, recentBulletin = null, checkedAt = nul
         return null;
       })();
       const bulletinAge = bulletinTime ? Date.now() - bulletinTime.getTime() : null;
-      const bulletinCurrent = Boolean(candidateBulletin) && (bulletinDemo || bulletinAge === null || (bulletinAge >= 0 && bulletinAge < 24 * 60 * 60 * 1000));
+      const bulletinCurrent = Boolean(candidateBulletin) && (bulletinDemo || bulletinAge === null || (bulletinAge >= 0 && bulletinAge < APP_CONFIG.AGE_HOURS.TSUNAMI_BULLETIN * 60 * 60 * 1000));
       const supportingBulletin = bulletinCurrent ? candidateBulletin : null;
       const noTsunami = (Boolean(candidateBulletin) && !bulletinCurrent) || (!candidateBulletin && /^no\s+tsunami(?:\s+threat\s+reported\s+by\s+itewc)?\.?$/i.test(String(message || '').trim()));
       const bulletinLabel = supportingBulletin?.type || supportingBulletin?.number || 'Latest';

@@ -15,6 +15,12 @@ Ocean Watch is a lightweight, accessible web dashboard for ocean advisories and 
 
 The generated `status.json` stays at the repository root because the static application and GitHub Pages update workflow fetch it directly.
 
+## Frequently changed settings
+
+Edit `js/config.js` to change deployment-wide settings. It is shared by the page and service worker and contains the cache version, public site URL, bulletin age limits, map settings, source endpoints, and severity colors.
+
+For a cache refresh, change only `CACHE_VERSION` in that file. Asset URLs and service-worker registration do not need separate version edits.
+
 ## Local validation
 
 ```powershell

@@ -24,7 +24,7 @@ function render(data) {
       const originText = data.seismic.latest?.ORIGINTIME;
       const originTime = originText ? new Date(`${String(originText).replace(' ','T')}+05:30`) : null;
       const seismicAge = originTime && !Number.isNaN(originTime.getTime()) ? Date.now() - originTime.getTime() : Number.POSITIVE_INFINITY;
-      const isRecentSeismic = demoMode === 'recent' || (seismicAge >= 0 && seismicAge <= 24 * 60 * 60 * 1000);
+      const isRecentSeismic = demoMode === 'recent' || (seismicAge >= 0 && seismicAge <= APP_CONFIG.AGE_HOURS.SEISMIC_RECENT * 60 * 60 * 1000);
       const demoBulletin = demoMode === 'bulletin2' ? bulletinTwoDemo : null;
       const relatedBulletin = isRecentSeismic ? data.tsunami.recentBulletin : null;
       renderTsunami(demoBulletin?.message || data.tsunami.message,demoBulletin || data.tsunami.bulletin,relatedBulletin,checkedAt);

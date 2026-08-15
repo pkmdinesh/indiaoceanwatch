@@ -52,4 +52,4 @@ loadStatus().catch(()=>{});
     wireDialog('marineHeatWaveDialog','marineHeatWaveClose');
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     window.addEventListener('online',()=>loadStatus().catch(()=>{}));
-if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=82',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
+if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
