@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-15T23:00:23.8955663+00:00",
-    "lastAttemptAt":  "2026-08-15T23:00:23.8955663+00:00",
+    "updatedAt":  "2026-08-15T23:15:29.0099443+00:00",
+    "lastAttemptAt":  "2026-08-15T23:15:29.0099443+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -15,47 +15,47 @@
                     "bulletin":  {
                                      "number":  1,
                                      "type":  "I",
-                                     "issuedAt":  "0359 IST Saturday 15 August 2026",
+                                     "issuedAt":  "0414 IST Saturday 15 August 2026",
                                      "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
                                      "state":  "safe",
-                                     "eventId":  "incois2026qbhk",
-                                     "magnitude":  "7.6",
+                                     "eventId":  "incois2026qbhx",
+                                     "magnitude":  "7.0",
                                      "location":  "Flores Region, Indonesia",
                                      "originDate":  "15 Aug 2026",
-                                     "originTime":  "0343 IST",
-                                     "depth":  "10  km",
-                                     "latitude":  "-8.2",
-                                     "longitude":  "120.21",
+                                     "originTime":  "0358 IST",
+                                     "depth":  "3  km",
+                                     "latitude":  "-8.32",
+                                     "longitude":  "121.64",
                                      "oceanParameter":  "PO",
-                                     "topographyBathymetry":  "1846 m",
+                                     "topographyBathymetry":  "1075 m",
                                      "advice":  "This bulletin is being issued as advice. Only national/state/local authorities and disaster management officers have the authority to make decisions regarding the official threat and warning status in their coastal areas and any action to be taken in response.",
                                      "updates":  "No further bulletins will be issued by ITEWC INCOIS for this event unless additional information becomes available.",
                                      "sequence":  [
                                                       {
                                                           "number":  1,
                                                           "type":  "I",
-                                                          "issuedAt":  "0359 IST Saturday 15 August 2026",
+                                                          "issuedAt":  "0414 IST Saturday 15 August 2026",
                                                           "message":  "Based on historical earthquake and tsunami data, Tsunami Threat does not exist for India. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.",
                                                           "state":  "safe",
-                                                          "eventId":  "incois2026qbhk",
-                                                          "magnitude":  "7.6",
+                                                          "eventId":  "incois2026qbhx",
+                                                          "magnitude":  "7.0",
                                                           "location":  "Flores Region, Indonesia",
                                                           "originDate":  "15 Aug 2026",
-                                                          "originTime":  "0343 IST",
-                                                          "depth":  "10  km",
-                                                          "latitude":  "-8.2",
-                                                          "longitude":  "120.21",
+                                                          "originTime":  "0358 IST",
+                                                          "depth":  "3  km",
+                                                          "latitude":  "-8.32",
+                                                          "longitude":  "121.64",
                                                           "oceanParameter":  "PO",
-                                                          "topographyBathymetry":  "1846 m",
+                                                          "topographyBathymetry":  "1075 m",
                                                           "advice":  "This bulletin is being issued as advice. Only national/state/local authorities and disaster management officers have the authority to make decisions regarding the official threat and warning status in their coastal areas and any action to be taken in response.",
                                                           "updates":  "No further bulletins will be issued by ITEWC INCOIS for this event unless additional information becomes available.",
                                                           "sequence":  [
 
                                                                        ],
-                                                          "url":  "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC\u0026eventId=incois2026qbhk\u0026aos=public\u0026currBullNo=1\u0026latestBullNo=1"
+                                                          "url":  "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC\u0026eventId=incois2026qbhx\u0026aos=public\u0026currBullNo=1\u0026latestBullNo=1"
                                                       }
                                                   ],
-                                     "url":  "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC\u0026eventId=incois2026qbhk\u0026aos=public\u0026currBullNo=1\u0026latestBullNo=1"
+                                     "url":  "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC\u0026eventId=incois2026qbhx\u0026aos=public\u0026currBullNo=1\u0026latestBullNo=1"
                                  },
                     "recentBulletin":  {
                                            "number":  1,
@@ -1758,7 +1758,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-15T23:00:40.4271423+00:00",
+                          "fetchedAt":  "2026-08-15T23:15:46.3848524+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -4394,7 +4394,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  11.53,
-                      "pfzAgeHours":  11.53
+                      "osfAgeHours":  11.77,
+                      "pfzAgeHours":  11.77
                   }
 }
