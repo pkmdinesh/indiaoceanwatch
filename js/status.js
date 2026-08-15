@@ -40,6 +40,9 @@ function render(data) {
         item.addEventListener('click',() => openSeismicDetails(event,event.bulletin));
         return item;
       }));
+      if (new URLSearchParams(location.search).get('print') === 'earthquake' && data.seismic.latest && !ids('seismicDialog').open) {
+        openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin);
+      }
       const stormDemoBulletin = demoMode === 'storm' ? data.stormSurge.recentBulletin : null;
       renderStormSurge(stormDemoBulletin?.message || data.stormSurge.message,stormDemoBulletin || data.stormSurge.bulletin);
       ids('highWaveIssueDate').textContent = `Issue date ${data.highWave.issueDate || '—'}`;

@@ -9,6 +9,7 @@ const APP_SHELL = [
   './css/layout.css',
   './css/components.css',
   './css/responsive.css',
+  './css/print.css',
   './js/config.js',
   './js/app.js',
   './js/share.js',

@@ -232,6 +232,60 @@ function osfStateCoordinates(name) {
       });
     }
 
+    const nextOsfMapPaint = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+    async function drawOsfSvgOverlay(context,svg,containerRect) {
+      const rect=svg.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const clone=svg.cloneNode(true);
+      clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+      clone.setAttribute('width',rect.width);
+      clone.setAttribute('height',rect.height);
+      const source=new XMLSerializer().serializeToString(clone);
+      const image=new Image();
+      const objectUrl=URL.createObjectURL(new Blob([source],{type:'image/svg+xml;charset=utf-8'}));
+      try {
+        await new Promise((resolve,reject) => { image.onload=resolve; image.onerror=reject; image.src=objectUrl; });
+        context.drawImage(image,rect.left-containerRect.left,rect.top-containerRect.top,rect.width,rect.height);
+      } finally { URL.revokeObjectURL(objectUrl); }
+    }
+
+    async function captureOsfMapCanvas() {
+      const container=ids('osfMapCanvas');
+      osfMap.invalidateSize({animate:false});
+      fitOsfVisibleBounds();
+      await nextOsfMapPaint();
+      const tileImages=[...container.querySelectorAll('.leaflet-tile-pane img.leaflet-tile')].filter(image => image.complete && image.naturalWidth);
+      await Promise.all(tileImages.map(image => image.decode?.().catch(()=>{}) || Promise.resolve()));
+      await nextOsfMapPaint();
+      const rect=container.getBoundingClientRect();
+      const scale=Math.min(window.devicePixelRatio || 1,2);
+      const canvas=document.createElement('canvas');
+      canvas.width=Math.max(1,Math.round(rect.width*scale));
+      canvas.height=Math.max(1,Math.round(rect.height*scale));
+      const context=canvas.getContext('2d');
+      context.scale(scale,scale);
+      context.fillStyle='#dce8e5';
+      context.fillRect(0,0,rect.width,rect.height);
+      tileImages.forEach(image => {
+        const tileRect=image.getBoundingClientRect();
+        if (tileRect.right<=rect.left || tileRect.bottom<=rect.top || tileRect.left>=rect.right || tileRect.top>=rect.bottom) return;
+        context.drawImage(image,tileRect.left-rect.left,tileRect.top-rect.top,tileRect.width,tileRect.height);
+      });
+      for (const svg of container.querySelectorAll('.leaflet-overlay-pane svg')) await drawOsfSvgOverlay(context,svg,rect);
+      container.querySelectorAll('.osf-map-marker-label').forEach(marker => {
+        const markerRect=marker.getBoundingClientRect();
+        const x=markerRect.left-rect.left+markerRect.width/2;
+        const y=markerRect.top-rect.top+markerRect.height/2;
+        const radius=Math.min(markerRect.width,markerRect.height)/2;
+        context.beginPath(); context.arc(x,y,radius,0,Math.PI*2);
+        context.fillStyle=getComputedStyle(marker).backgroundColor || '#fff'; context.fill();
+        context.lineWidth=3; context.strokeStyle='#fff'; context.stroke();
+        context.fillStyle='#082f3c'; context.font='900 9px Arial'; context.textAlign='center'; context.textBaseline='middle'; context.fillText(marker.textContent.trim(),x,y);
+      });
+      return canvas;
+    }
+
     async function shareOsfMap() {
       const selected=[...osfSelectedServices];
       const selectionTitle=selected.length ? selected.join(' + ') : 'No layers selected';
@@ -239,7 +293,7 @@ function osfStateCoordinates(name) {
       if (typeof html2canvas !== 'function') { status.textContent='Map image sharing could not be loaded.'; return; }
       status.textContent='Preparing current map image…';
       try {
-        const mapCanvas=await html2canvas(ids('osfMapCanvas'),{useCORS:true,allowTaint:false,backgroundColor:'#dce8e5',logging:false,scale:Math.min(window.devicePixelRatio || 1,2)});
+        const mapCanvas=await captureOsfMapCanvas();
         const headerHeight=64;
         const output=document.createElement('canvas'); output.width=mapCanvas.width; output.height=mapCanvas.height+headerHeight;
         const context=output.getContext('2d'); context.fillStyle='#082f3c'; context.fillRect(0,0,output.width,headerHeight); context.drawImage(mapCanvas,0,headerHeight);

@@ -47,8 +47,8 @@
   .forecast-title{align-items:flex-start;flex-wrap:wrap}
   .forecast-meta{width:100%;text-align:left}
   .issue-date{white-space:normal}
-  .severity-row{grid-template-columns:minmax(0,1fr);gap:4px}
-  .severity-row-label{width:100%;padding-top:0;white-space:normal}
+  .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr);gap:6px}
+  .severity-row-label{width:auto;padding-top:4px;white-space:normal}
   .severity-row-states{width:100%;overflow-x:auto;padding-bottom:2px}
   .severity-state-chip{max-width:none;white-space:nowrap;overflow-wrap:normal}
 }
