@@ -1,4 +1,15 @@
 /* Verified overrides added after the original compatibility cascade. */
+
+/* A 1024px laptop exposes about 1138 CSS pixels at 90% browser zoom.
+   Switch only the header before its centred title and right-side controls
+   collide, while retaining the two-column advisory-card layout. */
+@media(max-width:1200px){
+  .header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px}
+  .ocean-brand{min-width:0}
+  .title{position:static;grid-column:1/-1;grid-row:2;transform:none;width:100%;max-width:none;padding-top:5px}
+  .title h1{white-space:normal}
+  .header-actions{grid-column:2;grid-row:1}
+}
 .advisory-dialog{overflow-x:hidden;overflow-y:auto}
 
 @media(max-width:700px){

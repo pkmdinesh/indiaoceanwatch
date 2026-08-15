@@ -1,4 +1,7 @@
-const CACHE_NAME = 'ocean-watch-v83';
+importScripts('./js/config.js');
+
+const CONFIG = self.OCEAN_WATCH_CONFIG;
+const CACHE_NAME = `${CONFIG.CACHE_PREFIX}-v${CONFIG.CACHE_VERSION}`;
 const APP_SHELL = [
   './',
   './index.html',
@@ -6,6 +9,7 @@ const APP_SHELL = [
   './css/layout.css',
   './css/components.css',
   './css/responsive.css',
+  './js/config.js',
   './js/app.js',
   './js/share.js',
   './js/map.js',
