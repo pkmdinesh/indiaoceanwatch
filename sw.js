@@ -1,8 +1,22 @@
-const CACHE_NAME = 'ocean-watch-v79';
+const CACHE_NAME = 'ocean-watch-v82';
 const APP_SHELL = [
   './',
   './index.html',
-  './announcements.js',
+  './css/base.css',
+  './css/layout.css',
+  './css/components.css',
+  './css/responsive.css',
+  './js/app.js',
+  './js/share.js',
+  './js/map.js',
+  './js/pfz.js',
+  './js/advisory.js',
+  './js/tsunami.js',
+  './js/cyclone.js',
+  './js/seismic.js',
+  './js/status.js',
+  './js/pwa.js',
+  './js/announcements.js',
   './manifest.webmanifest',
   './icons/ocean-watch-v3-192.png',
   './icons/ocean-watch-v3-512.png',
@@ -34,7 +48,8 @@ async function networkFirst(request, fallbackUrl) {
   const cache = await caches.open(CACHE_NAME);
   try {
     const response = await fetch(request,{cache:'no-store'});
-    if (response.ok) cache.put(request,response.clone());
+    if (!response.ok) return (await cache.match(request)) || (fallbackUrl ? await cache.match(fallbackUrl) : null) || response;
+    await cache.put(request,response.clone());
     return response;
   } catch {
     return (await cache.match(request)) || (fallbackUrl ? await cache.match(fallbackUrl) : Response.error());
@@ -46,7 +61,8 @@ async function statusNetworkFirst(request) {
   const cacheKey = new Request(new URL('./status.json',self.location.href));
   try {
     const response = await fetch(request,{cache:'no-store'});
-    if (response.ok) await cache.put(cacheKey,response.clone());
+    if (!response.ok) return (await cache.match(cacheKey)) || response;
+    await cache.put(cacheKey,response.clone());
     return response;
   } catch {
     return (await cache.match(cacheKey)) || Response.error();
@@ -65,11 +81,17 @@ self.addEventListener('fetch',event => {
     return;
   }
   if (url.pathname.endsWith('/announcements.js')) {
-  event.respondWith(networkFirst(event.request, './announcements.js'));
-  return;
-}
-  event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-    if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(event.request,response.clone()));
+    event.respondWith(networkFirst(event.request,'./js/announcements.js'));
+    return;
+  }
+  event.respondWith((async () => {
+    const cached = await caches.match(event.request);
+    if (cached) return cached;
+    const response = await fetch(event.request);
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.put(event.request,response.clone());
+    }
     return response;
-  })));
+  })());
 });

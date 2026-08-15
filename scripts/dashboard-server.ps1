@@ -1,8 +1,9 @@
 param([int]$Port = 8765)
 
 $ErrorActionPreference = 'Stop'
-$projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$updater = Join-Path $projectRoot 'update-status.ps1'
+$scriptsRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+$projectRoot = Split-Path -Parent $scriptsRoot
+$updater = Join-Path $scriptsRoot 'update-status.ps1'
 $prefix = "http://127.0.0.1:$Port/"
 
 & $updater -Quiet

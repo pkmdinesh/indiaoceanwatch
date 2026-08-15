@@ -31,7 +31,11 @@ jobs:
         shell: powershell
         run: |
           $minimumAgeHours = if ('${{ inputs.force }}' -eq 'true') { 0 } else { 0.20 }
-          .\update-status.ps1 -Quiet -MinimumAgeHours $minimumAgeHours
+          .\scripts\update-status.ps1 -Quiet -MinimumAgeHours $minimumAgeHours
+
+      - name: Validate generated snapshot
+        shell: powershell
+        run: .\scripts\validate-status.ps1 -Path .\status.json
 
       - name: Commit updated snapshot
         id: commit_status

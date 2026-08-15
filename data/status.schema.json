@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pkmdinesh.github.io/indiaoceanwatch/data/status.schema.json",
+  "title": "Ocean Watch status snapshot",
+  "type": "object",
+  "required": [
+    "updatedAt",
+    "lastAttemptAt",
+    "updateIntervalHours",
+    "tsunami",
+    "seismic",
+    "highWave",
+    "swellSurge",
+    "oceanCurrent",
+    "stormSurge",
+    "cyclone",
+    "pfz",
+    "errors",
+    "healthAlerts"
+  ],
+  "properties": {
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "lastAttemptAt": { "type": "string", "format": "date-time" },
+    "updateIntervalHours": { "type": "number", "exclusiveMinimum": 0 },
+    "source": { "type": "string" },
+    "tsunami": { "$ref": "#/$defs/messageService" },
+    "seismic": {
+      "type": "object",
+      "required": ["count", "recentEvents"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 },
+        "latest": { "type": ["object", "null"] },
+        "recentEvents": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": true
+    },
+    "highWave": { "$ref": "#/$defs/osfService" },
+    "swellSurge": { "$ref": "#/$defs/osfService" },
+    "oceanCurrent": { "$ref": "#/$defs/osfService" },
+    "stormSurge": { "$ref": "#/$defs/messageService" },
+    "cyclone": { "$ref": "#/$defs/messageService" },
+    "jointBulletin": { "type": ["object", "null"] },
+    "marineHeatWave": { "type": ["object", "null"] },
+    "pfz": {
+      "type": "object",
+      "required": ["sectors"],
+      "properties": {
+        "forecastDate": { "type": ["string", "null"] },
+        "validUntil": { "type": ["string", "null"] },
+        "sectors": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": true
+    },
+    "errors": { "type": "array" },
+    "healthAlerts": { "type": "array" },
+    "freshness": { "type": "object" }
+  },
+  "$defs": {
+    "messageService": {
+      "type": "object",
+      "required": ["message"],
+      "properties": {
+        "message": { "type": "string" },
+        "ok": { "type": "boolean" },
+        "bulletin": { "type": ["object", "null"] },
+        "recentBulletin": { "type": ["object", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "osfService": {
+      "type": "object",
+      "required": ["warning", "alert", "watch", "noThreat", "states"],
+      "properties": {
+        "issueDate": { "type": ["string", "null"] },
+        "warning": { "type": "array", "items": { "type": "string" } },
+        "alert": { "type": "array", "items": { "type": "string" } },
+        "watch": { "type": "array", "items": { "type": "string" } },
+        "noThreat": { "type": "array", "items": { "type": "string" } },
+        "states": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

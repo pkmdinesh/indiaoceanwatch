@@ -1,0 +1,340 @@
+*{box-sizing:border-box}
+.incois-logo{width:min(390px,31vw);height:52px;object-fit:contain;object-position:left center}
+.service-img{width:58px;height:42px;flex:none;object-fit:cover;border-radius:10px}
+.service-logo{width:58px;height:42px;flex:none;object-fit:contain}
+.source{margin-left:auto;flex:none;text-decoration:none;padding:7px 9px;border-radius:8px;background:#e7f0ed;font-size:11px;font-weight:800}
+.source:hover,.source:focus-visible{color:#fff;background:var(--teal);outline:0}
+.forecast{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;height:calc(100% - 55px)}
+.forecast-card{display:flex;min-height:0;flex-direction:column;padding:11px;border-radius:15px;background:#f5f8f6;border:1px solid var(--line)}
+.forecast-card.current-forecast{grid-column:1/-1}
+.forecast-title{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px}
+.forecast-title h3{margin:0;font-size:17px}
+.forecast-meta{display:grid;gap:2px;text-align:right}
+.kind{font-size:11px;color:var(--ink);font-weight:800;text-transform:uppercase}
+.issue-date{color:var(--green);font-size:11px;font-weight:900;white-space:nowrap}
+.dot{width:8px;height:8px;flex:none;border-radius:50%;background:currentColor}
+.alert{color:var(--orange)}
+.watch{color:var(--yellow)}
+.warning{color:var(--red)}
+.nothreat{color:var(--green)}
+.states{display:flex;flex-wrap:wrap;gap:4px}
+.tag{padding:4px 6px;border:1px solid transparent;border-radius:5px;background:#e4ece9;color:var(--ink);font-size:11px;font-weight:800;line-height:1.2;text-decoration:none}
+.empty{color:var(--ink);font-size:11px;font-weight:700;line-height:1.35}
+.severity-board{display:grid;gap:2px;min-height:0;overflow:auto;scrollbar-width:thin}
+.severity-row{display:grid;grid-template-columns:67px 1fr;gap:6px;align-items:start;padding:6px 0;border-top:1px solid var(--line)}
+.severity-row:first-child{border-top:0}
+.severity-row-label{display:inline-flex;align-items:center;gap:5px;padding-top:4px;font-size:10px;font-weight:900;text-transform:uppercase}
+.severity-row-states{display:flex;flex-wrap:wrap;gap:4px}
+.severity-state-chip{display:inline-flex;align-items:center;padding:4px 6px;border:1px solid transparent;border-radius:6px;color:var(--ink);font-family:inherit;font-size:11px;font-weight:800;line-height:1.2;text-decoration:none;cursor:pointer}
+.severity-state-chip:hover,.severity-state-chip:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+.severity-state-chip.warning{color:var(--ink);background:var(--warning-bg);border-color:#e9a29c}
+.severity-state-chip.alert{color:var(--ink);background:var(--alert-bg);border-color:#f2bd91}
+.severity-state-chip.watch{color:var(--ink);background:var(--watch-bg);border-color:#e5ce69}
+.severity-state-chip.noThreat{color:var(--ink);background:var(--safe-bg);border-color:#9fd2c1}
+.district-count{margin-left:3px;opacity:.72;font-size:1em;font-weight:400}
+.advisory-note{margin:7px 0 0;color:var(--muted);font-size:10px;font-weight:700;line-height:1.3}
+.advisory-dialog{width:min(620px,calc(100vw - 28px));max-height:calc(100dvh - 28px);margin:auto;padding:0;overflow-x:hidden;overflow-y:auto;border:0;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 25px 80px rgba(8,47,60,.28);overscroll-behavior:contain;touch-action:pan-y}
+.advisory-dialog::backdrop{background:rgba(4,28,36,.52);backdrop-filter:blur(3px)}
+.advisory-dialog-head{position:sticky;top:0;z-index:10;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:17px 18px 13px;border-bottom:1px solid var(--line);background:#fff}
+.advisory-dialog-head h2{margin:0;font:700 20px/1.15 Georgia,"Times New Roman",serif}
+.advisory-dialog-head p{margin:4px 0 0;color:var(--muted);font-size:11px;font-weight:800}
+.dialog-close{position:relative;z-index:11;display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border:0;border-radius:50%;background:#e7f0ed;color:var(--ink);font-size:20px;cursor:pointer}
+.dialog-close:hover,.dialog-close:focus-visible{color:#fff;background:var(--teal);outline:0}
+.advisory-details{display:grid;gap:9px;padding:14px 18px 19px;overscroll-behavior:contain}
+.district-advisory{padding:11px 12px;border:1px solid var(--line);border-left-width:5px;border-radius:11px;background:#f8faf9}
+.district-advisory.severity-warning{border-left-color:var(--red)}
+.district-advisory.severity-alert{border-left-color:var(--orange)}
+.district-advisory.severity-watch{border-left-color:var(--yellow)}
+.district-advisory.severity-noThreat{border-left-color:var(--green)}
+.district-advisory-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.district-advisory h3{margin:0;font-size:15px}
+.severity-pill{padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900;text-transform:uppercase}
+.severity-pill.warning{color:#8f241d;background:var(--warning-bg)}
+.severity-pill.alert{color:#93400c;background:var(--alert-bg)}
+.severity-pill.watch{color:#765900;background:var(--watch-bg)}
+.severity-pill.noThreat{color:#17634f;background:var(--safe-bg)}
+.district-advisory p{margin:7px 0 0;color:#294b55;font-size:14px;font-weight:650;line-height:1.45}
+.tsunami-status{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:var(--safe-bg);color:var(--green)}
+.safe-mark{display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:50%;color:#fff!important;background:var(--green);font-size:20px;font-weight:900}
+.tsunami-status strong{display:block;color:currentColor;font-size:20px}
+.tsunami-copy>span{display:block;margin-top:2px;color:var(--ink);font-size:11px;font-weight:600}
+.tsunami-copy{min-width:0}
+.bulletin-link{display:none;margin-top:6px;color:var(--ink);font-size:11px;font-weight:900}
+.bulletin-link.is-visible{display:inline-block}
+.advisory-alert{color:var(--orange)!important;background:var(--alert-bg)!important}
+.advisory-watch{color:var(--yellow)!important;background:var(--watch-bg)!important}
+.advisory-warning{color:var(--red)!important;background:var(--warning-bg)!important}
+.advisory-safe{color:var(--green)!important;background:var(--safe-bg)!important}
+.advisory-other{color:var(--ink)!important;background:#edf1f2!important}
+.advisory-other strong{font-size:14px;line-height:1.35}
+.advisory-alert .safe-mark{background:var(--orange)}
+.advisory-watch .safe-mark{background:var(--yellow)}
+.advisory-warning .safe-mark{background:var(--red)}
+.advisory-safe .safe-mark{background:var(--green)}
+.advisory-other .safe-mark{background:var(--red)}
+.seismic{display:grid;grid-template-columns:48px 1fr;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.seismic img{width:48px;height:48px;border-radius:10px;object-fit:contain}
+.seismic-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.seismic h3{margin:0;font-size:16px}
+.seismic p{margin:0;color:var(--ink);font-size:12px;font-weight:700;line-height:1.45}
+.seismic-additional{display:grid;gap:3px;margin-top:4px}
+.seismic-additional:empty{display:none}
+.seismic-additional p{padding-left:8px;border-left:3px solid var(--orange);font-size:10px}
+.earthquake-chip{display:inline-flex;flex:none;padding:5px 8px;border-radius:7px;background:#e7f0ed;text-decoration:none;font-size:10px;font-weight:900}
+.earthquake-chip:hover,.earthquake-chip:focus-visible{color:#fff;background:var(--teal);outline:0}
+.mini h3{margin:0 0 6px;font-size:13px}
+.mini p{margin:0;color:var(--ink);font-size:11px;font-weight:700;line-height:1.45}
+.seismic b{color:var(--ink)}
+.mini{min-height:0;padding:14px 16px}
+.mini h2{margin:0;white-space:nowrap;font:700 clamp(18px,1.7vw,26px)/1 Georgia,"Times New Roman",serif}
+.storm-block{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.storm-block .source{margin-left:0;justify-self:end}
+.storm-block #surge-title{font-size:clamp(16px,1.45vw,22px)}
+.storm-status{display:flex;align-items:center;gap:9px;padding:9px;border-radius:12px;background:var(--safe-bg);color:var(--green)}
+.storm-mark{display:grid;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;color:#fff;background:var(--green);font-size:16px;font-weight:900}
+.storm-copy{min-width:0}
+.storm-copy strong,.storm-copy span{display:block}
+.storm-copy strong{font-size:12px;line-height:1.35}
+.storm-copy span{margin-top:2px;color:var(--ink);font-size:10px;font-weight:700}
+.storm-status.advisory-other{background:#edf1f2!important}
+.storm-status.advisory-other .storm-mark{background:var(--red)}
+.storm-status.advisory-safe .storm-mark{background:var(--green)}
+.pfz-title{font-size:clamp(16px,1.35vw,21px)!important}
+.pfz-date{color:var(--green)!important;font-size:13px;font-weight:800}
+.pfz-states{margin-top:7px}
+.pfz-chip{color:#082f3c;cursor:pointer}
+.pfz-chip:hover,.pfz-chip:focus-visible,.pfz-chip[aria-expanded="true"],.landing-chip[aria-expanded="true"]{border-color:var(--teal);outline:2px solid var(--teal);outline-offset:1px}
+.pfz-details{display:grid;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.pfz-details[hidden]{display:none}
+.pfz-details h3{margin:0;font-size:13px}
+.pfz-landing-centers{display:flex;flex-wrap:wrap;gap:4px}
+.landing-chip{color:var(--ink);cursor:pointer}
+.pfz-messages{display:grid;gap:6px}
+.pfz-message{padding:8px 9px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.pfz-message summary{color:var(--green);font-size:11px;font-weight:850;cursor:pointer}
+.pfz-message-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 12px;margin-top:8px;font-size:11px}
+.pfz-message-field{display:grid;gap:1px}
+.pfz-message-field strong{color:var(--muted);font-size:9px;text-transform:uppercase}
+.pfz-message-field span{font-weight:750}
+.cyclone-card{border-top:1px solid var(--line)}
+.cyclone-heading{display:flex;align-items:center;gap:9px;min-width:0}
+.cyclone-icon{width:38px;height:38px;flex:none;object-fit:contain}
+.cyclone-card h2{font-size:clamp(16px,1.35vw,21px)}
+.cyclone-status{padding:9px 10px;border-radius:12px;background:var(--safe-bg)}
+.cyclone-status strong{display:block;font-size:13px;line-height:1.3}
+.cyclone-status p{margin:4px 0 0;font-size:10px;line-height:1.4}
+.cyclone-status p[hidden]{display:none}
+.cyclone-status time{display:block;margin-top:5px;color:var(--muted);font-size:9px;font-weight:800}
+.cyclone-status.level-yellow{background:var(--watch-bg);border-left:5px solid var(--yellow)}
+.cyclone-status.level-yellow strong{color:#765900}
+.cyclone-status.level-orange{background:var(--alert-bg);border-left:5px solid var(--orange)}
+.cyclone-status.level-orange strong{color:#93400c}
+.cyclone-status.level-red{background:var(--warning-bg);border-left:5px solid var(--red)}
+.cyclone-status.level-red strong{color:#8f241d}
+.cyclone-status.level-safe{border-left:5px solid var(--green)}
+.cyclone-status.level-safe strong{color:var(--green)}
+.cyclone-status.level-safe p{font-weight:700}
+.cyclone-heading-copy{min-width:0}
+.joint-bulletin-card{margin-top:10px;padding:11px 12px;border:1px solid #b9dfd2;border-left:5px solid var(--green);border-radius:12px;background:var(--safe-bg);box-shadow:0 3px 10px rgba(8,47,60,.05)}
+.joint-bulletin-card[hidden]{display:none}
+.joint-bulletin-card.is-recent{border-color:#e9a29c;border-left-color:var(--red);background:var(--warning-bg);box-shadow:0 5px 16px rgba(201,54,43,.14)}
+.joint-bulletin-message{margin:0;color:var(--ink);font-size:12px;font-weight:800;line-height:1.45;overflow-wrap:anywhere}
+.joint-bulletin-time{display:block;margin-top:6px;color:var(--muted);font-size:9px;font-weight:800}
+.joint-bulletin-link{display:inline-block;margin-top:7px;color:var(--teal);font-size:11px;font-weight:900;line-height:1.35;text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+.joint-bulletin-link[hidden],.joint-bulletin-time[hidden]{display:none}
+.joint-bulletin-card.is-recent .joint-bulletin-message,.joint-bulletin-card.is-recent .joint-bulletin-time,.joint-bulletin-card.is-recent .joint-bulletin-link{color:#8f241d}
+.health-separator{color:var(--muted)}
+.storm-block .service-logo{grid-row:1 / span 2}
+.storm-block .source{grid-column:2;grid-row:2;justify-self:end;transform:none}
+.severity-row-label.noThreat{color:var(--green)}
+.install-button,.install-button:hover,.install-button:focus-visible,.install-icon{font-size:14px;line-height:1}
+}
+    @media(max-width:700px){html,body{width:100%;margin:0;padding:0;overflow-x:hidden}
+.ocean-brand{grid-column:1;grid-row:1}
+}
+    @media(max-width:520px){.header-actions{gap:3px}
+.install-button{width:34px;height:34px;justify-content:center;padding:0}
+.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+}
+    .install-button{color:#fff;background:#082f3c;border-color:#082f3c;box-shadow:0 5px 14px rgba(8,47,60,.22)}.install-button .install-icon{color:#68e0e5}.install-button:hover,.install-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;box-shadow:0 7px 18px rgba(8,127,132,.3)}
+    .ocean-brand{display:flex;align-items:center;gap:10px;flex:none;text-decoration:none}.brand-monogram{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;color:#fff;background:linear-gradient(145deg,#082f3c,#087f84);box-shadow:0 7px 18px rgba(8,47,60,.2);font:900 14px/1 Georgia,"Times New Roman",serif;letter-spacing:-.04em}.brand-copy{display:grid;gap:2px}.brand-copy strong{font:700 20px/1 Georgia,"Times New Roman",serif}.brand-copy small{color:var(--muted);font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.ocean-brand:hover .brand-monogram,.ocean-brand:focus-visible .brand-monogram{background:linear-gradient(145deg,#075f68,#0da0a6)}.ocean-brand:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:14px}
+    .brand-image{width:48px;height:48px;flex:none;border-radius:14px;object-fit:cover;box-shadow:0 7px 18px rgba(8,47,60,.2)}
+    @media(max-width:520px){.brand-image{width:42px;height:42px}
+.brand-copy strong{font-size:17px}
+}
+    @media(min-width:851px){.ocean .forecast{height:calc(100% - 74px)}
+}
+    @media(max-width:700px){.content{grid-template-columns:1fr;padding:10px}
+.forecast{grid-template-columns:1fr}
+.forecast-card.current-forecast{grid-column:auto}
+}
+    .seismic-event-link:is(button){width:100%;padding:0;border:0;background:transparent;font-family:inherit;text-align:left;cursor:pointer}.seismic-event-link:is(button):disabled{cursor:default;text-decoration:none}.seismic-dialog{width:min(700px,calc(100% - 28px))}.seismic-dialog-body{display:grid;gap:10px;padding:14px 18px 19px}.event-map{position:relative;height:320px;overflow:hidden;border:1px solid var(--line);border-radius:13px;background:#dce8e5}.event-map-canvas{width:100%;height:100%;min-height:320px}.event-map .leaflet-control-layers{font-family:Arial,sans-serif}.event-map .leaflet-control-attribution{font-size:8px}.earthquake-leaflet-marker{width:22px;height:22px;border:4px solid #fff;border-radius:50%;background:var(--red);box-shadow:0 2px 10px rgba(8,47,60,.6)}.event-map-label{position:absolute;left:10px;bottom:22px;display:flex;flex-direction:column;gap:6px;z-index:500;pointer-events:none}.event-map-label span{display:inline-block;width:max-content;max-width:100%;padding:6px 9px;border-radius:7px;background:rgba(8,47,60,.86);color:#fff;font-size:11px;font-weight:800}.map-attribution{margin:-4px 0 0;color:var(--muted);font-size:9px;font-weight:700;text-align:right}.event-setting{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;padding:9px 10px;border-radius:10px;background:var(--safe-bg)}.event-setting strong{flex:none;color:var(--green);font-size:12px}.event-setting span{font-size:11px;font-weight:700;line-height:1.4}.bulletin-groups{display:grid;gap:9px}.bulletin-section{border:1px solid var(--line);border-radius:10px;background:#f8faf9}.bulletin-section>summary{padding:11px 12px;color:var(--ink);font-size:12px;font-weight:900;cursor:pointer}.bulletin-content{display:grid;gap:8px;padding:0 10px 10px}.bulletin-field{border-top:1px solid var(--line)}.bulletin-field summary{padding:9px 2px;color:var(--ink);font-size:11px;font-weight:900;cursor:pointer}.bulletin-field p{margin:0;padding:0 2px 9px;color:#294b55;font-size:12px;font-weight:650;line-height:1.5}.event-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;margin:0;padding:0 2px 9px}.event-facts div{min-width:0}.event-facts dt{color:var(--muted);font-size:9px;font-weight:800;text-transform:uppercase}.event-facts dd{margin:2px 0 0;color:var(--ink);font-size:12px;font-weight:800;overflow-wrap:anywhere}.bulletin-unavailable{margin:0;padding:10px 12px;border-radius:10px;background:var(--watch-bg);color:var(--ink);font-size:12px;font-weight:800}.event-bulletin-link{justify-self:end;margin-top:2px}.event-bulletin-link[hidden]{display:none}
+    @media(max-width:700px){html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.source{padding:8px 10px;font-size:12px}
+.forecast-title h3{font-size:18px}
+.kind{font-size:12px}
+.issue-date{font-size:13px}
+.severity-row-label{font-size:12px}
+.severity-state-chip{padding:6px 8px;font-size:14px;line-height:1.3}
+.district-count{font-size:1em}
+.empty{font-size:12px}
+.advisory-note{font-size:12px;line-height:1.45}
+.tsunami-status strong{font-size:21px}
+.tsunami-copy>span,.seismic-event-link{font-size:14px;font-weight:700;line-height:1.5}
+.storm-copy strong,.cyclone-status strong{font-size:14px}
+.storm-copy span,.cyclone-status p{font-size:13px;line-height:1.5}
+.cyclone-status time{font-size:12px}
+.joint-bulletin-message{font-size:14px;line-height:1.5}
+.joint-bulletin-link{font-size:13px}
+.joint-bulletin-time{font-size:12px}
+.pfz-date{font-size:14px;font-weight:700;line-height:1.45}
+.tag{padding:6px 8px;font-size:12px}
+.pfz-chip{font-size:14px;font-weight:700;color:#082f3c}
+.pfz-landing-centers .tag{font-size:14px}
+.pfz-message summary,.pfz-message-grid{font-size:13px}
+.pfz-message-field strong{font-size:13px}
+.seismic-dialog{width:100%;max-width:none;max-height:90dvh;margin:auto 0 0;border-radius:20px 20px 0 0}
+.seismic-dialog-body{padding:12px 15px 18px}
+.event-map{min-height:210px}
+.event-map-canvas{min-height:210px}
+.seismic-dialog .event-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px}
+.bulletin-section summary,.bulletin-section p,.event-facts dd,.event-setting strong,.event-setting span{font-size:13px}
+}
+    @media(max-width:700px){.seismic-dialog .event-map{height:260px;min-height:0}
+.seismic-dialog .event-map-canvas{height:260px;min-height:260px}
+.seismic-dialog .bulletin-section>summary,.seismic-dialog .bulletin-field summary,.seismic-dialog .bulletin-field p{font-size:13px}
+}
+    .share-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:7px 10px;border:1px solid #082f3c;border-radius:9px;background:#082f3c;color:#fff;font:800 11px/1 inherit;cursor:pointer;box-shadow:0 5px 14px rgba(8,47,60,.22)}.share-button .share-icon{color:#68e0e5}.share-button:hover,.share-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;outline:0;box-shadow:0 7px 18px rgba(8,127,132,.3)}.share-icon{font-size:14px;line-height:1}.share-dialog{width:min(390px,calc(100vw - 24px));padding:0;border:0;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 25px 80px rgba(8,47,60,.28)}.share-dialog::backdrop{background:rgba(4,28,36,.52);backdrop-filter:blur(3px)}.share-dialog-body{display:grid;justify-items:center;gap:13px;padding:18px}.share-qr{display:grid;place-items:center;width:220px;height:220px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.share-qr canvas,.share-qr img{display:block!important;max-width:100%;height:auto!important}.share-qr-error{margin:0;padding:12px;color:var(--muted);font-size:11px;font-weight:800;line-height:1.45;text-align:center}.share-url{width:100%;margin:0;padding:9px 10px;border-radius:9px;background:#f3f7f5;color:var(--ink);font-size:11px;font-weight:750;line-height:1.45;text-align:center;overflow-wrap:anywhere}.share-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;width:100%}.share-action{min-width:112px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#e7f0ed;color:var(--ink);font:850 11px/1 inherit;cursor:pointer}.share-action:hover,.share-action:focus-visible{color:#fff;background:var(--teal);border-color:var(--teal);outline:0}.share-copy-status{min-height:1.2em;margin:0;color:var(--green);font-size:10px;font-weight:850;text-align:center}@media(max-width:520px){.share-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.share-button{width:34px;height:34px;padding:0}
+.share-dialog{width:calc(100vw - 16px);border-radius:18px}
+.share-qr{width:min(220px,70vw);height:min(220px,70vw)}
+}
+
+    /* Header action buttons: same desktop size and rounded pill shape. */
+    .share-button,.install-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:88px;min-width:88px;height:36px;min-height:36px;padding:0 12px;border:1px solid #082f3c;border-radius:999px;background:#082f3c;color:#fff;font:800 11px/1 inherit;cursor:pointer;box-shadow:0 5px 14px rgba(8,47,60,.22)}
+    .share-button .share-icon,.install-button .install-icon{display:block;width:clamp(16px,1.35vw,20px);height:clamp(16px,1.35vw,20px);flex:0 0 auto;color:#68e0e5;overflow:visible}
+    .share-button:hover,.share-button:focus-visible,.install-button:hover,.install-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;outline:0;box-shadow:0 7px 18px rgba(8,127,132,.3)}
+    .share-qr{box-sizing:border-box;aspect-ratio:1/1;display: inline-block}
+    .share-qr canvas,.share-qr img{display: inline-block;width:200px!important;height:200px!important;max-width:200px!important;max-height:200px!important;aspect-ratio:1/1!important;object-fit:contain!important}
+    @media(max-width:520px){.share-button,.install-button{width:34px;min-width:34px;height:34px;min-height:34px;padding:0}
+.share-button .share-icon,.install-button .install-icon{width:18px;height:18px}
+.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.share-qr canvas,.share-qr img{width:min(200px,calc(70vw - 20px))!important;height:min(200px,calc(70vw - 20px))!important;max-width:100%!important;max-height:100%!important}
+}
+
+    /* Keep header actions as readable chips and give the share dialog one scroll area. */
+    html:has(.share-dialog[open]),body:has(.share-dialog[open]){overflow:hidden}
+    .share-dialog{width:min(390px,calc(100vw - 24px));max-height:calc(100dvh - 24px);margin:auto;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+    .share-dialog .advisory-dialog-head{top:0}
+    .share-qr{display:grid}
+    .share-qr canvas{display:block!important}
+    .share-qr img{display:none!important}
+    @media(max-width:520px){.header-actions{flex-wrap:wrap}
+.share-button,.install-button{width:auto;min-width:78px;height:34px;min-height:34px;padding:0 11px}
+.share-button .share-icon,.install-button .install-icon{width:17px;height:17px}
+.share-label,.install-label{position:static;width:auto;height:auto;overflow:visible;clip:auto;clip-path:none;white-space:nowrap}
+.share-dialog{width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
+.share-dialog-body{padding:14px}
+.share-qr{width:min(220px,65vw);height:min(220px,65vw)}
+.share-qr canvas{width:min(200px,calc(65vw - 20px))!important;height:min(200px,calc(65vw - 20px))!important}
+}
+
+    /* Compact action chips, bulletin link, and contact details. */
+    .share-button,.install-button{border-radius:8px}
+    .joint-bulletin-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px}
+    .joint-bulletin-copy{min-width:0}
+    .joint-bulletin-link{align-self:center;margin:0;padding:7px 9px;border-radius:7px;background:#fff;color:var(--teal);text-decoration:none;white-space:nowrap;box-shadow:0 1px 4px rgba(8,47,60,.12)}
+    .joint-bulletin-link:hover,.joint-bulletin-link:focus-visible{background:var(--teal);color:#fff;outline:0}
+    .joint-bulletin-card.is-recent .joint-bulletin-link{color:#8f241d}.joint-bulletin-card.is-recent .joint-bulletin-link:hover,.joint-bulletin-card.is-recent .joint-bulletin-link:focus-visible{background:#8f241d;color:#fff}
+    .share-dialog .advisory-dialog-head{align-items:center}.share-dialog-logo{width:44px;height:44px;flex:none;border-radius:9px;object-fit:contain}.share-dialog-heading{min-width:0;flex:1}.severity-state-chip.severity-none-chip{border-color:#cbd3d4;background:#e4e8e8;color:#52666b;cursor:default}.pfz-chip.no-forecast{border-color:#cbd3d4;background:#e4e8e8;color:#52666b}.pfz-source-message{margin:0;padding:10px 12px;border-radius:9px;background:#f1f3f3;color:#52666b;font-size:11px;font-weight:750;line-height:1.45}.joint-bulletin-source-row,.cyclone-source-row{display:flex;justify-content:flex-end}.joint-bulletin-source-row{margin:2px 0 5px}.cyclone-source-row{margin-top:7px}.joint-bulletin-card{display:block;margin-top:0}.joint-bulletin-message{display:block;text-decoration:none}.joint-bulletin-message[href]{text-decoration:underline;text-underline-offset:2px}.cyclone-status{margin-top:10px}
+    .pfz-inline-message{margin:0;padding:9px 11px;border-left:4px solid #aab5b7;border-radius:7px;background:#eef1f1;color:#42585e;font-size:12px;font-weight:800;line-height:1.45}.cyclone-status{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}.cyclone-status-copy{min-width:0}.cyclone-imd-source{align-self:center;margin-right:3px}
+    .seismic-event-link{font-size:14px}.seismic-additional .seismic-event-link{font-size:12px}.event-setting strong{color:var(--ink);font-weight:900}@media(max-width:700px){.tsunami-copy>span,.seismic-event-link{font-size:16px}
+.seismic-additional .seismic-event-link{font-size:14px}
+}
+    .announcement-card{--notice-text:var(--ink);--notice-label:var(--green);--notice-symbol:#fff;--notice-accent:var(--green);--notice-link:var(--teal);--notice-bg:#e0f2eb;grid-column:1/-1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 14px!important;border-color:color-mix(in srgb,var(--notice-accent),#fff 58%)!important;background:linear-gradient(90deg,var(--notice-bg),#f7fbf9)!important}.announcement-card[hidden]{display:none}.announcement-label{display:inline-flex;align-items:center;gap:7px;color:var(--notice-label);font-size:11px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}.announcement-symbol{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;color:var(--notice-symbol);background:var(--notice-accent);font:900 12px/1 Georgia,serif}.announcement-message{min-width:0;margin:0;color:var(--notice-text);font-size:13px;font-weight:800;line-height:1.4}.announcement-link{margin-left:5px;color:var(--notice-link);font-weight:900;text-underline-offset:2px}.announcement-next{display:grid;place-items:center;width:32px;height:30px;border:1px solid #9fd2c1;border-radius:7px;background:#fff;color:var(--notice-link);font-size:16px;font-weight:900;cursor:pointer}.announcement-next:hover,.announcement-next:focus-visible{color:#fff;background:var(--notice-accent);outline:0}.announcement-next[hidden]{display:none}@media(max-width:700px){.announcement-card{grid-template-columns:1fr auto}
+.announcement-label{grid-column:1}
+.announcement-message{grid-column:1/-1;grid-row:2}
+.announcement-next{grid-column:2;grid-row:1}
+.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.joint-bulletin-card{grid-template-columns:minmax(0,1fr) auto}
+.joint-bulletin-link{padding:7px;font-size:11px}
+.contact-copy{padding:18px}
+.contact-copy address p{font-size:13px}
+.contact-image{min-height:180px;max-height:230px;object-position:center 52%}
+}
+    .tsunami-status{gap:9px;padding:9px}.tsunami-status .safe-mark{width:30px;height:30px;font-size:16px}.tsunami-status .tsunami-message{font-size:12px;line-height:1.35}.tsunami-message-window{min-width:0;overflow:hidden}.tsunami-status.advisory-safe{color:#238269!important}.tsunami-status.advisory-safe .safe-mark{background:#238269}.tsunami-status.advisory-safe .tsunami-copy>span{font-size:10px;line-height:1.35}.tsunami-status.advisory-info{color:var(--ink)!important;background:#fff!important;border:1px solid var(--line)}.tsunami-status.advisory-info .safe-mark{color:#fff!important;background:#6f7f83!important}.tsunami-status.advisory-info .tsunami-copy{display:flex;flex-direction:column}.tsunami-status.advisory-info .tsunami-copy>span{order:-1;margin:0 0 4px;color:var(--ink);font-size:12px;line-height:1.35}.tsunami-status.advisory-info .tsunami-message{display:inline-block;width:max-content;min-width:100%;padding-left:100%;white-space:nowrap;color:var(--ink);animation:tsunami-message-scroll 22s linear infinite}.tsunami-status.advisory-info:hover .tsunami-message{animation-play-state:paused}@keyframes tsunami-message-scroll{to{transform:translateX(-100%)}
+}@media(prefers-reduced-motion:reduce){.tsunami-status.advisory-info .tsunami-message{width:auto;min-width:0;padding-left:0;white-space:normal;animation:none}
+}
+    .forecast-card .alert{color:#FF8C00}.forecast-card .warning{color:#FF0000}.forecast-card .nothreat,.forecast-card .noThreat{color:#238269}.forecast-card .severity-row-label.watch,.forecast-card .severity-state-chip.watch{color:#EDC001}.forecast-card .severity-row-label.watch .dot{color:#FAFA33}
+    .cyclone-status.level-yellow,.cyclone-status.level-yellow strong,.cyclone-status.level-yellow p{color:#EDC001}
+    .cyclone-status.level-orange,.cyclone-status.level-orange strong,.cyclone-status.level-orange p{color:#FF8C00}
+    .cyclone-status.level-red,.cyclone-status.level-red strong,.cyclone-status.level-red p{color:#FF0000}
+    .cyclone-status.level-safe,.cyclone-status.level-safe strong,.cyclone-status.level-safe p{color:#238269}
+    .joint-bulletin-card.level-yellow .joint-bulletin-message,.joint-bulletin-card.level-yellow .joint-bulletin-time,.joint-bulletin-card.level-yellow .joint-bulletin-link{color:#EDC001}.joint-bulletin-card.level-yellow{border-left-color:#FAFA33;background:var(--watch-bg);box-shadow:0 5px 16px rgba(237,192,1,.14)}
+    .joint-bulletin-card.level-orange .joint-bulletin-message,.joint-bulletin-card.level-orange .joint-bulletin-time,.joint-bulletin-card.level-orange .joint-bulletin-link{color:#FF8C00}.joint-bulletin-card.level-orange{border-left-color:#FF8C00;background:var(--alert-bg);box-shadow:0 5px 16px rgba(255,140,0,.14)}
+    .joint-bulletin-card.level-red .joint-bulletin-message,.joint-bulletin-card.level-red .joint-bulletin-time,.joint-bulletin-card.level-red .joint-bulletin-link{color:#FF0000}.joint-bulletin-card.level-red{border-left-color:#FF0000;background:var(--warning-bg);box-shadow:0 5px 16px rgba(255,0,0,.14)}
+    .joint-bulletin-card.level-safe .joint-bulletin-message,.joint-bulletin-card.level-safe .joint-bulletin-time,.joint-bulletin-card.level-safe .joint-bulletin-link{color:#238269}.joint-bulletin-card.level-safe{border-left-color:#238269;background:var(--safe-bg);box-shadow:0 3px 10px rgba(35,130,105,.10)}
+    .joint-bulletin-card.level-expired{border-color:#cbd3d4;border-left-color:#819195;background:#eef1f1}.joint-bulletin-card.level-expired .joint-bulletin-message,.joint-bulletin-card.level-expired .joint-bulletin-time,.joint-bulletin-card.level-expired .joint-bulletin-link{color:#52666b}
+    .joint-bulletin-card.level-info{border-color:var(--line);border-left-color:#6f7f83;background:#fff;box-shadow:0 3px 10px rgba(8,47,60,.06)}.joint-bulletin-card.level-info .joint-bulletin-message,.joint-bulletin-card.level-info .joint-bulletin-time{color:var(--ink)}.joint-bulletin-card.level-info .joint-bulletin-link{color:var(--teal)}
+    .storm-status.advisory-info{color:var(--ink)!important;background:#fff!important;border:1px solid var(--line)}.storm-status.advisory-info .storm-mark{color:#fff;background:#6f7f83}.storm-status.advisory-info .storm-copy{display:flex;min-width:0;flex-direction:column}.storm-status.advisory-info .storm-copy>span{order:-1;margin:0 0 4px;color:var(--ink);font-size:10px}.storm-message-window{min-width:0;overflow:hidden}.storm-status.advisory-info .storm-message-window strong{display:inline-block;width:max-content;min-width:100%;padding-left:100%;white-space:nowrap;color:var(--ink);animation:storm-message-scroll 22s linear infinite}.storm-status.advisory-info:hover .storm-message-window strong{animation-play-state:paused}@keyframes storm-message-scroll{to{transform:translateX(-100%)}
+}@media(prefers-reduced-motion:reduce){.storm-status.advisory-info .storm-message-window strong{width:auto;min-width:0;padding-left:0;white-space:normal;animation:none}
+}
+    .advisory-dialog .severity-pill.warning{color:#FF0000}.advisory-dialog .severity-pill.alert{color:#FF8C00}.advisory-dialog .severity-pill.watch{color:#EDC001}.advisory-dialog .severity-pill.noThreat{color:#238269}
+    .seismic-message-wrap.is-recent .seismic-event-link{color:#8F241D}.seismic-message-wrap.is-older #seismicMessage{color:#238269}.earthquake-leaflet-marker{background:#8F241D}
+    .announcement-card{display:flex;align-items:center;gap:10px;padding:8px 12px!important;border-color:#cbd3d4!important;background:#f5f7f7!important}.announcement-card[hidden]{display:none}.announcement-label{flex:none;color:var(--ink)}.announcement-symbol{color:var(--ink);background:#e4e8e8}.announcement-message{display:flex;flex-wrap:wrap;gap:6px}.active-advisory-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border:1px solid currentColor;border-radius:7px;font-size:11px;font-weight:900;line-height:1.2}.active-advisory-chip.warning{color:#FF0000;background:var(--warning-bg)}.active-advisory-chip.alert{color:#FF8C00;background:var(--alert-bg)}.active-advisory-chip.watch{color:#EDC001;background:var(--watch-bg)}.active-advisory-chip .dot{width:7px;height:7px}.announcement-next{display:none!important}@media(max-width:700px){.announcement-card{align-items:flex-start}
+.announcement-message{width:100%}
+.active-advisory-chip{font-size:12px}
+}
+    .active-advisory-chip.resolved{color:#238269;background:var(--safe-bg)}.active-advisory-chip.info{color:var(--ink);background:#fff;border-color:var(--line)}
+    .tsunami-status.advisory-info .safe-mark{color:#FF0000!important}.storm-status.advisory-info .storm-mark{color:#FF0000!important}.joint-bulletin-card.level-info{display:flex;align-items:flex-start;gap:9px}.joint-bulletin-info-mark{display:none;place-items:center;width:30px;height:30px;flex:none;border-radius:50%;background:#6f7f83;color:#FF0000;font-size:16px;font-weight:900}.joint-bulletin-card.level-info .joint-bulletin-info-mark{display:grid}
+    .osf-map-actions{display:flex;align-items:center;gap:6px;margin-left:auto}.osf-map-actions .source{margin-left:0!important}.osf-map-button{border:0;font-family:inherit;cursor:pointer}.osf-map-dialog{width:min(980px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:0;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 25px 80px rgba(8,47,60,.28)}.osf-map-dialog::backdrop{background:rgba(4,28,36,.52);backdrop-filter:blur(3px)}.osf-map-body{display:grid;gap:10px;padding:12px 16px 16px}.osf-map-canvas{height:min(620px,68dvh);min-height:380px;border:1px solid var(--line);border-radius:13px;background:#dce8e5}.osf-map-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.osf-map-legend{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;font-weight:800}.osf-map-legend span{display:inline-flex;align-items:center;gap:5px}.osf-map-legend i{width:10px;height:10px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #718287}.osf-map-share{padding:8px 11px;border:0;border-radius:8px;background:var(--ink);color:#fff;font:850 11px/1 inherit;cursor:pointer}.osf-map-share:hover,.osf-map-share:focus-visible{background:var(--teal);outline:0}.osf-map-note{margin:0;color:var(--muted);font-size:10px;font-weight:700}.osf-map-marker-label{display:grid;place-items:center;width:24px;height:24px;border:3px solid #fff;border-radius:50%;color:#082f3c;box-shadow:0 2px 8px rgba(8,47,60,.42);font:900 9px/1 Arial,sans-serif}.osf-popup{min-width:210px}.osf-popup>strong{font-size:13px}.osf-popup section{margin-top:8px;padding-top:7px;border-top:1px solid #d9e5e1}.osf-popup section strong,.osf-popup section small{display:block}.osf-popup section small{margin-top:2px;color:#5b7279;font-size:9px}.osf-popup p{margin:5px 0 0;font-size:11px;line-height:1.4}.osf-popup-messages{max-height:190px;overflow:auto}.osf-popup button{margin-top:8px;padding:6px 8px;border:0;border-radius:6px;background:#e7f0ed;color:var(--ink);font:800 10px/1 Arial,sans-serif;cursor:pointer}@media(max-width:700px){.osf-map-actions{gap:4px}
+.osf-map-actions .source{padding:7px;font-size:11px}
+.osf-map-dialog{width:100%;max-width:none;max-height:92dvh;margin:auto 0 0;border-radius:20px 20px 0 0}
+.osf-map-body{padding:10px}
+.osf-map-canvas{height:65dvh;min-height:340px}
+}
+.osf-popup-toggle{margin-top:7px;border:1px solid #cbd9d5;border-radius:8px;overflow:hidden;background:#fff}
+    .osf-popup-toggle summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 9px;cursor:pointer;list-style:none;color:#18383f;font-size:11px;font-weight:850}
+    .osf-popup-toggle summary::-webkit-details-marker{display:none}
+    .osf-popup-toggle summary::after{content:'+';font-size:15px;line-height:1}
+    .osf-popup-toggle[open] summary::after{content:'\2212'}
+    .osf-popup-toggle summary b{margin-left:auto;font-size:10px;text-transform:uppercase}
+    .osf-popup-toggle.warning summary{background:#ffe5e5}.osf-popup-toggle.warning summary b{color:#b00000}
+    .osf-popup-toggle.alert summary{background:#fff0dc}.osf-popup-toggle.alert summary b{color:#a34e00}
+    .osf-popup-toggle.watch summary{background:#fffbd0}.osf-popup-toggle.watch summary b{color:#8a7800}
+    .osf-popup-toggle.noThreat summary{background:#e4f3ed}.osf-popup-toggle.noThreat summary b{color:#17634f}
+    .osf-popup-toggle-body{max-height:180px;overflow:auto;padding:8px 9px;border-top:1px solid #dce6e3;background:#fff;color:#000}
+    .osf-popup-toggle-body small{display:block;color:#5b7279;font-size:9px}
+    .osf-popup-toggle-body p{margin:5px 0 0;color:#000;font-size:11px;font-weight:600;line-height:1.45}
+    .dialog-head-actions{display:flex;align-items:center;gap:7px;margin-left:auto}
+    button.marine-advisory-chip{font-family:inherit;cursor:pointer}
+    @media(max-width:700px){.tsunami-status.advisory-info .tsunami-message{display:block;width:auto;min-width:0;padding-left:0;white-space:normal;animation:none;transform:none}
+.tsunami-message-window{overflow:visible}
+}
+    .seismic-message-copy>.seismic-event-link,.seismic-additional .seismic-event-link{font-size:14px;font-weight:700;line-height:1.5}
+    @media(max-width:700px){.seismic-message-copy>.seismic-event-link,.seismic-additional .seismic-event-link{font-size:16px}
+}
+    @media(max-width:700px){.osf-map-dialog .leaflet-popup{width:min(360px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important}
+.osf-map-dialog .leaflet-popup-content-wrapper{width:100%;max-width:none;border-radius:12px}
+.osf-map-dialog .leaflet-popup-content{width:auto!important;max-width:none!important;margin:12px 14px}
+.osf-map-dialog .osf-popup{min-width:0;width:100%;max-width:none;overflow-wrap:anywhere}
+.osf-map-dialog .osf-popup>strong{font-size:14px}
+.osf-map-dialog .osf-popup>p{font-size:13px}
+.osf-map-dialog .osf-popup-toggle-body{max-height:38dvh}
+.osf-map-dialog .osf-popup-toggle summary{gap:8px;padding:9px;font-size:13px}
+.osf-map-dialog .osf-popup-toggle summary b{font-size:11px}
+.osf-map-dialog .osf-popup-toggle-body p{font-size:13px;line-height:1.5}
+.osf-map-dialog .osf-popup-toggle-body small{font-size:10px}
+}
+    @media(max-width:700px){.title p,.stamp,.stamp time,.live{font-size:13px}
+.tsunami-status .tsunami-message{font-size:15px;line-height:1.45}
+.tsunami-status.advisory-safe .tsunami-copy>span,.tsunami-status.advisory-info .tsunami-copy>span{font-size:12px;line-height:1.45}
+.tsunami-status .bulletin-link{font-size:12px;line-height:1.45}
+}
+    .dialog-share{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 10px;border:0;border-radius:8px;background:#082f3c;color:#fff;font:850 10px/1 inherit;cursor:pointer}
+    .dialog-share:hover,.dialog-share:focus-visible{background:var(--teal);outline:0}
+    .event-setting-copy{display:grid;gap:3px;min-width:0}.event-coast-distance{display:block;color:#082f3c;font-size:11px;font-weight:800}
+    .content .other-advisories-card{grid-column:1/-1}.marine-advisory-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}.marine-advisory-chip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:7px 11px;border:1px solid #8bcce8;border-radius:8px;background:#d9f3ff;color:#082f5b;font-size:12px;font-weight:850;line-height:1.2;text-decoration:none;box-shadow:0 2px 7px rgba(8,47,91,.08)}.marine-advisory-chip:hover,.marine-advisory-chip:focus-visible{border-color:#4aaed6;background:#bfeaff;color:#061f46;outline:0;box-shadow:0 4px 11px rgba(8,47,91,.16)}
+    @media(max-width:520px){.dialog-share{width:36px;padding:0;font-size:0}
+.dialog-share::before{content:'↗';font-size:16px}
+.advisory-dialog-head{gap:8px}
