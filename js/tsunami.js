@@ -29,9 +29,10 @@ function renderTsunami(message, bulletin, recentBulletin = null, checkedAt = nul
       const checkedText = checkedAt && !Number.isNaN(checkedAt.getTime()) ? checkedAt.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'}) : '—';
       ids('tsunamiCaption').textContent = noTsunami ? `Last Checked ${checkedText}${checkedText === '—' ? '' : ' IST'}` : eventParts.length ? `Bulletin-${bulletinLabel} evaluation · Event: ${eventParts.join(' · ')}` : `Official ITEWC Bulletin-${bulletinLabel} evaluation`;
       const link = ids('tsunamiBulletin');
-      if (supportingBulletin?.url) {
+      const bulletinUrl = supportingBulletin?.pdfUrl || supportingBulletin?.url;
+      if (bulletinUrl) {
         link.textContent = `Issued Bulletin-${bulletinLabel} ↗`;
-        link.href = supportingBulletin.url;
+        link.href = bulletinUrl;
         link.classList.add('is-visible');
       } else {
         link.removeAttribute('href');

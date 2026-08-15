@@ -14,9 +14,10 @@ function renderStormSurge(message, bulletin) {
       const eventParts = supportingBulletin ? [supportingBulletin.cyclone ? `Cyclone ${supportingBulletin.cyclone}` : '',supportingBulletin.issuedAt ? `Issued ${supportingBulletin.issuedAt} IST` : ''].filter(Boolean) : [];
       ids('stormCaption').textContent = safe ? 'Official ITEWC bulletin feed when checked' : eventParts.join(' · ') || 'Official storm surge advice';
       const link = ids('stormBulletin');
-      if (!safe && supportingBulletin?.url) {
+      const bulletinUrl = supportingBulletin?.pdfUrl || supportingBulletin?.url;
+      if (!safe && bulletinUrl) {
         link.textContent = `Issued Bulletin-${supportingBulletin.number || 'Latest'} ↗`;
-        link.href = supportingBulletin.url;
+        link.href = bulletinUrl;
         link.classList.add('is-visible');
       } else {
         link.removeAttribute('href');

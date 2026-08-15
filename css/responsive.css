@@ -41,14 +41,14 @@
 @media(max-width:420px){
   .announcement-card{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
   .announcement-label,.announcement-message{grid-column:1;width:100%;min-width:0}
-  .announcement-message{display:grid;gap:6px}
-  .active-advisory-chip{width:100%;max-width:100%;box-sizing:border-box;justify-content:flex-start;white-space:normal;overflow-wrap:anywhere}
+  .announcement-message{display:flex;flex-wrap:wrap;gap:6px}
+  .active-advisory-chip{width:auto;max-width:100%;box-sizing:border-box;white-space:nowrap;text-decoration:none}
   .forecast-card,.forecast-title,.forecast-meta,.severity-board,.severity-row,.severity-row-states{min-width:0;max-width:100%}
   .forecast-title{align-items:flex-start;flex-wrap:wrap}
   .forecast-meta{width:100%;text-align:left}
   .issue-date{white-space:normal}
   .severity-row{grid-template-columns:minmax(0,1fr);gap:4px}
   .severity-row-label{width:100%;padding-top:0;white-space:normal}
-  .severity-row-states{width:100%}
-  .severity-state-chip{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+  .severity-row-states{width:100%;overflow-x:auto;padding-bottom:2px}
+  .severity-state-chip{max-width:none;white-space:nowrap;overflow-wrap:normal}
 }
