@@ -61,9 +61,11 @@ function Convert-GebcoResponseToElevation([string]$Content) {
             $payload.elevation,
             $payload.value,
             $payload.value_0,
+            $payload.value_list,
             $payload.features[0].properties.elevation,
             $payload.features[0].properties.value,
-            $payload.features[0].properties.value_0
+            $payload.features[0].properties.value_0,
+            $payload.features[0].properties.value_list
         )
         foreach ($candidate in $candidates) {
             $number = 0.0
@@ -78,6 +80,7 @@ function Convert-GebcoResponseToElevation([string]$Content) {
 
     foreach ($pattern in @(
         '(?i)value_0\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)',
+        '(?i)value_list\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)',
         '(?i)(?:elevation|depth|bathymetry)\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)',
         '(?i)Band\s*1\s*(?:Value)?\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)',
         '(?i)pixel[_\s-]*value\s*[=:]\s*["'']?(-?\d+(?:\.\d+)?)'
@@ -110,8 +113,8 @@ function Get-GebcoElevation([double]$Latitude, [double]$Longitude) {
             service = 'WMS'
             version = '1.1.1'
             request = 'GetFeatureInfo'
-            layers = 'gebco_latest'
-            query_layers = 'gebco_latest'
+            layers = 'GEBCO_LATEST_2'
+            query_layers = 'GEBCO_LATEST_2'
             styles = ''
             format = 'image/png'
             srs = 'EPSG:4326'
@@ -129,11 +132,63 @@ function Get-GebcoElevation([double]$Latitude, [double]$Longitude) {
 
         try {
             $response = Invoke-WebRequest -UseBasicParsing -Uri $url -TimeoutSec 30
-            $elevation = Convert-GebcoResponseToElevation "$($response.Content)"
+            $responseText = if ($response.Content -is [byte[]]) { [Text.Encoding]::UTF8.GetString($response.Content) } else { "$($response.Content)" }
+            $elevation = Convert-GebcoResponseToElevation $responseText
             if ($null -ne $elevation) { return [double]$elevation }
         } catch { }
     }
     return $null
+}
+
+$script:CoastlineFeatures = $null
+function Get-NaturalEarthCoastlineFeatures {
+    if ($null -eq $script:CoastlineFeatures) {
+        $coastline = Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_coastline.geojson' -TimeoutSec 90
+        $script:CoastlineFeatures = @($coastline.features)
+    }
+    return $script:CoastlineFeatures
+}
+
+function Get-NearestCoastDistanceKm([double]$Latitude, [double]$Longitude) {
+    try { $features = @(Get-NaturalEarthCoastlineFeatures) } catch { return $null }
+    if (-not $features.Count) { return $null }
+    $kmPerLongitudeDegree = 111.320 * [math]::Cos($Latitude * [math]::PI / 180)
+    $kmPerLatitudeDegree = 110.574
+    $minimum = [double]::PositiveInfinity
+    foreach ($feature in $features) {
+        $geometry = $feature.geometry
+        $lines = [System.Collections.ArrayList]::new()
+        if ("$($geometry.type)" -eq 'MultiLineString') {
+            foreach ($coordinateLine in @($geometry.coordinates)) { [void]$lines.Add($coordinateLine) }
+        } else {
+            [void]$lines.Add($geometry.coordinates)
+        }
+        foreach ($line in $lines) {
+            for ($index = 1; $index -lt $line.Count; $index++) {
+                $first = $line[$index - 1]; $second = $line[$index]
+                $firstDeltaLongitude = [double]$first[0] - $Longitude
+                $secondDeltaLongitude = [double]$second[0] - $Longitude
+                while ($firstDeltaLongitude -gt 180) { $firstDeltaLongitude -= 360 }
+                while ($firstDeltaLongitude -lt -180) { $firstDeltaLongitude += 360 }
+                while ($secondDeltaLongitude -gt 180) { $secondDeltaLongitude -= 360 }
+                while ($secondDeltaLongitude -lt -180) { $secondDeltaLongitude += 360 }
+                $ax = $firstDeltaLongitude * $kmPerLongitudeDegree
+                $ay = ([double]$first[1] - $Latitude) * $kmPerLatitudeDegree
+                $bx = $secondDeltaLongitude * $kmPerLongitudeDegree
+                $by = ([double]$second[1] - $Latitude) * $kmPerLatitudeDegree
+                $dx = $bx - $ax; $dy = $by - $ay
+                if ([math]::Abs($dx) -gt 10000) { continue }
+                $denominator = $dx * $dx + $dy * $dy
+                $position = if ($denominator -gt 0) { -($ax * $dx + $ay * $dy) / $denominator } else { 0 }
+                $position = [math]::Max(0,[math]::Min(1,$position))
+                $nearestX = $ax + $position * $dx; $nearestY = $ay + $position * $dy
+                $distance = [math]::Sqrt($nearestX * $nearestX + $nearestY * $nearestY)
+                if ($distance -lt $minimum) { $minimum = $distance }
+            }
+        }
+    }
+    if ([double]::IsInfinity($minimum)) { return $null }
+    return [math]::Round($minimum)
 }
 
 function Add-GebcoEventMetadata {
@@ -153,8 +208,17 @@ function Add-GebcoEventMetadata {
     $setting = if ($explicitlyLand) { 'LAND' } else { 'OCEANIC / MARINE' }
     $elevation = $null
     $bathymetry = $null
+    $bathymetrySource = $null
+    $officialDepthMatch = [regex]::Match($TopoBathy, '(?i)(\d[\d,.]*)\s*(?:m|metres?|meters?)\b')
+    if (-not $explicitlyLand -and $officialDepthMatch.Success) {
+        $officialDepth = 0.0
+        if ([double]::TryParse(($officialDepthMatch.Groups[1].Value -replace ',',''),[Globalization.NumberStyles]::Float,[Globalization.CultureInfo]::InvariantCulture,[ref]$officialDepth)) {
+            $bathymetry = [math]::Round([math]::Abs($officialDepth))
+            $bathymetrySource = 'ITEWC topo_bathy'
+        }
+    }
 
-    if (-not $explicitlyLand -and $hasLatitude -and $hasLongitude) {
+    if (-not $explicitlyLand -and $null -eq $bathymetry -and $hasLatitude -and $hasLongitude) {
         $elevation = Get-GebcoElevation -Latitude $latitude -Longitude $longitude
         if ($null -ne $elevation) {
             if ([double]$elevation -ge 0) {
@@ -162,13 +226,25 @@ function Add-GebcoEventMetadata {
             } else {
                 $setting = 'OCEANIC / MARINE'
                 $bathymetry = [math]::Round([math]::Abs([double]$elevation))
+                $bathymetrySource = 'GEBCO_LATEST_2'
             }
         }
+    }
+
+    $distanceFromCoast = $null
+    $distanceMatch = [regex]::Match($TopoBathy, '(?i)(?:distance|distnace)\s+of\s+([\d,.]+)\s*km\s+from\s+(?:the\s+)?coast(?:line)?')
+    if ($distanceMatch.Success) {
+        $parsedDistance = 0.0
+        if ([double]::TryParse(($distanceMatch.Groups[1].Value -replace ',',''),[Globalization.NumberStyles]::Float,[Globalization.CultureInfo]::InvariantCulture,[ref]$parsedDistance)) { $distanceFromCoast = [math]::Round($parsedDistance) }
+    } elseif ($hasLatitude -and $hasLongitude) {
+        $distanceFromCoast = Get-NearestCoastDistanceKm -Latitude $latitude -Longitude $longitude
     }
 
     $Event | Add-Member -NotePropertyName tectonicSetting -NotePropertyValue $setting -Force
     $Event | Add-Member -NotePropertyName gebcoElevationMeters -NotePropertyValue $elevation -Force
     $Event | Add-Member -NotePropertyName bathymetryMeters -NotePropertyValue $bathymetry -Force
+    $Event | Add-Member -NotePropertyName bathymetrySource -NotePropertyValue $bathymetrySource -Force
+    $Event | Add-Member -NotePropertyName distanceFromCoastKm -NotePropertyValue $distanceFromCoast -Force
     return $Event
 }
 

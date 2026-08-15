@@ -824,7 +824,7 @@
       }).addTo(seismicMap);
 
       seismicBathymetryLayer = L.tileLayer.wms('https://wms.gebco.net/mapserv', {
-        layers: 'gebco_latest',
+        layers: 'GEBCO_LATEST_2',
         format: 'image/png',
         transparent: true,
         opacity: 0.55,
@@ -1270,7 +1270,8 @@
           payload.value_0,
           payload?.features?.[0]?.properties?.elevation,
           payload?.features?.[0]?.properties?.value,
-          payload?.features?.[0]?.properties?.value_0
+          payload?.features?.[0]?.properties?.value_0,
+          payload?.features?.[0]?.properties?.value_list
         ];
         const match = candidates.map(Number).find(Number.isFinite);
         if (Number.isFinite(match)) return match;
@@ -1279,6 +1280,7 @@
       const text = String(payload || '');
       const patterns = [
         /value_0\s*[=:]\s*(-?\d+(?:\.\d+)?)/i,
+        /value_list\s*[=:]\s*['"]?(-?\d+(?:\.\d+)?)/i,
         /(?:elevation|depth|bathymetry)\s*[=:]\s*(-?\d+(?:\.\d+)?)/i,
         /Band\s*1\s*(?:Value)?\s*[=:]\s*(-?\d+(?:\.\d+)?)/i,
         /pixel[_\s-]*value\s*[=:]\s*(-?\d+(?:\.\d+)?)/i
@@ -1298,8 +1300,8 @@
         service: 'WMS',
         version: '1.1.1',
         request: 'GetFeatureInfo',
-        layers: 'gebco_latest',
-        query_layers: 'gebco_latest',
+        layers: 'GEBCO_LATEST_2',
+        query_layers: 'GEBCO_LATEST_2',
         styles: '',
         format: 'image/png',
         srs: 'EPSG:4326',
@@ -1357,7 +1359,7 @@
       if (Number.isFinite(savedDepth) && savedDepth > 0) {
         settingElement.textContent = 'Tectonic Setting: OCEANIC / MARINE';
         bathymetryElement.textContent = `Bathymetry: ${Math.round(savedDepth).toLocaleString('en-IN')} m`;
-        bathymetryElement.title = 'Bathymetry obtained by the scheduled GEBCO point query.';
+        bathymetryElement.title = 'Bathymetry from ITEWC topo_bathy, with GEBCO_LATEST_2 used only as fallback.';
         return;
       }
 
