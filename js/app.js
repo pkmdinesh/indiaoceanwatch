@@ -3,10 +3,15 @@ const ids = id => document.getElementById(id);
     function renderActiveAdvisories(data) {
       const card = ids('announcementCard');
       const container = ids('announcementMessage');
+      const latestContainer = ids('announcementLatest');
       const active = [];
-      const add = (service,level,detail = '',count = null,displayLabel = '',url = '') => {
-        if (!['warning','alert','watch','resolved','info'].includes(level)) return;
-        active.push({service,level,detail,count,displayLabel,url});
+      const latest = [];
+      const addActive = (service,level,detail = '',count = null) => {
+        if (!['warning','alert','watch'].includes(level)) return;
+        active.push({service,level,detail,count});
+      };
+      const addLatest = (service,label,url = '',detail = '') => {
+        latest.push({service,label,url,detail});
       };
       const bulletinDate = bulletin => {
         if (!bulletin) return null;
@@ -28,47 +33,68 @@ const ids = id => document.getElementById(id);
         const age = Date.now() - issued.getTime();
         return age >= 0 && age < hours * 60 * 60 * 1000;
       };
+      const productDate = value => {
+        const text = String(value || '').trim();
+        if (!text) return null;
+        const numeric = text.match(/^(\d{1,2})[-\/]([01]?\d)[-\/](\d{4})$/);
+        const named = text.match(/^(\d{1,2})[\s-]+([A-Za-z]{3,9})[\s-]+(\d{4})$/);
+        const normalized = numeric
+          ? `${numeric[3]}-${numeric[2].padStart(2,'0')}-${numeric[1].padStart(2,'0')}T17:00:00+05:30`
+          : named ? `${named[1]} ${named[2]} ${named[3]} 17:00:00 GMT+0530` : text;
+        const parsed = new Date(normalized);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+      };
+      const hasRecentUpdate = (values,hours) => values
+        .map(productDate)
+        .filter(Boolean)
+        .some(date => { const age=Date.now()-date.getTime(); return age>=0 && age<hours*60*60*1000; });
       const osfGroups = [data?.highWave,data?.swellSurge,data?.oceanCurrent];
       ['warning','alert','watch'].forEach(level => {
         const count = osfGroups.reduce((total,group) => total + (Array.isArray(group?.[level]) ? group[level].length : 0),0);
-        if (count) add('OSF',level,`${count} affected state-service ${count === 1 ? 'entry' : 'entries'}`,count);
+        if (count) addActive('OSF',level,`${count} affected state-service ${count === 1 ? 'entry' : 'entries'}`,count);
       });
+      if (hasRecentUpdate(osfGroups.map(group => group?.issueDate),APP_CONFIG.AGE_HOURS.OSF_UPDATE)) addLatest('OSF','Updated','','Latest Ocean State Forecast update');
+      if (hasRecentUpdate([data?.pfz?.forecastDate],APP_CONFIG.AGE_HOURS.PFZ_UPDATE)) addLatest('PFZ','Updated','','Latest Potential Fishing Zone update');
       const tsunamiBulletin = data?.tsunami?.bulletin || data?.tsunami?.recentBulletin;
       const tsunamiDemo = new URLSearchParams(location.search).get('demo') === 'bulletin2';
       const tsunamiBulletinNo = tsunamiDemo ? 'II' : tsunamiBulletin?.type || tsunamiBulletin?.number || 'Latest';
-      if (tsunamiDemo) add('Tsunami','info','Demo tsunami bulletin evaluation',null,`Bulletin-${tsunamiBulletinNo}`);
-      else if (tsunamiBulletin && isWithinHours(tsunamiBulletin,APP_CONFIG.AGE_HOURS.TSUNAMI_BULLETIN)) add('Tsunami','info',data?.tsunami?.message || tsunamiBulletin.message || 'Official ITEWC bulletin',null,`Bulletin-${tsunamiBulletinNo}`,tsunamiBulletin.pdfUrl || tsunamiBulletin.url);
+      if (tsunamiDemo) addLatest('Tsunami',`Bulletin-${tsunamiBulletinNo}`,'','Demo tsunami bulletin evaluation');
+      else if (tsunamiBulletin && isWithinHours(tsunamiBulletin,APP_CONFIG.AGE_HOURS.TSUNAMI_BULLETIN)) addLatest('Tsunami',`Bulletin-${tsunamiBulletinNo}`,tsunamiBulletin.pdfUrl || tsunamiBulletin.url,data?.tsunami?.message || tsunamiBulletin.message || 'Official ITEWC bulletin');
       const cycloneLevel = {red:'warning',orange:'alert',yellow:'watch'}[data?.cyclone?.level];
-      add('Cyclone',cycloneLevel,data?.cyclone?.title || data?.cyclone?.message || 'IMD cyclone advisory');
+      addActive('Cyclone',cycloneLevel,data?.cyclone?.title || data?.cyclone?.message || 'IMD cyclone advisory');
       const jointBulletin = normalizeJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
       const jointDate = jointBulletinDate(jointBulletin);
       const jointCurrent = jointBulletin && (jointDate ? Date.now() - jointDate.getTime() >= 0 && Date.now() - jointDate.getTime() < APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN * 60 * 60 * 1000 : Boolean(jointBulletin.isRecent));
-      if (jointCurrent) add('Cyclone','info',jointBulletin.message,null,`Bulletin-${jointBulletin.number || 1}`,jointBulletin.url);
-      const cycloneResolution = `${data?.cyclone?.title || ''} ${data?.cyclone?.message || ''}`;
-      if (data?.cyclone?.level === 'safe' && /cancel|dissipat|weaken|threat\s+(?:has\s+)?passed/i.test(cycloneResolution) && isWithinHours(data?.cyclone,APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN)) {
-        add('Cyclone','resolved',cycloneResolution.trim());
-      }
+      if (jointCurrent) addLatest('Cyclone',`Bulletin-${jointBulletin.number || 1}`,jointBulletin.url,jointBulletin.message);
       const stormBulletin = data?.stormSurge?.bulletin || data?.stormSurge?.recentBulletin;
-      if (stormBulletin && isWithinHours(stormBulletin,APP_CONFIG.AGE_HOURS.STORM_SURGE_BULLETIN)) add('Storm Surge','info',stormBulletin.message || data?.stormSurge?.message || 'Official ITEWC storm surge bulletin',null,`Bulletin-${stormBulletin.number || 'Latest'}`,stormBulletin.pdfUrl || stormBulletin.url);
-      const rank = {warning:4,alert:3,watch:2,info:1,resolved:1};
+      if (stormBulletin && isWithinHours(stormBulletin,APP_CONFIG.AGE_HOURS.STORM_SURGE_BULLETIN)) addLatest('Storm Surge',`Bulletin-${stormBulletin.number || 'Latest'}`,stormBulletin.pdfUrl || stormBulletin.url,stormBulletin.message || data?.stormSurge?.message || 'Official ITEWC storm surge bulletin');
+      if (data?.marineHeatWave?.message && hasRecentUpdate([data?.marineHeatWave?.fetchedAt],APP_CONFIG.AGE_HOURS.MHW_UPDATE)) addLatest('MHW','Updated','','Latest Marine Heat Wave information');
+      const rank = {warning:3,alert:2,watch:1};
       active.sort((a,b) => rank[b.level] - rank[a.level]);
       container.replaceChildren(...active.map(item => {
-        const chip = document.createElement(item.url ? 'a' : 'span');
+        const chip = document.createElement('span');
         chip.className = `active-advisory-chip ${item.level}`;
         chip.title = item.detail;
-        if (item.url) {
-          chip.href = item.url;
-          chip.target = '_blank';
-          chip.rel = 'noopener';
-          chip.setAttribute('aria-label',`${item.service} ${item.displayLabel || 'bulletin'} — open official bulletin`);
-        }
         const dot = document.createElement('i'); dot.className = 'dot'; dot.setAttribute('aria-hidden','true');
-        const labelText = item.displayLabel || (item.level === 'resolved' ? 'No threat' : item.level === 'info' ? 'Bulletin' : severityLabel[item.level]);
+        const labelText = severityLabel[item.level];
         const label = `${item.service} · ${labelText}${item.count === null ? '' : ` (${item.count})`}`;
         chip.append(dot,label);
         return chip;
       }));
-      card.hidden = active.length === 0;
+      if (!active.length) {
+        const none=document.createElement('span'); none.className='announcement-active-none'; none.textContent='None'; container.replaceChildren(none);
+      }
+      latestContainer.replaceChildren(...latest.flatMap((item,index) => {
+        const link=document.createElement(item.url ? 'a' : 'span');
+        link.className='announcement-latest-link';
+        link.textContent=`${item.service} \u00b7 ${item.label}`;
+        link.title=item.detail;
+        if (item.url) { link.href=item.url; link.target='_blank'; link.rel='noopener'; }
+        if (!index) return [link];
+        const separator=document.createElement('span'); separator.className='announcement-latest-separator'; separator.textContent='/';
+        return [separator,link];
+      }));
+      card.hidden = active.length === 0 && latest.length === 0;
     }
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));

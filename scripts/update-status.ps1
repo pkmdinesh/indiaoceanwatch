@@ -952,8 +952,10 @@ try {
     if (-not $mhwMatch.Success) { throw 'Marine Heat Wave marquee message was not found.' }
     $mhwMessage = [Net.WebUtility]::HtmlDecode(($mhwMatch.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
     if ([string]::IsNullOrWhiteSpace($mhwMessage)) { throw 'Marine Heat Wave marquee message was empty.' }
+    $previousMhwMessage = "$($status.marineHeatWave.message)"
+    $previousMhwFetchedAt = $status.marineHeatWave.fetchedAt
     $status.marineHeatWave.message = $mhwMessage
-    $status.marineHeatWave.fetchedAt = $attemptedAt
+    $status.marineHeatWave.fetchedAt = if ($mhwMessage -ne $previousMhwMessage -or [string]::IsNullOrWhiteSpace("$previousMhwFetchedAt")) { $attemptedAt } else { $previousMhwFetchedAt }
     $status.marineHeatWave.ok = $true
     $status.marineHeatWave.url = $mhwUrl
     $incoisPageAccessible = $true

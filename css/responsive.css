@@ -43,6 +43,8 @@
   .announcement-label,.announcement-message{grid-column:1;width:100%;min-width:0}
   .announcement-message{display:flex;flex-wrap:wrap;gap:6px}
   .active-advisory-chip{width:auto;max-width:100%;box-sizing:border-box;white-space:nowrap;text-decoration:none}
+  .announcement-latest{display:grid;grid-template-columns:auto auto minmax(0,1fr);width:100%}
+  .announcement-latest-message{gap:4px 6px}
   .forecast-card,.forecast-title,.forecast-meta,.severity-board,.severity-row,.severity-row-states{min-width:0;max-width:100%}
   .forecast-title{align-items:flex-start;flex-wrap:wrap}
   .forecast-meta{width:100%;text-align:left}
