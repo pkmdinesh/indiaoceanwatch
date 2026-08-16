@@ -3,7 +3,7 @@ function renderStormSurge(message, bulletin) {
       const issuedValue = /^\d{4}-\d{2}-\d{2}\s/.test(issuedText) ? `${issuedText.replace(' ','T').replace(/\.\d+$/,'')}+05:30` : issuedText;
       const issuedDate = issuedValue ? new Date(issuedValue) : null;
       const bulletinAge = issuedDate && !Number.isNaN(issuedDate.getTime()) ? Date.now() - issuedDate.getTime() : null;
-      const bulletinCurrent = Boolean(bulletin) && (bulletinAge === null || (bulletinAge >= 0 && bulletinAge < APP_CONFIG.AGE_HOURS.STORM_SURGE_BULLETIN * 60 * 60 * 1000));
+      const bulletinCurrent = Boolean(bulletin) && bulletinAge !== null && bulletinAge >= 0 && bulletinAge < APP_CONFIG.AGE_HOURS.STORM_SURGE_BULLETIN * 60 * 60 * 1000;
       const supportingBulletin = bulletinCurrent ? bulletin : null;
       const safe = !bulletinCurrent;
       const status = ids('stormStatus');
@@ -80,8 +80,8 @@ function renderStormSurge(message, bulletin) {
       const bulletinDate = jointBulletinDate(bulletin);
       const computedAge = bulletinDate ? Date.now() - bulletinDate.getTime() : Number.POSITIVE_INFINITY;
       const computedRecent = computedAge >= 0 && computedAge < APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN * 60 * 60 * 1000;
-      const isRecent = bulletinDate ? computedRecent : Boolean(bulletin?.isRecent);
-      const cycloneLevel = !bulletin ? 'safe' : bulletinDate && !isRecent ? 'expired' : 'info';
+      const isRecent = Boolean(bulletinDate && computedRecent);
+      const cycloneLevel = !bulletin ? 'safe' : isRecent ? 'info' : 'expired';
 
       card.classList.toggle('is-recent',Boolean(isRecent));
       card.classList.remove('level-safe','level-yellow','level-orange','level-red','level-expired','level-info');
