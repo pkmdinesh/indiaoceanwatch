@@ -4,7 +4,7 @@ let pfzMapOpenedFromUrl = false;
 let pfzMapLayers = {};
 let pfzSelectedLayers = new Set();
 let pfzDataPromise = null;
-let pfzBathymetryLegendElement = null;
+let pfzSstLegendElement = null;
 
 const PFZ_BATHYMETRY_SLD = '<StyledLayerDescriptor version="1.0.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"><NamedLayer><Name>BathymteryImage:gebcobathymtery</Name><UserStyle><FeatureTypeStyle><Rule><RasterSymbolizer><ColorMap type="ramp"><ColorMapEntry color="#081d58" quantity="-6000"/><ColorMapEntry color="#253494" quantity="-4500"/><ColorMapEntry color="#2c7fb8" quantity="-3000"/><ColorMapEntry color="#41b6c4" quantity="-1500"/><ColorMapEntry color="#a1dab4" quantity="-500"/><ColorMapEntry color="#ffffcc" quantity="0"/></ColorMap></RasterSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
 
@@ -91,11 +91,18 @@ function createPfzVectorLayers(data) {
 
 function updatePfzMapStatus() {
   const selected=[...pfzSelectedLayers];
-  if (pfzBathymetryLegendElement) pfzBathymetryLegendElement.hidden=!selected.includes('Bathymetry');
-  const liveNote=selected.includes('Bathymetry') ? ' Bathymetry is a live WMS overlay and is omitted from offline/shared images.' : '';
+  if (pfzSstLegendElement) pfzSstLegendElement.hidden=!selected.includes('SST Anomaly');
+  const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly'].includes(name));
+  const liveNote=liveLayers.length ? ` ${liveLayers.join(' and ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.` : '';
   ids('pfzMapShareStatus').textContent = selected.length
     ? `Showing ${selected.join(' + ')}. Vector layers are cached locally from official INCOIS WFS data.${liveNote}`
     : 'No PFZ layers selected. Use the layer control to enable a layer.';
+}
+
+function latestMurSstDate() {
+  const date=new Date();
+  date.setUTCDate(date.getUTCDate()-2);
+  return date.toISOString().slice(0,10);
 }
 
 function fitPfzCoastalExtent() {
@@ -116,8 +123,10 @@ async function buildPfzMapLayers() {
   pfzMapLayers.Bathymetry=L.tileLayer.wms(APP_CONFIG.MAP.PFZ_BATHYMETRY_WMS_URL,{
     layers:'BathymteryImage:gebcobathymtery',format:'image/png',transparent:true,version:'1.1.1',sld_body:PFZ_BATHYMETRY_SLD,opacity:.72,attribution:'INCOIS bathymetry'
   });
-  pfzSelectedLayers=new Set(['PFZ forecast lines','PFZ sectors','EEZ boundary']);
-  pfzMapLayers['PFZ sectors'].addTo(pfzMap);
+  const murDate=latestMurSstDate();
+  const murSstUrl=APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}',murDate);
+  pfzMapLayers['SST Anomaly']=L.tileLayer(murSstUrl,{opacity:.94,maxNativeZoom:7,maxZoom:12,crossOrigin:true,className:'pfz-sst-layer',attribution:`SST anomaly · ${murDate}`});
+  pfzSelectedLayers=new Set(['PFZ forecast lines','EEZ boundary']);
   pfzMapLayers['EEZ boundary'].addTo(pfzMap);
   pfzMapLayers['PFZ forecast lines'].addTo(pfzMap).bringToFront();
   pfzLayerControl=L.control.layers(null,pfzMapLayers,{collapsed:innerWidth < 700,position:'topright'}).addTo(pfzMap);
@@ -145,16 +154,16 @@ function ensurePfzMap() {
     pfzMap.createPane('pfzLinePane'); pfzMap.getPane('pfzLinePane').style.zIndex=450;
     pfzMap.createPane('pfzCentrePane'); pfzMap.getPane('pfzCentrePane').style.zIndex=460;
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,crossOrigin:true,attribution:'&copy; OpenStreetMap contributors'}).addTo(pfzMap);
-    const bathymetryLegend=L.control({position:'bottomright'});
-    bathymetryLegend.onAdd=() => {
-      const element=L.DomUtil.create('div','pfz-bathymetry-legend');
+    const sstLegend=L.control({position:'bottomright'});
+    sstLegend.onAdd=() => {
+      const element=L.DomUtil.create('div','pfz-sst-legend');
       element.hidden=true;
-      element.setAttribute('aria-label','Bathymetry depth from minus 6,000 metres to sea level');
-      element.innerHTML='<div class="pfz-bathymetry-scale" aria-hidden="true"></div><div class="pfz-bathymetry-labels"><div><strong>Min</strong><br><span>-6,000 m</span></div><div><strong>Max</strong><br><span>0 m</span></div></div>';
-      pfzBathymetryLegendElement=element;
+      element.setAttribute('aria-label','Sea surface temperature anomaly focus from minus 1 to plus 1 degree Celsius');
+      element.innerHTML='<strong>SST Anomaly · °C</strong><div class="pfz-sst-scale" aria-hidden="true"></div><div class="pfz-sst-ticks"><span>≤−1</span><span>−0.5</span><span>0</span><span>+0.5</span><span>≥+1</span></div><small>Cooler → Normal → Warmer</small>';
+      pfzSstLegendElement=element;
       return element;
     };
-    bathymetryLegend.addTo(pfzMap);
+    sstLegend.addTo(pfzMap);
   }
   void buildPfzMapLayers().catch(error => { ids('pfzMapShareStatus').textContent=`PFZ map data unavailable: ${error.message}`; fitPfzCoastalExtent(); });
   return pfzMap;
@@ -176,7 +185,7 @@ async function capturePfzMapCanvas() {
   const container=ids('pfzMapCanvas');
   pfzMap.invalidateSize({animate:false});
   await nextPfzMapPaint();
-  const tiles=[...container.querySelectorAll('.leaflet-tile-pane img.leaflet-tile')].filter(image => image.complete && image.naturalWidth && !image.src.includes('/BathymteryImage/'));
+  const tiles=[...container.querySelectorAll('.leaflet-tile-pane img.leaflet-tile')].filter(image => image.complete && image.naturalWidth && !image.src.includes('/BathymteryImage/') && !image.src.includes('GHRSST_L4_MUR_Sea_Surface_Temperature'));
   await Promise.all(tiles.map(image => image.decode?.().catch(()=>{}) || Promise.resolve()));
   const rect=container.getBoundingClientRect();
   const scale=Math.min(devicePixelRatio || 1,2);
@@ -194,7 +203,7 @@ async function capturePfzMapCanvas() {
 
 async function sharePfzMap() {
   const status=ids('pfzMapShareStatus');
-  const selection=[...pfzSelectedLayers].filter(name => name !== 'Bathymetry');
+  const selection=[...pfzSelectedLayers].filter(name => !['Bathymetry','SST Anomaly'].includes(name));
   status.textContent='Preparing current PFZ map image\u2026';
   try {
     const mapCanvas=await capturePfzMapCanvas();
