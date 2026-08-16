@@ -14,6 +14,7 @@ const APP_SHELL = [
   './js/app.js',
   './js/share.js',
   './js/map.js',
+  './js/pfz-map.js',
   './js/pfz.js',
   './js/advisory.js',
   './js/tsunami.js',
@@ -22,6 +23,10 @@ const APP_SHELL = [
   './js/status.js',
   './js/pwa.js',
   './js/announcements.js',
+  './data/pfz-lines.geojson',
+  './data/pfz-sectors.geojson',
+  './data/pfz-eez.geojson',
+  './data/pfz-landing-centres.geojson',
   './manifest.webmanifest',
   './icons/ocean-watch-v3-192.png',
   './icons/ocean-watch-v3-512.png',
@@ -87,6 +92,10 @@ self.addEventListener('fetch',event => {
   }
   if (url.pathname.endsWith('/announcements.js')) {
     event.respondWith(networkFirst(event.request,'./js/announcements.js'));
+    return;
+  }
+  if (/\/data\/pfz-[^/]+\.geojson$/.test(url.pathname)) {
+    event.respondWith(networkFirst(event.request));
     return;
   }
   event.respondWith((async () => {

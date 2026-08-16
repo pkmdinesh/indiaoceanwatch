@@ -44,7 +44,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add status.json
+          git add status.json data/pfz-lines.geojson data/pfz-eez.geojson data/pfz-sectors.geojson data/pfz-landing-centres.geojson
           git diff --cached --quiet
 
           if ($LASTEXITCODE -ne 0) {

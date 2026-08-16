@@ -20,6 +20,8 @@ let deferredInstallPrompt = null;
     ids('nativeShare').addEventListener('click',nativeShareUrl);
     ids('openOsfMap').addEventListener('click',()=>openOsfMap());
     ids('shareOsfMap').addEventListener('click',shareOsfMap);
+    ids('openPfzMap').addEventListener('click',openPfzMap);
+    ids('sharePfzMap').addEventListener('click',sharePfzMap);
     ids('shareOsfOverall').addEventListener('click',() => shareDialogText('Ocean Watch · Ocean State Forecast',osfOverallShareText(),null));
     ids('shareAdvisoryDialog').addEventListener('click',shareCurrentAdvisory);
     ids('shareSeismicDialog').addEventListener('click',shareCurrentSeismic);
@@ -47,6 +49,7 @@ loadStatus().catch(()=>{});
     }
     wireDialog('advisoryDialog','advisoryDialogClose');
     wireDialog('osfMapDialog','osfMapClose');
+    wireDialog('pfzMapDialog','pfzMapClose');
     wireDialog('seismicDialog','seismicDialogClose');
     wireDialog('shareDialog','shareDialogClose');
     wireDialog('marineHeatWaveDialog','marineHeatWaveClose');

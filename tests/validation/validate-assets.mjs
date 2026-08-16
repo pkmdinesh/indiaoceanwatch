@@ -13,13 +13,27 @@ for (const file of [...javascriptFiles,'sw.js']) {
   new vm.Script(readText(file),{filename:file});
 }
 
-for (const file of [
+const jsonFiles = [
   'manifest.webmanifest',
   'status.json',
   'data/status.schema.json',
-  'tests/fixtures/status-minimal.json'
-]) {
+  'tests/fixtures/status-minimal.json',
+  'data/pfz-lines.geojson',
+  'data/pfz-sectors.geojson',
+  'data/pfz-eez.geojson',
+  'data/pfz-landing-centres.geojson'
+];
+for (const file of jsonFiles) {
   JSON.parse(readText(file));
+}
+for (const file of jsonFiles.filter(file => file.endsWith('.geojson'))) {
+  const data=JSON.parse(readText(file));
+  if (data?.type !== 'FeatureCollection' || !Array.isArray(data.features) || !data.features.length) {
+    throw new Error(`Invalid or empty GeoJSON FeatureCollection: ${file}`);
+  }
+  if (data.features.some(feature => feature?.type !== 'Feature' || !feature.geometry?.type || !Array.isArray(feature.geometry.coordinates))) {
+    throw new Error(`Invalid GeoJSON feature geometry: ${file}`);
+  }
 }
 
 const html = readText('index.html');
@@ -40,4 +54,4 @@ const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
 const duplicateIds = [...new Set(ids.filter((id,index) => ids.indexOf(id) !== index))];
 if (duplicateIds.length) throw new Error(`Duplicate HTML ids: ${duplicateIds.join(', ')}`);
 
-console.log(`Validated ${javascriptFiles.length + 1} scripts, 4 JSON files, ${htmlReferences.length} HTML paths, and ${cachedAssets.length} cached assets.`);
+console.log(`Validated ${javascriptFiles.length + 1} scripts, ${jsonFiles.length} JSON files, ${htmlReferences.length} HTML paths, and ${cachedAssets.length} cached assets.`);
