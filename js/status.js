@@ -56,6 +56,7 @@ function render(data) {
       renderCyclone(data.cyclone);
       renderJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
       if (new URLSearchParams(location.search).get('view') === 'osf-map' && !osfMapOpenedFromUrl) { osfMapOpenedFromUrl=true; openOsfMap(); }
+      if (new URLSearchParams(location.search).get('view') === 'pfz-map' && !pfzMapOpenedFromUrl) { pfzMapOpenedFromUrl=true; openPfzMap(); }
     }
     let statusRefreshTimer;
     let statusLoadPromise;

@@ -944,6 +944,14 @@ try {
     $status.pfz.sectors = @($pfzSectors)
 } catch { $status.errors += "PFZ: $($_.Exception.Message)" }
 
+# Cache official PFZ vector layers locally for the interactive map, sharing,
+# and an offline fallback. A failed map refresh must not block advisory data.
+try {
+    & (Join-Path $scriptsRoot 'update-pfz-map.ps1') -ProjectRoot $projectRoot -Quiet
+} catch {
+    if (-not $Quiet) { Write-Warning "PFZ map cache refresh failed: $($_.Exception.Message)" }
+}
+
 # Marine Heat Wave is published as a marquee on the official product page.
 try {
     $mhwUrl = 'https://incois.gov.in/oceanservices/mhw/index.jsp'

@@ -7,6 +7,7 @@ Ocean Watch is a lightweight, accessible web dashboard for ocean advisories and 
 - `css/` — base, layout, component, and responsive styles
 - `js/` — shared application code and service-specific rendering
 - `data/status.schema.json` — snapshot contract
+- `data/pfz-*.geojson` — generated PFZ map vectors for display, sharing, and offline fallback
 - `scripts/update-status.ps1` — official-source updater
 - `scripts/validate-status.ps1` — snapshot validation
 - `scripts/sources/` — auditable source definitions

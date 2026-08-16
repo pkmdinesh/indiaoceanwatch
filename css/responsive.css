@@ -36,6 +36,11 @@
   .osf-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
   .osf-map-dialog .leaflet-control-layers label{white-space:normal}
   .osf-map-dialog .leaflet-control-zoom{margin-left:8px;margin-top:8px}
+  .osf-map-dialog .advisory-dialog-head,.seismic-dialog .advisory-dialog-head{isolation:isolate;z-index:1000}
+  .osf-map-dialog .dialog-head-actions,.seismic-dialog .dialog-head-actions{position:relative;z-index:1001;flex:none}
+  .pfz-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px)}
+  .pfz-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
+  .pfz-map-legend{gap:7px 10px;font-size:10px}
 }
 
 @media(max-width:420px){
