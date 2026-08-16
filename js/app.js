@@ -1,5 +1,25 @@
 const APP_CONFIG = globalThis.OCEAN_WATCH_CONFIG;
 const ids = id => document.getElementById(id);
+const istDateKey = value => {
+  const date=value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date);
+  const part=type => parts.find(item => item.type === type)?.value || '';
+  return `${part('year')}-${part('month')}-${part('day')}`;
+};
+const productDateKey = value => {
+  const text=String(value || '').trim();
+  if (!text) return '';
+  const numeric=text.match(/^(\d{1,2})[-\/]([01]?\d)[-\/](\d{4})$/);
+  if (numeric) return `${numeric[3]}-${numeric[2].padStart(2,'0')}-${numeric[1].padStart(2,'0')}`;
+  const named=text.match(/^(\d{1,2})[\s-]+([A-Za-z]{3,9})[\s-]+(\d{4})$/);
+  if (named) {
+    const month=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'].indexOf(named[2].slice(0,3).toLowerCase())+1;
+    if (month) return `${named[3]}-${String(month).padStart(2,'0')}-${named[1].padStart(2,'0')}`;
+  }
+  return istDateKey(text);
+};
+const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(new Date());
     function renderActiveAdvisories(data) {
       const card = ids('announcementCard');
       const container = ids('announcementMessage');
@@ -33,28 +53,18 @@ const ids = id => document.getElementById(id);
         const age = Date.now() - issued.getTime();
         return age >= 0 && age < hours * 60 * 60 * 1000;
       };
-      const productDate = value => {
-        const text = String(value || '').trim();
-        if (!text) return null;
-        const numeric = text.match(/^(\d{1,2})[-\/]([01]?\d)[-\/](\d{4})$/);
-        const named = text.match(/^(\d{1,2})[\s-]+([A-Za-z]{3,9})[\s-]+(\d{4})$/);
-        const normalized = numeric
-          ? `${numeric[3]}-${numeric[2].padStart(2,'0')}-${numeric[1].padStart(2,'0')}T17:00:00+05:30`
-          : named ? `${named[1]} ${named[2]} ${named[3]} 17:00:00 GMT+0530` : text;
-        const parsed = new Date(normalized);
-        return Number.isNaN(parsed.getTime()) ? null : parsed;
-      };
-      const hasRecentUpdate = (values,hours) => values
-        .map(productDate)
-        .filter(Boolean)
-        .some(date => { const age=Date.now()-date.getTime(); return age>=0 && age<hours*60*60*1000; });
+      const hasRecentUpdate = (values,hours) => values.some(value => {
+        const date=new Date(value);
+        const age=Date.now()-date.getTime();
+        return !Number.isNaN(date.getTime()) && age>=0 && age<hours*60*60*1000;
+      });
       const osfGroups = [data?.highWave,data?.swellSurge,data?.oceanCurrent];
       ['warning','alert','watch'].forEach(level => {
         const count = osfGroups.reduce((total,group) => total + (Array.isArray(group?.[level]) ? group[level].length : 0),0);
         if (count) addActive('OSF',level,`${count} affected state-service ${count === 1 ? 'entry' : 'entries'}`,count);
       });
-      if (hasRecentUpdate(osfGroups.map(group => group?.issueDate),APP_CONFIG.AGE_HOURS.OSF_UPDATE)) addLatest('OSF','Updated','','Latest Ocean State Forecast update');
-      if (hasRecentUpdate([data?.pfz?.forecastDate],APP_CONFIG.AGE_HOURS.PFZ_UPDATE)) addLatest('PFZ','Updated','','Latest Potential Fishing Zone update');
+      if (osfGroups.some(group => isCurrentIstProductDate(group?.issueDate))) addLatest('OSF','Updated','','Latest Ocean State Forecast update');
+      if (isCurrentIstProductDate(data?.pfz?.forecastDate)) addLatest('PFZ','Updated','','Latest Potential Fishing Zone update');
       const tsunamiBulletin = data?.tsunami?.bulletin || data?.tsunami?.recentBulletin;
       const tsunamiDemo = new URLSearchParams(location.search).get('demo') === 'bulletin2';
       const tsunamiBulletinNo = tsunamiDemo ? 'II' : tsunamiBulletin?.type || tsunamiBulletin?.number || 'Latest';
@@ -64,7 +74,7 @@ const ids = id => document.getElementById(id);
       addActive('Cyclone',cycloneLevel,data?.cyclone?.title || data?.cyclone?.message || 'IMD cyclone advisory');
       const jointBulletin = normalizeJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
       const jointDate = jointBulletinDate(jointBulletin);
-      const jointCurrent = jointBulletin && (jointDate ? Date.now() - jointDate.getTime() >= 0 && Date.now() - jointDate.getTime() < APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN * 60 * 60 * 1000 : Boolean(jointBulletin.isRecent));
+      const jointCurrent = Boolean(jointBulletin && jointDate && Date.now() - jointDate.getTime() >= 0 && Date.now() - jointDate.getTime() < APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN * 60 * 60 * 1000);
       if (jointCurrent) addLatest('Cyclone',`Bulletin-${jointBulletin.number || 1}`,jointBulletin.url,jointBulletin.message);
       const stormBulletin = data?.stormSurge?.bulletin || data?.stormSurge?.recentBulletin;
       if (stormBulletin && isWithinHours(stormBulletin,APP_CONFIG.AGE_HOURS.STORM_SURGE_BULLETIN)) addLatest('Storm Surge',`Bulletin-${stormBulletin.number || 'Latest'}`,stormBulletin.pdfUrl || stormBulletin.url,stormBulletin.message || data?.stormSurge?.message || 'Official ITEWC storm surge bulletin');
