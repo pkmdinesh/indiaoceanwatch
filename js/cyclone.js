@@ -106,7 +106,7 @@ function renderStormSurge(message, bulletin) {
       }
 
       sourceLink.href = JOINT_BULLETIN_PAGE_URL;
-      sourceLink.textContent = 'INCOIS-IMD ↗';
+      sourceLink.textContent = 'Joint Bulletin ↗';
       sourceLink.hidden = false;
     }
 

@@ -15,13 +15,13 @@ let deferredInstallPrompt = null;
       deferredInstallPrompt = null;
       ids('installApp').hidden = true;
     });
+    ids('shareApp').setAttribute('aria-label','Show Ocean Watch QR code');
+    ids('shareApp').querySelector('.share-label').textContent='QR';
     ids('shareApp').addEventListener('click',openShareDialog);
     ids('copyShareLink').addEventListener('click',copyShareUrl);
     ids('nativeShare').addEventListener('click',nativeShareUrl);
     ids('openOsfMap').addEventListener('click',()=>openOsfMap());
-    ids('shareOsfMap').addEventListener('click',shareOsfMap);
     ids('openPfzMap').addEventListener('click',openPfzMap);
-    ids('sharePfzMap').addEventListener('click',sharePfzMap);
     ids('shareOsfOverall').addEventListener('click',() => shareDialogText('Ocean Watch · Ocean State Forecast',osfOverallShareText(),null));
     ids('shareAdvisoryDialog').addEventListener('click',shareCurrentAdvisory);
     ids('shareSeismicDialog').addEventListener('click',shareCurrentSeismic);
@@ -33,14 +33,14 @@ let deferredInstallPrompt = null;
 loadStatus().catch(()=>{});
     window.addEventListener('pageshow',()=>loadStatus().catch(()=>{}));
     document.addEventListener('visibilitychange',()=>{ if (!document.hidden) loadStatus().catch(()=>{}); });
-    function wireDialog(dialogId, closeButtonId) {
+    function wireDialog(dialogId, closeButtonId, closeOnBackdrop = true) {
       const dialog = ids(dialogId);
       const closeButton = ids(closeButtonId);
       if (!dialog || !closeButton) return;
 
       closeButton.addEventListener('click', () => dialog.close());
       dialog.addEventListener('click', event => {
-        if (event.target === dialog) dialog.close();
+        if (closeOnBackdrop && event.target === dialog) dialog.close();
       });
       dialog.addEventListener('cancel', event => {
         event.preventDefault();
@@ -48,8 +48,8 @@ loadStatus().catch(()=>{});
       });
     }
     wireDialog('advisoryDialog','advisoryDialogClose');
-    wireDialog('osfMapDialog','osfMapClose');
-    wireDialog('pfzMapDialog','pfzMapClose');
+    wireDialog('osfMapDialog','osfMapClose',false);
+    wireDialog('pfzMapDialog','pfzMapClose',false);
     wireDialog('seismicDialog','seismicDialogClose');
     wireDialog('shareDialog','shareDialogClose');
     wireDialog('marineHeatWaveDialog','marineHeatWaveClose');
