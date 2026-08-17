@@ -147,7 +147,11 @@ function osfStateCoordinates(name) {
         const layerBounds = layer.getBounds();
         if (layerBounds.isValid()) bounds.extend(layerBounds);
       });
-      if (bounds.isValid()) osfMap.fitBounds(bounds,{padding:innerWidth < 700 ? [12,12] : [20,20],maxZoom:6,animate:false});
+      if (bounds.isValid()) {
+        const isMobile=innerWidth < 700;
+        osfMap.fitBounds(bounds,{padding:isMobile ? [0,0] : [20,20],maxZoom:isMobile ? 7 : 6,animate:false});
+        if (isMobile && osfMap.getZoom() < 7) osfMap.setZoom(osfMap.getZoom()+1,{animate:false});
+      }
     }
 
     async function buildCumulativeOsfMapLayers(data) {

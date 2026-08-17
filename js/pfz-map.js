@@ -101,7 +101,7 @@ function updatePfzMapStatus() {
 
 function latestMurSstDate() {
   const date=new Date();
-  date.setUTCDate(date.getUTCDate()-2);
+  date.setUTCDate(date.getUTCDate()-1);
   return date.toISOString().slice(0,10);
 }
 

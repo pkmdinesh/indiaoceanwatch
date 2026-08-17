@@ -57,7 +57,7 @@
         <div class="panel-head">
           <img class="service-img" src="assets/ocean-wave-service-icon.png" alt="Ocean wave icon">
           <div><h2 id="ocean-title">Ocean State Forecast</h2><p class="panel-kicker">High Wave, Swell Surge & Ocean Currents advisories</p></div>
-          <div class="osf-map-actions"><button class="source osf-map-button" id="shareOsfOverall" type="button">Share</button><button class="source osf-map-button" id="openOsfMap" type="button">Visualize</button><a class="source" href="https://incois.gov.in/site/services/hwa.jsp" target="_blank" rel="noopener">OSF ↗</a></div>
+          <div class="osf-map-actions"><button class="source card-action-button osf-map-button" id="shareOsfOverall" type="button">Share</button><button class="source card-action-button osf-map-button" id="openOsfMap" type="button">Visualize</button><a class="source card-action-button" href="https://incois.gov.in/site/services/hwa.jsp" target="_blank" rel="noopener">OSF ↗</a></div>
         </div>
         <div class="forecast">
           <article class="forecast-card">
@@ -80,13 +80,13 @@
         <div class="panel-head">
           <img class="service-logo" src="assets/tsunami-service-icon.png" alt="Tsunami icon">
           <div><h2 id="tsunami-title">Tsunami Advisory</h2><p class="panel-kicker">Indian Tsunami Early Warning Centre</p></div>
-          <a class="source itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWC ↗</a>
+          <a class="source card-action-button itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWC ↗</a>
         </div>
         <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage">No Tsunami threat reported by ITEWC</strong></div><span id="tsunamiCaption">Last Checked —</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel seismic-card" aria-labelledby="seismic-title">
-        <div class="panel-head"><img class="service-logo" src="assets/earthquake-network-icon.png" alt="Earthquake Network icon"><div><h2 id="seismic-title">Latest seismic activity ≥ 6.5M</h2></div><a class="source" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div>
+        <div class="panel-head"><img class="service-logo" src="assets/earthquake-network-icon.png" alt="Earthquake Network icon"><div><h2 id="seismic-title">Latest seismic activity ≥ 6.5M</h2></div><a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div>
         <div class="seismic-message-wrap" id="seismicMessageWrap"><div class="seismic-message-copy"><button class="seismic-event-link" id="seismicMessage" type="button" disabled>No Seismic Activity for the past 90 days with magnitude &gt;= 6.5M</button><div class="seismic-additional" id="seismicAdditional"></div></div></div>
       </section>
 
@@ -94,7 +94,7 @@
         <div class="panel-head">
           <img class="service-logo" src="assets/storm-surge-icon.png" alt="Storm surge icon">
           <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
-          <a class="source" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
+          <a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
         </div>
         <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage">No active storm surge bulletin</strong></div><span id="stormCaption">Official ITEWC bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
@@ -109,18 +109,18 @@
             </div>
           </div>
         </div>
-        <div class="joint-bulletin-source-row"><a class="source joint-bulletin-source" id="jointBulletinLink" href="https://incois.gov.in/site/services/jointbulletin.jsp" target="_blank" rel="noopener">INCOIS-IMD ↗</a></div>
+        <div class="joint-bulletin-source-row"><a class="source card-action-button joint-bulletin-source" id="jointBulletinLink" href="https://incois.gov.in/site/services/jointbulletin.jsp" target="_blank" rel="noopener">Joint Bulletin ↗</a></div>
         <article class="joint-bulletin-card" id="jointBulletinCard" aria-live="polite">
           <span class="joint-bulletin-info-mark" aria-hidden="true">i</span><div class="joint-bulletin-copy"><a class="joint-bulletin-message" id="jointBulletinMessage" target="_blank" rel="noopener">No INCOIS-IMD joint bulletin is currently available.</a><time class="joint-bulletin-time" id="jointBulletinTime" hidden></time></div>
         </article>
-        <div class="cyclone-status level-safe" id="cycloneStatus"><div class="cyclone-status-copy"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage">When checked IMD CAP Alerts feed.</p><time id="cycloneIssued"></time></div><a class="source cyclone-imd-source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
+        <div class="cyclone-status level-safe" id="cycloneStatus"><div class="cyclone-status-copy"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage">When checked IMD CAP Alerts feed.</p><time id="cycloneIssued"></time></div><a class="source card-action-button cyclone-imd-source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
       </section>
 
       <section class="panel pfz-card" aria-labelledby="pfz-title">
         <div class="panel-head">
           <img class="service-logo" src="assets/potential-fishing-zone-icon.jpg" alt="Fish swimming in ocean currents">
           <div><h2 id="pfz-title" class="pfz-title">Potential Fishing Zone</h2><p class="panel-kicker">Today’s advisory sectors</p></div>
-          <div class="osf-map-actions"><button class="source osf-map-button pfz-map-button" id="openPfzMap" type="button">Visualize</button><a class="source pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a></div>
+          <div class="osf-map-actions"><button class="source card-action-button osf-map-button pfz-map-button" id="openPfzMap" type="button">Visualize</button><a class="source card-action-button pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a></div>
         </div>
         <p class="pfz-date" id="pfzDate">Forecast — · Valid through —</p>
         <div class="states pfz-states" id="pfzStates"><span class="empty">Loading issued sectors…</span></div>
@@ -139,6 +139,8 @@
           <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/sarat/home.jsp" target="_blank" rel="noopener">SARAT ↗</a>
           <button class="marine-advisory-chip" id="openMarineHeatWave" type="button">Marine Heat Wave</button>
           <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/OSF/" target="_blank" rel="noopener">Ports &amp; Harbors ↗</a>
+          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/shipforecast/Login.jsp" target="_blank" rel="noopener">Ship Route Forecast ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/lsf.jsp" target="_blank" rel="noopener">Location Specific Forecast ↗</a>
         </nav>
       </section>
 
@@ -169,11 +171,11 @@
     <div class="advisory-details"><article class="district-advisory"><p id="marineHeatWaveMessage">Marine Heat Wave message will appear after the next source update.</p></article><a class="source" href="https://incois.gov.in/oceanservices/mhw/index.jsp" target="_blank" rel="noopener">Open Marine Heat Wave page ↗</a></div>
   </dialog>
   <dialog class="osf-map-dialog" id="osfMapDialog" aria-labelledby="osfMapTitle">
-    <div class="advisory-dialog-head"><div><h2 id="osfMapTitle">Ocean State Forecast Map</h2><p id="osfMapMeta">High Wave · Swell Surge · Ocean Currents</p></div><div class="dialog-head-actions"><button class="dialog-share" id="shareOsfMap" type="button" aria-label="Share OSF map and advisories">Share</button><button class="dialog-close" id="osfMapClose" type="button" aria-label="Close OSF map">&times;</button></div></div>
+    <div class="advisory-dialog-head"><div><h2 id="osfMapTitle">Ocean State Forecast Map</h2><p id="osfMapMeta">High Wave · Swell Surge · Ocean Currents</p></div><div class="dialog-head-actions"><button class="dialog-close" id="osfMapClose" type="button" aria-label="Close OSF map">&times;</button></div></div>
     <div class="osf-map-body"><div class="osf-map-toolbar"><div class="osf-map-legend" aria-label="Severity legend"><span><i style="background:#FF0000"></i>Warning</span><span><i style="background:#FF8C00"></i>Alert</span><span><i style="background:#FAFA33"></i>Watch</span><span><i style="background:#238269"></i>No Threat</span></div></div><div class="osf-map-canvas" id="osfMapCanvas" aria-label="Interactive Ocean State Forecast advisory map"></div><p class="osf-map-note" id="osfMapShareStatus">Markers represent state-level advisory records fetched from INCOIS. Use the layer control to select services.</p></div>
   </dialog>
   <dialog class="osf-map-dialog pfz-map-dialog" id="pfzMapDialog" aria-labelledby="pfzMapTitle">
-    <div class="advisory-dialog-head"><div><h2 id="pfzMapTitle">Potential Fishing Zone Map</h2><p id="pfzMapMeta">Official INCOIS PFZ vector layers</p></div><div class="dialog-head-actions"><button class="dialog-share" id="sharePfzMap" type="button" aria-label="Share PFZ map">Share</button><button class="dialog-close" id="pfzMapClose" type="button" aria-label="Close PFZ map">&times;</button></div></div>
+    <div class="advisory-dialog-head"><div><h2 id="pfzMapTitle">Potential Fishing Zone Map</h2><p id="pfzMapMeta">Official INCOIS PFZ vector layers</p></div><div class="dialog-head-actions"><button class="dialog-close" id="pfzMapClose" type="button" aria-label="Close PFZ map">&times;</button></div></div>
     <div class="osf-map-body pfz-map-body"><div class="osf-map-toolbar"><div class="pfz-map-legend" aria-label="PFZ map legend"><span><i class="pfz-line-swatch"></i>PFZ forecast lines</span><span><i class="pfz-sector-swatch"></i>Sectors</span><span><i class="pfz-eez-swatch"></i>EEZ</span><span><i class="pfz-centre-swatch"></i>Landing centres</span></div></div><div class="osf-map-canvas pfz-map-canvas" id="pfzMapCanvas" aria-label="Interactive Potential Fishing Zone map"></div><p class="osf-map-note" id="pfzMapShareStatus">PFZ forecast lines and EEZ are enabled by default. Use the layer control to add sectors, landing centres, bathymetry or SST Anomaly.</p></div>
   </dialog>
   <dialog class="share-dialog" id="shareDialog" aria-labelledby="shareDialogTitle">
