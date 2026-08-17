@@ -5,6 +5,7 @@ let pfzMapLayers = {};
 let pfzSelectedLayers = new Set();
 let pfzDataPromise = null;
 let pfzSstLegendElement = null;
+let pfzSstDataDate = null;
 
 const PFZ_BATHYMETRY_SLD = '<StyledLayerDescriptor version="1.0.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"><NamedLayer><Name>BathymteryImage:gebcobathymtery</Name><UserStyle><FeatureTypeStyle><Rule><RasterSymbolizer><ColorMap type="ramp"><ColorMapEntry color="#081d58" quantity="-6000"/><ColorMapEntry color="#253494" quantity="-4500"/><ColorMapEntry color="#2c7fb8" quantity="-3000"/><ColorMapEntry color="#41b6c4" quantity="-1500"/><ColorMapEntry color="#a1dab4" quantity="-500"/><ColorMapEntry color="#ffffcc" quantity="0"/></ColorMap></RasterSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
 
@@ -93,16 +94,27 @@ function updatePfzMapStatus() {
   const selected=[...pfzSelectedLayers];
   if (pfzSstLegendElement) pfzSstLegendElement.hidden=!selected.includes('SST Anomaly');
   const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly'].includes(name));
-  const liveNote=liveLayers.length ? ` ${liveLayers.join(' and ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.` : '';
+  const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly data date: ${pfzSstDataDate}.` : '';
+  const liveNote=liveLayers.length ? ` ${liveLayers.join(' and ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}` : '';
   ids('pfzMapShareStatus').textContent = selected.length
     ? `Showing ${selected.join(' + ')}. Vector layers are cached locally from official INCOIS WFS data.${liveNote}`
     : 'No PFZ layers selected. Use the layer control to enable a layer.';
 }
 
-function latestMurSstDate() {
-  const date=new Date();
-  date.setUTCDate(date.getUTCDate()-1);
-  return date.toISOString().slice(0,10);
+async function latestMurSstDate() {
+  for (let offset=1;offset<=5;offset++) {
+    const date=new Date();
+    date.setUTCDate(date.getUTCDate()-offset);
+    const value=date.toISOString().slice(0,10);
+    const probeUrl=APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}',value).replace('{z}','3').replace('{y}','3').replace('{x}','5');
+    try {
+      const response=await fetch(probeUrl,{method:'HEAD',cache:'no-store'});
+      if (response.ok) return value;
+    } catch { }
+  }
+  const fallback=new Date();
+  fallback.setUTCDate(fallback.getUTCDate()-2);
+  return fallback.toISOString().slice(0,10);
 }
 
 function fitPfzCoastalExtent() {
@@ -123,7 +135,8 @@ async function buildPfzMapLayers() {
   pfzMapLayers.Bathymetry=L.tileLayer.wms(APP_CONFIG.MAP.PFZ_BATHYMETRY_WMS_URL,{
     layers:'BathymteryImage:gebcobathymtery',format:'image/png',transparent:true,version:'1.1.1',sld_body:PFZ_BATHYMETRY_SLD,opacity:.72,attribution:'INCOIS bathymetry'
   });
-  const murDate=latestMurSstDate();
+  const murDate=await latestMurSstDate();
+  pfzSstDataDate=murDate;
   const murSstUrl=APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}',murDate);
   pfzMapLayers['SST Anomaly']=L.tileLayer(murSstUrl,{opacity:.94,maxNativeZoom:7,maxZoom:12,crossOrigin:true,className:'pfz-sst-layer',attribution:`SST anomaly · ${murDate}`});
   pfzSelectedLayers=new Set(['PFZ forecast lines','EEZ boundary']);
