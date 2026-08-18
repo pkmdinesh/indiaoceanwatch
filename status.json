@@ -1,11 +1,11 @@
 ﻿{
-    "updatedAt":  "2026-08-18T23:15:14.7732771+00:00",
-    "lastAttemptAt":  "2026-08-18T23:15:14.7732771+00:00",
+    "updatedAt":  "2026-08-18T23:30:20.0463531+00:00",
+    "lastAttemptAt":  "2026-08-18T23:30:20.0463531+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
-                           "message":  "Marine Heatwave event of Moderate category with area of spreading 23.58% has been observed on 2026-08-16 over the Arabian Sea; Marine Heatwave event of Moderate to Extreme category with area of spreading 36.67% has been observed on 2026-08-16 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 22.93% has been observed on 2026-08-16 over the Rest of Indian Ocean; Marine Heatwave event of No Heat Wave category with area of spreading 16.74% has been observed on 2026-08-16 over the Persian Gulf; Marine Heatwave event of Moderate category with area of spreading 70.74% has been observed on 2026-08-16 over the Maharashtra coast; Marine Heatwave event of Moderate category with area of spreading 93.10% has been observed on 2026-08-16 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 89.29% has been observed on 2026-08-16 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 81.34% has been observed on 2026-08-16 over the Lakshadweep coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 100.00% has been observed on 2026-08-16 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 95.15% has been observed on 2026-08-16 over the Nicobar coast;",
-                           "fetchedAt":  "2026-08-17T23:30:20.2566918+00:00",
+                           "message":  "Marine Heatwave event of Moderate category with area of spreading 20.97% has been observed on 2026-08-17 over the Arabian Sea; Marine Heatwave event of Moderate to Extreme category with area of spreading 35.73% has been observed on 2026-08-17 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 24.30% has been observed on 2026-08-17 over the Rest of Indian Ocean; Marine Heatwave event of No Heat Wave category with area of spreading 16.32% has been observed on 2026-08-17 over the Persian Gulf; Marine Heatwave event of Moderate category with area of spreading 34.57% has been observed on 2026-08-17 over the Maharashtra coast; Marine Heatwave event of Moderate category with area of spreading 96.55% has been observed on 2026-08-17 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 91.96% has been observed on 2026-08-17 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 83.25% has been observed on 2026-08-17 over the Lakshadweep coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 100.00% has been observed on 2026-08-17 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 92.73% has been observed on 2026-08-17 over the Nicobar coast;",
+                           "fetchedAt":  "2026-08-18T23:30:20.0463531+00:00",
                            "ok":  true,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
@@ -2126,7 +2126,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-18T23:15:29.9766208+00:00",
+                          "fetchedAt":  "2026-08-18T23:30:39.7239489+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -4685,7 +4685,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  11.78,
-                      "pfzAgeHours":  11.78
+                      "osfAgeHours":  12.03,
+                      "pfzAgeHours":  12.03
                   }
 }
