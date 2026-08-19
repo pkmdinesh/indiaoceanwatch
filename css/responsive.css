@@ -1,8 +1,61 @@
-/* OSF popup z-index and scrollable content so popups appear above controls */
-.osf-map-dialog .leaflet-popup-pane,
-.osf-map-dialog .leaflet-popup { z-index: 3000 !important; }
+/* Verified overrides added after the original compatibility cascade. */
 
-.osf-map-dialog .leaflet-control { z-index: 1500 !important; }
-.osf-map-dialog .leaflet-popup-content-wrap { max-height: 40vh; overflow:auto; }
-.osf-map-dialog .leaflet-popup-content { padding: 8px 12px; }
-.osf-map-dialog .osf-popup { max-height: 38vh; overflow:auto; box-sizing:border-box; }
+/* A 1024px laptop exposes about 1138 CSS pixels at 90% browser zoom.
+   Switch only the header before its centred title and right-side controls
+   collide, while retaining the two-column advisory-card layout. */
+@media(max-width:1200px){
+  .header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px}
+  .ocean-brand{min-width:0}
+  .title{position:static;grid-column:1/-1;grid-row:2;transform:none;width:100%;max-width:none;padding-top:5px}
+  .title h1{white-space:normal}
+  .header-actions{grid-column:2;grid-row:1}
+}
+.advisory-dialog{overflow-x:hidden;overflow-y:auto}
+
+@media(max-width:700px){
+  .header{grid-template-columns:minmax(0,1fr)}
+  .ocean-brand{grid-column:1;grid-row:1;width:max-content;max-width:100%}
+  .title{grid-column:1;grid-row:2}
+  .header-actions{grid-column:1;grid-row:3;width:100%;min-width:0;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;padding-top:8px;border-top:1px solid var(--line)}
+  .header-actions .stamp{min-width:0;margin-right:auto;overflow-wrap:anywhere;text-align:left}
+  .header-actions .share-button,.header-actions .install-button{flex:none}
+  .title p,.stamp,.stamp time,.live{font-size:13px}
+  .panel-kicker,.empty,.advisory-note{font-size:13px}
+  .tsunami-status .tsunami-message{font-size:15px;line-height:1.45}
+  .tsunami-status.advisory-safe .tsunami-copy>span,
+  .tsunami-status.advisory-info .tsunami-copy>span{font-size:12px;line-height:1.45}
+  .tsunami-status .bulletin-link{font-size:12px;line-height:1.45}
+  .content .ocean .panel-head{flex-wrap:wrap}
+  .content .ocean .panel-head>div:first-child{flex:1 1 190px}
+  .content .ocean .osf-map-actions{width:100%;min-width:0;margin-left:0;justify-content:flex-end;flex-wrap:wrap}
+  .content .ocean .osf-map-actions .source{min-width:0;max-width:100%}
+  .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr)}
+  .severity-row-states{min-width:0}
+  .severity-state-chip{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+  .osf-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px)}
+  .osf-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
+  .osf-map-dialog .leaflet-control-layers label{white-space:normal}
+  .osf-map-dialog .leaflet-control-zoom{margin-left:8px;margin-top:8px}
+  .osf-map-dialog .advisory-dialog-head,.seismic-dialog .advisory-dialog-head{isolation:isolate;z-index:1000}
+  .osf-map-dialog .dialog-head-actions,.seismic-dialog .dialog-head-actions{position:relative;z-index:1001;flex:none}
+  .pfz-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px)}
+  .pfz-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
+  .pfz-map-legend{gap:7px 10px;font-size:10px}
+}
+
+@media(max-width:420px){
+  .announcement-card{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
+  .announcement-label,.announcement-message{grid-column:1;width:100%;min-width:0}
+  .announcement-message{display:flex;flex-wrap:wrap;gap:6px}
+  .active-advisory-chip{width:auto;max-width:100%;box-sizing:border-box;white-space:nowrap;text-decoration:none}
+  .announcement-latest{display:grid;grid-template-columns:auto auto minmax(0,1fr);width:100%}
+  .announcement-latest-message{gap:4px 6px}
+  .forecast-card,.forecast-title,.forecast-meta,.severity-board,.severity-row,.severity-row-states{min-width:0;max-width:100%}
+  .forecast-title{align-items:flex-start;flex-wrap:wrap}
+  .forecast-meta{width:100%;text-align:left}
+  .issue-date{white-space:normal}
+  .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr);gap:6px}
+  .severity-row-label{width:auto;padding-top:4px;white-space:normal}
+  .severity-row-states{width:100%;overflow-x:auto;padding-bottom:2px}
+  .severity-state-chip{max-width:none;white-space:nowrap;overflow-wrap:normal}
+}
