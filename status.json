@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-20T13:45:21.1212294+00:00",
-    "lastAttemptAt":  "2026-08-20T13:45:21.1212294+00:00",
+    "updatedAt":  "2026-08-20T14:00:17.4916496+00:00",
+    "lastAttemptAt":  "2026-08-20T14:00:17.4916496+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -939,42 +939,18 @@
                                           "highestSeverity":  "alert",
                                           "counts":  {
                                                          "warning":  0,
-                                                         "alert":  6,
-                                                         "watch":  3,
+                                                         "alert":  3,
+                                                         "watch":  6,
                                                          "noThreat":  0
                                                      },
                                           "advisories":  [
-                                                             {
-                                                                 "state":  "ANDHRA PRADESH",
-                                                                 "district":  "GUNTUR",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Swell waves in the range of 18.0 - 21.0 sec period with 0.3 - 0.4 m height are forecasted during  20:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             },
-                                                             {
-                                                                 "state":  "ANDHRA PRADESH",
-                                                                 "district":  "KRISHNA",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KRISHNA,ANDHRA PRADESH from Nachugunta To Pedda Gollapalem. Swell waves in the range of 18.0 - 21.0 sec period with 0.5 - 0.6 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             },
-                                                             {
-                                                                 "state":  "ANDHRA PRADESH",
-                                                                 "district":  "PRAKASAM",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PRAKASAM,ANDHRA PRADESH from Ramayapatnam To Vadarevu. Swell waves in the range of 15.0 - 21.0 sec period with 0.3 - 0.4 m height are forecasted during  02:30 hours on 21-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
                                                                  "district":  "SRIKAKULAM",
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of SRIKAKULAM,ANDHRA PRADESH from Ramachandrapuram To Kaviti. Swell waves in the range of 16.0 - 19.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of SRIKAKULAM,ANDHRA PRADESH from Ramachandrapuram To Kaviti. Swell waves in the range of 15.0 - 18.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
@@ -982,7 +958,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of VISAKHAPATNAM,ANDHRA PRADESH from Palmanpeta To Bhimunipatnam. Swell waves in the range of 17.0 - 20.0 sec period with 1.0 - 1.1 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of VISAKHAPATNAM,ANDHRA PRADESH from Palmanpeta To Bhimunipatnam. Swell waves in the range of 15.0 - 18.0 sec period with 1.0 - 1.1 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
@@ -990,7 +966,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of VIZIANAGARAM,ANDHRA PRADESH from Mukkam To Chintapalli. Swell waves in the range of 16.0 - 19.0 sec period with 1.0 - 1.1 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of VIZIANAGARAM,ANDHRA PRADESH from Mukkam To Chintapalli. Swell waves in the range of 15.0 - 18.0 sec period with 1.0 - 1.1 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
@@ -1002,11 +978,35 @@
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
+                                                                 "district":  "GUNTUR",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "20-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Swell waves in the range of 10.0 - 18.0 sec period with 0.3 - 0.4 m height are forecasted during 20:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDHRA PRADESH",
+                                                                 "district":  "KRISHNA",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "20-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of KRISHNA,ANDHRA PRADESH from Nachugunta To Pedda Gollapalem. Swell waves in the range of 14.0 - 18.0 sec period with 0.4 - 0.6 m height are forecasted during  20:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDHRA PRADESH",
                                                                  "district":  "NELLORE",
                                                                  "severity":  "watch",
                                                                  "color":  "Yellow",
                                                                  "issueDate":  "20-08-2026",
                                                                  "message":  "Swell Surge Watch for the coast of NELLORE,ANDHRA PRADESH from Coromandel To Vatturupapallepalam. Swell waves in the range of 17.0 - 21.0 sec period with 0.3 - 0.4 m height are forecasted during  05:30 hours on 21-08-2026 to 23:30 hours on 22-08-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDHRA PRADESH",
+                                                                 "district":  "PRAKASAM",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "20-08-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of PRAKASAM,ANDHRA PRADESH from Ramayapatnam To Vadarevu. Swell waves in the range of 10.0 - 18.0 sec period with 0.3 - 0.4 m height are forecasted during  20:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that no immediate action is required. Check for updates."
                                                              },
                                                              {
                                                                  "state":  "ANDHRA PRADESH",
@@ -2094,7 +2094,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-20T13:45:38.6391870+00:00",
+                          "fetchedAt":  "2026-08-20T14:00:35.0360704+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6755,7 +6755,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  2.28,
-                      "pfzAgeHours":  2.28
+                      "osfAgeHours":  2.53,
+                      "pfzAgeHours":  2.53
                   }
 }
