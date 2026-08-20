@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-20T14:30:15.4112226+00:00",
-    "lastAttemptAt":  "2026-08-20T14:30:15.4112226+00:00",
+    "updatedAt":  "2026-08-20T14:45:16.8508797+00:00",
+    "lastAttemptAt":  "2026-08-20T14:45:16.8508797+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -1062,7 +1062,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of AMRELI,GUJARAT from Rohisha To Patva. Swell waves in the range of 16.0 - 17.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of AMRELI,GUJARAT from Rohisha To Patva. Swell waves in the range of 15.0 - 17.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1070,7 +1070,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of BHAVNAGAR,GUJARAT from Gadhada To Kamatalav. Swell waves in the range of 16.0 - 17.0 sec period with 0.9 - 1.0 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of BHAVNAGAR,GUJARAT from Gadhada To Kamatalav. Swell waves in the range of 15.0 - 17.0 sec period with 0.9 - 1.0 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1078,7 +1078,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of DEVBHUMI DWARAKA,GUJARAT from Vadinar To Harshad Miyani. Swell waves in the range of 13.0 - 16.0 sec period with 1.7 - 1.8 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of DEVBHUMI DWARAKA,GUJARAT from Vadinar To Harshad Miyani. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.8 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1086,7 +1086,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of GIR SOMNATH,GUJARAT from Adri To Mul Dwaraka. Swell waves in the range of 15.0 - 17.0 sec period with 1.7 - 1.8 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of GIR SOMNATH,GUJARAT from Adri To Mul Dwaraka. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.8 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1094,7 +1094,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of JUNAGADH NORTH,GUJARAT from Shil To Chorwad. Swell waves in the range of 15.0 - 17.0 sec period with 1.6 - 1.7 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of JUNAGADH NORTH,GUJARAT from Shil To Chorwad. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.7 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1102,7 +1102,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of JUNAGADH SOUTH,GUJARAT from Nava Bandar To Saiyad Rajpara. Swell waves in the range of 15.0 - 17.0 sec period with 1.6 - 1.7 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of JUNAGADH SOUTH,GUJARAT from Nava Bandar To Saiyad Rajpara. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1110,7 +1110,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KACHCHH,GUJARAT from Lakhapat To Kandla. Swell waves in the range of 16.0 - 17.0 sec period with 1.5 - 1.6 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of KACHCHH,GUJARAT from Lakhapat To Kandla. Swell waves in the range of 16.0 - 17.0 sec period with 1.4 - 1.6 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1118,7 +1118,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PORBANDAR,GUJARAT from Tukda Miyani To Madhavpur. Swell waves in the range of 14.0 - 16.0 sec period with 1.6 - 1.7 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of PORBANDAR,GUJARAT from Tukda Miyani To Madhavpur. Swell waves in the range of 15.0 - 16.0 sec period with 1.4 - 1.7 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1126,7 +1126,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of VALSAD SOUTH,GUJARAT from Kalai To Umargam. Swell waves in the range of 13.0 - 17.0 sec period with 1.0 - 1.1 m height are forecasted during  17:30 hours on 20-08-2026 to 20:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of VALSAD SOUTH,GUJARAT from Kalai To Umargam. Swell waves in the range of 15.0 - 17.0 sec period with 1.0 - 1.1 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -2094,7 +2094,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-20T14:30:30.7105955+00:00",
+                          "fetchedAt":  "2026-08-20T14:45:32.9470705+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6755,7 +6755,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  3.03,
-                      "pfzAgeHours":  3.03
+                      "osfAgeHours":  3.28,
+                      "pfzAgeHours":  3.28
                   }
 }
