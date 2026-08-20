@@ -1,11 +1,11 @@
 ﻿{
-    "updatedAt":  "2026-08-20T23:15:14.0051090+00:00",
-    "lastAttemptAt":  "2026-08-20T23:15:14.0051090+00:00",
+    "updatedAt":  "2026-08-20T23:30:23.7225393+00:00",
+    "lastAttemptAt":  "2026-08-20T23:30:23.7225393+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
-                           "message":  "Marine Heatwave event of Moderate category with area of spreading 20.40% has been observed on 2026-08-18 over the Arabian Sea; Marine Heatwave event of Moderate to Extreme category with area of spreading 40.38% has been observed on 2026-08-18 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 25.29% has been observed on 2026-08-18 over the Rest of Indian Ocean; Marine Heatwave event of Moderate category with area of spreading 51.60% has been observed on 2026-08-18 over the Maharashtra coast; Marine Heatwave event of Moderate category with area of spreading 96.55% has been observed on 2026-08-18 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 92.86% has been observed on 2026-08-18 over the Karnataka coast; Marine Heatwave event of No Heat Wave category with area of spreading 17.30% has been observed on 2026-08-18 over the Kerala coast; Marine Heatwave event of Moderate category with area of spreading 92.82% has been observed on 2026-08-18 over the Lakshadweep coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 100.00% has been observed on 2026-08-18 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 99.39% has been observed on 2026-08-18 over the Nicobar coast;",
-                           "fetchedAt":  "2026-08-19T23:30:18.8458778+00:00",
+                           "message":  "Marine Heatwave event of Moderate category with area of spreading 22.10% has been observed on 2026-08-19 over the Arabian Sea; Marine Heatwave event of Moderate to Extreme category with area of spreading 40.17% has been observed on 2026-08-19 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 25.40% has been observed on 2026-08-19 over the Rest of Indian Ocean; Marine Heatwave event of Moderate category with area of spreading 37.77% has been observed on 2026-08-19 over the Maharashtra coast; Marine Heatwave event of Moderate category with area of spreading 93.10% has been observed on 2026-08-19 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 91.07% has been observed on 2026-08-19 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 26.49% has been observed on 2026-08-19 over the Kerala coast; Marine Heatwave event of Moderate category with area of spreading 95.22% has been observed on 2026-08-19 over the Lakshadweep coast; Marine Heatwave event of No Heat Wave category with area of spreading 16.54% has been observed on 2026-08-19 over the North Tamil Nadu coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 100.00% has been observed on 2026-08-19 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 89.09% has been observed on 2026-08-19 over the Nicobar coast;",
+                           "fetchedAt":  "2026-08-20T23:30:23.7225393+00:00",
                            "ok":  true,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
@@ -1962,7 +1962,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-20T23:15:21.4920448+00:00",
+                          "fetchedAt":  "2026-08-20T23:30:31.1352549+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6623,7 +6623,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  11.78,
-                      "pfzAgeHours":  11.78
+                      "osfAgeHours":  12.03,
+                      "pfzAgeHours":  12.03
                   }
 }
