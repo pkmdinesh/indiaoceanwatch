@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-20T13:15:12.3982878+00:00",
-    "lastAttemptAt":  "2026-08-20T13:15:12.3982878+00:00",
+    "updatedAt":  "2026-08-20T13:30:22.5860575+00:00",
+    "lastAttemptAt":  "2026-08-20T13:30:22.5860575+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -2124,7 +2124,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-20T13:15:26.9379135+00:00",
+                          "fetchedAt":  "2026-08-20T13:30:40.6536432+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6785,7 +6785,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  25.78,
-                      "pfzAgeHours":  1.78
+                      "osfAgeHours":  26.03,
+                      "pfzAgeHours":  2.03
                   }
 }
