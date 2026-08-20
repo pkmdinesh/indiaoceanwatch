@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-20T15:45:20.3662664+00:00",
-    "lastAttemptAt":  "2026-08-20T15:45:20.3662664+00:00",
+    "updatedAt":  "2026-08-20T16:02:15.3349167+00:00",
+    "lastAttemptAt":  "2026-08-20T16:02:15.3349167+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -834,7 +834,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 18.0 sec period with 1.4 - 1.6 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.6 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -842,7 +842,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of CAR NICOBAR,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 17.0 sec period with 2.3 - 2.5 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of CAR NICOBAR,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 2.1 - 2.5 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -850,7 +850,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of FLAT ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 18.0 sec period with 2.2 - 2.3 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of FLAT ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 2.0 - 2.3 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -858,7 +858,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of HAVELOCK,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 1.6 - 1.8 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of HAVELOCK,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.8 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -866,7 +866,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of INDIRA POINT,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 2.0 - 2.5 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of INDIRA POINT,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 2.0 - 2.5 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -882,7 +882,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of LITTLE ANDAMAN,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 18.0 sec period with 2.3 - 2.5 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of LITTLE ANDAMAN,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 2.1 - 2.5 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -890,7 +890,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of NARCONDAM ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 18.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of NARCONDAM ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 18.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -898,7 +898,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of NORTH SENTINEL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 18.0 sec period with 2.3 - 2.4 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of NORTH SENTINEL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 2.2 - 2.4 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -906,7 +906,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PORT BLAIR,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 18.0 sec period with 1.9 - 2.1 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of PORT BLAIR,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 1.7 - 2.1 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -914,7 +914,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of RANGATH BAY,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 18.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of RANGATH BAY,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 1.0 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -922,7 +922,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 18.0 sec period with 2.2 - 2.3 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of WEST \u0026 LANDFALL ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 17.0 sec period with 2.0 - 2.3 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -1094,7 +1094,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of JUNAGADH NORTH,GUJARAT from Shil To Chorwad. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.7 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of JUNAGADH NORTH,GUJARAT from Shil To Chorwad. Swell waves in the range of 15.0 - 17.0 sec period with 1.6 - 1.7 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1102,7 +1102,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of JUNAGADH SOUTH,GUJARAT from Nava Bandar To Saiyad Rajpara. Swell waves in the range of 15.0 - 17.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of JUNAGADH SOUTH,GUJARAT from Nava Bandar To Saiyad Rajpara. Swell waves in the range of 15.0 - 17.0 sec period with 1.6 - 1.7 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1110,7 +1110,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KACHCHH,GUJARAT from Lakhapat To Kandla. Swell waves in the range of 16.0 - 17.0 sec period with 1.4 - 1.6 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of KACHCHH,GUJARAT from Lakhapat To Kandla. Swell waves in the range of 15.0 - 16.0 sec period with 1.5 - 1.6 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "GUJARAT",
@@ -1178,7 +1178,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of DAKSHINA KANNADA,KARNATAKA from Mulki To Mangalore. Swell waves in the range of 14.0 - 16.0 sec period with 1.0 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of DAKSHINA KANNADA,KARNATAKA from Mulki To Mangalore. Swell waves in the range of 15.0 - 16.0 sec period with 1.0 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "KARNATAKA",
@@ -1186,7 +1186,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of UDUPI,KARNATAKA from Baindur To Kapu. Swell waves in the range of 14.0 - 16.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 08:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of UDUPI,KARNATAKA from Baindur To Kapu. Swell waves in the range of 15.0 - 16.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "KARNATAKA",
@@ -1194,7 +1194,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of UTTARA KANNADA,KARNATAKA from Majali To Bhatkal. Swell waves in the range of 15.0 - 16.0 sec period with 1.1 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 14:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of UTTARA KANNADA,KARNATAKA from Majali To Bhatkal. Swell waves in the range of 15.0 - 16.0 sec period with 1.1 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              }
                                                          ]
                                       },
@@ -1238,7 +1238,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of THRISSUR,KERALA from Attupuram To Kodungallur. Swell waves in the range of 15.0 - 16.0 sec period with 1.1 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of KASARAGOD, KANNUR,KERALA from Kunzhathur To Kotte Kunnu. Swell waves in the range of 15.0 - 16.0 sec period with 1.1 - 1.3 m height are forecasted during 17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "KERALA",
@@ -1278,7 +1278,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of THRISSUR,KERALA from Attupuram To Kodungallur. Swell waves in the range of 16.0 - 18.0 sec period with 1.0 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of THRISSUR,KERALA from Attupuram To Kodungallur. Swell waves in the range of 15.0 - 16.0 sec period with 1.1 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              }
                                                          ]
                                       },
@@ -1298,7 +1298,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of AGATTI,LAKSHADWEEP. Swell waves in the range of 14.0 - 16.0 sec period with 1.3 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of AGATTI,LAKSHADWEEP. Swell waves in the range of 15.0 - 16.0 sec period with 1.3 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "LAKSHADWEEP",
@@ -1306,7 +1306,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of AMINI,LAKSHADWEEP. Swell waves in the range of 14.0 - 16.0 sec period with 1.2 - 1.4 m height are forecasted during 17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of AMINI,LAKSHADWEEP. Swell waves in the range of 15.0 - 16.0 sec period with 1.2 - 1.4 m height are forecasted during 17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "LAKSHADWEEP",
@@ -1314,7 +1314,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of ANDROTH,LAKSHADWEEP. Swell waves in the range of 16.0 - 18.0 sec period with 1.2 - 1.4 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of ANDROTH,LAKSHADWEEP. Swell waves in the range of 15.0 - 16.0 sec period with 1.2 - 1.4 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "LAKSHADWEEP",
@@ -1322,7 +1322,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KAVARATTI,LAKSHADWEEP. Swell waves in the range of 14.0 - 16.0 sec period with 1.3 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of KAVARATTI,LAKSHADWEEP. Swell waves in the range of 15.0 - 16.0 sec period with 1.3 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "LAKSHADWEEP",
@@ -1330,7 +1330,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of MINICOY,LAKSHADWEEP. Swell waves in the range of 15.0 - 18.0 sec period with 1.2 - 1.5 m height are forecasted during 17:30 hours on 20-08-2026 to 05:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of MINICOY,LAKSHADWEEP. Swell waves in the range of 15.0 - 16.0 sec period with 1.2 - 1.5 m height are forecasted during 17:30 hours on 20-08-2026 to 08:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              }
                                                          ]
                                       },
@@ -1350,7 +1350,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PALGHAR,MAHARASHTRA from Zai To Vasai. Swell waves in the range of 13.0 - 17.0 sec period with 1.3 - 1.4 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of PALGHAR,MAHARASHTRA from Zai To Vasai. Swell waves in the range of 15.0 - 17.0 sec period with 1.2 - 1.4 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "MAHARASHTRA",
@@ -1358,7 +1358,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of RAIGARH,MAHARASHTRA from Ulwa Moha To Bagmandla. Swell waves in the range of 14.0 - 17.0 sec period with 1.3 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of RAIGARH,MAHARASHTRA from Ulwa Moha To Bagmandla. Swell waves in the range of 15.0 - 17.0 sec period with 1.3 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "MAHARASHTRA",
@@ -1366,7 +1366,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of RATNAGIRI,MAHARASHTRA from Veshawi-Bankot To Jambhari. Swell waves in the range of 15.0 - 16.0 sec period with 1.4 - 1.6 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of RATNAGIRI,MAHARASHTRA from Veshawi-Bankot To Jambhari. Swell waves in the range of 15.0 - 16.0 sec period with 1.3 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 23:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "MAHARASHTRA",
@@ -1374,7 +1374,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of SINDHUDURG,MAHARASHTRA from Vijayadurg Hr To Terekhol. Swell waves in the range of 12.0 - 16.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of SINDHUDURG,MAHARASHTRA from Vijayadurg Hr To Terekhol. Swell waves in the range of 15.0 - 16.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 05:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "MAHARASHTRA",
@@ -1382,7 +1382,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of THANE, MUMBAI SUBURBAN, MUMBAI CITY,MAHARASHTRA from Dongi Point To Belapur. Swell waves in the range of 12.0 - 17.0 sec period with 1.4 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of THANE, MUMBAI SUBURBAN, MUMBAI CITY,MAHARASHTRA from Dongi Point To Belapur. Swell waves in the range of 16.0 - 17.0 sec period with 1.3 - 1.5 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 21-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              }
                                                          ]
                                       },
@@ -1402,7 +1402,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of BALESHWAR,ODISHA from Panchubisa To Talasari. Swell waves in the range of 17.0 - 19.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of BALESHWAR,ODISHA from Panchubisa To Talasari. Swell waves in the range of 15.0 - 18.0 sec period with 1.1 - 1.2 m height are forecasted during  17:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ODISHA",
@@ -1410,7 +1410,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of BHADRAK,ODISHA from Talchua To Chudamani. Swell waves in the range of 17.0 - 19.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of BHADRAK,ODISHA from Talchua To Chudamani. Swell waves in the range of 15.0 - 18.0 sec period with 1.1 - 1.3 m height are forecasted during  17:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ODISHA",
@@ -1418,7 +1418,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of GANJAM,ODISHA from Anantaraipur To Prayagi. Swell waves in the range of 16.0 - 19.0 sec period with 1.3 - 1.4 m height are forecasted during  17:30 hours on 20-08-2026 to 02:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of GANJAM,ODISHA from Anantaraipur To Prayagi. Swell waves in the range of 15.0 - 18.0 sec period with 1.2 - 1.4 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ODISHA",
@@ -1606,7 +1606,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of NORTH 24 PARGANAS,WEST BENGAL. Swell waves in the range of 17.0 - 19.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 14:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of NORTH 24 PARGANAS,WEST BENGAL. Swell waves in the range of 15.0 - 18.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "WEST BENGAL",
@@ -1614,7 +1614,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PURBA MEDINIPUR,WEST BENGAL from DighaMohanaF.F.T.A.(Digha) To Diamond Harbour. Swell waves in the range of 17.0 - 19.0 sec period with 1.0 - 1.1 m height are forecasted during  17:30 hours on 20-08-2026 to 11:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of PURBA MEDINIPUR,WEST BENGAL from DighaMohanaF.F.T.A.(Digha) To Diamond Harbour. Swell waves in the range of 15.0 - 18.0 sec period with 1.0 - 1.1 m height are forecasted during  17:30 hours on 20-08-2026 to 14:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "WEST BENGAL",
@@ -1622,7 +1622,7 @@
                                                                  "severity":  "alert",
                                                                  "color":  "Orange",
                                                                  "issueDate":  "20-08-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of SOUTH 24 PARGANAS,WEST BENGAL from Kakdwip To Lothian Island. Swell waves in the range of 17.0 - 19.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 14:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                                 "message":  "Swell Surge Alert for the coast of SOUTH 24 PARGANAS,WEST BENGAL from Kakdwip To Lothian Island. Swell waves in the range of 15.0 - 18.0 sec period with 1.2 - 1.3 m height are forecasted during  17:30 hours on 20-08-2026 to 17:30 hours on 22-08-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              }
                                                          ]
                                       },
@@ -2094,7 +2094,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-20T15:45:34.0746325+00:00",
+                          "fetchedAt":  "2026-08-20T16:02:44.5440932+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6755,7 +6755,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  4.27,
-                      "pfzAgeHours":  4.27
+                      "osfAgeHours":  4.58,
+                      "pfzAgeHours":  4.58
                   }
 }
