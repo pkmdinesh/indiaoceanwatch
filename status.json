@@ -1,12 +1,12 @@
 ﻿{
-    "updatedAt":  "2026-08-21T06:45:31.0912035+00:00",
-    "lastAttemptAt":  "2026-08-21T07:00:17.5180317+00:00",
+    "updatedAt":  "2026-08-21T07:30:18.1150799+00:00",
+    "lastAttemptAt":  "2026-08-21T07:30:18.1150799+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
                            "message":  "Marine Heatwave event of Moderate category with area of spreading 22.10% has been observed on 2026-08-19 over the Arabian Sea; Marine Heatwave event of Moderate to Extreme category with area of spreading 40.17% has been observed on 2026-08-19 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 25.40% has been observed on 2026-08-19 over the Rest of Indian Ocean; Marine Heatwave event of Moderate category with area of spreading 37.77% has been observed on 2026-08-19 over the Maharashtra coast; Marine Heatwave event of Moderate category with area of spreading 93.10% has been observed on 2026-08-19 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 91.07% has been observed on 2026-08-19 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 26.49% has been observed on 2026-08-19 over the Kerala coast; Marine Heatwave event of Moderate category with area of spreading 95.22% has been observed on 2026-08-19 over the Lakshadweep coast; Marine Heatwave event of No Heat Wave category with area of spreading 16.54% has been observed on 2026-08-19 over the North Tamil Nadu coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 100.00% has been observed on 2026-08-19 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 89.09% has been observed on 2026-08-19 over the Nicobar coast;",
                            "fetchedAt":  "2026-08-20T23:30:23.7225393+00:00",
-                           "ok":  false,
+                           "ok":  true,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
     "tsunami":  {
@@ -1962,7 +1962,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-21T07:00:30.2328149+00:00",
+                          "fetchedAt":  "2026-08-21T07:30:26.5634947+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6616,14 +6616,14 @@
                             ]
             },
     "errors":  [
-                   "Marine Heat Wave: The operation has timed out."
+
                ],
     "healthAlerts":  [
 
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  19.6,
-                      "pfzAgeHours":  19.6
+                      "osfAgeHours":  20.03,
+                      "pfzAgeHours":  20.03
                   }
 }
