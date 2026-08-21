@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-21T11:47:24.6028750+00:00",
-    "lastAttemptAt":  "2026-08-21T11:47:24.6028750+00:00",
+    "updatedAt":  "2026-08-21T12:00:18.0484379+00:00",
+    "lastAttemptAt":  "2026-08-21T12:00:18.0484379+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -1962,7 +1962,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-21T11:47:37.8247280+00:00",
+                          "fetchedAt":  "2026-08-21T12:00:28.0281519+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -4174,136 +4174,6 @@
                                                                             ]
                                                            },
                                                            {
-                                                               "name":  "Maruvakad",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "266",
-                                                                                    "distance":  "16-21",
-                                                                                    "depth":  "28-33",
-                                                                                    "latitude":  "9 49 14 N",
-                                                                                    "longitude":  "76 6 28 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Chellanum",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "267",
-                                                                                    "distance":  "17-22",
-                                                                                    "depth":  "28-33",
-                                                                                    "latitude":  "9 48 9 N",
-                                                                                    "longitude":  "76 6 6 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Pallithodu",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NW",
-                                                                                    "bearing":  "271",
-                                                                                    "distance":  "18-23",
-                                                                                    "depth":  "29-34",
-                                                                                    "latitude":  "9 47 2 N",
-                                                                                    "longitude":  "76 5 51 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Manakkodam",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NW",
-                                                                                    "bearing":  "275",
-                                                                                    "distance":  "19-24",
-                                                                                    "depth":  "28-33",
-                                                                                    "latitude":  "9 45 54 N",
-                                                                                    "longitude":  "76 5 42 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Thykal",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NW",
-                                                                                    "bearing":  "287",
-                                                                                    "distance":  "20-25",
-                                                                                    "depth":  "29-34",
-                                                                                    "latitude":  "9 44 45 N",
-                                                                                    "longitude":  "76 5 40 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Arthunkal/Chennavely",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NW",
-                                                                                    "bearing":  "287",
-                                                                                    "distance":  "20-25",
-                                                                                    "depth":  "27-32",
-                                                                                    "latitude":  "9 43 37 N",
-                                                                                    "longitude":  "76 5 49 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Aratungal",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NW",
-                                                                                    "bearing":  "286",
-                                                                                    "distance":  "19-24",
-                                                                                    "depth":  "24-29",
-                                                                                    "latitude":  "9 42 33 N",
-                                                                                    "longitude":  "76 6 13 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Chethy",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NW",
-                                                                                    "bearing":  "292",
-                                                                                    "distance":  "19-24",
-                                                                                    "depth":  "29-34",
-                                                                                    "latitude":  "9 41 34 N",
-                                                                                    "longitude":  "76 6 48 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Kottamkulangara",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NW",
-                                                                                    "bearing":  "297",
-                                                                                    "distance":  "19-24",
-                                                                                    "depth":  "35-40",
-                                                                                    "latitude":  "9 40 48 N",
-                                                                                    "longitude":  "76 7 39 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Pollethai",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NW",
-                                                                                    "bearing":  "302",
-                                                                                    "distance":  "18-23",
-                                                                                    "depth":  "22-27",
-                                                                                    "latitude":  "9 40 17 N",
-                                                                                    "longitude":  "76 8 40 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
                                                                "name":  "Valanjavazhy",
                                                                "messages":  [
                                                                                 {
@@ -4525,45 +4395,6 @@
                                                                             ]
                                                            },
                                                            {
-                                                               "name":  "Vilinjam",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "226",
-                                                                                    "distance":  "23-28",
-                                                                                    "depth":  "63-68",
-                                                                                    "latitude":  "8 13 34 N",
-                                                                                    "longitude":  "76 49 0 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "VizhinjamNorth",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "223",
-                                                                                    "distance":  "23-28",
-                                                                                    "depth":  "63-68",
-                                                                                    "latitude":  "8 12 43 N",
-                                                                                    "longitude":  "76 49 53 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Mariyanadu",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "225",
-                                                                                    "distance":  "24-29",
-                                                                                    "depth":  "63-68",
-                                                                                    "latitude":  "8 11 33 N",
-                                                                                    "longitude":  "76 50 22 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
                                                                "name":  "Kochuveli",
                                                                "messages":  [
                                                                                 {
@@ -4577,71 +4408,6 @@
                                                                             ]
                                                            },
                                                            {
-                                                               "name":  "Adimalathura",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "224",
-                                                                                    "distance":  "25-30",
-                                                                                    "depth":  "64-69",
-                                                                                    "latitude":  "8 10 30 N",
-                                                                                    "longitude":  "76 51 2 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Puthiathura(Kochupally)",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "222",
-                                                                                    "distance":  "24-29",
-                                                                                    "depth":  "63-68",
-                                                                                    "latitude":  "8 9 55 N",
-                                                                                    "longitude":  "76 52 9 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Karichal",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "218",
-                                                                                    "distance":  "23-28",
-                                                                                    "depth":  "61-66",
-                                                                                    "latitude":  "8 9 35 N",
-                                                                                    "longitude":  "76 53 22 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Kochuthura",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "218",
-                                                                                    "distance":  "22-27",
-                                                                                    "depth":  "59-64",
-                                                                                    "latitude":  "8 9 17 N",
-                                                                                    "longitude":  "76 54 36 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Poovar",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "217",
-                                                                                    "distance":  "22-27",
-                                                                                    "depth":  "58-63",
-                                                                                    "latitude":  "8 8 43 N",
-                                                                                    "longitude":  "76 55 43 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
                                                                "name":  "Vettucaud",
                                                                "messages":  [
                                                                                 {
@@ -4651,32 +4417,6 @@
                                                                                     "depth":  "831-836",
                                                                                     "latitude":  "8 7 49 N",
                                                                                     "longitude":  "76 29 58 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Puthiathura(Chinnamarthandanthura)",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "206",
-                                                                                    "distance":  "23-28",
-                                                                                    "depth":  "57-62",
-                                                                                    "latitude":  "8 7 40 N",
-                                                                                    "longitude":  "76 56 24 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Vizhinjam\u0026Kottapuram",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SW",
-                                                                                    "bearing":  "186",
-                                                                                    "distance":  "29-34",
-                                                                                    "depth":  "57-62",
-                                                                                    "latitude":  "8 6 28 N",
-                                                                                    "longitude":  "76 56 46 E"
                                                                                 }
                                                                             ]
                                                            },
@@ -6937,32 +6677,6 @@
                                                                             ]
                                                            },
                                                            {
-                                                               "name":  "Chetlat I",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "SE",
-                                                                                    "bearing":  "135",
-                                                                                    "distance":  "49-54",
-                                                                                    "depth":  "1066-1071",
-                                                                                    "latitude":  "11 21 56 N",
-                                                                                    "longitude":  "73 3 2 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
-                                                               "name":  "Kavaratti I",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NE",
-                                                                                    "bearing":  "34",
-                                                                                    "distance":  "101-106",
-                                                                                    "depth":  "1245-1250",
-                                                                                    "latitude":  "11 20 42 N",
-                                                                                    "longitude":  "73 11 30 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
                                                                "name":  "Kadmath I",
                                                                "messages":  [
                                                                                 {
@@ -6976,19 +6690,6 @@
                                                                             ]
                                                            },
                                                            {
-                                                               "name":  "Amini I",
-                                                               "messages":  [
-                                                                                {
-                                                                                    "direction":  "NE",
-                                                                                    "bearing":  "82",
-                                                                                    "distance":  "62-67",
-                                                                                    "depth":  "2021-2026",
-                                                                                    "latitude":  "11 11 40 N",
-                                                                                    "longitude":  "73 18 28 E"
-                                                                                }
-                                                                            ]
-                                                           },
-                                                           {
                                                                "name":  "Androth I",
                                                                "messages":  [
                                                                                 {
@@ -6998,6 +6699,19 @@
                                                                                     "depth":  "1968-1973",
                                                                                     "latitude":  "10 49 23 N",
                                                                                     "longitude":  "73 9 19 E"
+                                                                                }
+                                                                            ]
+                                                           },
+                                                           {
+                                                               "name":  "Kavaratti I",
+                                                               "messages":  [
+                                                                                {
+                                                                                    "direction":  "SE",
+                                                                                    "bearing":  "165",
+                                                                                    "distance":  "34-39",
+                                                                                    "depth":  "1826-1831",
+                                                                                    "latitude":  "10 14 27 N",
+                                                                                    "longitude":  "72 43 56 E"
                                                                                 }
                                                                             ]
                                                            },
@@ -7052,7 +6766,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  24.32,
-                      "pfzAgeHours":  0.32
+                      "osfAgeHours":  24.53,
+                      "pfzAgeHours":  0.53
                   }
 }
