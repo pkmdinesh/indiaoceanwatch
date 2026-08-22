@@ -1,12 +1,12 @@
 ﻿{
     "updatedAt":  "2026-08-22T10:45:14.8872720+00:00",
-    "lastAttemptAt":  "2026-08-22T10:45:14.8872720+00:00",
+    "lastAttemptAt":  "2026-08-22T11:02:03.3058074+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
                            "message":  "Marine Heatwave event of Moderate category with area of spreading 22.58% has been observed on 2026-08-20 over the Arabian Sea; Marine Heatwave event of Moderate to Extreme category with area of spreading 36.46% has been observed on 2026-08-20 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 25.67% has been observed on 2026-08-20 over the Rest of Indian Ocean; Marine Heatwave event of Moderate category with area of spreading 25.00% has been observed on 2026-08-20 over the Maharashtra coast; Marine Heatwave event of Moderate category with area of spreading 82.76% has been observed on 2026-08-20 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 80.36% has been observed on 2026-08-20 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 35.14% has been observed on 2026-08-20 over the Kerala coast; Marine Heatwave event of Moderate category with area of spreading 95.22% has been observed on 2026-08-20 over the Lakshadweep coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 100.00% has been observed on 2026-08-20 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 70.91% has been observed on 2026-08-20 over the Nicobar coast;",
                            "fetchedAt":  "2026-08-21T23:30:28.6900007+00:00",
-                           "ok":  true,
+                           "ok":  false,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
     "tsunami":  {
@@ -1887,7 +1887,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-22T10:45:27.0206314+00:00",
+                          "fetchedAt":  "2026-08-22T11:02:13.4657487+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -4455,14 +4455,14 @@
                             ]
             },
     "errors":  [
-
+                   "Marine Heat Wave: Unable to read data from the transport connection: The connection was closed."
                ],
     "healthAlerts":  [
 
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  23.28,
-                      "pfzAgeHours":  -0.72
+                      "osfAgeHours":  23.6,
+                      "pfzAgeHours":  -0.4
                   }
 }
