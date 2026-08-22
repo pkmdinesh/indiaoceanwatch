@@ -274,7 +274,7 @@ function renderPortTideCard() {
     `;
   }
 
-  // 4. Render High / Low Tide Times Table
+  // 4. Render High / Low Tide Times Table (Horizontal Row Layout)
   const tideTimesElem = ids('portTideTimesList');
   if (tideTimesElem) {
     const highTides = events.filter(e => e.type === 'High');
@@ -283,13 +283,17 @@ function renderPortTideCard() {
     const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
 
     tideTimesElem.innerHTML = `
-      <div class="tide-event-col">
+      <div class="tide-horizontal-row high-row">
         <span class="tide-event-badge high">High Tide</span>
-        ${highTides.length > 0 ? highTides.map(t => `<div><strong>${formatTime(t.time)}</strong> <span>${t.height}m</span></div>`).join('') : '<div>None</div>'}
+        <div class="tide-times-items">
+          ${highTides.length > 0 ? highTides.map(t => `<span class="tide-time-pill"><strong>${formatTime(t.time)}</strong> <small>${t.height}m</small></span>`).join('') : '<span class="empty">—</span>'}
+        </div>
       </div>
-      <div class="tide-event-col">
+      <div class="tide-horizontal-row low-row">
         <span class="tide-event-badge low">Low Tide</span>
-        ${lowTides.length > 0 ? lowTides.map(t => `<div><strong>${formatTime(t.time)}</strong> <span>${t.height}m</span></div>`).join('') : '<div>None</div>'}
+        <div class="tide-times-items">
+          ${lowTides.length > 0 ? lowTides.map(t => `<span class="tide-time-pill"><strong>${formatTime(t.time)}</strong> <small>${t.height}m</small></span>`).join('') : '<span class="empty">—</span>'}
+        </div>
       </div>
     `;
   }
