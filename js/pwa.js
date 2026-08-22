@@ -131,9 +131,11 @@ loadStatus().catch(()=>{});
     wireDialog('shareDialog','shareDialogClose');
     wireDialog('marineHeatWaveDialog','marineHeatWaveClose');
     wireDialog('notificationDialog','notificationDialogClose');
+    wireDialog('voiceSummaryDialog','voiceSummaryClose');
     if (typeof initNotifications === 'function') initNotifications();
     if (typeof initPortTides === 'function') initPortTides();
     if (typeof initPfzControls === 'function') initPfzControls();
+    if (typeof initVoiceSummary === 'function') initVoiceSummary();
     let printOpenedDetails = [];
     window.addEventListener('beforeprint',() => {
       printOpenedDetails = [...document.querySelectorAll('details:not([open])')];

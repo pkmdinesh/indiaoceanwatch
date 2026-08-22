@@ -24,7 +24,7 @@ const pfzProperty = (properties,...names) => {
 function loadPfzMapData() {
   if (!pfzDataPromise) {
     pfzDataPromise = Promise.all(Object.entries(PFZ_MAP_DATASETS).map(async ([name,url]) => {
-      const response = await fetch(url,{cache:'no-store'});
+      const response = await fetch(url);
       if (!response.ok) throw new Error(`${name} unavailable (${response.status})`);
       const data = await response.json();
       if (data?.type !== 'FeatureCollection' || !Array.isArray(data.features)) throw new Error(`${name} is invalid`);
@@ -104,36 +104,10 @@ function updatePfzMapStatus() {
     : 'No PFZ layers selected. Use the layer control to enable a layer.';
 }
 
-async function latestMurSstDate() {
-  for (let offset=1;offset<=5;offset++) {
-    const date=new Date();
-    date.setUTCDate(date.getUTCDate()-offset);
-    const value=date.toISOString().slice(0,10);
-    const probeUrl=APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}',value).replace('{z}','3').replace('{y}','3').replace('{x}','5');
-    try {
-      const response=await fetch(probeUrl,{method:'HEAD',cache:'no-store'});
-      if (response.ok) return value;
-    } catch { }
-  }
-  const fallback=new Date();
-  fallback.setUTCDate(fallback.getUTCDate()-2);
-  return fallback.toISOString().slice(0,10);
-}
-
-async function latestChlorophyllDate() {
-  for (let offset=1;offset<=6;offset++) {
-    const date=new Date();
-    date.setUTCDate(date.getUTCDate()-offset);
-    const value=date.toISOString().slice(0,10);
-    const probeUrl=APP_CONFIG.MAP.PFZ_CHLOROPHYLL_TILE_URL.replace('{date}',value).replace('{z}','3').replace('{y}','3').replace('{x}','5');
-    try {
-      const response=await fetch(probeUrl,{method:'HEAD',cache:'no-store'});
-      if (response.ok) return value;
-    } catch { }
-  }
-  const fallback=new Date();
-  fallback.setUTCDate(fallback.getUTCDate()-2);
-  return fallback.toISOString().slice(0,10);
+function getRecentIsoDate(daysAgo = 2) {
+  const d = new Date();
+  d.setUTCDate(d.getUTCDate() - daysAgo);
+  return d.toISOString().slice(0, 10);
 }
 
 function fitPfzCoastalExtent() {
@@ -154,14 +128,17 @@ async function buildPfzMapLayers() {
   pfzMapLayers.Bathymetry=L.tileLayer.wms(APP_CONFIG.MAP.PFZ_BATHYMETRY_WMS_URL,{
     layers:'BathymteryImage:gebcobathymtery',format:'image/png',transparent:true,version:'1.1.1',sld_body:PFZ_BATHYMETRY_SLD,opacity:.72,attribution:'INCOIS bathymetry'
   });
-  const murDate=await latestMurSstDate();
-  pfzSstDataDate=murDate;
-  const murSstUrl=APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}',murDate);
-  pfzMapLayers['SST Anomaly']=L.tileLayer(murSstUrl,{opacity:.94,maxNativeZoom:7,maxZoom:12,crossOrigin:true,className:'pfz-sst-layer',attribution:`SST anomaly · ${murDate}`});
-  const chlDate=await latestChlorophyllDate();
-  pfzChlorophyllDataDate=chlDate;
-  const chlUrl=APP_CONFIG.MAP.PFZ_CHLOROPHYLL_TILE_URL.replace('{date}',chlDate);
-  pfzMapLayers['Chlorophyll-a']=L.tileLayer(chlUrl,{opacity:.88,maxNativeZoom:7,maxZoom:12,crossOrigin:true,className:'pfz-chlorophyll-layer',attribution:`Chlorophyll-a · ${chlDate}`});
+
+  const murDate = getRecentIsoDate(2);
+  pfzSstDataDate = murDate;
+  const murSstUrl = APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}', murDate);
+  pfzMapLayers['SST Anomaly'] = L.tileLayer(murSstUrl, { opacity: .94, maxNativeZoom: 7, maxZoom: 12, crossOrigin: true, className: 'pfz-sst-layer', attribution: `SST anomaly · ${murDate}` });
+
+  const chlDate = getRecentIsoDate(2);
+  pfzChlorophyllDataDate = chlDate;
+  const chlUrl = APP_CONFIG.MAP.PFZ_CHLOROPHYLL_TILE_URL.replace('{date}', chlDate);
+  pfzMapLayers['Chlorophyll-a'] = L.tileLayer(chlUrl, { opacity: .88, maxNativeZoom: 7, maxZoom: 12, crossOrigin: true, className: 'pfz-chlorophyll-layer', attribution: `Chlorophyll-a · ${chlDate}` });
+
   pfzSelectedLayers=new Set(['PFZ forecast lines','EEZ boundary']);
   pfzMapLayers['EEZ boundary'].addTo(pfzMap);
   pfzMapLayers['PFZ forecast lines'].addTo(pfzMap).bringToFront();
