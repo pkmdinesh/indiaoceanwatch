@@ -86,6 +86,7 @@ function renderStormSurge(message, bulletin) {
       card.classList.toggle('is-recent',Boolean(isRecent));
       card.classList.remove('level-safe','level-yellow','level-orange','level-red','level-expired','level-info');
       card.classList.add(`level-${cycloneLevel}`);
+      card.hidden = !isRecent;
       message.textContent = bulletin?.message || 'No INCOIS-IMD joint bulletin is currently available.';
       if (bulletin?.url) {
         message.href = bulletin.url;

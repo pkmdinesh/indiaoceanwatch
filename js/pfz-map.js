@@ -1,11 +1,11 @@
-let pfzMap = null;
-let pfzLayerControl = null;
-let pfzMapOpenedFromUrl = false;
-let pfzMapLayers = {};
-let pfzSelectedLayers = new Set();
-let pfzDataPromise = null;
-let pfzSstLegendElement = null;
-let pfzSstDataDate = null;
+var pfzMap = null;
+var pfzLayerControl = null;
+var pfzMapOpenedFromUrl = false;
+var pfzMapLayers = {};
+var pfzSelectedLayers = new Set();
+var pfzDataPromise = null;
+var pfzSstLegendElement = null;
+var pfzSstDataDate = null;
 
 const PFZ_BATHYMETRY_SLD = '<StyledLayerDescriptor version="1.0.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"><NamedLayer><Name>BathymteryImage:gebcobathymtery</Name><UserStyle><FeatureTypeStyle><Rule><RasterSymbolizer><ColorMap type="ramp"><ColorMapEntry color="#081d58" quantity="-6000"/><ColorMapEntry color="#253494" quantity="-4500"/><ColorMapEntry color="#2c7fb8" quantity="-3000"/><ColorMapEntry color="#41b6c4" quantity="-1500"/><ColorMapEntry color="#a1dab4" quantity="-500"/><ColorMapEntry color="#ffffcc" quantity="0"/></ColorMap></RasterSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
 

@@ -3,12 +3,15 @@
 /* A 1024px laptop exposes about 1138 CSS pixels at 90% browser zoom.
    Switch only the header before its centred title and right-side controls
    collide, while retaining the two-column advisory-card layout. */
-@media(max-width:1200px){
+@media(max-width:1280px){
   .header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px}
   .ocean-brand{min-width:0}
-  .title{position:static;grid-column:1/-1;grid-row:2;transform:none;width:100%;max-width:none;padding-top:5px}
+  .title{position:static;grid-column:1/-1;grid-row:2;transform:none;width:100%;max-width:none;padding-top:5px;text-align:center;justify-self:center}
+  .title h1,.title p{text-align:center;width:100%}
   .title h1{white-space:normal}
   .header-actions{grid-column:2;grid-row:1}
+  .content .ocean .panel-head{flex-wrap:wrap;gap:8px 12px}
+  .content .ocean .panel-head>div{min-width:0;flex:1 1 200px}
 }
 .advisory-dialog{overflow-x:hidden;overflow-y:auto}
 
@@ -18,21 +21,23 @@
   .title{grid-column:1;grid-row:2}
   .header-actions{grid-column:1;grid-row:3;width:100%;min-width:0;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;padding-top:8px;border-top:1px solid var(--line)}
   .header-actions .stamp{min-width:0;margin-right:auto;overflow-wrap:anywhere;text-align:left}
-  .header-actions .share-button,.header-actions .install-button{flex:none}
+  .header-actions .notify-button,.header-actions .share-button,.header-actions .install-button{flex:none}
+  .notify-label{display:none!important}
+  .notify-button{width:36px!important;min-width:36px!important;height:36px!important;min-height:36px!important;padding:0!important;justify-content:center!important}
   .title p,.stamp,.stamp time,.live{font-size:13px}
   .panel-kicker,.empty,.advisory-note{font-size:13px}
   .tsunami-status .tsunami-message{font-size:15px;line-height:1.45}
   .tsunami-status.advisory-safe .tsunami-copy>span,
   .tsunami-status.advisory-info .tsunami-copy>span{font-size:12px;line-height:1.45}
   .tsunami-status .bulletin-link{font-size:12px;line-height:1.45}
-  .content .ocean .panel-head{flex-wrap:wrap}
-  .content .ocean .panel-head>div:first-child{flex:1 1 190px}
-  .content .ocean .osf-map-actions{width:100%;min-width:0;margin-left:0;justify-content:flex-end;flex-wrap:wrap}
-  .content .ocean .osf-map-actions .source{min-width:0;max-width:100%}
+  .content .ocean .panel-head{flex-wrap:wrap;gap:8px 10px}
+  .content .ocean .panel-head>div{flex:1 1 180px;min-width:0}
+  .content .ocean .osf-map-actions{width:100%;min-width:0;margin-left:auto;justify-content:flex-end;flex-wrap:wrap;gap:6px}
+  .content .ocean .osf-map-actions .source{min-width:0;max-width:100%;flex:none;text-align:center}
   .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr)}
   .severity-row-states{min-width:0}
   .severity-state-chip{max-width:100%;white-space:normal;overflow-wrap:anywhere}
-  .osf-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px)}
+  .osf-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px);z-index:900}
   .osf-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
   .osf-map-dialog .leaflet-control-layers label{white-space:normal}
   .osf-map-dialog .leaflet-control-zoom{margin-left:8px;margin-top:8px}
@@ -41,6 +46,11 @@
   .pfz-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px)}
   .pfz-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
   .pfz-map-legend{gap:7px 10px;font-size:10px}
+}
+
+@media(max-width:520px){
+  .content .ocean .osf-map-actions{width:100%;margin-left:auto;justify-content:flex-end;gap:5px}
+  .content .ocean .osf-map-actions .source{flex:none;padding:7px 8px;font-size:11px;text-align:center}
 }
 
 @media(max-width:420px){
@@ -54,6 +64,8 @@
   .forecast-title{align-items:flex-start;flex-wrap:wrap}
   .forecast-meta{width:100%;text-align:left}
   .issue-date{white-space:normal}
+  .content .ocean .osf-map-actions{margin-left:auto;justify-content:flex-end;gap:4px}
+  .content .ocean .osf-map-actions .source{flex:none;padding:6px 7px;font-size:10.5px}
   .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr);gap:6px}
   .severity-row-label{width:auto;padding-top:4px;white-space:normal}
   .severity-row-states{width:100%;overflow-x:auto;padding-bottom:2px}

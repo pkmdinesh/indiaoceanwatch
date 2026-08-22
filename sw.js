@@ -20,13 +20,16 @@ const APP_SHELL = [
   './js/tsunami.js',
   './js/cyclone.js',
   './js/seismic.js',
+  './js/port-tides.js',
   './js/status.js',
+  './js/notifications.js',
   './js/pwa.js',
   './js/announcements.js',
   './data/pfz-lines.geojson',
   './data/pfz-sectors.geojson',
   './data/pfz-eez.geojson',
   './data/pfz-landing-centres.geojson',
+  './data/osf-district-polygons.geojson',
   './manifest.webmanifest',
   './icons/ocean-watch-v3-192.png',
   './icons/ocean-watch-v3-512.png',
@@ -108,4 +111,47 @@ self.addEventListener('fetch',event => {
     }
     return response;
   })());
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  const targetUrl = event.notification.data?.url || './';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(windowClients => {
+      for (const client of windowClients) {
+        if (client.url && 'focus' in client) {
+          if (event.notification.data?.url && client.navigate) {
+            client.navigate(targetUrl);
+          }
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(targetUrl);
+      }
+    })
+  );
+});
+
+self.addEventListener('push', event => {
+  if (!event.data) return;
+  try {
+    const payload = event.data.json();
+    const title = payload.title || '🚨 Ocean Watch Alert';
+    const options = {
+      body: payload.body || 'New coastal advisory update.',
+      icon: './icons/ocean-watch-v3-192.png',
+      badge: './icons/ocean-watch-v3-192.png',
+      vibrate: [200, 100, 200],
+      tag: payload.tag || 'ocean-watch-push',
+      data: { url: payload.url || './' }
+    };
+    event.waitUntil(self.registration.showNotification(title, options));
+  } catch {
+    event.waitUntil(self.registration.showNotification('🚨 Ocean Watch Alert', {
+      body: event.data.text() || 'New coastal advisory update.',
+      icon: './icons/ocean-watch-v3-192.png',
+      badge: './icons/ocean-watch-v3-192.png'
+    }));
+  }
 });

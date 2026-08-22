@@ -1,5 +1,5 @@
-const APP_CONFIG = globalThis.OCEAN_WATCH_CONFIG;
-const ids = id => document.getElementById(id);
+var APP_CONFIG = globalThis.OCEAN_WATCH_CONFIG;
+var ids = id => document.getElementById(id);
 const istDateKey = value => {
   const date=value instanceof Date ? value : new Date(value);
   if (Number.isNaN(date.getTime())) return '';
@@ -77,8 +77,8 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
       const jointCurrent = Boolean(jointBulletin && jointDate && Date.now() - jointDate.getTime() >= 0 && Date.now() - jointDate.getTime() < APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN * 60 * 60 * 1000);
       if (jointCurrent) addLatest('Cyclone',`Bulletin-${jointBulletin.number || 1}`,jointBulletin.url,jointBulletin.message);
       const stormBulletin = data?.stormSurge?.bulletin || data?.stormSurge?.recentBulletin;
-      if (stormBulletin && isWithinHours(stormBulletin,APP_CONFIG.AGE_HOURS.STORM_SURGE_BULLETIN)) addLatest('Storm Surge',`Bulletin-${stormBulletin.number || 'Latest'}`,stormBulletin.pdfUrl || stormBulletin.url,stormBulletin.message || data?.stormSurge?.message || 'Official ITEWC storm surge bulletin');
-      if (data?.marineHeatWave?.message && hasRecentUpdate([data?.marineHeatWave?.fetchedAt],APP_CONFIG.AGE_HOURS.MHW_UPDATE)) addLatest('MHW','Updated','','Latest Marine Heat Wave information');
+      const mhwObservedDate = data?.marineHeatWave?.observedDate || data?.marineHeatWave?.message?.match(/\b\d{4}-\d{2}-\d{2}\b/)?.[0];
+      if (data?.marineHeatWave?.message && isCurrentIstProductDate(mhwObservedDate)) addLatest('MHW','Updated','','Latest Marine Heat Wave information');
       const rank = {warning:3,alert:2,watch:1};
       active.sort((a,b) => rank[b.level] - rank[a.level]);
       container.replaceChildren(...active.map(item => {
@@ -107,45 +107,36 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
       card.hidden = active.length === 0 && latest.length === 0;
     }
 
-const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
-    const SEISMIC_MAP_DEFAULT_ZOOM = APP_CONFIG.MAP.SEISMIC_DEFAULT_ZOOM;
+var escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
+    var SEISMIC_MAP_DEFAULT_ZOOM = APP_CONFIG.MAP.SEISMIC_DEFAULT_ZOOM;
     // Paste your MapTiler API key here. When configured, labels are forced to English.
-    const MAPTILER_API_KEY = APP_CONFIG.MAP.MAPTILER_API_KEY;
-    const hasMapTilerKey = () => MAPTILER_API_KEY && !MAPTILER_API_KEY.includes('YOUR_MAPTILER_API_KEY');
-    let seismicMapMode = '';
-    let seismicMap = null;
-    let seismicEpicentreMarker = null;
-    let seismicBathymetryLayer = null;
-    let currentSeismicShareData = null;
-    let currentAdvisoryShareData = null;
-    let latestStatusData = null;
-    let osfMap = null;
-    let osfLayerControl = null;
-    let osfMapOpenedFromUrl = false;
-    let osfServiceLayers = {};
-    let osfSelectedServices = new Set();
-    let osfCumulativeLayer = null;
-    let osfRequestedService = null;
-    let osfDistrictPolygonsPromise = null;
-    const OSF_DISTRICT_POLYGONS_URL = APP_CONFIG.MAP.OSF_DISTRICT_POLYGONS_URL;
-    const OSF_STATE_COORDS = {
+    var MAPTILER_API_KEY = APP_CONFIG.MAP.MAPTILER_API_KEY;
+    var hasMapTilerKey = () => MAPTILER_API_KEY && !MAPTILER_API_KEY.includes('YOUR_MAPTILER_API_KEY');
+    var seismicMapMode = '';
+    var seismicMap = null;
+    var seismicEpicentreMarker = null;
+    var seismicBathymetryLayer = null;
+    var currentSeismicShareData = null;
+    var currentAdvisoryShareData = null;
+    var latestStatusData = null;
+    var OSF_STATE_COORDS = {
       'ANDAMAN AND NICOBAR':[11.7,92.7],'ANDAMAN & NICOBAR':[11.7,92.7],'ANDHRA PRADESH':[15.7,80.7],
       'DAMAN AND DIU':[20.4,72.9],'DAMAN & DIU':[20.4,72.9],'GOA':[15.35,73.85],'GUJARAT':[21.1,71.5],
       'KARNATAKA':[13.0,74.75],'KERALA':[10.2,76.0],'LAKSHADWEEP':[10.6,72.65],'MAHARASHTRA':[18.4,72.9],
       'ODISHA':[20.0,86.2],'ORISSA':[20.0,86.2],'PUDUCHERRY':[11.9,79.8],'PONDICHERRY':[11.9,79.8],
       'TAMIL NADU':[10.8,79.6],'WEST BENGAL':[21.7,88.4]
     };
-    const OSF_SEVERITY_COLORS = {warning:APP_CONFIG.COLORS.WARNING,alert:APP_CONFIG.COLORS.ALERT,watch:APP_CONFIG.COLORS.WATCH,noThreat:APP_CONFIG.COLORS.SAFE};
-    const OSF_SERVICE_OFFSETS = {'High Wave':[.2,0],'Swell Surge':[-.1,.18],'Ocean Currents':[-.1,-.18]};
-    const OSF_SEVERITY_OFFSETS = {warning:[-.045,-.045],alert:[.045,-.045],watch:[-.045,.045],noThreat:[.045,.045]};
-    const OSF_POLYGON_BORDER = {color:'#263b40',weight:.7,opacity:.8};
+    var OSF_SEVERITY_COLORS = {warning:APP_CONFIG.COLORS.WARNING,alert:APP_CONFIG.COLORS.ALERT,watch:APP_CONFIG.COLORS.WATCH,noThreat:APP_CONFIG.COLORS.SAFE};
+    var OSF_SERVICE_OFFSETS = {'High Wave':[.2,0],'Swell Surge':[-.1,.18],'Ocean Currents':[-.1,-.18]};
+    var OSF_SEVERITY_OFFSETS = {warning:[-.045,-.045],alert:[.045,-.045],watch:[-.045,.045],noThreat:[.045,.045]};
+    var OSF_POLYGON_BORDER = {color:'#263b40',weight:.7,opacity:.8};
 
-const dashboard = document.querySelector('.dashboard');
-    const advisoryDialog = ids('advisoryDialog');
-    let savedZoom = 100;
-    const titleCase = value => String(value).toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace('And Nicobar','& Nicobar');
-    const OCEAN_WATCH_PUBLIC_URL = APP_CONFIG.PUBLIC_URL;
-    const shareCheckedText = () => {
+var dashboard = document.querySelector('.dashboard');
+    var advisoryDialog = ids('advisoryDialog');
+    var savedZoom = 100;
+    var titleCase = value => String(value).toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace('And Nicobar','& Nicobar');
+    var OCEAN_WATCH_PUBLIC_URL = APP_CONFIG.PUBLIC_URL;
+    var shareCheckedText = () => {
       const value = latestStatusData?.lastAttemptAt || latestStatusData?.updatedAt;
       const date = value ? new Date(value) : null;
       return date && !Number.isNaN(date.getTime()) ? `${date.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST` : 'Unavailable';

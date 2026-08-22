@@ -1,5 +1,5 @@
-const severityOrder = ['warning','alert','watch','noThreat'];
-    const severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No threat'};
+var severityOrder = ['warning','alert','watch','noThreat'];
+var severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No threat'};
     function legacyStateSummaries(group) {
       const names = [...new Set(severityOrder.flatMap(level => group?.[level] || []))];
       return names.map(name => {

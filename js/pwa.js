@@ -53,6 +53,9 @@ loadStatus().catch(()=>{});
     wireDialog('seismicDialog','seismicDialogClose');
     wireDialog('shareDialog','shareDialogClose');
     wireDialog('marineHeatWaveDialog','marineHeatWaveClose');
+    wireDialog('notificationDialog','notificationDialogClose');
+    if (typeof initNotifications === 'function') initNotifications();
+    if (typeof initPortTides === 'function') initPortTides();
     let printOpenedDetails = [];
     window.addEventListener('beforeprint',() => {
       printOpenedDetails = [...document.querySelectorAll('details:not([open])')];

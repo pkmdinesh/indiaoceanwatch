@@ -42,6 +42,7 @@
       <div class="title"><h1>Coastal Advisory Status</h1><p>Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</p></div>
       <div class="header-actions">
         <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated"></time></div>
+        <button class="notify-button" id="notificationHeaderBtn" type="button" aria-label="Configure advisory notifications"><svg class="notify-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg><span class="notify-label">Alerts</span></button>
         <button class="share-button" id="shareApp" type="button" aria-label="Share Ocean Watch"><svg class="share-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="currentColor" d="M13 14h1v1h-1zm1 1h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm-3-1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm3-1h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm-2 2h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm-1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-2 1h1v1h-1zm-2 0h1v1h-1zm1 0h1v1h-1zm-2 0h1v1h-1zm0 1h1v1h-1zm1 1h1v1h-1zm1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-1-2h1v1h-1zm1 0h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm0 3h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm1 3h1v1h-1zm0-2h1v1h-1zm0 1h1v1h-1zm-2-3h1v1h-1zm-6 1h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm-3 0h1v1h-1zm2 0h1v1h-1zm-2 1h1v1h-1zm0 1h1v1h-1zm0-19h1v1h-1zm1 1h1v1h-1zm-1 2h1v1h-1zm1 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm-1 1h1v1h-1zM1 11h1v1H1zm1 1h1v1H2zm2-1h1v1H4zm0 1h1v1H4zm1-1h1v1H5zm1 1h1v1H6zm1-1h1v1H7zm1 1h1v1H8zm0-1h1v1H8zm1 0h1v1H9zm1 0h1v1h-1zm1 1h1v1h-1zm2 0h1v1h-1zm1-1h1v1h-1zm1 0h1v1h-1zm1 0h1v1h-1zm-1 2h1v1h-1zm-2 9h1v1h-1zm-1 0h1v1h-1zm0-9h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm11-1h1v1h-1zm-1 1h1v1h-1zm1 2h1v1h-1zm-5-4h1v1h-1zm1-1h1v1h-1zm4 0h1v1h-1zm0 1h1v1h-1zm-1 0h1v1h-1zm1 8h1v1h-1zm-1 1h1v1h-1zm-2 0h1v1h-1zm3 0h1v1h-1z"/><path stroke="currentColor" stroke-width="2" d="M15 2h7v7h-7zM2 2h7v7H2zm0 13h7v7H2zM18 5h1v1h-1zM5 5h1v1H5zm0 13h1v1H5z"/></g></svg><span class="share-label">Share</span></button>
         <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch"><svg class="install-icon" aria-hidden="true" focusable="false" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M1664 1664h128v384H128v-384h128v256h1408zm-147-531-557 557-557-557 90-90 403 402V128h128v1317l403-402z"/></svg><span class="install-label">Install</span></button>
     </div>
@@ -71,6 +72,21 @@
           <article class="forecast-card current-forecast">
             <div class="forecast-title"><h3>Ocean Currents</h3><div class="forecast-meta"><span class="kind">Current speed</span><span class="issue-date" id="currentIssueDate">Issue date —</span></div></div>
             <div class="severity-board" id="currentStates"></div>
+          </article>
+          <article class="forecast-card tide-forecast" id="portTideCard">
+            <div class="forecast-title">
+              <h3>Wind &amp; Tide</h3>
+              <div class="port-tide-controls">
+                <select id="portSelectDropdown" class="port-select-dropdown" aria-label="Select major coastal port"></select>
+                <button type="button" id="portGpsBtn" class="port-gps-btn" aria-label="Find nearest port with GPS">📍 Near Me</button>
+              </div>
+            </div>
+            <div id="portWarningBanner" class="port-warning-banner level-safe">Checking coastal status…</div>
+            <div id="portWindDisplay" class="port-wind-display"></div>
+            <div class="port-tide-body">
+              <div id="portTideTimesList" class="port-tide-times-list"></div>
+              <div id="portTideChartContainer" class="port-tide-chart-container"></div>
+            </div>
           </article>
         </div>
         <p class="advisory-note">A state may appear under multiple levels because district and coastal-stretch conditions differ.</p>
@@ -197,6 +213,51 @@
       <p class="share-copy-status" id="shareCopyStatus" aria-live="polite"></p>
     </div>
   </dialog>
+  <dialog class="advisory-dialog notification-dialog" id="notificationDialog" aria-labelledby="notificationDialogTitle">
+    <div class="advisory-dialog-head">
+      <div>
+        <h2 id="notificationDialogTitle">Advisory Notifications</h2>
+        <p>Real-time alerts for Warnings &amp; Bulletins</p>
+      </div>
+      <button class="dialog-close" id="notificationDialogClose" type="button" aria-label="Close notifications settings">&times;</button>
+    </div>
+    <div class="notification-dialog-body">
+      <div class="notification-status-card" id="notificationStatusCard">
+        <span class="notification-status-icon" id="notificationStatusIcon">🔔</span>
+        <div class="notification-status-copy">
+          <strong id="notificationStatusTitle">Enable Web Alerts</strong>
+          <p id="notificationStatusDesc">Receive instant alerts on your device when new warnings or official bulletins are issued.</p>
+        </div>
+        <button class="notification-toggle-btn" id="notificationToggleBtn" type="button">Enable</button>
+      </div>
+      <div class="notification-options" id="notificationOptions">
+        <h3>Alert Preferences</h3>
+        <label class="notification-option">
+          <input type="checkbox" id="notifyWarnings" checked>
+          <span><strong>High Wave &amp; Swell Warnings (Red)</strong><small>Critical sea state warnings</small></span>
+        </label>
+        <label class="notification-option">
+          <input type="checkbox" id="notifyAlerts" checked>
+          <span><strong>High Wave &amp; Swell Alerts (Orange)</strong><small>Elevated sea state alerts</small></span>
+        </label>
+        <label class="notification-option">
+          <input type="checkbox" id="notifyTsunami" checked>
+          <span><strong>Tsunami Bulletins</strong><small>Official ITEWC bulletins and warnings</small></span>
+        </label>
+        <label class="notification-option">
+          <input type="checkbox" id="notifyCyclone" checked>
+          <span><strong>Cyclone &amp; Joint Bulletins</strong><small>IMD/INCOIS cyclone advisories</small></span>
+        </label>
+        <label class="notification-option">
+          <input type="checkbox" id="notifyStormSurge" checked>
+          <span><strong>Storm Surge Bulletins</strong><small>Coastal inundation bulletins</small></span>
+        </label>
+      </div>
+      <div class="notification-test-row">
+        <button class="notification-test-btn" id="notificationTestBtn" type="button">Send Test Alert</button>
+      </div>
+    </div>
+  </dialog>
   <dialog
   class="advisory-dialog seismic-dialog"
   id="seismicDialog"
@@ -305,7 +366,9 @@
   <script src="js/tsunami.js"></script>
   <script src="js/cyclone.js"></script>
   <script src="js/seismic.js"></script>
+  <script src="js/port-tides.js"></script>
   <script src="js/status.js"></script>
+  <script src="js/notifications.js"></script>
   <script src="js/pwa.js"></script>
 </body>
 </html>

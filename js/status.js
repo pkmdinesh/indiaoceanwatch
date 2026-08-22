@@ -1,6 +1,8 @@
 function render(data) {
       latestStatusData = data;
       renderActiveAdvisories(data);
+      if (typeof checkAndDispatchAlerts === 'function') checkAndDispatchAlerts(data);
+      if (typeof renderPortTideCard === 'function') renderPortTideCard();
       const checkedAtValue = data.lastAttemptAt || data.updatedAt;
       const checkedAt = checkedAtValue ? new Date(checkedAtValue) : null;
       if (checkedAt && !Number.isNaN(checkedAt.getTime())) {

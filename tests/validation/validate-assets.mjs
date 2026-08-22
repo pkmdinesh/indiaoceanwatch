@@ -21,7 +21,8 @@ const jsonFiles = [
   'data/pfz-lines.geojson',
   'data/pfz-sectors.geojson',
   'data/pfz-eez.geojson',
-  'data/pfz-landing-centres.geojson'
+  'data/pfz-landing-centres.geojson',
+  'data/osf-district-polygons.geojson'
 ];
 for (const file of jsonFiles) {
   JSON.parse(readText(file));
