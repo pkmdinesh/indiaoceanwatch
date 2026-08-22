@@ -1,77 +1,236 @@
 const PFZ_SECTOR_NAMES = ['Gujarat','Maharashtra','Goa','Karnataka','Kerala','South Tamil Nadu','North Tamil Nadu','South Andhra Pradesh','North Andhra Pradesh','Odisha','West Bengal','Andaman','Nicobar','Lakshadweep'];
-    function renderPfzSectors(values) {
-      const el = ids('pfzStates');
-      ids('pfzDetails').hidden = true;
-      const received = (values || []).map(value => typeof value === 'string' ? {name:value,landingCenters:[]} : value);
-      const byName = new Map(received.map(sector => [String(sector.name || '').toLowerCase(),sector]));
-      const sectors = PFZ_SECTOR_NAMES.map(name => byName.get(name.toLowerCase()) || {
-        name,
-        hasForecast:false,
-        landingCenters:[],
-        message:'No forecast is available for this sector in the latest fetched PFZ data.'
+const STORAGE_KEY_LOCKED_LC = 'ocean_watch_locked_landing_center';
+
+// Active navigation targets
+var currentPfzNavTarget = null;
+var deviceCompassActive = false;
+var currentDeviceHeading = 0;
+var targetCompassBearing = 0;
+
+// Persistence for Locked Landing Center
+function getLockedLandingCenter() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_LOCKED_LC);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function setLockedLandingCenter(center, sectorName) {
+  try {
+    const payload = {
+      name: center.name,
+      sectorName: sectorName,
+      messages: center.messages || [],
+      lockedAt: new Date().toISOString()
+    };
+    localStorage.setItem(STORAGE_KEY_LOCKED_LC, JSON.stringify(payload));
+    renderLockedLandingCenterBar();
+    renderPfzSectors(latestPfzSectorsData);
+  } catch (err) {
+    console.warn('Could not save locked landing center:', err);
+  }
+}
+
+function unlockLandingCenter() {
+  try {
+    localStorage.removeItem(STORAGE_KEY_LOCKED_LC);
+    renderLockedLandingCenterBar();
+    renderPfzSectors(latestPfzSectorsData);
+  } catch (err) {
+    console.warn('Could not unlock landing center:', err);
+  }
+}
+
+var latestPfzSectorsData = [];
+
+function renderPfzSectors(values) {
+  latestPfzSectorsData = values || [];
+  const el = ids('pfzStates');
+  ids('pfzDetails').hidden = true;
+  renderLockedLandingCenterBar();
+
+  const received = (values || []).map(value => typeof value === 'string' ? {name:value,landingCenters:[]} : value);
+  const byName = new Map(received.map(sector => [String(sector.name || '').toLowerCase(),sector]));
+  const sectors = PFZ_SECTOR_NAMES.map(name => byName.get(name.toLowerCase()) || {
+    name,
+    hasForecast:false,
+    landingCenters:[],
+    message:'No forecast is available for this sector in the latest fetched PFZ data.'
+  });
+  const knownNames = new Set(PFZ_SECTOR_NAMES.map(name => name.toLowerCase()));
+  sectors.push(...received.filter(sector => !knownNames.has(String(sector.name || '').toLowerCase())));
+  sectors.sort((a,b) => {
+    const aHasForecast = a.hasForecast !== false && Boolean(a.landingCenters?.length);
+    const bHasForecast = b.hasForecast !== false && Boolean(b.landingCenters?.length);
+    return Number(bHasForecast) - Number(aHasForecast);
+  });
+
+  const locked = getLockedLandingCenter();
+
+  el.replaceChildren(...sectors.map(value => {
+    const sector = typeof value === 'string' ? {name:value,landingCenters:[]} : value;
+    const hasForecast = sector.hasForecast !== false && Boolean(sector.landingCenters?.length);
+    const hasLockedLc = locked && sector.landingCenters?.some(c => c.name.toLowerCase() === locked.name.toLowerCase());
+
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'tag pfz-chip' + (hasForecast ? '' : ' no-forecast') + (hasLockedLc ? ' has-locked' : '');
+    chip.setAttribute('aria-expanded','false');
+    chip.textContent = titleCase(sector.name) + '(' + (sector.landingCenters?.length || 0) + ')' + (hasLockedLc ? ' 🔒' : '');
+    chip.addEventListener('click',() => {
+      el.querySelectorAll('.pfz-chip').forEach(item => item.setAttribute('aria-expanded',String(item === chip)));
+      renderPfzLandingCenters(sector);
+    });
+    return chip;
+  }));
+}
+
+function renderLockedLandingCenterBar() {
+  const banner = ids('pfzLockedBar');
+  if (!banner) return;
+  const locked = getLockedLandingCenter();
+  if (!locked) {
+    banner.hidden = true;
+    banner.replaceChildren();
+    return;
+  }
+
+  banner.hidden = false;
+  banner.innerHTML = `
+    <div class="pfz-locked-banner-card">
+      <span class="locked-icon">🔒</span>
+      <div class="locked-info">
+        <strong>Locked Landing Center: ${titleCase(locked.name)}</strong>
+        <span>${titleCase(locked.sectorName)} Sector · Saved Home Harbor</span>
+      </div>
+      <div class="locked-actions">
+        <button type="button" class="pfz-compass-mini-btn" onclick="locateLockedPfzCompass();">🧭 Nav</button>
+        <button type="button" class="pfz-unlock-btn" onclick="unlockLandingCenter();" title="Unlock Home Landing Center">🔓 Unlock</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderPfzLandingCenters(sector) {
+  const details = ids('pfzDetails');
+  const centers = sector.landingCenters || [];
+  const detailsTitle = ids('pfzDetailsTitle');
+  const inlineMessage = ids('pfzInlineMessage');
+  detailsTitle.textContent = centers.length ? titleCase(sector.name) + ' landing centers' : '';
+  detailsTitle.hidden = !centers.length;
+  inlineMessage.textContent = centers.length ? '' : titleCase(sector.name) + ' — ' + (sector.message || 'No forecast is available for this sector in the latest fetched PFZ data.');
+  inlineMessage.hidden = Boolean(centers.length);
+  ids('pfzMessages').replaceChildren();
+
+  const locked = getLockedLandingCenter();
+
+  ids('pfzLandingCenters').replaceChildren(...centers.map(center => {
+    const chip = document.createElement('button');
+    const messageCount = center.messages?.length || 0;
+    const isLocked = locked && locked.name.toLowerCase() === center.name.toLowerCase();
+
+    chip.type = 'button';
+    chip.className = 'tag landing-chip' + (isLocked ? ' is-locked-chip' : '');
+    chip.textContent = titleCase(center.name) + (messageCount > 1 ? '(' + messageCount + ')' : '') + (isLocked ? ' 🔒' : '');
+    chip.setAttribute('aria-expanded','false');
+    chip.addEventListener('click',() => {
+      ids('pfzLandingCenters').querySelectorAll('.landing-chip').forEach(item => item.setAttribute('aria-expanded',String(item === chip)));
+      renderPfzMessages(center, sector.name);
+    });
+    return chip;
+  }));
+
+  if (!centers.length) {
+    ids('pfzLandingCenters').replaceChildren();
+  }
+  details.hidden = false;
+}
+
+function renderPfzMessages(center, sectorName) {
+  const labels = {direction:'Direction',bearing:'Bearing (deg)',distance:'Distance (km)',depth:'Depth (mtr)',latitude:'Latitude (dms)',longitude:'Longitude (dms)'};
+  const locked = getLockedLandingCenter();
+  const isLocked = locked && locked.name.toLowerCase() === center.name.toLowerCase();
+
+  const messagesContainer = ids('pfzMessages');
+  messagesContainer.replaceChildren();
+
+  // Header Bar with Lock Button
+  const headerRow = document.createElement('div');
+  headerRow.className = 'pfz-center-header-row';
+  headerRow.innerHTML = `
+    <div class="pfz-center-title">
+      <strong>${titleCase(center.name)}</strong>
+      <span>${titleCase(sectorName || '')} Sector</span>
+    </div>
+    <div class="pfz-center-actions">
+      <button type="button" class="landing-lock-btn ${isLocked ? 'locked' : ''}">
+        ${isLocked ? '🔒 Locked (Home)' : '🔒 Lock Landing Center'}
+      </button>
+    </div>
+  `;
+
+  headerRow.querySelector('.landing-lock-btn').addEventListener('click', () => {
+    if (isLocked) {
+      unlockLandingCenter();
+    } else {
+      setLockedLandingCenter(center, sectorName);
+    }
+    renderPfzMessages(center, sectorName);
+  });
+
+  messagesContainer.appendChild(headerRow);
+
+  (center.messages || []).forEach((message, index) => {
+    const panel = document.createElement('details');
+    panel.className = 'pfz-message';
+    panel.open = true;
+    const summary = document.createElement('summary');
+    summary.textContent = 'Landing Center: ' + titleCase(center.name) + (center.messages.length > 1 ? ' — Message ' + (index + 1) : '');
+    const grid = document.createElement('div');
+    grid.className = 'pfz-message-grid';
+    grid.replaceChildren(...Object.entries(labels).map(([key,label]) => {
+      const field = document.createElement('div');
+      field.className = 'pfz-message-field';
+      const heading = document.createElement('strong');
+      heading.textContent = label;
+      const value = document.createElement('span');
+      value.textContent = message[key] || '—';
+      field.append(heading,value);
+      return field;
+    }));
+
+    // Add Direct Compass Action inside message panel
+    const actionRow = document.createElement('div');
+    actionRow.className = 'pfz-message-nav-action';
+    actionRow.innerHTML = `
+      <button type="button" class="pfz-msg-compass-btn">
+        🧭 Open Compass Dial for this target
+      </button>
+    `;
+
+    const bearingVal = parseFloat(message.bearing) || 0;
+    const distVal = parseFloat(message.distance) || 0;
+    const distNm = (distVal * 0.539957).toFixed(1);
+
+    actionRow.querySelector('.pfz-msg-compass-btn').addEventListener('click', () => {
+      openPfzCompassModal({
+        sourceLabel: titleCase(center.name) + ' Landing Center',
+        targetSector: titleCase(sectorName),
+        bearingDeg: Math.round(bearingVal),
+        cardinal: getCardinalFromDegrees(bearingVal),
+        distanceKm: distVal.toFixed(1),
+        distanceNm: distNm,
+        depth: message.depth || '',
+        direction: message.direction || ''
       });
-      const knownNames = new Set(PFZ_SECTOR_NAMES.map(name => name.toLowerCase()));
-      sectors.push(...received.filter(sector => !knownNames.has(String(sector.name || '').toLowerCase())));
-      sectors.sort((a,b) => {
-        const aHasForecast = a.hasForecast !== false && Boolean(a.landingCenters?.length);
-        const bHasForecast = b.hasForecast !== false && Boolean(b.landingCenters?.length);
-        return Number(bHasForecast) - Number(aHasForecast);
-      });
-      el.replaceChildren(...sectors.map(value => {
-        const sector = typeof value === 'string' ? {name:value,landingCenters:[]} : value;
-        const hasForecast = sector.hasForecast !== false && Boolean(sector.landingCenters?.length);
-        const chip = document.createElement('button');
-        chip.type = 'button'; chip.className = `tag pfz-chip${hasForecast ? '' : ' no-forecast'}`; chip.setAttribute('aria-expanded','false');
-        chip.textContent = `${titleCase(sector.name)}(${sector.landingCenters?.length || 0})`;
-        chip.addEventListener('click',() => {
-          el.querySelectorAll('.pfz-chip').forEach(item => item.setAttribute('aria-expanded',String(item === chip)));
-          renderPfzLandingCenters(sector);
-        });
-        return chip;
-      }));
-    }
-    function renderPfzLandingCenters(sector) {
-      const details = ids('pfzDetails');
-      const centers = sector.landingCenters || [];
-      const detailsTitle = ids('pfzDetailsTitle');
-      const inlineMessage = ids('pfzInlineMessage');
-      detailsTitle.textContent = centers.length ? `${titleCase(sector.name)} landing centers` : '';
-      detailsTitle.hidden = !centers.length;
-      inlineMessage.textContent = centers.length ? '' : `${titleCase(sector.name)} — ${sector.message || 'No forecast is available for this sector in the latest fetched PFZ data.'}`;
-      inlineMessage.hidden = Boolean(centers.length);
-      ids('pfzMessages').replaceChildren();
-      ids('pfzLandingCenters').replaceChildren(...centers.map(center => {
-        const chip = document.createElement('button');
-        const messageCount = center.messages?.length || 0;
-        chip.type = 'button'; chip.className = 'tag landing-chip';
-        chip.textContent = `${titleCase(center.name)}${messageCount > 1 ? `(${messageCount})` : ''}`;
-        chip.setAttribute('aria-expanded','false');
-        chip.addEventListener('click',() => {
-          ids('pfzLandingCenters').querySelectorAll('.landing-chip').forEach(item => item.setAttribute('aria-expanded',String(item === chip)));
-          renderPfzMessages(center);
-        });
-        return chip;
-      }));
-      if (!centers.length) {
-        ids('pfzLandingCenters').replaceChildren();
-      }
-      details.hidden = false;
-    }
-    function renderPfzMessages(center) {
-      const labels = {direction:'Direction',bearing:'Bearing (deg)',distance:'Distance (km)',depth:'Depth (mtr)',latitude:'Latitude (dms)',longitude:'Longitude (dms)'};
-      ids('pfzMessages').replaceChildren(...(center.messages || []).map((message,index) => {
-        const panel = document.createElement('details'); panel.className = 'pfz-message'; panel.open = true;
-        const summary = document.createElement('summary'); summary.textContent = `Landing Center: ${titleCase(center.name)}${center.messages.length > 1 ? ` — Message ${index + 1}` : ''}`;
-        const grid = document.createElement('div'); grid.className = 'pfz-message-grid';
-        grid.replaceChildren(...Object.entries(labels).map(([key,label]) => {
-          const field = document.createElement('div'); field.className = 'pfz-message-field';
-          const heading = document.createElement('strong'); heading.textContent = label;
-          const value = document.createElement('span'); value.textContent = message[key] || '—';
-          field.append(heading,value); return field;
-        }));
-        panel.append(summary,grid); return panel;
-      }));
-    }
+    });
+
+    panel.append(summary, grid, actionRow);
+    messagesContainer.appendChild(panel);
+  });
+}
 
 // Cache for PFZ lines coordinates
 var pfzLinesGeoJsonCache = null;
@@ -79,7 +238,7 @@ var pfzLinesGeoJsonCache = null;
 async function loadPfzLinesCoordinates() {
   if (pfzLinesGeoJsonCache) return pfzLinesGeoJsonCache;
   try {
-    const res = await fetch(APP_CONFIG.MAP.PFZ_LINES_URL, { cache: 'no-store' });
+    const res = await fetch(APP_CONFIG.MAP.PFZ_LINES_URL);
     if (!res.ok) return null;
     const data = await res.json();
     pfzLinesGeoJsonCache = data;
@@ -90,7 +249,12 @@ async function loadPfzLinesCoordinates() {
   }
 }
 
-// Forward Spherical Azimuth (Bearing) from (lat1, lon1) to (lat2, lon2)
+function getCardinalFromDegrees(bearing) {
+  const cardinals = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  const idx = Math.round(((bearing % 360) + 360) % 360 / 22.5) % 16;
+  return cardinals[idx];
+}
+
 function calculateCompassBearing(lat1, lon1, lat2, lon2) {
   const toRad = deg => deg * Math.PI / 180;
   const toDeg = rad => rad * 180 / Math.PI;
@@ -103,15 +267,12 @@ function calculateCompassBearing(lat1, lon1, lat2, lon2) {
   const theta = Math.atan2(y, x);
   const bearing = (toDeg(theta) + 360) % 360;
 
-  const cardinals = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
-  const cardinalIdx = Math.round(bearing / 22.5) % 16;
   return {
     deg: Math.round(bearing),
-    cardinal: cardinals[cardinalIdx]
+    cardinal: getCardinalFromDegrees(bearing)
   };
 }
 
-// Find closest PFZ line point and calculate Distance in Nautical Miles (NM) & Compass Heading
 async function findClosestPfzNavigationalTarget(lat, lon) {
   const geojson = await loadPfzLinesCoordinates();
   if (!geojson || !Array.isArray(geojson.features) || geojson.features.length === 0) {
@@ -154,6 +315,7 @@ async function findClosestPfzNavigationalTarget(lat, lon) {
   const bearing = calculateCompassBearing(lat, lon, targetPoint.lat, targetPoint.lon);
 
   return {
+    sourceLabel: 'GPS Position',
     distanceKm: minDistanceKm.toFixed(1),
     distanceNm: distNm,
     bearingDeg: bearing.deg,
@@ -163,7 +325,7 @@ async function findClosestPfzNavigationalTarget(lat, lon) {
   };
 }
 
-// Handler for PFZ GPS Button
+// Locate via GPS
 function locateUserPfzCompass() {
   const btn = ids('pfzGpsBtn');
   const banner = ids('pfzCompassBanner');
@@ -184,24 +346,26 @@ function locateUserPfzCompass() {
       const nav = await findClosestPfzNavigationalTarget(lat, lon);
 
       if (btn) {
-        btn.textContent = `📍 Located (${nav ? `${nav.distanceNm} NM` : 'OK'})`;
+        btn.textContent = '📍 Located (' + (nav ? nav.distanceNm + ' NM' : 'OK') + ')';
         btn.disabled = false;
       }
 
       if (banner && nav) {
+        currentPfzNavTarget = nav;
         banner.hidden = false;
         banner.innerHTML = `
           <div class="pfz-compass-card">
             <span class="pfz-compass-icon">🧭</span>
             <div class="pfz-compass-body">
               <strong>Heading ${nav.bearingDeg}° ${nav.cardinal} · ${nav.distanceNm} NM <small>(${nav.distanceKm} km)</small></strong>
-              <span>Nearest PFZ fishing line ${nav.targetSector ? `(${nav.targetSector})` : ''} from your GPS location</span>
+              <span>Nearest PFZ forecast line ${nav.targetSector ? '(' + nav.targetSector + ')' : ''} from your GPS location</span>
             </div>
+            <button type="button" class="pfz-open-compass-btn" onclick="openPfzCompassModal();">🧭 Compass</button>
           </div>
         `;
       } else if (banner) {
         banner.hidden = false;
-        banner.innerHTML = '<div class="pfz-compass-card"><span>No active PFZ lines found near current coordinates.</span></div>';
+        banner.innerHTML = '<div class="pfz-compass-card"><span>No active PFZ forecast lines found near current coordinates.</span></div>';
       }
     },
     err => {
@@ -216,9 +380,143 @@ function locateUserPfzCompass() {
   );
 }
 
+// Locate via Locked Landing Center
+async function locateLockedPfzCompass() {
+  const locked = getLockedLandingCenter();
+  if (!locked) return;
+
+  const firstMsg = locked.messages?.[0];
+  if (firstMsg) {
+    const bearingVal = parseFloat(firstMsg.bearing) || 0;
+    const distVal = parseFloat(firstMsg.distance) || 0;
+    const distNm = (distVal * 0.539957).toFixed(1);
+
+    openPfzCompassModal({
+      sourceLabel: '🔒 ' + titleCase(locked.name) + ' (Locked Home)',
+      targetSector: titleCase(locked.sectorName),
+      bearingDeg: Math.round(bearingVal),
+      cardinal: getCardinalFromDegrees(bearingVal),
+      distanceKm: distVal.toFixed(1),
+      distanceNm: distNm,
+      depth: firstMsg.depth || '',
+      direction: firstMsg.direction || ''
+    });
+  }
+}
+
+// Live Digital Nautical Compass Dial Engine
+function openPfzCompassModal(customTarget = null) {
+  const target = customTarget || currentPfzNavTarget;
+  if (!target) {
+    locateUserPfzCompass();
+    return;
+  }
+
+  currentPfzNavTarget = target;
+  targetCompassBearing = target.bearingDeg || 0;
+
+  const dialog = ids('pfzCompassModal');
+  if (!dialog) return;
+
+  ids('compassTargetTitle').textContent = target.sourceLabel || 'PFZ Forecast Line Target';
+  ids('compassTargetBearing').textContent = target.bearingDeg + '° ' + target.cardinal;
+  ids('compassTargetDist').textContent = target.distanceNm + ' NM (' + target.distanceKm + ' km)';
+  ids('compassSectorName').textContent = target.targetSector || 'Active Sector';
+
+  startDeviceCompassSensors();
+  dialog.showModal();
+}
+
+function startDeviceCompassSensors() {
+  if (deviceCompassActive) return;
+  deviceCompassActive = true;
+
+  if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+    // iOS 13+ permission request
+    DeviceOrientationEvent.requestPermission().then(state => {
+      if (state === 'granted') {
+        window.addEventListener('deviceorientation', handleDeviceOrientation, true);
+      }
+    }).catch(() => {});
+  } else {
+    // Android / Chrome / Standard
+    if ('ondeviceorientationabsolute' in window) {
+      window.addEventListener('deviceorientationabsolute', handleDeviceOrientation, true);
+    } else if ('ondeviceorientation' in window) {
+      window.addEventListener('deviceorientation', handleDeviceOrientation, true);
+    }
+  }
+
+  updateCompassDialUi(0);
+}
+
+function stopDeviceCompassSensors() {
+  deviceCompassActive = false;
+  window.removeEventListener('deviceorientationabsolute', handleDeviceOrientation, true);
+  window.removeEventListener('deviceorientation', handleDeviceOrientation, true);
+}
+
+function handleDeviceOrientation(event) {
+  let heading = 0;
+  if (event.webkitCompassHeading != null) {
+    // iOS webkit compass heading (0 = North, 90 = East)
+    heading = event.webkitCompassHeading;
+  } else if (event.alpha != null) {
+    // Android / standard alpha
+    heading = (360 - event.alpha) % 360;
+  }
+
+  currentDeviceHeading = Math.round(heading);
+  updateCompassDialUi(currentDeviceHeading);
+}
+
+function updateCompassDialUi(headingDeg) {
+  const dial = ids('compassRoseDial');
+  const targetPointer = ids('compassTargetPointer');
+  const shipHeadingText = ids('compassShipHeading');
+  const steerAdviceText = ids('compassSteerAdvice');
+
+  if (dial) {
+    dial.style.transform = 'rotate(' + (-headingDeg) + 'deg)';
+  }
+
+  // Target pointer points relative to vessel head: (targetBearing - headingDeg)
+  const relativeAngle = ((targetCompassBearing - headingDeg) + 360) % 360;
+  if (targetPointer) {
+    targetPointer.style.transform = 'rotate(' + relativeAngle + 'deg)';
+  }
+
+  if (shipHeadingText) {
+    shipHeadingText.textContent = headingDeg + '° ' + getCardinalFromDegrees(headingDeg);
+  }
+
+  if (steerAdviceText) {
+    let diff = (targetCompassBearing - headingDeg + 360) % 360;
+    if (diff > 180) diff -= 360; // -180 to +180
+
+    if (Math.abs(diff) <= 3) {
+      steerAdviceText.className = 'steer-badge on-course';
+      steerAdviceText.textContent = '🎯 ON COURSE';
+    } else if (diff > 0) {
+      steerAdviceText.className = 'steer-badge steer-starboard';
+      steerAdviceText.textContent = '🟢 STEER ' + Math.round(diff) + '° STARBOARD (RIGHT)';
+    } else {
+      steerAdviceText.className = 'steer-badge steer-port';
+      steerAdviceText.textContent = '🔴 STEER ' + Math.round(Math.abs(diff)) + '° PORT (LEFT)';
+    }
+  }
+}
+
 function initPfzControls() {
   const btn = ids('pfzGpsBtn');
   if (btn) {
     btn.addEventListener('click', locateUserPfzCompass);
+  }
+
+  const manualSlider = ids('compassManualSlider');
+  if (manualSlider) {
+    manualSlider.addEventListener('input', () => {
+      updateCompassDialUi(parseInt(manualSlider.value, 10));
+    });
   }
 }

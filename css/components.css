@@ -245,3 +245,62 @@
 .voice-play-button:hover{background:#0e4a44}
 .voice-play-button.is-playing{background:#d9534f;border-color:#d9534f}
 .voice-text-card{margin:0;font-size:12.5px;line-height:1.5}
+
+/* Locked Landing Center Banner & Actions */
+.pfz-locked-bar{margin-top:6px;margin-bottom:6px}
+.pfz-locked-bar[hidden]{display:none}
+.pfz-locked-banner-card{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:9px;background:#e8f4f2;border:1px solid #a3dcce;border-left:4px solid var(--teal)}
+.locked-icon{font-size:16px;flex:none}
+.locked-info{display:grid;gap:1px;min-width:0;flex:1}
+.locked-info strong{color:var(--ink);font-size:11.5px}
+.locked-info span{color:var(--muted);font-size:10px;font-weight:700}
+.locked-actions{display:flex;align-items:center;gap:6px;flex:none}
+.pfz-compass-mini-btn,.pfz-unlock-btn,.pfz-open-compass-btn,.pfz-msg-compass-btn{padding:4px 8px;border-radius:6px;border:1px solid var(--teal);background:#fff;color:var(--teal);font-size:10.5px;font-weight:800;cursor:pointer;line-height:1.2;transition:background .15s,color .15s}
+.pfz-compass-mini-btn:hover,.pfz-open-compass-btn:hover,.pfz-msg-compass-btn:hover{background:var(--teal);color:#fff}
+.pfz-unlock-btn{border-color:#d9534f;color:#d9534f}
+.pfz-unlock-btn:hover{background:#d9534f;color:#fff}
+.tag.pfz-chip.has-locked{border-color:var(--teal);font-weight:900}
+.landing-chip.is-locked-chip{background:#d1e7dd;color:#0f5132;border:1.5px solid #a3cfbb;font-weight:900}
+.pfz-center-header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;margin-bottom:6px;background:#f8fafc;border-radius:7px;border:1px solid var(--line)}
+.pfz-center-title{display:grid;gap:1px}
+.pfz-center-title strong{font-size:12px;color:var(--ink)}
+.pfz-center-title span{font-size:10px;color:var(--muted);font-weight:700}
+.landing-lock-btn{padding:4px 9px;border-radius:6px;border:1px solid var(--teal);background:#fff;color:var(--teal);font-size:11px;font-weight:800;cursor:pointer;transition:all .15s}
+.landing-lock-btn:hover{background:var(--teal);color:#fff}
+.landing-lock-btn.locked{background:#0f5132;border-color:#0f5132;color:#fff}
+.pfz-message-nav-action{margin-top:8px;padding-top:6px;border-top:1px dashed var(--line);display:flex;justify-content:flex-end}
+
+/* Live Digital Nautical Compass Dial */
+.compass-dialog{max-width:380px}
+.compass-dialog-body{display:grid;gap:12px;padding:12px 14px;text-align:center}
+.compass-target-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px;background:#f0f7f5;border-radius:7px;border:1px solid #cbe6df}
+.compass-target-header strong{font-size:12px;color:var(--ink)}
+.compass-sector-tag{font-size:10.5px;color:var(--teal);font-weight:800}
+.nautical-compass-stage{position:relative;width:220px;height:220px;margin:0 auto}
+.compass-lubber-line{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:3px;height:14px;background:#d9534f;border-radius:2px;z-index:10;box-shadow:0 0 4px rgba(217,83,79,.6)}
+.compass-dial-container{width:100%;height:100%;transition:transform .12s cubic-bezier(.2,.8,.4,1)}
+.compass-rose-svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 8px rgba(8,47,60,.18))}
+.compass-ring-outer{fill:#fdfdfd;stroke:#082f3c;stroke-width:3}
+.compass-ring-inner{fill:none;stroke:#76d7df;stroke-width:1.5;stroke-dasharray:2 4}
+.compass-text{font-size:20px;font-weight:900;fill:#082f3c;text-anchor:middle;dominant-baseline:central;font-family:system-ui,-apple-system,sans-serif}
+.compass-north{fill:#d9534f}
+.compass-subtext{font-size:11px;font-weight:800;fill:#557a83;text-anchor:middle;dominant-baseline:central;font-family:system-ui,-apple-system,sans-serif}
+
+.compass-target-pointer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;transition:transform .15s ease-out}
+.target-pointer-arrow{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.target-pointer-arrow::before{content:'';display:block;width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:18px solid #00a88f}
+.target-pointer-label{font-size:9px;font-weight:900;color:#fff;background:#00a88f;padding:1px 5px;border-radius:4px;margin-top:-2px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+
+.steer-badge{display:inline-block;padding:6px 10px;border-radius:7px;font-size:11.5px;font-weight:900;letter-spacing:.02em;margin:0 auto}
+.steer-badge.on-course{background:#d1e7dd;color:#0f5132;border:1px solid #a3cfbb}
+.steer-badge.steer-starboard{background:#e7f5ea;color:#1e7e34;border:1px solid #c3e6cb}
+.steer-badge.steer-port{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+
+.compass-metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.compass-metric-card{background:#f8fafc;padding:6px 4px;border-radius:7px;border:1px solid var(--line);display:grid;gap:2px}
+.compass-metric-card small{color:var(--muted);font-size:9.5px;font-weight:700}
+.compass-metric-card strong{color:var(--ink);font-size:11.5px}
+
+.compass-slider-box{display:grid;gap:4px;background:#f8fafc;padding:6px 8px;border-radius:7px;border:1px solid var(--line)}
+.compass-slider{width:100%;cursor:ew-resize}
+

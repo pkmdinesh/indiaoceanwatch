@@ -132,6 +132,13 @@ loadStatus().catch(()=>{});
     wireDialog('marineHeatWaveDialog','marineHeatWaveClose');
     wireDialog('notificationDialog','notificationDialogClose');
     wireDialog('voiceSummaryDialog','voiceSummaryClose');
+    wireDialog('pfzCompassModal','pfzCompassClose');
+    const compassDialog = ids('pfzCompassModal');
+    if (compassDialog) {
+      compassDialog.addEventListener('close', () => {
+        if (typeof stopDeviceCompassSensors === 'function') stopDeviceCompassSensors();
+      });
+    }
     if (typeof initNotifications === 'function') initNotifications();
     if (typeof initPortTides === 'function') initPortTides();
     if (typeof initPfzControls === 'function') initPfzControls();
