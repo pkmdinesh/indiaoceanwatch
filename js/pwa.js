@@ -63,11 +63,23 @@ let deferredInstallPrompt = null;
       });
     }
 
-    function renderMarineHeatWaveDialog() {
+    async function renderMarineHeatWaveDialog() {
       const container = ids('marineHeatWaveCards');
       if (!container) return;
 
-      const rawMessage = latestStatusData?.marineHeatWave?.message || '';
+      let data = globalThis.latestStatusData || latestStatusData;
+      if (!data?.marineHeatWave?.message) {
+        try {
+          const res = await fetch('./status.json', { cache: 'no-store' });
+          if (res.ok) {
+            data = await res.json();
+            globalThis.latestStatusData = data;
+            latestStatusData = data;
+          }
+        } catch { }
+      }
+
+      const rawMessage = data?.marineHeatWave?.message || '';
       if (!rawMessage) {
         container.innerHTML = '<article class="district-advisory"><p>Marine Heat Wave message is unavailable. Open the official page for the latest information.</p></article>';
         return;
@@ -90,8 +102,8 @@ let deferredInstallPrompt = null;
       `).join('');
     }
 
-    ids('openMarineHeatWave').addEventListener('click',() => {
-      renderMarineHeatWaveDialog();
+    ids('openMarineHeatWave').addEventListener('click', async () => {
+      await renderMarineHeatWaveDialog();
       ids('marineHeatWaveDialog').showModal();
     });
 

@@ -90,12 +90,15 @@ function createPfzVectorLayers(data) {
   return {'PFZ forecast lines':lines,'PFZ sectors':sectors,'EEZ boundary':eez,'Landing centres':landingCentres};
 }
 
+var pfzChlorophyllDataDate = null;
+
 function updatePfzMapStatus() {
   const selected=[...pfzSelectedLayers];
   if (pfzSstLegendElement) pfzSstLegendElement.hidden=!selected.includes('SST Anomaly');
-  const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a (NASA GIBS)'].includes(name));
-  const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly data date: ${pfzSstDataDate}.` : '';
-  const liveNote=liveLayers.length ? ` ${liveLayers.join(' and ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}` : '';
+  const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a'].includes(name));
+  const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly date: ${pfzSstDataDate}.` : '';
+  const chlDateNote=selected.includes('Chlorophyll-a') && pfzChlorophyllDataDate ? ` Chlorophyll-a date: ${pfzChlorophyllDataDate}.` : '';
+  const liveNote=liveLayers.length ? ` ${liveLayers.join(', ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}${chlDateNote}` : '';
   ids('pfzMapShareStatus').textContent = selected.length
     ? `Showing ${selected.join(' + ')}. Vector layers are cached locally from official INCOIS WFS data.${liveNote}`
     : 'No PFZ layers selected. Use the layer control to enable a layer.';
@@ -107,6 +110,22 @@ async function latestMurSstDate() {
     date.setUTCDate(date.getUTCDate()-offset);
     const value=date.toISOString().slice(0,10);
     const probeUrl=APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}',value).replace('{z}','3').replace('{y}','3').replace('{x}','5');
+    try {
+      const response=await fetch(probeUrl,{method:'HEAD',cache:'no-store'});
+      if (response.ok) return value;
+    } catch { }
+  }
+  const fallback=new Date();
+  fallback.setUTCDate(fallback.getUTCDate()-2);
+  return fallback.toISOString().slice(0,10);
+}
+
+async function latestChlorophyllDate() {
+  for (let offset=1;offset<=6;offset++) {
+    const date=new Date();
+    date.setUTCDate(date.getUTCDate()-offset);
+    const value=date.toISOString().slice(0,10);
+    const probeUrl=APP_CONFIG.MAP.PFZ_CHLOROPHYLL_TILE_URL.replace('{date}',value).replace('{z}','3').replace('{y}','3').replace('{x}','5');
     try {
       const response=await fetch(probeUrl,{method:'HEAD',cache:'no-store'});
       if (response.ok) return value;
@@ -139,9 +158,10 @@ async function buildPfzMapLayers() {
   pfzSstDataDate=murDate;
   const murSstUrl=APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}',murDate);
   pfzMapLayers['SST Anomaly']=L.tileLayer(murSstUrl,{opacity:.94,maxNativeZoom:7,maxZoom:12,crossOrigin:true,className:'pfz-sst-layer',attribution:`SST anomaly · ${murDate}`});
-  pfzMapLayers['Chlorophyll-a (NASA GIBS)']=L.tileLayer(APP_CONFIG.MAP.PFZ_CHLOROPHYLL_WMTS_URL,{
-    opacity:.85,maxNativeZoom:8,maxZoom:12,crossOrigin:true,className:'pfz-chlorophyll-layer',attribution:'NASA GIBS MODIS Chlorophyll-a'
-  });
+  const chlDate=await latestChlorophyllDate();
+  pfzChlorophyllDataDate=chlDate;
+  const chlUrl=APP_CONFIG.MAP.PFZ_CHLOROPHYLL_TILE_URL.replace('{date}',chlDate);
+  pfzMapLayers['Chlorophyll-a']=L.tileLayer(chlUrl,{opacity:.88,maxNativeZoom:7,maxZoom:12,crossOrigin:true,className:'pfz-chlorophyll-layer',attribution:`Chlorophyll-a · ${chlDate}`});
   pfzSelectedLayers=new Set(['PFZ forecast lines','EEZ boundary']);
   pfzMapLayers['EEZ boundary'].addTo(pfzMap);
   pfzMapLayers['PFZ forecast lines'].addTo(pfzMap).bringToFront();

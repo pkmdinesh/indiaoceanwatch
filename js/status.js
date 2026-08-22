@@ -1,4 +1,5 @@
 function render(data) {
+      globalThis.latestStatusData = data;
       latestStatusData = data;
       renderActiveAdvisories(data);
       if (typeof checkAndDispatchAlerts === 'function') checkAndDispatchAlerts(data);
