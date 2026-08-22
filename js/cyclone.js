@@ -77,17 +77,26 @@ function renderStormSurge(message, bulletin) {
       const message = ids('jointBulletinMessage');
       const time = ids('jointBulletinTime');
       const sourceLink = ids('jointBulletinLink');
+      if (!card) return;
+
+      if (!bulletin || (!bulletin.message && !bulletin.url)) {
+        card.hidden = true;
+        return;
+      }
+
       const bulletinDate = jointBulletinDate(bulletin);
       const computedAge = bulletinDate ? Date.now() - bulletinDate.getTime() : Number.POSITIVE_INFINITY;
       const computedRecent = computedAge >= 0 && computedAge < APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN * 60 * 60 * 1000;
       const isRecent = Boolean(bulletinDate && computedRecent);
-      const cycloneLevel = !bulletin ? 'safe' : isRecent ? 'info' : 'expired';
+      const cycloneLevel = isRecent ? 'red' : 'expired';
 
-      card.classList.toggle('is-recent',Boolean(isRecent));
+      card.hidden = false;
+      card.classList.toggle('is-recent', Boolean(isRecent));
+      card.classList.toggle('is-archived', !isRecent);
       card.classList.remove('level-safe','level-yellow','level-orange','level-red','level-expired','level-info');
       card.classList.add(`level-${cycloneLevel}`);
-      card.hidden = !isRecent;
-      message.textContent = bulletin?.message || 'No INCOIS-IMD joint bulletin is currently available.';
+
+      message.textContent = bulletin?.message || 'INCOIS-IMD Joint Special Bulletin';
       if (bulletin?.url) {
         message.href = bulletin.url;
         message.setAttribute('aria-label','Open the INCOIS-IMD joint bulletin PDF');
@@ -98,7 +107,7 @@ function renderStormSurge(message, bulletin) {
 
       if (bulletinDate) {
         time.dateTime = bulletinDate.toISOString();
-        time.textContent = `${isRecent ? `Issued within the past ${APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN} hours` : 'Bulletin time'} · ${bulletinDate.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+        time.textContent = `${isRecent ? `Active Bulletin (past ${APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN}h)` : 'Bulletin issued'} · ${bulletinDate.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
         time.hidden = false;
       } else {
         time.removeAttribute('datetime');
@@ -106,8 +115,13 @@ function renderStormSurge(message, bulletin) {
         time.hidden = true;
       }
 
-      sourceLink.href = JOINT_BULLETIN_PAGE_URL;
-      sourceLink.textContent = 'Joint Bulletin ↗';
+      if (bulletin?.url) {
+        sourceLink.href = bulletin.url;
+        sourceLink.textContent = 'Joint Bulletin PDF ↗';
+      } else {
+        sourceLink.href = JOINT_BULLETIN_PAGE_URL;
+        sourceLink.textContent = 'Joint Bulletin ↗';
+      }
       sourceLink.hidden = false;
     }
 
