@@ -121,6 +121,7 @@ loadStatus().catch(()=>{});
     wireDialog('notificationDialog','notificationDialogClose');
     if (typeof initNotifications === 'function') initNotifications();
     if (typeof initPortTides === 'function') initPortTides();
+    if (typeof initPfzControls === 'function') initPfzControls();
     let printOpenedDetails = [];
     window.addEventListener('beforeprint',() => {
       printOpenedDetails = [...document.querySelectorAll('details:not([open])')];

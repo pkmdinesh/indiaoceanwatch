@@ -233,6 +233,36 @@ function renderTideChartSvg(elevations, port, now = new Date()) {
   `;
 }
 
+// Astronomical Lunar Phase and Spring/Neap Tide Calculation
+function getMoonPhase(date = new Date()) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  const c = Math.floor(year / 100);
+  const epact = (11 * (year % 19) + Math.floor((8 * c + 13) / 25) - Math.floor(c / 4) + 11) % 30;
+  const jd = (day + (month < 3 ? month + 12 : month) * 30.6 + epact) % 29.53;
+  const age = (jd + 29.53) % 29.53;
+  const illumination = Math.round((1 - Math.cos(2 * Math.PI * (age / 29.53))) / 2 * 100);
+
+  let phase = 'New Moon';
+  let icon = '🌑';
+  if (age < 1.84) { phase = 'New Moon'; icon = '🌑'; }
+  else if (age < 7.38) { phase = 'Waxing Crescent'; icon = '🌒'; }
+  else if (age < 9.22) { phase = 'First Quarter'; icon = '🌓'; }
+  else if (age < 14.76) { phase = 'Waxing Gibbous'; icon = '🌔'; }
+  else if (age < 16.61) { phase = 'Full Moon'; icon = '🌕'; }
+  else if (age < 22.15) { phase = 'Waning Gibbous'; icon = '🌖'; }
+  else if (age < 23.99) { phase = 'Last Quarter'; icon = '🌗'; }
+  else { phase = 'Waning Crescent'; icon = '🌘'; }
+
+  const isSpringTide = (age <= 3.0 || age >= 26.5 || (age >= 11.5 && age <= 18.0));
+  const tideRegime = isSpringTide ? 'Spring Tide (Max Range)' : 'Neap Tide (Mild Range)';
+  const tideBadgeClass = isSpringTide ? 'spring' : 'neap';
+
+  return { phase, icon, illumination, isSpringTide, tideRegime, tideBadgeClass, age: age.toFixed(1) };
+}
+
 // Main Render Function for Wind, Tide & Port Forecast Card
 function renderPortTideCard() {
   const port = MAJOR_COASTAL_PORTS.find(p => p.id === selectedPortId) || MAJOR_COASTAL_PORTS[0];
@@ -243,6 +273,7 @@ function renderPortTideCard() {
   const currentHeight = calculateTideElevation(port, now);
   const futureHeight = calculateTideElevation(port, new Date(now.getTime() + 15 * 60 * 1000));
   const isRising = futureHeight >= currentHeight;
+  const moon = getMoonPhase(now);
 
   // 2. Check Warnings
   const warning = checkPortActiveWarnings(port);
@@ -252,24 +283,24 @@ function renderPortTideCard() {
     warningBanner.textContent = warning.text;
   }
 
-  // 3. Render Wind & Sea State
+  // 3. Render Wind, Sea State & Moon Phase
   const windElem = ids('portWindDisplay');
   if (windElem) {
     const windKmh = port.baseWind;
     const windKnots = (windKmh * 0.539957).toFixed(1);
-    const seaState = windKmh < 12 ? 'Calm to Smooth' : windKmh < 20 ? 'Slight' : 'Moderate';
+    const seaState = windKmh < 12 ? 'Calm' : windKmh < 20 ? 'Slight' : 'Moderate';
     windElem.innerHTML = `
       <div class="wind-stat-item">
-        <span class="wind-stat-label">Wind</span>
-        <strong>${port.windDir} ${windKmh} km/h <small>(${windKnots} kn)</small></strong>
-      </div>
-      <div class="wind-stat-item">
-        <span class="wind-stat-label">Sea Condition</span>
-        <strong>${seaState}</strong>
+        <span class="wind-stat-label">Wind &amp; Sea</span>
+        <strong>${port.windDir} ${windKmh} km/h <small>(${windKnots} kn · ${seaState})</small></strong>
       </div>
       <div class="wind-stat-item">
         <span class="wind-stat-label">Tide State</span>
         <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? '▲ Rising (Flood)' : '▼ Falling (Ebb)'}</strong>
+      </div>
+      <div class="wind-stat-item moon-stat-item">
+        <span class="wind-stat-label">Moon &amp; Tide Type</span>
+        <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime})">${moon.icon} ${moon.phase} <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? 'Spring Tide' : 'Neap Tide'}</small></strong>
       </div>
     `;
   }

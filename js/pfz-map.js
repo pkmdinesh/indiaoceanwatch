@@ -93,7 +93,7 @@ function createPfzVectorLayers(data) {
 function updatePfzMapStatus() {
   const selected=[...pfzSelectedLayers];
   if (pfzSstLegendElement) pfzSstLegendElement.hidden=!selected.includes('SST Anomaly');
-  const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly'].includes(name));
+  const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a (NASA GIBS)'].includes(name));
   const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly data date: ${pfzSstDataDate}.` : '';
   const liveNote=liveLayers.length ? ` ${liveLayers.join(' and ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}` : '';
   ids('pfzMapShareStatus').textContent = selected.length
@@ -139,6 +139,9 @@ async function buildPfzMapLayers() {
   pfzSstDataDate=murDate;
   const murSstUrl=APP_CONFIG.MAP.PFZ_L4_SST_TILE_URL.replace('{date}',murDate);
   pfzMapLayers['SST Anomaly']=L.tileLayer(murSstUrl,{opacity:.94,maxNativeZoom:7,maxZoom:12,crossOrigin:true,className:'pfz-sst-layer',attribution:`SST anomaly · ${murDate}`});
+  pfzMapLayers['Chlorophyll-a (NASA GIBS)']=L.tileLayer(APP_CONFIG.MAP.PFZ_CHLOROPHYLL_WMTS_URL,{
+    opacity:.85,maxNativeZoom:8,maxZoom:12,crossOrigin:true,className:'pfz-chlorophyll-layer',attribution:'NASA GIBS MODIS Chlorophyll-a'
+  });
   pfzSelectedLayers=new Set(['PFZ forecast lines','EEZ boundary']);
   pfzMapLayers['EEZ boundary'].addTo(pfzMap);
   pfzMapLayers['PFZ forecast lines'].addTo(pfzMap).bringToFront();

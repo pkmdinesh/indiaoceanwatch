@@ -136,9 +136,10 @@
         <div class="panel-head">
           <img class="service-logo" src="assets/potential-fishing-zone-icon.jpg" alt="Fish swimming in ocean currents">
           <div><h2 id="pfz-title" class="pfz-title">Potential Fishing Zone</h2><p class="panel-kicker">Today’s advisory sectors</p></div>
-          <div class="osf-map-actions"><button class="source card-action-button osf-map-button pfz-map-button" id="openPfzMap" type="button">Visualize</button><a class="source card-action-button pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a></div>
+          <div class="osf-map-actions"><button class="source card-action-button pfz-gps-button" id="pfzGpsBtn" type="button" aria-label="Calculate compass bearing and nautical miles to nearest PFZ">📍 Near Me</button><button class="source card-action-button osf-map-button pfz-map-button" id="openPfzMap" type="button">Visualize</button><a class="source card-action-button pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a></div>
         </div>
         <p class="pfz-date" id="pfzDate">Forecast — · Valid through —</p>
+        <div id="pfzCompassBanner" class="pfz-compass-banner" hidden></div>
         <div class="states pfz-states" id="pfzStates"><span class="empty">Loading issued sectors…</span></div>
         <div class="pfz-details" id="pfzDetails" hidden><h3 id="pfzDetailsTitle"></h3><p class="pfz-inline-message" id="pfzInlineMessage" hidden></p><div class="pfz-landing-centers" id="pfzLandingCenters"></div><div class="pfz-messages" id="pfzMessages"></div></div>
       </section>
@@ -175,8 +176,8 @@
   <dialog class="advisory-dialog" id="advisoryDialog" aria-labelledby="advisoryDialogTitle">
     <div class="advisory-dialog-head">
       <div>
-        <h2 id="advisoryDialogTitle">District advisories</h2>
-        <p id="advisoryDialogMeta"></p>
+        <h2 id="advisoryDialogTitle">District Advisories</h2>
+        <p id="advisoryDialogMeta">Coastal district guidance</p>
       </div>
       <div class="dialog-head-actions"><button class="dialog-share" id="shareAdvisoryDialog" type="button" aria-label="Share this OSF advisory">Share</button><button class="dialog-close" id="advisoryDialogClose" type="button" aria-label="Close district advisories">&times;</button></div>
     </div>
@@ -195,7 +196,7 @@
   </dialog>
   <dialog class="osf-map-dialog pfz-map-dialog" id="pfzMapDialog" aria-labelledby="pfzMapTitle">
     <div class="advisory-dialog-head"><div><h2 id="pfzMapTitle">Potential Fishing Zone Map</h2><p id="pfzMapMeta">Official INCOIS PFZ vector layers</p></div><div class="dialog-head-actions"><button class="dialog-close" id="pfzMapClose" type="button" aria-label="Close PFZ map">&times;</button></div></div>
-    <div class="osf-map-body pfz-map-body"><div class="osf-map-toolbar"><div class="pfz-map-legend" aria-label="PFZ map legend"><span><i class="pfz-line-swatch"></i>PFZ forecast lines</span><span><i class="pfz-sector-swatch"></i>Sectors</span><span><i class="pfz-eez-swatch"></i>EEZ</span><span><i class="pfz-centre-swatch"></i>Landing centres</span></div></div><div class="osf-map-canvas pfz-map-canvas" id="pfzMapCanvas" aria-label="Interactive Potential Fishing Zone map"></div><p class="osf-map-note" id="pfzMapShareStatus">PFZ forecast lines and EEZ are enabled by default. Use the layer control to add sectors, landing centres, bathymetry or SST Anomaly.</p></div>
+    <div class="osf-map-body pfz-map-body"><div class="osf-map-toolbar"><div class="pfz-map-legend" aria-label="PFZ map legend"><span><i class="pfz-line-swatch"></i>PFZ forecast lines</span><span><i class="pfz-sector-swatch"></i>Sectors</span><span><i class="pfz-eez-swatch"></i>EEZ</span><span><i class="pfz-centre-swatch"></i>Landing centres</span><span><i class="pfz-chlorophyll-swatch" style="background:#2ca02c"></i>Chlorophyll-a</span></div></div><div class="osf-map-canvas pfz-map-canvas" id="pfzMapCanvas" aria-label="Interactive Potential Fishing Zone map"></div><p class="osf-map-note" id="pfzMapShareStatus">PFZ forecast lines and EEZ are enabled by default. Use the layer control to add sectors, landing centres, bathymetry, SST Anomaly, or Chlorophyll-a.</p></div>
   </dialog>
   <dialog class="share-dialog" id="shareDialog" aria-labelledby="shareDialogTitle">
     <div class="advisory-dialog-head">
