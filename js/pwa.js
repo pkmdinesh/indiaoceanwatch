@@ -25,8 +25,73 @@ let deferredInstallPrompt = null;
     ids('shareOsfOverall').addEventListener('click',() => shareDialogText('Ocean Watch · Ocean State Forecast',osfOverallShareText(),null));
     ids('shareAdvisoryDialog').addEventListener('click',shareCurrentAdvisory);
     ids('shareSeismicDialog').addEventListener('click',shareCurrentSeismic);
+    function formatMhwTitle(raw) {
+      let title = String(raw || '').trim();
+      title = title.replace(/^(?:the\s+)/i, '');
+      title = title.replace(/\b[a-z]/g, c => c.toUpperCase());
+      return title;
+    }
+
+    function parseMhwMessage(message) {
+      if (!message) return [];
+      const segments = String(message).split(';').map(s => s.trim()).filter(Boolean);
+      return segments.map(seg => {
+        const overMatch = seg.match(/over\s+(?:the\s+)?(.+?)\.?$/i);
+        let title = overMatch ? formatMhwTitle(overMatch[1]) : 'Regional Observation';
+
+        const catMatch = seg.match(/event\s+of\s+(.+?)\s+category(?:\s+with\s+area\s+of\s+spreading\s+([\d.]+%)?)?/i);
+        const category = catMatch ? catMatch[1] : '';
+        const spreading = catMatch && catMatch[2] ? catMatch[2] : '';
+
+        let severity = 'watch';
+        const catLower = category.toLowerCase();
+        if (catLower.includes('extreme') || catLower.includes('severe') || catLower.includes('strong')) {
+          severity = 'alert';
+        } else if (catLower.includes('no heat wave') || catLower.includes('nil') || catLower.includes('none')) {
+          severity = 'noThreat';
+        } else if (catLower.includes('moderate')) {
+          severity = 'watch';
+        }
+
+        return {
+          title,
+          category: category || 'Observed',
+          spreading,
+          text: seg.endsWith('.') ? seg : `${seg}.`,
+          severity
+        };
+      });
+    }
+
+    function renderMarineHeatWaveDialog() {
+      const container = ids('marineHeatWaveCards');
+      if (!container) return;
+
+      const rawMessage = latestStatusData?.marineHeatWave?.message || '';
+      if (!rawMessage) {
+        container.innerHTML = '<article class="district-advisory"><p>Marine Heat Wave message is unavailable. Open the official page for the latest information.</p></article>';
+        return;
+      }
+
+      const items = parseMhwMessage(rawMessage);
+      if (items.length === 0) {
+        container.innerHTML = `<article class="district-advisory"><p>${rawMessage}</p></article>`;
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <article class="district-advisory severity-${item.severity}">
+          <div class="district-advisory-head">
+            <h3>${item.title}</h3>
+            <span class="severity-pill ${item.severity}">${item.category}${item.spreading ? ` · ${item.spreading}` : ''}</span>
+          </div>
+          <p>${item.text}</p>
+        </article>
+      `).join('');
+    }
+
     ids('openMarineHeatWave').addEventListener('click',() => {
-      ids('marineHeatWaveMessage').textContent = latestStatusData?.marineHeatWave?.message || 'Marine Heat Wave message is unavailable. Open the official page for the latest information.';
+      renderMarineHeatWaveDialog();
       ids('marineHeatWaveDialog').showModal();
     });
 

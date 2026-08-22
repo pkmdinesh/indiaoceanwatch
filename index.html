@@ -183,8 +183,11 @@
     <div class="advisory-details" id="advisoryDetails"></div>
   </dialog>
   <dialog class="advisory-dialog" id="marineHeatWaveDialog" aria-labelledby="marineHeatWaveTitle">
-    <div class="advisory-dialog-head"><div><h2 id="marineHeatWaveTitle">Marine Heat Wave</h2><p>Latest official marquee message</p></div><button class="dialog-close" id="marineHeatWaveClose" type="button" aria-label="Close Marine Heat Wave message">&times;</button></div>
-    <div class="advisory-details"><article class="district-advisory"><p id="marineHeatWaveMessage">Marine Heat Wave message will appear after the next source update.</p></article><a class="source" href="https://incois.gov.in/oceanservices/mhw/index.jsp" target="_blank" rel="noopener">Open Marine Heat Wave page ↗</a></div>
+    <div class="advisory-dialog-head"><div><h2 id="marineHeatWaveTitle">Marine Heat Wave</h2><p>Official INCOIS Regional Observations</p></div><button class="dialog-close" id="marineHeatWaveClose" type="button" aria-label="Close Marine Heat Wave message">&times;</button></div>
+    <div class="advisory-details">
+      <div id="marineHeatWaveCards" class="marine-heat-wave-cards" style="display:grid;gap:9px"></div>
+      <a class="source" href="https://incois.gov.in/oceanservices/mhw/index.jsp" target="_blank" rel="noopener">Open Marine Heat Wave page ↗</a>
+    </div>
   </dialog>
   <dialog class="osf-map-dialog" id="osfMapDialog" aria-labelledby="osfMapTitle">
     <div class="advisory-dialog-head"><div><h2 id="osfMapTitle">Ocean State Forecast Map</h2><p id="osfMapMeta">High Wave · Swell Surge · Ocean Currents</p></div><div class="dialog-head-actions"><button class="dialog-close" id="osfMapClose" type="button" aria-label="Close OSF map">&times;</button></div></div>
