@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T20:01:43.014Z",
+  "updated": "2026-08-23T20:16:34.664Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -33,7 +33,7 @@
     },
     "bn": {
       "file": "audio/bulletins/bulletin-bn.mp3",
-      "size": 407232,
+      "size": 407040,
       "title": "সমুদ্র পরিস্থিতি পূর্বাভাস (বাংলা)",
       "langCode": "bn-IN"
     },
