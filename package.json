@@ -1,5 +1,6 @@
 {
   "type": "module",
   "name": "indiaoceanwatch",
+  "license": "MIT",
   "private": true
 }

@@ -39,9 +39,17 @@ node tests/validation/validate-assets.mjs
 - Configurable announcement card for timely messages
 - Accessibility and safeguards for advisory states and statuses
 
+## Security
+
+Please see our [Security Policy](SECURITY.md) for information on reporting vulnerabilities and security updates.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
 ## Maintainers & Contact
-- Maintainer: @pkmdinesh
-- For questions or urgent issues, open an issue in the repository.
+- Maintainer: [@pkmdinesh](https://github.com/pkmdinesh)
+- For questions or issues, please open an issue in the repository.
 
 ## Acknowledgements
 - Built to surface timely ocean advisory information for coastal communities and responders.
