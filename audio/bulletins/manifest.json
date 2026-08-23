@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-23T12:31:32.849Z",
+  "updated": "2026-08-23T12:46:52.941Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 231168,
+      "size": 197184,
       "title": "Ocean State Forecast Advisory (English)",
       "langCode": "en-IN"
     },
@@ -15,19 +15,19 @@
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 168384,
+      "size": 160128,
       "title": "கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN"
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 175872,
+      "size": 131520,
       "title": "సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN"
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 117504,
+      "size": 106752,
       "title": "സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN"
     },
