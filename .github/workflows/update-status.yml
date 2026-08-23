@@ -37,6 +37,9 @@ jobs:
         shell: powershell
         run: .\scripts\validate-status.ps1 -Path .\status.json
 
+      - name: Generate Google TTS audio bulletins
+        run: node scripts/generate-audio-bulletins.mjs
+
       - name: Commit updated snapshot
         id: commit_status
         shell: powershell
@@ -44,11 +47,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add status.json data/pfz-lines.geojson data/pfz-eez.geojson data/pfz-sectors.geojson data/pfz-landing-centres.geojson
+          git add status.json data/pfz-lines.geojson data/pfz-eez.geojson data/pfz-sectors.geojson data/pfz-landing-centres.geojson audio/bulletins/
           git diff --cached --quiet
 
           if ($LASTEXITCODE -ne 0) {
-            git commit -m "Update coastal advisory status"
+            git commit -m "Update coastal advisory status & audio bulletins"
 
             git pull --rebase origin main
             if ($LASTEXITCODE -ne 0) {

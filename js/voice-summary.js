@@ -551,9 +551,16 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
   return { title: 'Ocean State Forecast Advisory (' + langConfig.name + ')', text: t };
 }
 
+var activeAudioElement = null;
+
 function stopVoiceSummary() {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
+  }
+  if (activeAudioElement) {
+    activeAudioElement.pause();
+    activeAudioElement.currentTime = 0;
+    activeAudioElement = null;
   }
   isSpeechPlaying = false;
   const playBtn = ids('voicePlayBtn');
@@ -564,35 +571,16 @@ function stopVoiceSummary() {
 }
 
 function playVoiceSummary() {
-  if (!('speechSynthesis' in window)) {
-    alert('Voice synthesis is not supported in this browser.');
-    return;
-  }
-
   if (isSpeechPlaying) {
     stopVoiceSummary();
     return;
   }
 
-  window.speechSynthesis.cancel();
-  const data = globalThis.latestStatusData || latestStatusData;
-  const bulletin = buildBulletinSummary(data, selectedVoiceLang);
   const langConfig = VOICE_LANGUAGES.find(l => l.code === selectedVoiceLang) || VOICE_LANGUAGES[0];
-
-  const utterance = new SpeechSynthesisUtterance(bulletin.text);
-  utterance.lang = langConfig.code;
-  utterance.rate = 0.92;
-  utterance.pitch = 1.0;
-
   const matchedVoice = findBestVoice(langConfig);
-  if (matchedVoice) {
-    utterance.voice = matchedVoice;
-    utterance.lang = matchedVoice.lang || langConfig.code;
-  }
-
   const playBtn = ids('voicePlayBtn');
 
-  utterance.onstart = () => {
+  const onStart = () => {
     isSpeechPlaying = true;
     if (playBtn) {
       playBtn.innerHTML = '⏹ Stop Audio';
@@ -600,7 +588,7 @@ function playVoiceSummary() {
     }
   };
 
-  utterance.onend = () => {
+  const onEnd = () => {
     isSpeechPlaying = false;
     if (playBtn) {
       playBtn.innerHTML = '▶ Play Audio';
@@ -608,15 +596,57 @@ function playVoiceSummary() {
     }
   };
 
-  utterance.onerror = () => {
-    isSpeechPlaying = false;
-    if (playBtn) {
-      playBtn.innerHTML = '▶ Play Audio';
-      playBtn.classList.remove('is-playing');
+  // 1. If a native matching regional voice exists in browser (e.g. Android Google TTS / Edge Natural Voice)
+  if ('speechSynthesis' in window && matchedVoice) {
+    window.speechSynthesis.cancel();
+    const data = globalThis.latestStatusData || latestStatusData;
+    const bulletin = buildBulletinSummary(data, selectedVoiceLang);
+
+    const utterance = new SpeechSynthesisUtterance(bulletin.text);
+    utterance.voice = matchedVoice;
+    utterance.lang = matchedVoice.lang || langConfig.code;
+    utterance.rate = 0.92;
+    utterance.pitch = 1.0;
+
+    utterance.onstart = onStart;
+    utterance.onend = onEnd;
+    utterance.onerror = onEnd;
+
+    window.speechSynthesis.speak(utterance);
+    return;
+  }
+
+  // 2. High-Quality Fallback for Laptops & Desktops without regional voices: Stream pre-generated Google TTS MP3
+  const cacheVer = globalThis.OCEAN_WATCH_CONFIG?.CACHE_VERSION || '1';
+  const audioSrc = `audio/bulletins/bulletin-${langConfig.voicePrefix}.mp3?v=${cacheVer}`;
+
+  if (activeAudioElement) {
+    activeAudioElement.pause();
+    activeAudioElement = null;
+  }
+
+  activeAudioElement = new Audio(audioSrc);
+  activeAudioElement.onplay = onStart;
+  activeAudioElement.onended = onEnd;
+  activeAudioElement.onerror = () => {
+    console.warn('Pre-rendered Google TTS audio file unavailable, falling back to browser speech synthesis...');
+    onEnd();
+    if ('speechSynthesis' in window) {
+      const data = globalThis.latestStatusData || latestStatusData;
+      const bulletin = buildBulletinSummary(data, selectedVoiceLang);
+      const utterance = new SpeechSynthesisUtterance(bulletin.text);
+      utterance.lang = langConfig.code;
+      utterance.onstart = onStart;
+      utterance.onend = onEnd;
+      utterance.onerror = onEnd;
+      window.speechSynthesis.speak(utterance);
     }
   };
 
-  window.speechSynthesis.speak(utterance);
+  activeAudioElement.play().catch(err => {
+    console.warn('Audio element play exception:', err);
+    onEnd();
+  });
 }
 
 function renderVoiceSummaryModal() {
@@ -638,8 +668,8 @@ function renderVoiceSummaryModal() {
       voiceNoticeEl.textContent = 'Voice: ' + matchedVoice.name + ' (' + (matchedVoice.lang || langConfig.code) + ')';
       voiceNoticeEl.style.color = 'var(--green)';
     } else {
-      voiceNoticeEl.textContent = 'Voice note: No dedicated ' + langConfig.name + ' speech voice detected in system; browser will use standard voice.';
-      voiceNoticeEl.style.color = 'var(--muted)';
+      voiceNoticeEl.textContent = 'Voice engine: Google Text-to-Speech (Cloud HQ)';
+      voiceNoticeEl.style.color = 'var(--teal)';
     }
   }
 
