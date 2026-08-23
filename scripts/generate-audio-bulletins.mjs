@@ -41,7 +41,6 @@ function splitTextIntoChunks(text, maxLength = 180) {
   if (!text || text.length <= maxLength) return [text];
 
   const chunks = [];
-  // Split on sentence terminators: . । ? ! ; or newline
   const sentences = text.split(/(?<=[.।?!;\n])\s+/);
   let currentChunk = '';
 
@@ -50,7 +49,6 @@ function splitTextIntoChunks(text, maxLength = 180) {
       currentChunk = (currentChunk + ' ' + sentence).trim();
     } else {
       if (currentChunk) chunks.push(currentChunk);
-      // If single sentence itself is longer than maxLength, split on commas or spaces
       if (sentence.length > maxLength) {
         const subWords = sentence.split(' ');
         let subChunk = '';
@@ -73,21 +71,26 @@ function splitTextIntoChunks(text, maxLength = 180) {
   return chunks.filter(c => c && c.trim().length > 0);
 }
 
-async function fetchGoogleTtsChunk(text, ttsLang) {
+async function fetchGoogleTtsChunkWithRetry(text, ttsLang, retries = 3) {
   const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${ttsLang}&client=tw-ob`;
-  const response = await fetch(url, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-      'Referer': 'https://translate.google.com/'
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Referer': 'https://translate.google.com/'
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`Google TTS status ${response.status}`);
+      }
+      const arrayBuffer = await response.arrayBuffer();
+      return Buffer.from(arrayBuffer);
+    } catch (err) {
+      if (attempt === retries) throw err;
+      await new Promise(r => setTimeout(r, 600 * attempt));
     }
-  });
-
-  if (!response.ok) {
-    throw new Error(`Google TTS request failed with status ${response.status} for lang ${ttsLang}`);
   }
-
-  const arrayBuffer = await response.arrayBuffer();
-  return Buffer.from(arrayBuffer);
 }
 
 async function generateAllBulletins() {
@@ -110,10 +113,9 @@ async function generateAllBulletins() {
     for (let i = 0; i < chunks.length; i++) {
       const chunk = chunks[i];
       try {
-        const buf = await fetchGoogleTtsChunk(chunk, ttsLang);
+        const buf = await fetchGoogleTtsChunkWithRetry(chunk, ttsLang);
         audioBuffers.push(buf);
-        // Small delay to be polite to endpoint
-        await new Promise(r => setTimeout(r, 200));
+        await new Promise(r => setTimeout(r, 150));
       } catch (err) {
         console.warn(`Warning: Chunk ${i + 1}/${chunks.length} failed for ${langPrefix}:`, err.message);
       }
