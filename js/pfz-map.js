@@ -184,7 +184,7 @@ async function fetchPfzWindForecastData() {
 
   const lats = PFZ_WIND_GRID_COORDINATES.map(p => p.lat).join(',');
   const lons = PFZ_WIND_GRID_COORDINATES.map(p => p.lon).join(',');
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&hourly=wind_speed_10m,wind_direction_10m&wind_speed_unit=kn&timezone=Asia%2FKolkata&forecast_days=2`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&hourly=wind_speed_10m,wind_direction_10m&wind_speed_unit=kn&timezone=Asia%2FKolkata&forecast_days=3`;
 
   try {
     const res = await fetch(url);
@@ -196,8 +196,8 @@ async function fetchPfzWindForecastData() {
       throw new Error('Invalid wind data structure');
     }
 
-    const times = dataList[0].hourly.time; // 48 hourly timestamps in Asia/Kolkata
-    pfzWindTimeSteps = calculate12HourlyTargetSteps(times);
+    const times = dataList[0].hourly.time;
+    pfzWindTimeSteps = calculateTargetWindSteps(times);
     pfzWindDataCache = dataList;
     return dataList;
   } catch (err) {
@@ -206,8 +206,7 @@ async function fetchPfzWindForecastData() {
   }
 }
 
-function calculate12HourlyTargetSteps(times) {
-  // Extract Today 06:00, Today 18:00, Tomorrow 06:00, Tomorrow 18:00
+function calculateTargetWindSteps(times) {
   if (!times || !times.length) return [];
 
   const now = new Date();
@@ -215,18 +214,19 @@ function calculate12HourlyTargetSteps(times) {
   const tomorrow = new Date(now.getTime() + 86400000);
   const tomorrowStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(tomorrow);
 
+  // 5 interval timings: 08 PM, 05 AM, 11 AM, 04 PM, 08 PM
   const targets = [
-    { label: 'Today 06:00', sub: 'Morning', iso: `${todayStr}T06:00` },
-    { label: 'Today 18:00', sub: 'Evening', iso: `${todayStr}T18:00` },
-    { label: 'Tomorrow 06:00', sub: 'Morning', iso: `${tomorrowStr}T06:00` },
-    { label: 'Tomorrow 18:00', sub: 'Evening', iso: `${tomorrowStr}T18:00` }
+    { label: '08 PM', dayLabel: 'Today 08 PM', iso: `${todayStr}T20:00` },
+    { label: '05 AM', dayLabel: 'Tomorrow 05 AM', iso: `${tomorrowStr}T05:00` },
+    { label: '11 AM', dayLabel: 'Tomorrow 11 AM', iso: `${tomorrowStr}T11:00` },
+    { label: '04 PM', dayLabel: 'Tomorrow 04 PM', iso: `${tomorrowStr}T16:00` },
+    { label: '08 PM', dayLabel: 'Tomorrow 08 PM', iso: `${tomorrowStr}T20:00` }
   ];
 
   return targets.map(t => {
     let bestIdx = times.indexOf(t.iso);
     if (bestIdx === -1) {
-      // Fallback closest index
-      bestIdx = times.findIndex(timeStr => timeStr.startsWith(t.iso.slice(0, 13))) || 0;
+      bestIdx = times.findIndex(timeStr => timeStr.startsWith(t.iso.slice(0, 13)));
       if (bestIdx === -1) bestIdx = 0;
     }
     return { ...t, hourIndex: bestIdx, actualTime: times[bestIdx] || t.iso };
@@ -293,7 +293,7 @@ function renderPfzWindMarkers(intervalIdx = 0) {
     const popupHtml = `
       <div class="pfz-map-popup">
         <strong>💨 ${escapeHtml(coordMeta.label)}</strong>
-        <div><strong>Time:</strong> ${step.label} (${step.sub}) IST</div>
+        <div><strong>Forecast Time:</strong> ${step.dayLabel || step.label} IST</div>
         <div><strong>Wind Speed:</strong> ${Math.round(spd)} Knots (${spdKm} km/h)</div>
         <div><strong>Direction:</strong> ${Math.round(dir)}° (${cardinal})</div>
         <div><strong>Condition:</strong> <span style="color:${tier.color}; font-weight:800;">${tier.seaState}</span></div>
@@ -312,17 +312,17 @@ function updatePfzWindTimelineUi() {
   if (!pfzWindTimelineElement || !pfzWindTimeSteps.length) return;
 
   const step = pfzWindTimeSteps[pfzWindIntervalIndex];
-  const stepBtns = pfzWindTimelineElement.querySelectorAll('.pfz-wind-step-btn');
-  stepBtns.forEach((btn, idx) => {
-    btn.classList.toggle('active', idx === pfzWindIntervalIndex);
+  const ticks = pfzWindTimelineElement.querySelectorAll('.pfz-wind-tick');
+  ticks.forEach((tick, idx) => {
+    tick.classList.toggle('active', idx === pfzWindIntervalIndex);
   });
 
   const range = pfzWindTimelineElement.querySelector('.pfz-wind-range');
   if (range) range.value = pfzWindIntervalIndex;
 
-  const timeLabel = pfzWindTimelineElement.querySelector('.pfz-wind-time-label');
-  if (timeLabel && step) {
-    timeLabel.textContent = `${step.label} (${step.sub})`;
+  const pill = pfzWindTimelineElement.querySelector('.pfz-wind-active-pill');
+  if (pill && step) {
+    pill.textContent = step.dayLabel || step.label;
   }
 }
 
@@ -332,16 +332,16 @@ function togglePfzWindAnimation() {
     clearInterval(pfzWindPlayTimer);
     pfzWindPlayTimer = null;
     if (playBtn) {
-      playBtn.innerHTML = '▶ Play';
+      playBtn.innerHTML = '▶';
       playBtn.classList.remove('is-playing');
     }
   } else {
     if (playBtn) {
-      playBtn.innerHTML = '⏹ Stop';
+      playBtn.innerHTML = '⏹';
       playBtn.classList.add('is-playing');
     }
     pfzWindPlayTimer = setInterval(() => {
-      const nextIdx = (pfzWindIntervalIndex + 1) % (pfzWindTimeSteps.length || 4);
+      const nextIdx = (pfzWindIntervalIndex + 1) % (pfzWindTimeSteps.length || 5);
       renderPfzWindMarkers(nextIdx);
     }, 2000);
   }
@@ -361,28 +361,24 @@ function createPfzWindTimelineWidget() {
   widget.id = 'pfzWindTimelineWidget';
   widget.className = 'pfz-wind-timeline';
   widget.innerHTML = `
-    <div class="pfz-wind-header">
-      <div class="pfz-wind-title">
-        <span>💨 Wind Forecast (12h)</span>
-        <span class="pfz-wind-drag-badge">⠿ Move</span>
+    <div class="pfz-wind-drag-handle" title="Drag to move timeline">⠿</div>
+    <button type="button" class="pfz-wind-play-btn" title="Play / Pause interval animation">▶</button>
+    <div class="pfz-wind-track-box">
+      <input type="range" class="pfz-wind-range" min="0" max="4" value="0" step="1" aria-label="Wind interval">
+      <div class="pfz-wind-ticks">
+        <span class="pfz-wind-tick active" data-idx="0">08 PM</span>
+        <span class="pfz-wind-tick" data-idx="1">05 AM</span>
+        <span class="pfz-wind-tick" data-idx="2">11 AM</span>
+        <span class="pfz-wind-tick" data-idx="3">04 PM</span>
+        <span class="pfz-wind-tick" data-idx="4">08 PM</span>
       </div>
-      <button type="button" class="pfz-wind-play-btn" title="Cycle through 12-hour intervals">▶ Play</button>
     </div>
-    <div class="pfz-wind-steps">
-      <button type="button" class="pfz-wind-step-btn active" data-idx="0">Today<small>06:00 AM</small></button>
-      <button type="button" class="pfz-wind-step-btn" data-idx="1">Today<small>06:00 PM</small></button>
-      <button type="button" class="pfz-wind-step-btn" data-idx="2">Tomorrow<small>06:00 AM</small></button>
-      <button type="button" class="pfz-wind-step-btn" data-idx="3">Tomorrow<small>06:00 PM</small></button>
-    </div>
-    <div class="pfz-wind-range-box">
-      <input type="range" class="pfz-wind-range" min="0" max="3" value="0" step="1" aria-label="Wind forecast interval">
-      <span class="pfz-wind-time-label">Today 06:00 (Morning)</span>
-    </div>
+    <div class="pfz-wind-active-pill">Today 08 PM</div>
   `;
 
-  // Wire buttons & slider
-  widget.querySelectorAll('.pfz-wind-step-btn').forEach((btn, idx) => {
-    btn.addEventListener('click', () => {
+  // Wire tick clicks
+  widget.querySelectorAll('.pfz-wind-tick').forEach((tick, idx) => {
+    tick.addEventListener('click', () => {
       if (pfzWindPlayTimer) togglePfzWindAnimation();
       renderPfzWindMarkers(idx);
     });
@@ -401,8 +397,8 @@ function createPfzWindTimelineWidget() {
     playBtn.addEventListener('click', togglePfzWindAnimation);
   }
 
-  // Movable / Draggable Implementation (Mouse & Touch)
-  makeElementDraggable(widget, widget.querySelector('.pfz-wind-header'), container);
+  // Movable / Draggable via the drag handle
+  makeElementDraggable(widget, widget.querySelector('.pfz-wind-drag-handle'), container);
 
   container.appendChild(widget);
   pfzWindTimelineElement = widget;
