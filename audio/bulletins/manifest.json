@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T10:46:34.387Z",
+  "updated": "2026-08-23T11:01:34.175Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -27,7 +27,7 @@
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 117312,
+      "size": 117504,
       "title": "സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN"
     },
