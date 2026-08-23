@@ -272,8 +272,9 @@ function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// Cache for PFZ lines coordinates
+// Cache for PFZ lines & landing centres coordinates
 var pfzLinesGeoJsonCache = null;
+var pfzLandingCentresGeoJsonCache = null;
 
 async function loadPfzLinesCoordinates() {
   if (pfzLinesGeoJsonCache) return pfzLinesGeoJsonCache;
@@ -285,6 +286,20 @@ async function loadPfzLinesCoordinates() {
     return data;
   } catch (err) {
     console.warn('Could not load PFZ lines geojson:', err);
+    return null;
+  }
+}
+
+async function loadPfzLandingCentresData() {
+  if (pfzLandingCentresGeoJsonCache) return pfzLandingCentresGeoJsonCache;
+  try {
+    const res = await fetch(APP_CONFIG.MAP.PFZ_LANDING_CENTRES_URL);
+    if (!res.ok) return null;
+    const data = await res.json();
+    pfzLandingCentresGeoJsonCache = data;
+    return data;
+  } catch (err) {
+    console.warn('Could not load PFZ landing centres geojson:', err);
     return null;
   }
 }
@@ -355,7 +370,7 @@ async function findClosestPfzNavigationalTarget(lat, lon) {
   const bearing = calculateCompassBearing(lat, lon, targetPoint.lat, targetPoint.lon);
 
   return {
-    sourceLabel: 'GPS Position ➔ PFZ Forecast Line',
+    sourceLabel: 'Nearest PFZ line from the Locked FLC',
     distanceKm: minDistanceKm.toFixed(1),
     distanceNm: distNm,
     bearingDeg: bearing.deg,
@@ -367,10 +382,196 @@ async function findClosestPfzNavigationalTarget(lat, lon) {
   };
 }
 
-// Locate via GPS
-function locateUserPfzCompass() {
+async function findNearestLandingCenterToGps(userLat, userLon) {
+  const geojson = await loadPfzLandingCentresData();
+  if (!geojson || !Array.isArray(geojson.features) || geojson.features.length === 0) {
+    return null;
+  }
+
+  let minDistanceKm = Number.POSITIVE_INFINITY;
+  let bestFeature = null;
+
+  for (const feature of geojson.features) {
+    const coords = feature.geometry?.coordinates;
+    if (!Array.isArray(coords) || coords.length < 2) continue;
+    const lcLon = coords[0];
+    const lcLat = coords[1];
+    const dist = calculateHaversineDistance(userLat, userLon, lcLat, lcLon);
+    if (dist < minDistanceKm) {
+      minDistanceKm = dist;
+      bestFeature = feature;
+    }
+  }
+
+  if (!bestFeature) return null;
+
+  const props = bestFeature.properties || {};
+  const lcName = props.LC_NAME || '';
+  const sectorName = props.SECTOR_NAM || '';
+  const distNm = (minDistanceKm * 0.539957).toFixed(1);
+  const coords = bestFeature.geometry.coordinates;
+  const bearing = calculateCompassBearing(userLat, userLon, coords[1], coords[0]);
+
+  return {
+    name: lcName,
+    sectorName: sectorName,
+    distName: props.DIST_NAME || '',
+    lat: coords[1],
+    lon: coords[0],
+    distanceKm: minDistanceKm.toFixed(1),
+    distanceNm: distNm,
+    bearingDeg: bearing.deg,
+    cardinal: bearing.cardinal
+  };
+}
+
+function findMatchingLandingCenter(targetName, targetSector) {
+  if (!Array.isArray(latestPfzSectorsData) || !latestPfzSectorsData.length) return null;
+
+  const normTarget = String(targetName || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const normSec = String(targetSector || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  let bestSector = null;
+  let bestCenter = null;
+
+  for (const sector of latestPfzSectorsData) {
+    const sName = String(sector.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const isSecMatch = sName.includes(normSec) || normSec.includes(sName);
+
+    for (const center of (sector.landingCenters || [])) {
+      const cName = String(center.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (cName === normTarget || cName.includes(normTarget) || normTarget.includes(cName)) {
+        if (isSecMatch) return { sector, center };
+        if (!bestCenter) {
+          bestSector = sector;
+          bestCenter = center;
+        }
+      }
+    }
+  }
+
+  if (bestCenter) return { sector: bestSector, center: bestCenter };
+
+  for (const sector of latestPfzSectorsData) {
+    const sName = String(sector.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (sName.includes(normSec) || normSec.includes(sName)) {
+      return { sector, center: sector.landingCenters?.[0] || null };
+    }
+  }
+
+  return null;
+}
+
+function selectLandingCenterInUi(centerName, sectorName) {
+  const match = findMatchingLandingCenter(centerName, sectorName);
+  if (!match || !match.sector) return null;
+
+  const sector = match.sector;
+  const center = match.center;
+
+  const sectorEl = ids('pfzStates');
+  if (sectorEl) {
+    const chips = sectorEl.querySelectorAll('.pfz-chip');
+    chips.forEach(chip => {
+      const isThis = chip.textContent.toLowerCase().includes(sector.name.toLowerCase());
+      chip.setAttribute('aria-expanded', String(isThis));
+    });
+  }
+
+  renderPfzLandingCenters(sector);
+
+  if (center) {
+    const lcChips = ids('pfzLandingCenters')?.querySelectorAll('.landing-chip');
+    if (lcChips) {
+      lcChips.forEach(chip => {
+        const isThis = chip.textContent.toLowerCase().includes(center.name.toLowerCase());
+        chip.setAttribute('aria-expanded', String(isThis));
+      });
+    }
+    renderPfzMessages(center, sector.name);
+  }
+
+  return match;
+}
+
+// Locate via GPS or Locked Landing Center
+async function locateUserPfzCompass() {
   const btn = ids('pfzGpsBtn');
   const banner = ids('pfzCompassBanner');
+  const locked = getLockedLandingCenter();
+
+  // SCENARIO 1: Any FLC is locked -> Display locked FLC details with compass and distance to nearest PFZ line
+  if (locked) {
+    if (btn) {
+      btn.textContent = '🔒 Locked FLC';
+      setTimeout(() => { if (btn) btn.textContent = '📍 Near Me'; }, 3000);
+    }
+
+    selectLandingCenterInUi(locked.name, locked.sectorName);
+
+    let lcLat = null;
+    let lcLon = null;
+    const firstMsg = locked.messages?.[0];
+    if (firstMsg) {
+      lcLat = parseDmsCoordinate(firstMsg.latitude);
+      lcLon = parseDmsCoordinate(firstMsg.longitude);
+    }
+
+    if (lcLat == null || lcLon == null) {
+      const geojson = await loadPfzLandingCentresData();
+      const feat = geojson?.features?.find(f => f.properties?.LC_NAME?.toLowerCase() === locked.name.toLowerCase());
+      if (feat) {
+        lcLon = feat.geometry.coordinates[0];
+        lcLat = feat.geometry.coordinates[1];
+      }
+    }
+
+    let nav = null;
+    if (lcLat != null && lcLon != null) {
+      nav = await findClosestPfzNavigationalTarget(lcLat, lcLon);
+    }
+
+    if (firstMsg && firstMsg.bearing && firstMsg.distance) {
+      const bearingVal = parseFloat(firstMsg.bearing) || (nav ? nav.bearingDeg : 0);
+      const distVal = parseFloat(firstMsg.distance) || (nav ? parseFloat(nav.distanceKm) : 0);
+      const distNm = (distVal * 0.539957).toFixed(1);
+      nav = {
+        sourceLabel: 'Nearest PFZ line from the Locked FLC',
+        distanceKm: distVal.toFixed(1),
+        distanceNm: distNm,
+        bearingDeg: Math.round(bearingVal),
+        cardinal: getCardinalFromDegrees(bearingVal),
+        targetSector: locked.sectorName,
+        targetPoint: (lcLat != null && lcLon != null) ? { lat: lcLat, lon: lcLon } : (nav?.targetPoint || null),
+        targetLat: lcLat,
+        targetLon: lcLon,
+        depth: firstMsg.depth || '',
+        direction: firstMsg.direction || '',
+        flcName: locked.name
+      };
+    } else if (nav) {
+      nav.sourceLabel = 'Nearest PFZ line from the Locked FLC';
+      nav.flcName = locked.name;
+    }
+
+    if (banner && nav) {
+      currentPfzNavTarget = nav;
+      banner.hidden = false;
+      banner.innerHTML = `
+        <div class="pfz-compass-card">
+          <span class="pfz-compass-icon">🔒</span>
+          <div class="pfz-compass-body">
+            <strong>Nearest PFZ line from the Locked FLC</strong>
+            <span>${titleCase(locked.name)} (${titleCase(locked.sectorName)}) ➔ Heading ${nav.bearingDeg}° ${nav.cardinal} · ${nav.distanceNm} NM (${nav.distanceKm} km)</span>
+          </div>
+          <button type="button" class="pfz-open-compass-btn" onclick="openPfzCompassModal();">🧭 Compass</button>
+        </div>
+      `;
+    }
+    return;
+  }
+
+  // SCENARIO 2: Default (No FLC locked) -> Select nearest landing center and display compass & distance from GPS location
   if (!navigator.geolocation) {
     alert('Geolocation is not supported by your browser.');
     return;
@@ -383,31 +584,73 @@ function locateUserPfzCompass() {
 
   navigator.geolocation.getCurrentPosition(
     async position => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      const nav = await findClosestPfzNavigationalTarget(lat, lon);
+      const userLat = position.coords.latitude;
+      const userLon = position.coords.longitude;
+
+      const nearestFlc = await findNearestLandingCenterToGps(userLat, userLon);
 
       if (btn) {
-        btn.textContent = '📍 Located (' + (nav ? nav.distanceNm + ' NM' : 'OK') + ')';
+        btn.textContent = nearestFlc ? `📍 ${nearestFlc.name} (${nearestFlc.distanceNm} NM)` : '📍 Located';
         btn.disabled = false;
       }
 
-      if (banner && nav) {
+      if (nearestFlc) {
+        // Automatically select the nearest landing center in UI
+        const selected = selectLandingCenterInUi(nearestFlc.name, nearestFlc.sectorName);
+
+        const firstMsg = selected?.center?.messages?.[0];
+        let targetPt = null;
+        if (firstMsg?.latitude && firstMsg?.longitude) {
+          const tLat = parseDmsCoordinate(firstMsg.latitude);
+          const tLon = parseDmsCoordinate(firstMsg.longitude);
+          if (tLat != null && tLon != null) targetPt = { lat: tLat, lon: tLon };
+        }
+
+        const nav = {
+          sourceLabel: 'Nearest FLC from your GPS location',
+          distanceKm: nearestFlc.distanceKm,
+          distanceNm: nearestFlc.distanceNm,
+          bearingDeg: nearestFlc.bearingDeg,
+          cardinal: nearestFlc.cardinal,
+          targetSector: nearestFlc.sectorName,
+          targetPoint: targetPt || { lat: nearestFlc.lat, lon: nearestFlc.lon },
+          targetLat: targetPt ? targetPt.lat : nearestFlc.lat,
+          targetLon: targetPt ? targetPt.lon : nearestFlc.lon,
+          flcName: nearestFlc.name
+        };
+
         currentPfzNavTarget = nav;
-        banner.hidden = false;
-        banner.innerHTML = `
-          <div class="pfz-compass-card">
-            <span class="pfz-compass-icon">🧭</span>
-            <div class="pfz-compass-body">
-              <strong>Heading ${nav.bearingDeg}° ${nav.cardinal} · ${nav.distanceNm} NM <small>(${nav.distanceKm} km)</small></strong>
-              <span>Nearest PFZ forecast line ${nav.targetSector ? '(' + nav.targetSector + ')' : ''} from your GPS location</span>
+
+        if (banner) {
+          banner.hidden = false;
+          banner.innerHTML = `
+            <div class="pfz-compass-card">
+              <span class="pfz-compass-icon">📍</span>
+              <div class="pfz-compass-body">
+                <strong>Nearest FLC from your GPS location</strong>
+                <span>${titleCase(nearestFlc.name)} (${titleCase(nearestFlc.sectorName)}) · Heading ${nearestFlc.bearingDeg}° ${nearestFlc.cardinal} · ${nearestFlc.distanceNm} NM (${nearestFlc.distanceKm} km)</span>
+              </div>
+              <button type="button" class="pfz-open-compass-btn" onclick="openPfzCompassModal();">🧭 Compass</button>
             </div>
-            <button type="button" class="pfz-open-compass-btn" onclick="openPfzCompassModal();">🧭 Compass</button>
-          </div>
-        `;
-      } else if (banner) {
-        banner.hidden = false;
-        banner.innerHTML = '<div class="pfz-compass-card"><span>No active PFZ forecast lines found near current coordinates.</span></div>';
+          `;
+        }
+      } else {
+        const nav = await findClosestPfzNavigationalTarget(userLat, userLon);
+        if (banner && nav) {
+          nav.sourceLabel = 'Nearest FLC from your GPS location';
+          currentPfzNavTarget = nav;
+          banner.hidden = false;
+          banner.innerHTML = `
+            <div class="pfz-compass-card">
+              <span class="pfz-compass-icon">🧭</span>
+              <div class="pfz-compass-body">
+                <strong>Nearest FLC from your GPS location</strong>
+                <span>Heading ${nav.bearingDeg}° ${nav.cardinal} · ${nav.distanceNm} NM (${nav.distanceKm} km)</span>
+              </div>
+              <button type="button" class="pfz-open-compass-btn" onclick="openPfzCompassModal();">🧭 Compass</button>
+            </div>
+          `;
+        }
       }
     },
     err => {
@@ -427,27 +670,53 @@ async function locateLockedPfzCompass() {
   const locked = getLockedLandingCenter();
   if (!locked) return;
 
+  selectLandingCenterInUi(locked.name, locked.sectorName);
+
+  let lcLat = null;
+  let lcLon = null;
   const firstMsg = locked.messages?.[0];
   if (firstMsg) {
-    const targetLat = parseDmsCoordinate(firstMsg.latitude);
-    const targetLon = parseDmsCoordinate(firstMsg.longitude);
-    const bearingVal = parseFloat(firstMsg.bearing) || 0;
-    const distVal = parseFloat(firstMsg.distance) || 0;
+    lcLat = parseDmsCoordinate(firstMsg.latitude);
+    lcLon = parseDmsCoordinate(firstMsg.longitude);
+  }
+
+  if (lcLat == null || lcLon == null) {
+    const geojson = await loadPfzLandingCentresData();
+    const feat = geojson?.features?.find(f => f.properties?.LC_NAME?.toLowerCase() === locked.name.toLowerCase());
+    if (feat) {
+      lcLon = feat.geometry.coordinates[0];
+      lcLat = feat.geometry.coordinates[1];
+    }
+  }
+
+  let nav = null;
+  if (lcLat != null && lcLon != null) {
+    nav = await findClosestPfzNavigationalTarget(lcLat, lcLon);
+  }
+
+  if (firstMsg && firstMsg.bearing && firstMsg.distance) {
+    const bearingVal = parseFloat(firstMsg.bearing) || (nav ? nav.bearingDeg : 0);
+    const distVal = parseFloat(firstMsg.distance) || (nav ? parseFloat(nav.distanceKm) : 0);
     const distNm = (distVal * 0.539957).toFixed(1);
 
     openPfzCompassModal({
-      sourceLabel: '🔒 ' + titleCase(locked.name) + ' (Locked Home)',
+      sourceLabel: 'Nearest PFZ line from the Locked FLC',
       targetSector: titleCase(locked.sectorName),
-      targetLat: targetLat,
-      targetLon: targetLon,
-      targetPoint: (targetLat != null && targetLon != null) ? { lat: targetLat, lon: targetLon } : null,
+      targetLat: lcLat,
+      targetLon: lcLon,
+      targetPoint: (lcLat != null && lcLon != null) ? { lat: lcLat, lon: lcLon } : null,
       bearingDeg: Math.round(bearingVal),
       cardinal: getCardinalFromDegrees(bearingVal),
       distanceKm: distVal.toFixed(1),
       distanceNm: distNm,
       depth: firstMsg.depth || '',
-      direction: firstMsg.direction || ''
+      direction: firstMsg.direction || '',
+      flcName: locked.name
     });
+  } else if (nav) {
+    nav.sourceLabel = 'Nearest PFZ line from the Locked FLC';
+    nav.flcName = locked.name;
+    openPfzCompassModal(nav);
   }
 }
 
@@ -536,10 +805,10 @@ function openPfzCompassModal(customTarget = null) {
   const dialog = ids('pfzCompassModal');
   if (!dialog) return;
 
-  ids('compassTargetTitle').textContent = target.sourceLabel || 'PFZ Forecast Line Target';
-  ids('compassTargetBearing').textContent = target.bearingDeg + '° ' + (target.cardinal || getCardinalFromDegrees(target.bearingDeg));
-  ids('compassTargetDist').textContent = target.distanceNm + ' NM (' + target.distanceKm + ' km)';
-  ids('compassSectorName').textContent = target.targetSector || 'Active Sector';
+  if (ids('compassTargetTitle')) ids('compassTargetTitle').textContent = target.sourceLabel || 'Nearest FLC from your GPS location';
+  if (ids('compassTargetBearing')) ids('compassTargetBearing').textContent = target.bearingDeg + '° ' + (target.cardinal || getCardinalFromDegrees(target.bearingDeg));
+  if (ids('compassTargetDist')) ids('compassTargetDist').textContent = target.distanceNm + ' NM (' + target.distanceKm + ' km)';
+  if (ids('compassSectorName')) ids('compassSectorName').textContent = target.targetSector ? titleCase(target.targetSector) : 'Active Sector';
 
   startDeviceCompassSensors();
   startDeviceLocationTracking();
@@ -636,6 +905,13 @@ function initPfzControls() {
   const btn = ids('pfzGpsBtn');
   if (btn) {
     btn.addEventListener('click', locateUserPfzCompass);
+  }
+
+  const modal = ids('pfzCompassModal');
+  if (modal) {
+    modal.addEventListener('close', () => {
+      stopDeviceCompassSensors();
+    });
   }
 
   const manualSlider = ids('compassManualSlider');
