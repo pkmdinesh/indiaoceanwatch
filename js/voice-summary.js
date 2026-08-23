@@ -1,5 +1,5 @@
 // Lightweight Multilingual Voice and Text Bulletin Engine
-// Uses native browser Web Speech API with seamless Google TTS audio fallback for laptops/desktops
+// Uses pre-rendered high-quality Google TTS audio streams with seamless HTML5 playback
 
 const VOICE_LANGUAGES = Object.freeze([
   { code: 'en-IN', name: 'English', native: 'English', voicePrefix: 'en', voiceNames: ['india', 'english'] },
@@ -29,9 +29,9 @@ const REGIONAL_STATE_NAMES = {
   'ANDHRA PRADESH': {
     ta: 'ஆந்திர பிரதேசம்',
     te: 'ఆంధ్రప్రదేశ్',
-    ml: 'ആന്ധ്രാപ്രദേശ്',
+    ml: 'ആന്ധ്രാ പ്രദേശ്',
     hi: 'आंध्र प्रदेश',
-    bn: 'অন্ধ্রপ্রদেশ',
+    bn: 'অন্ধ্র প্রদেশ',
     mr: 'आंध्र प्रदेश',
     gu: 'આંધ્ર પ્રદેશ',
     or: 'ଆନ୍ଧ୍ର ପ୍ରଦେଶ',
@@ -50,10 +50,10 @@ const REGIONAL_STATE_NAMES = {
   },
   'GUJARAT': {
     ta: 'குஜராத்',
-    te: 'ગુજરાત',
-    ml: 'ગુજરાത്ത്',
+    te: 'గుజరాత్',
+    ml: 'ഗുജറാത്ത്',
     hi: 'गुजरात',
-    bn: 'ગુજરાટ',
+    bn: 'গুজরাট',
     mr: 'गुजरात',
     gu: 'ગુજરાત',
     or: 'ଗୁଜରାଟ',
@@ -61,7 +61,7 @@ const REGIONAL_STATE_NAMES = {
   },
   'KARNATAKA': {
     ta: 'கர்நாடகா',
-    te: 'ಕರ್ನಾಟಕ',
+    te: 'కర్ణాటక',
     ml: 'കർണാടക',
     hi: 'कर्नाटक',
     bn: 'কর্ণাটক',
@@ -72,14 +72,14 @@ const REGIONAL_STATE_NAMES = {
   },
   'KERALA': {
     ta: 'கேரளா',
-    te: 'കേരള',
+    te: 'కేరళ',
     ml: 'കേരളം',
     hi: 'केरल',
-    bn: 'কেরালা',
+    bn: 'কেরল',
     mr: 'केरळ',
     gu: 'કેરળ',
     or: 'କେରଳ',
-    kn: 'കേರಳ'
+    kn: 'ಕೇರಳ'
   },
   'LAKSHADWEEP': {
     ta: 'லட்சத்தீவு',
@@ -117,7 +117,7 @@ const REGIONAL_STATE_NAMES = {
   'TAMIL NADU': {
     ta: 'தமிழ்நாடு',
     te: 'తమిళనాడు',
-    ml: 'തമിഴ്‌നാട്',
+    ml: 'തമിഴ്നാട്',
     hi: 'तमिलनाडु',
     bn: 'তামিলনাড়ু',
     mr: 'तमिळनाडू',
@@ -126,59 +126,60 @@ const REGIONAL_STATE_NAMES = {
     kn: 'ತಮಿಳುನಾಡು'
   },
   'WEST BENGAL': {
-    ta: 'மேற்கு வங்கம்',
-    te: 'పశ్చిம బెంగాల్',
+    ta: 'மேற்கு வங்காளம்',
+    te: 'పశ్చిమ బెంగాల్',
     ml: 'പശ്ചിമ ബംഗാൾ',
     hi: 'पश्चिम बंगाल',
     bn: 'পশ্চিমবঙ্গ',
     mr: 'पश्चिम बंगाल',
     gu: 'પશ્ચિમ બંગાળ',
-    or: 'ପଶ୍ଚିମବଙ୍ଗ',
+    or: 'ପଶ୍ଚିମ ବଙ୍ଗ',
     kn: 'ಪಶ್ಚಿಮ ಬಂಗಾಳ'
   },
   'DAMAN AND DIU': {
-    ta: 'தாமன் மற்றும் தியூ',
-    te: 'దామన్ మరియు దియు',
+    ta: 'டாமன் மற்றும் டையூ',
+    te: 'డామన్ మరియు డయ్యూ',
     ml: 'ദാമൻ ദിയു',
-    hi: 'दमन एवं दीव',
+    hi: 'दमन और दीव',
     bn: 'দমন ও দিউ',
-    mr: 'दमण आणि दीव',
+    mr: 'दमन आणि दीव',
     gu: 'દમણ અને દીવ',
-    or: 'ଦମନ ଓ ଦିଉ',
+    or: 'ଦମନ ଏବଂ ଦିଉ',
     kn: 'ದಮನ್ ಮತ್ತು ದಿಯು'
   },
   'PUDUCHERRY': {
     ta: 'புதுச்சேரி',
-    te: 'పుదుచ్చేரி',
+    te: 'పుదుచ్చేరి',
     ml: 'പുതുച്ചേരി',
-    hi: 'पुडुचेरी',
+    hi: 'पुदुचेरी',
     bn: 'পুদুচেরি',
-    mr: 'पुडुचेरी',
+    mr: 'पुदुच्चेरी',
     gu: 'પુડુચેરી',
-    or: 'ପୁଡୁଚେରୀ',
+    or: 'ପୁଦୁଚେରୀ',
     kn: 'ಪುದುಚೇರಿ'
   }
 };
 
 const LANGUAGE_TARGET_STATES = {
   ta: ['TAMIL NADU', 'PUDUCHERRY'],
-  te: ['ANDHRA PRADESH'],
+  te: ['ANDHRA PRADESH', 'PUDUCHERRY'],
   ml: ['KERALA', 'LAKSHADWEEP'],
-  kn: ['KARNATAKA'],
+  hi: ['ANDAMAN AND NICOBAR'],
+  bn: ['WEST BENGAL', 'ANDAMAN AND NICOBAR'],
   mr: ['MAHARASHTRA', 'GOA'],
   gu: ['GUJARAT', 'DAMAN AND DIU'],
   or: ['ODISHA'],
-  bn: ['WEST BENGAL'],
-  hi: ['ANDAMAN AND NICOBAR'],
-  en: null
+  kn: ['KARNATAKA', 'GOA']
 };
 
-function translateStateName(stateName, langPrefix) {
-  const norm = String(stateName || '').toUpperCase().trim();
-  if (REGIONAL_STATE_NAMES[norm] && REGIONAL_STATE_NAMES[norm][langPrefix]) {
-    return REGIONAL_STATE_NAMES[norm][langPrefix];
+function translateStateName(englishName, targetLangPrefix) {
+  if (!englishName) return '';
+  const norm = englishName.toUpperCase().trim();
+  const dict = REGIONAL_STATE_NAMES[norm];
+  if (dict && dict[targetLangPrefix]) {
+    return dict[targetLangPrefix];
   }
-  return stateName;
+  return englishName;
 }
 
 var selectedVoiceLang = 'en-IN';
@@ -186,9 +187,8 @@ var isSpeechPlaying = false;
 var availableBrowserVoices = [];
 
 function loadVoices() {
-  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-    availableBrowserVoices = window.speechSynthesis.getVoices() || [];
-  }
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  availableBrowserVoices = window.speechSynthesis.getVoices() || [];
 }
 
 if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -303,7 +303,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
       t += 'சிவப்பு எச்சரிக்கை (Red Warning): ' + mapStates(adv.allWarnings) + ' கடலோரப் பகுதிகளில் அதீத கடல் சீற்ற எச்சரிக்கை விடுக்கப்பட்டுள்ளது. மீனவர்கள் கடலுக்கு செல்ல வேண்டாம். ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'கள்ளக்கடல் / அலை எழுச்சி ஆரஞ்சு எச்சரிக்கை (Swell Surge Alert): ' + mapStates(adv.swellAlert) + '. ';
+      t += 'அலை எழுச்சி ஆரஞ்சு எச்சரிக்கை (Swell Surge Alert): ' + mapStates(adv.swellAlert) + '. ';
     }
     if (adv.highWaveAlert.length > 0) {
       t += 'உயர்ந்த அலை ஆரஞ்சு எச்சரிக்கை (High Wave Alert): ' + mapStates(adv.highWaveAlert) + '. ';
@@ -328,7 +328,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
       t += 'लाल चेतावनी (Red Warning): ' + mapStates(adv.allWarnings) + '। मछुआरे समुद्र में न जाएं। ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'स्वेल सर्ज / कल्लाक्कदल अलर्ट: ' + mapStates(adv.swellAlert) + '। ';
+      t += 'स्वेल सर्ज अलर्ट: ' + mapStates(adv.swellAlert) + '। ';
     }
     if (adv.highWaveAlert.length > 0) {
       t += 'ऊंची लहरें ऑरेंज अलर्ट: ' + mapStates(adv.highWaveAlert) + '। ';
@@ -353,7 +353,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
       t += 'రెడ్ అలర్ట్ (Red Warning): ' + mapStates(adv.allWarnings) + '. మత్స్యకారులు సముద్రంలోకి వెళ్లవద్దు. ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'స్వెల్ సర్జ్ / కళ్ళక్కడల్ ఆరెంజ్ అలర్ట్: ' + mapStates(adv.swellAlert) + '. ';
+      t += 'స్వెల్ సర్జ్ ఆరెంజ్ అలర్ట్: ' + mapStates(adv.swellAlert) + '. ';
     }
     if (adv.highWaveAlert.length > 0) {
       t += 'హై వేవ్ ఆరెంజ్ అలర్ట్: ' + mapStates(adv.highWaveAlert) + '. ';
@@ -378,7 +378,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
       t += 'റെഡ് മുന്നറിയിപ്പ് (Red Warning): ' + mapStates(adv.allWarnings) + '. മത്സ്യത്തൊഴിലാളികൾ കടലിൽ പോകരുത്. ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'കള്ളക്കടൽ / സ്വെൽ സർജ്ജ് ഓറഞ്ച് അലർട്ട്: ' + mapStates(adv.swellAlert) + '. ';
+      t += 'സ്വെൽ സർജ്ജ് ഓറഞ്ച് അലർട്ട്: ' + mapStates(adv.swellAlert) + '. ';
     }
     if (adv.highWaveAlert.length > 0) {
       t += 'ഉയർന്ന തിരമാല ഓറഞ്ച് അലർട്ട്: ' + mapStates(adv.highWaveAlert) + '. ';
@@ -428,7 +428,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
       t += 'लाल इशारा (Red Warning): ' + mapStates(adv.allWarnings) + '. मच्छिमारांनी समुद्रात जाऊ नये. ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'कल्लाक्कदल / स्वेल सर्ज ऑरेंज अलर्ट: ' + mapStates(adv.swellAlert) + '. ';
+      t += 'स्वेल सर्ज ऑरेंज अलर्ट: ' + mapStates(adv.swellAlert) + '. ';
     }
     if (adv.highWaveAlert.length > 0) {
       t += 'उंच लाटा ऑरेंज अलर्ट: ' + mapStates(adv.highWaveAlert) + '. ';
@@ -453,7 +453,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
       t += 'લાલ ચેતવણી (Red Warning): ' + mapStates(adv.allWarnings) + '. માછીમારોએ દરિયામાં ન જવું. ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'સ્વેલ સર્જ / કલ્લાક્કડલ ઓરેન્જ એલર્ટ: ' + mapStates(adv.swellAlert) + '. ';
+      t += 'સ્વેલ સર્જ ઓરેન્જ એલર્ટ: ' + mapStates(adv.swellAlert) + '. ';
     }
     if (adv.highWaveAlert.length > 0) {
       t += 'ઊંચા મોજા ઓરેન્જ એલર્ટ: ' + mapStates(adv.highWaveAlert) + '. ';
@@ -478,7 +478,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
       t += 'ଲାଲ୍ ଚେତାବନୀ (Red Warning): ' + mapStates(adv.allWarnings) + '। ମତ୍ସ୍ୟଜୀବୀମାନେ ସମୁଦ୍ରକୁ ଯାଆନ୍ତୁ ନାହିଁ। ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'ସ୍ୱେଲ୍ ସର୍ଜ / କଲ୍ଲାକଡ଼ାଲ୍ ଅରେଞ୍ଜ ଆଲର୍ଟ: ' + mapStates(adv.swellAlert) + '। ';
+      t += 'ସ୍ୱେଲ୍ ସର୍ଜ ଅରେଞ୍ଜ ଆଲର୍ଟ: ' + mapStates(adv.swellAlert) + '। ';
     }
     if (adv.highWaveAlert.length > 0) {
       t += 'ଉଚ୍ଚ ଢେଉ ଅରେଞ୍ଜ ଆଲର୍ଟ: ' + mapStates(adv.highWaveAlert) + '। ';
@@ -503,7 +503,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
       t += 'ಕೆಂಪು ಎಚ್ಚರಿಕೆ (Red Warning): ' + mapStates(adv.allWarnings) + '. ಮೀನುಗಾರರು ಸಮುದ್ರಕ್ಕೆ ಇಳಿಯಬಾರದು. ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'ಸ್ವೆಲ್ ಸರ್ಜ್ / ಕಲ್ಲಕ್ಕಡಲ್ ಆರೆಂಜ್ ಅಲರ್ಟ್: ' + mapStates(adv.swellAlert) + '. ';
+      t += 'ಸ್ವೆಲ್ ಸರ್ಜ್ ಆರೆಂಜ್ ಅಲರ್ಟ್: ' + mapStates(adv.swellAlert) + '. ';
     }
     if (adv.highWaveAlert.length > 0) {
       t += 'ಎತ್ತರದ ಅಲೆಗಳ ಆರೆಂಜ್ ಅಲರ್ಟ್: ' + mapStates(adv.highWaveAlert) + '. ';
@@ -529,10 +529,10 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
     t += 'Red Warning: Severe coastal advisories active across ' + adv.allWarnings.join(', ') + '. Fishermen are strictly advised not to venture into the sea. ';
   }
   if (adv.swellWarn.length > 0) {
-    t += 'Swell Surge (Kallakkadal) Red Warning in ' + adv.swellWarn.join(', ') + '. ';
+    t += 'Swell Surge Red Warning in ' + adv.swellWarn.join(', ') + '. ';
   }
   if (adv.swellAlert.length > 0) {
-    t += 'Swell Surge (Kallakkadal) Orange Alert in ' + adv.swellAlert.join(', ') + '. ';
+    t += 'Swell Surge Orange Alert in ' + adv.swellAlert.join(', ') + '. ';
   }
   if (adv.highWaveAlert.length > 0) {
     t += 'High Wave Orange Alert in ' + adv.highWaveAlert.join(', ') + '. ';
