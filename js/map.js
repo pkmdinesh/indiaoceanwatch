@@ -143,7 +143,7 @@ function osfMessageHtml(service,advisories,group,openLevel=null) {
       const badges = [];
       const m = metricsList[0];
       if (m.waveHeight) badges.push(`<span class="osf-metric-badge hs" title="INCOIS Forecasted Significant Wave Height (Hs)">🌊 Hs: <strong>${escapeHtml(m.waveHeight.text)}</strong></span>`);
-      if (m.swellPeriod) badges.push(`<span class="osf-metric-badge tp ${m.swellPeriod.isKallakkadal ? 'kallakkadal' : ''}" title="INCOIS Forecasted Peak Swell Period (Tp)">⏱ Tp: <strong>${escapeHtml(m.swellPeriod.text)}</strong>${m.swellPeriod.isKallakkadal ? ' ⚠ Kallakkadal' : ''}</span>`);
+      if (m.swellPeriod) badges.push(`<span class="osf-metric-badge tp ${m.swellPeriod.isKallakkadal ? 'kallakkadal' : ''}" title="INCOIS Forecasted Peak Swell Period (Tp)">⏱ Tp: <strong>${escapeHtml(m.swellPeriod.text)}</strong>${m.swellPeriod.isKallakkadal ? ' ⚠' : ''}</span>`);
       if (m.currentSpeed) badges.push(`<span class="osf-metric-badge cur" title="INCOIS Surface Current Speed">🧭 Current: <strong>${escapeHtml(m.currentSpeed.text)}</strong></span>`);
       if (m.validity) badges.push(`<span class="osf-metric-badge val" title="Validity Period">📅 Valid: ${escapeHtml(m.validity.start)} → ${escapeHtml(m.validity.end)} IST</span>`);
       if (badges.length) {
@@ -180,6 +180,119 @@ function osfDistrictTooltipHtml(district, state, service, advisories, level) {
       ${metricText}
     </div>
   `;
+}
+
+// ----------------------------------------------------
+// Coastal Tidal Stations & Astronomical Spring/Neap Engine
+// ----------------------------------------------------
+
+const OSF_TIDAL_STATIONS = Object.freeze([
+  { name: 'Kandla', state: 'Gujarat', lat: 23.00, lon: 70.22, rangeType: 'Macro-tidal', mhws: 6.5, hourOffset: 0.5 },
+  { name: 'Mumbai / JNPT', state: 'Maharashtra', lat: 18.92, lon: 72.83, rangeType: 'Macro-tidal', mhws: 4.8, hourOffset: 0.0 },
+  { name: 'Mormugao', state: 'Goa', lat: 15.42, lon: 73.80, rangeType: 'Meso-tidal', mhws: 2.3, hourOffset: -0.5 },
+  { name: 'Karwar', state: 'Karnataka', lat: 14.81, lon: 74.12, rangeType: 'Meso-tidal', mhws: 2.1, hourOffset: -0.6 },
+  { name: 'New Mangalore', state: 'Karnataka', lat: 12.93, lon: 74.82, rangeType: 'Micro-tidal', mhws: 1.7, hourOffset: -0.8 },
+  { name: 'Kochi', state: 'Kerala', lat: 9.96, lon: 76.24, rangeType: 'Micro-tidal', mhws: 1.2, hourOffset: -1.2 },
+  { name: 'Kanyakumari', state: 'Tamil Nadu', lat: 8.08, lon: 77.55, rangeType: 'Micro-tidal', mhws: 0.9, hourOffset: -1.5 },
+  { name: 'Tuticorin', state: 'Tamil Nadu', lat: 8.75, lon: 78.18, rangeType: 'Micro-tidal', mhws: 1.2, hourOffset: -1.0 },
+  { name: 'Chennai', state: 'Tamil Nadu', lat: 13.08, lon: 80.29, rangeType: 'Micro-tidal', mhws: 1.4, hourOffset: 1.2 },
+  { name: 'Visakhapatnam', state: 'Andhra Pradesh', lat: 17.68, lon: 83.28, rangeType: 'Meso-tidal', mhws: 1.8, hourOffset: 1.8 },
+  { name: 'Paradip', state: 'Odisha', lat: 20.26, lon: 86.67, rangeType: 'Meso-tidal', mhws: 2.6, hourOffset: 2.2 },
+  { name: 'Sagar Island / Haldia', state: 'West Bengal', lat: 21.80, lon: 88.03, rangeType: 'Macro-tidal', mhws: 4.9, hourOffset: 2.8 },
+  { name: 'Port Blair', state: 'Andaman & Nicobar', lat: 11.67, lon: 92.73, rangeType: 'Meso-tidal', mhws: 2.2, hourOffset: 0.8 },
+  { name: 'Kavaratti', state: 'Lakshadweep', lat: 10.56, lon: 72.64, rangeType: 'Micro-tidal', mhws: 1.4, hourOffset: -1.0 }
+]);
+
+function computeAstronomicalTidalState(now = new Date()) {
+  const synodicMonth = 29.530588853;
+  // Reference New Moon: 2000-01-06 18:14 UTC (947182440000 ms)
+  const epoch = 947182440000;
+  const days = (now.getTime() - epoch) / 86400000;
+  const moonAge = ((days % synodicMonth) + synodicMonth) % synodicMonth;
+
+  // Spring tide around New Moon (0..2.8 or 26.8..29.5) and Full Moon (12.2..17.2)
+  const isSpring = (moonAge <= 2.8 || moonAge >= 26.8 || (moonAge >= 12.2 && moonAge <= 17.2));
+  // Neap tide around Quarter Moons (5.5..9.5 or 20.0..24.0)
+  const isNeap = ((moonAge >= 5.5 && moonAge <= 9.5) || (moonAge >= 20.0 && moonAge <= 24.0));
+
+  let phase = 'moderate';
+  let phaseLabel = 'Moderate / Transitioning Tide';
+  let riskNote = 'Normal tidal range. Standard coastal caution during peak wave hours.';
+  let badgeClass = 'moderate';
+
+  if (isSpring) {
+    phase = 'spring';
+    phaseLabel = 'Spring Tide (High Amplitude / Inundation Risk)';
+    riskNote = 'Maximum tidal amplitude (Spring Tide). Coinciding high waves or swell surge will cause significant coastal overtopping and inundation.';
+    badgeClass = 'spring';
+  } else if (isNeap) {
+    phase = 'neap';
+    phaseLabel = 'Neap Tide (Low Amplitude / Lower Risk)';
+    riskNote = 'Minimum tidal amplitude (Neap Tide). Reduced inundation risk even with moderate swell action.';
+    badgeClass = 'neap';
+  }
+
+  return { moonAge: moonAge.toFixed(1), phase, phaseLabel, riskNote, badgeClass };
+}
+
+function createOsfTidalStationLayer() {
+  const layer = L.layerGroup();
+  const tideState = computeAstronomicalTidalState();
+
+  OSF_TIDAL_STATIONS.forEach(st => {
+    // Calculate approximate high tide windows for this port
+    const baseHt1 = (8.5 + st.hourOffset + (parseFloat(tideState.moonAge) * 0.84)) % 12.42;
+    const morningHt = (baseHt1 < 0 ? baseHt1 + 12.42 : baseHt1);
+    const eveningHt = (morningHt + 12.42) % 24;
+
+    const formatHour = (h) => {
+      const hh = Math.floor(h) % 24;
+      const mm = Math.floor((h % 1) * 60);
+      const period = hh >= 12 ? 'PM' : 'AM';
+      const dispH = hh % 12 || 12;
+      return `${String(dispH).padStart(2, '0')}:${String(mm).padStart(2, '0')} ${period}`;
+    };
+
+    const morningTimeStr = formatHour(morningHt);
+    const eveningTimeStr = formatHour(eveningHt);
+
+    const iconHtml = `
+      <div class="osf-tide-marker" title="${st.name}: ${tideState.phaseLabel}">
+        <div class="osf-tide-pin ${tideState.badgeClass}">🌊</div>
+        <span class="osf-tide-label">${st.name}</span>
+      </div>
+    `;
+
+    const icon = L.divIcon({
+      html: iconHtml,
+      className: '',
+      iconSize: [44, 38],
+      iconAnchor: [22, 19]
+    });
+
+    const marker = L.marker([st.lat, st.lon], { icon });
+
+    const popupHtml = `
+      <div class="osf-popup">
+        <strong>🌊 ${escapeHtml(st.name)} Port · ${escapeHtml(st.state)}</strong>
+        <div class="osf-tide-risk-banner ${tideState.badgeClass}">
+          ${escapeHtml(tideState.phaseLabel)}
+        </div>
+        <p style="font-size:11px; margin-bottom:6px;">${escapeHtml(tideState.riskNote)}</p>
+        <div style="background:#f8fafc; padding:6px 8px; border-radius:6px; border:1px solid #cbd5e1; font-size:10.5px; display:grid; gap:3px;">
+          <div><strong>Tidal Range Regime:</strong> ${escapeHtml(st.rangeType)} (MHWS ~${st.mhws}m)</div>
+          <div><strong>Estimated Morning High Tide:</strong> <span style="color:#0284c7; font-weight:800;">${morningTimeStr} IST</span></div>
+          <div><strong>Estimated Evening High Tide:</strong> <span style="color:#0284c7; font-weight:800;">${eveningTimeStr} IST</span></div>
+          <div style="font-size:9.5px; color:#64748b; margin-top:2px;">Lunar Age: ${tideState.moonAge} days · Semi-diurnal cycle</div>
+        </div>
+      </div>
+    `;
+
+    marker.bindPopup(popupHtml, OSF_POPUP_OPTIONS);
+    layer.addLayer(marker);
+  });
+
+  return layer;
 }
 
 function updateOsfComposite() {
@@ -285,6 +398,11 @@ async function buildCumulativeOsfMapLayers(data) {
       }
     }
   });
+
+  // Add Tidal Phase & High Tide Overlay
+  const tidalLayer = createOsfTidalStationLayer();
+  osfServiceLayers['Tidal Phase & High Tide'] = tidalLayer;
+
   Object.entries(osfServiceLayers).forEach(([service,layer]) => {
     if (!osfRequestedService || osfRequestedService === service) {
       layer.addTo(osfMap);
@@ -349,6 +467,7 @@ async function buildOsfMapLayers(data) {
     overlays[service] = layer;
     layer.addTo(osfMap);
   });
+  overlays['Tidal Phase & High Tide'] = createOsfTidalStationLayer();
   osfLayerControl = L.control.layers(null,overlays,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
   osfMap.invalidateSize({animate:false});
   if (bounds.length) osfMap.fitBounds(bounds,{padding:innerWidth < 700 ? [8,8] : [20,20],maxZoom:6,animate:false}); else osfMap.setView([15,79],innerWidth < 700 ? 4 : 5);

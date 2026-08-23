@@ -369,6 +369,20 @@
 .osf-tooltip-meta{display:flex;align-items:center;gap:6px;font-size:10px}
 .osf-tooltip-badge{padding:1px 4px;border-radius:3px;font-weight:800}
 
+/* OSF Tidal Station & Spring/Neap Layer */
+.osf-tide-marker{display:flex;flex-direction:column;align-items:center;cursor:pointer;user-select:none}
+.osf-tide-pin{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 2px 6px rgba(0,0,0,.4);border:1.5px solid #fff;transition:transform .15s}
+.osf-tide-marker:hover .osf-tide-pin{transform:scale(1.15)}
+.osf-tide-pin.spring{background:#ef4444;color:#fff;box-shadow:0 0 8px rgba(239,68,68,.6)}
+.osf-tide-pin.neap{background:#10b981;color:#fff}
+.osf-tide-pin.moderate{background:#f59e0b;color:#fff}
+.osf-tide-label{font-size:8.5px;font-weight:800;background:rgba(8,47,60,.9);color:#fff;padding:1px 4px;border-radius:3px;margin-top:1px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.osf-tide-risk-banner{display:inline-block;padding:3px 8px;border-radius:4px;font-size:10.5px;font-weight:800;margin-bottom:6px}
+.osf-tide-risk-banner.spring{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
+.osf-tide-risk-banner.neap{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}
+.osf-tide-risk-banner.moderate{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+
+
 
 
 
