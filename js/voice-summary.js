@@ -15,19 +15,162 @@ const VOICE_LANGUAGES = Object.freeze([
 ]);
 
 const REGIONAL_STATE_NAMES = {
-  'ANDAMAN AND NICOBAR': { ta: 'அந்தமான் மற்றும் நிக்கோபார்', te: 'అండమాన్ మరియు నికోబార్', ml: 'ആൻഡമാൻ നിക്കോബാർ', hi: 'अंडमान एवं निकोबार', bn: 'আন্দামান ও নিকোবর' },
-  'ANDHRA PRADESH': { ta: 'ஆந்திர பிரதேசம்', te: 'ఆంధ్రప్రదేశ్', ml: 'ആന്ധ്രാപ്രദേശ്', hi: 'आंध्र प्रदेश', bn: 'অন্ধ্রপ্রদেশ' },
-  'GOA': { ta: 'கோவா', te: 'గోవా', ml: 'ഗോവ', hi: 'गोवा', bn: 'গোয়া' },
-  'GUJARAT': { ta: 'குஜராத்', te: 'గుజరాత్', ml: 'ഗുജറാത്ത്', hi: 'गुजरात', bn: 'গুজরাট' },
-  'KARNATAKA': { ta: 'கர்நாடகா', te: 'కర్ణాటక', ml: 'കർണാടക', hi: 'कर्नाटक', bn: 'কর্ণাটক' },
-  'KERALA': { ta: 'கேரளா', te: 'కేరళ', ml: 'കേരളം', hi: 'केरल', bn: 'কেরালা' },
-  'LAKSHADWEEP': { ta: 'லட்சத்தீவு', te: 'లక్షద్వీప్', ml: 'ലക്ഷദ്വീപ്', hi: 'लक्षद्वीप', bn: 'লক্ষদ্বীপ' },
-  'MAHARASHTRA': { ta: 'மகாராஷ்டிரா', te: 'మహారాష్ట్ర', ml: 'മഹാരാഷ്ട്ര', hi: 'महाराष्ट्र', bn: 'মহারাষ্ট্র' },
-  'ODISHA': { ta: 'ஒடிசா', te: 'ఒడిశా', ml: 'ഒഡീഷ', hi: 'ओडिशा', bn: 'ওড়িশা' },
-  'TAMIL NADU': { ta: 'தமிழ்நாடு', te: 'తమిళనాడు', ml: 'തമിഴ്‌നാട്', hi: 'तमिलनाडु', bn: 'তামিলনাড়ু' },
-  'WEST BENGAL': { ta: 'மேற்கு வங்கம்', te: 'పశ్చిమ బెంగాల్', ml: 'പശ്ചിമ ബംഗാൾ', hi: 'पश्चिम बंगाल', bn: 'পশ্চিমবঙ্গ' },
-  'DAMAN AND DIU': { ta: 'தாமன் மற்றும் தியூ', te: 'దామన్ మరియు దియు', ml: 'ദാമൻ ദിയു', hi: 'दमन एवं दीव', bn: 'দমন ও দিউ' },
-  'PUDUCHERRY': { ta: 'புதுச்சேரி', te: 'పుదుచ్చేరి', ml: 'പുതുച്ചേരി', hi: 'पुडुचेरी', bn: 'পুদুচেরি' }
+  'ANDAMAN AND NICOBAR': {
+    ta: 'அந்தமான் மற்றும் நிக்கோபார்',
+    te: 'అండమాన్ మరియు నికోబార్',
+    ml: 'ആൻഡമാൻ നിക്കോബാർ',
+    hi: 'अंडमान एवं निकोबार द्वीप समूह',
+    bn: 'আন্দামান ও নিকোবর',
+    mr: 'अंदमान आणि निकोबार',
+    gu: 'અંદમાન અને નિકોબાર',
+    or: 'ଆଣ୍ଡାମାନ ଓ ନିକୋବର',
+    kn: 'ಅಂಡಮಾನ್ ಮತ್ತು ನಿಕೋಬಾರ್'
+  },
+  'ANDHRA PRADESH': {
+    ta: 'ஆந்திர பிரதேசம்',
+    te: 'ఆంధ్రప్రదేశ్',
+    ml: 'ఆంధ్రాപ്രദേശ്',
+    hi: 'आंध्र प्रदेश',
+    bn: 'অন্ধ্রপ্রদেশ',
+    mr: 'आंध्र प्रदेश',
+    gu: 'આંધ્ર પ્રદેશ',
+    or: 'ଆନ୍ଧ୍ର ପ୍ରଦେଶ',
+    kn: 'ಆಂಧ್ರ ಪ್ರದೇಶ'
+  },
+  'GOA': {
+    ta: 'கோவா',
+    te: 'గోవా',
+    ml: 'ഗോവ',
+    hi: 'गोवा',
+    bn: 'গোয়া',
+    mr: 'गोवा',
+    gu: 'ગોવા',
+    or: 'ଗୋଆ',
+    kn: 'ಗೋವಾ'
+  },
+  'GUJARAT': {
+    ta: 'குஜராத்',
+    te: 'ગુજરાત',
+    ml: 'ગુજરાത്ത്',
+    hi: 'गुजरात',
+    bn: 'ગુજરાટ',
+    mr: 'गुजरात',
+    gu: 'ગુજરાત',
+    or: 'ଗୁଜରାଟ',
+    kn: 'ગુજરાત'
+  },
+  'KARNATAKA': {
+    ta: 'கர்நாடகா',
+    te: 'ಕರ್ನಾಟಕ',
+    ml: 'കർണാടക',
+    hi: 'कर्नाटक',
+    bn: 'কর্ণাটক',
+    mr: 'ಕರ್ನಾಟಕ',
+    gu: 'કર્ણાટક',
+    or: 'କର୍ଣ୍ଣାଟକ',
+    kn: 'ಕರ್ನಾಟಕ'
+  },
+  'KERALA': {
+    ta: 'கேரளா',
+    te: 'കേരള',
+    ml: 'കേരളം',
+    hi: 'केरल',
+    bn: 'কেরালা',
+    mr: 'केरळ',
+    gu: 'કેરળ',
+    or: 'କେରଳ',
+    kn: 'കേರಳ'
+  },
+  'LAKSHADWEEP': {
+    ta: 'லட்சத்தீவு',
+    te: 'లక్షద్వీప్',
+    ml: 'ലക്ഷദ്വീപ്',
+    hi: 'लक्षद्वीप',
+    bn: 'লক্ষদ্বীপ',
+    mr: 'लक्षद्वीप',
+    gu: 'લક્ષદ્વીપ',
+    or: 'ଲାକ୍ଷାଦ୍ୱୀପ',
+    kn: 'ಲಕ್ಷದ್ವೀಪ'
+  },
+  'MAHARASHTRA': {
+    ta: 'மகாராஷ்டிரா',
+    te: 'మహారాష్ట్ర',
+    ml: 'മഹാരാഷ്ട്ര',
+    hi: 'महाराष्ट्र',
+    bn: 'মহারাষ্ট্র',
+    mr: 'महाराष्ट्र',
+    gu: 'મહારાષ્ટ્ર',
+    or: 'ମହାରାଷ୍ଟ୍ର',
+    kn: 'ಮಹಾರಾಷ್ಟ್ರ'
+  },
+  'ODISHA': {
+    ta: 'ஒடிசா',
+    te: 'ఒడిశా',
+    ml: 'ഒഡീഷ',
+    hi: 'ଓଡିଶା',
+    bn: 'ওড়িশা',
+    mr: 'ओडिशा',
+    gu: 'ઓડિશા',
+    or: 'ଓଡ଼ିଶା',
+    kn: 'ಒಡಿಶಾ'
+  },
+  'TAMIL NADU': {
+    ta: 'தமிழ்நாடு',
+    te: 'తమిళనాడు',
+    ml: 'തമിഴ്‌നാട്',
+    hi: 'तमिलनाडु',
+    bn: 'তামিলনাড়ু',
+    mr: 'तमिळनाडू',
+    gu: 'તમિલનાડુ',
+    or: 'ତାମିଲନାଡୁ',
+    kn: 'ತಮಿಳುನಾಡು'
+  },
+  'WEST BENGAL': {
+    ta: 'மேற்கு வங்கம்',
+    te: 'పశ్చిమ బెంగాల్',
+    ml: 'പശ്ചിമ ബംഗാൾ',
+    hi: 'पश्चिम बंगाल',
+    bn: 'পশ্চিমবঙ্গ',
+    mr: 'पश्चिम बंगाल',
+    gu: 'પશ્ચિમ બંગાળ',
+    or: 'ପଶ୍ଚିମବଙ୍ଗ',
+    kn: 'ಪಶ್ಚಿಮ ಬಂಗಾಳ'
+  },
+  'DAMAN AND DIU': {
+    ta: 'தாமன் மற்றும் தியூ',
+    te: 'దామన్ మరియు దియు',
+    ml: 'ദാമൻ ദിയു',
+    hi: 'दमन एवं दीव',
+    bn: 'দমন ও দিউ',
+    mr: 'दमण आणि दीव',
+    gu: 'દમણ અને દીવ',
+    or: 'ଦମନ ଓ ଦିଉ',
+    kn: 'ದಮನ್ ಮತ್ತು ದಿಯು'
+  },
+  'PUDUCHERRY': {
+    ta: 'புதுச்சேரி',
+    te: 'పుదుచ్చేరి',
+    ml: 'പുതുച്ചേരി',
+    hi: 'पुडुचेरी',
+    bn: 'পুদুচেরি',
+    mr: 'पुडुचेरी',
+    gu: 'પુડુચેરી',
+    or: 'ପୁଡୁଚେରୀ',
+    kn: 'ಪುದುಚೇರಿ'
+  }
+};
+
+const LANGUAGE_TARGET_STATES = {
+  ta: ['TAMIL NADU', 'PUDUCHERRY'],
+  te: ['ANDHRA PRADESH'],
+  ml: ['KERALA', 'LAKSHADWEEP'],
+  kn: ['KARNATAKA'],
+  mr: ['MAHARASHTRA', 'GOA'],
+  gu: ['GUJARAT', 'DAMAN AND DIU'],
+  or: ['ODISHA'],
+  bn: ['WEST BENGAL'],
+  hi: ['ANDAMAN AND NICOBAR'],
+  en: null
 };
 
 function translateStateName(stateName, langPrefix) {
@@ -85,27 +228,43 @@ function findBestVoice(langConfig) {
   return null;
 }
 
-function extractAllAdvisoryStates(data) {
+function extractAllAdvisoryStates(data, targetStates = null) {
   const highWaveWarn = [];
   const highWaveAlert = [];
   const swellWarn = [];
   const swellAlert = [];
   const currentAlert = [];
 
-  const parseStates = (statesList, warnTarget, alertTarget) => {
-    if (!Array.isArray(statesList)) return;
-    for (const st of statesList) {
-      const w = Number(st.counts?.warning || 0);
-      const a = Number(st.counts?.alert || 0);
-      const name = st.name || '';
-      if (w > 0 && name) warnTarget.push(name);
-      if (a > 0 && name) alertTarget.push(name);
+  const targetSet = Array.isArray(targetStates)
+    ? new Set(targetStates.map(s => String(s).toUpperCase().trim()))
+    : null;
+
+  const matchesFilter = name => {
+    if (!targetSet) return true;
+    const norm = String(name || '').toUpperCase().trim();
+    return targetSet.has(norm);
+  };
+
+  const parseStates = (statesList, warnTarget, alertTarget, legacyWarn = [], legacyAlert = []) => {
+    if (Array.isArray(statesList) && statesList.length > 0) {
+      for (const st of statesList) {
+        const w = Number(st.counts?.warning || 0);
+        const a = Number(st.counts?.alert || 0);
+        const name = st.name || '';
+        if (matchesFilter(name)) {
+          if (w > 0 && name) warnTarget.push(name);
+          if (a > 0 && name) alertTarget.push(name);
+        }
+      }
+    } else {
+      (legacyWarn || []).filter(matchesFilter).forEach(n => warnTarget.push(n));
+      (legacyAlert || []).filter(matchesFilter).forEach(n => alertTarget.push(n));
     }
   };
 
-  parseStates(data?.highWave?.states, highWaveWarn, highWaveAlert);
-  parseStates(data?.swellSurge?.states, swellWarn, swellAlert);
-  parseStates(data?.oceanCurrent?.states, [], currentAlert);
+  parseStates(data?.highWave?.states, highWaveWarn, highWaveAlert, data?.highWave?.warning, data?.highWave?.alert);
+  parseStates(data?.swellSurge?.states, swellWarn, swellAlert, data?.swellSurge?.warning, data?.swellSurge?.alert);
+  parseStates(data?.oceanCurrent?.states, [], currentAlert, [], data?.oceanCurrent?.alert);
 
   const allWarnings = [...new Set([...highWaveWarn, ...swellWarn])];
   const allAlerts = [...new Set([...highWaveAlert, ...swellAlert, ...currentAlert])];
@@ -124,24 +283,24 @@ function extractAllAdvisoryStates(data) {
 function buildBulletinSummary(data, langCode = 'en-IN') {
   if (!data) return { title: 'Ocean Watch', text: 'No live status data is available.' };
 
-  const adv = extractAllAdvisoryStates(data);
+  const langConfig = VOICE_LANGUAGES.find(l => l.code === langCode) || VOICE_LANGUAGES[0];
+  const langPrefix = langConfig.voicePrefix;
+  const targetStates = LANGUAGE_TARGET_STATES[langPrefix] || null;
+
+  const adv = extractAllAdvisoryStates(data, targetStates);
   const tsunamiThreat = typeof isTsunamiThreatActive === 'function' ? isTsunamiThreatActive(data.tsunami) : false;
   const cycloneActive = Boolean(data.cyclone?.status?.severity && data.cyclone.status.severity !== 'safe');
 
-  const langConfig = VOICE_LANGUAGES.find(l => l.code === langCode) || VOICE_LANGUAGES[0];
-  const langPrefix = langConfig.voicePrefix;
-
-  // Translation helpers
+  // Translation helper
   const mapStates = list => list.map(s => translateStateName(s, langPrefix)).join(', ');
 
-  // 1. TAMIL / தமிழ்
+  // 1. TAMIL / தமிழ் (Tamil Nadu & Puducherry)
   if (langPrefix === 'ta') {
-    let t = 'இந்திய கடலோர வானிலை மற்றும் பெருங்கடல் எச்சரிக்கை தகவல் சுருக்கம். ';
+    let t = 'கடல் நிலை முன்னறிவிப்பு ஆலோசனை (Ocean State Forecast Advisory). ';
     if (tsunamiThreat) t += 'முக்கிய அறிவிப்பு: சுனாமி ஆபத்து எச்சரிக்கை விடுக்கப்பட்டுள்ளது. உள்ளூர் பேரிடர் மேலாண்மை வழிகாட்டுதலை பின்பற்றவும். ';
-    else t += 'இந்திய கடலோர பகுதிகளுக்கு சுனாமி அச்சுறுத்தல் எதுவும் இல்லை, கடற்கரை பாதுகாப்பாக உள்ளது. ';
 
     if (adv.allWarnings.length > 0) {
-      t += 'சிவப்பு எச்சரிக்கை (Red Warning): ' + mapStates(adv.allWarnings) + ' ஆகிய மாநிலங்கள் மற்றும் யூனியன் பிரதேசங்களில் அதீத கடல் சீற்ற எச்சரிக்கை விடுக்கப்பட்டுள்ளது. மீனவர்கள் கடலுக்கு செல்ல வேண்டாம். ';
+      t += 'சிவப்பு எச்சரிக்கை (Red Warning): ' + mapStates(adv.allWarnings) + ' கடலோரப் பகுதிகளில் அதீத கடல் சீற்ற எச்சரிக்கை விடுக்கப்பட்டுள்ளது. மீனவர்கள் கடலுக்கு செல்ல வேண்டாம். ';
     }
     if (adv.swellAlert.length > 0) {
       t += 'கள்ளக்கடல் / அலை எழுச்சி ஆரஞ்சு எச்சரிக்கை (Swell Surge Alert): ' + mapStates(adv.swellAlert) + ' கடலோர பகுதிகளில் நீண்ட கால அலைகளால் கடல்நீர் உட்புகும் அபாயம் உள்ளது. கடலோர மக்கள் மிகுந்த எச்சரிக்கையுடன் இருக்கவும். ';
@@ -149,22 +308,24 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
     if (adv.highWaveAlert.length > 0) {
       t += 'உயர்ந்த அலை ஆரஞ்சு எச்சரிக்கை (High Wave Alert): ' + mapStates(adv.highWaveAlert) + ' பகுதிகளில் கடல் கொந்தளிப்புடன் காணப்படும். ';
     }
+    if (adv.currentAlert.length > 0) {
+      t += 'கடல் நீரோட்ட எச்சரிக்கை (Ocean Currents Alert): ' + mapStates(adv.currentAlert) + ' பகுதிகளில் தீவிர நீரோட்டம் காணப்படும். ';
+    }
     if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
-      t += 'அனைத்து கடலோர மாநிலங்களிலும் கடல் நிலைமை சீராகவும் இயல்பாகவும் உள்ளது. ';
+      t += 'தமிழ்நாடு மற்றும் புதுச்சேரி கடலோரப் பகுதிகளில் கடல் நிலைமை சீராகவும் இயல்பாகவும் உள்ளது. ';
     }
     if (cycloneActive) t += 'புயல் சுற்றறிக்கை விடுக்கப்பட்டுள்ளது, அதிகாரப்பூர்வ தகவல்களை கவனிக்கவும். ';
     t += 'சமீபத்திய துல்லியமான தகவல்களுக்கு INCOIS அதிகாரப்பூர்வ இணையதளத்தை காணவும்.';
-    return { title: 'கடலோர தகவல் சுருக்கம் (தமிழ்)', text: t };
+    return { title: 'கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)', text: t };
   }
 
-  // 2. HINDI / हिन्दी
+  // 2. HINDI / हिन्दी (Andaman & Nicobar)
   if (langPrefix === 'hi') {
-    let t = 'भारतीय तटीय मौसम एवं महासागरीय चेतावनी बुलेटिन। ';
+    let t = 'महासागर स्थिति पूर्वानुमान परामर्श (Ocean State Forecast Advisory)। ';
     if (tsunamiThreat) t += 'अति आवश्यक: सुनामी चेतावनी सक्रिय है। स्थानीय आपदा प्रबंधन के निर्देशों का पालन करें। ';
-    else t += 'भारत के लिए सुनामी का कोई खतरा नहीं है, सभी तटीय क्षेत्र सुरक्षित हैं। ';
 
     if (adv.allWarnings.length > 0) {
-      t += 'लाल चेतावनी (Red Warning): ' + mapStates(adv.allWarnings) + ' राज्यों और केंद्र शासित प्रदेशों में उच्च समुद्र चेतावनी जारी की गई है। मछुआरे समुद्र में न जाएं। ';
+      t += 'लाल चेतावनी (Red Warning): ' + mapStates(adv.allWarnings) + ' में समुद्र में अत्यधिक उथल-पुथल की चेतावनी जारी की गई है। मछुआरे समुद्र में न जाएं। ';
     }
     if (adv.swellAlert.length > 0) {
       t += 'स्वेल सर्ज / कल्लाक्कदल अलर्ट: ' + mapStates(adv.swellAlert) + ' के तटीय इलाकों में तेज समुद्री लहरों और जलभराव का खतरा है। सतर्क रहें। ';
@@ -172,82 +333,196 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
     if (adv.highWaveAlert.length > 0) {
       t += 'ऊंची लहरें ऑरेंज अलर्ट: ' + mapStates(adv.highWaveAlert) + ' में समुद्र अशांत रहेगा। ';
     }
+    if (adv.currentAlert.length > 0) {
+      t += 'समुद्री धाराएं अलर्ट: ' + mapStates(adv.currentAlert) + ' में सावधानी बरतें। ';
+    }
     if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
-      t += 'भारतीय तटीय क्षेत्रों में समुद्र की स्थिति सामान्य है। ';
+      t += 'अंडमान एवं निकोबार द्वीप समूह के तटीय क्षेत्रों में समुद्र की स्थिति सामान्य है। ';
     }
     if (cycloneActive) t += 'चक्रवात अलर्ट सक्रिय है। ';
     t += 'नवीनतम जानकारी हेतु INCOIS पोर्टल से जुड़े रहें।';
-    return { title: 'महासागर बुलेटिन (हिन्दी)', text: t };
+    return { title: 'महासागर स्थिति पूर्वानुमान (हिन्दी)', text: t };
   }
 
-  // 3. TELUGU / తెలుగు
+  // 3. TELUGU / తెలుగు (Andhra Pradesh)
   if (langPrefix === 'te') {
-    let t = 'భారత తీర ప్రాంత మరియు సముద్ర వాతావరణ హెచ్చరికల సమాచారం. ';
-    if (tsunamiThreat) t += 'ముఖ్య సమాచారం: సునామీ ముప్పు ఉంది. ';
-    else t += 'భారత తీర ప్రాంతాలకు సునామీ ముప్పు లేదు, సురక్షితంగా ఉంది. ';
+    let t = 'సముద్ర స్థితి సూచన హెచ్చరికలు (Ocean State Forecast Advisory). ';
+    if (tsunamiThreat) t += 'ముఖ్య సమాచారం: సునామీ ముప్పు హెచ్చరిక జారీ చేయబడింది. ';
 
     if (adv.allWarnings.length > 0) {
-      t += 'రెడ్ అలర్ట్: ' + mapStates(adv.allWarnings) + ' తీరప్రాంతాల్లో తీవ్ర హెచ్చరిక జారీ చేయబడింది. మత్స్యకారులు సముద్రంలోకి వెళ్లవద్దు. ';
+      t += 'రెడ్ అలర్ట్ (Red Warning): ' + mapStates(adv.allWarnings) + ' తీరప్రాంతాల్లో తీవ్ర హెచ్చరిక జారీ చేయబడింది. మత్స్యకారులు సముద్రంలోకి వెళ్లవద్దు. ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'స్వెల్ సర్జ్ ఆరెంజ్ అలర్ట్: ' + mapStates(adv.swellAlert) + ' తీరప్రాంతాల్లో అలల ఉధృతి ఎక్కువగా ఉంటుంది. ';
+      t += 'స్వెల్ సర్జ్ / కళ్ళక్కడల్ ఆరెంజ్ అలర్ట్: ' + mapStates(adv.swellAlert) + ' తీరప్రాంతాల్లో అలల ఉధృతి ఎక్కువగా ఉంటుంది. ';
     }
     if (adv.highWaveAlert.length > 0) {
-      t += 'హై వేవ్ అలర్ట్: ' + mapStates(adv.highWaveAlert) + ' ప్రాంతాల్లో జాగ్రత్త వహించండి. ';
+      t += 'హై వేవ్ ఆరెంజ్ అలర్ట్: ' + mapStates(adv.highWaveAlert) + ' ప్రాంతాల్లో సముద్రం అల్లకల్లోలంగా ఉంటుంది. ';
+    }
+    if (adv.currentAlert.length > 0) {
+      t += 'సముద్ర ప్రవాహాల అలర్ట్: ' + mapStates(adv.currentAlert) + ' ప్రాంతాల్లో జాగ్రత్త వహించండి. ';
     }
     if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
-      t += 'సముద్ర పరిస్థితి ప్రశాంతంగా మరియు సాధారణంగా ఉంది. ';
+      t += 'ఆంధ్రప్రదేశ్ తీర ప్రాంతంలో సముద్ర పరిస్థితి సాధారణంగా మరియు ప్రశాంతంగా ఉంది. ';
     }
-    t += 'మరిన్ని వివరాల కోసం INCOIS పర్యవేక్షించండి.';
-    return { title: 'సముద్ర హెచ్చరికల సమాచారం (తెలుగు)', text: t };
+    if (cycloneActive) t += 'తుఫాను హెచ్చరిక జారీ చేయబడింది. ';
+    t += 'మరిన్ని వివరాల కోసం అధికారిక INCOIS పోర్టల్ పర్యవేక్షించండి.';
+    return { title: 'సముద్ర స్థితి సూచన (తెలుగు)', text: t };
   }
 
-  // 4. MALAYALAM / മലയാളം
+  // 4. MALAYALAM / മലയാളം (Kerala & Lakshadweep)
   if (langPrefix === 'ml') {
-    let t = 'ഇന്ത്യൻ തീരദേശ കാലാവസ്ഥാ സമുദ്ര വിവര ബുള്ളറ്റിൻ. ';
+    let t = 'സമുദ്രാവസ്ഥ പ്രവചന മുന്നറിയിപ്പ് (Ocean State Forecast Advisory). ';
     if (tsunamiThreat) t += 'അടിയന്തര അറിയിപ്പ്: സുനാമി മുന്നറിയിപ്പ് നിലവിലുണ്ട്. ';
-    else t += 'സുനാമി ഭീഷണിയില്ല, തീരപ്രദേശങ്ങൾ സുരക്ഷിതമാണ്. ';
 
     if (adv.allWarnings.length > 0) {
-      t += 'റെഡ് അലർട്ട് (Red Warning): ' + mapStates(adv.allWarnings) + ' തീരങ്ങളിൽ അതീവ ജാഗ്രതാ നിർദ്ദേശം. മത്സ്യത്തൊഴിലാളികൾ കടലിൽ പോകരുത്. ';
+      t += 'റെഡ് മുന്നറിയിപ്പ് (Red Warning): ' + mapStates(adv.allWarnings) + ' തീരങ്ങളിൽ അതീവ ജാഗ്രതാ നിർദ്ദേശം. മത്സ്യത്തൊഴിലാളികൾ കടലിൽ പോകരുത്. ';
     }
     if (adv.swellAlert.length > 0) {
-      t += 'കള്ളക്കടൽ / സ് swell സർജ്ജ് ഓറഞ്ച് അലർട്ട്: ' + mapStates(adv.swellAlert) + ' തീരങ്ങളിൽ ഉയർന്ന തിരമാലകൾക്കും കടലാക്രമണത്തിനും സാധ്യതയുണ്ട്. ';
+      t += 'കള്ളക്കടൽ / സ്വെൽ സർജ്ജ് ഓറഞ്ച് അലർട്ട്: ' + mapStates(adv.swellAlert) + ' തീരങ്ങളിൽ ഉയർന്ന തിരമാലകൾക്കും കടലാക്രമണത്തിനും സാധ്യതയുണ്ട്. ';
     }
     if (adv.highWaveAlert.length > 0) {
-      t += 'ഉയർന്ന തിരമാല മുന്നറിയിപ്പ്: ' + mapStates(adv.highWaveAlert) + ' മേഖലകളിൽ ജാഗ്രത പാലിക്കുക. ';
+      t += 'ഉയർന്ന തിരമാല ഓറഞ്ച് അലർട്ട്: ' + mapStates(adv.highWaveAlert) + ' മേഖലകളിൽ ജാഗ്രത പാലിക്കുക. ';
+    }
+    if (adv.currentAlert.length > 0) {
+      t += 'സമുദ്ര പ്രവാഹ മുന്നറിയിപ്പ്: ' + mapStates(adv.currentAlert) + ' മേഖലകളിൽ ശ്രദ്ധിക്കുക. ';
     }
     if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
-      t += 'തീരദേശ സമുദ്രാവസ്ഥ സാധാരണ നിലയിലാണ്. ';
+      t += 'കേരളം மற்றும் ലക്ഷദ്വീപ് തീരങ്ങളിൽ സമുദ്രാവസ്ഥ ശാന്തവും സാധാരണ നിലയിലുമാണ്. ';
     }
+    if (cycloneActive) t += 'ചുഴലിക്കാറ്റ് മുന്നറിയിപ്പ് നിലവിലുണ്ട്. ';
     t += 'ഔദ്യോഗിക അറിയിപ്പുകൾക്കായി INCOIS പോർട്ടൽ സന്ദർശിക്കുക.';
-    return { title: 'തീരദേശ അറിയിപ്പ് (മലയാളം)', text: t };
+    return { title: 'സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)', text: t };
   }
 
-  // 5. BENGALI / বাংলা
+  // 5. BENGALI / বাংলা (West Bengal)
   if (langPrefix === 'bn') {
-    let t = 'ভারত মহাসাগর ও উপকূলীয় সতর্কতা বুলেটিন। ';
+    let t = 'সমুদ্র পরিস্থিতি পূর্বাভাস পরামর্শ (Ocean State Forecast Advisory)। ';
     if (tsunamiThreat) t += 'জরুরি বিজ্ঞপ্তি: সুনামি সতর্কতা জারি করা হয়েছে। ';
-    else t += 'ভারতের জন্য কোনো সুনামি সতর্কতা নেই, উপকূল নিরাপদ। ';
 
     if (adv.allWarnings.length > 0) {
-      t += 'লাল সতর্কতা (Red Warning): ' + mapStates(adv.allWarnings) + ' রাজ্যে উচ্চ সতর্কতা রয়েছে। সমুদ্রে যাবেন না। ';
+      t += 'লাল সতর্কতা (Red Warning): ' + mapStates(adv.allWarnings) + ' উপকূলে উচ্চ সতর্কতা রয়েছে। মৎস্যজীবীরা সমুদ্রে যাবেন না। ';
     }
-    if (adv.swellAlert.length > 0 || adv.highWaveAlert.length > 0) {
-      t += 'কমলা সতর্কতা (Orange Alert): ' + mapStates([...adv.swellAlert, ...adv.highWaveAlert]) + ' উপকূলে উত্তাল তরঙ্গের সম্ভাবনা রয়েছে। ';
+    if (adv.swellAlert.length > 0) {
+      t += 'সোয়েল সার্জ কমলা সতর্কতা: ' + mapStates(adv.swellAlert) + ' উপকূলে জলোচ্ছ্বাসের সম্ভাবনা রয়েছে। ';
+    }
+    if (adv.highWaveAlert.length > 0) {
+      t += 'উচ্চ ঢেউ কমলা সতর্কতা: ' + mapStates(adv.highWaveAlert) + ' উপকূলে উত্তাল তরঙ্গের সম্ভাবনা রয়েছে। ';
+    }
+    if (adv.currentAlert.length > 0) {
+      t += 'সমুদ্র স্রোত সতর্কতা: ' + mapStates(adv.currentAlert) + ' উপকূলে জারি করা হয়েছে। ';
     }
     if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
-      t += 'সমুদ্রের সামগ্রিক অবস্থা স্বাভাবিক রয়েছে। ';
+      t += 'পশ্চিমবঙ্গ উপকূলে সমুদ্রের অবস্থা স্বাভাবিক রয়েছে। ';
     }
-    return { title: 'উপকূলীয় বুলেটিন (বাংলা)', text: t };
+    if (cycloneActive) t += 'ঘূর্ণিঝড় সতর্কতা সক্রিয় রয়েছে। ';
+    t += 'সর্বশেষ তথ্যের জন্য INCOIS অফিসিয়াল পোর্টাল দেখুন।';
+    return { title: 'সমুদ্র পরিস্থিতি পূর্বাভাস (বাংলা)', text: t };
   }
 
-  // 6. DEFAULT ENGLISH
-  let t = 'Indian Coastal Weather and Ocean Advisory Summary. ';
+  // 6. MARATHI / मराठी (Maharashtra & Goa)
+  if (langPrefix === 'mr') {
+    let t = 'महासागर स्थिती अंदाज सल्लागार (Ocean State Forecast Advisory). ';
+    if (tsunamiThreat) t += 'तातडीची सूचना: त्सुनामीचा इशारा जारी करण्यात आला आहे. स्थानिक आपत्ती व्यवस्थापन प्राधिकरणाच्या सूचनांचे पालन करा. ';
+
+    if (adv.allWarnings.length > 0) {
+      t += 'लाल इशारा (Red Warning): ' + mapStates(adv.allWarnings) + ' किनारपट्टी भागात समुद्रात अतिदक्षतेचा इशारा जारी करण्यात आला आहे. मच्छिमारांनी समुद्रात जाऊ नये. ';
+    }
+    if (adv.swellAlert.length > 0) {
+      t += 'कल्लाक्कदल / स्वेल सर्ज ऑरेंज अलर्ट: ' + mapStates(adv.swellAlert) + ' किनारपट्टी भागात उसळणाऱ्या लाटांमुळे पाणी शिरण्याचा धोका आहे. सतर्क राहावे. ';
+    }
+    if (adv.highWaveAlert.length > 0) {
+      t += 'उंच लाटा ऑरेंज अलर्ट: ' + mapStates(adv.highWaveAlert) + ' भागात समुद्र खवळलेला राहील. ';
+    }
+    if (adv.currentAlert.length > 0) {
+      t += 'समुद्री प्रवाह इशारा: ' + mapStates(adv.currentAlert) + ' किनारपट्टी भागात दक्षता बाळगा. ';
+    }
+    if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
+      t += 'महाराष्ट्र आणि गोवा किनारपट्टीवर समुद्राची स्थिती सामान्य आणि शांत आहे. ';
+    }
+    if (cycloneActive) t += 'चक्रीवादळाचा इशारा सक्रिय आहे. ';
+    t += 'अधिकृत आणि ताज्या माहितीसाठी INCOIS पोर्टलला भेट द्या.';
+    return { title: 'महासागर स्थिती अंदाज (मराठी)', text: t };
+  }
+
+  // 7. GUJARATI / ગુજરાતી (Gujarat & Daman and Diu)
+  if (langPrefix === 'gu') {
+    let t = 'મહાસાગર સ્થિતિ પૂર્વાનુમાન સલાહકાર (Ocean State Forecast Advisory). ';
+    if (tsunamiThreat) t += 'તાકીદની સૂચના: સુનામી ચેતવણી જારી કરવામાં આવી છે. સ્થાનિક આપત્તિ વ્યવસ્થાપન સૂચનાઓનું પાલન કરો. ';
+
+    if (adv.allWarnings.length > 0) {
+      t += 'લાલ ચેતવણી (Red Warning): ' + mapStates(adv.allWarnings) + ' દરિયાકાંઠે ભારે સમુદ્રી ચેતવણી જારી કરવામાં આવી છે. માછીમારોએ દરિયામાં ન જવું. ';
+    }
+    if (adv.swellAlert.length > 0) {
+      t += 'સ્વેલ સર્જ / કલ્લાક્કડલ ઓરેન્જ એલર્ટ: ' + mapStates(adv.swellAlert) + ' ના કાંઠા વિસ્તારોમાં ઊંચા મોજા અને પાણી ભરાવાની શક્યતા છે. સાવચેત રહો. ';
+    }
+    if (adv.highWaveAlert.length > 0) {
+      t += 'ઊંચા મોજા ઓરેન્જ એલર્ટ: ' + mapStates(adv.highWaveAlert) + ' માં સમુદ્ર તોફાની રહેશે. ';
+    }
+    if (adv.currentAlert.length > 0) {
+      t += 'સમુદ્રી પ્રવાહ એલર્ટ: ' + mapStates(adv.currentAlert) + ' દરિયાકાંઠે સાવચેતી રાખવી. ';
+    }
+    if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
+      t += 'ગુજરાત અને દમણ અને દીવના દરિયાકાંઠે સમુદ્રની સ્થિતિ સામાન્ય છે. ';
+    }
+    if (cycloneActive) t += 'વાવાઝોડાની ચેતવણી સક્રિય છે. ';
+    t += 'તાજી માહિતી માટે INCOIS પોર્ટલની મુલાકાત લો.';
+    return { title: 'મહાસાગર સ્થિતિ પૂર્વાનુમાન (ગુજરાતી)', text: t };
+  }
+
+  // 8. ODIA / ଓଡ଼ିଆ (Odisha)
+  if (langPrefix === 'or') {
+    let t = 'ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ ପରାମର୍ଶ (Ocean State Forecast Advisory)। ';
+    if (tsunamiThreat) t += 'ଜରୁରୀ ସୂଚନା: ସୁନାମି ଚେତାବନୀ ଜାରି କରାଯାଇଛି। ସ୍ଥାନୀୟ ବିପର୍ଯ୍ୟୟ ପରିଚାଳନା ନିର୍ଦ୍ଦେଶ ପାଳନ କରନ୍ତୁ। ';
+
+    if (adv.allWarnings.length > 0) {
+      t += 'ଲାଲ୍ ଚେତାବନୀ (Red Warning): ' + mapStates(adv.allWarnings) + ' ଉପକୂଳରେ ପ୍ରବଳ ସମୁଦ୍ର ଅଶାନ୍ତ ପାଇଁ ସତର୍କତା ଜାରି କରାଯାଇଛି। ମତ୍ସ୍ୟଜୀବୀମାନେ ସମୁଦ୍ରକୁ ଯାଆନ୍ତୁ ନାହିଁ। ';
+    }
+    if (adv.swellAlert.length > 0) {
+      t += 'ସ୍ୱେଲ୍ ସର୍ଜ / କଲ୍ଲାକଡ଼ାଲ୍ ଅରେଞ୍ଜ ଆଲର୍ଟ: ' + mapStates(adv.swellAlert) + ' ଉପକୂଳରେ ଉଚ୍ଚ ତରଙ୍ଗ ଯୋଗୁଁ ଜଳପ୍ଲାବନ ଆଶଙ୍କା ରହିଛି। ';
+    }
+    if (adv.highWaveAlert.length > 0) {
+      t += 'ଉଚ୍ଚ ଢେଉ ଅରେଞ୍ଜ ଆଲର୍ଟ: ' + mapStates(adv.highWaveAlert) + ' ରେ ସମୁଦ୍ର ଅଶାନ୍ତ ରହିବ। ';
+    }
+    if (adv.currentAlert.length > 0) {
+      t += 'ସମୁଦ୍ର ସ୍ରୋତ ଆଲର୍ଟ: ' + mapStates(adv.currentAlert) + ' ରେ ସତର୍କ ରୁହନ୍ତୁ। ';
+    }
+    if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
+      t += 'ଓଡ଼ିଶା ଉପକୂଳରେ ସମୁଦ୍ର ସ୍ଥିତି ସ୍ୱାଭାବିକ ଏବଂ ଶାନ୍ତ ରହିଛି। ';
+    }
+    if (cycloneActive) t += 'ବାତ୍ୟା ସତର୍କତା ଜାରି କରାଯାଇଛି। ';
+    t += 'ସର୍ବଶେଷ ସୂଚନା ପାଇଁ INCOIS ଅଫିସିଆଲ୍ ପୋର୍ଟାଲ୍ ଦେଖନ୍ତୁ।';
+    return { title: 'ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ (ଓଡ଼ିଆ)', text: t };
+  }
+
+  // 9. KANNADA / ಕನ್ನಡ (Karnataka)
+  if (langPrefix === 'kn') {
+    let t = 'ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ ಸಲಹೆ (Ocean State Forecast Advisory). ';
+    if (tsunamiThreat) t += 'ತುರ್ತು ಸೂಚನೆ: ಸುನಾಮಿ ಎಚ್ಚರಿಕೆ ಸಕ್ರಿಯವಾಗಿದೆ. ಸ್ಥಳೀಯ ವಿಪತ್ತು ನಿರ್ವಹಣಾ ಮಾರ್ಗಸೂಚಿಗಳನ್ನು ಪಾಲಿಸಿ. ';
+
+    if (adv.allWarnings.length > 0) {
+      t += 'ಕೆಂಪು ಎಚ್ಚರಿಕೆ (Red Warning): ' + mapStates(adv.allWarnings) + ' ಕರಾವಳಿ ತೀರದಲ್ಲಿ ತೀವ್ರ ಸಮುದ್ರ ಪ್ರಕ್ಷುಬ್ಧತೆಯ ಎಚ್ಚರಿಕೆ ನೀಡಲಾಗಿದೆ. ಮೀನುಗಾರರು ಸಮುದ್ರಕ್ಕೆ ಇಳಿಯಬಾರದು. ';
+    }
+    if (adv.swellAlert.length > 0) {
+      t += 'ಸ್ವೆಲ್ ಸರ್ಜ್ / ಕಲ್ಲಕ್ಕಡಲ್ ಆರೆಂಜ್ ಅಲರ್ಟ್: ' + mapStates(adv.swellAlert) + ' ಕರಾವಳಿಯಲ್ಲಿ ಭಾರಿ ಅಲೆಗಳು ಮತ್ತು ನೀರು ನುಗ್ಗುವ ಸಾಧ್ಯತೆಯಿದೆ. ಜಾಗರೂಕರಾಗಿರಿ. ';
+    }
+    if (adv.highWaveAlert.length > 0) {
+      t += 'ಎತ್ತರದ ಅಲೆಗಳ ಆರೆಂಜ್ ಅಲರ್ಟ್: ' + mapStates(adv.highWaveAlert) + ' ನಲ್ಲಿ ಸಮುದ್ರ ಪ್ರಕ್ಷುಬ್ಧವಾಗಿರಲಿದೆ. ';
+    }
+    if (adv.currentAlert.length > 0) {
+      t += 'ಸಾಗರ ಪ್ರವಾಹ ಎಚ್ಚರಿಕೆ: ' + mapStates(adv.currentAlert) + ' ಕರಾವಳಿಯಲ್ಲಿ ಎಚ್ಚರ ವಹಿಸಿ. ';
+    }
+    if (adv.allWarnings.length === 0 && adv.allAlerts.length === 0) {
+      t += 'ಕರ್ನಾಟಕ ಕರಾವಳಿ ತೀರದಲ್ಲಿ ಸಮುದ್ರ ಸ್ಥಿತಿ ಸಾಮಾನ್ಯವಾಗಿ ಮತ್ತು ಶಾಂತವಾಗಿದೆ. ';
+    }
+    if (cycloneActive) t += 'ಚಂಡಮಾರುತದ ಎಚ್ಚರಿಕೆ ಸಕ್ರಿಯವಾಗಿದೆ. ';
+    t += 'ಹೆಚ್ಚಿನ ಮತ್ತು ನಿಖರ ಮಾಹಿತಿಗಾಗಿ INCOIS ಅಧಿಕೃತ ಪೋರ್ಟಲ್ ವೀಕ್ಷಿಸಿ.';
+    return { title: 'ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ (ಕನ್ನಡ)', text: t };
+  }
+
+  // 10. DEFAULT ENGLISH (All Coastal States / National)
+  let t = 'Ocean State Forecast Advisory. ';
   if (tsunamiThreat) {
     t += 'Urgent: Tsunami warning is active. Follow local disaster authority instructions. ';
-  } else {
-    t += 'No Tsunami threat exists for India. Coastal regions are safe. ';
   }
 
   if (adv.allWarnings.length > 0) {
@@ -273,7 +548,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
   }
   t += 'For latest real-time updates, visit the official INCOIS MoES portal.';
 
-  return { title: 'Coastal Advisory Audio Bulletin (' + langConfig.name + ')', text: t };
+  return { title: 'Ocean State Forecast Advisory (' + langConfig.name + ')', text: t };
 }
 
 function stopVoiceSummary() {

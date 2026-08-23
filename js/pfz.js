@@ -210,6 +210,8 @@ function renderPfzMessages(center, sectorName) {
       </button>
     `;
 
+    const targetLat = parseDmsCoordinate(message.latitude);
+    const targetLon = parseDmsCoordinate(message.longitude);
     const bearingVal = parseFloat(message.bearing) || 0;
     const distVal = parseFloat(message.distance) || 0;
     const distNm = (distVal * 0.539957).toFixed(1);
@@ -218,6 +220,9 @@ function renderPfzMessages(center, sectorName) {
       openPfzCompassModal({
         sourceLabel: titleCase(center.name) + ' Landing Center',
         targetSector: titleCase(sectorName),
+        targetLat: targetLat,
+        targetLon: targetLon,
+        targetPoint: (targetLat != null && targetLon != null) ? { lat: targetLat, lon: targetLon } : null,
         bearingDeg: Math.round(bearingVal),
         cardinal: getCardinalFromDegrees(bearingVal),
         distanceKm: distVal.toFixed(1),
@@ -230,6 +235,41 @@ function renderPfzMessages(center, sectorName) {
     panel.append(summary, grid, actionRow);
     messagesContainer.appendChild(panel);
   });
+}
+
+// Parse DMS coordinate string (e.g. "19 10 45 N", "72 35 40 E") to decimal degrees
+function parseDmsCoordinate(coordStr) {
+  if (typeof coordStr === 'number') return coordStr;
+  if (!coordStr || typeof coordStr !== 'string') return null;
+  const str = coordStr.trim().toUpperCase();
+  const directFloat = Number(str);
+  if (!isNaN(directFloat) && str !== '') return directFloat;
+
+  const parts = str.match(/[-+]?[0-9]*\.?[0-9]+/g);
+  if (!parts || parts.length === 0) return null;
+
+  const deg = parseFloat(parts[0]) || 0;
+  const min = parseFloat(parts[1]) || 0;
+  const sec = parseFloat(parts[2]) || 0;
+
+  let decimal = deg + (min / 60) + (sec / 3600);
+
+  if (str.includes('S') || str.includes('W') || str.startsWith('-')) {
+    decimal = -Math.abs(decimal);
+  }
+  return decimal;
+}
+
+// Calculate Haversine distance in kilometers
+function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Earth radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
 }
 
 // Cache for PFZ lines coordinates
@@ -315,13 +355,15 @@ async function findClosestPfzNavigationalTarget(lat, lon) {
   const bearing = calculateCompassBearing(lat, lon, targetPoint.lat, targetPoint.lon);
 
   return {
-    sourceLabel: 'GPS Position',
+    sourceLabel: 'GPS Position ➔ PFZ Forecast Line',
     distanceKm: minDistanceKm.toFixed(1),
     distanceNm: distNm,
     bearingDeg: bearing.deg,
     cardinal: bearing.cardinal,
     targetSector,
-    targetPoint
+    targetPoint,
+    targetLat: targetPoint.lat,
+    targetLon: targetPoint.lon
   };
 }
 
@@ -387,6 +429,8 @@ async function locateLockedPfzCompass() {
 
   const firstMsg = locked.messages?.[0];
   if (firstMsg) {
+    const targetLat = parseDmsCoordinate(firstMsg.latitude);
+    const targetLon = parseDmsCoordinate(firstMsg.longitude);
     const bearingVal = parseFloat(firstMsg.bearing) || 0;
     const distVal = parseFloat(firstMsg.distance) || 0;
     const distNm = (distVal * 0.539957).toFixed(1);
@@ -394,6 +438,9 @@ async function locateLockedPfzCompass() {
     openPfzCompassModal({
       sourceLabel: '🔒 ' + titleCase(locked.name) + ' (Locked Home)',
       targetSector: titleCase(locked.sectorName),
+      targetLat: targetLat,
+      targetLon: targetLon,
+      targetPoint: (targetLat != null && targetLon != null) ? { lat: targetLat, lon: targetLon } : null,
       bearingDeg: Math.round(bearingVal),
       cardinal: getCardinalFromDegrees(bearingVal),
       distanceKm: distVal.toFixed(1),
@@ -401,6 +448,77 @@ async function locateLockedPfzCompass() {
       depth: firstMsg.depth || '',
       direction: firstMsg.direction || ''
     });
+  }
+}
+
+// Device Geolocation Tracking for Live Distance to PFZ Point
+var deviceGpsWatchId = null;
+var latestUserDeviceLocation = null;
+
+function recalculateCompassDistanceToTarget(userLat, userLon) {
+  if (!currentPfzNavTarget) return;
+
+  const targetLat = currentPfzNavTarget.targetLat != null ? currentPfzNavTarget.targetLat : currentPfzNavTarget.targetPoint?.lat;
+  const targetLon = currentPfzNavTarget.targetLon != null ? currentPfzNavTarget.targetLon : currentPfzNavTarget.targetPoint?.lon;
+
+  if (targetLat != null && targetLon != null) {
+    const distKm = calculateHaversineDistance(userLat, userLon, targetLat, targetLon);
+    const distNm = (distKm * 0.539957).toFixed(1);
+    const bearing = calculateCompassBearing(userLat, userLon, targetLat, targetLon);
+
+    currentPfzNavTarget.distanceKm = distKm.toFixed(1);
+    currentPfzNavTarget.distanceNm = distNm;
+    currentPfzNavTarget.bearingDeg = bearing.deg;
+    currentPfzNavTarget.cardinal = bearing.cardinal;
+    targetCompassBearing = bearing.deg;
+
+    const distEl = ids('compassTargetDist');
+    const bearingEl = ids('compassTargetBearing');
+    if (distEl) distEl.textContent = distNm + ' NM (' + distKm.toFixed(1) + ' km)';
+    if (bearingEl) bearingEl.textContent = bearing.deg + '° ' + bearing.cardinal;
+
+    updateCompassDialUi(currentDeviceHeading);
+  }
+}
+
+function startDeviceLocationTracking() {
+  if (!navigator.geolocation) return;
+
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      latestUserDeviceLocation = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude
+      };
+      recalculateCompassDistanceToTarget(latestUserDeviceLocation.lat, latestUserDeviceLocation.lon);
+    },
+    err => {
+      console.warn('Compass device geolocation error:', err?.message);
+    },
+    { timeout: 10000, enableHighAccuracy: true }
+  );
+
+  if (deviceGpsWatchId === null) {
+    deviceGpsWatchId = navigator.geolocation.watchPosition(
+      position => {
+        latestUserDeviceLocation = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        };
+        recalculateCompassDistanceToTarget(latestUserDeviceLocation.lat, latestUserDeviceLocation.lon);
+      },
+      err => {
+        console.warn('Compass device GPS watch error:', err?.message);
+      },
+      { enableHighAccuracy: true, maximumAge: 5000, timeout: 10000 }
+    );
+  }
+}
+
+function stopDeviceLocationTracking() {
+  if (deviceGpsWatchId !== null && navigator.geolocation) {
+    navigator.geolocation.clearWatch(deviceGpsWatchId);
+    deviceGpsWatchId = null;
   }
 }
 
@@ -419,11 +537,17 @@ function openPfzCompassModal(customTarget = null) {
   if (!dialog) return;
 
   ids('compassTargetTitle').textContent = target.sourceLabel || 'PFZ Forecast Line Target';
-  ids('compassTargetBearing').textContent = target.bearingDeg + '° ' + target.cardinal;
+  ids('compassTargetBearing').textContent = target.bearingDeg + '° ' + (target.cardinal || getCardinalFromDegrees(target.bearingDeg));
   ids('compassTargetDist').textContent = target.distanceNm + ' NM (' + target.distanceKm + ' km)';
   ids('compassSectorName').textContent = target.targetSector || 'Active Sector';
 
   startDeviceCompassSensors();
+  startDeviceLocationTracking();
+
+  if (latestUserDeviceLocation) {
+    recalculateCompassDistanceToTarget(latestUserDeviceLocation.lat, latestUserDeviceLocation.lon);
+  }
+
   dialog.showModal();
 }
 
@@ -454,6 +578,7 @@ function stopDeviceCompassSensors() {
   deviceCompassActive = false;
   window.removeEventListener('deviceorientationabsolute', handleDeviceOrientation, true);
   window.removeEventListener('deviceorientation', handleDeviceOrientation, true);
+  stopDeviceLocationTracking();
 }
 
 function handleDeviceOrientation(event) {

@@ -21,9 +21,9 @@
   .title{grid-column:1;grid-row:2}
   .header-actions{grid-column:1;grid-row:3;width:100%;min-width:0;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;padding-top:8px;border-top:1px solid var(--line)}
   .header-actions .stamp{min-width:0;margin-right:auto;overflow-wrap:anywhere;text-align:left}
-  .header-actions .notify-button,.header-actions .share-button,.header-actions .install-button{flex:none}
-  .notify-label{display:none!important}
-  .notify-button{width:36px!important;min-width:36px!important;height:36px!important;min-height:36px!important;padding:0!important;justify-content:center!important}
+  .header-actions .voice-button,.header-actions .notify-button,.header-actions .share-button,.header-actions .install-button{flex:none}
+  .voice-label,.notify-label{display:none!important}
+  .voice-button,.notify-button{width:32px!important;min-width:32px!important;height:32px!important;min-height:32px!important;padding:0!important;justify-content:center!important}
   .title p,.stamp,.stamp time,.live{font-size:13px}
   .panel-kicker,.empty,.advisory-note{font-size:13px}
   .tsunami-status .tsunami-message{font-size:15px;line-height:1.45}
