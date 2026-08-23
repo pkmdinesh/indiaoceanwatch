@@ -551,6 +551,15 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
   return { title: 'Ocean State Forecast Advisory (' + langConfig.name + ')', text: t };
 }
 
+function isMobileOrTabletDevice() {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
+  const ua = (navigator.userAgent || navigator.vendor || window.opera || '').toLowerCase();
+  const isMobileUa = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile|tablet/i.test(ua);
+  const isTouchDevice = Boolean(navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+  const isSmallScreen = Boolean(typeof window.innerWidth === 'number' && window.innerWidth <= 1024);
+  return isMobileUa || (isTouchDevice && isSmallScreen);
+}
+
 var activeAudioElement = null;
 
 function stopVoiceSummary() {
@@ -596,8 +605,10 @@ function playVoiceSummary() {
     }
   };
 
-  // 1. If a native matching regional voice exists in browser (e.g. Android Google TTS / Edge Natural Voice)
-  if ('speechSynthesis' in window && matchedVoice) {
+  const isMobileOrTablet = isMobileOrTabletDevice();
+
+  // 1. Mobile & Tablet devices: Use their own device Web Speech API synthesizer if regional voice exists
+  if (isMobileOrTablet && 'speechSynthesis' in window && matchedVoice) {
     window.speechSynthesis.cancel();
     const data = globalThis.latestStatusData || latestStatusData;
     const bulletin = buildBulletinSummary(data, selectedVoiceLang);
@@ -616,8 +627,8 @@ function playVoiceSummary() {
     return;
   }
 
-  // 2. High-Quality Fallback for Laptops & Desktops without regional voices: Stream pre-generated Google TTS MP3
-  const cacheVer = globalThis.OCEAN_WATCH_CONFIG?.CACHE_VERSION || '1';
+  // 2. Desktop & Laptop versions (PC/Mac/Linux): Always stream and play high-quality Google TTS audio from Git
+  const cacheVer = globalThis.OCEAN_WATCH_CONFIG?.CACHE_VERSION || Date.now();
   const audioSrc = `audio/bulletins/bulletin-${langConfig.voicePrefix}.mp3?v=${cacheVer}`;
 
   if (activeAudioElement) {
@@ -629,13 +640,14 @@ function playVoiceSummary() {
   activeAudioElement.onplay = onStart;
   activeAudioElement.onended = onEnd;
   activeAudioElement.onerror = () => {
-    console.warn('Pre-rendered Google TTS audio file unavailable, falling back to browser speech synthesis...');
+    console.warn('Pre-rendered Google TTS audio file unavailable, attempting browser speech synthesis fallback...');
     onEnd();
     if ('speechSynthesis' in window) {
       const data = globalThis.latestStatusData || latestStatusData;
       const bulletin = buildBulletinSummary(data, selectedVoiceLang);
       const utterance = new SpeechSynthesisUtterance(bulletin.text);
-      utterance.lang = langConfig.code;
+      if (matchedVoice) utterance.voice = matchedVoice;
+      utterance.lang = matchedVoice ? (matchedVoice.lang || langConfig.code) : langConfig.code;
       utterance.onstart = onStart;
       utterance.onend = onEnd;
       utterance.onerror = onEnd;
@@ -662,13 +674,15 @@ function renderVoiceSummaryModal() {
   if (titleEl) titleEl.textContent = bulletin.title;
   if (textEl) textEl.textContent = bulletin.text;
 
+  const isMobileOrTablet = isMobileOrTabletDevice();
   const matchedVoice = findBestVoice(langConfig);
+
   if (voiceNoticeEl) {
-    if (matchedVoice) {
-      voiceNoticeEl.textContent = 'Voice: ' + matchedVoice.name + ' (' + (matchedVoice.lang || langConfig.code) + ')';
+    if (isMobileOrTablet && matchedVoice) {
+      voiceNoticeEl.textContent = 'Voice: ' + matchedVoice.name + ' (Device Native Speech Engine)';
       voiceNoticeEl.style.color = 'var(--green)';
     } else {
-      voiceNoticeEl.textContent = 'Voice engine: Google Text-to-Speech (Cloud HQ)';
+      voiceNoticeEl.textContent = 'Voice engine: Google Text-to-Speech (HQ Audio from Git)';
       voiceNoticeEl.style.color = 'var(--teal)';
     }
   }
