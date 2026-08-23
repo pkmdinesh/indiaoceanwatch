@@ -80,14 +80,106 @@ function osfHighestSeverity(advisories) {
   return severityOrder.find(level => advisories.some(advisory => advisory.severity === level)) || 'noThreat';
 }
 
+function extractIncoisAdvisoryMetrics(message) {
+  if (!message || typeof message !== 'string') return null;
+  const msg = message.trim();
+
+  // Wave height range: "2.4 - 2.5 meters" or "2.4 to 2.5 m" or "1.5 m"
+  let waveHeight = null;
+  const whMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:meters?|m\b)/i) ||
+                  msg.match(/(\d+(?:\.\d+)?)\s*(?:meters?|m\b)\s*height/i) ||
+                  msg.match(/height\s*(?:of)?\s*(\d+(?:\.\d+)?)\s*(?:meters?|m\b)/i);
+  if (whMatch) {
+    if (whMatch[2]) {
+      waveHeight = { min: parseFloat(whMatch[1]), max: parseFloat(whMatch[2]), text: `${whMatch[1]}–${whMatch[2]} m` };
+    } else {
+      waveHeight = { min: parseFloat(whMatch[1]), max: parseFloat(whMatch[1]), text: `${whMatch[1]} m` };
+    }
+  }
+
+  // Swell wave period: "16.0 - 20.0 sec period" or "16 - 20 s" or "period of 16.0 - 20.0"
+  let swellPeriod = null;
+  const spMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)\s*(?:period)?/i) ||
+                  msg.match(/period\s*(?:of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)?/i);
+  if (spMatch) {
+    const minVal = parseFloat(spMatch[1]);
+    const maxVal = spMatch[2] ? parseFloat(spMatch[2]) : minVal;
+    swellPeriod = { min: minVal, max: maxVal, text: spMatch[2] ? `${spMatch[1]}–${spMatch[2]} s` : `${spMatch[1]} s`, isKallakkadal: maxVal >= 16 };
+  }
+
+  // Current speed: "0.4 - 0.6 m/sec" or "0.4 to 0.6 m/s" or "knots"
+  let currentSpeed = null;
+  const curMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec)/i) ||
+                   msg.match(/(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s)/i);
+  if (curMatch) {
+    if (curMatch[2]) {
+      currentSpeed = { min: parseFloat(curMatch[1]), max: parseFloat(curMatch[2]), text: `${curMatch[1]}–${curMatch[2]} m/s` };
+    } else {
+      currentSpeed = { min: parseFloat(curMatch[1]), max: parseFloat(curMatch[1]), text: `${curMatch[1]} m/s` };
+    }
+  }
+
+  // Validity period: "17:30 hours on 23-08-2026 to 23:30 hours on 25-08-2026"
+  let validity = null;
+  const valMatch = msg.match(/(\d{1,2}:\d{2})\s*hours?\s*on\s*(\d{2}-\d{2}-\d{4})\s*to\s*(\d{1,2}:\d{2})\s*hours?\s*on\s*(\d{2}-\d{2}-\d{4})/i);
+  if (valMatch) {
+    validity = { start: `${valMatch[2].slice(0,5)} ${valMatch[1]}`, end: `${valMatch[4].slice(0,5)} ${valMatch[3]}` };
+  }
+
+  return { waveHeight, swellPeriod, currentSpeed, validity };
+}
+
 function osfMessageHtml(service,advisories,group,openLevel=null) {
   const levels = severityOrder.filter(level => advisories.some(advisory => advisory.severity === level));
   if (!levels.length) levels.push('noThreat');
   return levels.map(level => {
-    const messages = [...new Set(advisories.filter(advisory => advisory.severity === level).map(advisory => advisory.message).filter(Boolean))];
+    const matched = advisories.filter(advisory => advisory.severity === level);
+    const messages = [...new Set(matched.map(advisory => advisory.message).filter(Boolean))];
+
+    // Extract quantitative INCOIS metrics
+    const metricsList = messages.map(extractIncoisAdvisoryMetrics).filter(Boolean);
+    let badgesHtml = '';
+    if (metricsList.length) {
+      const badges = [];
+      const m = metricsList[0];
+      if (m.waveHeight) badges.push(`<span class="osf-metric-badge hs" title="INCOIS Forecasted Significant Wave Height (Hs)">🌊 Hs: <strong>${escapeHtml(m.waveHeight.text)}</strong></span>`);
+      if (m.swellPeriod) badges.push(`<span class="osf-metric-badge tp ${m.swellPeriod.isKallakkadal ? 'kallakkadal' : ''}" title="INCOIS Forecasted Peak Swell Period (Tp)">⏱ Tp: <strong>${escapeHtml(m.swellPeriod.text)}</strong>${m.swellPeriod.isKallakkadal ? ' ⚠ Kallakkadal' : ''}</span>`);
+      if (m.currentSpeed) badges.push(`<span class="osf-metric-badge cur" title="INCOIS Surface Current Speed">🧭 Current: <strong>${escapeHtml(m.currentSpeed.text)}</strong></span>`);
+      if (m.validity) badges.push(`<span class="osf-metric-badge val" title="Validity Period">📅 Valid: ${escapeHtml(m.validity.start)} → ${escapeHtml(m.validity.end)} IST</span>`);
+      if (badges.length) {
+        badgesHtml = `<div class="osf-metrics-strip">${badges.join('')}</div>`;
+      }
+    }
+
     const messageHtml = messages.length ? messages.map(message => `<p>${escapeHtml(message)}</p>`).join('') : '<p>No Threat</p>';
-    return `<details class="osf-popup-toggle ${level}"${openLevel === level ? ' open' : ''}><summary><span>${escapeHtml(service)}</span><b>${escapeHtml(severityLabel[level])}</b></summary><div class="osf-popup-toggle-body"><small>Issue date: ${escapeHtml(group?.issueDate || '—')}</small>${messageHtml}</div></details>`;
+    return `<details class="osf-popup-toggle ${level}"${openLevel === level ? ' open' : ''}><summary><span>${escapeHtml(service)}</span><b>${escapeHtml(severityLabel[level])}</b></summary><div class="osf-popup-toggle-body">${badgesHtml}<small>Issue date: ${escapeHtml(group?.issueDate || '—')}</small>${messageHtml}</div></details>`;
   }).join('');
+}
+
+function osfDistrictTooltipHtml(district, state, service, advisories, level) {
+  const messages = advisories.map(a => a.message).filter(Boolean);
+  const metricsList = messages.map(extractIncoisAdvisoryMetrics).filter(Boolean);
+  const m = metricsList[0] || null;
+
+  let metricText = '';
+  if (m) {
+    const parts = [];
+    if (m.waveHeight) parts.push(`🌊 ${m.waveHeight.text}`);
+    if (m.swellPeriod) parts.push(`⏱ ${m.swellPeriod.text}${m.swellPeriod.isKallakkadal ? ' ⚠' : ''}`);
+    if (m.currentSpeed) parts.push(`🧭 ${m.currentSpeed.text}`);
+    if (parts.length) metricText = `<div style="font-size:9.5px; color:#bfeff1; margin-top:2px;">${parts.join(' · ')}</div>`;
+  }
+
+  return `
+    <div class="osf-tooltip-content">
+      <span class="osf-tooltip-title">${escapeHtml(titleCase(district))} (${escapeHtml(titleCase(state))})</span>
+      <div class="osf-tooltip-meta">
+        <span class="osf-tooltip-badge" style="background:${OSF_SEVERITY_COLORS[level]}; color:#082f3c;">${escapeHtml(severityLabel[level])}</span>
+        <span>${escapeHtml(service)}</span>
+      </div>
+      ${metricText}
+    </div>
+  `;
 }
 
 function updateOsfComposite() {
@@ -159,10 +251,14 @@ async function buildCumulativeOsfMapLayers(data) {
       },
       onEachFeature:(feature,polygon) => {
         const advisories = osfFeatureAdvisories(feature,group);
+        const level = osfHighestSeverity(advisories);
         const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
         if (!cumulativeFeatures.has(key)) cumulativeFeatures.set(key,{feature,services:[]});
         cumulativeFeatures.get(key).services.push({service,group,advisories});
-        polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(feature.properties.District))} · ${escapeHtml(titleCase(feature.properties.STATE))}</strong>${osfMessageHtml(service,advisories,group,osfHighestSeverity(advisories))}</div>`,OSF_POPUP_OPTIONS);
+        polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(feature.properties.District))} · ${escapeHtml(titleCase(feature.properties.STATE))}</strong>${osfMessageHtml(service,advisories,group,level)}</div>`,OSF_POPUP_OPTIONS);
+        if (level !== 'noThreat') {
+          polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, service, advisories, level), { sticky: true, className: 'osf-district-tooltip' });
+        }
       }
     });
     osfServiceLayers[service]=layer;
@@ -184,6 +280,9 @@ async function buildCumulativeOsfMapLayers(data) {
       const sections = item.services.map(entry => osfMessageHtml(entry.service,entry.advisories,entry.group,entry.advisories.some(advisory => advisory.severity === level) ? level : null)).join('');
       polygon._osfServices = item.services;
       polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(feature.properties.District))} · ${escapeHtml(titleCase(feature.properties.STATE))}</strong><p><b>Cumulative status:</b> ${escapeHtml(severityLabel[level])}</p>${sections}</div>`,OSF_POPUP_OPTIONS);
+      if (level !== 'noThreat') {
+        polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, 'Cumulative', allAdvisories, level), { sticky: true, className: 'osf-district-tooltip' });
+      }
     }
   });
   Object.entries(osfServiceLayers).forEach(([service,layer]) => {

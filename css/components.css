@@ -353,5 +353,22 @@
   .pfz-wind-legend{bottom:60px!important;right:8px!important;font-size:9px;padding:4px 6px}
 }
 
+/* OSF INCOIS Quantitative Forecast Metrics & Tooltips */
+.osf-metrics-strip{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 8px}
+.osf-metric-badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;background:#e2f4f6;color:#082f3c;border:1px solid #bfeff1}
+.osf-metric-badge.hs{background:#e0f2fe;color:#0369a1;border-color:#bae6fd}
+.osf-metric-badge.tp{background:#fef3c7;color:#92400e;border-color:#fde68a}
+.osf-metric-badge.tp.kallakkadal{background:#fee2e2;color:#991b1b;border-color:#fca5a5;font-weight:900;box-shadow:0 0 5px rgba(239,68,68,.35)}
+.osf-metric-badge.cur{background:#ecfdf5;color:#065f46;border-color:#a7f3d0}
+.osf-metric-badge.val{background:#f1f5f9;color:#475569;border-color:#cbd5e1;font-size:9.5px;width:100%}
+
+.osf-district-tooltip{background:rgba(8,47,60,.94)!important;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(118,215,223,.4)!important;border-radius:6px!important;color:#fff!important;font-size:11px!important;padding:4px 8px!important;box-shadow:0 4px 12px rgba(0,0,0,.3)!important}
+.osf-district-tooltip::before{border-top-color:rgba(8,47,60,.94)!important}
+.osf-tooltip-content{display:grid;gap:2px}
+.osf-tooltip-title{font-weight:900;color:#76d7df}
+.osf-tooltip-meta{display:flex;align-items:center;gap:6px;font-size:10px}
+.osf-tooltip-badge{padding:1px 4px;border-radius:3px;font-weight:800}
+
+
 
 
