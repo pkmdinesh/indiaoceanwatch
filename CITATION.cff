@@ -8,7 +8,7 @@ authors:
     given-names: "Dinesh"
 repository-code: "https://github.com/pkmdinesh/indiaoceanwatch"
 url: "https://pkmdinesh.github.io/indiaoceanwatch/"
-license: MIT
+license: GPL-3.0-or-later
 keywords:
   - ocean information
   - coastal advisory

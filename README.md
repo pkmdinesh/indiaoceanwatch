@@ -45,7 +45,7 @@ Please see our [Security Policy](SECURITY.md) for information on reporting vulne
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](LICENSE).
 
 ## Maintainers & Contact
 - Maintainer: [@pkmdinesh](https://github.com/pkmdinesh)
