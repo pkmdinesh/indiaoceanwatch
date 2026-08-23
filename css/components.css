@@ -306,3 +306,45 @@
 .compass-slider-box{display:grid;gap:4px;background:#f8fafc;padding:6px 8px;border-radius:7px;border:1px solid var(--line)}
 .compass-slider{width:100%;cursor:ew-resize}
 
+/* PFZ Wind Speed & Direction Layer & Movable Timeline */
+.pfz-wind-timeline{position:absolute;bottom:14px;left:14px;z-index:900;background:rgba(8,47,60,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(118,215,223,.3);border-radius:12px;padding:8px 12px;box-shadow:0 8px 24px rgba(0,0,0,.35);color:#fff;display:grid;gap:7px;min-width:280px;max-width:calc(100vw - 32px);user-select:none;touch-action:none}
+.pfz-wind-timeline.is-dragging{box-shadow:0 12px 32px rgba(0,0,0,.5);border-color:var(--teal);opacity:.95}
+.pfz-wind-header{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:grab}
+.pfz-wind-header:active{cursor:grabbing}
+.pfz-wind-title{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:#e8f7f9}
+.pfz-wind-drag-badge{font-size:10px;font-weight:700;color:var(--teal);background:rgba(118,215,223,.15);padding:2px 6px;border-radius:4px;letter-spacing:.02em}
+.pfz-wind-play-btn{background:#00a88f;border:none;color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:background .15s}
+.pfz-wind-play-btn:hover{background:#02be9f}
+.pfz-wind-play-btn.is-playing{background:#d9534f}
+.pfz-wind-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.pfz-wind-step-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#bfeff1;font-size:10px;font-weight:700;padding:5px 4px;border-radius:6px;cursor:pointer;text-align:center;line-height:1.2;transition:all .15s}
+.pfz-wind-step-btn small{display:block;font-size:8.5px;opacity:.75;font-weight:600}
+.pfz-wind-step-btn:hover{background:rgba(255,255,255,.18);border-color:var(--teal)}
+.pfz-wind-step-btn.active{background:var(--teal);color:#082f3c;border-color:var(--teal);font-weight:900;box-shadow:0 0 8px rgba(118,215,223,.4)}
+.pfz-wind-step-btn.active small{opacity:1;color:#082f3c}
+.pfz-wind-range-box{display:flex;align-items:center;gap:8px}
+.pfz-wind-range{flex:1;height:5px;background:rgba(255,255,255,.2);border-radius:3px;outline:none;cursor:pointer}
+.pfz-wind-time-label{font-size:11px;font-weight:800;color:#76d7df;white-space:nowrap}
+
+/* PFZ Wind Arrow Markers */
+.pfz-wind-marker{display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer}
+.pfz-wind-arrow-svg{width:24px;height:24px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6));transition:transform .2s ease-out}
+.pfz-wind-badge{font-size:9px;font-weight:900;padding:1px 4px;border-radius:3px;margin-top:-3px;box-shadow:0 1px 4px rgba(0,0,0,.4);white-space:nowrap;line-height:1.1}
+.pfz-wind-tier-calm{color:#064e3b;background:#a7f3d0}
+.pfz-wind-tier-moderate{color:#78350f;background:#fde68a}
+.pfz-wind-tier-strong{color:#7c2d12;background:#fed7aa}
+.pfz-wind-tier-gale{color:#fff;background:#dc2626}
+
+/* PFZ Wind Legend */
+.pfz-wind-legend{background:rgba(8,47,60,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(118,215,223,.25);border-radius:8px;padding:6px 10px;color:#fff;font-size:10.5px;line-height:1.3;box-shadow:0 4px 12px rgba(0,0,0,.25);display:grid;gap:4px;user-select:none}
+.pfz-wind-legend strong{font-size:11px;color:#e8f7f9;font-weight:800;display:flex;align-items:center;gap:4px}
+.pfz-wind-scale-row{display:flex;gap:3px;align-items:center}
+.pfz-wind-scale-bar{display:flex;height:8px;border-radius:3px;overflow:hidden;flex:1}
+.pfz-wind-scale-seg{flex:1;height:100%}
+.pfz-wind-scale-seg.c1{background:#10b981}
+.pfz-wind-scale-seg.c2{background:#f59e0b}
+.pfz-wind-scale-seg.c3{background:#f97316}
+.pfz-wind-scale-seg.c4{background:#ef4444}
+.pfz-wind-legend-labels{display:flex;justify-content:space-between;font-size:9px;color:#bfeff1;font-weight:700}
+
+

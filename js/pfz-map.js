@@ -6,6 +6,15 @@ var pfzSelectedLayers = new Set();
 var pfzDataPromise = null;
 var pfzSstLegendElement = null;
 var pfzSstDataDate = null;
+var pfzWindLegendElement = null;
+var pfzWindTimelineElement = null;
+
+// Marine Wind Forecast State
+var pfzWindDataCache = null;
+var pfzWindLayerGroup = null;
+var pfzWindIntervalIndex = 0;
+var pfzWindPlayTimer = null;
+var pfzWindTimeSteps = [];
 
 const PFZ_BATHYMETRY_SLD = '<StyledLayerDescriptor version="1.0.0" xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc"><NamedLayer><Name>BathymteryImage:gebcobathymtery</Name><UserStyle><FeatureTypeStyle><Rule><RasterSymbolizer><ColorMap type="ramp"><ColorMapEntry color="#081d58" quantity="-6000"/><ColorMapEntry color="#253494" quantity="-4500"/><ColorMapEntry color="#2c7fb8" quantity="-3000"/><ColorMapEntry color="#41b6c4" quantity="-1500"/><ColorMapEntry color="#a1dab4" quantity="-500"/><ColorMapEntry color="#ffffcc" quantity="0"/></ColorMap></RasterSymbolizer></Rule></FeatureTypeStyle></UserStyle></NamedLayer></StyledLayerDescriptor>';
 
@@ -15,6 +24,82 @@ const PFZ_MAP_DATASETS = Object.freeze({
   'EEZ boundary': APP_CONFIG.MAP.PFZ_EEZ_URL,
   'Landing centres': APP_CONFIG.MAP.PFZ_LANDING_CENTRES_URL
 });
+
+// Representative Marine Wind Grid Coordinates across India's EEZ & Coastal Waters
+const PFZ_WIND_GRID_COORDINATES = Object.freeze([
+  // Gujarat & North Arabian Sea
+  { lat: 22.5, lon: 68.5, label: 'Gulf of Kutch' },
+  { lat: 21.0, lon: 69.0, label: 'Porbandar Offshore' },
+  { lat: 20.5, lon: 71.0, label: 'Veraval / Diu' },
+  { lat: 22.0, lon: 67.5, label: 'North-West Arabian Sea' },
+  { lat: 20.0, lon: 68.0, label: 'West Gujarat EEZ' },
+
+  // Maharashtra & Goa
+  { lat: 19.5, lon: 71.5, label: 'Mumbai Offshore' },
+  { lat: 18.5, lon: 71.5, label: 'Raigad Coast' },
+  { lat: 17.5, lon: 72.0, label: 'Ratnagiri Coast' },
+  { lat: 16.5, lon: 72.5, label: 'Sindhudurg Coast' },
+  { lat: 15.5, lon: 73.0, label: 'Goa Coastal Waters' },
+  { lat: 18.0, lon: 70.0, label: 'Central Arabian Sea' },
+  { lat: 16.0, lon: 71.0, label: 'Mid Maharashtra EEZ' },
+
+  // Karnataka & Kerala
+  { lat: 14.5, lon: 73.5, label: 'Karwar / Uttara Kannada' },
+  { lat: 13.5, lon: 74.0, label: 'Mangaluru / Udupi' },
+  { lat: 13.0, lon: 72.5, label: 'Karnataka Offshore' },
+  { lat: 12.0, lon: 74.5, label: 'Kasaragod / Kannur' },
+  { lat: 11.0, lon: 75.0, label: 'Kozhikode Coast' },
+  { lat: 10.0, lon: 75.5, label: 'Kochi Coast' },
+  { lat: 9.0, lon: 76.0, label: 'Alappuzha Coast' },
+  { lat: 8.0, lon: 76.5, label: 'Thiruvananthapuram Coast' },
+  { lat: 10.5, lon: 73.5, label: 'Kerala-Lakshadweep Channel' },
+  { lat: 8.5, lon: 74.5, label: 'South Arabian Sea' },
+
+  // Lakshadweep Sea
+  { lat: 11.0, lon: 72.5, label: 'Amini / Kadmat' },
+  { lat: 10.0, lon: 72.0, label: 'Kavaratti / Agatti' },
+  { lat: 8.5, lon: 73.0, label: 'Minicoy Waters' },
+
+  // South Tip & Gulf of Mannar
+  { lat: 7.5, lon: 77.5, label: 'Kanyakumari / Wadge Bank' },
+  { lat: 8.0, lon: 78.5, label: 'Gulf of Mannar' },
+  { lat: 9.0, lon: 79.5, label: 'Palk Bay / Rameswaram' },
+  { lat: 7.0, lon: 78.0, label: 'Indian Ocean South EEZ' },
+
+  // Tamil Nadu & South Andhra Coast
+  { lat: 10.0, lon: 80.5, label: 'Nagapattinam Coast' },
+  { lat: 11.5, lon: 80.5, label: 'Cuddalore / Puducherry' },
+  { lat: 12.5, lon: 81.0, label: 'Chennai Offshore' },
+  { lat: 13.5, lon: 81.0, label: 'North Tamil Nadu Waters' },
+  { lat: 11.0, lon: 82.5, label: 'South Bay of Bengal' },
+  { lat: 13.0, lon: 83.0, label: 'Chennai Deep Waters' },
+
+  // Andhra Pradesh & Odisha
+  { lat: 14.5, lon: 81.0, label: 'Nellore Coast' },
+  { lat: 15.5, lon: 81.5, label: 'Prakasam / Bapatla' },
+  { lat: 16.5, lon: 82.5, label: 'Kakinada / Godavari Delta' },
+  { lat: 17.5, lon: 83.5, label: 'Visakhapatnam Coast' },
+  { lat: 18.5, lon: 84.5, label: 'Srikakulam Coast' },
+  { lat: 16.0, lon: 84.0, label: 'Central Bay of Bengal' },
+  { lat: 18.0, lon: 86.0, label: 'East AP Offshore' },
+  { lat: 19.5, lon: 85.5, label: 'Puri / Ganjam Coast' },
+  { lat: 20.5, lon: 87.0, label: 'Paradip / Kendrapara' },
+  { lat: 19.5, lon: 87.5, label: 'Odisha Offshore' },
+  { lat: 20.0, lon: 89.0, label: 'North Bay of Bengal' },
+
+  // West Bengal
+  { lat: 21.5, lon: 88.0, label: 'Digha / Sagar Island' },
+  { lat: 21.5, lon: 89.0, label: 'Sundarbans Coast' },
+  { lat: 21.0, lon: 87.5, label: 'Baleshwar / WB Channel' },
+
+  // Andaman & Nicobar Islands
+  { lat: 13.5, lon: 93.0, label: 'North Andaman' },
+  { lat: 12.5, lon: 92.5, label: 'Middle Andaman' },
+  { lat: 11.5, lon: 93.0, label: 'Port Blair / South Andaman' },
+  { lat: 9.0, lon: 93.0, label: 'Car Nicobar' },
+  { lat: 7.0, lon: 93.5, label: 'Great Nicobar / Indira Point' },
+  { lat: 8.0, lon: 94.0, label: 'Andaman Sea Deep Basin' }
+]);
 
 const pfzProperty = (properties,...names) => {
   for (const name of names) if (properties?.[name] != null && String(properties[name]).trim()) return String(properties[name]).trim();
@@ -90,15 +175,330 @@ function createPfzVectorLayers(data) {
   return {'PFZ forecast lines':lines,'PFZ sectors':sectors,'EEZ boundary':eez,'Landing centres':landingCentres};
 }
 
+// ----------------------------------------------------
+// Marine Wind Speed & Direction Layer Implementation
+// ----------------------------------------------------
+
+async function fetchPfzWindForecastData() {
+  if (pfzWindDataCache) return pfzWindDataCache;
+
+  const lats = PFZ_WIND_GRID_COORDINATES.map(p => p.lat).join(',');
+  const lons = PFZ_WIND_GRID_COORDINATES.map(p => p.lon).join(',');
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&hourly=wind_speed_10m,wind_direction_10m&wind_speed_unit=kn&timezone=Asia%2FKolkata&forecast_days=2`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Wind API status ${res.status}`);
+    const data = await res.json();
+    const dataList = Array.isArray(data) ? data : [data];
+
+    if (!dataList.length || !dataList[0].hourly?.time) {
+      throw new Error('Invalid wind data structure');
+    }
+
+    const times = dataList[0].hourly.time; // 48 hourly timestamps in Asia/Kolkata
+    pfzWindTimeSteps = calculate12HourlyTargetSteps(times);
+    pfzWindDataCache = dataList;
+    return dataList;
+  } catch (err) {
+    console.warn('Could not fetch Open-Meteo wind forecast:', err);
+    return null;
+  }
+}
+
+function calculate12HourlyTargetSteps(times) {
+  // Extract Today 06:00, Today 18:00, Tomorrow 06:00, Tomorrow 18:00
+  if (!times || !times.length) return [];
+
+  const now = new Date();
+  const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(now);
+  const tomorrow = new Date(now.getTime() + 86400000);
+  const tomorrowStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(tomorrow);
+
+  const targets = [
+    { label: 'Today 06:00', sub: 'Morning', iso: `${todayStr}T06:00` },
+    { label: 'Today 18:00', sub: 'Evening', iso: `${todayStr}T18:00` },
+    { label: 'Tomorrow 06:00', sub: 'Morning', iso: `${tomorrowStr}T06:00` },
+    { label: 'Tomorrow 18:00', sub: 'Evening', iso: `${tomorrowStr}T18:00` }
+  ];
+
+  return targets.map(t => {
+    let bestIdx = times.indexOf(t.iso);
+    if (bestIdx === -1) {
+      // Fallback closest index
+      bestIdx = times.findIndex(timeStr => timeStr.startsWith(t.iso.slice(0, 13))) || 0;
+      if (bestIdx === -1) bestIdx = 0;
+    }
+    return { ...t, hourIndex: bestIdx, actualTime: times[bestIdx] || t.iso };
+  });
+}
+
+function getWindTier(speedKnots) {
+  const spd = Number(speedKnots) || 0;
+  if (spd < 10) return { tier: 'calm', color: '#10b981', label: 'Calm / Light (<10 kt)', seaState: 'Smooth Sea' };
+  if (spd < 20) return { tier: 'moderate', color: '#f59e0b', label: 'Moderate (10–20 kt)', seaState: 'Moderate Sea' };
+  if (spd < 30) return { tier: 'strong', color: '#f97316', label: 'Strong (20–30 kt)', seaState: 'Rough Sea' };
+  return { tier: 'gale', color: '#ef4444', label: 'Gale / Extreme (>30 kt)', seaState: 'Very Rough Sea / Squally' };
+}
+
+function getCardinalDirection(deg) {
+  const cardinals = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  const idx = Math.round(((deg % 360) + 360) % 360 / 22.5) % 16;
+  return cardinals[idx];
+}
+
+function renderPfzWindMarkers(intervalIdx = 0) {
+  if (!pfzWindLayerGroup || !pfzWindDataCache || !pfzWindTimeSteps.length) return;
+
+  pfzWindIntervalIndex = Math.max(0, Math.min(intervalIdx, pfzWindTimeSteps.length - 1));
+  const step = pfzWindTimeSteps[pfzWindIntervalIndex];
+  const hourIdx = step.hourIndex;
+
+  pfzWindLayerGroup.clearLayers();
+
+  pfzWindDataCache.forEach((pointData, i) => {
+    const coordMeta = PFZ_WIND_GRID_COORDINATES[i];
+    if (!coordMeta) return;
+
+    const spd = pointData.hourly?.wind_speed_10m?.[hourIdx] ?? 0;
+    const dir = pointData.hourly?.wind_direction_10m?.[hourIdx] ?? 0;
+    const spdKm = (spd * 1.852).toFixed(1);
+    const tier = getWindTier(spd);
+    const cardinal = getCardinalDirection(dir);
+
+    // Wind direction arrow points in the direction the wind is blowing towards: (dir + 180) % 360
+    const arrowAngle = (dir + 180) % 360;
+
+    const iconHtml = `
+      <div class="pfz-wind-marker" title="${coordMeta.label}: ${Math.round(spd)} kt ${cardinal}">
+        <svg class="pfz-wind-arrow-svg" style="transform: rotate(${arrowAngle}deg);" viewBox="0 0 24 24">
+          <path d="M12 2L6 18L12 14L18 18L12 2Z" fill="${tier.color}" stroke="#082f3c" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        <span class="pfz-wind-badge pfz-wind-tier-${tier.tier}">${Math.round(spd)} <small>kt</small></span>
+      </div>
+    `;
+
+    const customIcon = L.divIcon({
+      html: iconHtml,
+      className: '',
+      iconSize: [32, 38],
+      iconAnchor: [16, 19]
+    });
+
+    const marker = L.marker([coordMeta.lat, coordMeta.lon], {
+      icon: customIcon,
+      pane: 'pfzLinePane'
+    });
+
+    const popupHtml = `
+      <div class="pfz-map-popup">
+        <strong>💨 ${escapeHtml(coordMeta.label)}</strong>
+        <div><strong>Time:</strong> ${step.label} (${step.sub}) IST</div>
+        <div><strong>Wind Speed:</strong> ${Math.round(spd)} Knots (${spdKm} km/h)</div>
+        <div><strong>Direction:</strong> ${Math.round(dir)}° (${cardinal})</div>
+        <div><strong>Condition:</strong> <span style="color:${tier.color}; font-weight:800;">${tier.seaState}</span></div>
+        <div style="font-size:10px; color:#557a83; margin-top:2px;">Coordinates: ${coordMeta.lat.toFixed(1)}°N, ${coordMeta.lon.toFixed(1)}°E</div>
+      </div>
+    `;
+
+    marker.bindPopup(popupHtml);
+    pfzWindLayerGroup.addLayer(marker);
+  });
+
+  updatePfzWindTimelineUi();
+}
+
+function updatePfzWindTimelineUi() {
+  if (!pfzWindTimelineElement || !pfzWindTimeSteps.length) return;
+
+  const step = pfzWindTimeSteps[pfzWindIntervalIndex];
+  const stepBtns = pfzWindTimelineElement.querySelectorAll('.pfz-wind-step-btn');
+  stepBtns.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === pfzWindIntervalIndex);
+  });
+
+  const range = pfzWindTimelineElement.querySelector('.pfz-wind-range');
+  if (range) range.value = pfzWindIntervalIndex;
+
+  const timeLabel = pfzWindTimelineElement.querySelector('.pfz-wind-time-label');
+  if (timeLabel && step) {
+    timeLabel.textContent = `${step.label} (${step.sub})`;
+  }
+}
+
+function togglePfzWindAnimation() {
+  const playBtn = pfzWindTimelineElement?.querySelector('.pfz-wind-play-btn');
+  if (pfzWindPlayTimer) {
+    clearInterval(pfzWindPlayTimer);
+    pfzWindPlayTimer = null;
+    if (playBtn) {
+      playBtn.innerHTML = '▶ Play';
+      playBtn.classList.remove('is-playing');
+    }
+  } else {
+    if (playBtn) {
+      playBtn.innerHTML = '⏹ Stop';
+      playBtn.classList.add('is-playing');
+    }
+    pfzWindPlayTimer = setInterval(() => {
+      const nextIdx = (pfzWindIntervalIndex + 1) % (pfzWindTimeSteps.length || 4);
+      renderPfzWindMarkers(nextIdx);
+    }, 2000);
+  }
+}
+
+function createPfzWindTimelineWidget() {
+  const container = ids('pfzMapCanvas');
+  if (!container) return;
+
+  let widget = ids('pfzWindTimelineWidget');
+  if (widget) {
+    pfzWindTimelineElement = widget;
+    return widget;
+  }
+
+  widget = document.createElement('div');
+  widget.id = 'pfzWindTimelineWidget';
+  widget.className = 'pfz-wind-timeline';
+  widget.innerHTML = `
+    <div class="pfz-wind-header">
+      <div class="pfz-wind-title">
+        <span>💨 Wind Forecast (12h)</span>
+        <span class="pfz-wind-drag-badge">⠿ Move</span>
+      </div>
+      <button type="button" class="pfz-wind-play-btn" title="Cycle through 12-hour intervals">▶ Play</button>
+    </div>
+    <div class="pfz-wind-steps">
+      <button type="button" class="pfz-wind-step-btn active" data-idx="0">Today<small>06:00 AM</small></button>
+      <button type="button" class="pfz-wind-step-btn" data-idx="1">Today<small>06:00 PM</small></button>
+      <button type="button" class="pfz-wind-step-btn" data-idx="2">Tomorrow<small>06:00 AM</small></button>
+      <button type="button" class="pfz-wind-step-btn" data-idx="3">Tomorrow<small>06:00 PM</small></button>
+    </div>
+    <div class="pfz-wind-range-box">
+      <input type="range" class="pfz-wind-range" min="0" max="3" value="0" step="1" aria-label="Wind forecast interval">
+      <span class="pfz-wind-time-label">Today 06:00 (Morning)</span>
+    </div>
+  `;
+
+  // Wire buttons & slider
+  widget.querySelectorAll('.pfz-wind-step-btn').forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+      if (pfzWindPlayTimer) togglePfzWindAnimation();
+      renderPfzWindMarkers(idx);
+    });
+  });
+
+  const range = widget.querySelector('.pfz-wind-range');
+  if (range) {
+    range.addEventListener('input', (e) => {
+      if (pfzWindPlayTimer) togglePfzWindAnimation();
+      renderPfzWindMarkers(parseInt(e.target.value, 10));
+    });
+  }
+
+  const playBtn = widget.querySelector('.pfz-wind-play-btn');
+  if (playBtn) {
+    playBtn.addEventListener('click', togglePfzWindAnimation);
+  }
+
+  // Movable / Draggable Implementation (Mouse & Touch)
+  makeElementDraggable(widget, widget.querySelector('.pfz-wind-header'), container);
+
+  container.appendChild(widget);
+  pfzWindTimelineElement = widget;
+  return widget;
+}
+
+function makeElementDraggable(el, handle, boundaryContainer) {
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  let initialLeft = 0;
+  let initialTop = 0;
+
+  const onStart = (clientX, clientY) => {
+    isDragging = true;
+    el.classList.add('is-dragging');
+    const rect = el.getBoundingClientRect();
+    const parentRect = boundaryContainer.getBoundingClientRect();
+    startX = clientX;
+    startY = clientY;
+    initialLeft = rect.left - parentRect.left;
+    initialTop = rect.top - parentRect.top;
+    el.style.left = `${initialLeft}px`;
+    el.style.top = `${initialTop}px`;
+    el.style.bottom = 'auto';
+  };
+
+  const onMove = (clientX, clientY) => {
+    if (!isDragging) return;
+    const parentRect = boundaryContainer.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+
+    let newLeft = initialLeft + (clientX - startX);
+    let newTop = initialTop + (clientY - startY);
+
+    const maxLeft = parentRect.width - elRect.width - 8;
+    const maxTop = parentRect.height - elRect.height - 8;
+
+    newLeft = Math.max(8, Math.min(newLeft, maxLeft));
+    newTop = Math.max(8, Math.min(newTop, maxTop));
+
+    el.style.left = `${newLeft}px`;
+    el.style.top = `${newTop}px`;
+  };
+
+  const onEnd = () => {
+    if (isDragging) {
+      isDragging = false;
+      el.classList.remove('is-dragging');
+    }
+  };
+
+  // Mouse Events
+  handle.addEventListener('mousedown', (e) => {
+    if (e.target.tagName === 'BUTTON') return;
+    onStart(e.clientX, e.clientY);
+    const moveHandler = (moveEvent) => onMove(moveEvent.clientX, moveEvent.clientY);
+    const upHandler = () => {
+      onEnd();
+      window.removeEventListener('mousemove', moveHandler);
+      window.removeEventListener('mouseup', upHandler);
+    };
+    window.addEventListener('mousemove', moveHandler);
+    window.addEventListener('mouseup', upHandler);
+  });
+
+  // Touch Events
+  handle.addEventListener('touchstart', (e) => {
+    if (e.target.tagName === 'BUTTON') return;
+    const touch = e.touches[0];
+    onStart(touch.clientX, touch.clientY);
+  }, { passive: true });
+
+  handle.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    onMove(touch.clientX, touch.clientY);
+    e.preventDefault();
+  }, { passive: false });
+
+  handle.addEventListener('touchend', onEnd);
+}
+
 var pfzChlorophyllDataDate = null;
 
 function updatePfzMapStatus() {
   const selected=[...pfzSelectedLayers];
   if (pfzSstLegendElement) pfzSstLegendElement.hidden=!selected.includes('SST Anomaly');
-  const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a'].includes(name));
+  if (pfzWindLegendElement) pfzWindLegendElement.hidden=!selected.includes('Wind speed & direction');
+  if (pfzWindTimelineElement) pfzWindTimelineElement.hidden=!selected.includes('Wind speed & direction');
+
+  const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a','Wind speed & direction'].includes(name));
   const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly date: ${pfzSstDataDate}.` : '';
   const chlDateNote=selected.includes('Chlorophyll-a') && pfzChlorophyllDataDate ? ` Chlorophyll-a date: ${pfzChlorophyllDataDate}.` : '';
-  const liveNote=liveLayers.length ? ` ${liveLayers.join(', ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}${chlDateNote}` : '';
+  const windDateNote=selected.includes('Wind speed & direction') ? ` Wind model: Today & Tomorrow 12h forecast.` : '';
+  const liveNote=liveLayers.length ? ` ${liveLayers.join(', ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}${chlDateNote}${windDateNote}` : '';
   ids('pfzMapShareStatus').textContent = selected.length
     ? `Showing ${selected.join(' + ')}. Vector layers are cached locally from official INCOIS WFS data.${liveNote}`
     : 'No PFZ layers selected. Use the layer control to enable a layer.';
@@ -120,11 +520,12 @@ function fitPfzCoastalExtent() {
 
 async function buildPfzMapLayers() {
   const status=ids('pfzMapShareStatus');
-  status.textContent='Loading locally cached official INCOIS PFZ layers\u2026';
+  status.textContent='Loading official INCOIS PFZ and marine wind forecast layers\u2026';
   const data=await loadPfzMapData();
   if (pfzLayerControl) pfzLayerControl.remove();
   Object.values(pfzMapLayers).forEach(layer => { if (pfzMap.hasLayer(layer)) pfzMap.removeLayer(layer); });
   pfzMapLayers=createPfzVectorLayers(data);
+
   pfzMapLayers.Bathymetry=L.tileLayer.wms(APP_CONFIG.MAP.PFZ_BATHYMETRY_WMS_URL,{
     layers:'BathymteryImage:gebcobathymtery',format:'image/png',transparent:true,version:'1.1.1',sld_body:PFZ_BATHYMETRY_SLD,opacity:.72,attribution:'INCOIS bathymetry'
   });
@@ -139,12 +540,31 @@ async function buildPfzMapLayers() {
   const chlUrl = APP_CONFIG.MAP.PFZ_CHLOROPHYLL_TILE_URL.replace('{date}', chlDate);
   pfzMapLayers['Chlorophyll-a'] = L.tileLayer(chlUrl, { opacity: .88, maxNativeZoom: 7, maxZoom: 12, crossOrigin: true, className: 'pfz-chlorophyll-layer', attribution: `Chlorophyll-a · ${chlDate}` });
 
-  pfzSelectedLayers=new Set(['PFZ forecast lines','EEZ boundary']);
+  // Initialize Wind Layer Group & Timeline
+  if (!pfzWindLayerGroup) {
+    pfzWindLayerGroup = L.layerGroup();
+  }
+  pfzMapLayers['Wind speed & direction'] = pfzWindLayerGroup;
+
+  // Set default selected layers
+  pfzSelectedLayers=new Set(['PFZ forecast lines','EEZ boundary','Wind speed & direction']);
   pfzMapLayers['EEZ boundary'].addTo(pfzMap);
   pfzMapLayers['PFZ forecast lines'].addTo(pfzMap).bringToFront();
+  pfzMapLayers['Wind speed & direction'].addTo(pfzMap);
+
   pfzLayerControl=L.control.layers(null,pfzMapLayers,{collapsed:innerWidth < 700,position:'topright'}).addTo(pfzMap);
   pfzMap.off('overlayadd',handlePfzLayerChange); pfzMap.off('overlayremove',handlePfzLayerChange);
   pfzMap.on('overlayadd',handlePfzLayerChange); pfzMap.on('overlayremove',handlePfzLayerChange);
+
+  createPfzWindTimelineWidget();
+
+  // Fetch Wind Data and render initial 12h forecast
+  void fetchPfzWindForecastData().then(windData => {
+    if (windData) {
+      renderPfzWindMarkers(0);
+    }
+  });
+
   const generated=Object.values(data).map(item => new Date(item.generatedAt)).filter(date => !Number.isNaN(date.getTime())).sort((a,b)=>b-a)[0];
   ids('pfzMapMeta').textContent=generated ? `Cached from INCOIS WFS \u00b7 ${generated.toLocaleString('en-IN',{timeZone:'Asia/Kolkata',dateStyle:'medium',timeStyle:'short'})} IST` : 'Cached from official INCOIS WFS layers';
   fitPfzCoastalExtent();
@@ -167,6 +587,8 @@ function ensurePfzMap() {
     pfzMap.createPane('pfzLinePane'); pfzMap.getPane('pfzLinePane').style.zIndex=450;
     pfzMap.createPane('pfzCentrePane'); pfzMap.getPane('pfzCentrePane').style.zIndex=460;
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,crossOrigin:true,attribution:'&copy; OpenStreetMap contributors'}).addTo(pfzMap);
+
+    // SST Legend Control
     const sstLegend=L.control({position:'bottomright'});
     sstLegend.onAdd=() => {
       const element=L.DomUtil.create('div','pfz-sst-legend');
@@ -177,6 +599,33 @@ function ensurePfzMap() {
       return element;
     };
     sstLegend.addTo(pfzMap);
+
+    // Wind Speed & Direction Legend Control
+    const windLegend=L.control({position:'bottomright'});
+    windLegend.onAdd=() => {
+      const element=L.DomUtil.create('div','pfz-wind-legend');
+      element.setAttribute('aria-label','Wind speed scale in knots and direction arrows');
+      element.innerHTML=`
+        <strong>💨 Wind Speed · Knots (kt)</strong>
+        <div class="pfz-wind-scale-row">
+          <div class="pfz-wind-scale-bar">
+            <span class="pfz-wind-scale-seg c1" title="Calm / Light: <10 kt"></span>
+            <span class="pfz-wind-scale-seg c2" title="Moderate: 10-20 kt"></span>
+            <span class="pfz-wind-scale-seg c3" title="Strong: 20-30 kt"></span>
+            <span class="pfz-wind-scale-seg c4" title="Gale / Extreme: >30 kt"></span>
+          </div>
+        </div>
+        <div class="pfz-wind-legend-labels">
+          <span>0 kt</span>
+          <span>10</span>
+          <span>20</span>
+          <span>30+ kt</span>
+        </div>
+      `;
+      pfzWindLegendElement=element;
+      return element;
+    };
+    windLegend.addTo(pfzMap);
   }
   void buildPfzMapLayers().catch(error => { ids('pfzMapShareStatus').textContent=`PFZ map data unavailable: ${error.message}`; fitPfzCoastalExtent(); });
   return pfzMap;
@@ -216,7 +665,7 @@ async function capturePfzMapCanvas() {
 
 async function sharePfzMap() {
   const status=ids('pfzMapShareStatus');
-  const selection=[...pfzSelectedLayers].filter(name => !['Bathymetry','SST Anomaly'].includes(name));
+  const selection=[...pfzSelectedLayers].filter(name => !['Bathymetry','SST Anomaly','Wind speed & direction'].includes(name));
   status.textContent='Preparing current PFZ map image\u2026';
   try {
     const mapCanvas=await capturePfzMapCanvas();
