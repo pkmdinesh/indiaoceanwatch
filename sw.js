@@ -106,6 +106,10 @@ self.addEventListener('fetch',event => {
     event.respondWith(networkFirst(event.request));
     return;
   }
+  if (url.pathname.includes('/audio/bulletins/')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
   event.respondWith((async () => {
     const cached = await caches.match(event.request);
     if (cached) return cached;
