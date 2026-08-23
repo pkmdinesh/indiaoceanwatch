@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-23T17:31:43.413Z",
+  "updated": "2026-08-23T17:33:30.181Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 138240,
+      "size": 138432,
       "title": "Ocean State Forecast Advisory (English)",
       "langCode": "en-IN"
     },
@@ -33,7 +33,7 @@
     },
     "bn": {
       "file": "audio/bulletins/bulletin-bn.mp3",
-      "size": 407232,
+      "size": 407040,
       "title": "সমুদ্র পরিস্থিতি পূর্বাভাস (বাংলা)",
       "langCode": "bn-IN"
     },
