@@ -13,7 +13,7 @@ const OSF_POPUP_OPTIONS = Object.freeze({
   maxWidth: 440,
   autoPan: true,
   autoPanPaddingTopLeft: [16, 60],
-  autoPanPaddingBottomRight: [16, 16]
+  autoPanPaddingBottomRight: [16, 75]
 });
 
 function osfStateCoordinates(name) {
