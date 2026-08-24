@@ -57,15 +57,15 @@
         <div class="forecast">
           <article class="forecast-card">
             <div class="forecast-title"><h3>High Wave</h3><div class="forecast-meta"><span class="kind">Wave height</span><span class="issue-date" id="highWaveIssueDate">Issue date —</span></div></div>
-            <div class="severity-board" id="highWaveStates"></div>
+            <div class="severity-board" id="highWaveStates"><div class="severity-loading-placeholder">Loading high wave advisories…</div></div>
           </article>
           <article class="forecast-card">
             <div class="forecast-title"><h3>Swell Surge</h3><div class="forecast-meta"><span class="kind">Long-period swell</span><span class="issue-date" id="swellIssueDate">Issue date —</span></div></div>
-            <div class="severity-board" id="swellStates"></div>
+            <div class="severity-board" id="swellStates"><div class="severity-loading-placeholder">Loading swell surge advisories…</div></div>
           </article>
           <article class="forecast-card current-forecast">
             <div class="forecast-title"><h3>Ocean Currents</h3><div class="forecast-meta"><span class="kind">Current speed</span><span class="issue-date" id="currentIssueDate">Issue date —</span></div></div>
-            <div class="severity-board" id="currentStates"></div>
+            <div class="severity-board" id="currentStates"><div class="severity-loading-placeholder">Loading ocean currents advisories…</div></div>
           </article>
           <article class="forecast-card tide-forecast" id="portTideCard">
             <div class="forecast-title">
@@ -76,10 +76,10 @@
               </div>
             </div>
             <div id="portWarningBanner" class="port-warning-banner level-safe">Checking coastal status…</div>
-            <div id="portWindDisplay" class="port-wind-display"></div>
+            <div id="portWindDisplay" class="port-wind-display"><div class="wind-stat-item"><span class="wind-stat-label">Wind &amp; Sea</span><strong>Calculating wind…</strong></div></div>
             <div class="port-tide-body">
-              <div id="portTideTimesList" class="port-tide-times-list"></div>
-              <div id="portTideChartContainer" class="port-tide-chart-container"></div>
+              <div id="portTideTimesList" class="port-tide-times-list"><div class="tide-horizontal-row"><span class="tide-event-badge high">High Tide</span><span class="empty">Calculating…</span></div></div>
+              <div id="portTideChartContainer" class="port-tide-chart-container"><div class="tide-chart-placeholder">Calculating astronomical tide chart…</div></div>
             </div>
           </article>
         </div>
@@ -456,8 +456,6 @@
     </div>
   </dialog>
   <script src="vendor/leaflet/leaflet.js" defer></script>
-  <script src="vendor/qrcode.min.js" defer></script>
-  <script src="vendor/html2canvas.min.js" defer></script>
   <script src="js/config.js" defer></script>
   <script src="js/app.js" defer></script>
   <script src="js/share.js" defer></script>

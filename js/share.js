@@ -1,10 +1,17 @@
 const cleanShareUrl = () => `${location.origin}${location.pathname}`;
     let shareQrRenderedFor = '';
-    function renderShareQr(url) {
+    async function renderShareQr(url) {
       const container = ids('shareQr');
       if (!container) return;
       if (shareQrRenderedFor === url && container.querySelector('canvas,img')) return;
       container.replaceChildren();
+      if (typeof QRCode === 'undefined') {
+        try {
+          if (typeof loadScript === 'function') await loadScript('vendor/qrcode.min.js');
+        } catch (e) {
+          console.warn('Could not load qrcode.min.js', e);
+        }
+      }
       if (typeof QRCode === 'undefined') {
         const error = document.createElement('p');
         error.className = 'share-qr-error';

@@ -108,7 +108,24 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
     }
 
 var escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
-    var SEISMIC_MAP_DEFAULT_ZOOM = APP_CONFIG.MAP.SEISMIC_DEFAULT_ZOOM;
+globalThis.loadScript = function(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) {
+      if (existing.dataset.loaded === 'true') return resolve();
+      existing.addEventListener('load', () => resolve());
+      existing.addEventListener('error', reject);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = src;
+    script.defer = true;
+    script.onload = () => { script.dataset.loaded = 'true'; resolve(); };
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+};
+var SEISMIC_MAP_DEFAULT_ZOOM = APP_CONFIG.MAP.SEISMIC_DEFAULT_ZOOM;
     var seismicMap = null;
     var seismicEpicentreMarker = null;
     var seismicBathymetryLayer = null;

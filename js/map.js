@@ -573,6 +573,9 @@ async function shareOsfMap() {
   const selected=[...osfSelectedServices];
   const selectionTitle=selected.length ? selected.join(' + ') : 'No layers selected';
   const status=ids('osfMapShareStatus');
+  if (typeof html2canvas !== 'function' && typeof loadScript === 'function') {
+    try { await loadScript('vendor/html2canvas.min.js'); } catch {}
+  }
   if (typeof html2canvas !== 'function') { status.textContent='Map image sharing could not be loaded.'; return; }
   status.textContent='Preparing current map image…';
   try {

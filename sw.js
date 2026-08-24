@@ -87,6 +87,25 @@ async function statusNetworkFirst(request) {
   }
 }
 
+async function vendorCacheFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
+  if (cached) {
+    const headers = new Headers(cached.headers);
+    headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+    return new Response(cached.body, {
+      status: cached.status,
+      statusText: cached.statusText,
+      headers
+    });
+  }
+  const response = await fetch(request);
+  if (response.ok) {
+    await cache.put(request, response.clone());
+  }
+  return response;
+}
+
 self.addEventListener('fetch',event => {
   const url = new URL(event.request.url);
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
@@ -96,6 +115,10 @@ self.addEventListener('fetch',event => {
   }
   if (url.pathname.endsWith('/status.json')) {
     event.respondWith(statusNetworkFirst(event.request));
+    return;
+  }
+  if (url.pathname.includes('/vendor/')) {
+    event.respondWith(vendorCacheFirst(event.request));
     return;
   }
   if (url.pathname.endsWith('/announcements.js')) {

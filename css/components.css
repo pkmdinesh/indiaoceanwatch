@@ -437,6 +437,12 @@
 #announcementCard:not([hidden]){min-height:68px}
 #announcementMessage{min-height:26px}
 #portWarningBanner{min-height:36px}
+.port-wind-display{min-height:58px}
+.port-tide-times-list{min-height:64px}
+.port-tide-chart-container{min-height:110px}
+.severity-board{min-height:140px}
+.forecast-card{min-height:220px}
+.severity-loading-placeholder,.tide-chart-placeholder{color:#718287;font-size:11px;font-style:italic;padding:12px 6px;text-align:center}
 .brand-image{width:36px;height:36px;aspect-ratio:1/1}
 .service-img,.service-logo{width:48px;height:42px;aspect-ratio:48/42}
 .cyclone-icon{width:38px;height:38px;aspect-ratio:1/1}
