@@ -5,6 +5,7 @@ var osfMapOpenedFromUrl = false;
 var osfServiceLayers = {};
 var osfSelectedServices = new Set();
 var osfCumulativeLayer = null;
+var osfTidalLayer = null;
 var osfRequestedService = null;
 var osfDistrictPolygonsPromise = null;
 
@@ -219,20 +220,60 @@ function computeAstronomicalTidalState(now = new Date()) {
   let phaseLabel = 'Moderate / Transitioning Tide';
   let riskNote = 'Normal tidal range. Standard coastal caution during peak wave hours.';
   let badgeClass = 'moderate';
+  let tideTypeShort = 'Moderate Tide';
 
   if (isSpring) {
     phase = 'spring';
     phaseLabel = 'Spring Tide (High Amplitude / Inundation Risk)';
+    tideTypeShort = 'Spring Tide (Max Range)';
     riskNote = 'Maximum tidal amplitude (Spring Tide). Coinciding high waves or swell surge will cause significant coastal overtopping and inundation.';
     badgeClass = 'spring';
   } else if (isNeap) {
     phase = 'neap';
     phaseLabel = 'Neap Tide (Low Amplitude / Lower Risk)';
+    tideTypeShort = 'Neap Tide (Mild Range)';
     riskNote = 'Minimum tidal amplitude (Neap Tide). Reduced inundation risk even with moderate swell action.';
     badgeClass = 'neap';
   }
 
-  return { moonAge: moonAge.toFixed(1), phase, phaseLabel, riskNote, badgeClass };
+  // Calculate current diurnal tide elevation trend (Rising vs Falling)
+  const tHours = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+  const m2Speed = 2 * Math.PI / 12.4206;
+  const currentHarmonic = Math.cos(m2Speed * tHours);
+  const futureHarmonic = Math.cos(m2Speed * (tHours + 0.25));
+  const isRising = futureHarmonic >= currentHarmonic;
+  const tideStateLabel = isRising ? '▲ Rising (Flood)' : '▼ Falling (Ebb)';
+  const tideStateClass = isRising ? 'rising' : 'falling';
+
+  // Moon Phase Icon & Name
+  let moonIcon = '🌓';
+  if (moonAge < 1.8 || moonAge > 27.7) moonIcon = '🌑 New Moon';
+  else if (moonAge < 5.5) moonIcon = '🌒 Waxing Crescent';
+  else if (moonAge < 9.2) moonIcon = '🌓 First Quarter';
+  else if (moonAge < 12.9) moonIcon = '🌔 Waxing Gibbous';
+  else if (moonAge < 16.6) moonIcon = '🌕 Full Moon';
+  else if (moonAge < 20.3) moonIcon = '🌖 Waning Gibbous';
+  else if (moonAge < 24.0) moonIcon = '🌗 Last Quarter';
+  else moonIcon = '🌘 Waning Crescent';
+
+  // Update OSF Tide Status Banner (Bottom Right Corner)
+  const bannerRegime = ids('osfTideBannerRegime');
+  const bannerState = ids('osfTideBannerState');
+  const bannerType = ids('osfTideBannerType');
+  if (bannerRegime) {
+    bannerRegime.className = `osf-tide-banner-regime ${badgeClass}`;
+    bannerRegime.textContent = isSpring ? 'Spring Tide' : isNeap ? 'Neap Tide' : 'Moderate';
+  }
+  if (bannerState) {
+    bannerState.className = `osf-tide-banner-val ${tideStateClass}`;
+    bannerState.textContent = tideStateLabel;
+  }
+  if (bannerType) {
+    bannerType.className = `osf-tide-banner-val`;
+    bannerType.textContent = `${moonIcon} · ${tideTypeShort}`;
+  }
+
+  return { moonAge: moonAge.toFixed(1), phase, phaseLabel, riskNote, badgeClass, tideTypeShort, isRising, tideStateLabel, moonIcon };
 }
 
 function createOsfTidalStationLayer() {
@@ -322,7 +363,15 @@ function updateOsfComposite() {
 }
 
 function handleOsfLayerSelection(event) {
-  if (!event?.name || !osfServiceLayers[event.name]) return;
+  if (!event?.name) return;
+  if (event.name === 'Tidal Phase & High Tide') {
+    const banner = ids('osfTideBanner');
+    if (banner) {
+      banner.hidden = (event.type === 'overlayremove');
+    }
+    return;
+  }
+  if (!osfServiceLayers[event.name]) return;
   if (event.type === 'overlayadd') osfSelectedServices.add(event.name);
   else if (event.type === 'overlayremove') osfSelectedServices.delete(event.name);
   updateOsfComposite();
@@ -350,6 +399,7 @@ async function buildCumulativeOsfMapLayers(data) {
   ids('osfMapShareStatus').textContent='Loading coastal district polygons…';
   if (osfLayerControl) osfLayerControl.remove();
   if (osfCumulativeLayer && osfMap.hasLayer(osfCumulativeLayer)) osfMap.removeLayer(osfCumulativeLayer);
+  if (osfTidalLayer && osfMap.hasLayer(osfTidalLayer)) osfMap.removeLayer(osfTidalLayer);
   Object.values(osfServiceLayers).forEach(layer => { if (osfMap.hasLayer(layer)) osfMap.removeLayer(layer); });
   const polygonData = await loadOsfDistrictPolygons();
   const services = [['High Wave',data?.highWave],['Swell Surge',data?.swellSurge],['Ocean Currents',data?.oceanCurrent]];
@@ -393,7 +443,7 @@ async function buildCumulativeOsfMapLayers(data) {
       const level = osfHighestSeverity(allAdvisories);
       const sections = item.services.map(entry => osfMessageHtml(entry.service,entry.advisories,entry.group,entry.advisories.some(advisory => advisory.severity === level) ? level : null)).join('');
       polygon._osfServices = item.services;
-      polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(feature.properties.District))} · ${escapeHtml(titleCase(feature.properties.STATE))}</strong><p><b>Cumulative status:</b> ${escapeHtml(severityLabel[level])}</p>${sections}</div>`,OSF_POPUP_OPTIONS);
+      polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(polygon.feature.properties.District))} · ${escapeHtml(titleCase(polygon.feature.properties.STATE))}</strong><p><b>Cumulative status:</b> ${escapeHtml(severityLabel[level])}</p>${sections}</div>`,OSF_POPUP_OPTIONS);
       if (level !== 'noThreat') {
         polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, 'Cumulative', allAdvisories, level), { sticky: true, className: 'osf-district-tooltip' });
       }
@@ -401,8 +451,7 @@ async function buildCumulativeOsfMapLayers(data) {
   });
 
   // Add Tidal Phase & High Tide Overlay
-  const tidalLayer = createOsfTidalStationLayer();
-  osfServiceLayers['Tidal Phase & High Tide'] = tidalLayer;
+  osfTidalLayer = createOsfTidalStationLayer();
 
   Object.entries(osfServiceLayers).forEach(([service,layer]) => {
     if (!osfRequestedService || osfRequestedService === service) {
@@ -410,13 +459,29 @@ async function buildCumulativeOsfMapLayers(data) {
       osfSelectedServices.add(service);
     }
   });
-  osfLayerControl = L.control.layers(null,osfServiceLayers,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
+
+  // Add tidal layer to map if no specific service filter was requested
+  if (!osfRequestedService && osfTidalLayer) {
+    osfTidalLayer.addTo(osfMap);
+  }
+
+  const osfOverlays = {
+    ...osfServiceLayers,
+    'Tidal Phase & High Tide': osfTidalLayer
+  };
+
+  osfLayerControl = L.control.layers(null,osfOverlays,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
   osfMap.off('overlayadd',handleOsfLayerSelection); osfMap.off('overlayremove',handleOsfLayerSelection);
   osfMap.on('overlayadd',handleOsfLayerSelection); osfMap.on('overlayremove',handleOsfLayerSelection);
   osfMap.invalidateSize({animate:false});
   fitOsfVisibleBounds();
   ids('osfMapMeta').textContent = services.map(([name,group]) => `${name}: ${group?.issueDate || '—'}`).join(' · ');
   updateOsfComposite();
+
+  const banner = ids('osfTideBanner');
+  if (banner) {
+    banner.hidden = !osfTidalLayer || !osfMap.hasLayer(osfTidalLayer);
+  }
 }
 
 async function buildOsfMapLayers(data) {
@@ -512,6 +577,10 @@ async function openOsfMap(service = null) {
       });
       updateOsfComposite();
       fitOsfVisibleBounds();
+    }
+    const banner = ids('osfTideBanner');
+    if (banner) {
+      banner.hidden = !osfTidalLayer || !map.hasLayer(osfTidalLayer);
     }
   });
 }
