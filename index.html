@@ -11,18 +11,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Ocean Watch">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icons/ocean-watch-v3-apple.png">
-  <link rel="icon" type="image/png" href="icons/ocean-watch-v3-192.png">
-  <link rel="shortcut icon" href="icons/ocean-watch-v3-192.png">
-  <meta name="description" content="Coastal advisory status for India: tsunami, cyclone, storm surge, ocean state forecasts, and potential fishing zones.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://pkmdinesh.github.io/indiaoceanwatch/">
-  <meta property="og:title" content="Ocean Watch · Coastal Advisory Status">
-  <meta property="og:description" content="Tsunami, cyclone, storm surge, ocean state forecasts, and potential fishing zones for India.">
   <title>Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</title>
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/print.css" media="print">
+  <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
   <main class="dashboard">
@@ -139,7 +131,7 @@
 
       <section class="panel pfz-card" aria-labelledby="pfz-title">
         <div class="panel-head">
-          <img class="service-logo" src="assets/potential-fishing-zone-icon.jpg" alt="Fish swimming in ocean currents">
+          <img class="service-logo" src="assets/potential-fishing-zone-icon.jpg" alt="Fish swimming in ocean currents" width="48" height="42" loading="lazy">
           <div><h2 id="pfz-title" class="pfz-title">Potential Fishing Zone</h2><p class="panel-kicker">Today’s advisory sectors</p></div>
           <div class="osf-map-actions"><button class="source card-action-button pfz-gps-button" id="pfzGpsBtn" type="button" aria-label="Calculate compass bearing and nautical miles to nearest PFZ">📍 Near Me</button><button class="source card-action-button osf-map-button pfz-map-button" id="openPfzMap" type="button">Visualize</button><a class="source card-action-button pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a></div>
         </div>
@@ -173,7 +165,7 @@
           <h2 id="contact-title">Ocean Information Portal</h2>
           <p class="contact-organisation">Under Beta Testing</p>
         </div>
-        <img class="contact-image" src="1786177913304.png" alt="Under Beta Testing">
+        <img class="contact-image" src="1786177913304.png" alt="Under Beta Testing" width="320" height="180" loading="lazy">
       </section>
 
     </div>
@@ -206,7 +198,7 @@
   </dialog>
   <dialog class="share-dialog" id="shareDialog" aria-labelledby="shareDialogTitle">
     <div class="advisory-dialog-head">
-      <img class="share-dialog-logo" src="assets/ocean-watch-v3-512.png" alt="Ocean Watch logo">
+      <img class="share-dialog-logo" src="icons/ocean-watch-v3-192.png" alt="Ocean Watch logo" width="48" height="48" loading="lazy">
       <div class="share-dialog-heading">
         <h2 id="shareDialogTitle">Share Ocean Watch</h2>
         <p>Scan the QR code or share the page link</p>

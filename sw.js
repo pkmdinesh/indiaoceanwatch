@@ -135,7 +135,15 @@ self.addEventListener('fetch',event => {
   }
   event.respondWith((async () => {
     const cached = await caches.match(event.request);
-    if (cached) return cached;
+    if (cached) {
+      const headers = new Headers(cached.headers);
+      headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+      return new Response(cached.body, {
+        status: cached.status,
+        statusText: cached.statusText,
+        headers
+      });
+    }
     const response = await fetch(event.request);
     if (response.ok) {
       const cache = await caches.open(CACHE_NAME);

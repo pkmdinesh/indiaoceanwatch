@@ -208,11 +208,6 @@ let activeBathymetryRequest = 0;
       ids('seismicDialogMeta').textContent = bulletin?.issuedAt ? `${bulletinReference(bulletin)} · Issued ${bulletin.issuedAt}` : 'Earthquake event information';
       ids('eventCoastDistance').textContent = `Distance from nearest coast: ${coastDistanceText}`;
       currentSeismicShareData={magnitude,location,origin:[originDate,originTime].filter(Boolean).join(' '),coordinates:Number.isFinite(latitude)&&Number.isFinite(longitude) ? `${latitude}°, ${longitude}°` : '',coastDistance:coastDistanceText,bulletin:bulletinReference(bulletin),evaluation:bulletin?.message || ''};
-      ids('eventMagnitude').textContent = `M${magnitude}`;
-      ids('eventLocation').textContent = location;
-      ids('eventOriginTime').textContent = [originDate,originTime].filter(Boolean).join(' ');
-      ids('eventCoordinates').textContent = Number.isFinite(latitude) && Number.isFinite(longitude) ? `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°` : 'Coordinates unavailable';
-      ids('eventDepth').textContent = String(depth).includes('km') ? String(depth) : `${depth} km`;
       void updateTectonicSetting(latitude, longitude, topoBathy, bathymetryRequestId, savedBathymetry, savedSetting, savedElevation);
       const facts = [
         ['Magnitude',`M${magnitude}`],['Depth',String(depth).includes('km') ? depth : `${depth} km`],
