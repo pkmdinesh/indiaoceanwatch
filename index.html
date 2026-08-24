@@ -21,10 +21,7 @@
   <meta property="og:title" content="Ocean Watch · Coastal Advisory Status">
   <meta property="og:description" content="Tsunami, cyclone, storm surge, ocean state forecasts, and potential fishing zones for India.">
   <title>Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</title>
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/print.css" media="print">
 </head>
 <body>
@@ -56,15 +53,30 @@
         <div class="forecast">
           <article class="forecast-card">
             <div class="forecast-title"><h3>High Wave</h3><div class="forecast-meta"><span class="kind">Wave height</span><span class="issue-date" id="highWaveIssueDate">Issue date —</span></div></div>
-            <div class="severity-board" id="highWaveStates"><div class="severity-loading-placeholder">Loading high wave advisories…</div></div>
+            <div class="severity-board" id="highWaveStates">
+              <div class="severity-row"><span class="severity-row-label warning">Warning</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label alert">Alert</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label watch">Watch</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label no-threat">No Threat</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+            </div>
           </article>
           <article class="forecast-card">
             <div class="forecast-title"><h3>Swell Surge</h3><div class="forecast-meta"><span class="kind">Long-period swell</span><span class="issue-date" id="swellIssueDate">Issue date —</span></div></div>
-            <div class="severity-board" id="swellStates"><div class="severity-loading-placeholder">Loading swell surge advisories…</div></div>
+            <div class="severity-board" id="swellStates">
+              <div class="severity-row"><span class="severity-row-label warning">Warning</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label alert">Alert</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label watch">Watch</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label no-threat">No Threat</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+            </div>
           </article>
           <article class="forecast-card current-forecast">
             <div class="forecast-title"><h3>Ocean Currents</h3><div class="forecast-meta"><span class="kind">Current speed</span><span class="issue-date" id="currentIssueDate">Issue date —</span></div></div>
-            <div class="severity-board" id="currentStates"><div class="severity-loading-placeholder">Loading ocean currents advisories…</div></div>
+            <div class="severity-board" id="currentStates">
+              <div class="severity-row"><span class="severity-row-label warning">Warning</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label alert">Alert</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label watch">Watch</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+              <div class="severity-row"><span class="severity-row-label no-threat">No Threat</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
+            </div>
           </article>
           <article class="forecast-card tide-forecast" id="portTideCard">
             <div class="forecast-title">
