@@ -213,16 +213,15 @@ let activeBathymetryRequest = 0;
       ids('eventOriginTime').textContent = [originDate,originTime].filter(Boolean).join(' ');
       ids('eventCoordinates').textContent = Number.isFinite(latitude) && Number.isFinite(longitude) ? `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°` : 'Coordinates unavailable';
       ids('eventDepth').textContent = String(depth).includes('km') ? String(depth) : `${depth} km`;
-      updateTectonicBathymetry(latitude,longitude,savedBathymetry,savedSetting,savedElevation);
-      ids('eventDetailsList').replaceChildren(...[
-        ['Magnitude',`M${magnitude}`],
-        ['Location',location],
-        ['Origin time',[originDate,originTime].filter(Boolean).join(' ')],
-        ['Coordinates',Number.isFinite(latitude) && Number.isFinite(longitude) ? `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°` : 'Unavailable'],
-        ['Focal depth',String(depth).includes('km') ? String(depth) : `${depth} km`]
-      ].map(([label,value]) => {
-        const wrapper = document.createElement('div'); wrapper.className='seismic-kv-item';
-        const term = document.createElement('dt'); const detail = document.createElement('dd');
+      void updateTectonicSetting(latitude, longitude, topoBathy, bathymetryRequestId, savedBathymetry, savedSetting, savedElevation);
+      const facts = [
+        ['Magnitude',`M${magnitude}`],['Depth',String(depth).includes('km') ? depth : `${depth} km`],
+        ['Date',originDate || String(originTime).split(' ')[0] || '—'],['Origin time',originDate ? originTime : String(originTime).replace(/^\d{4}-\d{2}-\d{2}\s*/, '')],
+        ['Latitude',Number.isFinite(latitude) ? `${latitude}°` : '—'],['Longitude',Number.isFinite(longitude) ? `${longitude}°` : '—'],
+        ['Location',location],['Bulletin',bulletinReference(bulletin)]
+      ];
+      ids('eventFacts').replaceChildren(...facts.map(([label,value]) => {
+        const wrapper=document.createElement('div'); const term=document.createElement('dt'); const detail=document.createElement('dd');
         term.textContent=label; detail.textContent=value; wrapper.append(term,detail); return wrapper;
       }));
       const hasBulletin = Boolean(bulletin);
@@ -245,29 +244,30 @@ let activeBathymetryRequest = 0;
 
       if (hasCoordinates) {
         if (typeof ensureLeaflet === 'function') await ensureLeaflet();
-        const activeMap = ensureSeismicMap();
-        if (activeMap) {
-          const popupHtml =
-            `<strong>M${magnitude} · ${escapeHtml(location)}</strong><br>` +
-            `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°<br>` +
-            `Depth ${escapeHtml(String(depth).includes('km') ? String(depth) : `${depth} km`)}`;
+        requestAnimationFrame(() => {
+          const activeMap = ensureSeismicMap();
+          if (activeMap) {
+            const popupHtml =
+              `<strong>M${magnitude} · ${escapeHtml(location)}</strong><br>` +
+              `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°<br>` +
+              `Depth ${escapeHtml(String(depth).includes('km') ? String(depth) : `${depth} km`)}`;
 
-          activeMap.invalidateSize();
-          activeMap.setView([latitude, longitude], SEISMIC_MAP_DEFAULT_ZOOM, { animate: false });
-          if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
-          const earthquakeIcon = L.divIcon({
-            className: '',
-            html: '<div class="earthquake-leaflet-marker"></div>',
-            iconSize: [22,22],
-            iconAnchor: [11,11]
-          });
-          seismicEpicentreMarker = L.marker([latitude, longitude], {
-            icon: earthquakeIcon,
-            keyboard: false,
-            title: `M${magnitude} earthquake · ${location}`
-          }).addTo(activeMap);
-          seismicEpicentreMarker.bindPopup(popupHtml);
-          seismicEpicentreMarker.openPopup();
-        }
+            activeMap.invalidateSize();
+            activeMap.setView([latitude, longitude], SEISMIC_MAP_DEFAULT_ZOOM, { animate: false });
+            if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
+            const earthquakeIcon = L.divIcon({
+              className: '',
+              html: '<div class="earthquake-leaflet-marker"></div>',
+              iconSize: [22,22],
+              iconAnchor: [11,11]
+            });
+            seismicEpicentreMarker = L.marker([latitude, longitude], {
+              icon: earthquakeIcon,
+              keyboard: false,
+              title: `M${magnitude} earthquake · ${location}`
+            }).addTo(activeMap);
+            seismicEpicentreMarker.bindPopup(popupHtml).openPopup();
+          }
+        });
       }
     }
