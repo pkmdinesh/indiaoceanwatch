@@ -131,6 +131,13 @@ function pfzDateFromJulian(properties) {
   return `${String(date.getUTCDate()).padStart(2,'0')}/${String(date.getUTCMonth()+1).padStart(2,'0')}/${date.getUTCFullYear()}`;
 }
 
+const PFZ_POPUP_OPTIONS = Object.freeze({
+  maxWidth: 320,
+  autoPan: true,
+  autoPanPaddingTopLeft: [16, 60],
+  autoPanPaddingBottomRight: [16, 16]
+});
+
 function createPfzVectorLayers(data) {
   const lines = L.geoJSON(data['PFZ forecast lines'],{
     pane:'pfzLinePane',
@@ -141,7 +148,7 @@ function createPfzVectorLayers(data) {
       layer.bindPopup(pfzPopup(pfzProperty(p,'SECTORNAME') || 'PFZ forecast line',[
         pfzDateFromJulian(p) ? `Date: ${pfzDateFromJulian(p)}` : '',
         pfzProperty(p,'UID') ? `Feature ${pfzProperty(p,'UID')}` : ''
-      ]));
+      ]), PFZ_POPUP_OPTIONS);
     }
   });
   const sectors = L.geoJSON(data['PFZ sectors'],{
@@ -150,14 +157,14 @@ function createPfzVectorLayers(data) {
     style:{color:'#17868f',weight:1.2,opacity:.9,fillColor:'#76d7df',fillOpacity:.12},
     onEachFeature:(feature,layer) => {
       const p=feature.properties || {};
-      layer.bindPopup(pfzPopup(pfzProperty(p,'SECTORNAME') || 'PFZ sector',[pfzProperty(p,'SEC_ID')]));
+      layer.bindPopup(pfzPopup(pfzProperty(p,'SECTORNAME') || 'PFZ sector',[pfzProperty(p,'SEC_ID')]), PFZ_POPUP_OPTIONS);
     }
   });
   const eez = L.geoJSON(data['EEZ boundary'],{
     pane:'pfzEezPane',
     smoothFactor:1.5,
     style:{color:'#082f5b',weight:2,opacity:.9,dashArray:'7 5'},
-    onEachFeature:(feature,layer) => layer.bindPopup(pfzPopup('India EEZ boundary'))
+    onEachFeature:(feature,layer) => layer.bindPopup(pfzPopup('India EEZ boundary'), PFZ_POPUP_OPTIONS)
   });
   const landingCentres = L.geoJSON(data['Landing centres'],{
     pane:'pfzCentrePane',
@@ -169,7 +176,7 @@ function createPfzVectorLayers(data) {
         pfzProperty(p,'SECTOR_NAM'),
         pfzProperty(p,'FORECAST_D') ? `Forecast: ${pfzProperty(p,'FORECAST_D')}` : '',
         pfzProperty(p,'VALIDITY_D') ? `Valid: ${pfzProperty(p,'VALIDITY_D')}` : ''
-      ]),{maxWidth:300});
+      ]), PFZ_POPUP_OPTIONS);
     }
   });
   return {'PFZ forecast lines':lines,'PFZ sectors':sectors,'EEZ boundary':eez,'Landing centres':landingCentres};
@@ -301,7 +308,7 @@ function renderPfzWindMarkers(intervalIdx = 0) {
       </div>
     `;
 
-    marker.bindPopup(popupHtml);
+    marker.bindPopup(popupHtml, PFZ_POPUP_OPTIONS);
     pfzWindLayerGroup.addLayer(marker);
   });
 
@@ -519,10 +526,14 @@ function getRecentIsoDate(daysAgo = 2) {
 
 function fitPfzCoastalExtent() {
   if (!pfzMap || !window.L) return;
-  const preferred=pfzMapLayers['PFZ forecast lines'];
-  const bounds=preferred?.getBounds?.();
-  if (bounds?.isValid()) pfzMap.fitBounds(bounds,{padding:innerWidth < 700 ? [10,10] : [22,22],maxZoom:6,animate:false});
-  else pfzMap.fitBounds([[5,65],[24,100]],{padding:[12,12],maxZoom:5,animate:false});
+  const isMobile = innerWidth < 700;
+  const preferred = pfzMapLayers['PFZ forecast lines'];
+  const bounds = preferred?.getBounds?.();
+  if (bounds?.isValid()) {
+    pfzMap.fitBounds(bounds, { padding: isMobile ? [8, 8] : [20, 20], maxZoom: 6, animate: false });
+  } else {
+    pfzMap.setView([15, 79], isMobile ? 4 : 5, { animate: false });
+  }
 }
 
 async function buildPfzMapLayers() {
@@ -588,7 +599,7 @@ function handlePfzLayerChange(event) {
 function ensurePfzMap() {
   if (!window.L) return null;
   if (!pfzMap) {
-    pfzMap=L.map('pfzMapCanvas',{zoomControl:true,attributionControl:true,minZoom:3,maxZoom:12,preferCanvas:false});
+    pfzMap=L.map('pfzMapCanvas',{zoomControl:true,attributionControl:true,minZoom:3,maxZoom:12,preferCanvas:false}).setView([15,79],innerWidth < 700 ? 4 : 5);
     pfzMap.createPane('pfzSectorPane'); pfzMap.getPane('pfzSectorPane').style.zIndex=410;
     pfzMap.createPane('pfzEezPane'); pfzMap.getPane('pfzEezPane').style.zIndex=420;
     pfzMap.createPane('pfzLinePane'); pfzMap.getPane('pfzLinePane').style.zIndex=450;

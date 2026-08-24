@@ -401,13 +401,46 @@
 .pfz-sst-legend[hidden],
 .pfz-wind-timeline[hidden]{display:none!important}
 
-/* Mobile Popup Screen Alignment */
+/* Mobile Leaflet Popup Styling for OSF & PFZ maps */
 @media(max-width:700px){
-  .osf-map-dialog .leaflet-popup{position:absolute!important;left:10px!important;right:10px!important;bottom:10px!important;top:auto!important;transform:none!important;margin:0!important;width:auto!important;max-width:none!important}
-  .osf-map-dialog .leaflet-popup-tip-container{display:none!important}
-  .osf-map-dialog .leaflet-popup-content-wrapper{width:100%!important;max-width:none!important;max-height:48dvh!important;border-radius:14px!important;box-shadow:0 8px 24px rgba(8,47,60,.35)!important;border:1px solid rgba(8,47,60,.2)!important}
-  .osf-map-dialog .leaflet-popup-content{margin:10px 12px!important;max-height:42dvh!important}
+  .osf-map-dialog .leaflet-popup,
+  .pfz-map-dialog .leaflet-popup{
+    max-width:calc(100vw - 28px)!important;
+  }
+  .osf-map-dialog .leaflet-popup-content-wrapper,
+  .pfz-map-dialog .leaflet-popup-content-wrapper{
+    width:auto!important;
+    max-width:calc(100vw - 28px)!important;
+    max-height:54dvh!important;
+    border-radius:12px!important;
+    box-shadow:0 8px 24px rgba(8,47,60,.35)!important;
+    overflow:hidden!important;
+  }
+  .osf-map-dialog .leaflet-popup-content,
+  .pfz-map-dialog .leaflet-popup-content{
+    margin:10px 12px!important;
+    max-height:46dvh!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  .osf-popup,
+  .pfz-popup{
+    min-width:0!important;
+    width:100%!important;
+    max-width:none!important;
+  }
 }
+
+/* Layout Shift Prevention & Containment */
+.content{min-height:70vh;contain:paint layout}
+#announcementCard:not([hidden]){min-height:68px}
+#announcementMessage{min-height:26px}
+#portWarningBanner{min-height:36px}
+.brand-image{width:36px;height:36px;aspect-ratio:1/1}
+.service-img,.service-logo{width:48px;height:42px;aspect-ratio:48/42}
+.cyclone-icon{width:38px;height:38px;aspect-ratio:1/1}
+
 
 
 

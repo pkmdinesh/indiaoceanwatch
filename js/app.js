@@ -104,7 +104,7 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
         const separator=document.createElement('span'); separator.className='announcement-latest-separator'; separator.textContent='/';
         return [separator,link];
       }));
-      card.hidden = active.length === 0 && latest.length === 0;
+      card.classList.toggle('empty', active.length === 0 && latest.length === 0);
     }
 
 var escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
