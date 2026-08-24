@@ -16,7 +16,6 @@ globalThis.OCEAN_WATCH_CONFIG = Object.freeze({
   }),
   MAP: Object.freeze({
     SEISMIC_DEFAULT_ZOOM: 6,
-    MAPTILER_API_KEY: 'YOUR_MAPTILER_API_KEY',
     OSF_DISTRICT_POLYGONS_URL: 'https://samudra.incois.gov.in/incoismobileappdata/rest/incois/districtpolygons',
     PFZ_LINES_URL: './data/pfz-lines.geojson',
     PFZ_SECTORS_URL: './data/pfz-sectors.geojson',

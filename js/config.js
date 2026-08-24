@@ -1,7 +1,7 @@
 /* Ocean Watch settings that are expected to change between deployments.
    Edit values here; application modules and the service worker share them. */
 globalThis.OCEAN_WATCH_CONFIG = Object.freeze({
-  CACHE_VERSION: '148',
+  CACHE_VERSION: '149',
   CACHE_PREFIX: 'ocean-watch',
   PUBLIC_URL: 'https://pkmdinesh.github.io/indiaoceanwatch/',
   AGE_HOURS: Object.freeze({
@@ -15,7 +15,6 @@ globalThis.OCEAN_WATCH_CONFIG = Object.freeze({
   }),
   MAP: Object.freeze({
     SEISMIC_DEFAULT_ZOOM: 6,
-    MAPTILER_API_KEY: 'YOUR_MAPTILER_API_KEY',
     OSF_DISTRICT_POLYGONS_URL: './data/osf-district-polygons.geojson',
     OSF_REMOTE_DISTRICT_POLYGONS_URL: 'https://samudra.incois.gov.in/incoismobileappdata/rest/incois/districtpolygons',
     PFZ_LINES_URL: './data/pfz-lines.geojson',

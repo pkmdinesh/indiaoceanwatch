@@ -377,10 +377,37 @@
 .osf-tide-pin.neap{background:#10b981;color:#fff}
 .osf-tide-pin.moderate{background:#f59e0b;color:#fff}
 .osf-tide-label{font-size:8.5px;font-weight:800;background:rgba(8,47,60,.9);color:#fff;padding:1px 4px;border-radius:3px;margin-top:1px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.3)}
-.osf-tide-risk-banner{display:inline-block;padding:3px 8px;border-radius:4px;font-size:10.5px;font-weight:800;margin-bottom:6px}
+.osf-tide-risk-banner{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:800;margin-bottom:4px}
 .osf-tide-risk-banner.spring{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
 .osf-tide-risk-banner.neap{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}
 .osf-tide-risk-banner.moderate{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+
+/* Compact OSF Tide Popup */
+.osf-tide-popup{min-width:170px;padding:2px 0}
+.osf-tide-header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px}
+.osf-tide-header strong{font-size:12px;color:#082f3c}
+.osf-tide-state{font-size:9.5px;color:#5b7279;font-weight:700}
+.osf-tide-grid{display:grid;gap:2.5px;background:#f8fafc;padding:4px 7px;border-radius:5px;border:1px solid #cbd5e1;font-size:10px}
+.osf-tide-row{display:flex;justify-content:space-between;gap:8px}
+.osf-tide-row span{color:#475569}
+.osf-tide-row strong{color:#0284c7;font-weight:800}
+
+/* Leaflet Layers Toggle Icon */
+.leaflet-control-layers-toggle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='22' height='22'%3E%3Cpath fill='%23082f3c' d='M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 13l-9-4.09V15l9 4.09 9-4.09v-4.09L12 15zm0 4l-9-4.09V19l9 4.09 9-4.09v-4.09L12 19z'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:center!important;background-size:20px 20px!important}
+.leaflet-retina .leaflet-control-layers-toggle{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='22' height='22'%3E%3Cpath fill='%23082f3c' d='M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 13l-9-4.09V15l9 4.09 9-4.09v-4.09L12 15zm0 4l-9-4.09V19l9 4.09 9-4.09v-4.09L12 19z'/%3E%3C/svg%3E")!important;background-size:22px 22px!important}
+
+/* PFZ & OSF Element Hidden Enforcers */
+.pfz-wind-legend[hidden],
+.pfz-sst-legend[hidden],
+.pfz-wind-timeline[hidden]{display:none!important}
+
+/* Mobile Popup Screen Alignment */
+@media(max-width:700px){
+  .osf-map-dialog .leaflet-popup{position:absolute!important;left:10px!important;right:10px!important;bottom:10px!important;top:auto!important;transform:none!important;margin:0!important;width:auto!important;max-width:none!important}
+  .osf-map-dialog .leaflet-popup-tip-container{display:none!important}
+  .osf-map-dialog .leaflet-popup-content-wrapper{width:100%!important;max-width:none!important;max-height:48dvh!important;border-radius:14px!important;box-shadow:0 8px 24px rgba(8,47,60,.35)!important;border:1px solid rgba(8,47,60,.2)!important}
+  .osf-map-dialog .leaflet-popup-content{margin:10px 12px!important;max-height:42dvh!important}
+}
 
 
 

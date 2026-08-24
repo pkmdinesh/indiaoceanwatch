@@ -148,8 +148,7 @@ loadStatus().catch(()=>{});
       printOpenedDetails = [...document.querySelectorAll('details:not([open])')];
       printOpenedDetails.forEach(detail => { detail.open = true; });
       if (ids('seismicDialog')?.open && seismicMap) {
-        if (seismicMapMode === 'maptiler') seismicMap.resize();
-        else seismicMap.invalidateSize({animate:false});
+        seismicMap.invalidateSize({animate:false});
       }
     });
     window.addEventListener('afterprint',() => {

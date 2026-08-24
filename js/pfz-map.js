@@ -486,9 +486,20 @@ var pfzChlorophyllDataDate = null;
 
 function updatePfzMapStatus() {
   const selected=[...pfzSelectedLayers];
-  if (pfzSstLegendElement) pfzSstLegendElement.hidden=!selected.includes('SST Anomaly');
-  if (pfzWindLegendElement) pfzWindLegendElement.hidden=!selected.includes('Wind speed & direction');
-  if (pfzWindTimelineElement) pfzWindTimelineElement.hidden=!selected.includes('Wind speed & direction');
+  const hasWind = selected.includes('Wind speed & direction');
+  const hasSst = selected.includes('SST Anomaly');
+  if (pfzSstLegendElement) {
+    pfzSstLegendElement.hidden = !hasSst;
+    pfzSstLegendElement.style.display = hasSst ? 'block' : 'none';
+  }
+  if (pfzWindLegendElement) {
+    pfzWindLegendElement.hidden = !hasWind;
+    pfzWindLegendElement.style.display = hasWind ? 'grid' : 'none';
+  }
+  if (pfzWindTimelineElement) {
+    pfzWindTimelineElement.hidden = !hasWind;
+    pfzWindTimelineElement.style.display = hasWind ? 'flex' : 'none';
+  }
 
   const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a','Wind speed & direction'].includes(name));
   const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly date: ${pfzSstDataDate}.` : '';

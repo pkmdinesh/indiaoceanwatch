@@ -1,25 +1,7 @@
 function ensureSeismicMap() {
       if (seismicMap) return seismicMap;
-
-      if (hasMapTilerKey() && window.maptilersdk) {
-        seismicMapMode = 'maptiler';
-        maptilersdk.config.apiKey = MAPTILER_API_KEY;
-        seismicMap = new maptilersdk.Map({
-          container: 'eventMapCanvas',
-          style: maptilersdk.MapStyle.STREETS,
-          language: 'en',
-          center: [0,0],
-          zoom: SEISMIC_MAP_DEFAULT_ZOOM,
-          minZoom: 2,
-          maxZoom: 12,
-          navigationControl: true,
-          attributionControl: true
-        });
-        return seismicMap;
-      }
-
       if (!window.L) return null;
-      seismicMapMode = 'leaflet';
+
       seismicMap = L.map('eventMapCanvas', {
         zoomControl: true,
         attributionControl: true,
@@ -263,33 +245,22 @@ let activeBathymetryRequest = 0;
             `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°<br>` +
             `Depth ${escapeHtml(String(depth).includes('km') ? String(depth) : `${depth} km`)}`;
 
-          if (seismicMapMode === 'maptiler') {
-            activeMap.resize();
-            activeMap.jumpTo({center:[longitude,latitude],zoom:SEISMIC_MAP_DEFAULT_ZOOM});
-            if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
-            seismicEpicentreMarker = new maptilersdk.Marker({color:'#8F241D'})
-              .setLngLat([longitude,latitude])
-              .setPopup(new maptilersdk.Popup({offset:18}).setHTML(popupHtml))
-              .addTo(activeMap);
-            seismicEpicentreMarker.togglePopup();
-          } else {
-            activeMap.invalidateSize();
-            activeMap.setView([latitude, longitude], SEISMIC_MAP_DEFAULT_ZOOM, { animate: false });
-            if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
-            const earthquakeIcon = L.divIcon({
-              className: '',
-              html: '<div class="earthquake-leaflet-marker"></div>',
-              iconSize: [22,22],
-              iconAnchor: [11,11]
-            });
-            seismicEpicentreMarker = L.marker([latitude, longitude], {
-              icon: earthquakeIcon,
-              keyboard: false,
-              title: `M${magnitude} earthquake · ${location}`
-            }).addTo(activeMap);
-            seismicEpicentreMarker.bindPopup(popupHtml);
-            seismicEpicentreMarker.openPopup();
-          }
+          activeMap.invalidateSize();
+          activeMap.setView([latitude, longitude], SEISMIC_MAP_DEFAULT_ZOOM, { animate: false });
+          if (seismicEpicentreMarker) seismicEpicentreMarker.remove();
+          const earthquakeIcon = L.divIcon({
+            className: '',
+            html: '<div class="earthquake-leaflet-marker"></div>',
+            iconSize: [22,22],
+            iconAnchor: [11,11]
+          });
+          seismicEpicentreMarker = L.marker([latitude, longitude], {
+            icon: earthquakeIcon,
+            keyboard: false,
+            title: `M${magnitude} earthquake · ${location}`
+          }).addTo(activeMap);
+          seismicEpicentreMarker.bindPopup(popupHtml);
+          seismicEpicentreMarker.openPopup();
         }
       }
     }

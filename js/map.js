@@ -273,17 +273,18 @@ function createOsfTidalStationLayer() {
     const marker = L.marker([st.lat, st.lon], { icon });
 
     const popupHtml = `
-      <div class="osf-popup">
-        <strong>🌊 ${escapeHtml(st.name)} Port · ${escapeHtml(st.state)}</strong>
+      <div class="osf-popup osf-tide-popup">
+        <div class="osf-tide-header">
+          <strong>🌊 ${escapeHtml(st.name)} Port</strong>
+          <span class="osf-tide-state">${escapeHtml(st.state)}</span>
+        </div>
         <div class="osf-tide-risk-banner ${tideState.badgeClass}">
           ${escapeHtml(tideState.phaseLabel)}
         </div>
-        <p style="font-size:11px; margin-bottom:6px;">${escapeHtml(tideState.riskNote)}</p>
-        <div style="background:#f8fafc; padding:6px 8px; border-radius:6px; border:1px solid #cbd5e1; font-size:10.5px; display:grid; gap:3px;">
-          <div><strong>Tidal Range Regime:</strong> ${escapeHtml(st.rangeType)} (MHWS ~${st.mhws}m)</div>
-          <div><strong>Estimated Morning High Tide:</strong> <span style="color:#0284c7; font-weight:800;">${morningTimeStr} IST</span></div>
-          <div><strong>Estimated Evening High Tide:</strong> <span style="color:#0284c7; font-weight:800;">${eveningTimeStr} IST</span></div>
-          <div style="font-size:9.5px; color:#64748b; margin-top:2px;">Lunar Age: ${tideState.moonAge} days · Semi-diurnal cycle</div>
+        <div class="osf-tide-grid">
+          <div class="osf-tide-row"><span>Morning High Tide:</span> <strong>${morningTimeStr} IST</strong></div>
+          <div class="osf-tide-row"><span>Evening High Tide:</span> <strong>${eveningTimeStr} IST</strong></div>
+          <div class="osf-tide-row"><span>Tidal Regime:</span> <span>${escapeHtml(st.rangeType)} (MHWS ~${st.mhws}m)</span></div>
         </div>
       </div>
     `;

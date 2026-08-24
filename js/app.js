@@ -109,10 +109,6 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
 
 var escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
     var SEISMIC_MAP_DEFAULT_ZOOM = APP_CONFIG.MAP.SEISMIC_DEFAULT_ZOOM;
-    // Paste your MapTiler API key here. When configured, labels are forced to English.
-    var MAPTILER_API_KEY = APP_CONFIG.MAP.MAPTILER_API_KEY;
-    var hasMapTilerKey = () => MAPTILER_API_KEY && !MAPTILER_API_KEY.includes('YOUR_MAPTILER_API_KEY');
-    var seismicMapMode = '';
     var seismicMap = null;
     var seismicEpicentreMarker = null;
     var seismicBathymetryLayer = null;
