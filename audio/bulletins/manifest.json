@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T21:01:35.101Z",
+  "updated": "2026-08-24T21:16:44.521Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -51,7 +51,7 @@
     },
     "or": {
       "file": "audio/bulletins/bulletin-or.mp3",
-      "size": 87360,
+      "size": 87552,
       "title": "ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ (ଓଡ଼ିଆ)",
       "langCode": "or-IN"
     },
