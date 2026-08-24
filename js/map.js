@@ -490,11 +490,12 @@ function ensureOsfMap() {
   return osfMap;
 }
 
-function openOsfMap(service = null) {
+async function openOsfMap(service = null) {
   osfRequestedService = typeof service === 'string' ? service : null;
   const dialog = ids('osfMapDialog');
   if (!dialog) return;
   if (!dialog.open) dialog.showModal();
+  if (typeof ensureLeaflet === 'function') await ensureLeaflet();
   requestAnimationFrame(() => {
     const map=ensureOsfMap();
     if (!map) return;

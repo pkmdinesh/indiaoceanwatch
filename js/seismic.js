@@ -186,7 +186,7 @@ let activeBathymetryRequest = 0;
       bathymetryElement.title = `GEBCO elevation at the event coordinates: ${Math.round(elevation)} m.`;
     }
 
-    function openSeismicDetails(event, bulletin = null) {
+    async function openSeismicDetails(event, bulletin = null) {
       const magnitude = bulletin?.magnitude || event?.MAGNITUDE || event?.magnitude || '—';
       const location = bulletin?.location || event?.REGIONNAME || event?.region || 'Location unavailable';
       const depth = bulletin?.depth || (event?.DEPTH ?? event?.depth) || '—';
@@ -208,15 +208,21 @@ let activeBathymetryRequest = 0;
       ids('seismicDialogMeta').textContent = bulletin?.issuedAt ? `${bulletinReference(bulletin)} · Issued ${bulletin.issuedAt}` : 'Earthquake event information';
       ids('eventCoastDistance').textContent = `Distance from nearest coast: ${coastDistanceText}`;
       currentSeismicShareData={magnitude,location,origin:[originDate,originTime].filter(Boolean).join(' '),coordinates:Number.isFinite(latitude)&&Number.isFinite(longitude) ? `${latitude}°, ${longitude}°` : '',coastDistance:coastDistanceText,bulletin:bulletinReference(bulletin),evaluation:bulletin?.message || ''};
-      void updateTectonicSetting(latitude, longitude, topoBathy, bathymetryRequestId,savedBathymetry,savedSetting,savedElevation);
-      const facts = [
-        ['Magnitude',`M${magnitude}`],['Depth',String(depth).includes('km') ? depth : `${depth} km`],
-        ['Date',originDate || String(originTime).split(' ')[0] || '—'],['Origin time',originDate ? originTime : String(originTime).replace(/^\d{4}-\d{2}-\d{2}\s*/, '')],
-        ['Latitude',Number.isFinite(latitude) ? `${latitude}°` : '—'],['Longitude',Number.isFinite(longitude) ? `${longitude}°` : '—'],
-        ['Location',location],['Bulletin',bulletinReference(bulletin)]
-      ];
-      ids('eventFacts').replaceChildren(...facts.map(([label,value]) => {
-        const wrapper=document.createElement('div'); const term=document.createElement('dt'); const detail=document.createElement('dd');
+      ids('eventMagnitude').textContent = `M${magnitude}`;
+      ids('eventLocation').textContent = location;
+      ids('eventOriginTime').textContent = [originDate,originTime].filter(Boolean).join(' ');
+      ids('eventCoordinates').textContent = Number.isFinite(latitude) && Number.isFinite(longitude) ? `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°` : 'Coordinates unavailable';
+      ids('eventDepth').textContent = String(depth).includes('km') ? String(depth) : `${depth} km`;
+      updateTectonicBathymetry(latitude,longitude,savedBathymetry,savedSetting,savedElevation);
+      ids('eventDetailsList').replaceChildren(...[
+        ['Magnitude',`M${magnitude}`],
+        ['Location',location],
+        ['Origin time',[originDate,originTime].filter(Boolean).join(' ')],
+        ['Coordinates',Number.isFinite(latitude) && Number.isFinite(longitude) ? `LAT ${latitude.toFixed(2)}° · LONG ${longitude.toFixed(2)}°` : 'Unavailable'],
+        ['Focal depth',String(depth).includes('km') ? String(depth) : `${depth} km`]
+      ].map(([label,value]) => {
+        const wrapper = document.createElement('div'); wrapper.className='seismic-kv-item';
+        const term = document.createElement('dt'); const detail = document.createElement('dd');
         term.textContent=label; detail.textContent=value; wrapper.append(term,detail); return wrapper;
       }));
       const hasBulletin = Boolean(bulletin);
@@ -238,6 +244,7 @@ let activeBathymetryRequest = 0;
       ids('seismicDialog').showModal();
 
       if (hasCoordinates) {
+        if (typeof ensureLeaflet === 'function') await ensureLeaflet();
         const activeMap = ensureSeismicMap();
         if (activeMap) {
           const popupHtml =

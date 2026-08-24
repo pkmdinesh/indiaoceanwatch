@@ -1,66 +1,79 @@
 function render(data) {
-      globalThis.latestStatusData = data;
-      latestStatusData = data;
-      renderActiveAdvisories(data);
-      if (typeof checkAndDispatchAlerts === 'function') checkAndDispatchAlerts(data);
-      if (typeof renderPortTideCard === 'function') renderPortTideCard();
-      const checkedAtValue = data.lastAttemptAt || data.updatedAt;
-      const checkedAt = checkedAtValue ? new Date(checkedAtValue) : null;
-      if (checkedAt && !Number.isNaN(checkedAt.getTime())) {
-        ids('lastUpdated').dateTime = checkedAtValue;
-        ids('lastUpdated').textContent = `${checkedAt.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
-      } else {
-        ids('lastUpdated').removeAttribute('datetime');
-        ids('lastUpdated').textContent = 'No source check available';
-      }
-      const demoMode = new URLSearchParams(location.search).get('demo');
-      const bulletinTwoDemo = {
-        type: 'II',
-        number: 2,
-        magnitude: '6.7',
-        location: 'Kyushu, Japan',
-        originDate: '28 Jul 2026',
-        originTime: '1257 IST',
-        message: 'Based on the model results there is possibility of Tsunami. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.',
-        url: '#demo-bulletin-ii'
-      };
-      const originText = data.seismic.latest?.ORIGINTIME;
-      const originTime = originText ? new Date(`${String(originText).replace(' ','T')}+05:30`) : null;
-      const seismicAge = originTime && !Number.isNaN(originTime.getTime()) ? Date.now() - originTime.getTime() : Number.POSITIVE_INFINITY;
-      const isRecentSeismic = demoMode === 'recent' || (seismicAge >= 0 && seismicAge <= APP_CONFIG.AGE_HOURS.SEISMIC_RECENT * 60 * 60 * 1000);
-      const demoBulletin = demoMode === 'bulletin2' ? bulletinTwoDemo : null;
-      const relatedBulletin = isRecentSeismic ? data.tsunami.recentBulletin : null;
-      renderTsunami(demoBulletin?.message || data.tsunami.message,demoBulletin || data.tsunami.bulletin,relatedBulletin,checkedAt);
-      const latestSeismicLink = ids('seismicMessage');
-      latestSeismicLink.textContent = data.seismic.latest ? seismicSummary(data.seismic.latest) : data.seismic.message;
-      latestSeismicLink.disabled = !data.seismic.latest;
-      latestSeismicLink.onclick = data.seismic.latest ? () => openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin) : null;
-      ids('seismicMessageWrap').classList.toggle('is-recent',isRecentSeismic);
-      ids('seismicMessageWrap').classList.toggle('is-older',Boolean(data.seismic.latest) && !isRecentSeismic);
-      ids('seismicAdditional').replaceChildren(...(data.seismic.recentEvents || []).map(event => {
-        const item = document.createElement('button'); item.type = 'button'; item.className = 'seismic-event-link';
-        item.textContent = seismicSummary(event);
-        item.addEventListener('click',() => openSeismicDetails(event,event.bulletin));
-        return item;
-      }));
-      if (new URLSearchParams(location.search).get('print') === 'earthquake' && data.seismic.latest && !ids('seismicDialog').open) {
-        openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin);
-      }
-      const stormDemoBulletin = demoMode === 'storm' ? data.stormSurge.recentBulletin : null;
-      renderStormSurge(stormDemoBulletin?.message || data.stormSurge.message,stormDemoBulletin || data.stormSurge.bulletin);
-      ids('highWaveIssueDate').textContent = `Issue date ${data.highWave.issueDate || '—'}`;
-      ids('swellIssueDate').textContent = `Issue date ${data.swellSurge.issueDate || '—'}`;
-      renderSeverityBoard('highWaveStates','High Wave',data.highWave);
-      renderSeverityBoard('swellStates','Swell Surge',data.swellSurge);
-      ids('currentIssueDate').textContent = `Issue date ${data.oceanCurrent?.issueDate || '—'}`;
-      renderSeverityBoard('currentStates','Ocean Currents',data.oceanCurrent || {});
-      ids('pfzDate').textContent = `Forecast ${data.pfz.forecastDate || '—'} · Valid through ${data.pfz.validUntil || '—'}`;
-      renderPfzSectors(data.pfz.sectors);
-      renderCyclone(data.cyclone);
-      renderJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
-      if (new URLSearchParams(location.search).get('view') === 'osf-map' && !osfMapOpenedFromUrl) { osfMapOpenedFromUrl=true; openOsfMap(); }
-      if (new URLSearchParams(location.search).get('view') === 'pfz-map' && !pfzMapOpenedFromUrl) { pfzMapOpenedFromUrl=true; openPfzMap(); }
+  globalThis.latestStatusData = data;
+  latestStatusData = data;
+
+  // Phase 1: Critical visible cards (Top Viewport)
+  renderActiveAdvisories(data);
+  const checkedAtValue = data.lastAttemptAt || data.updatedAt;
+  const checkedAt = checkedAtValue ? new Date(checkedAtValue) : null;
+  if (checkedAt && !Number.isNaN(checkedAt.getTime())) {
+    ids('lastUpdated').dateTime = checkedAtValue;
+    ids('lastUpdated').textContent = `${checkedAt.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+  } else {
+    ids('lastUpdated').removeAttribute('datetime');
+    ids('lastUpdated').textContent = 'No source check available';
+  }
+
+  const demoMode = new URLSearchParams(location.search).get('demo');
+  const bulletinTwoDemo = {
+    type: 'II',
+    number: 2,
+    magnitude: '6.7',
+    location: 'Kyushu, Japan',
+    originDate: '28 Jul 2026',
+    originTime: '1257 IST',
+    message: 'Based on the model results there is possibility of Tsunami. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.',
+    url: '#demo-bulletin-ii'
+  };
+  const originText = data.seismic.latest?.ORIGINTIME;
+  const originTime = originText ? new Date(`${String(originText).replace(' ','T')}+05:30`) : null;
+  const seismicAge = originTime && !Number.isNaN(originTime.getTime()) ? Date.now() - originTime.getTime() : Number.POSITIVE_INFINITY;
+  const isRecentSeismic = demoMode === 'recent' || (seismicAge >= 0 && seismicAge <= APP_CONFIG.AGE_HOURS.SEISMIC_RECENT * 60 * 60 * 1000);
+  const demoBulletin = demoMode === 'bulletin2' ? bulletinTwoDemo : null;
+  const relatedBulletin = isRecentSeismic ? data.tsunami.recentBulletin : null;
+  renderTsunami(demoBulletin?.message || data.tsunami.message,demoBulletin || data.tsunami.bulletin,relatedBulletin,checkedAt);
+
+  ids('highWaveIssueDate').textContent = `Issue date ${data.highWave.issueDate || '—'}`;
+  ids('swellIssueDate').textContent = `Issue date ${data.swellSurge.issueDate || '—'}`;
+  renderSeverityBoard('highWaveStates','High Wave',data.highWave);
+  renderSeverityBoard('swellStates','Swell Surge',data.swellSurge);
+
+  // Phase 2: Deferred non-critical cards (Yield main thread to prevent long tasks)
+  requestAnimationFrame(() => {
+    ids('currentIssueDate').textContent = `Issue date ${data.oceanCurrent?.issueDate || '—'}`;
+    renderSeverityBoard('currentStates','Ocean Currents',data.oceanCurrent || {});
+
+    const latestSeismicLink = ids('seismicMessage');
+    latestSeismicLink.textContent = data.seismic.latest ? seismicSummary(data.seismic.latest) : data.seismic.message;
+    latestSeismicLink.disabled = !data.seismic.latest;
+    latestSeismicLink.onclick = data.seismic.latest ? () => openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin) : null;
+    ids('seismicMessageWrap').classList.toggle('is-recent',isRecentSeismic);
+    ids('seismicMessageWrap').classList.toggle('is-older',Boolean(data.seismic.latest) && !isRecentSeismic);
+    ids('seismicAdditional').replaceChildren(...(data.seismic.recentEvents || []).map(event => {
+      const item = document.createElement('button'); item.type = 'button'; item.className = 'seismic-event-link';
+      item.textContent = seismicSummary(event);
+      item.addEventListener('click',() => openSeismicDetails(event,event.bulletin));
+      return item;
+    }));
+
+    const stormDemoBulletin = demoMode === 'storm' ? data.stormSurge.recentBulletin : null;
+    renderStormSurge(stormDemoBulletin?.message || data.stormSurge.message,stormDemoBulletin || data.stormSurge.bulletin);
+
+    ids('pfzDate').textContent = `Forecast ${data.pfz.forecastDate || '—'} · Valid through ${data.pfz.validUntil || '—'}`;
+    renderPfzSectors(data.pfz.sectors);
+    renderCyclone(data.cyclone);
+    renderJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
+
+    if (typeof renderPortTideCard === 'function') renderPortTideCard();
+    if (typeof checkAndDispatchAlerts === 'function') checkAndDispatchAlerts(data);
+
+    if (new URLSearchParams(location.search).get('print') === 'earthquake' && data.seismic.latest && !ids('seismicDialog').open) {
+      openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin);
     }
+    if (new URLSearchParams(location.search).get('view') === 'osf-map' && !osfMapOpenedFromUrl) { osfMapOpenedFromUrl=true; openOsfMap(); }
+    if (new URLSearchParams(location.search).get('view') === 'pfz-map' && !pfzMapOpenedFromUrl) { pfzMapOpenedFromUrl=true; openPfzMap(); }
+  });
+}
     let statusRefreshTimer;
     let statusLoadPromise;
     function scheduleStatusRefresh(data, retryDelay = 0) {

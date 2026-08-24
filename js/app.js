@@ -125,6 +125,27 @@ globalThis.loadScript = function(src) {
     document.head.appendChild(script);
   });
 };
+
+globalThis.loadStyle = function(href) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`link[href="${href}"]`)) return resolve();
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.onload = () => resolve();
+    link.onerror = reject;
+    document.head.appendChild(link);
+  });
+};
+
+globalThis.ensureLeaflet = async function() {
+  if (window.L) return window.L;
+  await Promise.all([
+    globalThis.loadStyle('vendor/leaflet/leaflet.css'),
+    globalThis.loadScript('vendor/leaflet/leaflet.js')
+  ]);
+  return window.L;
+};
 var SEISMIC_MAP_DEFAULT_ZOOM = APP_CONFIG.MAP.SEISMIC_DEFAULT_ZOOM;
     var seismicMap = null;
     var seismicEpicentreMarker = null;

@@ -649,8 +649,9 @@ function ensurePfzMap() {
   return pfzMap;
 }
 
-function openPfzMap() {
+async function openPfzMap() {
   ids('pfzMapDialog').showModal();
+  if (typeof ensureLeaflet === 'function') await ensureLeaflet();
   requestAnimationFrame(() => {
     const map=ensurePfzMap();
     if (!map) return;

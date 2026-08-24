@@ -139,10 +139,19 @@ loadStatus().catch(()=>{});
         if (typeof stopDeviceCompassSensors === 'function') stopDeviceCompassSensors();
       });
     }
-    if (typeof initNotifications === 'function') initNotifications();
-    if (typeof initPortTides === 'function') initPortTides();
-    if (typeof initPfzControls === 'function') initPfzControls();
-    if (typeof initVoiceSummary === 'function') initVoiceSummary();
+    const scheduleIdle = window.requestIdleCallback || (cb => setTimeout(cb, 60));
+    scheduleIdle(() => {
+      if (typeof initPortTides === 'function') initPortTides();
+      if (typeof initPfzControls === 'function') initPfzControls();
+      if (typeof initNotifications === 'function') initNotifications();
+      if (typeof initVoiceSummary === 'function') initVoiceSummary();
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
+          .then(registration => registration.update())
+          .catch(() => {});
+      }
+    });
+
     let printOpenedDetails = [];
     window.addEventListener('beforeprint',() => {
       printOpenedDetails = [...document.querySelectorAll('details:not([open])')];
@@ -157,4 +166,4 @@ loadStatus().catch(()=>{});
     });
     window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
     window.addEventListener('online',()=>loadStatus().catch(()=>{}));
-if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
+
