@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-24T00:00:15.662Z",
+  "updated": "2026-08-24T00:16:36.196Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 138240,
+      "size": 138432,
       "title": "Ocean State Forecast Advisory (English)",
       "langCode": "en-IN"
     },
