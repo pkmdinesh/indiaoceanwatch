@@ -482,9 +482,10 @@
   .content .ocean .panel-head>div{flex:1 1 180px;min-width:0}
   .content .ocean .osf-map-actions{width:100%;min-width:0;margin-left:auto;justify-content:flex-end;flex-wrap:wrap;gap:6px}
   .content .ocean .osf-map-actions .source{min-width:0;max-width:100%;flex:none;text-align:center}
-  .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr)}
-  .severity-row-states{min-width:0}
-  .severity-state-chip{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+  .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr);align-items:center;min-height:30px}
+  .severity-row-states{min-width:0;display:flex;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:4px;align-items:center}
+  .severity-row-states::-webkit-scrollbar{display:none}
+  .severity-state-chip{flex:none;max-width:none;white-space:nowrap}
   .osf-map-dialog .leaflet-control-layers{max-width:calc(100vw - 72px);z-index:900}
   .osf-map-dialog .leaflet-control-layers-expanded{max-height:42dvh;overflow:auto}
   .osf-map-dialog .leaflet-control-layers label{white-space:normal}
@@ -502,11 +503,12 @@
 }
 
 @media(max-width:420px){
-  .announcement-card{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
+  .announcement-card{display:grid;grid-template-columns:minmax(0,1fr);align-items:start;min-height:92px}
   .announcement-label,.announcement-message{grid-column:1;width:100%;min-width:0}
-  .announcement-message{display:flex;flex-wrap:wrap;gap:6px}
-  .active-advisory-chip{width:auto;max-width:100%;box-sizing:border-box;white-space:nowrap;text-decoration:none}
-  .announcement-latest{display:grid;grid-template-columns:auto auto minmax(0,1fr);width:100%}
+  .announcement-message{display:flex;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:6px;min-height:28px;align-items:center}
+  .announcement-message::-webkit-scrollbar{display:none}
+  .active-advisory-chip{flex:none;width:auto;max-width:100%;box-sizing:border-box;white-space:nowrap;text-decoration:none}
+  .announcement-latest{display:grid;grid-template-columns:auto auto minmax(0,1fr);width:100%;min-height:20px}
   .announcement-latest-message{gap:4px 6px}
   .forecast-card,.forecast-title,.forecast-meta,.severity-board,.severity-row,.severity-row-states{min-width:0;max-width:100%}
   .forecast-title{align-items:flex-start;flex-wrap:wrap}
@@ -514,10 +516,11 @@
   .issue-date{white-space:normal}
   .content .ocean .osf-map-actions{margin-left:auto;justify-content:flex-end;gap:4px}
   .content .ocean .osf-map-actions .source{flex:none;padding:6px 7px;font-size:10.5px}
-  .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr);gap:6px}
-  .severity-row-label{width:auto;padding-top:4px;white-space:normal}
-  .severity-row-states{width:100%;overflow-x:auto;padding-bottom:2px}
-  .severity-state-chip{max-width:none;white-space:nowrap;overflow-wrap:normal}
+  .severity-row{grid-template-columns:minmax(64px,72px) minmax(0,1fr);gap:6px;min-height:30px}
+  .severity-row-label{width:auto;padding-top:0;white-space:normal}
+  .severity-row-states{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:0;display:flex;flex-wrap:nowrap;gap:4px;align-items:center}
+  .severity-row-states::-webkit-scrollbar{display:none}
+  .severity-state-chip{max-width:none;white-space:nowrap;overflow-wrap:normal;flex:none}
 }
 
 

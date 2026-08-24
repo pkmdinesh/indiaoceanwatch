@@ -141,6 +141,12 @@ loadStatus().catch(()=>{});
     }
     const scheduleIdle = window.requestIdleCallback || (cb => setTimeout(cb, 60));
     scheduleIdle(() => {
+      if (!document.querySelector('link[rel="manifest"]')) {
+        const manifestLink = document.createElement('link');
+        manifestLink.rel = 'manifest';
+        manifestLink.href = 'manifest.webmanifest';
+        document.head.appendChild(manifestLink);
+      }
       if (typeof initPortTides === 'function') initPortTides();
       if (typeof initPfzControls === 'function') initPfzControls();
       if (typeof initNotifications === 'function') initNotifications();
