@@ -12,7 +12,28 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Ocean Watch">
   <title>Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</title>
-  <link rel="stylesheet" href="css/components.css">
+  <style>
+    :root{--ink:#082f3c;--teal:#087f84;--line:#cbd3d4;--muted:#5b7279;--bg:#eef3f1;--panel:#fff;--safe:#238269;--safe-bg:#e4f3ed;--watch:#8a7800;--watch-bg:#fffbd0;--alert:#a34e00;--alert-bg:#fff0dc;--warning:#b00000;--warning-bg:#ffe5e5}
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;font-family:Arial,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+    .dashboard{max-width:1440px;margin:0 auto;padding:12px 14px 28px}
+    .header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(8,47,60,.06)}
+    .ocean-brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+    .brand-image{width:36px;height:36px;flex:none}
+    .brand-copy strong{font-size:16px;font-weight:900;color:var(--ink)}
+    .title{flex:1;min-width:0}
+    .title h1{margin:0;font-size:15px;font-weight:900;line-height:1.2;color:var(--ink)}
+    .title p{margin:2px 0 0;font-size:10.5px;color:var(--muted);font-weight:700}
+    .header-actions{display:flex;align-items:center;gap:8px;flex:none}
+    .stamp{text-align:right;font-size:9.5px;font-weight:700;color:var(--muted)}
+    .stamp .live{color:var(--safe);font-weight:900}
+    .voice-button,.notify-button,.share-button,.install-button{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 10px;border:1px solid #082f3c;border-radius:8px;background:#082f3c;color:#fff;font:800 11px/1 inherit;cursor:pointer}
+    .content{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:12px;min-height:75vh;contain:layout style}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
+    .announcement-card{grid-column:1/-1;min-height:98px}
+  </style>
+  <link rel="preload" href="css/components.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css"></noscript>
   <link rel="stylesheet" href="css/print.css" media="print">
 </head>
 <body>
@@ -492,5 +513,6 @@
   <script src="js/status.js" defer></script>
   <script src="js/notifications.js" defer></script>
   <script src="js/pwa.js" defer></script>
+  <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>

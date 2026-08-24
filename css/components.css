@@ -136,8 +136,8 @@
 .seismic-message-copy .seismic-event-link:not(:disabled)::before{content:'\25B8';display:inline-block;margin-right:6px;color:currentColor;font-weight:900;text-decoration:none}
 .pfz-map-legend{display:flex;align-items:center;gap:9px 13px;flex-wrap:wrap;color:var(--ink);font-size:11px;font-weight:800}.pfz-map-legend span{display:inline-flex;align-items:center;gap:6px}.pfz-map-legend i{display:inline-block;flex:none}.pfz-line-swatch{width:20px;height:0;border-top:4px solid #082f5b}.pfz-sector-swatch{width:12px;height:10px;border:1px solid #17868f;background:rgba(23,134,143,.14)}.pfz-eez-swatch{width:20px;height:0;border-top:2px dashed #082f5b}.pfz-centre-swatch{width:8px;height:8px;border:2px solid #fff;border-radius:50%;background:#ff8c00;box-shadow:0 0 0 1px #8a4b00}.pfz-map-dialog .leaflet-control-layers{font:700 11px/1.35 Arial,sans-serif}.pfz-map-dialog .leaflet-popup-content{font:700 12px/1.45 Arial,sans-serif}.pfz-map-dialog .leaflet-popup-content strong{color:#082f5b}.pfz-landing-centre-marker{stroke:#fff;stroke-width:1.5}.pfz-map-dialog .leaflet-popup{width:max-content!important;max-width:min(260px,calc(100vw - 90px))!important}.pfz-map-dialog .leaflet-popup-content-wrapper{width:max-content!important;max-width:100%!important}.pfz-map-dialog .leaflet-popup-content{width:max-content!important;min-width:0!important;max-width:220px!important;margin:10px 12px!important}.pfz-map-popup{width:max-content;max-width:220px}.pfz-bathymetry-legend{display:flex;align-items:stretch;gap:6px;padding:7px 8px;border:1px solid rgba(8,47,91,.25);border-radius:7px;background:rgba(255,255,255,.94);color:#082f5b;box-shadow:0 1px 6px rgba(8,47,60,.22);font:800 9px/1.15 Arial,sans-serif}.pfz-bathymetry-legend[hidden]{display:none}.pfz-bathymetry-scale{width:11px;height:72px;border:1px solid rgba(8,47,91,.2);background:linear-gradient(to bottom,#081d58 0%,#253494 25%,#2c7fb8 50%,#41b6c4 72%,#a1dab4 90%,#ffffcc 100%)}.pfz-bathymetry-labels{display:flex;flex-direction:column;justify-content:space-between;white-space:nowrap}.pfz-bathymetry-labels strong{font-size:9px}.pfz-bathymetry-labels span{font-size:8px;font-weight:700}
 .osf-map-dialog .leaflet-popup-pane{z-index:1200!important}.osf-map-dialog .leaflet-popup{z-index:1200!important}.osf-map-dialog .leaflet-popup-close-button{z-index:1205!important}
-.osf-tide-status-banner{position:absolute;right:12px;bottom:52px;z-index:600;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border:1px solid rgba(8,47,91,.25);border-radius:9px;padding:7px 11px;box-shadow:0 3px 12px rgba(8,47,60,.22);font:800 10.5px/1.3 Arial,sans-serif;max-width:min(230px,calc(100vw - 32px));pointer-events:auto}
-.osf-tide-status-banner[hidden]{display:none}
+.osf-tide-status-banner{position:absolute;right:16px;bottom:55px;z-index:600;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border:1px solid rgba(8,47,91,.25);border-radius:8px;padding:6px 10px;box-shadow:0 2px 8px rgba(8,47,60,.18);font:800 10px/1.3 Arial,sans-serif;max-width:min(220px,calc(100vw - 24px));pointer-events:auto;transition:opacity .15s ease}
+.osf-tide-status-banner[hidden],.osf-tide-status-banner.is-dimmed{display:none!important}
 .osf-tide-banner-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px;padding-bottom:3px;border-bottom:1px solid rgba(8,47,91,.12)}
 .osf-tide-banner-title{font-weight:900;color:#082f5b;font-size:11px}
 .osf-tide-banner-regime{display:inline-block;padding:2px 5px;border-radius:4px;font-size:9px;font-weight:850;text-transform:uppercase}
@@ -458,10 +458,10 @@
     box-sizing:border-box!important;
   }
   .osf-tide-status-banner{
-    bottom:44px!important;
-    right:8px!important;
-    padding:6px 9px!important;
-    font-size:10px!important;
+    bottom:50px!important;
+    right:12px!important;
+    padding:5px 8px!important;
+    font-size:9.5px!important;
   }
 }
 

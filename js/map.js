@@ -204,40 +204,39 @@ const OSF_TIDAL_STATIONS = Object.freeze([
   { name: 'Kavaratti', state: 'Lakshadweep', lat: 10.56, lon: 72.64, rangeType: 'Micro-tidal', mhws: 1.4, hourOffset: -1.0 }
 ]);
 
-function computeAstronomicalTidalState(now = new Date()) {
-  const synodicMonth = 29.530588853;
-  // Reference New Moon: 2000-01-06 18:14 UTC (947182440000 ms)
-  const epoch = 947182440000;
-  const days = (now.getTime() - epoch) / 86400000;
-  const moonAge = ((days % synodicMonth) + synodicMonth) % synodicMonth;
+function computeAstronomicalTidalState(date = new Date()) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
 
-  // Spring tide around New Moon (0..2.8 or 26.8..29.5) and Full Moon (12.2..17.2)
-  const isSpring = (moonAge <= 2.8 || moonAge >= 26.8 || (moonAge >= 12.2 && moonAge <= 17.2));
-  // Neap tide around Quarter Moons (5.5..9.5 or 20.0..24.0)
-  const isNeap = ((moonAge >= 5.5 && moonAge <= 9.5) || (moonAge >= 20.0 && moonAge <= 24.0));
+  const c = Math.floor(year / 100);
+  const epact = (11 * (year % 19) + Math.floor((8 * c + 13) / 25) - Math.floor(c / 4) + 11) % 30;
+  const jd = (day + (month < 3 ? month + 12 : month) * 30.6 + epact) % 29.53;
+  const age = (jd + 29.53) % 29.53;
+  const illumination = Math.round((1 - Math.cos(2 * Math.PI * (age / 29.53))) / 2 * 100);
 
-  let phase = 'moderate';
-  let phaseLabel = 'Moderate / Transitioning Tide';
-  let riskNote = 'Normal tidal range. Standard coastal caution during peak wave hours.';
-  let badgeClass = 'moderate';
-  let tideTypeShort = 'Moderate Tide';
+  let phase = 'New Moon';
+  let icon = '🌑';
+  if (age < 1.84) { phase = 'New Moon'; icon = '🌑'; }
+  else if (age < 7.38) { phase = 'Waxing Crescent'; icon = '🌒'; }
+  else if (age < 9.22) { phase = 'First Quarter'; icon = '🌓'; }
+  else if (age < 14.76) { phase = 'Waxing Gibbous'; icon = '🌔'; }
+  else if (age < 16.61) { phase = 'Full Moon'; icon = '🌕'; }
+  else if (age < 22.15) { phase = 'Waning Gibbous'; icon = '🌖'; }
+  else if (age < 23.99) { phase = 'Last Quarter'; icon = '🌗'; }
+  else { phase = 'Waning Crescent'; icon = '🌘'; }
 
-  if (isSpring) {
-    phase = 'spring';
-    phaseLabel = 'Spring Tide (High Amplitude / Inundation Risk)';
-    tideTypeShort = 'Spring Tide (Max Range)';
-    riskNote = 'Maximum tidal amplitude (Spring Tide). Coinciding high waves or swell surge will cause significant coastal overtopping and inundation.';
-    badgeClass = 'spring';
-  } else if (isNeap) {
-    phase = 'neap';
-    phaseLabel = 'Neap Tide (Low Amplitude / Lower Risk)';
-    tideTypeShort = 'Neap Tide (Mild Range)';
-    riskNote = 'Minimum tidal amplitude (Neap Tide). Reduced inundation risk even with moderate swell action.';
-    badgeClass = 'neap';
-  }
+  // Spring tide around New Moon and Full Moon, Neap tide around Quarter Moons
+  const isSpring = (age <= 3.5 || age >= 26.0 || (age >= 11.2 && age <= 18.2));
+  const tideTypeShort = isSpring ? 'Spring Tide' : 'Neap Tide';
+  const phaseLabel = isSpring ? 'Spring Tide (High Amplitude / Inundation Risk)' : 'Neap Tide (Low Amplitude / Lower Risk)';
+  const riskNote = isSpring
+    ? 'Maximum tidal amplitude (Spring Tide). Coinciding high waves or swell surge will cause significant coastal overtopping and inundation.'
+    : 'Minimum tidal amplitude (Neap Tide). Reduced inundation risk even with moderate swell action.';
+  const badgeClass = isSpring ? 'spring' : 'neap';
 
   // Calculate current diurnal tide elevation trend (Rising vs Falling)
-  const tHours = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+  const tHours = date.getHours() + date.getMinutes() / 60 + date.getSeconds() / 3600;
   const m2Speed = 2 * Math.PI / 12.4206;
   const currentHarmonic = Math.cos(m2Speed * tHours);
   const futureHarmonic = Math.cos(m2Speed * (tHours + 0.25));
@@ -245,24 +244,13 @@ function computeAstronomicalTidalState(now = new Date()) {
   const tideStateLabel = isRising ? '▲ Rising (Flood)' : '▼ Falling (Ebb)';
   const tideStateClass = isRising ? 'rising' : 'falling';
 
-  // Moon Phase Icon & Name
-  let moonIcon = '🌓';
-  if (moonAge < 1.8 || moonAge > 27.7) moonIcon = '🌑 New Moon';
-  else if (moonAge < 5.5) moonIcon = '🌒 Waxing Crescent';
-  else if (moonAge < 9.2) moonIcon = '🌓 First Quarter';
-  else if (moonAge < 12.9) moonIcon = '🌔 Waxing Gibbous';
-  else if (moonAge < 16.6) moonIcon = '🌕 Full Moon';
-  else if (moonAge < 20.3) moonIcon = '🌖 Waning Gibbous';
-  else if (moonAge < 24.0) moonIcon = '🌗 Last Quarter';
-  else moonIcon = '🌘 Waning Crescent';
-
   // Update OSF Tide Status Banner (Bottom Right Corner)
   const bannerRegime = ids('osfTideBannerRegime');
   const bannerState = ids('osfTideBannerState');
   const bannerType = ids('osfTideBannerType');
   if (bannerRegime) {
     bannerRegime.className = `osf-tide-banner-regime ${badgeClass}`;
-    bannerRegime.textContent = isSpring ? 'Spring Tide' : isNeap ? 'Neap Tide' : 'Moderate';
+    bannerRegime.textContent = tideTypeShort;
   }
   if (bannerState) {
     bannerState.className = `osf-tide-banner-val ${tideStateClass}`;
@@ -270,10 +258,10 @@ function computeAstronomicalTidalState(now = new Date()) {
   }
   if (bannerType) {
     bannerType.className = `osf-tide-banner-val`;
-    bannerType.textContent = `${moonIcon} · ${tideTypeShort}`;
+    bannerType.textContent = `${icon} ${phase} · ${tideTypeShort}`;
   }
 
-  return { moonAge: moonAge.toFixed(1), phase, phaseLabel, riskNote, badgeClass, tideTypeShort, isRising, tideStateLabel, moonIcon };
+  return { moonAge: age.toFixed(1), phase, phaseLabel, riskNote, badgeClass, tideTypeShort, isRising, tideStateLabel, moonIcon: icon, illumination };
 }
 
 function createOsfTidalStationLayer() {
@@ -547,6 +535,14 @@ function ensureOsfMap() {
     osfMap = L.map('osfMapCanvas',{zoomControl:true,attributionControl:true,minZoom:2,maxZoom:9});
     osfMap.setView([15,79],innerWidth < 700 ? 4 : 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,crossOrigin:true,attribution:'&copy; OpenStreetMap contributors'}).addTo(osfMap);
+    osfMap.on('popupopen', () => {
+      const banner = ids('osfTideBanner');
+      if (banner) banner.classList.add('is-dimmed');
+    });
+    osfMap.on('popupclose', () => {
+      const banner = ids('osfTideBanner');
+      if (banner) banner.classList.remove('is-dimmed');
+    });
   }
   void buildCumulativeOsfMapLayers(latestStatusData).catch(err => {
     console.warn('[OSF] Cumulative map layers failed, falling back to basic layer:', err);
