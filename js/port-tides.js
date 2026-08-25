@@ -82,8 +82,15 @@ function calculateTideElevation(port, date) {
   return Number(Math.max(0.05, rawHeight).toFixed(2));
 }
 
+var dailyTideCache = new Map();
+
 // Generate 24-hour tide predictions (High Tides & Low Tides) for today with robust extremum detection
 function calculateDailyTideEvents(port, baseDate = new Date()) {
+  const dateKey = `${port.id}_${baseDate.getFullYear()}-${baseDate.getMonth()}-${baseDate.getDate()}`;
+  if (dailyTideCache.has(dateKey)) {
+    return dailyTideCache.get(dateKey);
+  }
+
   const startOfDay = new Date(baseDate);
   startOfDay.setHours(0, 0, 0, 0);
 
@@ -143,7 +150,9 @@ function calculateDailyTideEvents(port, baseDate = new Date()) {
     }
   }
 
-  return { events: filteredEvents, elevations };
+  const result = { events: filteredEvents, elevations };
+  dailyTideCache.set(dateKey, result);
+  return result;
 }
 
 function isTsunamiThreatActive(tsunami) {
@@ -422,7 +431,7 @@ function locateUserNearMe() {
 // Initialize Port & Tide Controls
 function initPortTides() {
   const select = ids('portSelectDropdown');
-  if (select) {
+  if (select && select.children.length === 0) {
     select.innerHTML = MAJOR_COASTAL_PORTS.map(p => `
       <option value="${p.id}" ${p.id === selectedPortId ? 'selected' : ''}>${p.name} (${p.state})</option>
     `).join('');
@@ -434,7 +443,8 @@ function initPortTides() {
   }
 
   const gpsBtn = ids('portGpsBtn');
-  if (gpsBtn) {
+  if (gpsBtn && !gpsBtn.dataset.wired) {
+    gpsBtn.dataset.wired = 'true';
     gpsBtn.addEventListener('click', locateUserNearMe);
   }
 

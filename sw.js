@@ -5,6 +5,7 @@ const CACHE_NAME = `${CONFIG.CACHE_PREFIX}-v${CONFIG.CACHE_VERSION}`;
 const APP_SHELL = [
   './',
   './index.html',
+  './favicon.ico',
   './css/base.css',
   './css/layout.css',
   './css/components.css',

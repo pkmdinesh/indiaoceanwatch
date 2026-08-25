@@ -2,7 +2,7 @@ function render(data) {
   globalThis.latestStatusData = data;
   latestStatusData = data;
 
-  // Phase 1: Critical visible cards (Top Viewport)
+  // Phase 1: Critical top viewport card (Header, Tsunami & Active Bulletins)
   renderActiveAdvisories(data);
   const checkedAtValue = data.lastAttemptAt || data.updatedAt;
   const checkedAt = checkedAtValue ? new Date(checkedAtValue) : null;
@@ -25,7 +25,7 @@ function render(data) {
     message: 'Based on the model results there is possibility of Tsunami. ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat.',
     url: '#demo-bulletin-ii'
   };
-  const originText = data.seismic.latest?.ORIGINTIME;
+  const originText = data.seismic?.latest?.ORIGINTIME;
   const originTime = originText ? new Date(`${String(originText).replace(' ','T')}+05:30`) : null;
   const seismicAge = originTime && !Number.isNaN(originTime.getTime()) ? Date.now() - originTime.getTime() : Number.POSITIVE_INFINITY;
   const isRecentSeismic = demoMode === 'recent' || (seismicAge >= 0 && seismicAge <= APP_CONFIG.AGE_HOURS.SEISMIC_RECENT * 60 * 60 * 1000);
@@ -33,45 +33,48 @@ function render(data) {
   const relatedBulletin = isRecentSeismic ? data.tsunami.recentBulletin : null;
   renderTsunami(demoBulletin?.message || data.tsunami.message,demoBulletin || data.tsunami.bulletin,relatedBulletin,checkedAt);
 
-  ids('highWaveIssueDate').textContent = `Issue date ${data.highWave.issueDate || '—'}`;
-  ids('swellIssueDate').textContent = `Issue date ${data.swellSurge.issueDate || '—'}`;
-  renderSeverityBoard('highWaveStates','High Wave',data.highWave);
-  renderSeverityBoard('swellStates','Swell Surge',data.swellSurge);
-
-  // Phase 2: Deferred non-critical cards (Yield main thread to prevent long tasks)
+  // Phase 2: High Wave & Swell Surge Severity boards (Yielded to animation frame)
   requestAnimationFrame(() => {
-    ids('currentIssueDate').textContent = `Issue date ${data.oceanCurrent?.issueDate || '—'}`;
-    renderSeverityBoard('currentStates','Ocean Currents',data.oceanCurrent || {});
+    ids('highWaveIssueDate').textContent = `Issue date ${data.highWave?.issueDate || '—'}`;
+    ids('swellIssueDate').textContent = `Issue date ${data.swellSurge?.issueDate || '—'}`;
+    renderSeverityBoard('highWaveStates','High Wave',data.highWave);
+    renderSeverityBoard('swellStates','Swell Surge',data.swellSurge);
 
-    const latestSeismicLink = ids('seismicMessage');
-    latestSeismicLink.textContent = data.seismic.latest ? seismicSummary(data.seismic.latest) : data.seismic.message;
-    latestSeismicLink.disabled = !data.seismic.latest;
-    latestSeismicLink.onclick = data.seismic.latest ? () => openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin) : null;
-    ids('seismicMessageWrap').classList.toggle('is-recent',isRecentSeismic);
-    ids('seismicMessageWrap').classList.toggle('is-older',Boolean(data.seismic.latest) && !isRecentSeismic);
-    ids('seismicAdditional').replaceChildren(...(data.seismic.recentEvents || []).map(event => {
-      const item = document.createElement('button'); item.type = 'button'; item.className = 'seismic-event-link';
-      item.textContent = seismicSummary(event);
-      item.addEventListener('click',() => openSeismicDetails(event,event.bulletin));
-      return item;
-    }));
+    // Phase 3: Secondary cards (Seismic, Storm Surge, Cyclone, PFZ, Port Tides)
+    setTimeout(() => {
+      ids('currentIssueDate').textContent = `Issue date ${data.oceanCurrent?.issueDate || '—'}`;
+      renderSeverityBoard('currentStates','Ocean Currents',data.oceanCurrent || {});
 
-    const stormDemoBulletin = demoMode === 'storm' ? data.stormSurge.recentBulletin : null;
-    renderStormSurge(stormDemoBulletin?.message || data.stormSurge.message,stormDemoBulletin || data.stormSurge.bulletin);
+      const latestSeismicLink = ids('seismicMessage');
+      latestSeismicLink.textContent = data.seismic?.latest ? seismicSummary(data.seismic.latest) : data.seismic?.message;
+      latestSeismicLink.disabled = !data.seismic?.latest;
+      latestSeismicLink.onclick = data.seismic?.latest ? () => openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin) : null;
+      ids('seismicMessageWrap').classList.toggle('is-recent',isRecentSeismic);
+      ids('seismicMessageWrap').classList.toggle('is-older',Boolean(data.seismic?.latest) && !isRecentSeismic);
+      ids('seismicAdditional').replaceChildren(...(data.seismic?.recentEvents || []).map(event => {
+        const item = document.createElement('button'); item.type = 'button'; item.className = 'seismic-event-link';
+        item.textContent = seismicSummary(event);
+        item.addEventListener('click',() => openSeismicDetails(event,event.bulletin));
+        return item;
+      }));
 
-    ids('pfzDate').textContent = `Forecast ${data.pfz.forecastDate || '—'} · Valid through ${data.pfz.validUntil || '—'}`;
-    renderPfzSectors(data.pfz.sectors);
-    renderCyclone(data.cyclone);
-    renderJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
+      const stormDemoBulletin = demoMode === 'storm' ? data.stormSurge.recentBulletin : null;
+      renderStormSurge(stormDemoBulletin?.message || data.stormSurge.message,stormDemoBulletin || data.stormSurge.bulletin);
 
-    if (typeof renderPortTideCard === 'function') renderPortTideCard();
-    if (typeof checkAndDispatchAlerts === 'function') checkAndDispatchAlerts(data);
+      ids('pfzDate').textContent = `Forecast ${data.pfz?.forecastDate || '—'} · Valid through ${data.pfz?.validUntil || '—'}`;
+      renderPfzSectors(data.pfz?.sectors);
+      renderCyclone(data.cyclone);
+      renderJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
 
-    if (new URLSearchParams(location.search).get('print') === 'earthquake' && data.seismic.latest && !ids('seismicDialog').open) {
-      openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin);
-    }
-    if (new URLSearchParams(location.search).get('view') === 'osf-map' && !osfMapOpenedFromUrl) { osfMapOpenedFromUrl=true; openOsfMap(); }
-    if (new URLSearchParams(location.search).get('view') === 'pfz-map' && !pfzMapOpenedFromUrl) { pfzMapOpenedFromUrl=true; openPfzMap(); }
+      if (typeof renderPortTideCard === 'function') renderPortTideCard();
+      if (typeof checkAndDispatchAlerts === 'function') checkAndDispatchAlerts(data);
+
+      if (new URLSearchParams(location.search).get('print') === 'earthquake' && data.seismic?.latest && !ids('seismicDialog').open) {
+        openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin);
+      }
+      if (new URLSearchParams(location.search).get('view') === 'osf-map' && !osfMapOpenedFromUrl) { osfMapOpenedFromUrl=true; openOsfMap(); }
+      if (new URLSearchParams(location.search).get('view') === 'pfz-map' && !pfzMapOpenedFromUrl) { pfzMapOpenedFromUrl=true; openPfzMap(); }
+    }, 0);
   });
 }
     let statusRefreshTimer;
