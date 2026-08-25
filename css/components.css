@@ -127,8 +127,6 @@
     button.marine-advisory-chip{font-family:inherit;cursor:pointer}
     @media(max-width:700px){.tsunami-status.advisory-info .tsunami-message{display:block;width:auto;min-width:0;padding-left:0;white-space:normal;animation:none;transform:none}.tsunami-message-window{overflow:visible}}
     .seismic-message-copy>.seismic-event-link,.seismic-additional .seismic-event-link{font-size:14px;font-weight:700;line-height:1.5}
-    @media(max-width:700px){.seismic-message-copy>.seismic-event-link,.seismic-additional .seismic-event-link{font-size:16px}}
-    @media(max-width:700px){.osf-map-dialog .leaflet-popup{width:min(360px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important}.osf-map-dialog .leaflet-popup-content-wrapper{width:100%;max-width:none;max-height:56dvh;overflow:hidden;border-radius:12px}.osf-map-dialog .leaflet-popup-content{width:auto!important;max-width:none!important;max-height:48dvh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin:12px 14px}.osf-map-dialog .osf-popup{min-width:0;width:100%;max-width:none;overflow-wrap:anywhere}.osf-map-dialog .osf-popup>strong{font-size:14px}.osf-map-dialog .osf-popup-chips{gap:5px}.osf-map-dialog .osf-popup-chip{font-size:12px;padding:6px 9px}.osf-map-dialog .osf-popup-panel{padding:10px}.osf-map-dialog .osf-popup-msg-content p{font-size:13px;line-height:1.5}.osf-map-dialog .osf-popup-panel small{font-size:10px}}
     .dialog-share{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 10px;border:0;border-radius:8px;background:#082f3c;color:#fff;font:850 10px/1 inherit;cursor:pointer}
     .dialog-share:hover,.dialog-share:focus-visible{background:var(--teal);outline:0}
     .event-setting-copy{display:grid;gap:3px;min-width:0}.event-coast-distance{display:block;color:#082f3c;font-size:11px;font-weight:800}
@@ -443,47 +441,76 @@
 @media(max-width:700px){
   .osf-map-dialog .leaflet-popup,
   .pfz-map-dialog .leaflet-popup{
-    max-width:calc(100vw - 28px)!important;
+    width:calc(100vw - 32px)!important;
+    max-width:calc(100vw - 32px)!important;
+    margin:0 auto!important;
     box-sizing:border-box!important;
-  }
-  .pfz-map-dialog .leaflet-popup-content{
-    max-width:calc(100vw - 64px)!important;
   }
   .osf-map-dialog .leaflet-popup-content-wrapper,
   .pfz-map-dialog .leaflet-popup-content-wrapper{
     width:100%!important;
-    max-width:calc(100vw - 28px)!important;
-    max-height:54dvh!important;
+    max-width:100%!important;
+    max-height:56dvh!important;
     border-radius:14px!important;
-    padding:2px 0!important;
+    padding:0!important;
+    margin:0!important;
     box-shadow:0 8px 24px rgba(8,47,60,.35)!important;
     box-sizing:border-box!important;
     overflow:hidden!important;
   }
   .osf-map-dialog .leaflet-popup-content,
   .pfz-map-dialog .leaflet-popup-content{
-    margin:10px 14px 12px 14px!important;
-    padding:0!important;
-    max-height:46dvh!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:12px!important;
+    max-height:50dvh!important;
     overflow-y:auto!important;
     overscroll-behavior:contain!important;
     -webkit-overflow-scrolling:touch!important;
     box-sizing:border-box!important;
   }
-  .osf-map-dialog .osf-popup>strong,
-  .osf-map-dialog .osf-tide-header,
-  .pfz-map-dialog .leaflet-popup-content>strong{
-    display:block!important;
-    padding-right:28px!important;
-    box-sizing:border-box!important;
-  }
-  .osf-popup,
-  .pfz-popup{
-    min-width:0!important;
+  .osf-map-dialog .osf-popup,
+  .pfz-map-dialog .pfz-popup{
     width:100%!important;
+    min-width:0!important;
     max-width:none!important;
+    margin:0!important;
     padding:0!important;
     box-sizing:border-box!important;
+  }
+  .osf-map-dialog .osf-popup>strong{
+    display:block!important;
+    font-size:13.5px!important;
+    padding-right:26px!important;
+    margin-bottom:4px!important;
+  }
+  .osf-map-dialog .osf-popup-chips{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:5px!important;
+    margin:6px 0!important;
+    padding:0!important;
+    width:100%!important;
+  }
+  .osf-map-dialog .osf-popup-chip{
+    font-size:11.5px!important;
+    padding:5px 8px!important;
+    flex:none!important;
+  }
+  .osf-map-dialog .osf-popup-panel{
+    padding:9px 10px!important;
+    box-sizing:border-box!important;
+    width:100%!important;
+    margin-top:6px!important;
+  }
+  .osf-map-dialog .osf-popup-msg-content p{
+    font-size:12px!important;
+    line-height:1.45!important;
+    margin:5px 0 0!important;
+  }
+  .osf-map-dialog .osf-popup-panel small{
+    font-size:9.5px!important;
   }
   .osf-tide-status-banner{
     bottom:60px!important;

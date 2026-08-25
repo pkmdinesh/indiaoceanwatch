@@ -495,16 +495,14 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
   const cycloneActive = Boolean(data.cyclone?.status?.severity && data.cyclone.status.severity !== 'safe');
 
   // Translation helpers
-  const mapStates = list => [...new Set(list || [])].map(s => translateStateName(s, langPrefix)).filter(Boolean).join(', ');
-  const mapDistricts = list => [...new Set(list || [])].map(d => translateDistrictName(d, langPrefix)).filter(Boolean).join(', ');
+  const mapStates = list => [...new Set((list || []).map(s => translateStateName(s, langPrefix)).filter(Boolean))].join(', ');
+  const mapDistricts = list => [...new Set((list || []).map(d => translateDistrictName(d, langPrefix)).filter(Boolean))].join(', ');
 
-  // Location renderer for regional bulletins (combines district names with state name)
+  // Location renderer for regional bulletins (uses district names if available, else state names without duplicated parentheses)
   const formatRegionalLoc = (districts, states) => {
     const dStr = mapDistricts(districts);
-    const sStr = mapStates(states);
-    if (dStr && sStr) return `${dStr} (${sStr})`;
     if (dStr) return dStr;
-    return sStr;
+    return mapStates(states);
   };
 
   // 1. TAMIL / தமிழ் (Tamil Nadu & Puducherry)
