@@ -509,7 +509,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 1. TAMIL / தமிழ் (Tamil Nadu & Puducherry)
   if (langPrefix === 'ta') {
-    let t = 'இன்காய்ஸ் (INCOIS) கடல் நிலை முன்னறிவிப்பு ஆலோசனை. ';
+    let t = 'இன்காய்ஸ் கடல் நிலை முன்னறிவிப்பு ஆலோசனை. ';
     if (tsunamiThreat) t += 'முக்கிய அறிவிப்பு: சுனாமி ஆபத்து எச்சரிக்கை விடுக்கப்பட்டுள்ளது. உள்ளூர் பேரிடர் மேலாண்மை வழிகாட்டுதலை பின்பற்றவும். ';
 
     if (adv.allWarnings.length > 0) {
@@ -542,7 +542,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 2. HINDI / हिन्दी (Andaman & Nicobar)
   if (langPrefix === 'hi') {
-    let t = 'इनकॉइस (INCOIS) महासागर स्थिति पूर्वानुमान परामर्श। ';
+    let t = 'इनकॉइस महासागर स्थिति पूर्वानुमान परामर्श। ';
     if (tsunamiThreat) t += 'अति आवश्यक: सुनामी चेतावनी सक्रिय है। स्थानीय आपदा प्रबंधन के निर्देशों का पालन करें। ';
 
     if (adv.allWarnings.length > 0) {
@@ -575,7 +575,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 3. TELUGU / తెలుగు (Andhra Pradesh)
   if (langPrefix === 'te') {
-    let t = 'ఇన్కాయిస్ (INCOIS) సముద్ర స్థితి సూచన హెచ్చరికలు. ';
+    let t = 'ఇన్కాయిస్ సముద్ర స్థితి సూచన హెచ్చరికలు. ';
     if (tsunamiThreat) t += 'ముఖ్య సమాచారం: సునామీ ముప్పు హెచ్చరిక జారీ చేయబడింది. ';
 
     if (adv.allWarnings.length > 0) {
@@ -608,7 +608,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 4. MALAYALAM / മലയാളം (Kerala & Lakshadweep)
   if (langPrefix === 'ml') {
-    let t = 'ഇൻകോയിസ് (INCOIS) സമുദ്രാവസ്ഥ പ്രവചന മുന്നറിയിപ്പ്. ';
+    let t = 'ഇൻകോയിസ് സമുദ്രാവസ്ഥ പ്രവചന മുന്നറിയിപ്പ്. ';
     if (tsunamiThreat) t += 'അടിയന്തര അറിയിപ്പ്: സുനാമി മുന്നറിയിപ്പ് നിലവിലുണ്ട്. ';
 
     if (adv.allWarnings.length > 0) {
@@ -641,7 +641,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 5. BENGALI / বাংলা (West Bengal)
   if (langPrefix === 'bn') {
-    let t = 'ইনকয়েস (INCOIS) সমুদ্র পরিস্থিতি পূর্বাভাস পরামর্শ। ';
+    let t = 'ইনকয়েস সমুদ্র পরিস্থিতি পূর্বাভাস পরামর্শ। ';
     if (tsunamiThreat) t += 'জরুরি বিজ্ঞপ্তি: সুনামি সতর্কতা জারি করা হয়েছে। ';
 
     if (adv.allWarnings.length > 0) {
@@ -674,7 +674,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 6. MARATHI / मराठी (Maharashtra & Goa)
   if (langPrefix === 'mr') {
-    let t = 'इन्कॉईस (INCOIS) महासागर स्थिती अंदाज सल्लागार. ';
+    let t = 'इन्कॉईस महासागर स्थिती अंदाज सल्लागार. ';
     if (tsunamiThreat) t += 'तातडीची सूचना: त्सुनामीचा इशारा जारी करण्यात आला आहे. स्थानिक आपत्ती व्यवस्थापन प्राधिकरणाच्या सूचनांचे पालन करा. ';
 
     if (adv.allWarnings.length > 0) {
@@ -707,7 +707,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 7. GUJARATI / ગુજરાતી (Gujarat & Daman and Diu)
   if (langPrefix === 'gu') {
-    let t = 'ઇનકોઇસ (INCOIS) મહાસાગર સ્થિતિ પૂર્વાનુમાન સલાહકાર. ';
+    let t = 'ઇનકોઇસ મહાસાગર સ્થિતિ પૂર્વાનુમાન સલાહકાર. ';
     if (tsunamiThreat) t += 'તાકીદની સૂચના: સુનામી ચેતવણી જારી કરવામાં આવી છે. સ્થાનિક આપત્તિ વ્યવસ્થાપન સૂચનાઓનું પાલન કરો. ';
 
     if (adv.allWarnings.length > 0) {
@@ -740,7 +740,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 8. ODIA / ଓଡ଼ିଆ (Odisha)
   if (langPrefix === 'or') {
-    let t = 'ଇନକଏସ (INCOIS) ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ ପରାମର୍ଶ। ';
+    let t = 'INCOIS ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ ପରାମର୍ଶ। ';
     if (tsunamiThreat) t += 'ଜରୁରୀ ସୂଚନା: ସୁନାମି ଚେତାବନୀ ଜାରି କରାଯାଇଛି। ସ୍ଥାନୀୟ ବିପର୍ଯ୍ୟୟ ପରିଚାଳନା ନିର୍ଦ୍ଦେଶ ପାଳନ କରନ୍ତୁ। ';
 
     if (adv.allWarnings.length > 0) {
@@ -773,7 +773,7 @@ function buildBulletinSummary(data, langCode = 'en-IN') {
 
   // 9. KANNADA / ಕನ್ನಡ (Karnataka)
   if (langPrefix === 'kn') {
-    let t = 'ಇನ್ಕಾಯ್ಸ್ (INCOIS) ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ ಸಲಹೆ. ';
+    let t = 'ಇನ್ಕಾಯ್ಸ್ ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ ಸಲಹೆ. ';
     if (tsunamiThreat) t += 'ತುರ್ತು ಸೂಚನೆ: ಸುನಾಮಿ ಎಚ್ಚರಿಕೆ ಸಕ್ರಿಯವಾಗಿದೆ. ಸ್ಥಳೀಯ ವಿಪತ್ತು ನಿರ್ವಹಣಾ ಮಾರ್ಗಸೂಚಿಗಳನ್ನು ಪಾಲಿಸಿ. ';
 
     if (adv.allWarnings.length > 0) {
