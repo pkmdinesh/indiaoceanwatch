@@ -1,64 +1,64 @@
 {
-  "updated": "2026-08-25T09:01:53.248Z",
+  "updated": "2026-08-25T09:16:43.262Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 100416,
-      "title": "Ocean State Forecast Advisory (English)",
+      "size": 430272,
+      "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN"
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 260544,
-      "title": "महासागर स्थिति पूर्वानुमान (हिन्दी)",
+      "size": 628032,
+      "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN"
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 107136,
-      "title": "கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
+      "size": 360192,
+      "title": "INCOIS கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN"
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 125952,
-      "title": "సముద్ర స్థితి సూచన (తెలుగు)",
+      "size": 388032,
+      "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN"
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 90048,
-      "title": "സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
+      "size": 332928,
+      "title": "INCOIS സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN"
     },
     "bn": {
       "file": "audio/bulletins/bulletin-bn.mp3",
-      "size": 90624,
-      "title": "সমুদ্র পরিস্থিতি পূর্বাভাস (বাংলা)",
+      "size": 231360,
+      "title": "INCOIS সমুদ্র পরিস্থিতি পূর্বাভাস (বাংলা)",
       "langCode": "bn-IN"
     },
     "mr": {
       "file": "audio/bulletins/bulletin-mr.mp3",
-      "size": 98880,
-      "title": "महासागर स्थिती अंदाज (मराठी)",
+      "size": 165504,
+      "title": "INCOIS महासागर स्थिती अंदाज (मराठी)",
       "langCode": "mr-IN"
     },
     "gu": {
       "file": "audio/bulletins/bulletin-gu.mp3",
-      "size": 98112,
-      "title": "મહાસાગર સ્થિતિ પૂર્વાનુમાન (ગુજરાતી)",
+      "size": 202176,
+      "title": "INCOIS મહાસાગર સ્થિતિ પૂર્વાનુમાન (ગુજરાતી)",
       "langCode": "gu-IN"
     },
     "or": {
       "file": "audio/bulletins/bulletin-or.mp3",
-      "size": 87552,
-      "title": "ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ (ଓଡ଼ିଆ)",
+      "size": 259392,
+      "title": "INCOIS ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ (ଓଡ଼ିଆ)",
       "langCode": "or-IN"
     },
     "kn": {
       "file": "audio/bulletins/bulletin-kn.mp3",
-      "size": 102528,
-      "title": "ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ (ಕನ್ನಡ)",
+      "size": 141888,
+      "title": "INCOIS ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ (ಕನ್ನಡ)",
       "langCode": "kn-IN"
     }
   }
