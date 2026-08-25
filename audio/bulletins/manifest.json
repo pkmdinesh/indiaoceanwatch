@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T11:51:23.422Z",
+  "updated": "2026-08-25T12:02:02.348Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -21,7 +21,7 @@
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 371904,
+      "size": 371712,
       "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN"
     },
@@ -51,7 +51,7 @@
     },
     "or": {
       "file": "audio/bulletins/bulletin-or.mp3",
-      "size": 249216,
+      "size": 249024,
       "title": "INCOIS ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ (ଓଡ଼ିଆ)",
       "langCode": "or-IN"
     },
