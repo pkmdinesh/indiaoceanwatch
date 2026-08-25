@@ -81,46 +81,57 @@ function osfHighestSeverity(advisories) {
   return severityOrder.find(level => advisories.some(advisory => advisory.severity === level)) || 'noThreat';
 }
 
-function extractIncoisAdvisoryMetrics(message) {
-  if (!message || typeof message !== 'string') return null;
-  const msg = message.trim();
+function extractIncoisAdvisoryMetrics(msg, serviceName = '') {
+  if (!msg || typeof msg !== 'string') return null;
 
-  // Wave height range: "2.4 - 2.5 meters" or "2.4 to 2.5 m" or "1.5 m"
-  let waveHeight = null;
-  const whMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:meters?|m\b)/i) ||
-                  msg.match(/(\d+(?:\.\d+)?)\s*(?:meters?|m\b)\s*height/i) ||
-                  msg.match(/height\s*(?:of)?\s*(\d+(?:\.\d+)?)\s*(?:meters?|m\b)/i);
-  if (whMatch) {
-    if (whMatch[2]) {
-      waveHeight = { min: parseFloat(whMatch[1]), max: parseFloat(whMatch[2]), text: `${whMatch[1]}–${whMatch[2]} m` };
-    } else {
-      waveHeight = { min: parseFloat(whMatch[1]), max: parseFloat(whMatch[1]), text: `${whMatch[1]} m` };
-    }
-  }
+  const isCurrentService = /current/i.test(serviceName) || /ocean currents/i.test(msg);
+  const isHighWaveService = /high wave/i.test(serviceName) || /high wave/i.test(msg);
+  const isSwellService = /swell/i.test(serviceName) || /swell/i.test(msg);
 
-  // Swell wave period: "16.0 - 20.0 sec period" or "16 - 20 s" or "period of 16.0 - 20.0"
-  let swellPeriod = null;
-  const spMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)\s*(?:period)?/i) ||
-                  msg.match(/period\s*(?:of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)?/i);
-  if (spMatch) {
-    const minVal = parseFloat(spMatch[1]);
-    const maxVal = spMatch[2] ? parseFloat(spMatch[2]) : minVal;
-    swellPeriod = { min: minVal, max: maxVal, text: spMatch[2] ? `${spMatch[1]}–${spMatch[2]} s` : `${spMatch[1]} s`, isKallakkadal: maxVal >= 16 };
-  }
-
-  // Current speed: "0.4 - 0.6 m/sec" or "0.4 to 0.6 m/s" or "knots"
+  // 1. Current speed: "0.4 - 0.6 m/sec", "1.2 - 1.5 m/sec", "20 - 70 cm/sec", "knots"
   let currentSpeed = null;
-  const curMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec)/i) ||
-                   msg.match(/(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s)/i);
+  const curMatch = msg.match(/(?:current\s+speeds?(?:\s+in\s+the\s+range\s+of)?|speed\s+of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec|cm\/sec|cm\/s|knots?|kn\b)/i) ||
+                   msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec|cm\/sec|cm\/s|knots?|kn\b)/i) ||
+                   msg.match(/(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec|cm\/sec|cm\/s|knots?|kn\b)/i);
   if (curMatch) {
+    const isCm = /cm\/s/i.test(curMatch[0]);
+    const isKn = /kn/i.test(curMatch[0]);
+    const unit = isCm ? 'cm/s' : (isKn ? 'kn' : 'm/s');
     if (curMatch[2]) {
-      currentSpeed = { min: parseFloat(curMatch[1]), max: parseFloat(curMatch[2]), text: `${curMatch[1]}–${curMatch[2]} m/s` };
+      currentSpeed = { min: parseFloat(curMatch[1]), max: parseFloat(curMatch[2]), text: `${curMatch[1]}–${curMatch[2]} ${unit}` };
     } else {
-      currentSpeed = { min: parseFloat(curMatch[1]), max: parseFloat(curMatch[1]), text: `${curMatch[1]} m/s` };
+      currentSpeed = { min: parseFloat(curMatch[1]), max: parseFloat(curMatch[1]), text: `${curMatch[1]} ${unit}` };
     }
   }
 
-  // Validity period: "17:30 hours on 23-08-2026 to 23:30 hours on 25-08-2026"
+  // 2. Wave height: "2.5 - 3.4 meters" or "2.5 to 3.4 m" (ensure m is not followed by /s or /sec)
+  let waveHeight = null;
+  if (!isCurrentService || isHighWaveService || isSwellService) {
+    const whMatch = msg.match(/(?:waves?(?:\s+heights?)?|heights?|swell(?:\s+waves?)?)?\s*(?:in\s+the\s+range\s+of|of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:meters?|m(?!\s*\/(?:s|sec)))\b/i) ||
+                    msg.match(/(\d+(?:\.\d+)?)\s*(?:meters?|m(?!\s*\/(?:s|sec)))\b\s*(?:height|wave)/i) ||
+                    msg.match(/(?:wave\s+height|height)\s*(?:of)?\s*(\d+(?:\.\d+)?)\s*(?:meters?|m(?!\s*\/(?:s|sec)))\b/i);
+    if (whMatch) {
+      if (whMatch[2]) {
+        waveHeight = { min: parseFloat(whMatch[1]), max: parseFloat(whMatch[2]), text: `${whMatch[1]}–${whMatch[2]} m` };
+      } else {
+        waveHeight = { min: parseFloat(whMatch[1]), max: parseFloat(whMatch[1]), text: `${whMatch[1]} m` };
+      }
+    }
+  }
+
+  // 3. Swell wave period: "16.0 - 20.0 sec period" or "16 - 20 s"
+  let swellPeriod = null;
+  if (!isCurrentService || isSwellService) {
+    const spMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)\s*(?:period)?/i) ||
+                    msg.match(/period\s*(?:of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)?/i);
+    if (spMatch) {
+      const minVal = parseFloat(spMatch[1]);
+      const maxVal = spMatch[2] ? parseFloat(spMatch[2]) : minVal;
+      swellPeriod = { min: minVal, max: maxVal, text: spMatch[2] ? `${spMatch[1]}–${spMatch[2]} s` : `${spMatch[1]} s`, isKallakkadal: maxVal >= 16 };
+    }
+  }
+
+  // 4. Validity period
   let validity = null;
   const valMatch = msg.match(/(\d{1,2}:\d{2})\s*hours?\s*on\s*(\d{2}-\d{2}-\d{4})\s*to\s*(\d{1,2}:\d{2})\s*hours?\s*on\s*(\d{2}-\d{2}-\d{4})/i);
   if (valMatch) {
@@ -130,15 +141,36 @@ function extractIncoisAdvisoryMetrics(message) {
   return { waveHeight, swellPeriod, currentSpeed, validity };
 }
 
-function osfMessageHtml(service,advisories,group,openLevel=null) {
-  const levels = severityOrder.filter(level => advisories.some(advisory => advisory.severity === level));
-  if (!levels.length) levels.push('noThreat');
-  return levels.map(level => {
-    const matched = advisories.filter(advisory => advisory.severity === level);
-    const messages = [...new Set(matched.map(advisory => advisory.message).filter(Boolean))];
+let osfPopupCounter = 0;
 
-    // Extract quantitative INCOIS metrics
-    const metricsList = messages.map(extractIncoisAdvisoryMetrics).filter(Boolean);
+function renderOsfDistrictPopup(district, state, serviceEntries, cumulativeLevel = null) {
+  const uid = ++osfPopupCounter;
+  const entries = Array.isArray(serviceEntries) ? serviceEntries : [serviceEntries];
+
+  // Pick active service: first match with cumulative severity if provided, else first entry
+  let activeIdx = 0;
+  if (cumulativeLevel) {
+    const matchIdx = entries.findIndex(e => osfHighestSeverity(e.advisories) === cumulativeLevel);
+    if (matchIdx !== -1) activeIdx = matchIdx;
+  }
+
+  const serviceIcons = {
+    'High Wave': '🌊',
+    'Swell Surge': '⏱',
+    'Ocean Currents': '🧭'
+  };
+
+  const chipsHtml = entries.map((entry, idx) => {
+    const level = osfHighestSeverity(entry.advisories);
+    const icon = serviceIcons[entry.service] || '🌊';
+    const isActive = (idx === activeIdx);
+    return `<button type="button" class="osf-popup-chip ${level} ${isActive ? 'is-active' : ''}" data-target="osf-panel-${uid}-${idx}" role="tab" aria-selected="${isActive ? 'true' : 'false'}"><span>${icon} ${escapeHtml(entry.service)}</span><b class="osf-chip-badge ${level}">${escapeHtml(severityLabel[level])}</b></button>`;
+  }).join('');
+
+  const panelsHtml = entries.map((entry, idx) => {
+    const level = osfHighestSeverity(entry.advisories);
+    const messages = [...new Set(entry.advisories.map(a => a.message).filter(Boolean))];
+    const metricsList = messages.map(msg => extractIncoisAdvisoryMetrics(msg, entry.service)).filter(Boolean);
     let badgesHtml = '';
     if (metricsList.length) {
       const badges = [];
@@ -151,15 +183,59 @@ function osfMessageHtml(service,advisories,group,openLevel=null) {
         badgesHtml = `<div class="osf-metrics-strip">${badges.join('')}</div>`;
       }
     }
+    const messageHtml = messages.length ? messages.map(m => `<p>${escapeHtml(m)}</p>`).join('') : '<p class="osf-safe-msg">✓ No active threat or advisory in this coastal district.</p>';
+    const isActive = (idx === activeIdx);
 
-    const messageHtml = messages.length ? messages.map(message => `<p>${escapeHtml(message)}</p>`).join('') : '<p>No Threat</p>';
-    return `<details class="osf-popup-toggle ${level}"${openLevel === level ? ' open' : ''}><summary><span>${escapeHtml(service)}</span><b>${escapeHtml(severityLabel[level])}</b></summary><div class="osf-popup-toggle-body">${badgesHtml}<small>Issue date: ${escapeHtml(group?.issueDate || '—')}</small>${messageHtml}</div></details>`;
+    return `
+      <div class="osf-popup-panel ${level}" id="osf-panel-${uid}-${idx}" ${isActive ? '' : 'hidden'} role="tabpanel">
+        ${badgesHtml}
+        <div class="osf-popup-panel-meta">
+          <small class="osf-issue-date">Issue date: ${escapeHtml(entry.group?.issueDate || '—')}</small>
+        </div>
+        <div class="osf-popup-msg-content">${messageHtml}</div>
+      </div>
+    `;
   }).join('');
+
+  const cumStatusHtml = cumulativeLevel
+    ? `<div class="osf-popup-cum-status"><b>Cumulative status:</b> <span class="osf-status-pill ${cumulativeLevel}">${escapeHtml(severityLabel[cumulativeLevel])}</span></div>`
+    : '';
+
+  return `
+    <div class="osf-popup">
+      <strong class="osf-popup-title">${escapeHtml(titleCase(district))} · ${escapeHtml(titleCase(state))}</strong>
+      ${cumStatusHtml}
+      <div class="osf-popup-chips" role="tablist" aria-label="Advisory Services">${chipsHtml}</div>
+      <div class="osf-popup-panels">${panelsHtml}</div>
+    </div>
+  `;
+}
+
+// Delegated click listener for popup chip selection
+if (typeof document !== 'undefined') {
+  document.addEventListener('click', (e) => {
+    const chip = e.target.closest('.osf-popup-chip');
+    if (!chip) return;
+    const popup = chip.closest('.osf-popup');
+    if (!popup) return;
+    const targetId = chip.getAttribute('data-target');
+    popup.querySelectorAll('.osf-popup-chip').forEach(c => {
+      c.classList.remove('is-active');
+      c.setAttribute('aria-selected', 'false');
+    });
+    popup.querySelectorAll('.osf-popup-panel').forEach(p => {
+      p.hidden = true;
+    });
+    chip.classList.add('is-active');
+    chip.setAttribute('aria-selected', 'true');
+    const panel = popup.querySelector('#' + targetId);
+    if (panel) panel.hidden = false;
+  });
 }
 
 function osfDistrictTooltipHtml(district, state, service, advisories, level) {
   const messages = advisories.map(a => a.message).filter(Boolean);
-  const metricsList = messages.map(extractIncoisAdvisoryMetrics).filter(Boolean);
+  const metricsList = messages.map(msg => extractIncoisAdvisoryMetrics(msg, service)).filter(Boolean);
   const m = metricsList[0] || null;
 
   let metricText = '';
@@ -275,9 +351,8 @@ function updateOsfComposite() {
       const services = (polygon._osfServices || []).filter(entry => selectedServices.includes(entry.service));
       const allAdvisories = services.flatMap(entry => entry.advisories);
       const level = osfHighestSeverity(allAdvisories);
-      const sections = services.map(entry => osfMessageHtml(entry.service,entry.advisories,entry.group,entry.advisories.some(advisory => advisory.severity === level) ? level : null)).join('');
       polygon.setStyle({...OSF_POLYGON_BORDER,color:'#111',weight:.5,opacity:1,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:1});
-      polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(polygon.feature.properties.District))} · ${escapeHtml(titleCase(polygon.feature.properties.STATE))}</strong><p><b>Cumulative status:</b> ${escapeHtml(severityLabel[level])}</p>${sections}</div>`,OSF_POPUP_OPTIONS);
+      polygon.bindPopup(renderOsfDistrictPopup(polygon.feature.properties.District, polygon.feature.properties.STATE, services, level), OSF_POPUP_OPTIONS);
     });
     if (!osfMap.hasLayer(osfCumulativeLayer)) osfCumulativeLayer.addTo(osfMap);
     if (osfCumulativeLayer.bringToFront) osfCumulativeLayer.bringToFront();
@@ -344,7 +419,7 @@ async function buildCumulativeOsfMapLayers(data) {
         const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
         if (!cumulativeFeatures.has(key)) cumulativeFeatures.set(key,{feature,services:[]});
         cumulativeFeatures.get(key).services.push({service,group,advisories});
-        polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(feature.properties.District))} · ${escapeHtml(titleCase(feature.properties.STATE))}</strong>${osfMessageHtml(service,advisories,group,level)}</div>`,OSF_POPUP_OPTIONS);
+        polygon.bindPopup(renderOsfDistrictPopup(feature.properties.District, feature.properties.STATE, [{service, group, advisories}]), OSF_POPUP_OPTIONS);
         if (level !== 'noThreat') {
           polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, service, advisories, level), { sticky: true, className: 'osf-district-tooltip' });
         }
@@ -366,9 +441,8 @@ async function buildCumulativeOsfMapLayers(data) {
       const item = cumulativeFeatures.get(key);
       const allAdvisories = item.services.flatMap(entry => entry.advisories);
       const level = osfHighestSeverity(allAdvisories);
-      const sections = item.services.map(entry => osfMessageHtml(entry.service,entry.advisories,entry.group,entry.advisories.some(advisory => advisory.severity === level) ? level : null)).join('');
       polygon._osfServices = item.services;
-      polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(polygon.feature.properties.District))} · ${escapeHtml(titleCase(polygon.feature.properties.STATE))}</strong><p><b>Cumulative status:</b> ${escapeHtml(severityLabel[level])}</p>${sections}</div>`,OSF_POPUP_OPTIONS);
+      polygon.bindPopup(renderOsfDistrictPopup(polygon.feature.properties.District, polygon.feature.properties.STATE, item.services, level), OSF_POPUP_OPTIONS);
       if (level !== 'noThreat') {
         polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, 'Cumulative', allAdvisories, level), { sticky: true, className: 'osf-district-tooltip' });
       }
@@ -390,7 +464,7 @@ async function buildCumulativeOsfMapLayers(data) {
     'Tidal Phase & High Tide': osfTidalLayer
   };
 
-  osfLayerControl = L.control.layers(null,osfOverlays,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
+  osfLayerControl = L.control.layers(null,osfOverlays,{collapsed:true,position:'topright'}).addTo(osfMap);
   osfMap.off('overlayadd',handleOsfLayerSelection); osfMap.off('overlayremove',handleOsfLayerSelection);
   osfMap.on('overlayadd',handleOsfLayerSelection); osfMap.on('overlayremove',handleOsfLayerSelection);
   osfMap.invalidateSize({animate:false});
@@ -454,7 +528,7 @@ async function buildOsfMapLayers(data) {
     layer.addTo(osfMap);
   });
   overlays['Tidal Phase & High Tide'] = createOsfTidalStationLayer();
-  osfLayerControl = L.control.layers(null,overlays,{collapsed:innerWidth < 700,position:'topright'}).addTo(osfMap);
+  osfLayerControl = L.control.layers(null,overlays,{collapsed:true,position:'topright'}).addTo(osfMap);
   osfMap.invalidateSize({animate:false});
   if (bounds.length) osfMap.fitBounds(bounds,{padding:innerWidth < 700 ? [8,8] : [20,20],maxZoom:6,animate:false}); else osfMap.setView([15,79],innerWidth < 700 ? 4 : 5);
   ids('osfMapMeta').textContent = services.map(([name,group]) => `${name}: ${group?.issueDate || '—'}`).join(' · ');
