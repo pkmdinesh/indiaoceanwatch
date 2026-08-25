@@ -229,39 +229,25 @@ function computeAstronomicalTidalState(date = new Date()) {
   // Spring tide around New Moon and Full Moon, Neap tide around Quarter Moons
   const isSpring = (age <= 3.5 || age >= 26.0 || (age >= 11.2 && age <= 18.2));
   const tideTypeShort = isSpring ? 'Spring Tide' : 'Neap Tide';
-  const phaseLabel = isSpring ? 'Spring Tide (High Amplitude / Inundation Risk)' : 'Neap Tide (Low Amplitude / Lower Risk)';
+  const phaseLabel = isSpring ? 'Spring Tide' : 'Neap Tide';
   const riskNote = isSpring
     ? 'Maximum tidal amplitude (Spring Tide). Coinciding high waves or swell surge will cause significant coastal overtopping and inundation.'
     : 'Minimum tidal amplitude (Neap Tide). Reduced inundation risk even with moderate swell action.';
   const badgeClass = isSpring ? 'spring' : 'neap';
 
-  // Calculate current diurnal tide elevation trend (Rising vs Falling)
-  const tHours = date.getHours() + date.getMinutes() / 60 + date.getSeconds() / 3600;
-  const m2Speed = 2 * Math.PI / 12.4206;
-  const currentHarmonic = Math.cos(m2Speed * tHours);
-  const futureHarmonic = Math.cos(m2Speed * (tHours + 0.25));
-  const isRising = futureHarmonic >= currentHarmonic;
-  const tideStateLabel = isRising ? '▲ Rising (Flood)' : '▼ Falling (Ebb)';
-  const tideStateClass = isRising ? 'rising' : 'falling';
-
   // Update OSF Tide Status Banner (Bottom Right Corner)
   const bannerRegime = ids('osfTideBannerRegime');
-  const bannerState = ids('osfTideBannerState');
   const bannerType = ids('osfTideBannerType');
   if (bannerRegime) {
     bannerRegime.className = `osf-tide-banner-regime ${badgeClass}`;
     bannerRegime.textContent = tideTypeShort;
-  }
-  if (bannerState) {
-    bannerState.className = `osf-tide-banner-val ${tideStateClass}`;
-    bannerState.textContent = tideStateLabel;
   }
   if (bannerType) {
     bannerType.className = `osf-tide-banner-val`;
     bannerType.textContent = `${icon} ${phase} · ${tideTypeShort}`;
   }
 
-  return { moonAge: age.toFixed(1), phase, phaseLabel, riskNote, badgeClass, tideTypeShort, isRising, tideStateLabel, moonIcon: icon, illumination };
+  return { moonAge: age.toFixed(1), phase, phaseLabel, riskNote, badgeClass, tideTypeShort, moonIcon: icon, illumination };
 }
 
 function createOsfTidalStationLayer() {
@@ -306,9 +292,6 @@ function createOsfTidalStationLayer() {
         <div class="osf-tide-header">
           <strong>🌊 ${escapeHtml(st.name)} Port</strong>
           <span class="osf-tide-state">${escapeHtml(st.state)}</span>
-        </div>
-        <div class="osf-tide-risk-banner ${tideState.badgeClass}">
-          ${escapeHtml(tideState.phaseLabel)}
         </div>
         <div class="osf-tide-grid">
           <div class="osf-tide-row"><span>Morning High Tide:</span> <strong>${morningTimeStr} IST</strong></div>
@@ -447,11 +430,6 @@ async function buildCumulativeOsfMapLayers(data) {
       osfSelectedServices.add(service);
     }
   });
-
-  // Add tidal layer to map if no specific service filter was requested
-  if (!osfRequestedService && osfTidalLayer) {
-    osfTidalLayer.addTo(osfMap);
-  }
 
   const osfOverlays = {
     ...osfServiceLayers,
