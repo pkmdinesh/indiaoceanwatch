@@ -331,7 +331,7 @@ function renderPortTideCard() {
     windElem.innerHTML = `
       <div class="wind-stat-item">
         <span class="wind-stat-label">Wind &amp; Sea</span>
-        <strong>${port.windDir} ${windKmh} km/h <small>(${windKnots} kn · ${seaState})</small></strong>
+        <strong>${port.windDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState})</span></strong>
       </div>
       <div class="wind-stat-item">
         <span class="wind-stat-label">Tide State</span>
@@ -339,12 +339,12 @@ function renderPortTideCard() {
       </div>
       <div class="wind-stat-item moon-stat-item">
         <span class="wind-stat-label">Moon &amp; Tide Type</span>
-        <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime})">${moon.icon} ${moon.phase} <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? 'Spring Tide' : 'Neap Tide'}</small></strong>
+        <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime})"><span>${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? 'Spring Tide' : 'Neap Tide'}</small></strong>
       </div>
     `;
   }
 
-  // 4. Render High / Low Tide Times Table (Horizontal Row Layout)
+  // 4. Render High / Low Tide Times Table (Horizontal Row Layout with IST Time Format)
   const tideTimesElem = ids('portTideTimesList');
   if (tideTimesElem) {
     const highTides = events.filter(e => e.type === 'High');
@@ -354,15 +354,15 @@ function renderPortTideCard() {
 
     tideTimesElem.innerHTML = `
       <div class="tide-horizontal-row high-row">
-        <span class="tide-event-badge high">High Tide</span>
+        <span class="tide-event-badge high">High Tide (IST)</span>
         <div class="tide-times-items">
-          ${highTides.length > 0 ? highTides.map(t => `<span class="tide-time-pill"><strong>${formatTime(t.time)}</strong> <small>${t.height}m</small></span>`).join('') : '<span class="empty">—</span>'}
+          ${highTides.length > 0 ? highTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
         </div>
       </div>
       <div class="tide-horizontal-row low-row">
-        <span class="tide-event-badge low">Low Tide</span>
+        <span class="tide-event-badge low">Low Tide (IST)</span>
         <div class="tide-times-items">
-          ${lowTides.length > 0 ? lowTides.map(t => `<span class="tide-time-pill"><strong>${formatTime(t.time)}</strong> <small>${t.height}m</small></span>`).join('') : '<span class="empty">—</span>'}
+          ${lowTides.length > 0 ? lowTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
         </div>
       </div>
     `;

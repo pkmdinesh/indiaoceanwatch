@@ -202,32 +202,32 @@
 .port-warning-banner.level-alert{background:var(--alert-bg);color:#93400c;border-left:4px solid var(--orange)}
 .port-warning-banner.level-warning{background:var(--warning-bg);color:#8f241d;border-left:4px solid var(--red)}
 
-.port-wind-display{display:flex;justify-content:space-between;gap:8px;padding:6px 9px;border-radius:9px;background:#fff;border:1px solid var(--line);font-size:11px}
-.wind-stat-item{display:grid;gap:1px}
-.wind-stat-label{font-size:8.5px;font-weight:800;text-transform:uppercase;color:var(--muted)}
-.wind-stat-item strong{font-size:11px;color:var(--ink)}
-.wind-stat-item strong small{font-size:9.5px;color:var(--muted);font-weight:700}
-.tide-direction.rising{color:var(--teal)}
-.tide-direction.falling{color:#d9534f}
+.port-wind-display{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:7px 10px;border-radius:9px;background:#fff;border:1px solid var(--line);font-size:11.5px}
+.wind-stat-item{display:grid;gap:2px;min-width:0}
+.wind-stat-label{font-size:9px;font-weight:800;text-transform:uppercase;color:var(--muted);letter-spacing:.02em}
+.wind-stat-item strong{font-size:12px;color:var(--ink);display:flex;align-items:baseline;gap:4px;flex-wrap:wrap;line-height:1.35}
+.wind-stat-item strong small,.wind-knots-sea{font-size:11px;color:var(--muted);font-weight:750}
+.tide-direction.rising{color:var(--teal);font-weight:850;font-size:12px}
+.tide-direction.falling{color:#d9534f;font-weight:850;font-size:12px}
 
 .port-tide-body{display:grid;grid-template-columns:1fr;gap:8px;margin-top:2px}
-.port-tide-times-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;padding:6px 9px;border-radius:9px;background:#fff;border:1px solid var(--line);font-size:10.5px}
-.tide-horizontal-row{display:flex;align-items:center;gap:6px;min-width:0}
+.port-tide-times-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;padding:7px 10px;border-radius:9px;background:#fff;border:1px solid var(--line);font-size:11px;align-items:center}
+.tide-horizontal-row{display:flex;align-items:center;gap:6px;min-width:0;flex-wrap:wrap}
 .tide-times-items{display:flex;align-items:center;gap:5px;flex-wrap:wrap;min-width:0}
-.tide-time-pill{display:inline-flex;align-items:baseline;gap:3px;padding:2px 5px;border-radius:5px;background:#f5f8f7;color:var(--ink);font-size:10px}
-.tide-time-pill strong{font-weight:850}
-.tide-time-pill small{font-size:9px;color:var(--muted);font-weight:700}
-.tide-event-badge{display:inline-block;padding:3px 6px;border-radius:5px;font-size:8.5px;font-weight:900;text-transform:uppercase;text-align:center;flex:none}
-.tide-event-badge.high{background:#e0f2eb;color:var(--green)}
-.tide-event-badge.low{background:#eef3ef;color:var(--muted)}
+.tide-time-pill{display:inline-flex;align-items:baseline;gap:4px;padding:3px 7px;border-radius:6px;background:#f0f5f3;color:var(--ink);border:1px solid rgba(8,47,91,.08)}
+.tide-time-pill strong,.tide-time-pill .tide-time{font-size:11.5px;font-weight:850;color:#082f3c}
+.tide-time-pill small,.tide-time-pill .tide-height-val{font-size:12px;font-weight:900;color:var(--teal)}
+.tide-event-badge{display:inline-flex;align-items:center;justify-content:center;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900;text-transform:uppercase;text-align:center;flex:none;white-space:nowrap;letter-spacing:.02em}
+.tide-event-badge.high{background:#d8f3e5;color:#0f5132;border:1px solid #b7e4c7}
+.tide-event-badge.low{background:#eef2f5;color:#475569;border:1px solid #cbd5e1}
 
 .port-tide-chart-container{min-width:0;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:9px;padding:2px 4px}
 .tide-curve-svg{width:100%;height:auto;display:block}
 
 /* Moon Phase & Tide Regime Indicator */
 .moon-stat-item{grid-column:1/-1;border-top:1px dashed var(--line);padding-top:4px;margin-top:2px}
-.moon-tide-text{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:10.5px}
-.tide-regime-pill{display:inline-block;padding:2px 6px;border-radius:5px;font-size:8.5px;font-weight:900;text-transform:uppercase;letter-spacing:.02em}
+.moon-tide-text{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11px}
+.tide-regime-pill{display:inline-block;padding:2px 6px;border-radius:5px;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.02em}
 .tide-regime-pill.spring{background:#e3f2fd;color:#0d47a1;border:1px solid #bbdefb}
 .tide-regime-pill.neap{background:#f5f5f5;color:#616161;border:1px solid #e0e0e0}
 
