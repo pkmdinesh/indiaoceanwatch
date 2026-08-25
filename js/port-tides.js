@@ -18,8 +18,8 @@ var MAJOR_COASTAL_PORTS = [
   { id: 'visakhapatnam', name: 'Visakhapatnam', state: 'Andhra Pradesh', district: 'Visakhapatnam', lat: 17.686, lng: 83.218, range: 1.8, m2Amp: 0.62, s2Amp: 0.22, baseWind: 14, windDir: 'SSW' },
   { id: 'paradip', name: 'Paradip', state: 'Odisha', district: 'Jagatsinghpur', lat: 20.266, lng: 86.666, range: 2.9, m2Amp: 1.0, s2Amp: 0.35, baseWind: 16, windDir: 'SW' },
   { id: 'dhamra', name: 'Dhamra', state: 'Odisha', district: 'Bhadrak', lat: 20.816, lng: 86.966, range: 3.6, m2Amp: 1.25, s2Amp: 0.44, baseWind: 15, windDir: 'SSW' },
-  { id: 'haldia', name: 'Haldia / Syama Prasad (Kolkata)', state: 'West Bengal', district: 'Purba Medinipur', lat: 22.023, lng: 88.066, range: 5.2, m2Amp: 1.8, s2Amp: 0.65, baseWind: 14, windDir: 'S' },
-  { id: 'portblair', name: 'Port Blair', state: 'Andaman & Nicobar', district: 'South Andaman', lat: 11.666, lng: 92.733, range: 2.2, m2Amp: 0.78, s2Amp: 0.26, baseWind: 17, windDir: 'WSW' }
+  { id: 'portblair', name: 'Port Blair', state: 'Andaman & Nicobar', district: 'South Andaman', lat: 11.666, lng: 92.733, range: 2.2, m2Amp: 0.78, s2Amp: 0.26, baseWind: 17, windDir: 'WSW' },
+  { id: 'kavaratti', name: 'Kavaratti', state: 'Lakshadweep', district: 'Lakshadweep', lat: 10.566, lng: 72.641, range: 1.4, m2Amp: 0.48, s2Amp: 0.17, baseWind: 15, windDir: 'WNW' }
 ];
 
 var selectedPortId = 'mumbai';
@@ -52,8 +52,8 @@ function getNearestPort(lat, lng) {
   return { port: nearest, distanceKm: Math.round(minDistance) };
 }
 
-// Astronomical Harmonic Tide Elevation calculation for given timestamp and port
-function calculateTideElevation(port, date) {
+// Astronomical Harmonic Tide Elevation calculation (unrounded float)
+function calculateTideElevationRaw(port, date) {
   const tHours = date.getHours() + date.getMinutes() / 60 + date.getSeconds() / 3600;
   const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
   
@@ -73,38 +73,77 @@ function calculateTideElevation(port, date) {
 
   // Mean Sea Level
   const msl = port.range * 0.55;
-  const height = msl + m2 + s2 + k1;
-  return Math.max(0.1, Number(height.toFixed(2)));
+  return msl + m2 + s2 + k1;
 }
 
-// Generate 24-hour tide predictions (High Tides & Low Tides) for today
+// Astronomical Harmonic Tide Elevation calculation for given timestamp and port
+function calculateTideElevation(port, date) {
+  const rawHeight = calculateTideElevationRaw(port, date);
+  return Number(Math.max(0.05, rawHeight).toFixed(2));
+}
+
+// Generate 24-hour tide predictions (High Tides & Low Tides) for today with robust extremum detection
 function calculateDailyTideEvents(port, baseDate = new Date()) {
-  const events = [];
   const startOfDay = new Date(baseDate);
   startOfDay.setHours(0, 0, 0, 0);
 
+  // 1. Sample elevations for the SVG chart (every 5 mins)
   const elevations = [];
-  // Sample every 5 minutes (288 steps in 24 hours)
   for (let m = 0; m <= 24 * 60; m += 5) {
     const time = new Date(startOfDay.getTime() + m * 60 * 1000);
-    const height = calculateTideElevation(port, time);
-    elevations.push({ time, height, minutes: m });
+    const rawH = calculateTideElevationRaw(port, time);
+    elevations.push({ time, height: Number(Math.max(0.05, rawH).toFixed(2)), minutes: m });
   }
 
-  // Detect local extrema (High / Low Tides)
-  for (let i = 1; i < elevations.length - 1; i++) {
-    const prev = elevations[i - 1].height;
-    const curr = elevations[i].height;
-    const next = elevations[i + 1].height;
+  // 2. High-resolution sampling (every 2 mins with a 60-min buffer) on continuous floats
+  const samples = [];
+  for (let m = -60; m <= 24 * 60 + 60; m += 2) {
+    const time = new Date(startOfDay.getTime() + m * 60 * 1000);
+    samples.push({ minutes: m, time, h: calculateTideElevationRaw(port, time) });
+  }
 
-    if (curr > prev && curr >= next) {
-      events.push({ type: 'High', time: elevations[i].time, height: curr });
-    } else if (curr < prev && curr <= next) {
-      events.push({ type: 'Low', time: elevations[i].time, height: curr });
+  // 3. Detect candidate peaks and troughs using 5-point slope comparison to avoid flat-spot ripples
+  const rawExtrema = [];
+  for (let i = 2; i < samples.length - 2; i++) {
+    const prev2 = samples[i - 2].h;
+    const prev1 = samples[i - 1].h;
+    const curr = samples[i].h;
+    const next1 = samples[i + 1].h;
+    const next2 = samples[i + 2].h;
+
+    if (curr >= prev1 && curr > prev2 && curr >= next1 && curr > next2) {
+      rawExtrema.push({ type: 'High', minutes: samples[i].minutes, time: samples[i].time, height: Number(Math.max(0.05, curr).toFixed(2)), raw: curr });
+    } else if (curr <= prev1 && curr < prev2 && curr <= next1 && curr < next2) {
+      rawExtrema.push({ type: 'Low', minutes: samples[i].minutes, time: samples[i].time, height: Number(Math.max(0.05, curr).toFixed(2)), raw: curr });
     }
   }
 
-  return { events, elevations };
+  // 4. Filter events strictly within [00:00, 24:00], merging adjacent micro-ripples and enforcing alternating sequence
+  const filteredEvents = [];
+  for (const ext of rawExtrema) {
+    if (ext.minutes < 0 || ext.minutes > 1440) continue;
+
+    const last = filteredEvents[filteredEvents.length - 1];
+    if (!last) {
+      filteredEvents.push(ext);
+    } else if (last.type === ext.type) {
+      // Same extremum type: keep the more extreme value
+      if (ext.type === 'High' && ext.raw > last.raw) {
+        filteredEvents[filteredEvents.length - 1] = ext;
+      } else if (ext.type === 'Low' && ext.raw < last.raw) {
+        filteredEvents[filteredEvents.length - 1] = ext;
+      }
+    } else {
+      // Alternating type: enforce realistic tidal period separation (>= 2.5 hours) & significant prominence
+      if (Math.abs(ext.minutes - last.minutes) >= 150) {
+        if (Math.abs(ext.raw - last.raw) >= 0.12) {
+          filteredEvents.push(ext);
+        }
+      }
+    }
+  }
+
+  return { events: filteredEvents, elevations };
 }
 
 function isTsunamiThreatActive(tsunami) {

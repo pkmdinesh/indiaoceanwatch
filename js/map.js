@@ -184,97 +184,51 @@ function osfDistrictTooltipHtml(district, state, service, advisories, level) {
 }
 
 // ----------------------------------------------------
-// Coastal Tidal Stations & Astronomical Spring/Neap Engine
+// Coastal Tidal Stations Layer (Powered by js/port-tides.js)
 // ----------------------------------------------------
 
-const OSF_TIDAL_STATIONS = Object.freeze([
-  { name: 'Kandla', state: 'Gujarat', lat: 23.00, lon: 70.22, rangeType: 'Macro-tidal', mhws: 6.5, hourOffset: 0.5 },
-  { name: 'Mumbai / JNPT', state: 'Maharashtra', lat: 18.92, lon: 72.83, rangeType: 'Macro-tidal', mhws: 4.8, hourOffset: 0.0 },
-  { name: 'Mormugao', state: 'Goa', lat: 15.42, lon: 73.80, rangeType: 'Meso-tidal', mhws: 2.3, hourOffset: -0.5 },
-  { name: 'Karwar', state: 'Karnataka', lat: 14.81, lon: 74.12, rangeType: 'Meso-tidal', mhws: 2.1, hourOffset: -0.6 },
-  { name: 'New Mangalore', state: 'Karnataka', lat: 12.93, lon: 74.82, rangeType: 'Micro-tidal', mhws: 1.7, hourOffset: -0.8 },
-  { name: 'Kochi', state: 'Kerala', lat: 9.96, lon: 76.24, rangeType: 'Micro-tidal', mhws: 1.2, hourOffset: -1.2 },
-  { name: 'Kanyakumari', state: 'Tamil Nadu', lat: 8.08, lon: 77.55, rangeType: 'Micro-tidal', mhws: 0.9, hourOffset: -1.5 },
-  { name: 'Tuticorin', state: 'Tamil Nadu', lat: 8.75, lon: 78.18, rangeType: 'Micro-tidal', mhws: 1.2, hourOffset: -1.0 },
-  { name: 'Chennai', state: 'Tamil Nadu', lat: 13.08, lon: 80.29, rangeType: 'Micro-tidal', mhws: 1.4, hourOffset: 1.2 },
-  { name: 'Visakhapatnam', state: 'Andhra Pradesh', lat: 17.68, lon: 83.28, rangeType: 'Meso-tidal', mhws: 1.8, hourOffset: 1.8 },
-  { name: 'Paradip', state: 'Odisha', lat: 20.26, lon: 86.67, rangeType: 'Meso-tidal', mhws: 2.6, hourOffset: 2.2 },
-  { name: 'Sagar Island / Haldia', state: 'West Bengal', lat: 21.80, lon: 88.03, rangeType: 'Macro-tidal', mhws: 4.9, hourOffset: 2.8 },
-  { name: 'Port Blair', state: 'Andaman & Nicobar', lat: 11.67, lon: 92.73, rangeType: 'Meso-tidal', mhws: 2.2, hourOffset: 0.8 },
-  { name: 'Kavaratti', state: 'Lakshadweep', lat: 10.56, lon: 72.64, rangeType: 'Micro-tidal', mhws: 1.4, hourOffset: -1.0 }
-]);
-
-function computeAstronomicalTidalState(date = new Date()) {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  const c = Math.floor(year / 100);
-  const epact = (11 * (year % 19) + Math.floor((8 * c + 13) / 25) - Math.floor(c / 4) + 11) % 30;
-  const jd = (day + (month < 3 ? month + 12 : month) * 30.6 + epact) % 29.53;
-  const age = (jd + 29.53) % 29.53;
-  const illumination = Math.round((1 - Math.cos(2 * Math.PI * (age / 29.53))) / 2 * 100);
-
-  let phase = 'New Moon';
-  let icon = '🌑';
-  if (age < 1.84) { phase = 'New Moon'; icon = '🌑'; }
-  else if (age < 7.38) { phase = 'Waxing Crescent'; icon = '🌒'; }
-  else if (age < 9.22) { phase = 'First Quarter'; icon = '🌓'; }
-  else if (age < 14.76) { phase = 'Waxing Gibbous'; icon = '🌔'; }
-  else if (age < 16.61) { phase = 'Full Moon'; icon = '🌕'; }
-  else if (age < 22.15) { phase = 'Waning Gibbous'; icon = '🌖'; }
-  else if (age < 23.99) { phase = 'Last Quarter'; icon = '🌗'; }
-  else { phase = 'Waning Crescent'; icon = '🌘'; }
-
-  // Spring tide around New Moon and Full Moon, Neap tide around Quarter Moons
-  const isSpring = (age <= 3.5 || age >= 26.0 || (age >= 11.2 && age <= 18.2));
-  const tideTypeShort = isSpring ? 'Spring Tide' : 'Neap Tide';
-  const phaseLabel = isSpring ? 'Spring Tide' : 'Neap Tide';
-  const riskNote = isSpring
-    ? 'Maximum tidal amplitude (Spring Tide). Coinciding high waves or swell surge will cause significant coastal overtopping and inundation.'
-    : 'Minimum tidal amplitude (Neap Tide). Reduced inundation risk even with moderate swell action.';
-  const badgeClass = isSpring ? 'spring' : 'neap';
+function createOsfTidalStationLayer() {
+  const layer = L.layerGroup();
+  const now = new Date();
+  const moon = typeof getMoonPhase === 'function' ? getMoonPhase(now) : { phase: 'Moon', icon: '🌑', isSpringTide: true, tideBadgeClass: 'spring' };
 
   // Update OSF Tide Status Banner (Bottom Right Corner)
   const bannerRegime = ids('osfTideBannerRegime');
   const bannerType = ids('osfTideBannerType');
+  const tideTypeShort = moon.isSpringTide ? 'Spring Tide' : 'Neap Tide';
   if (bannerRegime) {
-    bannerRegime.className = `osf-tide-banner-regime ${badgeClass}`;
+    bannerRegime.className = `osf-tide-banner-regime ${moon.tideBadgeClass}`;
     bannerRegime.textContent = tideTypeShort;
   }
   if (bannerType) {
-    bannerType.className = `osf-tide-banner-val`;
-    bannerType.textContent = `${icon} ${phase} · ${tideTypeShort}`;
+    bannerType.className = 'osf-tide-banner-val';
+    bannerType.textContent = `${moon.icon} ${moon.phase} · ${tideTypeShort}`;
   }
 
-  return { moonAge: age.toFixed(1), phase, phaseLabel, riskNote, badgeClass, tideTypeShort, moonIcon: icon, illumination };
-}
+  const ports = typeof MAJOR_COASTAL_PORTS !== 'undefined' ? MAJOR_COASTAL_PORTS : [];
+  const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
 
-function createOsfTidalStationLayer() {
-  const layer = L.layerGroup();
-  const tideState = computeAstronomicalTidalState();
+  ports.forEach(port => {
+    const lat = port.lat;
+    const lon = port.lng || port.lon;
+    if (typeof lat !== 'number' || typeof lon !== 'number') return;
 
-  OSF_TIDAL_STATIONS.forEach(st => {
-    // Calculate approximate high tide windows for this port
-    const baseHt1 = (8.5 + st.hourOffset + (parseFloat(tideState.moonAge) * 0.84)) % 12.42;
-    const morningHt = (baseHt1 < 0 ? baseHt1 + 12.42 : baseHt1);
-    const eveningHt = (morningHt + 12.42) % 24;
+    let morningStr = '—';
+    let eveningStr = '—';
 
-    const formatHour = (h) => {
-      const hh = Math.floor(h) % 24;
-      const mm = Math.floor((h % 1) * 60);
-      const period = hh >= 12 ? 'PM' : 'AM';
-      const dispH = hh % 12 || 12;
-      return `${String(dispH).padStart(2, '0')}:${String(mm).padStart(2, '0')} ${period}`;
-    };
+    if (typeof calculateDailyTideEvents === 'function') {
+      const { events } = calculateDailyTideEvents(port, now);
+      const highTides = (events || []).filter(e => e.type === 'High');
+      if (highTides[0]) morningStr = `${formatTime(highTides[0].time)} IST (${highTides[0].height}m)`;
+      if (highTides[1]) eveningStr = `${formatTime(highTides[1].time)} IST (${highTides[1].height}m)`;
+    }
 
-    const morningTimeStr = formatHour(morningHt);
-    const eveningTimeStr = formatHour(eveningHt);
+    const regime = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
 
     const iconHtml = `
-      <div class="osf-tide-marker" title="${st.name}: ${tideState.phaseLabel}">
-        <div class="osf-tide-pin ${tideState.badgeClass}">🌊</div>
-        <span class="osf-tide-label">${st.name}</span>
+      <div class="osf-tide-marker" title="${port.name}: ${tideTypeShort}">
+        <div class="osf-tide-pin ${moon.tideBadgeClass}">🌊</div>
+        <span class="osf-tide-label">${port.name}</span>
       </div>
     `;
 
@@ -285,18 +239,18 @@ function createOsfTidalStationLayer() {
       iconAnchor: [22, 19]
     });
 
-    const marker = L.marker([st.lat, st.lon], { icon });
+    const marker = L.marker([lat, lon], { icon });
 
     const popupHtml = `
       <div class="osf-popup osf-tide-popup">
         <div class="osf-tide-header">
-          <strong>🌊 ${escapeHtml(st.name)} Port</strong>
-          <span class="osf-tide-state">${escapeHtml(st.state)}</span>
+          <strong>🌊 ${escapeHtml(port.name)} Port</strong>
+          <span class="osf-tide-state">${escapeHtml(port.state)}</span>
         </div>
         <div class="osf-tide-grid">
-          <div class="osf-tide-row"><span>Morning High Tide:</span> <strong>${morningTimeStr} IST</strong></div>
-          <div class="osf-tide-row"><span>Evening High Tide:</span> <strong>${eveningTimeStr} IST</strong></div>
-          <div class="osf-tide-row"><span>Tidal Regime:</span> <span>${escapeHtml(st.rangeType)} (MHWS ~${st.mhws}m)</span></div>
+          <div class="osf-tide-row"><span>Morning High Tide:</span> <strong>${morningStr}</strong></div>
+          <div class="osf-tide-row"><span>Evening High Tide:</span> <strong>${eveningStr}</strong></div>
+          <div class="osf-tide-row"><span>Tidal Regime:</span> <span>${regime} (MHWS ~${port.range}m)</span></div>
         </div>
       </div>
     `;
