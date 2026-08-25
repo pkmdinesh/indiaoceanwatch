@@ -899,8 +899,9 @@ function playVoiceSummary() {
     }
   };
 
-  // Stream and play pre-rendered Google TTS regional audio MP3 from Git
-  const cacheVer = globalThis.OCEAN_WATCH_CONFIG?.CACHE_VERSION || '1';
+  // Stream and play pre-rendered Google TTS regional audio MP3 with fresh status timestamp cache-busting
+  const statusTime = globalThis.latestStatusData?.updatedAt ? new Date(globalThis.latestStatusData.updatedAt).getTime() : '';
+  const cacheVer = (globalThis.OCEAN_WATCH_CONFIG?.CACHE_VERSION || '1') + (statusTime ? `-${statusTime}` : '');
   const audioUrl = new URL('./audio/bulletins/bulletin-' + langConfig.voicePrefix + '.mp3?v=' + cacheVer, window.location.href).href;
 
   const audio = new Audio();
