@@ -1,11 +1,11 @@
 ﻿{
-    "updatedAt":  "2026-08-26T23:16:25.3728962+00:00",
-    "lastAttemptAt":  "2026-08-26T23:16:25.3728962+00:00",
+    "updatedAt":  "2026-08-26T23:30:16.5893433+00:00",
+    "lastAttemptAt":  "2026-08-26T23:30:16.5893433+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
-                           "message":  "Marine Heatwave event of No Heat Wave category with area of spreading 19.46% has been observed on 2026-08-24 over the Arabian Sea; Marine Heatwave event of Moderate category with area of spreading 31.81% has been observed on 2026-08-24 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 26.12% has been observed on 2026-08-24 over the Rest of Indian Ocean; Marine Heatwave event of Moderate category with area of spreading 29.46% has been observed on 2026-08-24 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 90.43% has been observed on 2026-08-24 over the Lakshadweep coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 73.28% has been observed on 2026-08-24 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 65.45% has been observed on 2026-08-24 over the Nicobar coast;",
-                           "fetchedAt":  "2026-08-25T23:30:17.2631811+00:00",
+                           "message":  "Marine Heatwave event of No Heat Wave category with area of spreading 17.76% has been observed on 2026-08-25 over the Arabian Sea; Marine Heatwave event of Moderate category with area of spreading 34.06% has been observed on 2026-08-25 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 26.28% has been observed on 2026-08-25 over the Rest of Indian Ocean; Marine Heatwave event of Moderate category with area of spreading 41.38% has been observed on 2026-08-25 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 49.11% has been observed on 2026-08-25 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 88.52% has been observed on 2026-08-25 over the Lakshadweep coast; Marine Heatwave event of Moderate category with area of spreading 34.06% has been observed on 2026-08-25 over the West Bengal coast; Marine Heatwave event of Moderate category with area of spreading 81.78% has been observed on 2026-08-25 over the Andaman coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 80.00% has been observed on 2026-08-25 over the Nicobar coast;",
+                           "fetchedAt":  "2026-08-26T23:30:16.5893433+00:00",
                            "ok":  true,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
@@ -1646,7 +1646,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-26T23:16:36.5281147+00:00",
+                          "fetchedAt":  "2026-08-26T23:30:24.8099578+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -4464,7 +4464,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  11.79,
-                      "pfzAgeHours":  11.79
+                      "osfAgeHours":  12.03,
+                      "pfzAgeHours":  12.03
                   }
 }
