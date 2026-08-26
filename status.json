@@ -1,6 +1,6 @@
 ﻿{
     "updatedAt":  "2026-08-26T10:30:18.0005478+00:00",
-    "lastAttemptAt":  "2026-08-26T10:45:15.1699355+00:00",
+    "lastAttemptAt":  "2026-08-26T11:00:27.9939092+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -1585,7 +1585,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-26T10:47:03.7279296+00:00",
+                          "fetchedAt":  "2026-08-26T11:01:20.0008213+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -4396,29 +4396,15 @@
                             ]
             },
     "errors":  [
-                   "Tsunami: Unable to connect to the remote server",
-                   "Seismic: Unable to connect to the remote server",
                    "High wave/swell: Unable to connect to the remote server",
-                   "Ocean current: Unable to connect to the remote server",
-                   "Storm surge: Unable to connect to the remote server"
+                   "Ocean current: Unable to connect to the remote server"
                ],
     "healthAlerts":  [
-                         {
-                             "code":  "itewc",
-                             "message":  "Error: Unable to access Tsunami/Seismic Info",
-                             "linkLabel":  "Check ITEWC webpage",
-                             "url":  "https://tsunami.incois.gov.in/TEWS/"
-                         },
-                         {
-                             "code":  "storm-surge",
-                             "message":  "Error: Unable to access Storm Surge Info",
-                             "linkLabel":  "Check ITEWC webpage",
-                             "url":  "https://tsunami.incois.gov.in/TEWS/"
-                         }
+
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  23.3,
-                      "pfzAgeHours":  -0.7
+                      "osfAgeHours":  23.54,
+                      "pfzAgeHours":  -0.46
                   }
 }
