@@ -152,11 +152,29 @@ loadStatus().catch(()=>{});
       if (typeof initNotifications === 'function') initNotifications();
       if (typeof initVoiceSummary === 'function') initVoiceSummary();
       if ('serviceWorker' in navigator) {
+        let swRefreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!swRefreshing) {
+            swRefreshing = true;
+            window.location.reload();
+          }
+        });
+
         navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
-          .then(registration => registration.update())
+          .then(registration => {
+            registration.update().catch(() => {});
+          })
           .catch(() => {});
       }
     });
+
+    function checkAppUpdates() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(reg => {
+          if (reg) reg.update().catch(() => {});
+        }).catch(() => {});
+      }
+    }
 
     let printOpenedDetails = [];
     window.addEventListener('beforeprint',() => {
@@ -170,6 +188,17 @@ loadStatus().catch(()=>{});
       printOpenedDetails.forEach(detail => { detail.open = false; });
       printOpenedDetails = [];
     });
-    window.addEventListener('focus',()=>loadStatus().catch(()=>{}));
-    window.addEventListener('online',()=>loadStatus().catch(()=>{}));
+    window.addEventListener('focus', () => {
+      loadStatus().catch(() => {});
+      checkAppUpdates();
+    });
+    window.addEventListener('online', () => {
+      loadStatus().catch(() => {});
+      checkAppUpdates();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        checkAppUpdates();
+      }
+    });
 

@@ -36,6 +36,7 @@ const APP_SHELL = [
   './data/pfz-eez.geojson',
   './data/pfz-landing-centres.geojson',
   './data/osf-district-polygons.geojson',
+  './data/tides.json',
   './manifest.webmanifest',
   './icons/ocean-watch-v3-192.png',
   './icons/ocean-watch-v3-512.png',
@@ -118,6 +119,10 @@ self.addEventListener('fetch',event => {
     event.respondWith(statusNetworkFirst(event.request));
     return;
   }
+  if (url.pathname.endsWith('/data/tides.json')) {
+    event.respondWith(networkFirst(event.request));
+    return;
+  }
   if (url.pathname.includes('/vendor/')) {
     event.respondWith(vendorCacheFirst(event.request));
     return;
@@ -134,16 +139,14 @@ self.addEventListener('fetch',event => {
     event.respondWith(fetch(event.request));
     return;
   }
+  if (url.pathname.includes('/js/') || url.pathname.includes('/css/')) {
+    event.respondWith(networkFirst(event.request));
+    return;
+  }
   event.respondWith((async () => {
     const cached = await caches.match(event.request);
     if (cached) {
-      const headers = new Headers(cached.headers);
-      headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-      return new Response(cached.body, {
-        status: cached.status,
-        statusText: cached.statusText,
-        headers
-      });
+      return cached;
     }
     const response = await fetch(event.request);
     if (response.ok) {
