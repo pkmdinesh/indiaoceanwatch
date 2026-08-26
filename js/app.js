@@ -175,3 +175,28 @@ var dashboard = document.querySelector('.dashboard');
       const date = value ? new Date(value) : null;
       return date && !Number.isNaN(date.getTime()) ? `${date.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST` : 'Unavailable';
     };
+
+function initPageHitCounter() {
+  const el = document.getElementById('hitCount');
+  if (!el) return;
+  const BASE_OFFSET = 700;
+  fetch('https://api.counterapi.dev/v1/pkmdinesh-indiaoceanwatch/visits/up')
+    .then(res => res.json())
+    .then(data => {
+      if (data && typeof data.count === 'number') {
+        el.textContent = (BASE_OFFSET + data.count).toLocaleString();
+      } else {
+        el.textContent = (BASE_OFFSET + 1).toLocaleString();
+      }
+    })
+    .catch(() => {
+      if (el && el.textContent === '...') el.textContent = (BASE_OFFSET + 1).toLocaleString();
+    });
+}
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPageHitCounter);
+  } else {
+    initPageHitCounter();
+  }
+}

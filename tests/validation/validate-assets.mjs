@@ -38,7 +38,7 @@ for (const file of jsonFiles.filter(file => file.endsWith('.geojson'))) {
 }
 
 const html = readText('index.html');
-const htmlReferences = [...html.matchAll(/(?:src|href)=["'](?!https?:|#|mailto:|tel:|data:|javascript:)([^"'?]+)(?:\?[^"']*)?["']/g)]
+const htmlReferences = [...html.matchAll(/(?:src|href)=["'](?!https?:|\/\/|#|mailto:|tel:|data:|javascript:)([^"'?]+)(?:\?[^"']*)?["']/g)]
   .map(match => match[1])
   .filter(reference => reference && reference !== './');
 const cachedAssets = [...readText('sw.js').matchAll(/^\s*'\.\/([^']+)'/gm)]
