@@ -299,11 +299,13 @@ function createOsfTidalStationLayer() {
       if (highTides[1]) eveningStr = `${formatTime(highTides[1].time)} IST (${highTides[1].height}m)`;
     }
 
-    const regime = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
+    const isReporting = port.status !== 'Not Reporting';
+    const pinClass = isReporting ? (moon.tideBadgeClass || 'spring') : 'not-reporting';
+    const statusLabel = isReporting ? tideTypeShort : 'Telemetry Offline (No Real-Time Data)';
 
     const iconHtml = `
-      <div class="osf-tide-marker" title="${port.name}: ${tideTypeShort}">
-        <div class="osf-tide-pin ${moon.tideBadgeClass}">🌊</div>
+      <div class="osf-tide-marker ${isReporting ? 'is-reporting' : 'is-not-reporting'}" title="${port.name}: ${statusLabel}">
+        <div class="osf-tide-pin ${pinClass}">🌊</div>
         <span class="osf-tide-label">${port.name}</span>
       </div>
     `;
@@ -320,13 +322,16 @@ function createOsfTidalStationLayer() {
     const popupHtml = `
       <div class="osf-popup osf-tide-popup">
         <div class="osf-tide-header">
-          <strong>🌊 ${escapeHtml(port.name)} Port</strong>
-          <span class="osf-tide-state">${escapeHtml(port.state)}</span>
+          <strong>${isReporting ? '🌊' : '🌫️'} ${escapeHtml(port.name)} Tide Station</strong>
+          <span class="osf-tide-state">${escapeHtml(port.state)}${!isReporting ? ' · <small style="color:#64748b;font-weight:800;">(No Real-Time Data)</small>' : ''}</span>
         </div>
         <div class="osf-tide-grid">
           <div class="osf-tide-row"><span>Morning High Tide:</span> <strong>${morningStr}</strong></div>
           <div class="osf-tide-row"><span>Evening High Tide:</span> <strong>${eveningStr}</strong></div>
           <div class="osf-tide-row"><span>Tidal Regime:</span> <span>${regime} (MHWS ~${port.range}m)</span></div>
+        </div>
+        <div style="margin-top:7px;text-align:right;">
+          <a href="https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}" target="_blank" rel="noopener" style="font-size:10.5px;font-weight:800;color:var(--teal);text-decoration:underline;">INCOIS PAT Tide Graph ↗</a>
         </div>
       </div>
     `;

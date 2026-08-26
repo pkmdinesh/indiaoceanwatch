@@ -1,28 +1,710 @@
-// Port catalog with geographical coordinates, coastal district mappings, and tidal parameters
-var MAJOR_COASTAL_PORTS = [
-  { id: 'kandla', name: 'Deendayal (Kandla)', state: 'Gujarat', district: 'Kachchh', lat: 23.003, lng: 70.218, range: 6.4, m2Amp: 2.3, s2Amp: 0.8, baseWind: 18, windDir: 'WSW' },
-  { id: 'dwarka', name: 'Dwarka / Okha', state: 'Gujarat', district: 'Devbhumi Dwarka', lat: 22.466, lng: 69.072, range: 4.2, m2Amp: 1.5, s2Amp: 0.5, baseWind: 20, windDir: 'SW' },
-  { id: 'veraval', name: 'Veraval', state: 'Gujarat', district: 'Gir Somnath', lat: 20.902, lng: 70.366, range: 2.8, m2Amp: 1.0, s2Amp: 0.35, baseWind: 16, windDir: 'SW' },
-  { id: 'bhavnagar', name: 'Bhavnagar / Alang', state: 'Gujarat', district: 'Bhavnagar', lat: 21.764, lng: 72.152, range: 9.8, m2Amp: 3.5, s2Amp: 1.2, baseWind: 15, windDir: 'SSW' },
-  { id: 'mumbai', name: 'Mumbai / JNPT', state: 'Maharashtra', district: 'Mumbai Suburban', lat: 18.950, lng: 72.868, range: 4.8, m2Amp: 1.7, s2Amp: 0.6, baseWind: 14, windDir: 'WNW' },
-  { id: 'ratnagiri', name: 'Ratnagiri', state: 'Maharashtra', district: 'Ratnagiri', lat: 16.983, lng: 73.283, range: 2.6, m2Amp: 0.9, s2Amp: 0.3, baseWind: 12, windDir: 'NW' },
-  { id: 'mormugao', name: 'Mormugao', state: 'Goa', district: 'South Goa', lat: 15.416, lng: 73.799, range: 2.3, m2Amp: 0.8, s2Amp: 0.28, baseWind: 11, windDir: 'WNW' },
-  { id: 'karwar', name: 'Karwar', state: 'Karnataka', district: 'Uttara Kannada', lat: 14.816, lng: 74.133, range: 2.1, m2Amp: 0.75, s2Amp: 0.25, baseWind: 10, windDir: 'W' },
-  { id: 'mangalore', name: 'New Mangalore', state: 'Karnataka', district: 'Dakshina Kannada', lat: 12.923, lng: 74.816, range: 1.6, m2Amp: 0.55, s2Amp: 0.2, baseWind: 12, windDir: 'W' },
-  { id: 'kochi', name: 'Cochin (Kochi)', state: 'Kerala', district: 'Ernakulam', lat: 9.966, lng: 76.266, range: 1.1, m2Amp: 0.38, s2Amp: 0.14, baseWind: 13, windDir: 'W' },
-  { id: 'kanyakumari', name: 'Kanyakumari', state: 'Tamil Nadu', district: 'Kanniyakumari', lat: 8.083, lng: 77.550, range: 1.0, m2Amp: 0.35, s2Amp: 0.12, baseWind: 22, windDir: 'WSW' },
-  { id: 'tuticorin', name: 'V.O. Chidambaranar (Tuticorin)', state: 'Tamil Nadu', district: 'Thoothukkudi', lat: 8.750, lng: 78.183, range: 1.2, m2Amp: 0.42, s2Amp: 0.15, baseWind: 19, windDir: 'SW' },
-  { id: 'nagapattinam', name: 'Nagapattinam', state: 'Tamil Nadu', district: 'Nagappattinam', lat: 10.766, lng: 79.850, range: 0.9, m2Amp: 0.32, s2Amp: 0.11, baseWind: 15, windDir: 'SSW' },
-  { id: 'chennai', name: 'Chennai / Kamarajar (Ennore)', state: 'Tamil Nadu', district: 'Chennai', lat: 13.083, lng: 80.283, range: 1.4, m2Amp: 0.48, s2Amp: 0.17, baseWind: 14, windDir: 'S' },
-  { id: 'krishnapatnam', name: 'Krishnapatnam', state: 'Andhra Pradesh', district: 'Nellore', lat: 14.250, lng: 80.116, range: 1.3, m2Amp: 0.45, s2Amp: 0.16, baseWind: 13, windDir: 'SSE' },
-  { id: 'visakhapatnam', name: 'Visakhapatnam', state: 'Andhra Pradesh', district: 'Visakhapatnam', lat: 17.686, lng: 83.218, range: 1.8, m2Amp: 0.62, s2Amp: 0.22, baseWind: 14, windDir: 'SSW' },
-  { id: 'paradip', name: 'Paradip', state: 'Odisha', district: 'Jagatsinghpur', lat: 20.266, lng: 86.666, range: 2.9, m2Amp: 1.0, s2Amp: 0.35, baseWind: 16, windDir: 'SW' },
-  { id: 'dhamra', name: 'Dhamra', state: 'Odisha', district: 'Bhadrak', lat: 20.816, lng: 86.966, range: 3.6, m2Amp: 1.25, s2Amp: 0.44, baseWind: 15, windDir: 'SSW' },
-  { id: 'portblair', name: 'Port Blair', state: 'Andaman & Nicobar', district: 'South Andaman', lat: 11.666, lng: 92.733, range: 2.2, m2Amp: 0.78, s2Amp: 0.26, baseWind: 17, windDir: 'WSW' },
-  { id: 'kavaratti', name: 'Kavaratti', state: 'Lakshadweep', district: 'Lakshadweep', lat: 10.566, lng: 72.641, range: 1.4, m2Amp: 0.48, s2Amp: 0.17, baseWind: 15, windDir: 'WNW' }
+// National Tide Gauge Stations dataset with geographical coordinates, coastal district mappings, and tidal parameters
+// Sourced from INCOIS TEWS (https://tsunami.incois.gov.in/TEWS/TGMap.jsp)
+var NATIONAL_TIDE_STATIONS = [
+  {
+    "id": "adan",
+    "name": "Adani",
+    "lat": 21.1,
+    "lng": 72.616,
+    "state": "Gujarat",
+    "district": "Surat / Hazira",
+    "status": "Reporting",
+    "range": 5.8,
+    "m2Amp": 2.1,
+    "s2Amp": 0.75,
+    "baseWind": 16,
+    "windDir": "SW"
+  },
+  {
+    "id": "aeri",
+    "name": "Aerialbay",
+    "lat": 13.2833,
+    "lng": 93.0333,
+    "state": "Andaman & Nicobar",
+    "district": "North & Middle Andaman",
+    "status": "Reporting",
+    "range": 2.1,
+    "m2Amp": 0.75,
+    "s2Amp": 0.25,
+    "baseWind": 17,
+    "windDir": "WSW"
+  },
+  {
+    "id": "agatt",
+    "name": "Agatti",
+    "lat": 10.8184,
+    "lng": 72.1726,
+    "state": "Lakshadweep",
+    "district": "Agatti Island",
+    "status": "Reporting",
+    "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
+    "baseWind": 15,
+    "windDir": "WNW"
+  },
+  {
+    "id": "astra",
+    "name": "Astranga",
+    "lat": 19.9743,
+    "lng": 86.339,
+    "state": "Odisha",
+    "district": "Puri",
+    "status": "Reporting",
+    "range": 2.6,
+    "m2Amp": 0.9,
+    "s2Amp": 0.32,
+    "baseWind": 16,
+    "windDir": "SSW"
+  },
+  {
+    "id": "bahab",
+    "name": "Bahabalpur",
+    "lat": 20.793,
+    "lng": 86.9006,
+    "state": "Odisha",
+    "district": "Baleswar",
+    "status": "Reporting",
+    "range": 3.4,
+    "m2Amp": 1.2,
+    "s2Amp": 0.42,
+    "baseWind": 15,
+    "windDir": "S"
+  },
+  {
+    "id": "chenn",
+    "name": "Chennai",
+    "lat": 13.1,
+    "lng": 80.3,
+    "state": "Tamil Nadu",
+    "district": "Chennai",
+    "status": "Reporting",
+    "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
+    "baseWind": 14,
+    "windDir": "S"
+  },
+  {
+    "id": "coch",
+    "name": "Cochin",
+    "lat": 9.9667,
+    "lng": 76.2667,
+    "state": "Kerala",
+    "district": "Ernakulam",
+    "status": "Reporting",
+    "range": 1.1,
+    "m2Amp": 0.38,
+    "s2Amp": 0.14,
+    "baseWind": 13,
+    "windDir": "W"
+  },
+  {
+    "id": "daman",
+    "name": "Daman",
+    "lat": 20.4111,
+    "lng": 72.834,
+    "state": "Daman & Diu",
+    "district": "Daman",
+    "status": "Reporting",
+    "range": 4.6,
+    "m2Amp": 1.6,
+    "s2Amp": 0.58,
+    "baseWind": 14,
+    "windDir": "WSW"
+  },
+  {
+    "id": "dosin",
+    "name": "Dosinga",
+    "lat": 20.8174,
+    "lng": 86.9681,
+    "state": "Odisha",
+    "district": "Bhadrak",
+    "status": "Reporting",
+    "range": 3.6,
+    "m2Amp": 1.25,
+    "s2Amp": 0.44,
+    "baseWind": 15,
+    "windDir": "SSW"
+  },
+  {
+    "id": "enno",
+    "name": "Ennore",
+    "lat": 13.25,
+    "lng": 80.3333,
+    "state": "Tamil Nadu",
+    "district": "Tiruvallur",
+    "status": "Reporting",
+    "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
+    "baseWind": 14,
+    "windDir": "SSE"
+  },
+  {
+    "id": "gard",
+    "name": "Gardenreach",
+    "lat": 22.55,
+    "lng": 88.3,
+    "state": "West Bengal",
+    "district": "Kolkata",
+    "status": "Reporting",
+    "range": 4.8,
+    "m2Amp": 1.7,
+    "s2Amp": 0.6,
+    "baseWind": 12,
+    "windDir": "S"
+  },
+  {
+    "id": "jakh",
+    "name": "Jakhau",
+    "lat": 23.243,
+    "lng": 68.606,
+    "state": "Gujarat",
+    "district": "Kachchh",
+    "status": "Reporting",
+    "range": 4.5,
+    "m2Amp": 1.6,
+    "s2Amp": 0.55,
+    "baseWind": 20,
+    "windDir": "WSW"
+  },
+  {
+    "id": "jnpt",
+    "name": "Jnpt",
+    "lat": 18.9167,
+    "lng": 72.75,
+    "state": "Maharashtra",
+    "district": "Raigad",
+    "status": "Reporting",
+    "range": 4.8,
+    "m2Amp": 1.7,
+    "s2Amp": 0.6,
+    "baseWind": 14,
+    "windDir": "WNW"
+  },
+  {
+    "id": "kaki",
+    "name": "Kakinada",
+    "lat": 16.9333,
+    "lng": 82.25,
+    "state": "Andhra Pradesh",
+    "district": "Kakinada",
+    "status": "Reporting",
+    "range": 1.6,
+    "m2Amp": 0.55,
+    "s2Amp": 0.2,
+    "baseWind": 13,
+    "windDir": "SE"
+  },
+  {
+    "id": "kalpe",
+    "name": "Kalpeni",
+    "lat": 10.0884,
+    "lng": 73.6467,
+    "state": "Lakshadweep",
+    "district": "Kalpeni Island",
+    "status": "Reporting",
+    "range": 1.3,
+    "m2Amp": 0.45,
+    "s2Amp": 0.16,
+    "baseWind": 14,
+    "windDir": "W"
+  },
+  {
+    "id": "kand",
+    "name": "Kandla",
+    "lat": 23.017,
+    "lng": 70.217,
+    "state": "Gujarat",
+    "district": "Kachchh",
+    "status": "Reporting",
+    "range": 6.4,
+    "m2Amp": 2.3,
+    "s2Amp": 0.8,
+    "baseWind": 18,
+    "windDir": "WSW"
+  },
+  {
+    "id": "kanya",
+    "name": "Kanyakumari",
+    "lat": 8.0952,
+    "lng": 77.5645,
+    "state": "Tamil Nadu",
+    "district": "Kanniyakumari",
+    "status": "Reporting",
+    "range": 1,
+    "m2Amp": 0.35,
+    "s2Amp": 0.12,
+    "baseWind": 22,
+    "windDir": "WSW"
+  },
+  {
+    "id": "karw",
+    "name": "Karwar",
+    "lat": 14.8,
+    "lng": 74.1167,
+    "state": "Karnataka",
+    "district": "Uttara Kannada",
+    "status": "Reporting",
+    "range": 2.1,
+    "m2Amp": 0.75,
+    "s2Amp": 0.25,
+    "baseWind": 10,
+    "windDir": "W"
+  },
+  {
+    "id": "kris",
+    "name": "Krishnapatnam",
+    "lat": 14.25,
+    "lng": 80.1333,
+    "state": "Andhra Pradesh",
+    "district": "SPS Nellore",
+    "status": "Reporting",
+    "range": 1.3,
+    "m2Amp": 0.45,
+    "s2Amp": 0.16,
+    "baseWind": 13,
+    "windDir": "SSE"
+  },
+  {
+    "id": "marm",
+    "name": "Marmagoa",
+    "lat": 15.409,
+    "lng": 73.8,
+    "state": "Goa",
+    "district": "South Goa",
+    "status": "Reporting",
+    "range": 2.3,
+    "m2Amp": 0.8,
+    "s2Amp": 0.28,
+    "baseWind": 11,
+    "windDir": "WNW"
+  },
+  {
+    "id": "mumba",
+    "name": "Mumbai",
+    "lat": 18.9415,
+    "lng": 72.8527,
+    "state": "Maharashtra",
+    "district": "Mumbai City",
+    "status": "Reporting",
+    "range": 4.8,
+    "m2Amp": 1.7,
+    "s2Amp": 0.6,
+    "baseWind": 14,
+    "windDir": "WNW"
+  },
+  {
+    "id": "murud",
+    "name": "Murud",
+    "lat": 18.2837,
+    "lng": 72.9823,
+    "state": "Maharashtra",
+    "district": "Raigad",
+    "status": "Reporting",
+    "range": 4.2,
+    "m2Amp": 1.5,
+    "s2Amp": 0.52,
+    "baseWind": 13,
+    "windDir": "NW"
+  },
+  {
+    "id": "naga",
+    "name": "Nagapattinam",
+    "lat": 10.7667,
+    "lng": 79.85,
+    "state": "Tamil Nadu",
+    "district": "Nagapattinam",
+    "status": "Reporting",
+    "range": 0.9,
+    "m2Amp": 0.32,
+    "s2Amp": 0.11,
+    "baseWind": 15,
+    "windDir": "SSW"
+  },
+  {
+    "id": "newm",
+    "name": "Newmangalore",
+    "lat": 12.9167,
+    "lng": 74.8,
+    "state": "Karnataka",
+    "district": "Dakshina Kannada",
+    "status": "Reporting",
+    "range": 1.6,
+    "m2Amp": 0.55,
+    "s2Amp": 0.2,
+    "baseWind": 12,
+    "windDir": "W"
+  },
+  {
+    "id": "okha",
+    "name": "Okha",
+    "lat": 22.4667,
+    "lng": 69.0833,
+    "state": "Gujarat",
+    "district": "Devbhumi Dwarka",
+    "status": "Reporting",
+    "range": 4.2,
+    "m2Amp": 1.5,
+    "s2Amp": 0.5,
+    "baseWind": 20,
+    "windDir": "SW"
+  },
+  {
+    "id": "panaj",
+    "name": "Panaji",
+    "lat": 15.5016,
+    "lng": 73.8282,
+    "state": "Goa",
+    "district": "North Goa",
+    "status": "Reporting",
+    "range": 2.3,
+    "m2Amp": 0.8,
+    "s2Amp": 0.28,
+    "baseWind": 11,
+    "windDir": "WNW"
+  },
+  {
+    "id": "para",
+    "name": "Paradeep",
+    "lat": 20.2667,
+    "lng": 86.7,
+    "state": "Odisha",
+    "district": "Jagatsinghpur",
+    "status": "Reporting",
+    "range": 2.9,
+    "m2Amp": 1,
+    "s2Amp": 0.35,
+    "baseWind": 16,
+    "windDir": "SW"
+  },
+  {
+    "id": "porb",
+    "name": "Porbander",
+    "lat": 21.6333,
+    "lng": 69.6167,
+    "state": "Gujarat",
+    "district": "Porbandar",
+    "status": "Reporting",
+    "range": 3.2,
+    "m2Amp": 1.15,
+    "s2Amp": 0.4,
+    "baseWind": 18,
+    "windDir": "SW"
+  },
+  {
+    "id": "ptbl",
+    "name": "Portblair",
+    "lat": 11.6833,
+    "lng": 92.7667,
+    "state": "Andaman & Nicobar",
+    "district": "South Andaman",
+    "status": "Reporting",
+    "range": 2.2,
+    "m2Amp": 0.78,
+    "s2Amp": 0.26,
+    "baseWind": 17,
+    "windDir": "WSW"
+  },
+  {
+    "id": "ramaya",
+    "name": "Ramayapatnam",
+    "lat": 15.0158,
+    "lng": 80.0603,
+    "state": "Andhra Pradesh",
+    "district": "Prakasam",
+    "status": "Reporting",
+    "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
+    "baseWind": 13,
+    "windDir": "SSE"
+  },
+  {
+    "id": "rames",
+    "name": "Rameshwaram",
+    "lat": 9.2578,
+    "lng": 79.2257,
+    "state": "Tamil Nadu",
+    "district": "Ramanathapuram",
+    "status": "Reporting",
+    "range": 0.8,
+    "m2Amp": 0.28,
+    "s2Amp": 0.1,
+    "baseWind": 20,
+    "windDir": "SW"
+  },
+  {
+    "id": "tuti",
+    "name": "Tuticorin",
+    "lat": 8.75,
+    "lng": 78.2,
+    "state": "Tamil Nadu",
+    "district": "Thoothukkudi",
+    "status": "Reporting",
+    "range": 1.2,
+    "m2Amp": 0.42,
+    "s2Amp": 0.15,
+    "baseWind": 19,
+    "windDir": "SW"
+  },
+  {
+    "id": "beyp",
+    "name": "Beypore",
+    "lat": 11.171,
+    "lng": 75.808,
+    "state": "Kerala",
+    "district": "Kozhikode",
+    "status": "Not Reporting",
+    "range": 1.3,
+    "m2Amp": 0.45,
+    "s2Amp": 0.16,
+    "baseWind": 12,
+    "windDir": "W"
+  },
+  {
+    "id": "camp",
+    "name": "Campbellbay",
+    "lat": 7,
+    "lng": 93.9333,
+    "state": "Andaman & Nicobar",
+    "district": "Nicobar",
+    "status": "Not Reporting",
+    "range": 1.8,
+    "m2Amp": 0.65,
+    "s2Amp": 0.22,
+    "baseWind": 18,
+    "windDir": "SW"
+  },
+  {
+    "id": "carn",
+    "name": "Carnicobar",
+    "lat": 9.2344,
+    "lng": 92.7769,
+    "state": "Andaman & Nicobar",
+    "district": "Nicobar",
+    "status": "Not Reporting",
+    "range": 2,
+    "m2Amp": 0.7,
+    "s2Amp": 0.24,
+    "baseWind": 18,
+    "windDir": "WSW"
+  },
+  {
+    "id": "chetl",
+    "name": "Chetlat",
+    "lat": 11.6939,
+    "lng": 72.717,
+    "state": "Lakshadweep",
+    "district": "Chetlat Island",
+    "status": "Not Reporting",
+    "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
+    "baseWind": 15,
+    "windDir": "WNW"
+  },
+  {
+    "id": "dham",
+    "name": "Dhamra",
+    "lat": 20.7851,
+    "lng": 86.9556,
+    "state": "Odisha",
+    "district": "Bhadrak",
+    "status": "Not Reporting",
+    "range": 3.6,
+    "m2Amp": 1.25,
+    "s2Amp": 0.44,
+    "baseWind": 15,
+    "windDir": "SSW"
+  },
+  {
+    "id": "gopa",
+    "name": "Gopalpur",
+    "lat": 19.2889,
+    "lng": 84.9483,
+    "state": "Odisha",
+    "district": "Ganjam",
+    "status": "Not Reporting",
+    "range": 2.4,
+    "m2Amp": 0.85,
+    "s2Amp": 0.3,
+    "baseWind": 15,
+    "windDir": "S"
+  },
+  {
+    "id": "hutb",
+    "name": "Hutbay",
+    "lat": 10.5914,
+    "lng": 92.5625,
+    "state": "Andaman & Nicobar",
+    "district": "South Andaman",
+    "status": "Not Reporting",
+    "range": 2.1,
+    "m2Amp": 0.75,
+    "s2Amp": 0.25,
+    "baseWind": 17,
+    "windDir": "WSW"
+  },
+  {
+    "id": "jaig",
+    "name": "Jaigarh",
+    "lat": 17.281,
+    "lng": 73.208,
+    "state": "Maharashtra",
+    "district": "Ratnagiri",
+    "status": "Not Reporting",
+    "range": 2.8,
+    "m2Amp": 1,
+    "s2Amp": 0.35,
+    "baseWind": 13,
+    "windDir": "NW"
+  },
+  {
+    "id": "kava",
+    "name": "Kavaratti",
+    "lat": 10.5667,
+    "lng": 72.6333,
+    "state": "Lakshadweep",
+    "district": "Kavaratti Island",
+    "status": "Not Reporting",
+    "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
+    "baseWind": 15,
+    "windDir": "WNW"
+  },
+  {
+    "id": "koll",
+    "name": "Kollam",
+    "lat": 8.864,
+    "lng": 76.603,
+    "state": "Kerala",
+    "district": "Kollam",
+    "status": "Not Reporting",
+    "range": 1,
+    "m2Amp": 0.35,
+    "s2Amp": 0.12,
+    "baseWind": 14,
+    "windDir": "WSW"
+  },
+  {
+    "id": "mach",
+    "name": "Machilipatnam",
+    "lat": 16.145,
+    "lng": 81.178,
+    "state": "Andhra Pradesh",
+    "district": "Krishna",
+    "status": "Not Reporting",
+    "range": 1.5,
+    "m2Amp": 0.52,
+    "s2Amp": 0.18,
+    "baseWind": 14,
+    "windDir": "SE"
+  },
+  {
+    "id": "mayab",
+    "name": "Mayabunder",
+    "lat": 12.9265,
+    "lng": 92.8975,
+    "state": "Andaman & Nicobar",
+    "district": "North & Middle Andaman",
+    "status": "Not Reporting",
+    "range": 2.2,
+    "m2Amp": 0.78,
+    "s2Amp": 0.26,
+    "baseWind": 16,
+    "windDir": "WSW"
+  },
+  {
+    "id": "mini",
+    "name": "Minicoy",
+    "lat": 8.2833,
+    "lng": 73.05,
+    "state": "Lakshadweep",
+    "district": "Minicoy Island",
+    "status": "Not Reporting",
+    "range": 1.2,
+    "m2Amp": 0.42,
+    "s2Amp": 0.15,
+    "baseWind": 16,
+    "windDir": "WSW"
+  },
+  {
+    "id": "nagc",
+    "name": "Nancowry",
+    "lat": 8.05,
+    "lng": 93.55,
+    "state": "Andaman & Nicobar",
+    "district": "Nicobar",
+    "status": "Not Reporting",
+    "range": 1.9,
+    "m2Amp": 0.68,
+    "s2Amp": 0.23,
+    "baseWind": 18,
+    "windDir": "SW"
+  },
+  {
+    "id": "pudu",
+    "name": "Puducherry",
+    "lat": 11.93,
+    "lng": 79.835,
+    "state": "Puducherry",
+    "district": "Puducherry",
+    "status": "Not Reporting",
+    "range": 1.3,
+    "m2Amp": 0.45,
+    "s2Amp": 0.16,
+    "baseWind": 14,
+    "windDir": "S"
+  },
+  {
+    "id": "rang",
+    "name": "Rangatbay",
+    "lat": 12.4889,
+    "lng": 92.9569,
+    "state": "Andaman & Nicobar",
+    "district": "North & Middle Andaman",
+    "status": "Not Reporting",
+    "range": 2.2,
+    "m2Amp": 0.78,
+    "s2Amp": 0.26,
+    "baseWind": 16,
+    "windDir": "WSW"
+  },
+  {
+    "id": "verav",
+    "name": "Veraval",
+    "lat": 20.912,
+    "lng": 70.408,
+    "state": "Gujarat",
+    "district": "Gir Somnath",
+    "status": "Not Reporting",
+    "range": 2.8,
+    "m2Amp": 1,
+    "s2Amp": 0.35,
+    "baseWind": 16,
+    "windDir": "SW"
+  },
+  {
+    "id": "vish",
+    "name": "Visakhapatnam",
+    "lat": 17.6833,
+    "lng": 83.2833,
+    "state": "Andhra Pradesh",
+    "district": "Visakhapatnam",
+    "status": "Not Reporting",
+    "range": 1.8,
+    "m2Amp": 0.62,
+    "s2Amp": 0.22,
+    "baseWind": 14,
+    "windDir": "SSW"
+  }
 ];
+var MAJOR_COASTAL_PORTS = NATIONAL_TIDE_STATIONS;
 
-var selectedPortId = 'mumbai';
+var selectedPortId = 'chenn';
 var userLocationData = null;
 
 // Calculate Haversine distance in kilometers
@@ -37,16 +719,20 @@ function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// Find nearest port to given coordinates
+// Find nearest station to given coordinates
 function getNearestPort(lat, lng) {
-  let nearest = MAJOR_COASTAL_PORTS[0];
+  return getNearestTideStation(lat, lng);
+}
+
+function getNearestTideStation(lat, lng) {
+  let nearest = NATIONAL_TIDE_STATIONS[0];
   let minDistance = Number.POSITIVE_INFINITY;
 
-  for (const port of MAJOR_COASTAL_PORTS) {
-    const dist = calculateHaversineDistance(lat, lng, port.lat, port.lng);
+  for (const st of NATIONAL_TIDE_STATIONS) {
+    const dist = calculateHaversineDistance(lat, lng, st.lat, st.lng);
     if (dist < minDistance) {
       minDistance = dist;
-      nearest = port;
+      nearest = st;
     }
   }
   return { port: nearest, distanceKm: Math.round(minDistance) };
@@ -73,10 +759,10 @@ function calculateTideElevationRaw(port, date) {
 
   // Mean Sea Level
   const msl = port.range * 0.55;
+
   return msl + m2 + s2 + k1;
 }
 
-// Astronomical Harmonic Tide Elevation calculation for given timestamp and port
 function calculateTideElevation(port, date) {
   const rawHeight = calculateTideElevationRaw(port, date);
   return Number(Math.max(0.05, rawHeight).toFixed(2));
@@ -173,7 +859,7 @@ function isTsunamiThreatActive(tsunami) {
   return false;
 }
 
-// Check active warnings for port's state/district in latestStatusData
+// Check active warnings for station's state/district in latestStatusData
 function checkPortActiveWarnings(port) {
   if (!globalThis.latestStatusData) return { safe: true, text: 'No active advisory records available' };
 
@@ -207,6 +893,9 @@ function checkPortActiveWarnings(port) {
   }
 
   if (matches.length === 0) {
+    if (port.status === 'Not Reporting') {
+      return { safe: true, level: 'safe', text: `ℹ️ Telemetry offline for ${port.name} (${port.district}, ${port.state}) · Showing astronomical forecast` };
+    }
     return { safe: true, level: 'safe', text: `✓ No active coastal warnings for ${port.name} (${port.district}, ${port.state})` };
   }
 
@@ -268,14 +957,15 @@ function renderTideChartSvg(elevations, port, now = new Date()) {
       <defs>
         <linearGradient id="tideFillGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#087f84" stop-opacity="0.32" />
-          <stop offset="100%" stop-color="#087f84" stop-opacity="0.02" />
+          <stop offset="100%" stop-color="#087f84" stop-opacity="0.04" />
         </linearGradient>
       </defs>
+      <line x1="${padSide}" y1="${height - padBottom}" x2="${width - padSide}" y2="${height - padBottom}" stroke="#cbd3d4" stroke-width="1" />
       <path d="${fillD}" fill="url(#tideFillGrad)" />
       <path d="${pathD}" fill="none" stroke="#087f84" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
       ${markersSvg}
-      <line x1="${nowX}" y1="${padTop - 4}" x2="${nowX}" y2="${height - padBottom}" stroke="#ff8c00" stroke-width="1.5" stroke-dasharray="2 2" />
-      <circle cx="${nowX}" cy="${nowY}" r="4" fill="#ff8c00" stroke="#fff" stroke-width="1.5" />
+      <line x1="${nowX}" y1="${padTop}" x2="${nowX}" y2="${height - padBottom}" stroke="#082f3c" stroke-width="1.4" stroke-dasharray="2,2" />
+      <circle cx="${nowX}" cy="${nowY}" r="4" fill="#082f3c" stroke="#fff" stroke-width="1.8" />
       <text x="${nowX}" y="${Math.max(10, Number(nowY) - 6)}" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="middle">NOW ${currentHeight}m</text>
     </svg>
   `;
@@ -313,7 +1003,7 @@ function getMoonPhase(date = new Date()) {
 
 // Main Render Function for Wind, Tide & Port Forecast Card
 function renderPortTideCard() {
-  const port = MAJOR_COASTAL_PORTS.find(p => p.id === selectedPortId) || MAJOR_COASTAL_PORTS[0];
+  const port = NATIONAL_TIDE_STATIONS.find(p => p.id === selectedPortId) || NATIONAL_TIDE_STATIONS[0];
   const now = new Date();
 
   // 1. Calculate Daily Tides
@@ -382,6 +1072,13 @@ function renderPortTideCard() {
   if (chartElem) {
     chartElem.innerHTML = renderTideChartSvg(elevations, port, now);
   }
+
+  // 6. Update direct INCOIS PAT Link
+  const patLink = ids('portIncoisPatLink');
+  if (patLink) {
+    patLink.href = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}`;
+    patLink.title = `View official INCOIS Predicted & Actual Tide (PAT) graph and moon phases for ${port.name} (${port.state})`;
+  }
 }
 
 // Handle GPS "📍 Near Me" Button Click
@@ -401,7 +1098,7 @@ function locateUserNearMe() {
     position => {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
-      const nearest = getNearestPort(lat, lng);
+      const nearest = getNearestTideStation(lat, lng);
       selectedPortId = nearest.port.id;
       userLocationData = { lat, lng, distanceKm: nearest.distanceKm };
 
@@ -432,9 +1129,32 @@ function locateUserNearMe() {
 function initPortTides() {
   const select = ids('portSelectDropdown');
   if (select && select.children.length === 0) {
-    select.innerHTML = MAJOR_COASTAL_PORTS.map(p => `
-      <option value="${p.id}" ${p.id === selectedPortId ? 'selected' : ''}>${p.name} (${p.state})</option>
-    `).join('');
+    // Group stations by State / UT, placing Reporting stations first and Not Reporting (No Data) stations last
+    const stateGroups = {};
+    for (const st of NATIONAL_TIDE_STATIONS) {
+      const s = st.state;
+      if (!stateGroups[s]) stateGroups[s] = [];
+      stateGroups[s].push(st);
+    }
+
+    const optGroups = Object.keys(stateGroups).sort().map(state => {
+      const sortedInState = stateGroups[state].slice().sort((a, b) => {
+        const aRep = a.status === 'Reporting' ? 0 : 1;
+        const bRep = b.status === 'Reporting' ? 0 : 1;
+        if (aRep !== bRep) return aRep - bRep;
+        return a.name.localeCompare(b.name);
+      });
+
+      const options = sortedInState.map(p => {
+        const isOffline = p.status === 'Not Reporting';
+        const label = isOffline ? `${p.name} (${p.district}) — No Data` : `${p.name} (${p.district})`;
+        return `<option value="${p.id}" ${p.id === selectedPortId ? 'selected' : ''}>${label}</option>`;
+      }).join('');
+
+      return `<optgroup label="${state}">${options}</optgroup>`;
+    }).join('');
+
+    select.innerHTML = optGroups;
 
     select.addEventListener('change', () => {
       selectedPortId = select.value;

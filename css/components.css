@@ -215,6 +215,8 @@
 .port-gps-btn{display:inline-flex;align-items:center;gap:3px;padding:5px 8px;border:1px solid #78b9bd;border-radius:7px;background:#e7f0ed;color:var(--ink);font:800 10px/1 inherit;cursor:pointer;white-space:nowrap;flex:none}
 .port-gps-btn:hover,.port-gps-btn:focus-visible{background:var(--teal);color:#fff;border-color:var(--teal)}
 .port-gps-btn.is-located{background:var(--safe-bg);color:var(--green);border-color:var(--green)}
+.port-pat-portal-btn{display:inline-flex;align-items:center;gap:3px;padding:5px 8px;border:1px solid #78b9bd;border-radius:7px;background:#082f3c;color:#fff;font:800 10px/1 inherit;text-decoration:none;white-space:nowrap;flex:none}
+.port-pat-portal-btn:hover,.port-pat-portal-btn:focus-visible{background:var(--teal);color:#fff;border-color:var(--teal);outline:0}
 
 .port-warning-banner{padding:6px 9px;border-radius:8px;font-size:10.5px;font-weight:800;line-height:1.35}
 .port-warning-banner.level-safe{background:var(--safe-bg);color:var(--green);border-left:4px solid var(--green)}
@@ -250,6 +252,10 @@
 .tide-regime-pill{display:inline-block;padding:2px 6px;border-radius:5px;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.02em}
 .tide-regime-pill.spring{background:#e3f2fd;color:#0d47a1;border:1px solid #bbdefb}
 .tide-regime-pill.neap{background:#f5f5f5;color:#616161;border:1px solid #e0e0e0}
+
+.port-tide-actions{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-top:4px}
+.port-incois-pat-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:6px 10px;border-radius:8px;background:#e7f0ed;color:#082f3c;font:800 10.5px/1.2 inherit;text-decoration:none;border:1px solid #9dc3be;text-align:center;box-sizing:border-box}
+.port-incois-pat-btn:hover,.port-incois-pat-btn:focus-visible{background:var(--teal);color:#fff;border-color:var(--teal);outline:0}
 
 /* PFZ GPS Compass & Nautical Miles Banner */
 .pfz-gps-button{background:#e7f0ed}
@@ -409,6 +415,7 @@
 .osf-tide-pin.spring{background:#ef4444;color:#fff;box-shadow:0 0 8px rgba(239,68,68,.6)}
 .osf-tide-pin.neap{background:#10b981;color:#fff}
 .osf-tide-pin.moderate{background:#f59e0b;color:#fff}
+.osf-tide-pin.not-reporting{background:#64748b!important;color:#fff!important;filter:grayscale(100%) opacity(0.85)!important;box-shadow:0 1px 4px rgba(0,0,0,.25)!important}
 .osf-tide-label{font-size:8.5px;font-weight:800;background:rgba(8,47,60,.9);color:#fff;padding:1px 4px;border-radius:3px;margin-top:1px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .osf-tide-risk-banner{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:800;margin-bottom:4px}
 .osf-tide-risk-banner.spring{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
