@@ -1,4 +1,4 @@
-// National Tide Gauge Stations dataset with geographical coordinates and coastal district mappings
+// National Tide Gauge Stations dataset with geographical coordinates, coastal district mappings, and tidal parameters
 // Sourced from INCOIS National Tide Gauge Network & INCOIS PAT (https://incois.gov.in/oceanservices/PAT/index.html)
 var NATIONAL_TIDE_STATIONS = [
   {
@@ -9,6 +9,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Gujarat",
     "district": "Surat / Hazira",
     "range": 5.8,
+    "m2Amp": 2.1,
+    "s2Amp": 0.75,
     "baseWind": 16,
     "windDir": "SW"
   },
@@ -20,6 +22,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andaman & Nicobar",
     "district": "North & Middle Andaman",
     "range": 2.1,
+    "m2Amp": 0.75,
+    "s2Amp": 0.25,
     "baseWind": 17,
     "windDir": "WSW"
   },
@@ -31,6 +35,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Lakshadweep",
     "district": "Agatti Island",
     "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
     "baseWind": 15,
     "windDir": "WNW"
   },
@@ -42,6 +48,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Odisha",
     "district": "Puri",
     "range": 2.6,
+    "m2Amp": 0.9,
+    "s2Amp": 0.32,
     "baseWind": 16,
     "windDir": "SSW"
   },
@@ -53,6 +61,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Odisha",
     "district": "Baleswar",
     "range": 3.4,
+    "m2Amp": 1.2,
+    "s2Amp": 0.42,
     "baseWind": 15,
     "windDir": "S"
   },
@@ -64,6 +74,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Kerala",
     "district": "Kozhikode",
     "range": 1.3,
+    "m2Amp": 0.45,
+    "s2Amp": 0.16,
     "baseWind": 12,
     "windDir": "W"
   },
@@ -75,6 +87,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andaman & Nicobar",
     "district": "Nicobar",
     "range": 1.8,
+    "m2Amp": 0.65,
+    "s2Amp": 0.22,
     "baseWind": 18,
     "windDir": "SW"
   },
@@ -86,6 +100,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andaman & Nicobar",
     "district": "Nicobar",
     "range": 2,
+    "m2Amp": 0.7,
+    "s2Amp": 0.24,
     "baseWind": 18,
     "windDir": "WSW"
   },
@@ -97,6 +113,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Tamil Nadu",
     "district": "Chennai",
     "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
     "baseWind": 14,
     "windDir": "S"
   },
@@ -108,6 +126,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Lakshadweep",
     "district": "Chetlat Island",
     "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
     "baseWind": 15,
     "windDir": "WNW"
   },
@@ -119,6 +139,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Kerala",
     "district": "Ernakulam",
     "range": 1.1,
+    "m2Amp": 0.38,
+    "s2Amp": 0.14,
     "baseWind": 13,
     "windDir": "W"
   },
@@ -130,6 +152,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Daman & Diu",
     "district": "Daman",
     "range": 4.6,
+    "m2Amp": 1.6,
+    "s2Amp": 0.58,
     "baseWind": 14,
     "windDir": "WSW"
   },
@@ -141,6 +165,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Odisha",
     "district": "Bhadrak",
     "range": 3.6,
+    "m2Amp": 1.25,
+    "s2Amp": 0.44,
     "baseWind": 15,
     "windDir": "SSW"
   },
@@ -152,6 +178,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Odisha",
     "district": "Bhadrak",
     "range": 3.6,
+    "m2Amp": 1.25,
+    "s2Amp": 0.44,
     "baseWind": 15,
     "windDir": "SSW"
   },
@@ -163,6 +191,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Tamil Nadu",
     "district": "Tiruvallur",
     "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
     "baseWind": 14,
     "windDir": "SSE"
   },
@@ -174,6 +204,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "West Bengal",
     "district": "Kolkata",
     "range": 4.8,
+    "m2Amp": 1.7,
+    "s2Amp": 0.6,
     "baseWind": 12,
     "windDir": "S"
   },
@@ -185,6 +217,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Odisha",
     "district": "Ganjam",
     "range": 2.4,
+    "m2Amp": 0.85,
+    "s2Amp": 0.3,
     "baseWind": 15,
     "windDir": "S"
   },
@@ -196,6 +230,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andaman & Nicobar",
     "district": "South Andaman",
     "range": 2.1,
+    "m2Amp": 0.75,
+    "s2Amp": 0.25,
     "baseWind": 17,
     "windDir": "WSW"
   },
@@ -207,6 +243,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Maharashtra",
     "district": "Ratnagiri",
     "range": 2.8,
+    "m2Amp": 1,
+    "s2Amp": 0.35,
     "baseWind": 13,
     "windDir": "NW"
   },
@@ -218,6 +256,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Gujarat",
     "district": "Kachchh",
     "range": 4.5,
+    "m2Amp": 1.6,
+    "s2Amp": 0.55,
     "baseWind": 20,
     "windDir": "WSW"
   },
@@ -229,6 +269,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Maharashtra",
     "district": "Raigad",
     "range": 4.8,
+    "m2Amp": 1.7,
+    "s2Amp": 0.6,
     "baseWind": 14,
     "windDir": "WNW"
   },
@@ -240,6 +282,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andhra Pradesh",
     "district": "Kakinada",
     "range": 1.6,
+    "m2Amp": 0.55,
+    "s2Amp": 0.2,
     "baseWind": 13,
     "windDir": "SE"
   },
@@ -251,6 +295,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Lakshadweep",
     "district": "Kalpeni Island",
     "range": 1.3,
+    "m2Amp": 0.45,
+    "s2Amp": 0.16,
     "baseWind": 14,
     "windDir": "W"
   },
@@ -262,6 +308,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Gujarat",
     "district": "Kachchh",
     "range": 6.4,
+    "m2Amp": 2.3,
+    "s2Amp": 0.8,
     "baseWind": 18,
     "windDir": "WSW"
   },
@@ -273,6 +321,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Tamil Nadu",
     "district": "Kanniyakumari",
     "range": 1,
+    "m2Amp": 0.35,
+    "s2Amp": 0.12,
     "baseWind": 22,
     "windDir": "WSW"
   },
@@ -284,6 +334,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Karnataka",
     "district": "Uttara Kannada",
     "range": 2.1,
+    "m2Amp": 0.75,
+    "s2Amp": 0.25,
     "baseWind": 10,
     "windDir": "W"
   },
@@ -295,6 +347,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Lakshadweep",
     "district": "Kavaratti Island",
     "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
     "baseWind": 15,
     "windDir": "WNW"
   },
@@ -306,6 +360,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Kerala",
     "district": "Kollam",
     "range": 1,
+    "m2Amp": 0.35,
+    "s2Amp": 0.12,
     "baseWind": 14,
     "windDir": "WSW"
   },
@@ -317,6 +373,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andhra Pradesh",
     "district": "SPS Nellore",
     "range": 1.3,
+    "m2Amp": 0.45,
+    "s2Amp": 0.16,
     "baseWind": 13,
     "windDir": "SSE"
   },
@@ -328,6 +386,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andhra Pradesh",
     "district": "Krishna",
     "range": 1.5,
+    "m2Amp": 0.52,
+    "s2Amp": 0.18,
     "baseWind": 14,
     "windDir": "SE"
   },
@@ -339,6 +399,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Goa",
     "district": "South Goa",
     "range": 2.3,
+    "m2Amp": 0.8,
+    "s2Amp": 0.28,
     "baseWind": 11,
     "windDir": "WNW"
   },
@@ -350,6 +412,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andaman & Nicobar",
     "district": "North & Middle Andaman",
     "range": 2.2,
+    "m2Amp": 0.78,
+    "s2Amp": 0.26,
     "baseWind": 16,
     "windDir": "WSW"
   },
@@ -361,6 +425,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Lakshadweep",
     "district": "Minicoy Island",
     "range": 1.2,
+    "m2Amp": 0.42,
+    "s2Amp": 0.15,
     "baseWind": 16,
     "windDir": "WSW"
   },
@@ -372,6 +438,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Maharashtra",
     "district": "Mumbai City",
     "range": 4.8,
+    "m2Amp": 1.7,
+    "s2Amp": 0.6,
     "baseWind": 14,
     "windDir": "WNW"
   },
@@ -383,6 +451,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Maharashtra",
     "district": "Raigad",
     "range": 4.2,
+    "m2Amp": 1.5,
+    "s2Amp": 0.52,
     "baseWind": 13,
     "windDir": "NW"
   },
@@ -394,6 +464,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Tamil Nadu",
     "district": "Nagapattinam",
     "range": 0.9,
+    "m2Amp": 0.32,
+    "s2Amp": 0.11,
     "baseWind": 15,
     "windDir": "SSW"
   },
@@ -405,6 +477,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andaman & Nicobar",
     "district": "Nicobar",
     "range": 1.9,
+    "m2Amp": 0.68,
+    "s2Amp": 0.23,
     "baseWind": 18,
     "windDir": "SW"
   },
@@ -416,6 +490,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Karnataka",
     "district": "Dakshina Kannada",
     "range": 1.6,
+    "m2Amp": 0.55,
+    "s2Amp": 0.2,
     "baseWind": 12,
     "windDir": "W"
   },
@@ -427,6 +503,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Gujarat",
     "district": "Devbhumi Dwarka",
     "range": 4.2,
+    "m2Amp": 1.5,
+    "s2Amp": 0.5,
     "baseWind": 20,
     "windDir": "SW"
   },
@@ -438,6 +516,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Goa",
     "district": "North Goa",
     "range": 2.3,
+    "m2Amp": 0.8,
+    "s2Amp": 0.28,
     "baseWind": 11,
     "windDir": "WNW"
   },
@@ -449,6 +529,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Odisha",
     "district": "Jagatsinghpur",
     "range": 2.9,
+    "m2Amp": 1,
+    "s2Amp": 0.35,
     "baseWind": 16,
     "windDir": "SW"
   },
@@ -460,6 +542,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Gujarat",
     "district": "Porbandar",
     "range": 3.2,
+    "m2Amp": 1.15,
+    "s2Amp": 0.4,
     "baseWind": 18,
     "windDir": "SW"
   },
@@ -471,6 +555,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andaman & Nicobar",
     "district": "South Andaman",
     "range": 2.2,
+    "m2Amp": 0.78,
+    "s2Amp": 0.26,
     "baseWind": 17,
     "windDir": "WSW"
   },
@@ -482,6 +568,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Puducherry",
     "district": "Puducherry",
     "range": 1.3,
+    "m2Amp": 0.45,
+    "s2Amp": 0.16,
     "baseWind": 14,
     "windDir": "S"
   },
@@ -493,6 +581,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andhra Pradesh",
     "district": "Prakasam",
     "range": 1.4,
+    "m2Amp": 0.48,
+    "s2Amp": 0.17,
     "baseWind": 13,
     "windDir": "SSE"
   },
@@ -504,6 +594,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Tamil Nadu",
     "district": "Ramanathapuram",
     "range": 0.8,
+    "m2Amp": 0.28,
+    "s2Amp": 0.1,
     "baseWind": 20,
     "windDir": "SW"
   },
@@ -515,6 +607,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andaman & Nicobar",
     "district": "North & Middle Andaman",
     "range": 2.2,
+    "m2Amp": 0.78,
+    "s2Amp": 0.26,
     "baseWind": 16,
     "windDir": "WSW"
   },
@@ -526,6 +620,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Tamil Nadu",
     "district": "Thoothukkudi",
     "range": 1.2,
+    "m2Amp": 0.42,
+    "s2Amp": 0.15,
     "baseWind": 19,
     "windDir": "SW"
   },
@@ -537,6 +633,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Gujarat",
     "district": "Gir Somnath",
     "range": 2.8,
+    "m2Amp": 1,
+    "s2Amp": 0.35,
     "baseWind": 16,
     "windDir": "SW"
   },
@@ -548,6 +646,8 @@ var NATIONAL_TIDE_STATIONS = [
     "state": "Andhra Pradesh",
     "district": "Visakhapatnam",
     "range": 1.8,
+    "m2Amp": 0.62,
+    "s2Amp": 0.22,
     "baseWind": 14,
     "windDir": "SSW"
   }
@@ -585,6 +685,107 @@ function getNearestTideStation(lat, lng) {
     }
   }
   return { port: nearest, distanceKm: Math.round(minDistance) };
+}
+
+// Astronomical Harmonic Tide Elevation calculation (unrounded float)
+function calculateTideElevationRaw(port, date) {
+  const tHours = date.getHours() + date.getMinutes() / 60 + date.getSeconds() / 3600;
+  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+  
+  // Principal Lunar Semidiurnal M2 (Period ~12.42h)
+  const m2Speed = 2 * Math.PI / 12.4206;
+  const m2Phase = (port.lng * Math.PI / 180) + (dayOfYear * 0.08);
+  const m2 = port.m2Amp * Math.cos(m2Speed * tHours - m2Phase);
+
+  // Principal Solar Semidiurnal S2 (Period ~12.00h)
+  const s2Speed = 2 * Math.PI / 12.0;
+  const s2Phase = (port.lng * Math.PI / 180) * 0.8;
+  const s2 = port.s2Amp * Math.cos(s2Speed * tHours - s2Phase);
+
+  // Lunar Diurnal K1 (Period ~23.93h)
+  const k1Speed = 2 * Math.PI / 23.9344;
+  const k1 = (port.range * 0.12) * Math.sin(k1Speed * tHours);
+
+  // Mean Sea Level
+  const msl = port.range * 0.55;
+
+  return msl + m2 + s2 + k1;
+}
+
+function calculateTideElevation(port, date) {
+  const rawHeight = calculateTideElevationRaw(port, date);
+  return Number(Math.max(0.05, rawHeight).toFixed(2));
+}
+
+var dailyTideCache = new Map();
+
+// Generate 24-hour tide predictions (High Tides & Low Tides) for today with robust extremum detection
+function calculateDailyTideEvents(port, baseDate = new Date()) {
+  const dateKey = `${port.id}_${baseDate.getFullYear()}-${baseDate.getMonth()}-${baseDate.getDate()}`;
+  if (dailyTideCache.has(dateKey)) {
+    return dailyTideCache.get(dateKey);
+  }
+
+  const startOfDay = new Date(baseDate);
+  startOfDay.setHours(0, 0, 0, 0);
+
+  // 1. Sample elevations for the SVG chart (every 5 mins)
+  const elevations = [];
+  for (let m = 0; m <= 24 * 60; m += 5) {
+    const time = new Date(startOfDay.getTime() + m * 60 * 1000);
+    const rawH = calculateTideElevationRaw(port, time);
+    elevations.push({ time, height: Number(Math.max(0.05, rawH).toFixed(2)), minutes: m });
+  }
+
+  // 2. High-resolution sampling (every 2 mins with a 60-min buffer) on continuous floats
+  const samples = [];
+  for (let m = -60; m <= 24 * 60 + 60; m += 2) {
+    const time = new Date(startOfDay.getTime() + m * 60 * 1000);
+    samples.push({ minutes: m, time, h: calculateTideElevationRaw(port, time) });
+  }
+
+  // 3. Detect candidate peaks and troughs using 5-point slope comparison
+  const rawExtrema = [];
+  for (let i = 2; i < samples.length - 2; i++) {
+    const prev2 = samples[i - 2].h;
+    const prev1 = samples[i - 1].h;
+    const curr = samples[i].h;
+    const next1 = samples[i + 1].h;
+    const next2 = samples[i + 2].h;
+
+    if (curr >= prev1 && curr > prev2 && curr >= next1 && curr > next2) {
+      rawExtrema.push({ type: 'High', minutes: samples[i].minutes, time: samples[i].time, height: Number(Math.max(0.05, curr).toFixed(2)), raw: curr });
+    } else if (curr <= prev1 && curr < prev2 && curr <= next1 && curr < next2) {
+      rawExtrema.push({ type: 'Low', minutes: samples[i].minutes, time: samples[i].time, height: Number(Math.max(0.05, curr).toFixed(2)), raw: curr });
+    }
+  }
+
+  // 4. Filter events strictly within [00:00, 24:00], merging adjacent micro-ripples and enforcing alternating sequence
+  const filteredEvents = [];
+  for (const ext of rawExtrema) {
+    if (ext.minutes < 0 || ext.minutes > 1440) continue;
+
+    const last = filteredEvents[filteredEvents.length - 1];
+    if (!last) {
+      filteredEvents.push(ext);
+    } else if (last.type === ext.type) {
+      if (ext.type === 'High' && ext.raw > last.raw) {
+        filteredEvents[filteredEvents.length - 1] = ext;
+      } else if (ext.type === 'Low' && ext.raw < last.raw) {
+        filteredEvents[filteredEvents.length - 1] = ext;
+      }
+    } else {
+      if (Math.abs(ext.minutes - last.minutes) >= 150) {
+        if (Math.abs(ext.raw - last.raw) >= 0.12) {
+          filteredEvents.push(ext);
+        }
+      }
+    }
+  }
+
+  const result = { events: filteredEvents, elevations };
+  dailyTideCache.set(dateKey, result);
+  return result;
 }
 
 function isTsunamiThreatActive(tsunami) {
@@ -650,6 +851,70 @@ function checkPortActiveWarnings(port) {
   };
 }
 
+// Render SVG Tide Curve
+function renderTideChartSvg(elevations, port, now = new Date()) {
+  const width = 340;
+  const height = 90;
+  const padTop = 16;
+  const padBottom = 18;
+  const padSide = 12;
+
+  const minH = Math.min(...elevations.map(e => e.height));
+  const maxH = Math.max(...elevations.map(e => e.height));
+  const rangeH = Math.max(0.8, maxH - minH);
+
+  const getX = m => padSide + (m / (24 * 60)) * (width - 2 * padSide);
+  const getY = h => padTop + (1 - (h - minH) / rangeH) * (height - padTop - padBottom);
+
+  let pathD = '';
+  elevations.forEach((pt, i) => {
+    const x = getX(pt.minutes).toFixed(1);
+    const y = getY(pt.height).toFixed(1);
+    pathD += i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`;
+  });
+
+  // Fill area under curve
+  const fillD = `${pathD} L ${getX(24 * 60).toFixed(1)} ${height - padBottom} L ${getX(0).toFixed(1)} ${height - padBottom} Z`;
+
+  // Current time position
+  const nowM = now.getHours() * 60 + now.getMinutes();
+  const nowX = getX(Math.min(24 * 60, Math.max(0, nowM))).toFixed(1);
+  const currentHeight = calculateTideElevation(port, now);
+  const nowY = getY(currentHeight).toFixed(1);
+
+  // Time markers at 00h, 06h, 12h, 18h, 24h
+  const timeLabels = [
+    { label: '00:00', m: 0 },
+    { label: '06:00', m: 360 },
+    { label: '12:00', m: 720 },
+    { label: '18:00', m: 1080 },
+    { label: '24:00', m: 1440 }
+  ];
+
+  const markersSvg = timeLabels.map(t => `
+    <text x="${getX(t.m).toFixed(1)}" y="${height - 3}" font-size="8" fill="#5b7279" text-anchor="${t.m === 0 ? 'start' : t.m === 1440 ? 'end' : 'middle'}">${t.label}</text>
+    <line x1="${getX(t.m).toFixed(1)}" y1="${height - padBottom}" x2="${getX(t.m).toFixed(1)}" y2="${height - padBottom + 3}" stroke="#d9e5e1" stroke-width="1" />
+  `).join('');
+
+  return `
+    <svg viewBox="0 0 ${width} ${height}" class="tide-curve-svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="tideFillGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#087f84" stop-opacity="0.32" />
+          <stop offset="100%" stop-color="#087f84" stop-opacity="0.04" />
+        </linearGradient>
+      </defs>
+      <line x1="${padSide}" y1="${height - padBottom}" x2="${width - padSide}" y2="${height - padBottom}" stroke="#cbd3d4" stroke-width="1" />
+      <path d="${fillD}" fill="url(#tideFillGrad)" />
+      <path d="${pathD}" fill="none" stroke="#087f84" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      ${markersSvg}
+      <line x1="${nowX}" y1="${padTop}" x2="${nowX}" y2="${height - padBottom}" stroke="#082f3c" stroke-width="1.4" stroke-dasharray="2,2" />
+      <circle cx="${nowX}" cy="${nowY}" r="4" fill="#082f3c" stroke="#fff" stroke-width="1.8" />
+      <text x="${nowX}" y="${Math.max(10, Number(nowY) - 6)}" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="middle">NOW ${currentHeight}m</text>
+    </svg>
+  `;
+}
+
 // Astronomical Lunar Phase Calculation
 function getMoonPhase(date = new Date()) {
   const year = date.getFullYear();
@@ -684,9 +949,15 @@ function getMoonPhase(date = new Date()) {
 function renderPortTideCard() {
   const port = NATIONAL_TIDE_STATIONS.find(p => p.id === selectedPortId) || NATIONAL_TIDE_STATIONS[0];
   const now = new Date();
+
+  // 1. Calculate Daily Tides
+  const { events, elevations } = calculateDailyTideEvents(port, now);
+  const currentHeight = calculateTideElevation(port, now);
+  const futureHeight = calculateTideElevation(port, new Date(now.getTime() + 15 * 60 * 1000));
+  const isRising = futureHeight >= currentHeight;
   const moon = getMoonPhase(now);
 
-  // 1. Check Warnings
+  // 2. Check Warnings
   const warning = checkPortActiveWarnings(port);
   const warningBanner = ids('portWarningBanner');
   if (warningBanner) {
@@ -694,7 +965,7 @@ function renderPortTideCard() {
     warningBanner.textContent = warning.text;
   }
 
-  // 2. Render Wind, Sea State & Moon Phase
+  // 3. Render Wind, Sea State & Moon Phase
   const windElem = ids('portWindDisplay');
   if (windElem) {
     const windKmh = port.baseWind;
@@ -708,44 +979,59 @@ function renderPortTideCard() {
       else if (warning.level === 'watch') seaState = 'Moderate';
     }
 
+    const regimeLabel = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
+
     windElem.innerHTML = `
       <div class="wind-stat-item">
         <span class="wind-stat-label">Wind &amp; Sea</span>
         <strong>${port.windDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState})</span></strong>
       </div>
       <div class="wind-stat-item">
-        <span class="wind-stat-label">Tidal Regime</span>
-        <strong style="color:var(--teal);font-weight:850;">${port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal'} (~${port.range}m)</strong>
+        <span class="wind-stat-label">Tide State</span>
+        <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? '▲ Rising (Flood)' : '▼ Falling (Ebb)'}</strong>
       </div>
       <div class="wind-stat-item moon-stat-item">
-        <span class="wind-stat-label">Moon &amp; Tidal Phase</span>
-        <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime})"><span>${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? 'Spring Tide' : 'Neap Tide'}</small></strong>
+        <span class="wind-stat-label">Moon &amp; Tide Type</span>
+        <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime}) · Tidal Regime: ${regimeLabel} (~${port.range}m)"><span>${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? 'Spring Tide' : 'Neap Tide'} · ${regimeLabel}</small></strong>
       </div>
     `;
   }
 
-  // 3. Render High / Low Tide Prediction Info and PAT Action
-  const patUrl = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}`;
+  // 4. Render High / Low Tide Times Table (Horizontal Row Layout with IST Time Format)
   const tideTimesElem = ids('portTideTimesList');
   if (tideTimesElem) {
+    const highTides = events.filter(e => e.type === 'High');
+    const lowTides = events.filter(e => e.type === 'Low');
+
+    const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+
     tideTimesElem.innerHTML = `
-      <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-        <span style="font-size:11px;font-weight:750;color:#082f3c;">Station: <strong>${port.name}</strong> (${port.district}, ${port.state})</span>
-        <a href="${patUrl}" target="_blank" rel="noopener" class="source card-action-button" style="padding:4px 8px;font-size:10.5px;min-height:auto;">View INCOIS High &amp; Low Tide Table ↗</a>
+      <div class="tide-horizontal-row high-row">
+        <span class="tide-event-badge high">High Tide (IST)</span>
+        <div class="tide-times-items">
+          ${highTides.length > 0 ? highTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
+        </div>
+      </div>
+      <div class="tide-horizontal-row low-row">
+        <span class="tide-event-badge low">Low Tide (IST)</span>
+        <div class="tide-times-items">
+          ${lowTides.length > 0 ? lowTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
+        </div>
       </div>
     `;
   }
 
-  // 4. Render Chart Container with direct PAT portal view link
+  // 5. Render SVG Harmonic Tide Graph
   const chartElem = ids('portTideChartContainer');
   if (chartElem) {
-    chartElem.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 10px;text-align:center;gap:6px;background:#f8fcfb;border-radius:7px;">
-        <div style="font-size:11.5px;font-weight:800;color:#082f3c;">Official INCOIS Predicted &amp; Actual Tide (PAT) Chart</div>
-        <div style="font-size:10.5px;color:#5b7279;">Coordinates: ${port.lat.toFixed(4)}°N, ${port.lng.toFixed(4)}°E · Spring Range: ~${port.range}m</div>
-        <a href="${patUrl}" target="_blank" rel="noopener" class="source card-action-button" style="margin-top:4px;font-size:11px;padding:6px 12px;">Open Interactive PAT Tide Graph (INCOIS) ↗</a>
-      </div>
-    `;
+    chartElem.innerHTML = renderTideChartSvg(elevations, port, now);
+  }
+
+  // 6. Update direct INCOIS PAT link in header
+  const patHeaderLink = ids('portPatHeaderLink');
+  if (patHeaderLink) {
+    patHeaderLink.href = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}`;
+    patHeaderLink.title = `Open official INCOIS Predicted & Actual Tide (PAT) interactive graph for ${port.name}`;
   }
 }
 

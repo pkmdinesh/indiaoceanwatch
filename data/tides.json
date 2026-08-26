@@ -1,0 +1,2571 @@
+{
+  "updatedAt": "2026-08-26T04:55:32.811Z",
+  "source": "INCOIS Predicted & Actual Tide (PAT)",
+  "sourceUrl": "https://incois.gov.in/oceanservices/PAT/index.html",
+  "totalStations": 50,
+  "stations": {
+    "adan": {
+      "id": "adan",
+      "name": "Adani",
+      "lat": 21.1,
+      "lng": 72.616,
+      "state": "Gujarat",
+      "district": "Surat / Hazira",
+      "range": 5.8,
+      "baseWind": 16,
+      "windDir": "SW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:31.029Z"
+    },
+    "aeri": {
+      "id": "aeri",
+      "name": "Aerialbay",
+      "lat": 13.2833,
+      "lng": 93.0333,
+      "state": "Andaman & Nicobar",
+      "district": "North & Middle Andaman",
+      "range": 2.1,
+      "baseWind": 17,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:27.063Z"
+    },
+    "agatt": {
+      "id": "agatt",
+      "name": "Agatti",
+      "lat": 10.8184,
+      "lng": 72.1726,
+      "state": "Lakshadweep",
+      "district": "Agatti Island",
+      "range": 1.4,
+      "baseWind": 15,
+      "windDir": "WNW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:27.611Z"
+    },
+    "astra": {
+      "id": "astra",
+      "name": "Astranga",
+      "lat": 19.9743,
+      "lng": 86.339,
+      "state": "Odisha",
+      "district": "Puri",
+      "range": 2.6,
+      "baseWind": 16,
+      "windDir": "SSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:27.617Z"
+    },
+    "bahab": {
+      "id": "bahab",
+      "name": "Bahabalpur",
+      "lat": 20.793,
+      "lng": 86.9006,
+      "state": "Odisha",
+      "district": "Baleswar",
+      "range": 3.4,
+      "baseWind": 15,
+      "windDir": "S",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:27.621Z"
+    },
+    "beyp": {
+      "id": "beyp",
+      "name": "Beypore",
+      "lat": 11.171,
+      "lng": 75.808,
+      "state": "Kerala",
+      "district": "Kozhikode",
+      "range": 1.3,
+      "baseWind": 12,
+      "windDir": "W",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.48
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 10:15",
+          "height": 0.99
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 02:22",
+          "height": 0.38
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 20:10",
+          "height": 0.85
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 15:46",
+          "height": 0.82
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 10:49",
+          "height": 1.03
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 03:19",
+          "height": 0.35
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 21:20",
+          "height": 0.9
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 16:29",
+          "height": 0.77
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 11:13",
+          "height": 1.07
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 04:06",
+          "height": 0.33
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 22:15",
+          "height": 0.97
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 17:01",
+          "height": 0.7
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 11:35",
+          "height": 1.13
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 04:45",
+          "height": 0.31
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 23:04",
+          "height": 1.03
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 17:30",
+          "height": 0.62
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 11:58",
+          "height": 1.19
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 05:18",
+          "height": 0.32
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 23:49",
+          "height": 1.08
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 17:59",
+          "height": 0.52
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 12:22",
+          "height": 1.25
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 05:49",
+          "height": 0.35
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 18:28",
+          "height": 0.42
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 00:33",
+          "height": 1.12
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 06:21",
+          "height": 0.39
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 12:47",
+          "height": 1.28
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 18:58",
+          "height": 0.32
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:27.095Z"
+    },
+    "camp": {
+      "id": "camp",
+      "name": "Campbellbay",
+      "lat": 7,
+      "lng": 93.9333,
+      "state": "Andaman & Nicobar",
+      "district": "Nicobar",
+      "range": 1.8,
+      "baseWind": 18,
+      "windDir": "SW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:28.169Z"
+    },
+    "carn": {
+      "id": "carn",
+      "name": "Carnicobar",
+      "lat": 9.2344,
+      "lng": 92.7769,
+      "state": "Andaman & Nicobar",
+      "district": "Nicobar",
+      "range": 2,
+      "baseWind": 18,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:27.187Z"
+    },
+    "chenn": {
+      "id": "chenn",
+      "name": "Chennai",
+      "lat": 13.1,
+      "lng": 80.3,
+      "state": "Tamil Nadu",
+      "district": "Chennai",
+      "range": 1.4,
+      "baseWind": 14,
+      "windDir": "S",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.34
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 06:24",
+          "height": 0.86
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 13:00",
+          "height": 0.39
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 18:36",
+          "height": 0.7
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 07:04",
+          "height": 0.93
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 00:26",
+          "height": 0.29
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 19:12",
+          "height": 0.78
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 13:32",
+          "height": 0.32
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 07:34",
+          "height": 1
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 01:03",
+          "height": 0.24
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 19:42",
+          "height": 0.85
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 13:58",
+          "height": 0.26
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 08:00",
+          "height": 1.06
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 01:35",
+          "height": 0.2
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 20:10",
+          "height": 0.92
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 14:21",
+          "height": 0.21
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 08:26",
+          "height": 1.1
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 02:06",
+          "height": 0.17
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 20:39",
+          "height": 0.99
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 14:44",
+          "height": 0.16
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 08:52",
+          "height": 1.13
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 02:37",
+          "height": 0.16
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 21:09",
+          "height": 1.04
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 15:09",
+          "height": 0.12
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 09:21",
+          "height": 1.14
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 03:10",
+          "height": 0.15
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 21:43",
+          "height": 1.08
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 15:36",
+          "height": 0.1
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:27.742Z"
+    },
+    "chetl": {
+      "id": "chetl",
+      "name": "Chetlat",
+      "lat": 11.6939,
+      "lng": 72.717,
+      "state": "Lakshadweep",
+      "district": "Chetlat Island",
+      "range": 1.4,
+      "baseWind": 15,
+      "windDir": "WNW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:28.197Z"
+    },
+    "coch": {
+      "id": "coch",
+      "name": "Cochin",
+      "lat": 9.9667,
+      "lng": 76.2667,
+      "state": "Kerala",
+      "district": "Ernakulam",
+      "range": 1.1,
+      "baseWind": 13,
+      "windDir": "W",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:27.801Z"
+    },
+    "daman": {
+      "id": "daman",
+      "name": "Daman",
+      "lat": 20.4111,
+      "lng": 72.834,
+      "state": "Daman & Diu",
+      "district": "Daman",
+      "range": 4.6,
+      "baseWind": 14,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:28.133Z"
+    },
+    "dham": {
+      "id": "dham",
+      "name": "Dhamra",
+      "lat": 20.7851,
+      "lng": 86.9556,
+      "state": "Odisha",
+      "district": "Bhadrak",
+      "range": 3.6,
+      "baseWind": 15,
+      "windDir": "SSW",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          1.46
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 07:42",
+          "height": 2.67
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 01:20",
+          "height": 1.38
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 20:06",
+          "height": 2.44
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 14:49",
+          "height": 1.43
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 08:28",
+          "height": 2.87
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 02:34",
+          "height": 1.21
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 20:49",
+          "height": 2.62
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 15:30",
+          "height": 1.21
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 09:04",
+          "height": 3.04
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 03:22",
+          "height": 1.05
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 21:24",
+          "height": 2.78
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 16:04",
+          "height": 1.03
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 09:35",
+          "height": 3.15
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 04:01",
+          "height": 0.94
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 21:55",
+          "height": 2.91
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 16:34",
+          "height": 0.89
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 10:04",
+          "height": 3.22
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 04:37",
+          "height": 0.86
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 22:24",
+          "height": 3.03
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 17:04",
+          "height": 0.79
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 10:32",
+          "height": 3.27
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 05:11",
+          "height": 0.82
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 22:53",
+          "height": 3.14
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 17:33",
+          "height": 0.72
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 11:02",
+          "height": 3.29
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 05:43",
+          "height": 0.79
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 23:24",
+          "height": 3.22
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 18:02",
+          "height": 0.68
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:28.446Z"
+    },
+    "dosin": {
+      "id": "dosin",
+      "name": "Dosinga",
+      "lat": 20.8174,
+      "lng": 86.9681,
+      "state": "Odisha",
+      "district": "Bhadrak",
+      "range": 3.6,
+      "baseWind": 15,
+      "windDir": "SSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:19.102Z"
+    },
+    "enno": {
+      "id": "enno",
+      "name": "Ennore",
+      "lat": 13.25,
+      "lng": 80.3333,
+      "state": "Tamil Nadu",
+      "district": "Tiruvallur",
+      "range": 1.4,
+      "baseWind": 14,
+      "windDir": "SSE",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:18.990Z"
+    },
+    "gard": {
+      "id": "gard",
+      "name": "Gardenreach",
+      "lat": 22.55,
+      "lng": 88.3,
+      "state": "West Bengal",
+      "district": "Kolkata",
+      "range": 4.8,
+      "baseWind": 12,
+      "windDir": "S",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:28.767Z"
+    },
+    "gopa": {
+      "id": "gopa",
+      "name": "Gopalpur",
+      "lat": 19.2889,
+      "lng": 84.9483,
+      "state": "Odisha",
+      "district": "Ganjam",
+      "range": 2.4,
+      "baseWind": 15,
+      "windDir": "S",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.72
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 06:32",
+          "height": 1.46
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 13:40",
+          "height": 0.8
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 18:36",
+          "height": 1.2
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 07:14",
+          "height": 1.55
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 00:29",
+          "height": 0.74
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 19:17",
+          "height": 1.32
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 14:45",
+          "height": 0.77
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 07:50",
+          "height": 1.63
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 01:52",
+          "height": 0.77
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 19:54",
+          "height": 1.44
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 15:30",
+          "height": 0.76
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 08:22",
+          "height": 1.7
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 03:09",
+          "height": 0.78
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 20:28",
+          "height": 1.55
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 16:10",
+          "height": 0.76
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 08:50",
+          "height": 1.75
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 03:58",
+          "height": 0.79
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 21:02",
+          "height": 1.65
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 16:48",
+          "height": 0.77
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 09:17",
+          "height": 1.78
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 04:37",
+          "height": 0.78
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 21:35",
+          "height": 1.71
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 17:23",
+          "height": 0.77
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 09:46",
+          "height": 1.79
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 05:11",
+          "height": 0.77
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 22:10",
+          "height": 1.75
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 17:56",
+          "height": 0.77
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:28.839Z"
+    },
+    "hutb": {
+      "id": "hutb",
+      "name": "Hutbay",
+      "lat": 10.5914,
+      "lng": 92.5625,
+      "state": "Andaman & Nicobar",
+      "district": "South Andaman",
+      "range": 2.1,
+      "baseWind": 17,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:28.815Z"
+    },
+    "jaig": {
+      "id": "jaig",
+      "name": "Jaigarh",
+      "lat": 17.281,
+      "lng": 73.208,
+      "state": "Maharashtra",
+      "district": "Ratnagiri",
+      "range": 2.8,
+      "baseWind": 13,
+      "windDir": "NW",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          1.1
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 09:35",
+          "height": 2.34
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 01:58",
+          "height": 0.87
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 20:24",
+          "height": 1.99
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 15:17",
+          "height": 1.57
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 10:04",
+          "height": 2.47
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 02:49",
+          "height": 0.74
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 21:18",
+          "height": 2.12
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 15:54",
+          "height": 1.41
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 10:31",
+          "height": 2.6
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 03:31",
+          "height": 0.62
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 22:03",
+          "height": 2.27
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 16:24",
+          "height": 1.24
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 10:57",
+          "height": 2.73
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 04:08",
+          "height": 0.53
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 22:43",
+          "height": 2.43
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 16:53",
+          "height": 1.07
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 11:24",
+          "height": 2.83
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 04:43",
+          "height": 0.49
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 23:23",
+          "height": 2.57
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 17:22",
+          "height": 0.91
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 11:51",
+          "height": 2.9
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 05:17",
+          "height": 0.52
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 17:52",
+          "height": 0.76
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 00:03",
+          "height": 2.69
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 05:52",
+          "height": 0.62
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 12:20",
+          "height": 2.92
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 18:23",
+          "height": 0.63
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:28.816Z"
+    },
+    "jakh": {
+      "id": "jakh",
+      "name": "Jakhau",
+      "lat": 23.243,
+      "lng": 68.606,
+      "state": "Gujarat",
+      "district": "Kachchh",
+      "range": 4.5,
+      "baseWind": 20,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:32.148Z"
+    },
+    "jnpt": {
+      "id": "jnpt",
+      "name": "Jnpt",
+      "lat": 18.9167,
+      "lng": 72.75,
+      "state": "Maharashtra",
+      "district": "Raigad",
+      "range": 4.8,
+      "baseWind": 14,
+      "windDir": "WNW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:32.131Z"
+    },
+    "kaki": {
+      "id": "kaki",
+      "name": "Kakinada",
+      "lat": 16.9333,
+      "lng": 82.25,
+      "state": "Andhra Pradesh",
+      "district": "Kakinada",
+      "range": 1.6,
+      "baseWind": 13,
+      "windDir": "SE",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.55
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 06:47",
+          "height": 1.28
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 13:18",
+          "height": 0.62
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 18:50",
+          "height": 1.09
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 07:22",
+          "height": 1.39
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 00:51",
+          "height": 0.48
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 19:24",
+          "height": 1.21
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 13:49",
+          "height": 0.53
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 07:50",
+          "height": 1.49
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 01:30",
+          "height": 0.41
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 19:55",
+          "height": 1.32
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 14:16",
+          "height": 0.45
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 08:16",
+          "height": 1.58
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 02:04",
+          "height": 0.36
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 20:26",
+          "height": 1.43
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 14:42",
+          "height": 0.37
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 08:44",
+          "height": 1.64
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 02:38",
+          "height": 0.33
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 20:59",
+          "height": 1.53
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 15:08",
+          "height": 0.3
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 09:13",
+          "height": 1.67
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 03:13",
+          "height": 0.32
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 21:33",
+          "height": 1.6
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 15:37",
+          "height": 0.25
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 09:45",
+          "height": 1.68
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 03:48",
+          "height": 0.33
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 22:09",
+          "height": 1.63
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 16:06",
+          "height": 0.23
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:29.453Z"
+    },
+    "kalpe": {
+      "id": "kalpe",
+      "name": "Kalpeni",
+      "lat": 10.0884,
+      "lng": 73.6467,
+      "state": "Lakshadweep",
+      "district": "Kalpeni Island",
+      "range": 1.3,
+      "baseWind": 14,
+      "windDir": "W",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:29.040Z"
+    },
+    "kand": {
+      "id": "kand",
+      "name": "Kandla",
+      "lat": 23.017,
+      "lng": 70.217,
+      "state": "Gujarat",
+      "district": "Kachchh",
+      "range": 6.4,
+      "baseWind": 18,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:21.366Z"
+    },
+    "kanya": {
+      "id": "kanya",
+      "name": "Kanyakumari",
+      "lat": 8.0952,
+      "lng": 77.5645,
+      "state": "Tamil Nadu",
+      "district": "Kanniyakumari",
+      "range": 1,
+      "baseWind": 22,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:21.868Z"
+    },
+    "karw": {
+      "id": "karw",
+      "name": "Karwar",
+      "lat": 14.8,
+      "lng": 74.1167,
+      "state": "Karnataka",
+      "district": "Uttara Kannada",
+      "range": 2.1,
+      "baseWind": 10,
+      "windDir": "W",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.64
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 10:05",
+          "height": 1.6
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 02:19",
+          "height": 0.45
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 20:04",
+          "height": 1.3
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 15:57",
+          "height": 1.1
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 10:34",
+          "height": 1.67
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 03:16",
+          "height": 0.4
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 21:17",
+          "height": 1.39
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 16:25",
+          "height": 0.99
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 10:58",
+          "height": 1.75
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 03:56",
+          "height": 0.36
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 22:10",
+          "height": 1.49
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 16:51",
+          "height": 0.88
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 11:20",
+          "height": 1.82
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 04:29",
+          "height": 0.33
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 22:54",
+          "height": 1.58
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 17:16",
+          "height": 0.76
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 11:41",
+          "height": 1.88
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 04:59",
+          "height": 0.33
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 23:35",
+          "height": 1.65
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 17:41",
+          "height": 0.64
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 12:02",
+          "height": 1.92
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 05:29",
+          "height": 0.35
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 18:06",
+          "height": 0.51
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 00:17",
+          "height": 1.7
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 06:01",
+          "height": 0.41
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 12:23",
+          "height": 1.93
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 18:35",
+          "height": 0.38
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:29.713Z"
+    },
+    "kava": {
+      "id": "kava",
+      "name": "Kavaratti",
+      "lat": 10.5667,
+      "lng": 72.6333,
+      "state": "Lakshadweep",
+      "district": "Kavaratti Island",
+      "range": 1.4,
+      "baseWind": 15,
+      "windDir": "WNW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:29.429Z"
+    },
+    "koll": {
+      "id": "koll",
+      "name": "Kollam",
+      "lat": 8.864,
+      "lng": 76.603,
+      "state": "Kerala",
+      "district": "Kollam",
+      "range": 1,
+      "baseWind": 14,
+      "windDir": "WSW",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.41
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 14:26",
+          "height": 0.87
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 00:47",
+          "height": 0.41
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 13:34",
+          "height": 0.88
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 02:59",
+          "height": 0.45
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 12:55",
+          "height": 0.91
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 04:53",
+          "height": 0.45
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 23:15",
+          "height": 0.68
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 19:39",
+          "height": 0.62
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 12:55",
+          "height": 0.97
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 05:52",
+          "height": 0.42
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 19:38",
+          "height": 0.53
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 00:30",
+          "height": 0.76
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 06:34",
+          "height": 0.4
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 13:12",
+          "height": 1.03
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 19:52",
+          "height": 0.43
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 01:17",
+          "height": 0.84
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 07:11",
+          "height": 0.38
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 13:35",
+          "height": 1.08
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 20:13",
+          "height": 0.34
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 01:57",
+          "height": 0.91
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 07:44",
+          "height": 0.37
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 14:02",
+          "height": 1.13
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 20:37",
+          "height": 0.26
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:32.235Z"
+    },
+    "kris": {
+      "id": "kris",
+      "name": "Krishnapatnam",
+      "lat": 14.25,
+      "lng": 80.1333,
+      "state": "Andhra Pradesh",
+      "district": "SPS Nellore",
+      "range": 1.3,
+      "baseWind": 13,
+      "windDir": "SSE",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:29.431Z"
+    },
+    "mach": {
+      "id": "mach",
+      "name": "Machilipatnam",
+      "lat": 16.145,
+      "lng": 81.178,
+      "state": "Andhra Pradesh",
+      "district": "Krishna",
+      "range": 1.5,
+      "baseWind": 14,
+      "windDir": "SE",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:30.282Z"
+    },
+    "marm": {
+      "id": "marm",
+      "name": "Marmagoa",
+      "lat": 15.409,
+      "lng": 73.8,
+      "state": "Goa",
+      "district": "South Goa",
+      "range": 2.3,
+      "baseWind": 11,
+      "windDir": "WNW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:30.370Z"
+    },
+    "mayab": {
+      "id": "mayab",
+      "name": "Mayabunder",
+      "lat": 12.9265,
+      "lng": 92.8975,
+      "state": "Andaman & Nicobar",
+      "district": "North & Middle Andaman",
+      "range": 2.2,
+      "baseWind": 16,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:30.883Z"
+    },
+    "mini": {
+      "id": "mini",
+      "name": "Minicoy",
+      "lat": 8.2833,
+      "lng": 73.05,
+      "state": "Lakshadweep",
+      "district": "Minicoy Island",
+      "range": 1.2,
+      "baseWind": 16,
+      "windDir": "WSW",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          1.25
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 11:13",
+          "height": 1.8
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 02:31",
+          "height": 1.13
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 11:43",
+          "height": 1.85
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 03:41",
+          "height": 1.12
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 22:16",
+          "height": 1.54
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 17:51",
+          "height": 1.45
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 12:07",
+          "height": 1.89
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 04:35",
+          "height": 1.1
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 23:11",
+          "height": 1.62
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 18:04",
+          "height": 1.39
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 12:27",
+          "height": 1.92
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 05:20",
+          "height": 1.09
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 23:53",
+          "height": 1.7
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 18:26",
+          "height": 1.32
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 12:44",
+          "height": 1.94
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 05:59",
+          "height": 1.1
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 18:50",
+          "height": 1.24
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 00:30",
+          "height": 1.77
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 06:35",
+          "height": 1.12
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 13:01",
+          "height": 1.94
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 19:15",
+          "height": 1.17
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 01:08",
+          "height": 1.82
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 07:09",
+          "height": 1.16
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 13:19",
+          "height": 1.94
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 19:42",
+          "height": 1.08
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:30.240Z"
+    },
+    "mumba": {
+      "id": "mumba",
+      "name": "Mumbai",
+      "lat": 18.9415,
+      "lng": 72.8527,
+      "state": "Maharashtra",
+      "district": "Mumbai City",
+      "range": 4.8,
+      "baseWind": 14,
+      "windDir": "WNW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:23.919Z"
+    },
+    "murud": {
+      "id": "murud",
+      "name": "Murud",
+      "lat": 18.2837,
+      "lng": 72.9823,
+      "state": "Maharashtra",
+      "district": "Raigad",
+      "range": 4.2,
+      "baseWind": 13,
+      "windDir": "NW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:26.584Z"
+    },
+    "naga": {
+      "id": "naga",
+      "name": "Nagapattinam",
+      "lat": 10.7667,
+      "lng": 79.85,
+      "state": "Tamil Nadu",
+      "district": "Nagapattinam",
+      "range": 0.9,
+      "baseWind": 15,
+      "windDir": "SSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:32.258Z"
+    },
+    "nagc": {
+      "id": "nagc",
+      "name": "Nancowry",
+      "lat": 8.05,
+      "lng": 93.55,
+      "state": "Andaman & Nicobar",
+      "district": "Nicobar",
+      "range": 1.9,
+      "baseWind": 18,
+      "windDir": "SW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:24.709Z"
+    },
+    "newm": {
+      "id": "newm",
+      "name": "Newmangalore",
+      "lat": 12.9167,
+      "lng": 74.8,
+      "state": "Karnataka",
+      "district": "Dakshina Kannada",
+      "range": 1.6,
+      "baseWind": 12,
+      "windDir": "W",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:32.234Z"
+    },
+    "okha": {
+      "id": "okha",
+      "name": "Okha",
+      "lat": 22.4667,
+      "lng": 69.0833,
+      "state": "Gujarat",
+      "district": "Devbhumi Dwarka",
+      "range": 4.2,
+      "baseWind": 20,
+      "windDir": "SW",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          1.97
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 10:56",
+          "height": 3.18
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 03:55",
+          "height": 0.81
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 22:37",
+          "height": 2.56
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 17:09",
+          "height": 1.51
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 11:32",
+          "height": 3.33
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 04:39",
+          "height": 0.66
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 23:18",
+          "height": 2.76
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 17:38",
+          "height": 1.33
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 12:03",
+          "height": 3.46
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 05:16",
+          "height": 0.51
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 23:55",
+          "height": 2.95
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 18:04",
+          "height": 1.15
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 12:33",
+          "height": 3.57
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 05:49",
+          "height": 0.41
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 18:29",
+          "height": 0.96
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 00:29",
+          "height": 3.11
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 06:21",
+          "height": 0.37
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 13:01",
+          "height": 3.64
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 18:55",
+          "height": 0.77
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 01:02",
+          "height": 3.23
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 06:53",
+          "height": 0.41
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 13:27",
+          "height": 3.66
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 19:22",
+          "height": 0.58
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 01:37",
+          "height": 3.32
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 07:26",
+          "height": 0.51
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 13:53",
+          "height": 3.64
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 19:52",
+          "height": 0.39
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:30.931Z"
+    },
+    "panaj": {
+      "id": "panaj",
+      "name": "Panaji",
+      "lat": 15.5016,
+      "lng": 73.8282,
+      "state": "Goa",
+      "district": "North Goa",
+      "range": 2.3,
+      "baseWind": 11,
+      "windDir": "WNW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:30.914Z"
+    },
+    "para": {
+      "id": "para",
+      "name": "Paradeep",
+      "lat": 20.2667,
+      "lng": 86.7,
+      "state": "Odisha",
+      "district": "Jagatsinghpur",
+      "range": 2.9,
+      "baseWind": 16,
+      "windDir": "SW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:31.491Z"
+    },
+    "porb": {
+      "id": "porb",
+      "name": "Porbander",
+      "lat": 21.6333,
+      "lng": 69.6167,
+      "state": "Gujarat",
+      "district": "Porbandar",
+      "range": 3.2,
+      "baseWind": 18,
+      "windDir": "SW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:30.279Z"
+    },
+    "ptbl": {
+      "id": "ptbl",
+      "name": "Portblair",
+      "lat": 11.6833,
+      "lng": 92.7667,
+      "state": "Andaman & Nicobar",
+      "district": "South Andaman",
+      "range": 2.2,
+      "baseWind": 17,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:31.000Z"
+    },
+    "pudu": {
+      "id": "pudu",
+      "name": "Puducherry",
+      "lat": 11.93,
+      "lng": 79.835,
+      "state": "Puducherry",
+      "district": "Puducherry",
+      "range": 1.3,
+      "baseWind": 14,
+      "windDir": "S",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.53
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 07:19",
+          "height": 0.88
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 12:53",
+          "height": 0.63
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 18:18",
+          "height": 0.77
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 07:43",
+          "height": 0.98
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 00:04",
+          "height": 0.46
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 19:15",
+          "height": 0.83
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 13:33",
+          "height": 0.55
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 08:06",
+          "height": 1.08
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 00:53",
+          "height": 0.41
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 19:54",
+          "height": 0.91
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 14:05",
+          "height": 0.47
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 08:28",
+          "height": 1.15
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 01:33",
+          "height": 0.37
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 20:28",
+          "height": 0.97
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 14:33",
+          "height": 0.39
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 08:51",
+          "height": 1.21
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 02:09",
+          "height": 0.34
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 20:59",
+          "height": 1.03
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 14:59",
+          "height": 0.32
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 09:14",
+          "height": 1.23
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 02:43",
+          "height": 0.33
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 21:29",
+          "height": 1.08
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 15:25",
+          "height": 0.27
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 09:39",
+          "height": 1.23
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 03:17",
+          "height": 0.33
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 21:59",
+          "height": 1.11
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 15:52",
+          "height": 0.23
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:32.810Z"
+    },
+    "ramaya": {
+      "id": "ramaya",
+      "name": "Ramayapatnam",
+      "lat": 15.0158,
+      "lng": 80.0603,
+      "state": "Andhra Pradesh",
+      "district": "Prakasam",
+      "range": 1.4,
+      "baseWind": 13,
+      "windDir": "SSE",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:31.612Z"
+    },
+    "rames": {
+      "id": "rames",
+      "name": "Rameshwaram",
+      "lat": 9.2578,
+      "lng": 79.2257,
+      "state": "Tamil Nadu",
+      "district": "Ramanathapuram",
+      "range": 0.8,
+      "baseWind": 20,
+      "windDir": "SW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:31.550Z"
+    },
+    "rang": {
+      "id": "rang",
+      "name": "Rangatbay",
+      "lat": 12.4889,
+      "lng": 92.9569,
+      "state": "Andaman & Nicobar",
+      "district": "North & Middle Andaman",
+      "range": 2.2,
+      "baseWind": 16,
+      "windDir": "WSW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:32.139Z"
+    },
+    "tuti": {
+      "id": "tuti",
+      "name": "Tuticorin",
+      "lat": 8.75,
+      "lng": 78.2,
+      "state": "Tamil Nadu",
+      "district": "Thoothukkudi",
+      "range": 1.2,
+      "baseWind": 19,
+      "windDir": "SW",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.47
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 01:02",
+          "height": 0.49
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 05:23",
+          "height": 0.41
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 12:48",
+          "height": 0.74
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 19:52",
+          "height": 0.31
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 01:33",
+          "height": 0.58
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 06:31",
+          "height": 0.36
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 13:20",
+          "height": 0.82
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 20:04",
+          "height": 0.26
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 01:59",
+          "height": 0.66
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 07:07",
+          "height": 0.3
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 13:45",
+          "height": 0.88
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 20:18",
+          "height": 0.23
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 02:21",
+          "height": 0.73
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 07:39",
+          "height": 0.26
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 14:07",
+          "height": 0.92
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 20:31",
+          "height": 0.2
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 02:42",
+          "height": 0.8
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 08:09",
+          "height": 0.22
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 14:28",
+          "height": 0.94
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 20:44",
+          "height": 0.18
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 03:02",
+          "height": 0.85
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 08:39",
+          "height": 0.21
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 14:50",
+          "height": 0.94
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 21:01",
+          "height": 0.16
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 03:24",
+          "height": 0.89
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 09:09",
+          "height": 0.21
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 15:13",
+          "height": 0.93
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 21:20",
+          "height": 0.14
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:31.548Z"
+    },
+    "verav": {
+      "id": "verav",
+      "name": "Veraval",
+      "lat": 20.912,
+      "lng": 70.408,
+      "state": "Gujarat",
+      "district": "Gir Somnath",
+      "range": 2.8,
+      "baseWind": 16,
+      "windDir": "SW",
+      "hasData": false,
+      "series": [],
+      "events": [],
+      "updatedAt": "2026-08-26T04:55:31.651Z"
+    },
+    "vish": {
+      "id": "vish",
+      "name": "Visakhapatnam",
+      "lat": 17.6833,
+      "lng": 83.2833,
+      "state": "Andhra Pradesh",
+      "district": "Visakhapatnam",
+      "range": 1.8,
+      "baseWind": 14,
+      "windDir": "SSW",
+      "hasData": true,
+      "series": [
+        [
+          1787529600000,
+          0.57
+        ]
+      ],
+      "events": [
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 06:27",
+          "height": 1.26
+        },
+        {
+          "type": "Low",
+          "timeStr": "24-08-2026 13:01",
+          "height": 0.64
+        },
+        {
+          "type": "High",
+          "timeStr": "24-08-2026 18:33",
+          "height": 1.07
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 07:05",
+          "height": 1.38
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 00:28",
+          "height": 0.48
+        },
+        {
+          "type": "High",
+          "timeStr": "25-08-2026 19:10",
+          "height": 1.19
+        },
+        {
+          "type": "Low",
+          "timeStr": "25-08-2026 13:30",
+          "height": 0.53
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 07:34",
+          "height": 1.49
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 01:06",
+          "height": 0.39
+        },
+        {
+          "type": "High",
+          "timeStr": "26-08-2026 19:42",
+          "height": 1.31
+        },
+        {
+          "type": "Low",
+          "timeStr": "26-08-2026 13:56",
+          "height": 0.43
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 08:01",
+          "height": 1.58
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 01:39",
+          "height": 0.33
+        },
+        {
+          "type": "High",
+          "timeStr": "27-08-2026 20:12",
+          "height": 1.42
+        },
+        {
+          "type": "Low",
+          "timeStr": "27-08-2026 14:20",
+          "height": 0.34
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 08:28",
+          "height": 1.65
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 02:11",
+          "height": 0.28
+        },
+        {
+          "type": "High",
+          "timeStr": "28-08-2026 20:42",
+          "height": 1.51
+        },
+        {
+          "type": "Low",
+          "timeStr": "28-08-2026 14:45",
+          "height": 0.27
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 08:56",
+          "height": 1.69
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 02:43",
+          "height": 0.25
+        },
+        {
+          "type": "High",
+          "timeStr": "29-08-2026 21:13",
+          "height": 1.58
+        },
+        {
+          "type": "Low",
+          "timeStr": "29-08-2026 15:12",
+          "height": 0.21
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 09:25",
+          "height": 1.69
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 03:16",
+          "height": 0.25
+        },
+        {
+          "type": "High",
+          "timeStr": "30-08-2026 21:46",
+          "height": 1.62
+        },
+        {
+          "type": "Low",
+          "timeStr": "30-08-2026 15:39",
+          "height": 0.17
+        }
+      ],
+      "updatedAt": "2026-08-26T04:55:31.682Z"
+    }
+  }
+}
