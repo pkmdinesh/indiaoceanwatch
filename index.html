@@ -35,9 +35,9 @@
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
     .announcement-card{grid-column:1/-1;min-height:98px}
   </style>
-  <link rel="preload" href="css/components.css?v=185" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=185"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=185" media="print">
+  <link rel="preload" href="css/components.css?v=192" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=192"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=192" media="print">
 </head>
 <body>
   <main class="dashboard">
@@ -232,9 +232,9 @@
       <p class="osf-map-note" id="osfMapShareStatus">Markers represent state-level advisory records fetched from INCOIS. Use the layer control to select services.</p>
     </div>
   </dialog>
-  <dialog class="osf-map-dialog pfz-map-dialog" id="pfzMapDialog" aria-labelledby="pfzMapTitle">
+  <dialog class="pfz-map-dialog" id="pfzMapDialog" aria-labelledby="pfzMapTitle">
     <div class="advisory-dialog-head"><div><h2 id="pfzMapTitle">Potential Fishing Zone Map</h2><p id="pfzMapMeta">Official INCOIS PFZ vector layers</p></div><div class="dialog-head-actions"><button class="dialog-close" id="pfzMapClose" type="button" aria-label="Close PFZ map">&times;</button></div></div>
-    <div class="osf-map-body pfz-map-body"><div class="osf-map-toolbar"><div class="pfz-map-legend" aria-label="PFZ map legend"><span><i class="pfz-line-swatch"></i>PFZ forecast lines</span><span><i class="pfz-sector-swatch"></i>Sectors</span><span><i class="pfz-eez-swatch"></i>EEZ</span><span><i class="pfz-centre-swatch"></i>Landing centres</span><span><i class="pfz-chlorophyll-swatch" style="background:#2ca02c"></i>Chlorophyll-a</span></div></div><div class="osf-map-canvas pfz-map-canvas" id="pfzMapCanvas" aria-label="Interactive Potential Fishing Zone map"></div><p class="osf-map-note" id="pfzMapShareStatus">PFZ forecast lines and EEZ are enabled by default. Use the layer control to add sectors, landing centres, bathymetry, SST Anomaly, or Chlorophyll-a.</p></div>
+    <div class="pfz-map-body"><div class="osf-map-toolbar"><div class="pfz-map-legend" aria-label="PFZ map legend"><span><i class="pfz-line-swatch"></i>PFZ forecast lines</span><span><i class="pfz-sector-swatch"></i>Sectors</span><span><i class="pfz-eez-swatch"></i>EEZ</span><span><i class="pfz-centre-swatch"></i>Landing centres</span><span><i class="pfz-chlorophyll-swatch" style="background:#2ca02c"></i>Chlorophyll-a</span></div></div><div class="pfz-map-canvas" id="pfzMapCanvas" aria-label="Interactive Potential Fishing Zone map"></div></div>
   </dialog>
   <dialog class="share-dialog" id="shareDialog" aria-labelledby="shareDialogTitle">
     <div class="advisory-dialog-head">
@@ -498,21 +498,21 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=185" defer></script>
-  <script src="js/app.js?v=185" defer></script>
-  <script src="js/share.js?v=185" defer></script>
-  <script src="js/map.js?v=185" defer></script>
-  <script src="js/pfz-map.js?v=185" defer></script>
-  <script src="js/pfz.js?v=185" defer></script>
-  <script src="js/advisory.js?v=185" defer></script>
-  <script src="js/tsunami.js?v=185" defer></script>
-  <script src="js/cyclone.js?v=185" defer></script>
-  <script src="js/seismic.js?v=185" defer></script>
-  <script src="js/port-tides.js?v=185" defer></script>
-  <script src="js/voice-summary.js?v=185" defer></script>
-  <script src="js/status.js?v=185" defer></script>
-  <script src="js/notifications.js?v=185" defer></script>
-  <script src="js/pwa.js?v=185" defer></script>
+  <script src="js/config.js?v=192" defer></script>
+  <script src="js/app.js?v=192" defer></script>
+  <script src="js/share.js?v=192" defer></script>
+  <script src="js/map.js?v=192" defer></script>
+  <script src="js/pfz-map.js?v=192" defer></script>
+  <script src="js/pfz.js?v=192" defer></script>
+  <script src="js/advisory.js?v=192" defer></script>
+  <script src="js/tsunami.js?v=192" defer></script>
+  <script src="js/cyclone.js?v=192" defer></script>
+  <script src="js/seismic.js?v=192" defer></script>
+  <script src="js/port-tides.js?v=192" defer></script>
+  <script src="js/voice-summary.js?v=192" defer></script>
+  <script src="js/status.js?v=192" defer></script>
+  <script src="js/notifications.js?v=192" defer></script>
+  <script src="js/pwa.js?v=192" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>

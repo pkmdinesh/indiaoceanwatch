@@ -508,14 +508,17 @@ function updatePfzMapStatus() {
     pfzWindTimelineElement.style.display = hasWind ? 'flex' : 'none';
   }
 
-  const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a','Wind speed & direction'].includes(name));
-  const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly date: ${pfzSstDataDate}.` : '';
-  const chlDateNote=selected.includes('Chlorophyll-a') && pfzChlorophyllDataDate ? ` Chlorophyll-a date: ${pfzChlorophyllDataDate}.` : '';
-  const windDateNote=selected.includes('Wind speed & direction') ? ` Wind model: Today & Tomorrow 12h forecast.` : '';
-  const liveNote=liveLayers.length ? ` ${liveLayers.join(', ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}${chlDateNote}${windDateNote}` : '';
-  ids('pfzMapShareStatus').textContent = selected.length
-    ? `Showing ${selected.join(' + ')}. Vector layers are cached locally from official INCOIS WFS data.${liveNote}`
-    : 'No PFZ layers selected. Use the layer control to enable a layer.';
+  const status = ids('pfzMapShareStatus');
+  if (status) {
+    const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a','Wind speed & direction'].includes(name));
+    const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly date: ${pfzSstDataDate}.` : '';
+    const chlDateNote=selected.includes('Chlorophyll-a') && pfzChlorophyllDataDate ? ` Chlorophyll-a date: ${pfzChlorophyllDataDate}.` : '';
+    const windDateNote=selected.includes('Wind speed & direction') ? ` Wind model: Today & Tomorrow 12h forecast.` : '';
+    const liveNote=liveLayers.length ? ` ${liveLayers.join(', ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}${chlDateNote}${windDateNote}` : '';
+    status.textContent = selected.length
+      ? `Showing ${selected.join(' + ')}. Vector layers are cached locally from official INCOIS WFS data.${liveNote}`
+      : 'No PFZ layers selected. Use the layer control to enable a layer.';
+  }
 }
 
 function getRecentIsoDate(daysAgo = 2) {
@@ -538,7 +541,7 @@ function fitPfzCoastalExtent() {
 
 async function buildPfzMapLayers() {
   const status=ids('pfzMapShareStatus');
-  status.textContent='Loading official INCOIS PFZ and marine wind forecast layers\u2026';
+  if (status) status.textContent='Loading official INCOIS PFZ and marine wind forecast layers\u2026';
   const data=await loadPfzMapData();
   if (pfzLayerControl) pfzLayerControl.remove();
   Object.values(pfzMapLayers).forEach(layer => { if (pfzMap.hasLayer(layer)) pfzMap.removeLayer(layer); });
@@ -645,7 +648,7 @@ function ensurePfzMap() {
     };
     windLegend.addTo(pfzMap);
   }
-  void buildPfzMapLayers().catch(error => { ids('pfzMapShareStatus').textContent=`PFZ map data unavailable: ${error.message}`; fitPfzCoastalExtent(); });
+  void buildPfzMapLayers().catch(error => { const status = ids('pfzMapShareStatus'); if (status) status.textContent=`PFZ map data unavailable: ${error.message}`; fitPfzCoastalExtent(); });
   return pfzMap;
 }
 
@@ -685,7 +688,7 @@ async function capturePfzMapCanvas() {
 async function sharePfzMap() {
   const status=ids('pfzMapShareStatus');
   const selection=[...pfzSelectedLayers].filter(name => !['Bathymetry','SST Anomaly','Wind speed & direction'].includes(name));
-  status.textContent='Preparing current PFZ map image\u2026';
+  if (status) status.textContent='Preparing current PFZ map image\u2026';
   try {
     const mapCanvas=await capturePfzMapCanvas();
     const headerHeight=64;
