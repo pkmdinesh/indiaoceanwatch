@@ -282,29 +282,17 @@ function createOsfTidalStationLayer() {
   }
 
   const ports = typeof MAJOR_COASTAL_PORTS !== 'undefined' ? MAJOR_COASTAL_PORTS : [];
-  const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
 
   ports.forEach(port => {
     const lat = port.lat;
     const lon = port.lng || port.lon;
     if (typeof lat !== 'number' || typeof lon !== 'number') return;
 
-    let morningStr = '—';
-    let eveningStr = '—';
-
-    if (typeof calculateDailyTideEvents === 'function') {
-      const { events } = calculateDailyTideEvents(port, now);
-      const highTides = (events || []).filter(e => e.type === 'High');
-      if (highTides[0]) morningStr = `${formatTime(highTides[0].time)} IST (${highTides[0].height}m)`;
-      if (highTides[1]) eveningStr = `${formatTime(highTides[1].time)} IST (${highTides[1].height}m)`;
-    }
-
-    const isReporting = port.status !== 'Not Reporting';
-    const pinClass = isReporting ? (moon.tideBadgeClass || 'spring') : 'not-reporting';
-    const statusLabel = isReporting ? tideTypeShort : 'Telemetry Offline (No Real-Time Data)';
+    const pinClass = moon.tideBadgeClass || 'spring';
+    const regime = (port.range || 2.0) >= 4.0 ? 'Macro-tidal' : (port.range || 2.0) >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
 
     const iconHtml = `
-      <div class="osf-tide-marker ${isReporting ? 'is-reporting' : 'is-not-reporting'}" title="${port.name}: ${statusLabel}">
+      <div class="osf-tide-marker" title="${port.name}: ${tideTypeShort}">
         <div class="osf-tide-pin ${pinClass}">🌊</div>
         <span class="osf-tide-label">${port.name}</span>
       </div>
@@ -322,12 +310,12 @@ function createOsfTidalStationLayer() {
     const popupHtml = `
       <div class="osf-popup osf-tide-popup">
         <div class="osf-tide-header">
-          <strong>${isReporting ? '🌊' : '🌫️'} ${escapeHtml(port.name)} Tide Station</strong>
-          <span class="osf-tide-state">${escapeHtml(port.state)}${!isReporting ? ' · <small style="color:#64748b;font-weight:800;">(No Real-Time Data)</small>' : ''}</span>
+          <strong>🌊 ${escapeHtml(port.name)} Tide Station</strong>
+          <span class="osf-tide-state">${escapeHtml(port.state)}</span>
         </div>
         <div class="osf-tide-grid">
-          <div class="osf-tide-row"><span>Morning High Tide:</span> <strong>${morningStr}</strong></div>
-          <div class="osf-tide-row"><span>Evening High Tide:</span> <strong>${eveningStr}</strong></div>
+          <div class="osf-tide-row"><span>District:</span> <strong>${escapeHtml(port.district)}</strong></div>
+          <div class="osf-tide-row"><span>Coordinates:</span> <span>${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E</span></div>
           <div class="osf-tide-row"><span>Tidal Regime:</span> <span>${regime} (MHWS ~${port.range}m)</span></div>
         </div>
         <div style="margin-top:7px;text-align:right;">

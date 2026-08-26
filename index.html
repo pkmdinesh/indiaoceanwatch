@@ -98,8 +98,8 @@
               <h3>Predicted Astronomical Tide</h3>
               <div class="port-tide-controls">
                 <select id="portSelectDropdown" class="port-select-dropdown" aria-label="Select National Tide Gauge Station"></select>
-                <button type="button" id="portGpsBtn" class="port-gps-btn" aria-label="Find nearest tide station with GPS">📍 Near Me</button>
-                <a href="https://incois.gov.in/oceanservices/PAT/index.html" target="_blank" rel="noopener" class="port-pat-portal-btn" title="Open official INCOIS Predicted &amp; Actual Tide (PAT) Portal">PAT Portal ↗</a>
+                <button type="button" id="portGpsBtn" class="source card-action-button port-action-btn" aria-label="Find nearest tide station with GPS">📍 Near Me</button>
+                <a href="https://incois.gov.in/oceanservices/PAT/index.html" target="_blank" rel="noopener" class="source card-action-button port-action-btn" title="Open official INCOIS Predicted &amp; Actual Tide (PAT) Portal">INCOIS PAT ↗</a>
               </div>
             </div>
             <div id="portWarningBanner" class="port-warning-banner level-safe">Checking coastal status…</div>
@@ -107,9 +107,6 @@
             <div class="port-tide-body">
               <div id="portTideTimesList" class="port-tide-times-list"><div class="tide-horizontal-row"><span class="tide-event-badge high">High Tide (IST)</span><span class="empty">Calculating…</span></div></div>
               <div id="portTideChartContainer" class="port-tide-chart-container"><div class="tide-chart-placeholder">Calculating astronomical tide chart…</div></div>
-            </div>
-            <div class="port-tide-actions">
-              <a id="portIncoisPatLink" class="port-incois-pat-btn" target="_blank" rel="noopener" href="https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=Chennai">📊 INCOIS High &amp; Low Tide Graph / Phases ↗</a>
             </div>
           </article>
         </div>
