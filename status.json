@@ -1,12 +1,12 @@
 ﻿{
     "updatedAt":  "2026-08-26T09:15:12.6924848+00:00",
-    "lastAttemptAt":  "2026-08-26T09:15:12.6924848+00:00",
+    "lastAttemptAt":  "2026-08-26T09:30:16.3338563+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
                            "message":  "Marine Heatwave event of No Heat Wave category with area of spreading 19.46% has been observed on 2026-08-24 over the Arabian Sea; Marine Heatwave event of Moderate category with area of spreading 31.81% has been observed on 2026-08-24 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 26.12% has been observed on 2026-08-24 over the Rest of Indian Ocean; Marine Heatwave event of Moderate category with area of spreading 29.46% has been observed on 2026-08-24 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 90.43% has been observed on 2026-08-24 over the Lakshadweep coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 73.28% has been observed on 2026-08-24 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 65.45% has been observed on 2026-08-24 over the Nicobar coast;",
                            "fetchedAt":  "2026-08-25T23:30:17.2631811+00:00",
-                           "ok":  true,
+                           "ok":  false,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
     "tsunami":  {
@@ -1586,9 +1586,9 @@
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
                           "fetchedAt":  "2026-08-26T09:15:20.2633993+00:00",
-                          "ok":  true,
+                          "ok":  false,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
-                          "lastError":  null
+                          "lastError":  "Unable to connect to the remote server"
                       },
     "pfz":  {
                 "forecastDate":  "25 AUG 2026",
@@ -6963,14 +6963,23 @@
                             ]
             },
     "errors":  [
-
+                   "High wave/swell: Unable to connect to the remote server",
+                   "Ocean current: Unable to connect to the remote server",
+                   "Joint bulletin: Unable to connect to the remote server",
+                   "PFZ: Unable to connect to the remote server",
+                   "Marine Heat Wave: Unable to connect to the remote server"
                ],
     "healthAlerts":  [
-
+                         {
+                             "code":  "incois-main",
+                             "message":  "Error: Unable to access Info",
+                             "linkLabel":  "Check INCOIS Main page",
+                             "url":  "https://incois.gov.in/"
+                         }
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  21.78,
-                      "pfzAgeHours":  21.78
+                      "osfAgeHours":  22.04,
+                      "pfzAgeHours":  22.04
                   }
 }
