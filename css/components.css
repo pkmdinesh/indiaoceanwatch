@@ -210,9 +210,16 @@
 
 /* Wind & Tide Port Forecast Card */
 .tide-forecast{display:flex;flex-direction:column;gap:8px}
-.port-tide-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0;justify-content:flex-end}
-.port-select-dropdown{max-width:145px;min-width:0;min-height:32px;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:750 11px/1.2 inherit;cursor:pointer;box-sizing:border-box}
-.port-action-btn{min-height:32px!important;padding:5px 9px!important;font-size:11px!important;border-radius:8px!important;margin-left:0!important;flex:none;box-sizing:border-box}
+.tide-forecast .forecast-title{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.port-tide-controls{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;min-width:0;max-width:100%;justify-content:flex-end}
+.port-select-dropdown{flex:1 1 auto;min-width:95px;max-width:145px;min-height:30px;height:30px;padding:3px 5px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font:750 11px/1.2 inherit;cursor:pointer;box-sizing:border-box;text-overflow:ellipsis}
+.port-action-btn{min-height:30px!important;height:30px!important;padding:4px 7px!important;font-size:10.5px!important;border-radius:7px!important;margin-left:0!important;flex:0 0 auto!important;box-sizing:border-box;white-space:nowrap}
+@media(max-width:520px){
+  .tide-forecast .forecast-title{flex-direction:column;align-items:stretch;gap:5px}
+  .port-tide-controls{width:100%;display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
+  .port-select-dropdown{flex:1 1 0;min-width:0;max-width:none;font-size:10px;padding:2px 4px;height:28px;min-height:28px}
+  .port-action-btn{padding:3px 5px!important;font-size:9.5px!important;height:28px!important;min-height:28px!important}
+}
 
 .port-warning-banner{padding:6px 9px;border-radius:8px;font-size:10.5px;font-weight:800;line-height:1.35}
 .port-warning-banner.level-safe{background:var(--safe-bg);color:var(--green);border-left:4px solid var(--green)}
@@ -440,29 +447,29 @@
 @media(max-width:700px){
   .osf-map-dialog .leaflet-popup,
   .pfz-map-dialog .leaflet-popup{
-    width:calc(100vw - 32px)!important;
-    max-width:calc(100vw - 32px)!important;
+    width:auto!important;
+    max-width:min(280px,calc(100vw - 32px))!important;
     margin:0 auto!important;
     box-sizing:border-box!important;
   }
   .osf-map-dialog .leaflet-popup-content-wrapper,
   .pfz-map-dialog .leaflet-popup-content-wrapper{
-    width:100%!important;
+    width:auto!important;
     max-width:100%!important;
     max-height:56dvh!important;
-    border-radius:14px!important;
+    border-radius:12px!important;
     padding:0!important;
     margin:0!important;
-    box-shadow:0 8px 24px rgba(8,47,60,.35)!important;
+    box-shadow:0 6px 20px rgba(8,47,60,.35)!important;
     box-sizing:border-box!important;
     overflow:hidden!important;
   }
   .osf-map-dialog .leaflet-popup-content,
   .pfz-map-dialog .leaflet-popup-content{
-    width:100%!important;
+    width:auto!important;
     max-width:100%!important;
     margin:0!important;
-    padding:12px!important;
+    padding:8px 10px!important;
     max-height:50dvh!important;
     overflow-y:auto!important;
     overscroll-behavior:contain!important;
@@ -480,42 +487,66 @@
   }
   .osf-map-dialog .osf-popup>strong{
     display:block!important;
-    font-size:13.5px!important;
-    padding-right:26px!important;
-    margin-bottom:4px!important;
+    font-size:12.5px!important;
+    padding-right:22px!important;
+    margin-bottom:3px!important;
+    line-height:1.2!important;
   }
   .osf-map-dialog .osf-popup-chips{
     display:flex!important;
     flex-wrap:wrap!important;
-    gap:5px!important;
-    margin:6px 0!important;
+    gap:4px!important;
+    margin:4px 0!important;
     padding:0!important;
     width:100%!important;
   }
   .osf-map-dialog .osf-popup-chip{
-    font-size:11.5px!important;
-    padding:5px 8px!important;
+    font-size:10.5px!important;
+    padding:3px 6px!important;
     flex:none!important;
   }
   .osf-map-dialog .osf-popup-panel{
-    padding:9px 10px!important;
+    padding:6px 8px!important;
     box-sizing:border-box!important;
     width:100%!important;
-    margin-top:6px!important;
+    margin-top:4px!important;
   }
   .osf-map-dialog .osf-popup-msg-content p{
-    font-size:12px!important;
-    line-height:1.45!important;
-    margin:5px 0 0!important;
+    font-size:11px!important;
+    line-height:1.35!important;
+    margin:3px 0 0!important;
   }
   .osf-map-dialog .osf-popup-panel small{
-    font-size:9.5px!important;
+    font-size:8.5px!important;
+  }
+  .osf-tide-popup{
+    min-width:170px!important;
+    max-width:240px!important;
+  }
+  .osf-tide-grid{
+    display:grid!important;
+    gap:3px!important;
+    margin-top:4px!important;
+    font-size:10.5px!important;
+  }
+  .osf-tide-row{
+    display:flex!important;
+    justify-content:space-between!important;
+    gap:6px!important;
   }
   .osf-tide-status-banner{
     bottom:60px!important;
     right:12px!important;
-    padding:5px 8px!important;
-    font-size:9.5px!important;
+    padding:4px 7px!important;
+    font-size:9px!important;
+  }
+  .osf-map-body, .pfz-map-body{
+    padding:6px 8px 10px!important;
+    gap:6px!important;
+  }
+  .osf-map-dialog .advisory-dialog-head,
+  .pfz-map-dialog .advisory-dialog-head{
+    padding:8px 12px!important;
   }
 }
 

@@ -289,7 +289,16 @@ function createOsfTidalStationLayer() {
     if (typeof lat !== 'number' || typeof lon !== 'number') return;
 
     const pinClass = moon.tideBadgeClass || 'spring';
-    const regime = (port.range || 2.0) >= 4.0 ? 'Macro-tidal' : (port.range || 2.0) >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
+
+    let highTideStr = '—';
+    if (typeof calculateDailyTideEvents === 'function') {
+      const { events } = calculateDailyTideEvents(port, now);
+      const highTides = (events || []).filter(e => e.type === 'High');
+      const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+      if (highTides.length > 0) {
+        highTideStr = highTides.map(t => `${formatTime(t.time)} (${t.height}m)`).join(', ');
+      }
+    }
 
     const iconHtml = `
       <div class="osf-tide-marker" title="${port.name}: ${tideTypeShort}">
@@ -315,10 +324,10 @@ function createOsfTidalStationLayer() {
         </div>
         <div class="osf-tide-grid">
           <div class="osf-tide-row"><span>District:</span> <strong>${escapeHtml(port.district)}</strong></div>
+          <div class="osf-tide-row"><span>High Tide (IST):</span> <strong style="color:var(--teal);">${highTideStr}</strong></div>
           <div class="osf-tide-row"><span>Coordinates:</span> <span>${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E</span></div>
-          <div class="osf-tide-row"><span>Tidal Regime:</span> <span>${regime} (MHWS ~${port.range}m)</span></div>
         </div>
-        <div style="margin-top:7px;text-align:right;">
+        <div style="margin-top:6px;text-align:right;">
           <a href="https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}" target="_blank" rel="noopener" style="font-size:10.5px;font-weight:800;color:var(--teal);text-decoration:underline;">INCOIS PAT Tide Graph ↗</a>
         </div>
       </div>

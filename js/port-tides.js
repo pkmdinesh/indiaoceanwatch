@@ -908,9 +908,9 @@ function renderTideChartSvg(elevations, port, now = new Date()) {
       <path d="${fillD}" fill="url(#tideFillGrad)" />
       <path d="${pathD}" fill="none" stroke="#087f84" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
       ${markersSvg}
-      <line x1="${nowX}" y1="${padTop}" x2="${nowX}" y2="${height - padBottom}" stroke="#082f3c" stroke-width="1.4" stroke-dasharray="2,2" />
-      <circle cx="${nowX}" cy="${nowY}" r="4" fill="#082f3c" stroke="#fff" stroke-width="1.8" />
-      <text x="${nowX}" y="${Math.max(10, Number(nowY) - 6)}" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="middle">NOW ${currentHeight}m</text>
+      <line x1="${nowX}" y1="${padTop}" x2="${nowX}" y2="${height - padBottom}" stroke="#f97316" stroke-width="1.6" stroke-dasharray="2,2" />
+      <circle cx="${nowX}" cy="${nowY}" r="4" fill="#ea580c" stroke="#ffffff" stroke-width="1.8" />
+      <text x="${nowX}" y="${Math.max(10, Number(nowY) - 6)}" font-size="8.5" font-weight="900" fill="#ea580c" text-anchor="middle">NOW ${currentHeight}m</text>
     </svg>
   `;
 }
