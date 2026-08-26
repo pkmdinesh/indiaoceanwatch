@@ -1,36 +1,94 @@
-function ensureSeismicMap() {
-      if (seismicMap) return seismicMap;
-      if (!window.L) return null;
+let seismicZoomHintTimer = null;
 
-      seismicMap = L.map('eventMapCanvas', {
-        zoomControl: true,
-        attributionControl: true,
-        minZoom: 2,
-        maxZoom: 12,
-        worldCopyJump: true
-      });
+function setupSeismicMapScrollLock(map) {
+  const container = ids('eventMap');
+  if (!container) return;
 
-      const labelledBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 19,
-        attribution: 'Tiles &copy; Esri'
-      }).addTo(seismicMap);
+  let hint = ids('seismicMapZoomHint');
+  if (!hint) {
+    hint = document.createElement('div');
+    hint.id = 'seismicMapZoomHint';
+    hint.className = 'map-ctrl-zoom-hint';
+    hint.textContent = 'Use Ctrl + scroll to zoom map';
+    container.appendChild(hint);
+  }
 
-      seismicBathymetryLayer = L.tileLayer.wms('https://wms.gebco.net/mapserv', {
-        layers: 'GEBCO_LATEST_2',
-        format: 'image/png',
-        transparent: true,
-        opacity: 0.55,
-        attribution: 'GEBCO'
-      });
+  const showHint = () => {
+    hint.classList.add('is-visible');
+    clearTimeout(seismicZoomHintTimer);
+    seismicZoomHintTimer = setTimeout(() => {
+      hint.classList.remove('is-visible');
+    }, 1200);
+  };
 
-      L.control.layers(
-        { 'Global map (English)': labelledBase },
-        { 'GEBCO bathymetry': seismicBathymetryLayer },
-        { collapsed: true, position: 'topright' }
-      ).addTo(seismicMap);
-
-      return seismicMap;
+  container.addEventListener('wheel', (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      if (!map.scrollWheelZoom.enabled()) {
+        map.scrollWheelZoom.enable();
+      }
+      hint.classList.remove('is-visible');
+    } else {
+      if (map.scrollWheelZoom.enabled()) {
+        map.scrollWheelZoom.disable();
+      }
+      showHint();
     }
+  }, { passive: true });
+
+  window.addEventListener('keydown', (e) => {
+    if ((e.key === 'Control' || e.key === 'Meta') && map) {
+      map.scrollWheelZoom.enable();
+    }
+  });
+
+  window.addEventListener('keyup', (e) => {
+    if ((e.key === 'Control' || e.key === 'Meta') && map) {
+      map.scrollWheelZoom.disable();
+    }
+  });
+
+  container.addEventListener('mouseleave', () => {
+    if (map) map.scrollWheelZoom.disable();
+    hint.classList.remove('is-visible');
+  });
+}
+
+function ensureSeismicMap() {
+  if (seismicMap) return seismicMap;
+  if (!window.L) return null;
+
+  seismicMap = L.map('eventMapCanvas', {
+    zoomControl: true,
+    attributionControl: true,
+    minZoom: 2,
+    maxZoom: 12,
+    worldCopyJump: true,
+    scrollWheelZoom: false
+  });
+
+  const labelledBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 19,
+    attribution: 'Tiles &copy; Esri'
+  }).addTo(seismicMap);
+
+  seismicBathymetryLayer = L.tileLayer.wms('https://wms.gebco.net/mapserv', {
+    layers: 'GEBCO_LATEST_2',
+    format: 'image/png',
+    transparent: true,
+    opacity: 0.55,
+    attribution: 'GEBCO'
+  });
+
+  L.control.layers(
+    { 'Global map (English)': labelledBase },
+    { 'GEBCO bathymetry': seismicBathymetryLayer },
+    { collapsed: true, position: 'topright' }
+  ).addTo(seismicMap);
+
+  setupSeismicMapScrollLock(seismicMap);
+
+  return seismicMap;
+}
 
 const appendIst = value => {
       const text = String(value || '').trim();

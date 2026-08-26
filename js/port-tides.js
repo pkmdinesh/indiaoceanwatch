@@ -808,7 +808,7 @@ function isTsunamiThreatActive(tsunami) {
 
 // Check active warnings for station's state/district in latestStatusData
 function checkPortActiveWarnings(port) {
-  if (!globalThis.latestStatusData) return { safe: true, text: 'No active advisory records available' };
+  if (!globalThis.latestStatusData) return { safe: false, level: 'watch', text: 'Unable to Fetch.....Check the INCOIS PAT link.....' };
 
   const data = globalThis.latestStatusData;
   const matches = [];
@@ -952,6 +952,14 @@ function renderPortTideCard() {
 
   // 1. Calculate Daily Tides
   const { events, elevations } = calculateDailyTideEvents(port, now);
+  if (!port || !events || !events.length) {
+    const warningBanner = ids('portWarningBanner');
+    if (warningBanner) {
+      warningBanner.className = 'port-warning-banner level-watch';
+      warningBanner.textContent = 'Unable to Fetch.....Check the INCOIS PAT link.....';
+    }
+    return;
+  }
   const currentHeight = calculateTideElevation(port, now);
   const futureHeight = calculateTideElevation(port, new Date(now.getTime() + 15 * 60 * 1000));
   const isRising = futureHeight >= currentHeight;

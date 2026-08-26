@@ -22,7 +22,7 @@
     .dashboard{max-width:1440px;margin:0 auto;padding:12px 14px 28px}
     .header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(8,47,60,.06)}
     .ocean-brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
-    .brand-image{width:36px;height:36px;flex:none}
+    .brand-image{width:36px;height:36px;flex:none;border-radius:9px;object-fit:contain}
     .brand-copy strong{font-size:16px;font-weight:900;color:var(--ink)}
     .title{flex:1;min-width:0}
     .title h1{margin:0;font-size:15px;font-weight:900;line-height:1.2;color:var(--ink)}
@@ -35,14 +35,14 @@
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
     .announcement-card{grid-column:1/-1;min-height:98px}
   </style>
-  <link rel="preload" href="css/components.css?v=192" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=192"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=192" media="print">
+  <link rel="preload" href="css/components.css?v=198" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=198"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=198" media="print">
 </head>
 <body>
   <main class="dashboard">
     <header class="header">
-      <a class="ocean-brand" href="./" aria-label="Ocean Watch home"><img class="brand-image" src="icons/ocean-watch-v3-192.png" alt="" width="36" height="36"><span class="brand-copy"><strong>Ocean Watch</strong></span></a>
+      <a class="ocean-brand" href="./" aria-label="Ocean Watch home"><img class="brand-image" src="icons/ocean-watch-v3-192.png" alt="Ocean Watch" width="36" height="36"><span class="brand-copy"><strong>Ocean Watch</strong></span></a>
       <div class="title"><h1>Coastal Advisory Status</h1><p>Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</p></div>
       <div class="header-actions">
         <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated"></time></div>
@@ -102,11 +102,11 @@
                 <a id="portPatHeaderLink" href="https://incois.gov.in/oceanservices/PAT/index.html" target="_blank" rel="noopener" class="source card-action-button port-action-btn" title="Open official INCOIS Predicted &amp; Actual Tide (PAT) Portal">INCOIS PAT ↗</a>
               </div>
             </div>
-            <div id="portWarningBanner" class="port-warning-banner level-safe">Checking coastal status…</div>
-            <div id="portWindDisplay" class="port-wind-display"><div class="wind-stat-item"><span class="wind-stat-label">Wind &amp; Sea</span><strong>Calculating wind…</strong></div></div>
+            <div id="portWarningBanner" class="port-warning-banner level-safe">Loading Predicted Tide Data…</div>
+            <div id="portWindDisplay" class="port-wind-display"><div class="wind-stat-item"><span class="wind-stat-label">Wind &amp; Sea</span><strong>Fetching Wind…</strong></div></div>
             <div class="port-tide-body">
-              <div id="portTideTimesList" class="port-tide-times-list"><div class="tide-horizontal-row"><span class="tide-event-badge high">High Tide (IST)</span><span class="empty">Calculating…</span></div></div>
-              <div id="portTideChartContainer" class="port-tide-chart-container"><div class="tide-chart-placeholder">Calculating astronomical tide chart…</div></div>
+              <div id="portTideTimesList" class="port-tide-times-list"><div class="tide-horizontal-row"><span class="tide-event-badge high">High Tide (IST)</span><span class="empty">Fetching Tide Events…</span></div></div>
+              <div id="portTideChartContainer" class="port-tide-chart-container"><div class="tide-chart-placeholder">Loading Astronomical Tide Chart…</div></div>
             </div>
           </article>
         </div>
@@ -119,12 +119,12 @@
           <div><h2 id="tsunami-title">Tsunami Advisory</h2><p class="panel-kicker">Indian Tsunami Early Warning Centre</p></div>
           <a class="source card-action-button itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWC ↗</a>
         </div>
-        <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage">No Tsunami threat reported by ITEWC</strong></div><span id="tsunamiCaption">Last Checked —</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
+        <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage">Checking ITEWC Tsunami threat status.....</strong></div><span id="tsunamiCaption">Last Checked —</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel seismic-card" aria-labelledby="seismic-title">
         <div class="panel-head"><img class="service-logo" src="assets/earthquake-network-icon.png" alt="Earthquake Network icon" width="48" height="42" loading="lazy"><div><h2 id="seismic-title">Latest seismic activity ≥ 6.5M</h2></div><a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div>
-        <div class="seismic-message-wrap" id="seismicMessageWrap"><div class="seismic-message-copy"><button class="seismic-event-link" id="seismicMessage" type="button" disabled>No Seismic Activity for the past 90 days with magnitude &gt;= 6.5M</button><div class="seismic-additional" id="seismicAdditional"></div></div></div>
+        <div class="seismic-message-wrap" id="seismicMessageWrap"><div class="seismic-message-copy"><button class="seismic-event-link" id="seismicMessage" type="button" disabled>Checking Latest Seismic Activity magnitude &gt;= 6.5M</button><div class="seismic-additional" id="seismicAdditional"></div></div></div>
       </section>
 
       <section class="panel storm-card" aria-labelledby="surge-title">
@@ -133,7 +133,7 @@
           <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
           <a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
         </div>
-        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage">No active storm surge bulletin</strong></div><span id="stormCaption">Official ITEWC bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
+        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage">Checking active storm surge status.....</strong></div><span id="stormCaption">Official ITEWC bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel cyclone-card" aria-labelledby="cyclone-title">
@@ -189,7 +189,7 @@
           <h2 id="contact-title">Ocean Information Portal</h2>
           <p class="contact-organisation">Under Beta Testing</p>
         </div>
-        <img class="contact-image" src="1786177913304.png" alt="Under Beta Testing" width="320" height="180" loading="lazy">
+        <img class="contact-image" src="1786177913304.png" alt="Under Beta Testing" height="180" loading="lazy">
       </section>
 
     </div>
@@ -498,21 +498,21 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=192" defer></script>
-  <script src="js/app.js?v=192" defer></script>
-  <script src="js/share.js?v=192" defer></script>
-  <script src="js/map.js?v=192" defer></script>
-  <script src="js/pfz-map.js?v=192" defer></script>
-  <script src="js/pfz.js?v=192" defer></script>
-  <script src="js/advisory.js?v=192" defer></script>
-  <script src="js/tsunami.js?v=192" defer></script>
-  <script src="js/cyclone.js?v=192" defer></script>
-  <script src="js/seismic.js?v=192" defer></script>
-  <script src="js/port-tides.js?v=192" defer></script>
-  <script src="js/voice-summary.js?v=192" defer></script>
-  <script src="js/status.js?v=192" defer></script>
-  <script src="js/notifications.js?v=192" defer></script>
-  <script src="js/pwa.js?v=192" defer></script>
+  <script src="js/config.js?v=198" defer></script>
+  <script src="js/app.js?v=198" defer></script>
+  <script src="js/share.js?v=198" defer></script>
+  <script src="js/map.js?v=198" defer></script>
+  <script src="js/pfz-map.js?v=198" defer></script>
+  <script src="js/pfz.js?v=198" defer></script>
+  <script src="js/advisory.js?v=198" defer></script>
+  <script src="js/tsunami.js?v=198" defer></script>
+  <script src="js/cyclone.js?v=198" defer></script>
+  <script src="js/seismic.js?v=198" defer></script>
+  <script src="js/port-tides.js?v=198" defer></script>
+  <script src="js/voice-summary.js?v=198" defer></script>
+  <script src="js/status.js?v=198" defer></script>
+  <script src="js/notifications.js?v=198" defer></script>
+  <script src="js/pwa.js?v=198" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>

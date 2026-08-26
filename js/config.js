@@ -1,7 +1,7 @@
 /* Ocean Watch settings that are expected to change between deployments.
    Edit values here; application modules and the service worker share them. */
 globalThis.OCEAN_WATCH_CONFIG = Object.freeze({
-  CACHE_VERSION: '192',
+  CACHE_VERSION: '198',
   CACHE_PREFIX: 'ocean-watch',
   PUBLIC_URL: 'https://pkmdinesh.github.io/indiaoceanwatch/',
   AGE_HOURS: Object.freeze({

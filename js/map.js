@@ -296,7 +296,7 @@ function createOsfTidalStationLayer() {
       const highTides = (events || []).filter(e => e.type === 'High');
       const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
       if (highTides.length > 0) {
-        highTideStr = highTides.map(t => `${formatTime(t.time)} (${t.height}m)`).join(', ');
+        highTideStr = highTides.map(t => `${formatTime(t.time)} - ${t.height}m`).join('<br>');
       }
     }
 
@@ -324,7 +324,7 @@ function createOsfTidalStationLayer() {
         </div>
         <div class="osf-tide-grid">
           <div class="osf-tide-row"><span>District:</span> <strong>${escapeHtml(port.district)}</strong></div>
-          <div class="osf-tide-row"><span>High Tide (IST):</span> <strong style="color:var(--teal);">${highTideStr}</strong></div>
+          <div class="osf-tide-row" style="align-items:flex-start;"><span>High Tide (IST):</span> <strong style="color:var(--teal);text-align:right;line-height:1.35;">${highTideStr}</strong></div>
           <div class="osf-tide-row"><span>Coordinates:</span> <span>${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E</span></div>
         </div>
         <div style="margin-top:6px;text-align:right;">
@@ -543,14 +543,6 @@ function ensureOsfMap() {
     osfMap = L.map('osfMapCanvas',{zoomControl:true,attributionControl:true,minZoom:2,maxZoom:9});
     osfMap.setView([15,79],innerWidth < 700 ? 4 : 5);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,crossOrigin:true,attribution:'&copy; OpenStreetMap contributors'}).addTo(osfMap);
-    osfMap.on('popupopen', () => {
-      const banner = ids('osfTideBanner');
-      if (banner) banner.classList.add('is-dimmed');
-    });
-    osfMap.on('popupclose', () => {
-      const banner = ids('osfTideBanner');
-      if (banner) banner.classList.remove('is-dimmed');
-    });
   }
   void buildCumulativeOsfMapLayers(latestStatusData).catch(err => {
     console.warn('[OSF] Cumulative map layers failed, falling back to basic layer:', err);
