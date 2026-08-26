@@ -1,6 +1,6 @@
 ﻿{
     "updatedAt":  "2026-08-26T12:45:21.1802978+00:00",
-    "lastAttemptAt":  "2026-08-26T13:15:19.5051732+00:00",
+    "lastAttemptAt":  "2026-08-26T13:33:43.7545277+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -4410,7 +4410,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  25.78,
-                      "pfzAgeHours":  1.78
+                      "osfAgeHours":  26.09,
+                      "pfzAgeHours":  2.09
                   }
 }
