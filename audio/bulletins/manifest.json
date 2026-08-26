@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-26T08:46:36.979Z",
+  "updated": "2026-08-26T09:01:39.471Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 480960,
+      "size": 481152,
       "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN"
     },
