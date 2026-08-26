@@ -1,6 +1,6 @@
 ﻿{
     "updatedAt":  "2026-08-26T12:45:21.1802978+00:00",
-    "lastAttemptAt":  "2026-08-26T12:45:21.1802978+00:00",
+    "lastAttemptAt":  "2026-08-26T13:00:17.6584136+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -1585,7 +1585,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-26T12:45:29.2085916+00:00",
+                          "fetchedAt":  "2026-08-26T13:01:27.1359823+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -4396,14 +4396,27 @@
                             ]
             },
     "errors":  [
-
+                   "Tsunami: Unable to connect to the remote server",
+                   "Seismic: Unable to connect to the remote server",
+                   "Storm surge: Unable to connect to the remote server"
                ],
     "healthAlerts":  [
-
+                         {
+                             "code":  "itewc",
+                             "message":  "Error: Unable to access Tsunami/Seismic Info",
+                             "linkLabel":  "Check ITEWC webpage",
+                             "url":  "https://tsunami.incois.gov.in/TEWS/"
+                         },
+                         {
+                             "code":  "storm-surge",
+                             "message":  "Error: Unable to access Storm Surge Info",
+                             "linkLabel":  "Check ITEWC webpage",
+                             "url":  "https://tsunami.incois.gov.in/TEWS/"
+                         }
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  25.28,
-                      "pfzAgeHours":  1.28
+                      "osfAgeHours":  25.55,
+                      "pfzAgeHours":  1.55
                   }
 }
