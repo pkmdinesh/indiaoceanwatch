@@ -10,10 +10,9 @@ var osfRequestedService = null;
 var osfDistrictPolygonsPromise = null;
 
 const OSF_POPUP_OPTIONS = Object.freeze({
-  maxWidth: 440,
+  maxWidth: 460,
   autoPan: true,
-  autoPanPaddingTopLeft: [16, 60],
-  autoPanPaddingBottomRight: [16, 75]
+  autoPanPadding: [24, 24]
 });
 
 function osfStateCoordinates(name) {
@@ -164,7 +163,7 @@ function renderOsfDistrictPopup(district, state, serviceEntries, cumulativeLevel
     const level = osfHighestSeverity(entry.advisories);
     const icon = serviceIcons[entry.service] || '🌊';
     const isActive = (idx === activeIdx);
-    return `<button type="button" class="osf-popup-chip ${level} ${isActive ? 'is-active' : ''}" data-target="osf-panel-${uid}-${idx}" role="tab" aria-selected="${isActive ? 'true' : 'false'}"><span>${icon} ${escapeHtml(entry.service)}</span><b class="osf-chip-badge ${level}">${escapeHtml(severityLabel[level])}</b></button>`;
+    return `<button type="button" class="osf-popup-chip ${level} ${isActive ? 'is-active' : ''}" data-target="osf-panel-${uid}-${idx}" role="tab" aria-selected="${isActive ? 'true' : 'false'}"><span>${icon} ${escapeHtml(entry.service)}</span></button>`;
   }).join('');
 
   const panelsHtml = entries.map((entry, idx) => {

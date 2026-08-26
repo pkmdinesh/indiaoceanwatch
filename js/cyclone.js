@@ -24,7 +24,7 @@ function renderStormSurge(message, bulletin) {
         link.classList.remove('is-visible');
       }
     }
-    const JOINT_BULLETIN_PAGE_URL = 'https://incois.gov.in/site/services/jointbulletin.jsp';
+    const JOINT_BULLETIN_PAGE_URL = 'https://www.incois.gov.in/site/services/jointbulletin.jsp';
     const JOINT_BULLETIN_PREFIX = /^INCOIS\s*[-–—]\s*IMD\s+Joint(?:\s+Special)?\s+Bulletin\s*[-–—:]?\s*(?:Ocean\s+State\s+Forecast\s+associated\s+with\s*[-–—:]?\s*)?/i;
 
     function compactText(value) {
