@@ -182,24 +182,41 @@ function initPageHitCounter() {
   const el = document.getElementById('hitCount');
   if (!el) return;
   const BASE_OFFSET = 700;
-  fetch('https://indiaoceanwatch.goatcounter.com/counter/TOTAL.json')
+
+  // Retrieve stored total or initialize at base offset
+  let stored = parseInt(localStorage.getItem('ow_hit_total') || '0', 10);
+  if (!stored || stored < BASE_OFFSET) {
+    stored = BASE_OFFSET;
+  }
+
+  // Increment on fresh browser session so user sees their visit immediately
+  if (!sessionStorage.getItem('ow_session_hit')) {
+    sessionStorage.setItem('ow_session_hit', '1');
+    stored += 1;
+    localStorage.setItem('ow_hit_total', String(stored));
+  }
+
+  el.textContent = stored.toLocaleString();
+
+  // Query live total from GoatCounter with cache busting
+  const url = `https://indiaoceanwatch.goatcounter.com/counter/TOTAL.json?_=${Date.now()}`;
+  fetch(url, { cache: 'no-store', mode: 'cors' })
     .then(res => {
-      if (!res.ok) throw new Error(`GoatCounter API status ${res.status}`);
+      if (!res.ok) throw new Error(`GoatCounter status ${res.status}`);
       return res.json();
     })
     .then(data => {
       if (data && (data.count !== undefined || data.count_unique !== undefined)) {
         const rawStr = String(data.count ?? data.count_unique ?? '0');
-        const rawNum = parseInt(rawStr.replace(/[^0-9]/g, ''), 10) || 0;
-        el.textContent = (BASE_OFFSET + rawNum).toLocaleString();
-      } else {
-        el.textContent = (BASE_OFFSET).toLocaleString();
+        const serverHits = parseInt(rawStr.replace(/[^0-9]/g, ''), 10) || 0;
+        const serverTotal = BASE_OFFSET + serverHits;
+        const finalCount = Math.max(serverTotal, stored);
+        localStorage.setItem('ow_hit_total', String(finalCount));
+        el.textContent = finalCount.toLocaleString();
       }
     })
     .catch(() => {
-      if (el && (el.textContent === '...' || el.textContent === '—')) {
-        el.textContent = (BASE_OFFSET).toLocaleString();
-      }
+      // Keep optimistic stored count
     });
 }
 if (typeof document !== 'undefined') {
