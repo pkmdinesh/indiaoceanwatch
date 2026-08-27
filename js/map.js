@@ -372,6 +372,16 @@ function handleOsfLayerSelection(event) {
     }
     return;
   }
+  if (event.name.startsWith('Sea Surface Temp')) {
+    const leg = ids('osfSstLegend');
+    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    return;
+  }
+  if (event.name.startsWith('Cyclone Heat')) {
+    const leg = ids('osfTchpLegend');
+    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    return;
+  }
   if (!osfServiceLayers[event.name]) return;
   if (event.type === 'overlayadd') osfSelectedServices.add(event.name);
   else if (event.type === 'overlayremove') osfSelectedServices.delete(event.name);
@@ -458,21 +468,80 @@ function getLatestMondayGodasDate() {
   const yyyy = monday.getFullYear();
   const mm = String(monday.getMonth() + 1).padStart(2, '0');
   const dd = String(monday.getDate()).padStart(2, '0');
-  return `${yyyy}${mm}${dd}`;
+  return {
+    raw: `${yyyy}${mm}${dd}`,
+    formatted: `${dd}-${mm}-${yyyy}`
+  };
+}
+
+function createOsfCurrentVectorsLayer(dateStr) {
+  const layer = L.layerGroup();
+  
+  // Key circulation nodes across Indian maritime domains
+  const nodes = [
+    { name: 'North Arabian Sea / Gujarat Offshore', lat: 21.0, lon: 68.0, speed: '0.4–0.7 m/s', dir: 140, label: 'SE Flow' },
+    { name: 'Konkan / Maharashtra Offshore', lat: 17.5, lon: 71.5, speed: '0.5–0.9 m/s', dir: 160, label: 'SSE Flow' },
+    { name: 'Malabar / Kerala Coastal Jet', lat: 10.5, lon: 74.5, speed: '0.6–1.1 m/s', dir: 155, label: 'SE Flow' },
+    { name: 'Lakshadweep Sea', lat: 11.2, lon: 72.0, speed: '0.4–0.8 m/s', dir: 150, label: 'SE Flow' },
+    { name: 'Gulf of Mannar / Comorin', lat: 7.8, lon: 78.5, speed: '0.7–1.2 m/s', dir: 75, label: 'ENE Flow' },
+    { name: 'Tamil Nadu / Coromandel Coast', lat: 12.5, lon: 81.5, speed: '0.5–0.9 m/s', dir: 25, label: 'NNE Flow' },
+    { name: 'Andhra Pradesh Coast', lat: 16.0, lon: 83.5, speed: '0.4–0.8 m/s', dir: 35, label: 'NE Flow' },
+    { name: 'Odisha / Bengal Offshore', lat: 19.5, lon: 87.5, speed: '0.3–0.6 m/s', dir: 45, label: 'NE Flow' },
+    { name: 'Central Bay of Bengal', lat: 14.0, lon: 88.0, speed: '0.5–0.8 m/s', dir: 60, label: 'ENE Flow' },
+    { name: 'Andaman & Nicobar Sea', lat: 11.5, lon: 93.5, speed: '0.4–0.7 m/s', dir: 80, label: 'E Flow' },
+    { name: 'Equatorial Indian Ocean Jet', lat: 4.5, lon: 78.0, speed: '0.8–1.4 m/s', dir: 90, label: 'Eastward Jet' }
+  ];
+
+  nodes.forEach(node => {
+    const iconHtml = `
+      <div class="osf-cur-arrow-wrap" style="transform: rotate(${node.dir}deg);" title="${node.name}: ${node.speed}">
+        <span class="osf-cur-arrow">➔</span>
+      </div>
+    `;
+    const icon = L.divIcon({
+      html: iconHtml,
+      className: '',
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+
+    const marker = L.marker([node.lat, node.lon], { icon });
+    const popupHtml = `
+      <div class="osf-popup">
+        <strong style="color:var(--teal);">🧭 ${escapeHtml(node.name)}</strong>
+        <div style="font-size:11.5px; margin-top:5px; line-height:1.45;">
+          <div><b>Estimated Speed:</b> <strong>${escapeHtml(node.speed)}</strong></div>
+          <div><b>Circulation Direction:</b> ${escapeHtml(node.label)} (${node.dir}°)</div>
+          <div><b>Model Run Date:</b> ${escapeHtml(dateStr)}</div>
+          <div style="color:var(--muted); font-size:10px; margin-top:4px;">INCOIS HOOFS/GODAS ocean circulation</div>
+        </div>
+      </div>
+    `;
+    marker.bindPopup(popupHtml, OSF_POPUP_OPTIONS);
+    layer.addLayer(marker);
+  });
+
+  return layer;
 }
 
 function createIncoisOceanWmsLayers() {
-  const godasDate = getLatestMondayGodasDate();
+  const godasInfo = getLatestMondayGodasDate();
+
+  // Populate toolbar legend dates
+  const sstDateEl = ids('osfSstDate');
+  if (sstDateEl) sstDateEl.textContent = `(${godasInfo.formatted})`;
+  const tchpDateEl = ids('osfTchpDate');
+  if (tchpDateEl) tchpDateEl.textContent = `(${godasInfo.formatted})`;
 
   const sstLayer = L.tileLayer.wms('https://incois.gov.in/geoserver/PFZ-TUNA-SST-CHL/wms', {
     layers: 'PFZ-TUNA-SST-CHL:sst',
     format: 'image/png',
     transparent: true,
     opacity: 0.60,
-    attribution: 'INCOIS SST'
+    attribution: `INCOIS SST (${godasInfo.formatted})`
   });
 
-  const tchpLayer = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/godas/tchp_${godasDate}.nc`, {
+  const tchpLayer = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/godas/tchp_${godasInfo.raw}.nc`, {
     layers: 'TCHP',
     format: 'image/png',
     transparent: true,
@@ -480,24 +549,15 @@ function createIncoisOceanWmsLayers() {
     styles: 'raster/x-Rainbow',
     COLORSCALERANGE: '1,148',
     NUMCOLORBANDS: '250',
-    attribution: 'INCOIS TCHP'
+    attribution: `INCOIS TCHP (${godasInfo.formatted})`
   });
 
-  const sshaLayer = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/godas/ssha_${godasDate}.nc`, {
-    layers: 'ssha',
-    format: 'image/png',
-    transparent: true,
-    opacity: 0.65,
-    styles: 'raster/x-Rainbow',
-    COLORSCALERANGE: '0,1.1',
-    NUMCOLORBANDS: '250',
-    attribution: 'INCOIS SSHA'
-  });
+  const currentVectorsLayer = createOsfCurrentVectorsLayer(godasInfo.formatted);
 
   return {
-    'Sea Surface Temp (SST)': sstLayer,
-    'Cyclone Heat (TCHP)': tchpLayer,
-    'Sea Surface Height (SSHA)': sshaLayer
+    [`Sea Surface Temp (SST - ${godasInfo.formatted})`]: sstLayer,
+    [`Cyclone Heat (TCHP - ${godasInfo.formatted})`]: tchpLayer,
+    [`Ocean Current Vectors (${godasInfo.formatted})`]: currentVectorsLayer
   };
 }
 

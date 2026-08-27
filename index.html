@@ -35,9 +35,9 @@
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
     .announcement-card{grid-column:1/-1;min-height:98px}
   </style>
-  <link rel="preload" href="css/components.css?v=217" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=217"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=217" media="print">
+  <link rel="preload" href="css/components.css?v=218" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=218"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=218" media="print">
 </head>
 <body>
   <main class="dashboard">
@@ -283,7 +283,24 @@
   <dialog class="osf-map-dialog" id="osfMapDialog" aria-labelledby="osfMapTitle">
     <div class="advisory-dialog-head"><div><h2 id="osfMapTitle">Ocean State Forecast Map</h2><p id="osfMapMeta">High Wave · Swell Surge · Ocean Currents</p></div><div class="dialog-head-actions"><button class="dialog-close" id="osfMapClose" type="button" aria-label="Close OSF map">&times;</button></div></div>
     <div class="osf-map-body">
-      <div class="osf-map-toolbar"><div class="osf-map-legend" aria-label="Severity legend"><span><i style="background:#FF0000"></i>Warning</span><span><i style="background:#FF8C00"></i>Alert</span><span><i style="background:#FAFA33"></i>Watch</span><span><i style="background:#238269"></i>No Threat</span></div></div>
+      <div class="osf-map-toolbar">
+        <div class="osf-map-legend" aria-label="Severity legend">
+          <span><i style="background:#FF0000"></i>Warning</span>
+          <span><i style="background:#FF8C00"></i>Alert</span>
+          <span><i style="background:#FAFA33"></i>Watch</span>
+          <span><i style="background:#238269"></i>No Threat</span>
+        </div>
+        <div class="osf-thermal-legend" id="osfSstLegend" style="display:none;">
+          <span>🌡️ <strong>SST</strong> <small id="osfSstDate"></small>:</span>
+          <span class="thermal-bar sst-bar" title="24°C to 34°C"></span>
+          <span class="thermal-range">24° → 34°C</span>
+        </div>
+        <div class="osf-thermal-legend" id="osfTchpLegend" style="display:none;">
+          <span>🌪️ <strong>TCHP</strong> <small id="osfTchpDate"></small>:</span>
+          <span class="thermal-bar tchp-bar" title="1 to 148 kJ/cm²"></span>
+          <span class="thermal-range">1 → 148 kJ/cm²</span>
+        </div>
+      </div>
       <div class="osf-map-canvas" id="osfMapCanvas" aria-label="Interactive Ocean State Forecast advisory map"></div>
       <div id="osfTideBanner" class="osf-tide-status-banner" hidden>
         <div class="osf-tide-banner-content">
@@ -566,22 +583,22 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=217" defer></script>
-  <script src="js/app.js?v=217" defer></script>
-  <script src="js/share.js?v=217" defer></script>
-  <script src="js/map.js?v=217" defer></script>
-  <script src="js/pfz-map.js?v=217" defer></script>
-  <script src="js/pfz.js?v=217" defer></script>
-  <script src="js/advisory.js?v=217" defer></script>
-  <script src="js/tsunami.js?v=217" defer></script>
-  <script src="js/cyclone.js?v=217" defer></script>
-  <script src="js/seismic.js?v=217" defer></script>
-  <script src="js/port-tides.js?v=217" defer></script>
-  <script src="js/voice-summary.js?v=217" defer></script>
-  <script src="js/status.js?v=217" defer></script>
-  <script src="js/notifications.js?v=217" defer></script>
-  <script src="js/pwa.js?v=217" defer></script>
-  <script src="js/tchp.js?v=217" defer></script>
+  <script src="js/config.js?v=218" defer></script>
+  <script src="js/app.js?v=218" defer></script>
+  <script src="js/share.js?v=218" defer></script>
+  <script src="js/map.js?v=218" defer></script>
+  <script src="js/pfz-map.js?v=218" defer></script>
+  <script src="js/pfz.js?v=218" defer></script>
+  <script src="js/advisory.js?v=218" defer></script>
+  <script src="js/tsunami.js?v=218" defer></script>
+  <script src="js/cyclone.js?v=218" defer></script>
+  <script src="js/seismic.js?v=218" defer></script>
+  <script src="js/port-tides.js?v=218" defer></script>
+  <script src="js/voice-summary.js?v=218" defer></script>
+  <script src="js/status.js?v=218" defer></script>
+  <script src="js/notifications.js?v=218" defer></script>
+  <script src="js/pwa.js?v=218" defer></script>
+  <script src="js/tchp.js?v=218" defer></script>
   <script data-goatcounter="https://indiaoceanwatch.goatcounter.com/count" data-goatcounter-settings='{"allow_local": true}' async src="https://gc.zgo.at/count.js"></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
