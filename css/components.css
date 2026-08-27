@@ -272,6 +272,19 @@
 .marine-advisory-chip.mhw-chip-first{background:#d1e7dd;color:#0f5132;border:1.5px solid #a3cfbb;font-weight:850;box-shadow:0 1px 3px rgba(15,81,50,.12)}
 .marine-advisory-chip.mhw-chip-first:hover,.marine-advisory-chip.mhw-chip-first:focus-visible{background:#badbcc;color:#0a3622;border-color:#75b798}
 
+/* Coral Bleaching Dialog & Components */
+.coral-dialog{width:min(660px,calc(100vw - 28px))}
+.coral-regions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.coral-region-card{margin:0;padding:12px;border:1px solid var(--line);border-left-width:5px;border-radius:11px;background:#f8faf9}
+.coral-card-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(8,47,60,.08);font-size:11px}
+.coral-metric-row{display:flex;flex-direction:column;gap:2px}
+.coral-metric-label{font-size:9px;color:var(--muted);font-weight:800;text-transform:uppercase}
+.coral-metric-value{font-size:11.5px;font-weight:800;color:var(--ink)}
+.coral-guide-box{margin-top:10px;padding:10px 12px;background:#eef4f2;border-radius:10px;border-left:4px solid var(--teal);font-size:11px;line-height:1.45}
+.coral-guide-box strong{color:var(--teal)}
+.coral-guide-box p{margin:4px 0 0;color:var(--ink);font-size:10.5px}
+.coral-dialog-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+
 /* Voice Summary Button & Modal */
 .voice-button{display:inline-flex;align-items:center;justify-content:center;gap:5px;width:auto;min-width:76px;height:32px;min-height:32px;padding:0 10px;border:1px solid #082f3c;border-radius:8px;background:#082f3c;color:#fff;font:800 10.5px/1 inherit;cursor:pointer;box-shadow:0 4px 12px rgba(8,47,60,.20);transition:background .15s,border-color .15s,box-shadow .15s}
 .voice-button .voice-icon{width:14px;height:14px;display:block;flex:0 0 auto;color:#68e0e5;overflow:visible}

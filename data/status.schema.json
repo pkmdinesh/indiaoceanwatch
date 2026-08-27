@@ -41,6 +41,7 @@
     "cyclone": { "$ref": "#/$defs/messageService" },
     "jointBulletin": { "type": ["object", "null"] },
     "marineHeatWave": { "type": ["object", "null"] },
+    "coralBleaching": { "type": ["object", "null"] },
     "pfz": {
       "type": "object",
       "required": ["sectors"],

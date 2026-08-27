@@ -79,6 +79,8 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
       const stormBulletin = data?.stormSurge?.bulletin || data?.stormSurge?.recentBulletin;
       const mhwObservedDate = data?.marineHeatWave?.observedDate || data?.marineHeatWave?.message?.match(/\b\d{4}-\d{2}-\d{2}\b/)?.[0];
       if (data?.marineHeatWave?.message && isCurrentIstProductDate(mhwObservedDate)) addLatest('MHW','Updated','','Latest Marine Heat Wave information');
+      const alertCoral = data?.coralBleaching?.regions?.find(r => r.severity === 'warning' || r.severity === 'alert');
+      if (alertCoral) addActive('Coral', alertCoral.severity, `${alertCoral.area}: DHW ${alertCoral.dhw}`);
       const rank = {warning:3,alert:2,watch:1};
       active.sort((a,b) => rank[b.level] - rank[a.level]);
       container.replaceChildren(...active.map(item => {

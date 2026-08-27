@@ -35,9 +35,9 @@
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
     .announcement-card{grid-column:1/-1;min-height:98px}
   </style>
-  <link rel="preload" href="css/components.css?v=210" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=210"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=210" media="print">
+  <link rel="preload" href="css/components.css?v=211" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=211"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=211" media="print">
 </head>
 <body>
   <main class="dashboard">
@@ -172,7 +172,7 @@
           <button class="marine-advisory-chip mhw-chip-first" id="openMarineHeatWave" type="button">Marine Heat Wave</button>
           <a class="marine-advisory-chip" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=2&amp;request_locale=en" target="_blank" rel="noopener">Tuna ↗</a>
           <a class="marine-advisory-chip" href="https://incois.gov.in/oceanservices/Hilsa/index.jsp" target="_blank" rel="noopener">Hilsa ↗</a>
-          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/coralwarning.jsp" target="_blank" rel="noopener">Coral Bleaching ↗</a>
+          <button class="marine-advisory-chip" id="openCoralBleaching" type="button">Coral Bleaching</button>
           <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/hab_products.jsp" target="_blank" rel="noopener">Harmful Algal Bloom ↗</a>
           <a class="marine-advisory-chip" href="https://oosa.incois.gov.in/OOSA/" target="_blank" rel="noopener">Oil Spill (OOSA) ↗</a>
           <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/SVA_overview.jsp" target="_blank" rel="noopener">Small Vessel (SVAS) ↗</a>
@@ -210,6 +210,27 @@
     <div class="advisory-details">
       <div id="marineHeatWaveCards" class="marine-heat-wave-cards" style="display:grid;gap:9px"></div>
       <a class="source" href="https://incois.gov.in/oceanservices/mhw/index.jsp" target="_blank" rel="noopener">Open Marine Heat Wave page ↗</a>
+    </div>
+  </dialog>
+  <dialog class="advisory-dialog coral-dialog" id="coralBleachingDialog" aria-labelledby="coralBleachingTitle">
+    <div class="advisory-dialog-head">
+      <div>
+        <h2 id="coralBleachingTitle">🪸 Coral Bleaching Alert System</h2>
+        <p id="coralBleachingMeta">INCOIS CBAS · Satellite Thermal Stress Monitoring</p>
+      </div>
+      <button class="dialog-close" id="coralBleachingClose" type="button" aria-label="Close Coral Bleaching Dialog">&times;</button>
+    </div>
+    <div class="advisory-details">
+      <div id="coralBleachingCards" class="coral-regions-grid"></div>
+      <div class="coral-guide-box">
+        <strong>ℹ️ What do these metrics mean?</strong>
+        <p><strong>HotSpot (HS):</strong> Instantaneous Sea Surface Temperature (SST) anomaly above the maximum monthly mean — indicates immediate thermal stress.</p>
+        <p><strong>Degree of Heating Weeks (DHW):</strong> Thermal stress accumulated over a 12-week window (°C-weeks) — indicates bleaching severity and potential mortality risk.</p>
+      </div>
+      <div class="coral-dialog-actions">
+        <a class="source card-action-button" id="coralMapLink" href="https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg" target="_blank" rel="noopener">🗺️ View National Stress Map ↗</a>
+        <a class="source card-action-button" href="https://incois.gov.in/site/services/coralwarning.jsp" target="_blank" rel="noopener">Official CBAS Portal ↗</a>
+      </div>
     </div>
   </dialog>
   <dialog class="osf-map-dialog" id="osfMapDialog" aria-labelledby="osfMapTitle">
@@ -498,21 +519,21 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=210" defer></script>
-  <script src="js/app.js?v=210" defer></script>
-  <script src="js/share.js?v=210" defer></script>
-  <script src="js/map.js?v=210" defer></script>
-  <script src="js/pfz-map.js?v=210" defer></script>
-  <script src="js/pfz.js?v=210" defer></script>
-  <script src="js/advisory.js?v=210" defer></script>
-  <script src="js/tsunami.js?v=210" defer></script>
-  <script src="js/cyclone.js?v=210" defer></script>
-  <script src="js/seismic.js?v=210" defer></script>
-  <script src="js/port-tides.js?v=210" defer></script>
-  <script src="js/voice-summary.js?v=210" defer></script>
-  <script src="js/status.js?v=210" defer></script>
-  <script src="js/notifications.js?v=210" defer></script>
-  <script src="js/pwa.js?v=210" defer></script>
+  <script src="js/config.js?v=211" defer></script>
+  <script src="js/app.js?v=211" defer></script>
+  <script src="js/share.js?v=211" defer></script>
+  <script src="js/map.js?v=211" defer></script>
+  <script src="js/pfz-map.js?v=211" defer></script>
+  <script src="js/pfz.js?v=211" defer></script>
+  <script src="js/advisory.js?v=211" defer></script>
+  <script src="js/tsunami.js?v=211" defer></script>
+  <script src="js/cyclone.js?v=211" defer></script>
+  <script src="js/seismic.js?v=211" defer></script>
+  <script src="js/port-tides.js?v=211" defer></script>
+  <script src="js/voice-summary.js?v=211" defer></script>
+  <script src="js/status.js?v=211" defer></script>
+  <script src="js/notifications.js?v=211" defer></script>
+  <script src="js/pwa.js?v=211" defer></script>
   <script data-goatcounter="https://indiaoceanwatch.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>

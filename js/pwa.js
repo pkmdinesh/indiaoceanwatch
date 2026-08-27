@@ -102,10 +102,67 @@ let deferredInstallPrompt = null;
       `).join('');
     }
 
-    ids('openMarineHeatWave').addEventListener('click', async () => {
-      await renderMarineHeatWaveDialog();
-      ids('marineHeatWaveDialog').showModal();
-    });
+    async function renderCoralBleachingDialog() {
+      const container = ids('coralBleachingCards');
+      if (!container) return;
+
+      let data = globalThis.latestStatusData || latestStatusData;
+      if (!data?.coralBleaching?.regions || data.coralBleaching.regions.length === 0) {
+        try {
+          const res = await fetch('./status.json', { cache: 'no-store' });
+          if (res.ok) {
+            data = await res.json();
+            globalThis.latestStatusData = data;
+            latestStatusData = data;
+          }
+        } catch { }
+      }
+
+      const regions = data?.coralBleaching?.regions || [];
+      if (!regions.length) {
+        container.innerHTML = '<article class="district-advisory"><p>Coral Bleaching Alert data is currently unavailable. Please verify with the official INCOIS CBAS portal.</p></article>';
+        return;
+      }
+
+      container.innerHTML = regions.map(reg => {
+        const sev = reg.severity || 'safe';
+        const isAlert = sev === 'warning' || sev === 'alert';
+        const isWatch = sev === 'watch';
+        const icon = isAlert ? '🔴' : (isWatch ? '🟡' : '🟢');
+        return `
+          <article class="district-advisory coral-region-card severity-${sev}">
+            <div class="district-advisory-head">
+              <h3>${icon} ${reg.area}</h3>
+              <span class="severity-pill ${sev}">${reg.dhw || 'No Stress'}</span>
+            </div>
+            <div class="coral-card-metrics">
+              <div class="coral-metric-row">
+                <span class="coral-metric-label">HotSpot (Instant):</span>
+                <strong class="coral-metric-value">${reg.hs}</strong>
+              </div>
+              <div class="coral-metric-row">
+                <span class="coral-metric-label">DHW (12-Wk Cumulative):</span>
+                <strong class="coral-metric-value">${reg.dhw}</strong>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    if (ids('openMarineHeatWave')) {
+      ids('openMarineHeatWave').addEventListener('click', async () => {
+        await renderMarineHeatWaveDialog();
+        ids('marineHeatWaveDialog').showModal();
+      });
+    }
+
+    if (ids('openCoralBleaching')) {
+      ids('openCoralBleaching').addEventListener('click', async () => {
+        await renderCoralBleachingDialog();
+        ids('coralBleachingDialog').showModal();
+      });
+    }
 
 loadStatus().catch(()=>{});
     window.addEventListener('pageshow',()=>loadStatus().catch(()=>{}));
@@ -130,6 +187,7 @@ loadStatus().catch(()=>{});
     wireDialog('seismicDialog','seismicDialogClose');
     wireDialog('shareDialog','shareDialogClose');
     wireDialog('marineHeatWaveDialog','marineHeatWaveClose');
+    wireDialog('coralBleachingDialog','coralBleachingClose');
     wireDialog('notificationDialog','notificationDialogClose');
     wireDialog('voiceSummaryDialog','voiceSummaryClose');
     wireDialog('pfzCompassModal','pfzCompassClose');

@@ -1,4 +1,4 @@
-﻿param(
+param(
     [switch]$Quiet,
     [double]$MinimumAgeHours = 0
 )
@@ -451,6 +451,7 @@ $status = [ordered]@{
     updateIntervalHours = 0.25
     source = 'INCOIS / ITEWC'
     marineHeatWave = [ordered]@{ message = $null; fetchedAt = $null; ok = $false; url = 'https://incois.gov.in/oceanservices/mhw/index.jsp' }
+    coralBleaching = [ordered]@{ ok = $false; fetchedAt = $null; url = 'https://incois.gov.in/site/services/coralwarning.jsp'; regions = @(); mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg' }
     tsunami = [ordered]@{ message = 'Status unavailable'; state = 'watch'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
@@ -970,6 +971,55 @@ try {
 } catch {
     $status.marineHeatWave.ok = $false
     $status.errors += "Marine Heat Wave: $($_.Exception.Message)"
+}
+
+# Coral Bleaching Alert System (CBAS) is published as a table on the official coralwarning page.
+try {
+    $cbasUrl = 'https://incois.gov.in/site/services/coralwarning.jsp'
+    $cbasHtml = Get-TextContent $cbasUrl
+    $cbasMatches = [regex]::Matches($cbasHtml, '(?is)<tr>\s*<td>(.*?)</td>\s*<td>(.*?)</td>\s*<td>(.*?)</td>\s*</tr>')
+    $cbasRegions = @()
+    foreach ($m in $cbasMatches) {
+        $area = [Net.WebUtility]::HtmlDecode(($m.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+        $hs = [Net.WebUtility]::HtmlDecode(($m.Groups[2].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+        $dhw = [Net.WebUtility]::HtmlDecode(($m.Groups[3].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+        if ($area -and $area -ne 'Area') {
+            $severity = 'safe'
+            $combined = "$hs $dhw".ToLower()
+            if ($combined -match 'severe|extreme|alert') {
+                $severity = 'warning'
+            } elseif ($combined -match 'moderate|warning') {
+                $severity = 'alert'
+            } elseif ($combined -match 'low|watch') {
+                $severity = 'watch'
+            }
+            $cbasRegions += [ordered]@{
+                area = $area
+                hs = $hs
+                dhw = $dhw
+                severity = $severity
+            }
+        }
+    }
+    if ($cbasRegions.Count -eq 0) { throw 'Coral Bleaching table rows were not found.' }
+    
+    $status.coralBleaching = [ordered]@{
+        ok = $true
+        url = $cbasUrl
+        fetchedAt = $attemptedAt
+        regions = $cbasRegions
+        mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg'
+    }
+    $incoisPageAccessible = $true
+} catch {
+    $status.coralBleaching = [ordered]@{
+        ok = $false
+        url = 'https://incois.gov.in/site/services/coralwarning.jsp'
+        fetchedAt = $attemptedAt
+        regions = @()
+        mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg'
+    }
+    $status.errors += "Coral Bleaching: $($_.Exception.Message)"
 }
 
 # Public health alerts intentionally differ from the diagnostic scraper errors.
