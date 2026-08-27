@@ -328,7 +328,7 @@ function calculateCompassBearing(lat1, lon1, lat2, lon2) {
   };
 }
 
-async function findClosestPfzNavigationalTarget(lat, lon) {
+async function findClosestPfzNavigationalTarget(lat, lon, flcName = null) {
   const geojson = await loadPfzLinesCoordinates();
   if (!geojson || !Array.isArray(geojson.features) || geojson.features.length === 0) {
     return null;
@@ -368,9 +368,10 @@ async function findClosestPfzNavigationalTarget(lat, lon) {
 
   const distNm = (minDistanceKm * 0.539957).toFixed(1);
   const bearing = calculateCompassBearing(lat, lon, targetPoint.lat, targetPoint.lon);
+  const label = flcName ? `Nearest PFZ line from ${titleCase(flcName)}` : 'Nearest PFZ line from Landing Centre';
 
   return {
-    sourceLabel: 'Nearest PFZ line from the Locked FLC',
+    sourceLabel: label,
     distanceKm: minDistanceKm.toFixed(1),
     distanceNm: distNm,
     bearingDeg: bearing.deg,
@@ -378,7 +379,8 @@ async function findClosestPfzNavigationalTarget(lat, lon) {
     targetSector,
     targetPoint,
     targetLat: targetPoint.lat,
-    targetLon: targetPoint.lon
+    targetLon: targetPoint.lon,
+    flcName: flcName
   };
 }
 
@@ -528,7 +530,7 @@ async function locateUserPfzCompass() {
 
     let nav = null;
     if (lcLat != null && lcLon != null) {
-      nav = await findClosestPfzNavigationalTarget(lcLat, lcLon);
+      nav = await findClosestPfzNavigationalTarget(lcLat, lcLon, locked.name);
     }
 
     if (firstMsg && firstMsg.bearing && firstMsg.distance) {
@@ -536,7 +538,7 @@ async function locateUserPfzCompass() {
       const distVal = parseFloat(firstMsg.distance) || (nav ? parseFloat(nav.distanceKm) : 0);
       const distNm = (distVal * 0.539957).toFixed(1);
       nav = {
-        sourceLabel: 'Nearest PFZ line from the Locked FLC',
+        sourceLabel: `Nearest PFZ line from ${titleCase(locked.name)}`,
         distanceKm: distVal.toFixed(1),
         distanceNm: distNm,
         bearingDeg: Math.round(bearingVal),
@@ -550,7 +552,7 @@ async function locateUserPfzCompass() {
         flcName: locked.name
       };
     } else if (nav) {
-      nav.sourceLabel = 'Nearest PFZ line from the Locked FLC';
+      nav.sourceLabel = `Nearest PFZ line from ${titleCase(locked.name)}`;
       nav.flcName = locked.name;
     }
 
@@ -561,7 +563,7 @@ async function locateUserPfzCompass() {
         <div class="pfz-compass-card">
           <span class="pfz-compass-icon">🔒</span>
           <div class="pfz-compass-body">
-            <strong>Nearest PFZ line from the Locked FLC</strong>
+            <strong>Nearest PFZ line from ${titleCase(locked.name)}</strong>
             <span>${titleCase(locked.name)} (${titleCase(locked.sectorName)}) ➔ Heading ${nav.bearingDeg}° ${nav.cardinal} · ${nav.distanceNm} NM (${nav.distanceKm} km)</span>
           </div>
           <button type="button" class="pfz-open-compass-btn" onclick="openPfzCompassModal();">🧭 Compass</button>
@@ -700,7 +702,7 @@ async function locateLockedPfzCompass() {
     const distNm = (distVal * 0.539957).toFixed(1);
 
     openPfzCompassModal({
-      sourceLabel: 'Nearest PFZ line from the Locked FLC',
+      sourceLabel: `Nearest PFZ line from ${titleCase(locked.name)}`,
       targetSector: titleCase(locked.sectorName),
       targetLat: lcLat,
       targetLon: lcLon,
@@ -714,7 +716,7 @@ async function locateLockedPfzCompass() {
       flcName: locked.name
     });
   } else if (nav) {
-    nav.sourceLabel = 'Nearest PFZ line from the Locked FLC';
+    nav.sourceLabel = `Nearest PFZ line from ${titleCase(locked.name)}`;
     nav.flcName = locked.name;
     openPfzCompassModal(nav);
   }

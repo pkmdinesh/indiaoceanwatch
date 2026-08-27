@@ -115,13 +115,8 @@ function renderStormSurge(message, bulletin) {
         time.hidden = true;
       }
 
-      if (bulletin?.url) {
-        sourceLink.href = bulletin.url;
-        sourceLink.textContent = 'Joint Bulletin PDF ↗';
-      } else {
-        sourceLink.href = JOINT_BULLETIN_PAGE_URL;
-        sourceLink.textContent = 'Joint Bulletin ↗';
-      }
+      sourceLink.href = JOINT_BULLETIN_PAGE_URL;
+      sourceLink.textContent = 'Joint Bulletin ↗';
       sourceLink.hidden = false;
     }
 
