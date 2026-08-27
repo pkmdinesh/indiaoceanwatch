@@ -9,6 +9,7 @@
   var isPlaying = false;
   var playTimer = null;
   var framesList = [];
+  var imageCache = { tchp: {}, sst: {}, ssha: {} };
   var stepHours = [1, 4, 7, 10, 13, 16, 19, 22];
 
   function getTargetFrames(param) {
@@ -44,6 +45,20 @@
     return list;
   }
 
+  function preloadFrames(param) {
+    if (!imageCache[param]) {
+      imageCache[param] = {};
+    }
+    const list = getTargetFrames(param);
+    list.forEach(function (frame) {
+      if (!imageCache[param][frame.url]) {
+        const img = new Image();
+        img.src = frame.url;
+        imageCache[param][frame.url] = img;
+      }
+    });
+  }
+
   function updateFrameDisplay(index) {
     if (!framesList.length) return;
     if (index < 0) index = 0;
@@ -66,14 +81,32 @@
     }
 
     if (img) {
-      if (overlay) overlay.style.display = 'flex';
-      img.onload = function () {
+      const cached = imageCache[currentParam] && imageCache[currentParam][frame.url];
+      const isReady = cached && cached.complete && cached.naturalWidth > 0;
+
+      if (isReady) {
         if (overlay) overlay.style.display = 'none';
-      };
-      img.onerror = function () {
-        if (overlay) overlay.style.display = 'none';
-      };
-      img.src = frame.url;
+        img.src = frame.url;
+      } else {
+        // If first frame is not ready yet, show overlay; otherwise keep previous frame until loaded
+        if (!img.getAttribute('src') && overlay) {
+          overlay.style.display = 'flex';
+        }
+        const tempImg = new Image();
+        tempImg.onload = function () {
+          if (currentFrameIndex === index) {
+            img.src = frame.url;
+            if (overlay) overlay.style.display = 'none';
+          }
+        };
+        tempImg.onerror = function () {
+          if (overlay) overlay.style.display = 'none';
+        };
+        tempImg.src = frame.url;
+        if (imageCache[currentParam]) {
+          imageCache[currentParam][frame.url] = tempImg;
+        }
+      }
     }
   }
 
@@ -113,6 +146,16 @@
 
   function initTchpViewer() {
     framesList = getTargetFrames(currentParam);
+    preloadFrames(currentParam);
+    
+    // Also proactively preload other parameters in the background for instant tab switching
+    setTimeout(function () {
+      if (currentParam === 'tchp') {
+        preloadFrames('sst');
+        preloadFrames('ssha');
+      }
+    }, 1200);
+
     currentFrameIndex = 0;
     updateFrameDisplay(0);
 
@@ -159,6 +202,7 @@
           this.classList.add('active');
           currentParam = this.dataset.param || 'tchp';
           framesList = getTargetFrames(currentParam);
+          preloadFrames(currentParam);
           updateFrameDisplay(currentFrameIndex);
         });
       }
