@@ -450,6 +450,57 @@ async function buildCumulativeOsfMapLayers(data) {
     }
   });
 
+function getLatestMondayGodasDate() {
+  const now = new Date();
+  const day = now.getDay();
+  const diff = (day >= 1 ? day - 1 : 6);
+  const monday = new Date(now.getTime() - diff * 86400000);
+  const yyyy = monday.getFullYear();
+  const mm = String(monday.getMonth() + 1).padStart(2, '0');
+  const dd = String(monday.getDate()).padStart(2, '0');
+  return `${yyyy}${mm}${dd}`;
+}
+
+function createIncoisOceanWmsLayers() {
+  const godasDate = getLatestMondayGodasDate();
+
+  const sstLayer = L.tileLayer.wms('https://incois.gov.in/geoserver/PFZ-TUNA-SST-CHL/wms', {
+    layers: 'PFZ-TUNA-SST-CHL:sst',
+    format: 'image/png',
+    transparent: true,
+    opacity: 0.60,
+    attribution: 'INCOIS SST'
+  });
+
+  const tchpLayer = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/godas/tchp_${godasDate}.nc`, {
+    layers: 'TCHP',
+    format: 'image/png',
+    transparent: true,
+    opacity: 0.65,
+    styles: 'raster/x-Rainbow',
+    COLORSCALERANGE: '1,148',
+    NUMCOLORBANDS: '250',
+    attribution: 'INCOIS TCHP'
+  });
+
+  const sshaLayer = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/godas/ssha_${godasDate}.nc`, {
+    layers: 'ssha',
+    format: 'image/png',
+    transparent: true,
+    opacity: 0.65,
+    styles: 'raster/x-Rainbow',
+    COLORSCALERANGE: '0,1.1',
+    NUMCOLORBANDS: '250',
+    attribution: 'INCOIS SSHA'
+  });
+
+  return {
+    'Sea Surface Temp (SST)': sstLayer,
+    'Cyclone Heat (TCHP)': tchpLayer,
+    'Sea Surface Height (SSHA)': sshaLayer
+  };
+}
+
   // Add Tidal Phase & High Tide Overlay
   osfTidalLayer = createOsfTidalStationLayer();
 
@@ -460,9 +511,12 @@ async function buildCumulativeOsfMapLayers(data) {
     }
   });
 
+  const oceanWmsLayers = createIncoisOceanWmsLayers();
+
   const osfOverlays = {
     ...osfServiceLayers,
-    'Tidal Phase & High Tide': osfTidalLayer
+    'Tidal Phase & High Tide': osfTidalLayer,
+    ...oceanWmsLayers
   };
 
   osfLayerControl = L.control.layers(null,osfOverlays,{collapsed:true,position:'topright'}).addTo(osfMap);
@@ -529,6 +583,7 @@ async function buildOsfMapLayers(data) {
     layer.addTo(osfMap);
   });
   overlays['Tidal Phase & High Tide'] = createOsfTidalStationLayer();
+  Object.assign(overlays, createIncoisOceanWmsLayers());
   osfLayerControl = L.control.layers(null,overlays,{collapsed:true,position:'topright'}).addTo(osfMap);
   osfMap.invalidateSize({animate:false});
   if (bounds.length) osfMap.fitBounds(bounds,{padding:innerWidth < 700 ? [8,8] : [20,20],maxZoom:6,animate:false}); else osfMap.setView([15,79],innerWidth < 700 ? 4 : 5);
