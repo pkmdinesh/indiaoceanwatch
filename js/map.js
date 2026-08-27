@@ -527,12 +527,6 @@ function createOsfCurrentVectorsLayer(dateStr) {
 function createIncoisOceanWmsLayers() {
   const godasInfo = getLatestMondayGodasDate();
 
-  // Populate toolbar legend dates
-  const sstDateEl = ids('osfSstDate');
-  if (sstDateEl) sstDateEl.textContent = `(${godasInfo.formatted})`;
-  const tchpDateEl = ids('osfTchpDate');
-  if (tchpDateEl) tchpDateEl.textContent = `(${godasInfo.formatted})`;
-
   const sstLayer = L.tileLayer.wms('https://incois.gov.in/geoserver/PFZ-TUNA-SST-CHL/wms', {
     layers: 'PFZ-TUNA-SST-CHL:sst',
     format: 'image/png',
@@ -555,9 +549,9 @@ function createIncoisOceanWmsLayers() {
   const currentVectorsLayer = createOsfCurrentVectorsLayer(godasInfo.formatted);
 
   return {
-    [`Sea Surface Temp (SST - ${godasInfo.formatted})`]: sstLayer,
-    [`Cyclone Heat (TCHP - ${godasInfo.formatted})`]: tchpLayer,
-    [`Ocean Current Vectors (${godasInfo.formatted})`]: currentVectorsLayer
+    'Sea Surface Temp (SST)': sstLayer,
+    'Cyclone Heat (TCHP)': tchpLayer,
+    'Ocean Current Vectors': currentVectorsLayer
   };
 }
 
