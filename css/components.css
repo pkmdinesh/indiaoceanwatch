@@ -268,9 +268,12 @@
 .pfz-compass-body strong small{color:var(--muted);font-size:10px;font-weight:700}
 .pfz-chlorophyll-swatch{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:middle}
 
-/* Marine Heat Wave First Chip (Light Green) */
-.marine-advisory-chip.mhw-chip-first{background:#d1e7dd;color:#0f5132;border:1.5px solid #a3cfbb;font-weight:850;box-shadow:0 1px 3px rgba(15,81,50,.12)}
-.marine-advisory-chip.mhw-chip-first:hover,.marine-advisory-chip.mhw-chip-first:focus-visible{background:#badbcc;color:#0a3622;border-color:#75b798}
+/* Interactive Marine Advisory Monitor Chips */
+.marine-advisory-chip.mhw-chip-first{background:#fdf2e9;color:#8a4812;border:1.5px solid #facca2;font-weight:850;box-shadow:0 1px 3px rgba(138,72,18,.10)}
+.marine-advisory-chip.mhw-chip-first:hover,.marine-advisory-chip.mhw-chip-first:focus-visible{background:#fae3d0;border-color:#f7b477;color:#6e3508}
+
+.marine-advisory-chip.cbas-chip-second{background:#e7f5f7;color:#085566;border:1.5px solid #a8dee6;font-weight:850;box-shadow:0 1px 3px rgba(8,85,102,.10)}
+.marine-advisory-chip.cbas-chip-second:hover,.marine-advisory-chip.cbas-chip-second:focus-visible{background:#d3edf1;border-color:#79cddb;color:#053b47}
 
 /* Coral Bleaching Dialog & Components */
 .coral-dialog{width:min(660px,calc(100vw - 28px))}
