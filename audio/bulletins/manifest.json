@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-27T14:01:51.930Z",
+  "updated": "2026-08-27T14:17:38.636Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -27,7 +27,7 @@
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 330048,
+      "size": 329856,
       "title": "INCOIS സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN"
     },
