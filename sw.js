@@ -26,6 +26,7 @@ const APP_SHELL = [
   './js/status.js',
   './js/notifications.js',
   './js/pwa.js',
+  './js/tchp.js',
   './js/announcements.js',
   './vendor/leaflet/leaflet.js',
   './vendor/leaflet/leaflet.css',

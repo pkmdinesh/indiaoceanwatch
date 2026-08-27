@@ -35,9 +35,9 @@
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
     .announcement-card{grid-column:1/-1;min-height:98px}
   </style>
-  <link rel="preload" href="css/components.css?v=212" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=212"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=212" media="print">
+  <link rel="preload" href="css/components.css?v=213" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=213"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=213" media="print">
 </head>
 <body>
   <main class="dashboard">
@@ -170,7 +170,8 @@
         <div class="panel-head"><div><h2 id="other-advisories-title">Other Marine Advisories</h2></div></div>
         <nav class="marine-advisory-links" aria-label="Other marine advisory services">
           <button class="marine-advisory-chip mhw-chip-first" id="openMarineHeatWave" type="button">Marine Heat Wave (MHW)</button>
-          <button class="marine-advisory-chip cbas-chip-second" id="openCoralBleaching" type="button">Coral Bleaching Alert (CBAS)</button>
+          <button class="marine-advisory-chip tchp-chip-second" id="openTchpDialog" type="button">Cyclone Heat (TCHP)</button>
+          <button class="marine-advisory-chip cbas-chip-third" id="openCoralBleaching" type="button">Coral Bleaching Alert (CBAS)</button>
           <a class="marine-advisory-chip" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=2&amp;request_locale=en" target="_blank" rel="noopener">Tuna ↗</a>
           <a class="marine-advisory-chip" href="https://incois.gov.in/oceanservices/Hilsa/index.jsp" target="_blank" rel="noopener">Hilsa ↗</a>
           <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/hab_products.jsp" target="_blank" rel="noopener">Harmful Algal Bloom ↗</a>
@@ -230,6 +231,52 @@
       <div class="coral-dialog-actions">
         <a class="source card-action-button" id="coralMapLink" href="https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg" target="_blank" rel="noopener">🗺️ View National Stress Map ↗</a>
         <a class="source card-action-button" href="https://incois.gov.in/site/services/coralwarning.jsp" target="_blank" rel="noopener">Official CBAS Portal ↗</a>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="advisory-dialog tchp-dialog" id="tchpDialog" aria-labelledby="tchpDialogTitle">
+    <div class="advisory-dialog-head">
+      <div>
+        <h2 id="tchpDialogTitle">🌪️ Tropical Cyclone Heat Potential (TCHP)</h2>
+        <p id="tchpDialogMeta">INCOIS-ROMS 5-Day Ocean Thermal Energy Forecast</p>
+      </div>
+      <button class="dialog-close" id="tchpDialogClose" type="button" aria-label="Close TCHP dialog">&times;</button>
+    </div>
+    <div class="advisory-details">
+      <div class="tchp-param-tabs" role="tablist">
+        <button type="button" class="tchp-tab-btn active" data-param="tchp">TCHP (kJ/cm²)</button>
+        <button type="button" class="tchp-tab-btn" data-param="sst">SST (°C)</button>
+        <button type="button" class="tchp-tab-btn" data-param="ssha">SSHA (m)</button>
+      </div>
+      <div class="tchp-viewer-container">
+        <div class="tchp-image-wrap">
+          <img id="tchpImageDisplay" class="tchp-frame-image" src="" alt="INCOIS TCHP Forecast Frame">
+          <div id="tchpLoadingOverlay" class="tchp-loading-overlay"><span>Loading forecast map…</span></div>
+        </div>
+        <div class="tchp-player-controls">
+          <div class="tchp-playback-btns">
+            <button type="button" id="tchpPrevBtn" class="tchp-ctrl-btn" title="Previous 3h frame">⏮</button>
+            <button type="button" id="tchpPlayPauseBtn" class="tchp-ctrl-btn tchp-play-btn" title="Play / Pause Animation">▶ Play</button>
+            <button type="button" id="tchpNextBtn" class="tchp-ctrl-btn" title="Next 3h frame">⏭</button>
+          </div>
+          <div class="tchp-slider-row">
+            <input type="range" id="tchpTimeSlider" class="tchp-slider" min="0" max="47" value="0">
+            <span id="tchpTimeLabel" class="tchp-time-label">Calculating…</span>
+          </div>
+        </div>
+      </div>
+      <div class="tchp-guide-box">
+        <strong>ℹ️ Cyclone Intensification Energy Guide:</strong>
+        <div class="tchp-threshold-grid">
+          <div class="tchp-th-item safe"><span>&lt; 50 kJ/cm²</span><strong>Low / Unfavorable</strong></div>
+          <div class="tchp-th-item watch"><span>50 - 80 kJ/cm²</span><strong>Moderate / Favorable</strong></div>
+          <div class="tchp-th-item alert"><span>&gt; 80 kJ/cm²</span><strong>⚠️ Rapid Intensification</strong></div>
+        </div>
+        <p>Tropical Cyclone Heat Potential measures integrated upper-ocean thermal energy down to the 26°C isotherm. High TCHP (&gt;80 kJ/cm²) prevents cyclone-induced cooling and fuels severe cyclone intensification.</p>
+      </div>
+      <div class="tchp-dialog-actions">
+        <a class="source card-action-button" href="https://incois.gov.in/oceanservices/tchpgodas.jsp" target="_blank" rel="noopener">🗺️ Open GODAS Live GIS Map ↗</a>
+        <a class="source card-action-button" href="https://incois.gov.in/site/services/tchp.jsp" target="_blank" rel="noopener">Official INCOIS TCHP Portal ↗</a>
       </div>
     </div>
   </dialog>
@@ -519,21 +566,22 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=212" defer></script>
-  <script src="js/app.js?v=212" defer></script>
-  <script src="js/share.js?v=212" defer></script>
-  <script src="js/map.js?v=212" defer></script>
-  <script src="js/pfz-map.js?v=212" defer></script>
-  <script src="js/pfz.js?v=212" defer></script>
-  <script src="js/advisory.js?v=212" defer></script>
-  <script src="js/tsunami.js?v=212" defer></script>
-  <script src="js/cyclone.js?v=212" defer></script>
-  <script src="js/seismic.js?v=212" defer></script>
-  <script src="js/port-tides.js?v=212" defer></script>
-  <script src="js/voice-summary.js?v=212" defer></script>
-  <script src="js/status.js?v=212" defer></script>
-  <script src="js/notifications.js?v=212" defer></script>
-  <script src="js/pwa.js?v=212" defer></script>
+  <script src="js/config.js?v=213" defer></script>
+  <script src="js/app.js?v=213" defer></script>
+  <script src="js/share.js?v=213" defer></script>
+  <script src="js/map.js?v=213" defer></script>
+  <script src="js/pfz-map.js?v=213" defer></script>
+  <script src="js/pfz.js?v=213" defer></script>
+  <script src="js/advisory.js?v=213" defer></script>
+  <script src="js/tsunami.js?v=213" defer></script>
+  <script src="js/cyclone.js?v=213" defer></script>
+  <script src="js/seismic.js?v=213" defer></script>
+  <script src="js/port-tides.js?v=213" defer></script>
+  <script src="js/voice-summary.js?v=213" defer></script>
+  <script src="js/status.js?v=213" defer></script>
+  <script src="js/notifications.js?v=213" defer></script>
+  <script src="js/pwa.js?v=213" defer></script>
+  <script src="js/tchp.js?v=213" defer></script>
   <script data-goatcounter="https://indiaoceanwatch.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>

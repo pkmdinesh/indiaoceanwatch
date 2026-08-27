@@ -272,8 +272,42 @@
 .marine-advisory-chip.mhw-chip-first{background:#fdf2e9;color:#8a4812;border:1.5px solid #facca2;font-weight:850;box-shadow:0 1px 3px rgba(138,72,18,.10)}
 .marine-advisory-chip.mhw-chip-first:hover,.marine-advisory-chip.mhw-chip-first:focus-visible{background:#fae3d0;border-color:#f7b477;color:#6e3508}
 
-.marine-advisory-chip.cbas-chip-second{background:#e7f5f7;color:#085566;border:1.5px solid #a8dee6;font-weight:850;box-shadow:0 1px 3px rgba(8,85,102,.10)}
-.marine-advisory-chip.cbas-chip-second:hover,.marine-advisory-chip.cbas-chip-second:focus-visible{background:#d3edf1;border-color:#79cddb;color:#053b47}
+.marine-advisory-chip.tchp-chip-second{background:#fdf0ec;color:#9c3c1b;border:1.5px solid #f8c2b4;font-weight:850;box-shadow:0 1px 3px rgba(156,60,27,.10)}
+.marine-advisory-chip.tchp-chip-second:hover,.marine-advisory-chip.tchp-chip-second:focus-visible{background:#fae0d8;border-color:#f3a28d;color:#7e2d11}
+
+.marine-advisory-chip.cbas-chip-third{background:#e7f5f7;color:#085566;border:1.5px solid #a8dee6;font-weight:850;box-shadow:0 1px 3px rgba(8,85,102,.10)}
+.marine-advisory-chip.cbas-chip-third:hover,.marine-advisory-chip.cbas-chip-third:focus-visible{background:#d3edf1;border-color:#79cddb;color:#053b47}
+
+/* TCHP Dialog & Animation Player */
+.tchp-dialog{width:min(700px,calc(100vw - 28px))}
+.tchp-param-tabs{display:flex;gap:6px;margin-bottom:10px}
+.tchp-tab-btn{padding:6px 12px;border:1px solid #d2dedb;border-radius:8px;background:#f3f6f5;color:var(--ink);font-size:11px;font-weight:800;cursor:pointer;transition:all .15s}
+.tchp-tab-btn:hover{background:#e2ece9}
+.tchp-tab-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 2px 6px rgba(8,127,132,.25)}
+.tchp-viewer-container{background:#000;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(8,47,60,.15)}
+.tchp-image-wrap{position:relative;width:100%;background:#082f3c;min-height:280px;display:flex;align-items:center;justify-content:center}
+.tchp-frame-image{width:100%;height:auto;display:block;max-height:440px;object-fit:contain}
+.tchp-loading-overlay{position:absolute;inset:0;background:rgba(8,47,60,.65);display:none;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800}
+.tchp-player-controls{padding:10px 14px;background:#103947;color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.tchp-playback-btns{display:flex;align-items:center;gap:6px}
+.tchp-ctrl-btn{padding:5px 10px;border:0;border-radius:6px;background:#1e5163;color:#fff;font-size:12px;font-weight:850;cursor:pointer}
+.tchp-ctrl-btn:hover{background:#2a6e85}
+.tchp-play-btn{min-width:68px;background:var(--teal)}
+.tchp-play-btn:hover{background:#0ba1a8}
+.tchp-slider-row{display:flex;align-items:center;gap:10px;flex:1;min-width:200px}
+.tchp-slider{flex:1;cursor:pointer;accent-color:var(--teal)}
+.tchp-time-label{font-size:11px;font-weight:800;color:#9ed4de;white-space:nowrap}
+.tchp-guide-box{margin-top:10px;padding:10px 12px;background:#fef7f4;border-radius:10px;border-left:4px solid #d9534f;font-size:11px;line-height:1.45}
+.tchp-guide-box strong{color:#9c3c1b}
+.tchp-guide-box p{margin:6px 0 0;color:var(--ink);font-size:10.5px}
+.tchp-threshold-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:6px;margin-top:6px}
+.tchp-th-item{padding:6px 8px;border-radius:6px;border:1px solid #d2dedb;background:#fff;display:flex;flex-direction:column;gap:1px}
+.tchp-th-item span{font-size:10px;color:var(--muted);font-weight:800}
+.tchp-th-item strong{font-size:11px}
+.tchp-th-item.safe strong{color:var(--green)}
+.tchp-th-item.watch strong{color:#765900}
+.tchp-th-item.alert strong{color:var(--red)}
+.tchp-dialog-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 
 /* Coral Bleaching Dialog & Components */
 .coral-dialog{width:min(660px,calc(100vw - 28px))}
