@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-27T01:46:50.045Z",
+  "updated": "2026-08-27T02:01:54.504Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -21,7 +21,7 @@
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 293760,
+      "size": 293568,
       "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN"
     },
