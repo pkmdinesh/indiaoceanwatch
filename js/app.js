@@ -180,17 +180,24 @@ function initPageHitCounter() {
   const el = document.getElementById('hitCount');
   if (!el) return;
   const BASE_OFFSET = 700;
-  fetch('https://api.counterapi.dev/v1/pkmdinesh-indiaoceanwatch/visits/up')
-    .then(res => res.json())
+  fetch('https://indiaoceanwatch.goatcounter.com/counter/TOTAL.json')
+    .then(res => {
+      if (!res.ok) throw new Error(`GoatCounter API status ${res.status}`);
+      return res.json();
+    })
     .then(data => {
-      if (data && typeof data.count === 'number') {
-        el.textContent = (BASE_OFFSET + data.count).toLocaleString();
+      if (data && (data.count !== undefined || data.count_unique !== undefined)) {
+        const rawStr = String(data.count ?? data.count_unique ?? '0');
+        const rawNum = parseInt(rawStr.replace(/[^0-9]/g, ''), 10) || 0;
+        el.textContent = (BASE_OFFSET + rawNum).toLocaleString();
       } else {
-        el.textContent = (BASE_OFFSET + 1).toLocaleString();
+        el.textContent = (BASE_OFFSET).toLocaleString();
       }
     })
     .catch(() => {
-      if (el && el.textContent === '...') el.textContent = (BASE_OFFSET + 1).toLocaleString();
+      if (el && (el.textContent === '...' || el.textContent === '—')) {
+        el.textContent = (BASE_OFFSET).toLocaleString();
+      }
     });
 }
 if (typeof document !== 'undefined') {
