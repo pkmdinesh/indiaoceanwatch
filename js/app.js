@@ -178,10 +178,12 @@ var dashboard = document.querySelector('.dashboard');
       return date && !Number.isNaN(date.getTime()) ? `${date.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST` : 'Unavailable';
     };
 
-function initPageHitCounter() {
+async function initPageHitCounter() {
   const el = document.getElementById('hitCount');
   if (!el) return;
   const BASE_OFFSET = 700;
+  const config = globalThis.OCEAN_WATCH_CONFIG || {};
+  const firebaseUrl = config.FIREBASE_COUNTER_URL;
 
   // Retrieve stored total or initialize at base offset
   let stored = parseInt(localStorage.getItem('ow_hit_total') || '0', 10);
@@ -189,8 +191,8 @@ function initPageHitCounter() {
     stored = BASE_OFFSET;
   }
 
-  // Increment on fresh browser session so user sees their visit immediately
-  if (!sessionStorage.getItem('ow_session_hit')) {
+  const isNewSession = !sessionStorage.getItem('ow_session_hit');
+  if (isNewSession) {
     sessionStorage.setItem('ow_session_hit', '1');
     stored += 1;
     localStorage.setItem('ow_hit_total', String(stored));
@@ -198,26 +200,60 @@ function initPageHitCounter() {
 
   el.textContent = stored.toLocaleString();
 
-  // Query live total from GoatCounter with cache busting
-  const url = `https://indiaoceanwatch.goatcounter.com/counter/TOTAL.json?_=${Date.now()}`;
-  fetch(url, { cache: 'no-store', mode: 'cors' })
-    .then(res => {
-      if (!res.ok) throw new Error(`GoatCounter status ${res.status}`);
-      return res.json();
-    })
-    .then(data => {
-      if (data && (data.count !== undefined || data.count_unique !== undefined)) {
-        const rawStr = String(data.count ?? data.count_unique ?? '0');
-        const serverHits = parseInt(rawStr.replace(/[^0-9]/g, ''), 10) || 0;
-        const serverTotal = BASE_OFFSET + serverHits;
-        const finalCount = Math.max(serverTotal, stored);
+  // 1. Try Firebase Realtime Database REST API (Option 2)
+  if (firebaseUrl) {
+    try {
+      if (isNewSession) {
+        // Atomic increment via Firebase RTDB REST
+        const res = await fetch(firebaseUrl, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ count: { '.sv': { 'increment': 1 } } })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (typeof data?.count === 'number') {
+            const finalCount = Math.max(BASE_OFFSET + data.count, stored);
+            localStorage.setItem('ow_hit_total', String(finalCount));
+            el.textContent = finalCount.toLocaleString();
+            return;
+          }
+        }
+      } else {
+        // Read-only GET query on Firebase RTDB
+        const res = await fetch(firebaseUrl, { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          const serverCount = typeof data === 'number' ? data : (typeof data?.count === 'number' ? data.count : 0);
+          if (serverCount > 0) {
+            const finalCount = Math.max(BASE_OFFSET + serverCount, stored);
+            localStorage.setItem('ow_hit_total', String(finalCount));
+            el.textContent = finalCount.toLocaleString();
+            return;
+          }
+        }
+      }
+    } catch {
+      // Fall through to fallback
+    }
+  }
+
+  // 2. High-reliability fallback (VisitorBadge)
+  try {
+    const fbRes = await fetch('https://api.visitorbadge.io/api/visitors?path=pkmdinesh.github.io%2Findiaoceanwatch', { cache: 'no-store' });
+    if (fbRes.ok) {
+      const text = await fbRes.text();
+      const match = text.match(/aria-label="VISITORS:\s*([\d,]+)"/i) || text.match(/<text[^>]*>([\d,]+)<\/text>/i);
+      if (match && match[1]) {
+        const rawHits = parseInt(match[1].replace(/,/g, ''), 10) || 0;
+        const finalCount = Math.max(BASE_OFFSET + rawHits, stored);
         localStorage.setItem('ow_hit_total', String(finalCount));
         el.textContent = finalCount.toLocaleString();
       }
-    })
-    .catch(() => {
-      // Keep optimistic stored count
-    });
+    }
+  } catch {
+    // Keep resilient local counter
+  }
 }
 if (typeof document !== 'undefined') {
   if (document.readyState === 'loading') {
