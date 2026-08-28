@@ -1,10 +1,10 @@
 /* Ocean Watch settings that are expected to change between deployments.
    Edit values here; application modules and the service worker share them. */
 globalThis.OCEAN_WATCH_CONFIG = Object.freeze({
-  CACHE_VERSION: '220',
+  CACHE_VERSION: '221',
   CACHE_PREFIX: 'ocean-watch',
   PUBLIC_URL: 'https://pkmdinesh.github.io/indiaoceanwatch/',
-  FIREBASE_COUNTER_URL: 'https://indiaoceanwatch-default-rtdb.firebaseio.com/hits.json',
+  FIREBASE_COUNTER_URL: 'https://india-ocean-watch-default-rtdb.asia-southeast1.firebasedatabase.app/hits.json',
   AGE_HOURS: Object.freeze({
     OSF_UPDATE: 36,
     PFZ_UPDATE: 36,
