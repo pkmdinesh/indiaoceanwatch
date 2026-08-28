@@ -35,18 +35,19 @@ function render(data) {
 
   // Phase 2: High Wave & Swell Surge Severity boards (Yielded to animation frame)
   requestAnimationFrame(() => {
-    ids('highWaveIssueDate').textContent = `Issue date ${data.highWave?.issueDate || '—'}`;
-    ids('swellIssueDate').textContent = `Issue date ${data.swellSurge?.issueDate || '—'}`;
+    const issuedLbl = globalThis.i18n?.t('severity.issued', 'Issue date') || 'Issue date';
+    ids('highWaveIssueDate').textContent = `${issuedLbl} ${data.highWave?.issueDate || '—'}`;
+    ids('swellIssueDate').textContent = `${issuedLbl} ${data.swellSurge?.issueDate || '—'}`;
     renderSeverityBoard('highWaveStates','High Wave',data.highWave);
     renderSeverityBoard('swellStates','Swell Surge',data.swellSurge);
 
     // Phase 3: Secondary cards (Seismic, Storm Surge, Cyclone, PFZ, Port Tides)
     setTimeout(() => {
-      ids('currentIssueDate').textContent = `Issue date ${data.oceanCurrent?.issueDate || '—'}`;
+      ids('currentIssueDate').textContent = `${issuedLbl} ${data.oceanCurrent?.issueDate || '—'}`;
       renderSeverityBoard('currentStates','Ocean Currents',data.oceanCurrent || {});
 
       const latestSeismicLink = ids('seismicMessage');
-      latestSeismicLink.textContent = data.seismic?.latest ? seismicSummary(data.seismic.latest) : data.seismic?.message;
+      latestSeismicLink.textContent = data.seismic?.latest ? seismicSummary(data.seismic.latest) : (data.seismic?.message || globalThis.i18n?.t('seismic.safe', 'No recent significant coastal earthquakes (M≥5.0).'));
       latestSeismicLink.disabled = !data.seismic?.latest;
       latestSeismicLink.onclick = data.seismic?.latest ? () => openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin) : null;
       ids('seismicMessageWrap').classList.toggle('is-recent',isRecentSeismic);
@@ -61,7 +62,9 @@ function render(data) {
       const stormDemoBulletin = demoMode === 'storm' ? data.stormSurge.recentBulletin : null;
       renderStormSurge(stormDemoBulletin?.message || data.stormSurge.message,stormDemoBulletin || data.stormSurge.bulletin);
 
-      ids('pfzDate').textContent = `Forecast ${data.pfz?.forecastDate || '—'} · Valid through ${data.pfz?.validUntil || '—'}`;
+      const fcLbl = globalThis.i18n?.t('pfz.forecast_date', 'Forecast') || 'Forecast';
+      const vtLbl = globalThis.i18n?.t('pfz.valid_through', 'Valid through') || 'Valid through';
+      ids('pfzDate').textContent = `${fcLbl} ${data.pfz?.forecastDate || '—'} · ${vtLbl} ${data.pfz?.validUntil || '—'}`;
       renderPfzSectors(data.pfz?.sectors);
       renderCyclone(data.cyclone);
       renderJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);

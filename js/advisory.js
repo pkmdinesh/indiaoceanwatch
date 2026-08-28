@@ -13,20 +13,26 @@ var severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No 
     }
     function openAdvisoryDetails(hazardName, issueDate, state) {
       currentAdvisoryShareData={hazardName,issueDate,state};
-      ids('advisoryDialogTitle').textContent = `${titleCase(state.name)} \u2014 ${hazardName}`;
-      ids('advisoryDialogMeta').textContent = `${countSummary(state.counts)}${issueDate ? ` \u00b7 Issued ${issueDate}` : ''}`;
+      const translatedState = state.displayName || globalThis.i18n?.translateStateName(state.name) || titleCase(state.name);
+      ids('advisoryDialogTitle').textContent = `${translatedState} \u2014 ${hazardName}`;
+      const issuedLbl = globalThis.i18n?.t('severity.issued', 'Issued') || 'Issued';
+      ids('advisoryDialogMeta').textContent = `${countSummary(state.counts)}${issueDate ? ` \u00b7 ${issuedLbl} ${issueDate}` : ''}`;
       const advisories = state.advisories || [];
       if (!advisories.length) {
-        ids('advisoryDetails').innerHTML = '<p class="empty">District details will appear after the next source update.</p>';
+        const noDetailsMsg = globalThis.i18n?.t('dialog.no_district_details', 'District details will appear after the next source update.') || 'District details will appear after the next source update.';
+        ids('advisoryDetails').innerHTML = `<p class="empty">${noDetailsMsg}</p>`;
       } else {
         ids('advisoryDetails').replaceChildren(...advisories.map(advisory => {
           const article = document.createElement('article');
           article.className = `district-advisory severity-${advisory.severity}`;
           const head = document.createElement('div'); head.className = 'district-advisory-head';
-          const district = document.createElement('h3'); district.textContent = titleCase(advisory.district || 'Coastal area');
+          const districtName = globalThis.i18n?.translateSectorName(advisory.district) || titleCase(advisory.district || globalThis.i18n?.t('dialog.coastal_area', 'Coastal area'));
+          const district = document.createElement('h3'); district.textContent = districtName;
           const pill = document.createElement('span'); pill.className = `severity-pill ${advisory.severity}`; pill.textContent = severityLabel[advisory.severity] || advisory.severity;
           head.append(district,pill);
-          const message = document.createElement('p'); message.textContent = advisory.message || 'Open the official map for full details.';
+          const rawMsg = advisory.message || globalThis.i18n?.t('dialog.open_official_map', 'Open the official map for full details.');
+          const translatedMsg = globalThis.i18n?.translateAdvisoryMessage(rawMsg) || rawMsg;
+          const message = document.createElement('p'); message.textContent = translatedMsg;
           article.append(head,message);
           return article;
         }));
@@ -48,7 +54,7 @@ var severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No 
         if (level === 'noThreat') {
           const visualize = document.createElement('button'); visualize.type='button'; visualize.className = 'severity-state-chip noThreat';
           visualize.setAttribute('aria-label',`Visualize the ${hazardName} layer`);
-          visualize.textContent = 'Visualize';
+          visualize.textContent = globalThis.i18n?.t('osf.visualize', 'Visualize') || 'Visualize';
           visualize.addEventListener('click',()=>openOsfMap(hazardName));
           stateList.append(visualize); row.append(label,stateList); return row;
         }
@@ -56,18 +62,20 @@ var severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No 
         if (!matchingStates.length) {
           const none = document.createElement('span');
           none.className = 'severity-state-chip severity-none-chip';
-          none.textContent = 'None';
+          none.textContent = globalThis.i18n?.t('announcement.none', 'None') || 'None';
           stateList.append(none);
         } else {
           stateList.append(...matchingStates.map(state => {
             const count = Number(state.counts[level]);
+            const displayName = globalThis.i18n?.translateStateName(state.name) || titleCase(state.name);
             const button = document.createElement('button'); button.type = 'button'; button.className = `severity-state-chip ${level}`;
-            button.setAttribute('aria-label', `View ${severityLabel[level]} ${hazardName} districts for ${titleCase(state.name)}`);
-            button.append(document.createTextNode(titleCase(state.name)));
-            const countBadge = document.createElement('span'); countBadge.className = 'district-count'; countBadge.textContent = `(${count})`;
+            button.setAttribute('aria-label', `View ${severityLabel[level]} ${hazardName} districts for ${displayName}`);
+            button.append(document.createTextNode(displayName));
+            const countBadge = document.createElement('span'); countBadge.className = 'district-count'; countBadge.textContent = ` (${count})`;
             button.append(countBadge);
             button.addEventListener('click',() => openAdvisoryDetails(hazardName,group.issueDate,{
               name:state.name,
+              displayName:displayName,
               counts:{[level]:count},
               advisories:(state.advisories || []).filter(advisory => advisory.severity === level)
             }));

@@ -35,39 +35,47 @@
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
     .announcement-card{grid-column:1/-1;min-height:98px}
   </style>
-  <link rel="preload" href="css/components.css?v=224" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=224"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=224" media="print">
+  <link rel="preload" href="css/components.css?v=225" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=225"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=225" media="print">
 </head>
 <body>
   <main class="dashboard">
     <header class="header">
-      <a class="ocean-brand" href="./" aria-label="Ocean Watch home"><img class="brand-image" src="icons/ocean-watch-v3-192.png" alt="Ocean Watch" width="60" height="60"><span class="brand-copy"><strong>Ocean Watch</strong></span></a>
-      <div class="title"><h1>Coastal Advisory Status</h1><p>Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</p></div>
+      <a class="ocean-brand" href="./" aria-label="Ocean Watch home"><img class="brand-image" src="icons/ocean-watch-v3-192.png" alt="Ocean Watch" width="60" height="60"><span class="brand-copy"><strong data-i18n="brand.title">Ocean Watch</strong></span></a>
+      <div class="title"><h1 data-i18n="header.title">Coastal Advisory Status</h1><p data-i18n="header.subtitle">Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</p></div>
       <div class="header-actions">
-        <div class="stamp"><span class="live">Official-source snapshot</span><br><time id="lastUpdated"></time></div>
-        <button class="voice-button" id="voiceSummaryBtn" type="button" aria-label="Listen to coastal advisory audio summary"><svg class="voice-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><span class="voice-label">Voice</span></button>
-        <button class="notify-button" id="notificationHeaderBtn" type="button" aria-label="Configure advisory notifications"><svg class="notify-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg><span class="notify-label">Alerts</span></button>
-        <button class="share-button" id="shareApp" type="button" aria-label="Share Ocean Watch"><svg class="share-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="currentColor" d="M13 14h1v1h-1zm1 1h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm-3-1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm3-1h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm-2 2h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm-1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-2 1h1v1h-1zm-2 0h1v1h-1zm1 0h1v1h-1zm-2 0h1v1h-1zm0 1h1v1h-1zm1 1h1v1h-1zm1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-1-2h1v1h-1zm1 0h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm0 3h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm1 3h1v1h-1zm0-2h1v1h-1zm0 1h1v1h-1zm-2-3h1v1h-1zm-6 1h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm-3 0h1v1h-1zm2 0h1v1h-1zm-2 1h1v1h-1zm0 1h1v1h-1zm0-19h1v1h-1zm1 1h1v1h-1zm-1 2h1v1h-1zm1 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm-1 1h1v1h-1zM1 11h1v1H1zm1 1h1v1H2zm2-1h1v1H4zm0 1h1v1H4zm1-1h1v1H5zm1 1h1v1H6zm1-1h1v1H7zm1 1h1v1H8zm0-1h1v1H8zm1 0h1v1H9zm1 0h1v1h-1zm1 1h1v1h-1zm2 0h1v1h-1zm1-1h1v1h-1zm1 0h1v1h-1zm1 0h1v1h-1zm-1 2h1v1h-1zm-2 9h1v1h-1zm-1 0h1v1h-1zm0-9h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm11-1h1v1h-1zm-1 1h1v1h-1zm1 2h1v1h-1zm-5-4h1v1h-1zm1-1h1v1h-1zm4 0h1v1h-1zm0 1h1v1h-1zm-1 0h1v1h-1zm1 8h1v1h-1zm-1 1h1v1h-1zm-2 0h1v1h-1zm3 0h1v1h-1z"/><path stroke="currentColor" stroke-width="2" d="M15 2h7v7h-7zM2 2h7v7H2zm0 13h7v7H2zM18 5h1v1h-1zM5 5h1v1H5zm0 13h1v1H5z"/></g></svg><span class="share-label">Share</span></button>
-        <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch"><svg class="install-icon" aria-hidden="true" focusable="false" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M1664 1664h128v384H128v-384h128v256h1408zm-147-531-557 557-557-557 90-90 403 402V128h128v1317l403-402z"/></svg><span class="install-label">Install</span></button>
+        <div class="header-top-row">
+          <div class="stamp"><span class="live" data-i18n="header.snapshot">Official-source snapshot</span><br><time id="lastUpdated"></time></div>
+          <div class="lang-picker-wrap">
+            <label for="appLangSelect" class="lang-picker-label" aria-label="Select Language">🌐</label>
+            <select id="appLangSelect" class="app-lang-select" aria-label="Select Language"></select>
+          </div>
+        </div>
+        <div class="header-btn-row">
+          <button class="voice-button" id="voiceSummaryBtn" type="button" aria-label="Listen to coastal advisory audio summary"><svg class="voice-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><span class="voice-label" data-i18n="header.voice">Voice</span></button>
+          <button class="notify-button" id="notificationHeaderBtn" type="button" aria-label="Configure advisory notifications"><svg class="notify-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg><span class="notify-label" data-i18n="header.alerts">Alerts</span></button>
+          <button class="share-button" id="shareApp" type="button" aria-label="Share Ocean Watch"><svg class="share-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="currentColor" d="M13 14h1v1h-1zm1 1h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm-3-1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm3-1h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm-2 2h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm-1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-2 1h1v1h-1zm-2 0h1v1h-1zm1 0h1v1h-1zm-2 0h1v1h-1zm0 1h1v1h-1zm1 1h1v1h-1zm1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-1-2h1v1h-1zm1 0h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm0 3h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm1 3h1v1h-1zm0-2h1v1h-1zm0 1h1v1h-1zm-2-3h1v1h-1zm-6 1h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm-3 0h1v1h-1zm2 0h1v1h-1zm-2 1h1v1h-1zm0 1h1v1h-1zm0-19h1v1h-1zm1 1h1v1h-1zm-1 2h1v1h-1zm1 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm-1 1h1v1h-1zM1 11h1v1H1zm1 1h1v1H2zm2-1h1v1H4zm0 1h1v1H4zm1-1h1v1H5zm1 1h1v1H6zm1-1h1v1H7zm1 1h1v1H8zm0-1h1v1H8zm1 0h1v1H9zm1 0h1v1h-1zm1 1h1v1h-1zm2 0h1v1h-1zm1-1h1v1h-1zm1 0h1v1h-1zm1 0h1v1h-1zm-1 2h1v1h-1zm-2 9h1v1h-1zm-1 0h1v1h-1zm0-9h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm11-1h1v1h-1zm-1 1h1v1h-1zm1 2h1v1h-1zm-5-4h1v1h-1zm1-1h1v1h-1zm4 0h1v1h-1zm0 1h1v1h-1zm-1 0h1v1h-1zm1 8h1v1h-1zm-1 1h1v1h-1zm-2 0h1v1h-1zm3 0h1v1h-1z"/><path stroke="currentColor" stroke-width="2" d="M15 2h7v7h-7zM2 2h7v7H2zm0 13h7v7H2zM18 5h1v1h-1zM5 5h1v1H5zm0 13h1v1H5z"/></g></svg><span class="share-label" data-i18n="header.share">Share</span></button>
+          <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch"><svg class="install-icon" aria-hidden="true" focusable="false" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M1664 1664h128v384H128v-384h128v256h1408zm-147-531-557 557-557-557 90-90 403 402V128h128v1317l403-402z"/></svg><span class="install-label" data-i18n="header.install">Install</span></button>
+        </div>
       </div>
     </header>
 
     <div class="content">
       <section class="panel announcement-card" id="announcementCard" aria-label="Active advisories and latest updates" aria-live="polite">
-        <span class="announcement-label"><span class="announcement-symbol" aria-hidden="true">&#9989;</span><span>Active</span></span>
-        <div class="announcement-message" id="announcementMessage"><span class="announcement-active-none">Checking advisories…</span></div>
-        <div class="announcement-latest"><span class="announcement-latest-symbol" aria-hidden="true">&#8986;</span><strong>LATEST:</strong><div class="announcement-latest-message" id="announcementLatest"><span class="announcement-latest-link">Checking latest feeds…</span></div></div>
+        <span class="announcement-label"><span class="announcement-symbol" aria-hidden="true">&#9989;</span><span data-i18n="announcement.title">Active</span></span>
+        <div class="announcement-message" id="announcementMessage"><span class="announcement-active-none" data-i18n="announcement.checking">Checking advisories…</span></div>
+        <div class="announcement-latest"><span class="announcement-latest-symbol" aria-hidden="true">&#8986;</span><strong data-i18n="announcement.latest">LATEST:</strong><div class="announcement-latest-message" id="announcementLatest"><span class="announcement-latest-link" data-i18n="announcement.checking">Checking latest feeds…</span></div></div>
       </section>
       <section class="panel ocean" aria-labelledby="ocean-title">
         <div class="panel-head">
           <img class="service-img" src="assets/ocean-wave-service-icon.png" alt="Ocean wave icon" width="48" height="42" loading="lazy">
-          <div><h2 id="ocean-title">Ocean State Forecast</h2><p class="panel-kicker">High Wave, Swell Surge & Ocean Currents advisories</p></div>
-          <div class="osf-map-actions"><button class="source card-action-button osf-map-button" id="shareOsfOverall" type="button">Share</button><button class="source card-action-button osf-map-button" id="openOsfMap" type="button">Visualize</button><a class="source card-action-button" href="https://incois.gov.in/site/services/hwa.jsp" target="_blank" rel="noopener">OSF ↗</a></div>
+          <div><h2 id="ocean-title" data-i18n="osf.title">Ocean State Forecast</h2><p class="panel-kicker" data-i18n="osf.high_wave_kicker">High Wave, Swell Surge & Ocean Currents advisories</p></div>
+          <div class="osf-map-actions"><button class="source card-action-button osf-map-button" id="shareOsfOverall" type="button" data-i18n="dialog.share">Share</button><button class="source card-action-button osf-map-button" id="openOsfMap" type="button" data-i18n="osf.visualize">Visualize</button><a class="source card-action-button" href="https://incois.gov.in/site/services/hwa.jsp" target="_blank" rel="noopener">OSF ↗</a></div>
         </div>
         <div class="forecast">
           <article class="forecast-card">
-            <div class="forecast-title"><h3>High Wave</h3><div class="forecast-meta"><span class="kind">Wave height</span><span class="issue-date" id="highWaveIssueDate">Issue date —</span></div></div>
+            <div class="forecast-title"><h3 data-i18n="osf.high_wave">High Wave</h3><div class="forecast-meta"><span class="kind" data-i18n="osf.high_wave_card">Wave height</span><span class="issue-date" id="highWaveIssueDate">Issue date —</span></div></div>
             <div class="severity-board" id="highWaveStates">
               <div class="severity-row"><span class="severity-row-label warning">Warning</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
               <div class="severity-row"><span class="severity-row-label alert">Alert</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
@@ -76,7 +84,7 @@
             </div>
           </article>
           <article class="forecast-card">
-            <div class="forecast-title"><h3>Swell Surge</h3><div class="forecast-meta"><span class="kind">Long-period swell</span><span class="issue-date" id="swellIssueDate">Issue date —</span></div></div>
+            <div class="forecast-title"><h3 data-i18n="osf.swell_surge">Swell Surge</h3><div class="forecast-meta"><span class="kind" data-i18n="osf.swell_surge_card">Long-period swell</span><span class="issue-date" id="swellIssueDate">Issue date —</span></div></div>
             <div class="severity-board" id="swellStates">
               <div class="severity-row"><span class="severity-row-label warning">Warning</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
               <div class="severity-row"><span class="severity-row-label alert">Alert</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
@@ -85,7 +93,7 @@
             </div>
           </article>
           <article class="forecast-card current-forecast">
-            <div class="forecast-title"><h3>Ocean Currents</h3><div class="forecast-meta"><span class="kind">Current speed</span><span class="issue-date" id="currentIssueDate">Issue date —</span></div></div>
+            <div class="forecast-title"><h3 data-i18n="osf.ocean_currents">Ocean Currents</h3><div class="forecast-meta"><span class="kind" data-i18n="osf.ocean_currents_card">Current speed</span><span class="issue-date" id="currentIssueDate">Issue date —</span></div></div>
             <div class="severity-board" id="currentStates">
               <div class="severity-row"><span class="severity-row-label warning">Warning</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
               <div class="severity-row"><span class="severity-row-label alert">Alert</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
@@ -95,7 +103,7 @@
           </article>
           <article class="forecast-card tide-forecast" id="portTideCard">
             <div class="forecast-title">
-              <h3>Predicted Astronomical Tide</h3>
+              <h3 data-i18n="osf.astronomical_tide">Predicted Astronomical Tide</h3>
               <div class="port-tide-controls">
                 <select id="portSelectDropdown" class="port-select-dropdown" aria-label="Select National Tide Gauge Station"></select>
                 <button type="button" id="portGpsBtn" class="source card-action-button port-action-btn" aria-label="Find nearest tide station with GPS">📍 Near Me</button>
@@ -116,24 +124,24 @@
       <section class="panel advisory-card" aria-labelledby="tsunami-title">
         <div class="panel-head">
           <img class="service-logo" src="assets/tsunami-service-icon.png" alt="Tsunami icon" width="48" height="42" loading="lazy">
-          <div><h2 id="tsunami-title">Tsunami Advisory</h2><p class="panel-kicker">Indian Tsunami Early Warning Centre</p></div>
+          <div><h2 id="tsunami-title" data-i18n="tsunami.title">Tsunami Advisory</h2><p class="panel-kicker" data-i18n="tsunami.kicker">Indian Tsunami Early Warning Centre</p></div>
           <a class="source card-action-button itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWC ↗</a>
         </div>
-        <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage">Checking ITEWC Tsunami threat status.....</strong></div><span id="tsunamiCaption">Last Checked —</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
+        <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage" data-i18n="tsunami.checking">Checking ITEWC Tsunami threat status.....</strong></div><span id="tsunamiCaption">Last Checked —</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel seismic-card" aria-labelledby="seismic-title">
-        <div class="panel-head"><img class="service-logo" src="assets/earthquake-network-icon.png" alt="Earthquake Network icon" width="48" height="42" loading="lazy"><div><h2 id="seismic-title">Latest seismic activity ≥ 6.5M</h2></div><a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div>
-        <div class="seismic-message-wrap" id="seismicMessageWrap"><div class="seismic-message-copy"><button class="seismic-event-link" id="seismicMessage" type="button" disabled>Checking Latest Seismic Activity magnitude &gt;= 6.5M</button><div class="seismic-additional" id="seismicAdditional"></div></div></div>
+        <div class="panel-head"><img class="service-logo" src="assets/earthquake-network-icon.png" alt="Earthquake Network icon" width="48" height="42" loading="lazy"><div><h2 id="seismic-title" data-i18n="seismic.title">Latest seismic activity ≥ 6.5M</h2></div><a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div>
+        <div class="seismic-message-wrap" id="seismicMessageWrap"><div class="seismic-message-copy"><button class="seismic-event-link" id="seismicMessage" type="button" disabled data-i18n="seismic.checking">Checking Latest Seismic Activity magnitude &gt;= 6.5M</button><div class="seismic-additional" id="seismicAdditional"></div></div></div>
       </section>
 
       <section class="panel storm-card" aria-labelledby="surge-title">
         <div class="panel-head">
           <img class="service-logo" src="assets/storm-surge-icon.png" alt="Storm surge icon" width="48" height="42" loading="lazy">
-          <div><h2 id="surge-title">Storm Surge Advisory</h2><p class="panel-kicker">Coastal inundation</p></div>
+          <div><h2 id="surge-title" data-i18n="storm.title">Storm Surge Advisory</h2><p class="panel-kicker" data-i18n="osf.storm_surge_kicker">Coastal inundation</p></div>
           <a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
         </div>
-        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage">Checking active storm surge status.....</strong></div><span id="stormCaption">Official ITEWC bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
+        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage" data-i18n="storm.checking">Checking active storm surge status.....</strong></div><span id="stormCaption" data-i18n="storm.caption">Official ITEWC bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel cyclone-card" aria-labelledby="cyclone-title">
@@ -141,23 +149,23 @@
           <div class="cyclone-heading">
             <img class="cyclone-icon" src="assets/cyclone-service-icon.png" alt="Cyclone icon" width="38" height="38" loading="lazy">
             <div class="cyclone-heading-copy">
-              <h2 id="cyclone-title">Cyclone Advisory</h2>
-              <p class="panel-kicker">INCOIS-IMD Joint Bulletin</p>
+              <h2 id="cyclone-title" data-i18n="cyclone.title">Cyclone Advisory</h2>
+              <p class="panel-kicker" data-i18n="cyclone.kicker">INCOIS-IMD Joint Bulletin</p>
             </div>
           </div>
         </div>
-        <div class="joint-bulletin-source-row"><a class="source card-action-button joint-bulletin-source" id="jointBulletinLink" href="https://www.incois.gov.in/site/services/jointbulletin.jsp" target="_blank" rel="noopener">Joint Bulletin ↗</a></div>
+        <div class="joint-bulletin-source-row"><a class="source card-action-button joint-bulletin-source" id="jointBulletinLink" href="https://www.incois.gov.in/site/services/jointbulletin.jsp" target="_blank" rel="noopener" data-i18n="joint_bulletin.title">Joint Bulletin ↗</a></div>
         <article class="joint-bulletin-card" id="jointBulletinCard" aria-live="polite">
-          <span class="joint-bulletin-info-mark" aria-hidden="true">i</span><div class="joint-bulletin-copy"><a class="joint-bulletin-message" id="jointBulletinMessage" target="_blank" rel="noopener">No INCOIS-IMD joint bulletin is currently available.</a><time class="joint-bulletin-time" id="jointBulletinTime" hidden></time></div>
+          <span class="joint-bulletin-info-mark" aria-hidden="true">i</span><div class="joint-bulletin-copy"><a class="joint-bulletin-message" id="jointBulletinMessage" target="_blank" rel="noopener" data-i18n="joint_bulletin.none">No INCOIS-IMD joint bulletin is currently available.</a><time class="joint-bulletin-time" id="jointBulletinTime" hidden></time></div>
         </article>
-        <div class="cyclone-status level-safe" id="cycloneStatus"><div class="cyclone-status-copy"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage">When checked IMD CAP Alerts feed.</p><time id="cycloneIssued"></time></div><a class="source card-action-button cyclone-imd-source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
+        <div class="cyclone-status level-safe" id="cycloneStatus"><div class="cyclone-status-copy"><strong id="cycloneMessageTitle" data-i18n="cyclone.safe">No active cyclone advisory</strong><p id="cycloneMessage" data-i18n="cyclone.checked">When checked IMD CAP Alerts feed.</p><time id="cycloneIssued"></time></div><a class="source card-action-button cyclone-imd-source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
       </section>
 
       <section class="panel pfz-card" aria-labelledby="pfz-title">
         <div class="panel-head">
           <img class="service-logo" src="assets/potential-fishing-zone-icon.jpg" alt="Fish swimming in ocean currents" width="48" height="42" loading="lazy">
-          <div><h2 id="pfz-title" class="pfz-title">Potential Fishing Zone</h2><p class="panel-kicker">Today’s advisory sectors</p></div>
-          <div class="osf-map-actions"><button class="source card-action-button pfz-gps-button" id="pfzGpsBtn" type="button" aria-label="Calculate compass bearing and nautical miles to nearest PFZ">📍 Near Me</button><button class="source card-action-button osf-map-button pfz-map-button" id="openPfzMap" type="button">Visualize</button><a class="source card-action-button pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a></div>
+          <div><h2 id="pfz-title" class="pfz-title" data-i18n="pfz.title">Potential Fishing Zone</h2><p class="panel-kicker" data-i18n="pfz.kicker">Today’s advisory sectors</p></div>
+          <div class="osf-map-actions"><button class="source card-action-button pfz-gps-button" id="pfzGpsBtn" type="button" aria-label="Calculate compass bearing and nautical miles to nearest PFZ" data-i18n="pfz.near_me">📍 Near Me</button><button class="source card-action-button osf-map-button pfz-map-button" id="openPfzMap" type="button" data-i18n="osf.visualize">Visualize</button><a class="source card-action-button pfz-source" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&amp;request_locale=en" target="_blank" rel="noopener">PFZ ↗</a></div>
         </div>
         <p class="pfz-date" id="pfzDate">Forecast — · Valid through —</p>
         <div id="pfzLockedBar" class="pfz-locked-bar" hidden></div>
@@ -167,20 +175,20 @@
       </section>
 
       <section class="panel other-advisories-card" aria-labelledby="other-advisories-title">
-        <div class="panel-head"><div><h2 id="other-advisories-title">Other Marine Advisories</h2></div></div>
+        <div class="panel-head"><div><h2 id="other-advisories-title" data-i18n="other.title">Other Marine Advisories</h2></div></div>
         <nav class="marine-advisory-links" aria-label="Other marine advisory services">
-          <button class="marine-advisory-chip mhw-chip-first" id="openMarineHeatWave" type="button">Marine Heat Wave (MHW)</button>
-          <button class="marine-advisory-chip tchp-chip-second" id="openTchpDialog" type="button">Cyclone Heat (TCHP)</button>
-          <button class="marine-advisory-chip cbas-chip-third" id="openCoralBleaching" type="button">Coral Bleaching Alert (CBAS)</button>
-          <a class="marine-advisory-chip" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=2&amp;request_locale=en" target="_blank" rel="noopener">Tuna ↗</a>
-          <a class="marine-advisory-chip" href="https://incois.gov.in/oceanservices/Hilsa/index.jsp" target="_blank" rel="noopener">Hilsa ↗</a>
-          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/hab_products.jsp" target="_blank" rel="noopener">Harmful Algal Bloom ↗</a>
-          <a class="marine-advisory-chip" href="https://oosa.incois.gov.in/OOSA/" target="_blank" rel="noopener">Oil Spill (OOSA) ↗</a>
-          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/SVA_overview.jsp" target="_blank" rel="noopener">Small Vessel (SVAS) ↗</a>
-          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/sarat/home.jsp" target="_blank" rel="noopener">SARAT ↗</a>
-          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/OSF/" target="_blank" rel="noopener">Ports &amp; Harbors ↗</a>
-          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/shipforecast/Login.jsp" target="_blank" rel="noopener">Ship Route Forecast ↗</a>
-          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/lsf.jsp" target="_blank" rel="noopener">Location Specific Forecast ↗</a>
+          <button class="marine-advisory-chip mhw-chip-first" id="openMarineHeatWave" type="button" data-i18n="other.mhw">Marine Heat Wave (MHW)</button>
+          <button class="marine-advisory-chip tchp-chip-second" id="openTchpDialog" type="button" data-i18n="other.tchp">Cyclone Heat (TCHP)</button>
+          <button class="marine-advisory-chip cbas-chip-third" id="openCoralBleaching" type="button" data-i18n="other.cbas">Coral Bleaching Alert (CBAS)</button>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=2&amp;request_locale=en" target="_blank" rel="noopener" data-i18n="other.tuna">Tuna ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/oceanservices/Hilsa/index.jsp" target="_blank" rel="noopener" data-i18n="other.hilsa">Hilsa ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/hab_products.jsp" target="_blank" rel="noopener" data-i18n="other.hab">Harmful Algal Bloom ↗</a>
+          <a class="marine-advisory-chip" href="https://oosa.incois.gov.in/OOSA/" target="_blank" rel="noopener" data-i18n="other.oil_spill">Oil Spill (OOSA) ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/SVA_overview.jsp" target="_blank" rel="noopener" data-i18n="other.svas">Small Vessel (SVAS) ↗</a>
+          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/sarat/home.jsp" target="_blank" rel="noopener" data-i18n="other.sarat">SARAT ↗</a>
+          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/OSF/" target="_blank" rel="noopener" data-i18n="other.ports">Ports &amp; Harbors ↗</a>
+          <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/shipforecast/Login.jsp" target="_blank" rel="noopener" data-i18n="other.ship_route">Ship Route Forecast ↗</a>
+          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/lsf.jsp" target="_blank" rel="noopener" data-i18n="other.location_specific">Location Specific Forecast ↗</a>
         </nav>
       </section>
 
@@ -199,64 +207,64 @@
   <dialog class="advisory-dialog" id="advisoryDialog" aria-labelledby="advisoryDialogTitle">
     <div class="advisory-dialog-head">
       <div>
-        <h2 id="advisoryDialogTitle">District Advisories</h2>
-        <p id="advisoryDialogMeta">Coastal district guidance</p>
+        <h2 id="advisoryDialogTitle" data-i18n="dialog.district_advisories">District Advisories</h2>
+        <p id="advisoryDialogMeta" data-i18n="dialog.district_guidance">Coastal district guidance</p>
       </div>
-      <div class="dialog-head-actions"><button class="dialog-share" id="shareAdvisoryDialog" type="button" aria-label="Share this OSF advisory">Share</button><button class="dialog-close" id="advisoryDialogClose" type="button" aria-label="Close district advisories">&times;</button></div>
+      <div class="dialog-head-actions"><button class="dialog-share" id="shareAdvisoryDialog" type="button" aria-label="Share this OSF advisory" data-i18n="dialog.share">Share</button><button class="dialog-close" id="advisoryDialogClose" type="button" aria-label="Close district advisories">&times;</button></div>
     </div>
     <div class="advisory-details" id="advisoryDetails"></div>
   </dialog>
   <dialog class="advisory-dialog" id="marineHeatWaveDialog" aria-labelledby="marineHeatWaveTitle">
-    <div class="advisory-dialog-head"><div><h2 id="marineHeatWaveTitle">Marine Heat Wave</h2><p>Official INCOIS Regional Observations</p></div><button class="dialog-close" id="marineHeatWaveClose" type="button" aria-label="Close Marine Heat Wave message">&times;</button></div>
+    <div class="advisory-dialog-head"><div><h2 id="marineHeatWaveTitle" data-i18n="mhw.title">Marine Heat Wave</h2><p data-i18n="mhw.subtitle">Official INCOIS Regional Observations</p></div><button class="dialog-close" id="marineHeatWaveClose" type="button" aria-label="Close Marine Heat Wave message">&times;</button></div>
     <div class="advisory-details">
       <div id="marineHeatWaveCards" class="marine-heat-wave-cards" style="display:grid;gap:9px"></div>
-      <a class="source" href="https://incois.gov.in/oceanservices/mhw/index.jsp" target="_blank" rel="noopener">Open Marine Heat Wave page ↗</a>
+      <a class="source" href="https://incois.gov.in/oceanservices/mhw/index.jsp" target="_blank" rel="noopener" data-i18n="mhw.open_page">Open Marine Heat Wave page ↗</a>
     </div>
   </dialog>
   <dialog class="advisory-dialog coral-dialog" id="coralBleachingDialog" aria-labelledby="coralBleachingTitle">
     <div class="advisory-dialog-head">
       <div>
-        <h2 id="coralBleachingTitle">🪸 Coral Bleaching Alert System</h2>
-        <p id="coralBleachingMeta">INCOIS CBAS · Satellite Thermal Stress Monitoring</p>
+        <h2 id="coralBleachingTitle" data-i18n="cbas.title">🪸 Coral Bleaching Alert System</h2>
+        <p id="coralBleachingMeta" data-i18n="cbas.subtitle">INCOIS CBAS · Satellite Thermal Stress Monitoring</p>
       </div>
       <button class="dialog-close" id="coralBleachingClose" type="button" aria-label="Close Coral Bleaching Dialog">&times;</button>
     </div>
     <div class="advisory-details">
       <div id="coralBleachingCards" class="coral-regions-grid"></div>
       <div class="coral-guide-box">
-        <strong>ℹ️ What do these metrics mean?</strong>
-        <p><strong>HotSpot (HS):</strong> Instantaneous Sea Surface Temperature (SST) anomaly above the maximum monthly mean — indicates immediate thermal stress.</p>
-        <p><strong>Degree of Heating Weeks (DHW):</strong> Thermal stress accumulated over a 12-week window (°C-weeks) — indicates bleaching severity and potential mortality risk.</p>
+        <strong data-i18n="cbas.guide_title">ℹ️ What do these metrics mean?</strong>
+        <p><strong data-i18n="cbas.hotspot_lbl">HotSpot (HS):</strong> <span data-i18n="cbas.hotspot_def">Instantaneous Sea Surface Temperature (SST) anomaly above the maximum monthly mean — indicates immediate thermal stress.</span></p>
+        <p><strong data-i18n="cbas.dhw_lbl">Degree of Heating Weeks (DHW):</strong> <span data-i18n="cbas.dhw_def">Thermal stress accumulated over a 12-week window (°C-weeks) — indicates bleaching severity and potential mortality risk.</span></p>
       </div>
       <div class="coral-dialog-actions">
-        <a class="source card-action-button" id="coralMapLink" href="https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg" target="_blank" rel="noopener">🗺️ View National Stress Map ↗</a>
-        <a class="source card-action-button" href="https://incois.gov.in/site/services/coralwarning.jsp" target="_blank" rel="noopener">Official CBAS Portal ↗</a>
+        <a class="source card-action-button" id="coralMapLink" href="https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg" target="_blank" rel="noopener" data-i18n="cbas.view_map">🗺️ View National Stress Map ↗</a>
+        <a class="source card-action-button" href="https://incois.gov.in/site/services/coralwarning.jsp" target="_blank" rel="noopener" data-i18n="cbas.official_portal">Official CBAS Portal ↗</a>
       </div>
     </div>
   </dialog>
   <dialog class="advisory-dialog tchp-dialog" id="tchpDialog" aria-labelledby="tchpDialogTitle">
     <div class="advisory-dialog-head">
       <div>
-        <h2 id="tchpDialogTitle">🌪️ Tropical Cyclone Heat Potential (TCHP)</h2>
-        <p id="tchpDialogMeta">INCOIS-ROMS 5-Day Ocean Thermal Energy Forecast</p>
+        <h2 id="tchpDialogTitle" data-i18n="tchp.title">🌪️ Tropical Cyclone Heat Potential (TCHP)</h2>
+        <p id="tchpDialogMeta" data-i18n="tchp.subtitle">INCOIS-ROMS 5-Day Ocean Thermal Energy Forecast</p>
       </div>
       <button class="dialog-close" id="tchpDialogClose" type="button" aria-label="Close TCHP dialog">&times;</button>
     </div>
     <div class="advisory-details">
       <div class="tchp-param-tabs" role="tablist">
-        <button type="button" class="tchp-tab-btn active" data-param="tchp">TCHP (kJ/cm²)</button>
-        <button type="button" class="tchp-tab-btn" data-param="sst">SST (°C)</button>
-        <button type="button" class="tchp-tab-btn" data-param="ssha">SSHA (m)</button>
+        <button type="button" class="tchp-tab-btn active" data-param="tchp" data-i18n="tchp.tab_tchp">TCHP (kJ/cm²)</button>
+        <button type="button" class="tchp-tab-btn" data-param="sst" data-i18n="tchp.tab_sst">SST (°C)</button>
+        <button type="button" class="tchp-tab-btn" data-param="ssha" data-i18n="tchp.tab_ssha">SSHA (m)</button>
       </div>
       <div class="tchp-viewer-container">
         <div class="tchp-image-wrap">
           <img id="tchpImageDisplay" class="tchp-frame-image" src="" alt="INCOIS TCHP Forecast Frame">
-          <div id="tchpLoadingOverlay" class="tchp-loading-overlay"><span>Loading forecast map…</span></div>
+          <div id="tchpLoadingOverlay" class="tchp-loading-overlay"><span data-i18n="tchp.loading">Loading forecast map…</span></div>
         </div>
         <div class="tchp-player-controls">
           <div class="tchp-playback-btns">
             <button type="button" id="tchpPrevBtn" class="tchp-ctrl-btn" title="Previous 3h frame">⏮</button>
-            <button type="button" id="tchpPlayPauseBtn" class="tchp-ctrl-btn tchp-play-btn" title="Play / Pause Animation">▶ Play</button>
+            <button type="button" id="tchpPlayPauseBtn" class="tchp-ctrl-btn tchp-play-btn" title="Play / Pause Animation" data-i18n="tchp.play">▶ Play</button>
             <button type="button" id="tchpNextBtn" class="tchp-ctrl-btn" title="Next 3h frame">⏭</button>
           </div>
           <div class="tchp-slider-row">
@@ -266,13 +274,13 @@
         </div>
       </div>
       <div class="tchp-guide-box">
-        <strong>ℹ️ Cyclone Intensification Energy Guide:</strong>
+        <strong data-i18n="tchp.guide_title">ℹ️ Cyclone Intensification Energy Guide:</strong>
         <div class="tchp-threshold-grid">
-          <div class="tchp-th-item safe"><span>&lt; 50 kJ/cm²</span><strong>Low / Unfavorable</strong></div>
-          <div class="tchp-th-item watch"><span>50 - 80 kJ/cm²</span><strong>Moderate / Favorable</strong></div>
-          <div class="tchp-th-item alert"><span>&gt; 80 kJ/cm²</span><strong>⚠️ Rapid Intensification</strong></div>
+          <div class="tchp-th-item safe"><span>&lt; 50 kJ/cm²</span><strong data-i18n="tchp.low_unfavorable">Low / Unfavorable</strong></div>
+          <div class="tchp-th-item watch"><span>50 - 80 kJ/cm²</span><strong data-i18n="tchp.moderate_favorable">Moderate / Favorable</strong></div>
+          <div class="tchp-th-item alert"><span>&gt; 80 kJ/cm²</span><strong data-i18n="tchp.rapid_intensification">⚠️ Rapid Intensification</strong></div>
         </div>
-        <p>Tropical Cyclone Heat Potential measures integrated upper-ocean thermal energy down to the 26°C isotherm. High TCHP (&gt;80 kJ/cm²) prevents cyclone-induced cooling and fuels severe cyclone intensification.</p>
+        <p data-i18n="tchp.guide_desc">Tropical Cyclone Heat Potential measures integrated upper-ocean thermal energy down to the 26°C isotherm. High TCHP (&gt;80 kJ/cm²) prevents cyclone-induced cooling and fuels severe cyclone intensification.</p>
       </div>
       <div class="tchp-dialog-actions">
         <a class="source card-action-button" href="https://incois.gov.in/oceanservices/tchpgodas.jsp" target="_blank" rel="noopener">🗺️ Open GODAS Live GIS Map ↗</a>
@@ -281,14 +289,14 @@
     </div>
   </dialog>
   <dialog class="osf-map-dialog" id="osfMapDialog" aria-labelledby="osfMapTitle">
-    <div class="advisory-dialog-head"><div><h2 id="osfMapTitle">Ocean State Forecast Map</h2><p id="osfMapMeta">High Wave · Swell Surge · Ocean Currents</p></div><div class="dialog-head-actions"><button class="dialog-close" id="osfMapClose" type="button" aria-label="Close OSF map">&times;</button></div></div>
+    <div class="advisory-dialog-head"><div><h2 id="osfMapTitle" data-i18n="map.osf_title">Ocean State Forecast Map</h2><p id="osfMapMeta" data-i18n="map.osf_subtitle">High Wave · Swell Surge · Ocean Currents</p></div><div class="dialog-head-actions"><button class="dialog-close" id="osfMapClose" type="button" aria-label="Close OSF map">&times;</button></div></div>
     <div class="osf-map-body">
       <div class="osf-map-toolbar">
         <div class="osf-map-legend" aria-label="Severity legend">
-          <span><i style="background:#FF0000"></i>Warning</span>
-          <span><i style="background:#FF8C00"></i>Alert</span>
-          <span><i style="background:#FAFA33"></i>Watch</span>
-          <span><i style="background:#238269"></i>No Threat</span>
+          <span><i style="background:#FF0000"></i><span data-i18n="severity.warning">Warning</span></span>
+          <span><i style="background:#FF8C00"></i><span data-i18n="severity.alert">Alert</span></span>
+          <span><i style="background:#FAFA33"></i><span data-i18n="severity.watch">Watch</span></span>
+          <span><i style="background:#238269"></i><span data-i18n="severity.no_threat">No Threat</span></span>
         </div>
         <div class="osf-thermal-legend" id="osfSstLegend" style="display:none;">
           <span>🌡️ <strong>SST</strong>:</span>
@@ -305,28 +313,28 @@
       <div id="osfTideBanner" class="osf-tide-status-banner" hidden>
         <div class="osf-tide-banner-content">
           <div class="osf-tide-banner-header">
-            <span class="osf-tide-banner-title">🌊 Tidal Status</span>
+            <span class="osf-tide-banner-title" data-i18n="tide.status_title">🌊 Tidal Status</span>
             <span class="osf-tide-banner-regime" id="osfTideBannerRegime">Spring Tide</span>
           </div>
           <div class="osf-tide-banner-row">
-            <span class="osf-tide-banner-label">Tide Type:</span>
+            <span class="osf-tide-banner-label" data-i18n="tide.type_label">Tide Type:</span>
             <strong class="osf-tide-banner-val" id="osfTideBannerType">Spring Tide</strong>
           </div>
         </div>
       </div>
-      <p class="osf-map-note" id="osfMapShareStatus">Markers represent state-level advisory records fetched from INCOIS. Use the layer control to select services.</p>
+      <p class="osf-map-note" id="osfMapShareStatus" data-i18n="map.osf_note">Markers represent state-level advisory records fetched from INCOIS. Use the layer control to select services.</p>
     </div>
   </dialog>
   <dialog class="pfz-map-dialog" id="pfzMapDialog" aria-labelledby="pfzMapTitle">
-    <div class="advisory-dialog-head"><div><h2 id="pfzMapTitle">Potential Fishing Zone Map</h2><p id="pfzMapMeta">Official INCOIS PFZ vector layers</p></div><div class="dialog-head-actions"><button class="dialog-close" id="pfzMapClose" type="button" aria-label="Close PFZ map">&times;</button></div></div>
-    <div class="pfz-map-body"><div class="osf-map-toolbar"><div class="pfz-map-legend" aria-label="PFZ map legend"><span><i class="pfz-line-swatch"></i>PFZ forecast lines</span><span><i class="pfz-sector-swatch"></i>Sectors</span><span><i class="pfz-eez-swatch"></i>EEZ</span><span><i class="pfz-centre-swatch"></i>Landing centres</span><span><i class="pfz-chlorophyll-swatch" style="background:#2ca02c"></i>Chlorophyll-a</span></div></div><div class="pfz-map-canvas" id="pfzMapCanvas" aria-label="Interactive Potential Fishing Zone map"></div></div>
+    <div class="advisory-dialog-head"><div><h2 id="pfzMapTitle" data-i18n="map.pfz_title">Potential Fishing Zone Map</h2><p id="pfzMapMeta" data-i18n="map.pfz_subtitle">Official INCOIS PFZ vector layers</p></div><div class="dialog-head-actions"><button class="dialog-close" id="pfzMapClose" type="button" aria-label="Close PFZ map">&times;</button></div></div>
+    <div class="pfz-map-body"><div class="osf-map-toolbar"><div class="pfz-map-legend" aria-label="PFZ map legend"><span><i class="pfz-line-swatch"></i><span data-i18n="map.pfz_lines">PFZ forecast lines</span></span><span><i class="pfz-sector-swatch"></i><span data-i18n="map.pfz_sectors">Sectors</span></span><span><i class="pfz-eez-swatch"></i><span data-i18n="map.pfz_eez">EEZ</span></span><span><i class="pfz-centre-swatch"></i><span data-i18n="map.pfz_centers">Landing centres</span></span><span><i class="pfz-chlorophyll-swatch" style="background:#2ca02c"></i><span data-i18n="map.pfz_chlorophyll">Chlorophyll-a</span></span></div></div><div class="pfz-map-canvas" id="pfzMapCanvas" aria-label="Interactive Potential Fishing Zone map"></div></div>
   </dialog>
   <dialog class="share-dialog" id="shareDialog" aria-labelledby="shareDialogTitle">
     <div class="advisory-dialog-head">
       <img class="share-dialog-logo" src="icons/ocean-watch-v3-192.png" alt="Ocean Watch logo" width="48" height="48" loading="lazy">
       <div class="share-dialog-heading">
-        <h2 id="shareDialogTitle">Share Ocean Watch</h2>
-        <p>Scan the QR code or share the page link</p>
+        <h2 id="shareDialogTitle" data-i18n="share.title">Share Ocean Watch</h2>
+        <p data-i18n="share.subtitle">Scan the QR code or share the page link</p>
       </div>
       <button class="dialog-close" id="shareDialogClose" type="button" aria-label="Close share dialog">&times;</button>
     </div>
@@ -334,8 +342,8 @@
       <div class="share-qr" id="shareQr" aria-label="QR code for Ocean Watch"></div>
       <p class="share-url" id="shareUrl"></p>
       <div class="share-actions">
-        <button class="share-action" id="copyShareLink" type="button">Copy link</button>
-        <button class="share-action" id="nativeShare" type="button">Share</button>
+        <button class="share-action" id="copyShareLink" type="button" data-i18n="share.copy">Copy link</button>
+        <button class="share-action" id="nativeShare" type="button" data-i18n="dialog.share">Share</button>
       </div>
       <p class="share-copy-status" id="shareCopyStatus" aria-live="polite"></p>
     </div>
@@ -343,8 +351,8 @@
   <dialog class="advisory-dialog notification-dialog" id="notificationDialog" aria-labelledby="notificationDialogTitle">
     <div class="advisory-dialog-head">
       <div>
-        <h2 id="notificationDialogTitle">Advisory Notifications</h2>
-        <p>Real-time alerts for Warnings &amp; Bulletins</p>
+        <h2 id="notificationDialogTitle" data-i18n="notify.title">Advisory Notifications</h2>
+        <p data-i18n="notify.subtitle">Real-time alerts for Warnings &amp; Bulletins</p>
       </div>
       <button class="dialog-close" id="notificationDialogClose" type="button" aria-label="Close notifications settings">&times;</button>
     </div>
@@ -352,36 +360,36 @@
       <div class="notification-status-card" id="notificationStatusCard">
         <span class="notification-status-icon" id="notificationStatusIcon">🔔</span>
         <div class="notification-status-copy">
-          <strong id="notificationStatusTitle">Enable Web Alerts</strong>
-          <p id="notificationStatusDesc">Receive instant alerts on your device when new warnings or official bulletins are issued.</p>
+          <strong id="notificationStatusTitle" data-i18n="notify.enable_title">Enable Web Alerts</strong>
+          <p id="notificationStatusDesc" data-i18n="notify.enable_desc">Receive instant alerts on your device when new warnings or official bulletins are issued.</p>
         </div>
-        <button class="notification-toggle-btn" id="notificationToggleBtn" type="button">Enable</button>
+        <button class="notification-toggle-btn" id="notificationToggleBtn" type="button" data-i18n="notify.enable_btn">Enable</button>
       </div>
       <div class="notification-options" id="notificationOptions">
-        <h3>Alert Preferences</h3>
+        <h3 data-i18n="notify.preferences">Alert Preferences</h3>
         <label class="notification-option">
           <input type="checkbox" id="notifyWarnings" checked>
-          <span><strong>High Wave &amp; Swell Warnings (Red)</strong><small>Critical sea state warnings</small></span>
+          <span><strong data-i18n="notify.opt_warnings">High Wave &amp; Swell Warnings (Red)</strong><small data-i18n="notify.opt_warnings_sub">Critical sea state warnings</small></span>
         </label>
         <label class="notification-option">
           <input type="checkbox" id="notifyAlerts" checked>
-          <span><strong>High Wave &amp; Swell Alerts (Orange)</strong><small>Elevated sea state alerts</small></span>
+          <span><strong data-i18n="notify.opt_alerts">High Wave &amp; Swell Alerts (Orange)</strong><small data-i18n="notify.opt_alerts_sub">Elevated sea state alerts</small></span>
         </label>
         <label class="notification-option">
           <input type="checkbox" id="notifyTsunami" checked>
-          <span><strong>Tsunami Bulletins</strong><small>Official ITEWC bulletins and warnings</small></span>
+          <span><strong data-i18n="notify.opt_tsunami">Tsunami Bulletins</strong><small data-i18n="notify.opt_tsunami_sub">Official ITEWC bulletins and warnings</small></span>
         </label>
         <label class="notification-option">
           <input type="checkbox" id="notifyCyclone" checked>
-          <span><strong>Cyclone &amp; Joint Bulletins</strong><small>IMD/INCOIS cyclone advisories</small></span>
+          <span><strong data-i18n="notify.opt_cyclone">Cyclone &amp; Joint Bulletins</strong><small data-i18n="notify.opt_cyclone_sub">IMD/INCOIS cyclone advisories</small></span>
         </label>
         <label class="notification-option">
           <input type="checkbox" id="notifyStormSurge" checked>
-          <span><strong>Storm Surge Bulletins</strong><small>Coastal inundation bulletins</small></span>
+          <span><strong data-i18n="notify.opt_storm">Storm Surge Bulletins</strong><small data-i18n="notify.opt_storm_sub">Coastal inundation bulletins</small></span>
         </label>
       </div>
       <div class="notification-test-row">
-        <button class="notification-test-btn" id="notificationTestBtn" type="button">Send Test Alert</button>
+        <button class="notification-test-btn" id="notificationTestBtn" type="button" data-i18n="notify.send_test">Send Test Alert</button>
       </div>
     </div>
   </dialog>
@@ -392,11 +400,11 @@
 >
   <div class="advisory-dialog-head">
     <div>
-      <h2 id="seismicDialogTitle">Earthquake bulletin details</h2>
-      <p id="seismicDialogMeta">Official ITEWC information</p>
+      <h2 id="seismicDialogTitle" data-i18n="seismic.dialog_title">Earthquake bulletin details</h2>
+      <p id="seismicDialogMeta" data-i18n="seismic.dialog_meta">Official ITEWC information</p>
     </div>
 
-    <div class="dialog-head-actions"><button class="dialog-share" id="shareSeismicDialog" type="button" aria-label="Share earthquake bulletin and map">Share</button><button
+    <div class="dialog-head-actions"><button class="dialog-share" id="shareSeismicDialog" type="button" aria-label="Share earthquake bulletin and map" data-i18n="dialog.share">Share</button><button
       class="dialog-close"
       id="seismicDialogClose"
       type="button"
@@ -433,14 +441,14 @@
     <div class="bulletin-groups">
 
       <details class="bulletin-section">
-        <summary>ITEWC evaluation</summary>
+        <summary data-i18n="seismic.itewc_evaluation">ITEWC evaluation</summary>
         <div class="bulletin-content">
           <p id="eventEvaluation"></p>
         </div>
       </details>
 
       <details class="bulletin-section">
-        <summary>Advice</summary>
+        <summary data-i18n="seismic.advice">Advice</summary>
         <div class="bulletin-content">
           <p id="eventAdvice"></p>
         </div>
@@ -451,7 +459,7 @@
         id="eventUpdatesSection"
         hidden
       >
-        <summary>Updates</summary>
+        <summary data-i18n="seismic.updates">Updates</summary>
         <div class="bulletin-content">
           <p id="eventUpdates"></p>
         </div>
@@ -463,6 +471,7 @@
       class="bulletin-unavailable"
       id="eventBulletinUnavailable"
       hidden
+      data-i18n="seismic.unavailable"
     >
       No official ITEWC bulletin content is available for this event.
     </p>
@@ -473,6 +482,7 @@
       target="_blank"
       rel="noopener"
       hidden
+      data-i18n="seismic.open_bulletin"
     >
       Open official bulletin ↗
     </a>
@@ -482,16 +492,16 @@
   <dialog class="advisory-dialog voice-dialog" id="voiceSummaryDialog" aria-labelledby="voiceSummaryHeading">
     <div class="advisory-dialog-head">
       <div>
-        <h2 id="voiceSummaryHeading">Coastal Audio Bulletin</h2>
-        <p>Multilingual Voice Summary (INCOIS / ITEWC / IMD)</p>
+        <h2 id="voiceSummaryHeading" data-i18n="voice.dialog_title">Coastal Audio Bulletin</h2>
+        <p data-i18n="voice.dialog_subtitle">Multilingual Voice Summary (INCOIS / ITEWC / IMD)</p>
       </div>
       <button class="dialog-close" id="voiceSummaryClose" type="button" aria-label="Close audio summary">&times;</button>
     </div>
     <div class="advisory-details voice-dialog-body">
       <div class="voice-controls-row">
-        <label for="voiceLangSelect"><strong>Language:</strong></label>
+        <label for="voiceLangSelect"><strong data-i18n="voice.lang_label">Language:</strong></label>
         <select id="voiceLangSelect" class="voice-lang-select"></select>
-        <button id="voicePlayBtn" class="voice-play-button" type="button">▶ Play Audio</button>
+        <button id="voicePlayBtn" class="voice-play-button" type="button" data-i18n="voice.play_audio">▶ Play Audio</button>
       </div>
       <p id="voiceNotice" class="voice-notice" style="font-size:10px;margin:0;font-weight:700"></p>
       <article class="district-advisory voice-text-card">
@@ -503,14 +513,14 @@
   <dialog class="advisory-dialog compass-dialog" id="pfzCompassModal" aria-labelledby="pfzCompassTitle">
     <div class="advisory-dialog-head">
       <div>
-        <h2 id="pfzCompassTitle">🧭 Live Nautical Compass</h2>
-        <p>Device Location to PFZ Forecast Point</p>
+        <h2 id="pfzCompassTitle" data-i18n="compass.title">🧭 Live Nautical Compass</h2>
+        <p data-i18n="compass.subtitle">Device Location to PFZ Forecast Point</p>
       </div>
       <button class="dialog-close" id="pfzCompassClose" type="button" aria-label="Close compass dial">&times;</button>
     </div>
     <div class="advisory-details compass-dialog-body">
       <div class="compass-target-header">
-        <strong id="compassTargetTitle">PFZ Forecast Line Target</strong>
+        <strong id="compassTargetTitle" data-i18n="compass.target_line">PFZ Forecast Line Target</strong>
         <span id="compassSectorName" class="compass-sector-tag"></span>
       </div>
       
@@ -560,45 +570,46 @@
         </div>
       </div>
 
-      <div id="compassSteerAdvice" class="steer-badge on-course">🎯 CALCULATING COURSE…</div>
+      <div id="compassSteerAdvice" class="steer-badge on-course" data-i18n="compass.calc_course">🎯 CALCULATING COURSE…</div>
 
       <div class="compass-metrics-grid">
         <div class="compass-metric-card">
-          <small>Vessel Heading</small>
+          <small data-i18n="compass.heading">Vessel Heading</small>
           <strong id="compassShipHeading">000° N</strong>
         </div>
         <div class="compass-metric-card">
-          <small>Target Bearing</small>
+          <small data-i18n="compass.bearing">Target Bearing</small>
           <strong id="compassTargetBearing">—</strong>
         </div>
         <div class="compass-metric-card">
-          <small>Distance (Device to PFZ)</small>
+          <small data-i18n="compass.distance">Distance (Device to PFZ)</small>
           <strong id="compassTargetDist">—</strong>
         </div>
       </div>
 
       <div class="compass-slider-box">
-        <label for="compassManualSlider"><small>Rotate Heading (Sensor Simulator):</small></label>
+        <label for="compassManualSlider"><small data-i18n="compass.rotate_sensor">Rotate Heading (Sensor Simulator):</small></label>
         <input type="range" id="compassManualSlider" min="0" max="359" value="0" class="compass-slider">
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=224" defer></script>
-  <script src="js/app.js?v=224" defer></script>
-  <script src="js/share.js?v=224" defer></script>
-  <script src="js/map.js?v=224" defer></script>
-  <script src="js/pfz-map.js?v=224" defer></script>
-  <script src="js/pfz.js?v=224" defer></script>
-  <script src="js/advisory.js?v=224" defer></script>
-  <script src="js/tsunami.js?v=224" defer></script>
-  <script src="js/cyclone.js?v=224" defer></script>
-  <script src="js/seismic.js?v=224" defer></script>
-  <script src="js/port-tides.js?v=224" defer></script>
-  <script src="js/voice-summary.js?v=224" defer></script>
-  <script src="js/status.js?v=224" defer></script>
-  <script src="js/notifications.js?v=224" defer></script>
-  <script src="js/pwa.js?v=224" defer></script>
-  <script src="js/tchp.js?v=224" defer></script>
+  <script src="js/config.js?v=225" defer></script>
+  <script src="js/i18n.js?v=225" defer></script>
+  <script src="js/app.js?v=225" defer></script>
+  <script src="js/share.js?v=225" defer></script>
+  <script src="js/map.js?v=225" defer></script>
+  <script src="js/pfz-map.js?v=225" defer></script>
+  <script src="js/pfz.js?v=225" defer></script>
+  <script src="js/advisory.js?v=225" defer></script>
+  <script src="js/tsunami.js?v=225" defer></script>
+  <script src="js/cyclone.js?v=225" defer></script>
+  <script src="js/seismic.js?v=225" defer></script>
+  <script src="js/port-tides.js?v=225" defer></script>
+  <script src="js/voice-summary.js?v=225" defer></script>
+  <script src="js/status.js?v=225" defer></script>
+  <script src="js/notifications.js?v=225" defer></script>
+  <script src="js/pwa.js?v=225" defer></script>
+  <script src="js/tchp.js?v=225" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>

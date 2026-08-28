@@ -22,12 +22,13 @@ function renderTsunami(message, bulletin, recentBulletin = null, checkedAt = nul
       const status = ids('tsunamiStatus');
       status.classList.remove('advisory-safe','advisory-info','advisory-other','advisory-bulletin','advisory-warning','advisory-alert','advisory-watch');
       status.classList.add(noTsunami ? 'advisory-safe' : 'advisory-info');
-      const messageLink = ids('tsunamiMessage');
-      messageLink.textContent = noTsunami ? 'No Tsunami threat reported by ITEWC' : supportingBulletin?.message || message || 'Official ITEWC bulletin information';
+      const safeMsg = globalThis.i18n?.t('tsunami.safe', 'No active tsunami threat for India') || 'No active tsunami threat for India';
+      messageLink.textContent = noTsunami ? safeMsg : supportingBulletin?.message || message || 'Official ITEWC bulletin information';
       ids('tsunamiMark').textContent = noTsunami ? '✓' : 'i';
       const eventParts = supportingBulletin ? [supportingBulletin.magnitude ? `M${supportingBulletin.magnitude}` : '',supportingBulletin.location || '',[supportingBulletin.originDate,supportingBulletin.originTime].filter(Boolean).join(' ')].filter(Boolean) : [];
       const checkedText = checkedAt && !Number.isNaN(checkedAt.getTime()) ? checkedAt.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'}) : '—';
-      ids('tsunamiCaption').textContent = noTsunami ? `Last Checked ${checkedText}${checkedText === '—' ? '' : ' IST'}` : eventParts.length ? `Bulletin-${bulletinLabel} evaluation · Event: ${eventParts.join(' · ')}` : `Official ITEWC Bulletin-${bulletinLabel} evaluation`;
+      const lastCheckedLbl = globalThis.i18n?.t('tsunami.last_checked', 'Last Checked') || 'Last Checked';
+      ids('tsunamiCaption').textContent = noTsunami ? `${lastCheckedLbl} ${checkedText}${checkedText === '—' ? '' : ' IST'}` : eventParts.length ? `Bulletin-${bulletinLabel} evaluation · Event: ${eventParts.join(' · ')}` : `Official ITEWC Bulletin-${bulletinLabel} evaluation`;
       const link = ids('tsunamiBulletin');
       const bulletinUrl = supportingBulletin?.pdfUrl || supportingBulletin?.url;
       if (bulletinUrl) {

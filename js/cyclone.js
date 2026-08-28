@@ -9,10 +9,12 @@ function renderStormSurge(message, bulletin) {
       const status = ids('stormStatus');
       status.classList.remove('advisory-safe','advisory-info','advisory-other');
       status.classList.add(safe ? 'advisory-safe' : 'advisory-info');
-      ids('stormMessage').textContent = safe ? 'No active storm surge bulletin' : supportingBulletin?.message || message || 'Official ITEWC storm surge information';
+      const stormSafeMsg = globalThis.i18n?.t('storm.safe', 'No active storm surge bulletin') || 'No active storm surge bulletin';
+      ids('stormMessage').textContent = safe ? stormSafeMsg : supportingBulletin?.message || message || 'Official ITEWC storm surge information';
       ids('stormMark').textContent = safe ? '✓' : 'i';
       const eventParts = supportingBulletin ? [supportingBulletin.cyclone ? `Cyclone ${supportingBulletin.cyclone}` : '',supportingBulletin.issuedAt ? `Issued ${supportingBulletin.issuedAt} IST` : ''].filter(Boolean) : [];
-      ids('stormCaption').textContent = safe ? 'Official ITEWC bulletin feed when checked' : eventParts.join(' · ') || 'Official storm surge advice';
+      const stormCaptionSafe = globalThis.i18n?.t('storm.caption', 'Official ITEWC bulletin feed when checked') || 'Official ITEWC bulletin feed when checked';
+      ids('stormCaption').textContent = safe ? stormCaptionSafe : eventParts.join(' · ') || 'Official storm surge advice';
       const link = ids('stormBulletin');
       const bulletinUrl = supportingBulletin?.pdfUrl || supportingBulletin?.url;
       if (!safe && bulletinUrl) {
@@ -125,15 +127,18 @@ function renderStormSurge(message, bulletin) {
       const status = ids('cycloneStatus');
       status.classList.remove('level-safe','level-yellow','level-orange','level-red');
       status.classList.add(`level-${level}`);
-      ids('cycloneMessageTitle').textContent = cyclone?.title || 'No active cyclone advisory';
+      const cycloneSafeTitle = globalThis.i18n?.t('cyclone.safe', 'No active cyclone advisory') || 'No active cyclone advisory';
+      ids('cycloneMessageTitle').textContent = (level === 'safe' ? cycloneSafeTitle : cyclone?.title) || cycloneSafeTitle;
       const message = ids('cycloneMessage');
-      message.textContent = cyclone?.message || (level === 'safe' ? 'When checked IMD CAP Alerts feed.' : '');
+      const cycloneCheckedMsg = globalThis.i18n?.t('cyclone.checked', 'When checked IMD CAP Alerts feed.') || 'When checked IMD CAP Alerts feed.';
+      message.textContent = cyclone?.message || (level === 'safe' ? cycloneCheckedMsg : '');
       message.hidden = !message.textContent;
       const issued = ids('cycloneIssued');
       if (cyclone?.issuedAt) {
         const issuedDate = new Date(cyclone.issuedAt);
         issued.dateTime = cyclone.issuedAt;
-        issued.textContent = `Issued ${issuedDate.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+        const issuedLbl = globalThis.i18n?.t('severity.issued', 'Issued') || 'Issued';
+        issued.textContent = `${issuedLbl} ${issuedDate.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
       } else {
         issued.removeAttribute('datetime');
         issued.textContent = '';

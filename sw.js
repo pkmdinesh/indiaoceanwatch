@@ -12,6 +12,7 @@ const APP_SHELL = [
   './css/responsive.css',
   './css/print.css',
   './js/config.js',
+  './js/i18n.js',
   './js/app.js',
   './js/share.js',
   './js/map.js',

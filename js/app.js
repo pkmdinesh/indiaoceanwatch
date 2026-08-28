@@ -94,7 +94,7 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
         return chip;
       }));
       if (!active.length) {
-        const none=document.createElement('span'); none.className='announcement-active-none'; none.textContent='None'; container.replaceChildren(none);
+        const none=document.createElement('span'); none.className='announcement-active-none'; none.textContent=globalThis.i18n?.t('announcement.none', 'None') || 'None'; container.replaceChildren(none);
       }
       latestContainer.replaceChildren(...latest.flatMap((item,index) => {
         const link=document.createElement(item.url ? 'a' : 'span');
