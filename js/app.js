@@ -181,8 +181,8 @@ var dashboard = document.querySelector('.dashboard');
 async function initPageHitCounter() {
   const el = document.getElementById('hitCount');
   if (!el) return;
-  const BASE_OFFSET = 700;
   const config = globalThis.OCEAN_WATCH_CONFIG || {};
+  const BASE_OFFSET = typeof config.HIT_COUNTER_BASE_OFFSET === 'number' ? config.HIT_COUNTER_BASE_OFFSET : 727;
   const firebaseUrl = config.FIREBASE_COUNTER_URL;
 
   // Retrieve stored total or initialize at base offset
