@@ -27,7 +27,7 @@
     @media(max-width:520px){.header-actions{gap:4px}.header-actions .stamp{margin-right:auto}.voice-button,.notify-button,.share-button,.install-button{width:30px;height:30px;justify-content:center;padding:0}.voice-label,.notify-label,.share-label,.install-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
     .install-button{color:#fff;background:#082f3c;border-color:#082f3c;box-shadow:0 5px 14px rgba(8,47,60,.22)}.install-button .install-icon{color:#68e0e5}.install-button:hover,.install-button:focus-visible{color:#fff;background:#087f84;border-color:#087f84;box-shadow:0 7px 18px rgba(8,127,132,.3)}
     .ocean-brand{display:flex;align-items:center;gap:10px;flex:none;text-decoration:none}.brand-monogram{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;color:#fff;background:linear-gradient(145deg,#082f3c,#087f84);box-shadow:0 7px 18px rgba(8,47,60,.2);font:900 14px/1 Georgia,"Times New Roman",serif;letter-spacing:-.04em}.brand-copy{display:grid;gap:2px}.brand-copy strong{font:700 20px/1 Georgia,"Times New Roman",serif}.brand-copy small{color:var(--muted);font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.ocean-brand:hover .brand-monogram,.ocean-brand:focus-visible .brand-monogram{background:linear-gradient(145deg,#075f68,#0da0a6)}.ocean-brand:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:14px}
-    .brand-image{width:36px;height:36px;flex:none;border-radius:9px;object-fit:contain}
+    .brand-image{width:60px;height:60px;flex:none;border-radius:16px;object-fit:contain}
     @media(max-width:520px){.brand-copy strong{font-size:17px}}
     @media(min-width:851px){.ocean .forecast{height:calc(100% - 74px)}}
     .content{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start;padding:12px 14px}.content>.panel{padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:#f5f8f6}.content>.panel:last-child{border:1px solid var(--line)}.content .ocean,.content .pfz-card{grid-column:1/-1}.content .ocean .forecast{height:auto}.content .panel-head{display:flex;min-height:36px;align-items:center;flex-wrap:nowrap;padding-top:0}.content .panel-head>div{min-width:0}.content .panel-head h2{font-size:clamp(16px,1.5vw,21px)!important;white-space:normal;overflow-wrap:anywhere}.content .panel-head>.source{position:static;margin-left:auto;flex:none}.content .advisory-card,.content .cyclone-card,.content .storm-card,.content .seismic-card{display:flex;min-width:0;flex-direction:column}.content .tsunami-status,.content .storm-status,.content .cyclone-status{height:auto;min-height:46px;flex:1;padding:7px 9px}.tsunami-status.advisory-bulletin{color:var(--green)!important;background:var(--safe-bg)!important}.advisory-bulletin .safe-mark{color:#fff!important;background:var(--green)!important}.tsunami-message{display:block;color:currentColor;font-size:15px;font-weight:800}.seismic-message-wrap{display:flex;min-height:46px;flex:1;align-items:center;padding:7px 9px;border-radius:12px;background:var(--safe-bg)}.seismic-message-copy{min-width:0}.seismic-event-link{display:block;color:var(--ink);font-size:12px;font-weight:700;line-height:1.45;text-decoration:underline;text-underline-offset:2px}.seismic-message-wrap .seismic-additional{margin-top:4px}.seismic-additional .seismic-event-link{font-size:10px}.seismic-message-wrap .seismic-additional p{padding-left:0;border-left:0}.seismic-message-wrap.is-recent .seismic-event-link{color:var(--red);font-weight:850}.pfz-card .pfz-states{margin-top:8px}
@@ -347,25 +347,38 @@
 /* Locked Landing Center Banner & Actions */
 .pfz-locked-bar{margin-top:6px;margin-bottom:6px}
 .pfz-locked-bar[hidden]{display:none}
-.pfz-locked-banner-card{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:9px;background:#e8f4f2;border:1px solid #a3dcce;border-left:4px solid var(--teal)}
+.pfz-locked-banner-card{display:grid;gap:8px;padding:9px 12px;border-radius:10px;background:#e8f4f2;border:1px solid #a3dcce;border-left:5px solid var(--teal)}
+.pfz-locked-top-row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-bottom:6px;border-bottom:1px solid #cbe6df}
+.pfz-locked-top-row .locked-info{display:flex;align-items:center;gap:7px}
+.pfz-locked-top-row .locked-info strong{font-size:12.5px;color:var(--ink);display:block}
+.pfz-locked-top-row .locked-info span{font-size:10.5px;color:#35606a;font-weight:700}
 .locked-icon{font-size:16px;flex:none}
-.locked-info{display:grid;gap:1px;min-width:0;flex:1}
-.locked-info strong{color:var(--ink);font-size:11.5px}
-.locked-info span{color:var(--muted);font-size:10px;font-weight:700}
 .locked-actions{display:flex;align-items:center;gap:6px;flex:none}
-.pfz-compass-mini-btn,.pfz-unlock-btn,.pfz-open-compass-btn,.pfz-msg-compass-btn{padding:4px 8px;border-radius:6px;border:1px solid var(--teal);background:#fff;color:var(--teal);font-size:10.5px;font-weight:800;cursor:pointer;line-height:1.2;transition:background .15s,color .15s}
+.pfz-compass-mini-btn,.pfz-unlock-btn,.pfz-open-compass-btn,.pfz-msg-compass-btn{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:6px;border:1px solid var(--teal);background:#fff;color:var(--teal);font-size:11px;font-weight:800;cursor:pointer;line-height:1.2;transition:all .15s}
 .pfz-compass-mini-btn:hover,.pfz-open-compass-btn:hover,.pfz-msg-compass-btn:hover{background:var(--teal);color:#fff}
 .pfz-unlock-btn{border-color:#d9534f;color:#d9534f}
 .pfz-unlock-btn:hover{background:#d9534f;color:#fff}
 .tag.pfz-chip.has-locked{border-color:var(--teal);font-weight:900}
 .landing-chip.is-locked-chip{background:#d1e7dd;color:#0f5132;border:1.5px solid #a3cfbb;font-weight:900}
-.pfz-center-header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;margin-bottom:6px;background:#f8fafc;border-radius:7px;border:1px solid var(--line)}
-.pfz-center-title{display:grid;gap:1px}
-.pfz-center-title strong{font-size:12px;color:var(--ink)}
-.pfz-center-title span{font-size:10px;color:var(--muted);font-weight:700}
-.landing-lock-btn{padding:4px 9px;border-radius:6px;border:1px solid var(--teal);background:#fff;color:var(--teal);font-size:11px;font-weight:800;cursor:pointer;transition:all .15s}
+.pfz-center-header-row{display:grid;gap:8px;padding:10px 12px;margin-bottom:8px;background:#f8fafc;border-radius:10px;border:1px solid #d0e2dd}
+.pfz-center-top-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1px solid #e2ece9}
+.pfz-center-title{display:flex;align-items:center;gap:7px}
+.pfz-lc-icon{font-size:18px;flex:none}
+.pfz-lc-kicker{display:block;font-size:9.5px;font-weight:900;letter-spacing:.05em;color:var(--teal);text-transform:uppercase}
+.pfz-center-title strong{font-size:14px;color:var(--ink);display:block;line-height:1.2}
+.pfz-center-title small{font-size:10px;color:var(--muted);font-weight:700}
+.pfz-center-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.landing-lock-btn{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:6px;border:1px solid var(--teal);background:#fff;color:var(--teal);font-size:11px;font-weight:800;cursor:pointer;transition:all .15s}
 .landing-lock-btn:hover{background:var(--teal);color:#fff}
 .landing-lock-btn.locked{background:#0f5132;border-color:#0f5132;color:#fff}
+.pfz-compact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:8px;padding:4px 0}
+.pfz-compact-item{background:#fff;border:1px solid #e1ebe8;border-radius:8px;padding:7px 9px;display:grid;gap:2px;box-shadow:0 1px 3px rgba(8,47,60,.04)}
+.pfz-item-lbl{font-size:9.5px;font-weight:900;letter-spacing:.04em;color:#506d75;display:flex;align-items:center;gap:4px}
+.pfz-item-val{font-size:12px;font-weight:800;color:var(--ink);line-height:1.35}
+.pfz-item-sub{font-size:10.5px;color:var(--muted)}
+.pfz-item-sub b{color:var(--teal)}
+.pfz-msg-card{background:rgba(255,255,255,.8);border-radius:8px;padding:4px;border:1px solid rgba(0,0,0,.04)}
+.pfz-no-msg{font-size:11px;color:var(--muted);font-weight:700;padding:6px 2px}
 .pfz-message-nav-action{margin-top:8px;padding-top:6px;border-top:1px dashed var(--line);display:flex;justify-content:flex-end}
 
 /* Live Digital Nautical Compass Dial */
@@ -677,7 +690,7 @@
 .severity-board{min-height:200px}
 .forecast-card{min-height:280px}
 .severity-loading-placeholder,.tide-chart-placeholder{color:#718287;font-size:11px;font-style:italic;padding:12px 6px;text-align:center}
-.brand-image{width:36px;height:36px;aspect-ratio:1/1}
+.brand-image{width:60px;height:60px;border-radius:16px;aspect-ratio:1/1}
 .service-img,.service-logo{width:48px;height:42px;aspect-ratio:48/42}
 .cyclone-icon{width:38px;height:38px;aspect-ratio:1/1}
 .contact-image{width:100%;height:100%;aspect-ratio:16/9;object-fit:cover}

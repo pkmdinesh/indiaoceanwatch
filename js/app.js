@@ -103,7 +103,7 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
         link.title=item.detail;
         if (item.url) { link.href=item.url; link.target='_blank'; link.rel='noopener'; }
         if (!index) return [link];
-        const separator=document.createElement('span'); separator.className='announcement-latest-separator'; separator.textContent='/';
+        const separator=document.createElement('span'); separator.className='announcement-latest-separator'; separator.textContent='|';
         return [separator,link];
       }));
       card.classList.toggle('empty', active.length === 0 && latest.length === 0);

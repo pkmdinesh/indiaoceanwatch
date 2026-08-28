@@ -87,6 +87,40 @@ function renderPfzSectors(values) {
   }));
 }
 
+function formatDmsPretty(str) {
+  if (!str) return '—';
+  if (typeof str !== 'string') return String(str);
+  if (str.includes('°')) return str;
+  const parts = str.trim().split(/\s+/);
+  if (parts.length >= 4) {
+    return `${parts[0]}°${parts[1]}′${parts[2]}″ ${parts[3]}`;
+  }
+  return str;
+}
+
+function openCompassForMessage(message, centerName, sectorName) {
+  const targetLat = parseDmsCoordinate(message?.latitude);
+  const targetLon = parseDmsCoordinate(message?.longitude);
+  const bearingVal = parseFloat(message?.bearing) || 0;
+  const distVal = parseFloat(message?.distance) || 0;
+  const distNm = (distVal * 0.539957).toFixed(1);
+
+  openPfzCompassModal({
+    sourceLabel: `Nearest PFZ line from ${titleCase(centerName || '')}`,
+    targetSector: titleCase(sectorName || ''),
+    targetLat: targetLat,
+    targetLon: targetLon,
+    targetPoint: (targetLat != null && targetLon != null) ? { lat: targetLat, lon: targetLon } : null,
+    bearingDeg: Math.round(bearingVal),
+    cardinal: getCardinalFromDegrees(bearingVal),
+    distanceKm: distVal ? distVal.toFixed(1) : '',
+    distanceNm: distNm,
+    depth: message?.depth || '',
+    direction: message?.direction || '',
+    flcName: centerName
+  });
+}
+
 function renderLockedLandingCenterBar() {
   const banner = ids('pfzLockedBar');
   if (!banner) return;
@@ -97,17 +131,64 @@ function renderLockedLandingCenterBar() {
     return;
   }
 
+  // Refresh messages from latestPfzSectorsData if available
+  let messages = locked.messages || [];
+  if (latestPfzSectorsData && Array.isArray(latestPfzSectorsData)) {
+    const sec = latestPfzSectorsData.find(s => String(s.name || '').toLowerCase() === String(locked.sectorName || '').toLowerCase());
+    const lc = sec?.landingCenters?.find(c => String(c.name || '').toLowerCase() === String(locked.name || '').toLowerCase());
+    if (lc && lc.messages?.length) {
+      messages = lc.messages;
+    }
+  }
+
+  let messagesHtml = '';
+  if (messages.length > 0) {
+    messagesHtml = messages.map((msg, idx) => `
+      <div class="pfz-msg-card">
+        ${messages.length > 1 ? `<div style="font-size:10px; font-weight:800; color:var(--teal); margin-bottom:4px;">Target Line ${idx + 1}</div>` : ''}
+        <div class="pfz-compact-grid">
+          <div class="pfz-compact-item dir">
+            <span class="pfz-item-lbl">🧭 DIRECTION</span>
+            <strong class="pfz-item-val">${escapeHtml(msg.direction || '—')}</strong>
+            <small class="pfz-item-sub">Bearing: <b>${escapeHtml(msg.bearing ? msg.bearing + '°' : '—')}</b></small>
+          </div>
+          <div class="pfz-compact-item dist">
+            <span class="pfz-item-lbl">📏 DISTANCE</span>
+            <strong class="pfz-item-val">${escapeHtml(msg.distance ? (String(msg.distance).includes('km') ? msg.distance : msg.distance + ' km') : '—')}</strong>
+          </div>
+          <div class="pfz-compact-item depth">
+            <span class="pfz-item-lbl">🌊 DEPTH</span>
+            <strong class="pfz-item-val">${escapeHtml(msg.depth ? (String(msg.depth).includes('m') ? msg.depth : msg.depth + ' m') : '—')}</strong>
+          </div>
+          <div class="pfz-compact-item coords">
+            <span class="pfz-item-lbl">📌 COORDINATES</span>
+            <strong class="pfz-item-val">${escapeHtml(formatDmsPretty(msg.latitude))}<br>${escapeHtml(formatDmsPretty(msg.longitude))}</strong>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } else {
+    messagesHtml = `<div class="pfz-no-msg">ℹ️ No active PFZ line issued today for ${escapeHtml(titleCase(locked.name))}.</div>`;
+  }
+
   banner.hidden = false;
   banner.innerHTML = `
     <div class="pfz-locked-banner-card">
-      <span class="locked-icon">🔒</span>
-      <div class="locked-info">
-        <strong>Locked Landing Center: ${titleCase(locked.name)}</strong>
-        <span>${titleCase(locked.sectorName)} Sector · Saved Home Harbor</span>
+      <div class="pfz-locked-top-row">
+        <div class="locked-info">
+          <span class="locked-icon">🔒</span>
+          <div>
+            <strong>Locked Landing Center: ${escapeHtml(titleCase(locked.name))}</strong>
+            <span>${escapeHtml(titleCase(locked.sectorName))} Sector · Saved Home Harbor</span>
+          </div>
+        </div>
+        <div class="locked-actions">
+          <button type="button" class="pfz-open-compass-btn" onclick="locateLockedPfzCompass();">🧭 Open Compass</button>
+          <button type="button" class="pfz-unlock-btn" onclick="unlockLandingCenter();" title="Unlock Home Landing Center">🔓 Unlock</button>
+        </div>
       </div>
-      <div class="locked-actions">
-        <button type="button" class="pfz-compass-mini-btn" onclick="locateLockedPfzCompass();">🧭 Nav</button>
-        <button type="button" class="pfz-unlock-btn" onclick="unlockLandingCenter();" title="Unlock Home Landing Center">🔓 Unlock</button>
+      <div class="pfz-locked-content">
+        ${messagesHtml}
       </div>
     </div>
   `;
@@ -149,29 +230,73 @@ function renderPfzLandingCenters(sector) {
 }
 
 function renderPfzMessages(center, sectorName) {
-  const labels = {direction:'Direction',bearing:'Bearing (deg)',distance:'Distance (km)',depth:'Depth (mtr)',latitude:'Latitude (dms)',longitude:'Longitude (dms)'};
   const locked = getLockedLandingCenter();
   const isLocked = locked && locked.name.toLowerCase() === center.name.toLowerCase();
 
   const messagesContainer = ids('pfzMessages');
   messagesContainer.replaceChildren();
 
-  // Header Bar with Lock Button
   const headerRow = document.createElement('div');
   headerRow.className = 'pfz-center-header-row';
+
+  const messages = center.messages || [];
+
+  let messagesHtml = '';
+  if (messages.length > 0) {
+    messagesHtml = messages.map((msg, idx) => `
+      <div class="pfz-msg-card">
+        ${messages.length > 1 ? `<div style="font-size:10px; font-weight:800; color:var(--teal); margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;"><span>Target Line ${idx + 1}</span><button type="button" class="pfz-msg-compass-btn" data-msg-idx="${idx}">🧭 Compass</button></div>` : ''}
+        <div class="pfz-compact-grid">
+          <div class="pfz-compact-item dir">
+            <span class="pfz-item-lbl">🧭 DIRECTION</span>
+            <strong class="pfz-item-val">${escapeHtml(msg.direction || '—')}</strong>
+            <small class="pfz-item-sub">Bearing: <b>${escapeHtml(msg.bearing ? msg.bearing + '°' : '—')}</b></small>
+          </div>
+          <div class="pfz-compact-item dist">
+            <span class="pfz-item-lbl">📏 DISTANCE</span>
+            <strong class="pfz-item-val">${escapeHtml(msg.distance ? (String(msg.distance).includes('km') ? msg.distance : msg.distance + ' km') : '—')}</strong>
+          </div>
+          <div class="pfz-compact-item depth">
+            <span class="pfz-item-lbl">🌊 DEPTH</span>
+            <strong class="pfz-item-val">${escapeHtml(msg.depth ? (String(msg.depth).includes('m') ? msg.depth : msg.depth + ' m') : '—')}</strong>
+          </div>
+          <div class="pfz-compact-item coords">
+            <span class="pfz-item-lbl">📌 COORDINATES</span>
+            <strong class="pfz-item-val">${escapeHtml(formatDmsPretty(msg.latitude))}<br>${escapeHtml(formatDmsPretty(msg.longitude))}</strong>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } else {
+    messagesHtml = `<div class="pfz-no-msg">No active PFZ line issued for ${escapeHtml(titleCase(center.name))}.</div>`;
+  }
+
   headerRow.innerHTML = `
-    <div class="pfz-center-title">
-      <strong>${titleCase(center.name)}</strong>
-      <span>${titleCase(sectorName || '')} Sector</span>
+    <div class="pfz-center-top-bar">
+      <div class="pfz-center-title">
+        <span class="pfz-lc-icon">📍</span>
+        <div>
+          <span class="pfz-lc-kicker">LANDING CENTER</span>
+          <strong>${escapeHtml(titleCase(center.name))}</strong>
+          <small>${escapeHtml(titleCase(sectorName || ''))} Sector</small>
+        </div>
+      </div>
+      <div class="pfz-center-actions">
+        <button type="button" class="pfz-open-compass-btn" id="openCompassBtn">
+          🧭 Open Compass
+        </button>
+        <button type="button" class="landing-lock-btn ${isLocked ? 'locked' : ''}" id="lockFlcBtn">
+          ${isLocked ? '🔒 Locked (Home)' : '🔒 Lock FLC'}
+        </button>
+      </div>
     </div>
-    <div class="pfz-center-actions">
-      <button type="button" class="landing-lock-btn ${isLocked ? 'locked' : ''}">
-        ${isLocked ? '🔒 Locked (Home)' : '🔒 Lock Landing Center'}
-      </button>
+    <div class="pfz-center-contents">
+      ${messagesHtml}
     </div>
   `;
 
-  headerRow.querySelector('.landing-lock-btn').addEventListener('click', () => {
+  // Wire Lock/Unlock Button
+  headerRow.querySelector('#lockFlcBtn').addEventListener('click', () => {
     if (isLocked) {
       unlockLandingCenter();
     } else {
@@ -180,61 +305,26 @@ function renderPfzMessages(center, sectorName) {
     renderPfzMessages(center, sectorName);
   });
 
-  messagesContainer.appendChild(headerRow);
-
-  (center.messages || []).forEach((message, index) => {
-    const panel = document.createElement('details');
-    panel.className = 'pfz-message';
-    panel.open = true;
-    const summary = document.createElement('summary');
-    summary.textContent = 'Landing Center: ' + titleCase(center.name) + (center.messages.length > 1 ? ' — Message ' + (index + 1) : '');
-    const grid = document.createElement('div');
-    grid.className = 'pfz-message-grid';
-    grid.replaceChildren(...Object.entries(labels).map(([key,label]) => {
-      const field = document.createElement('div');
-      field.className = 'pfz-message-field';
-      const heading = document.createElement('strong');
-      heading.textContent = label;
-      const value = document.createElement('span');
-      value.textContent = message[key] || '—';
-      field.append(heading,value);
-      return field;
-    }));
-
-    // Add Direct Compass Action inside message panel
-    const actionRow = document.createElement('div');
-    actionRow.className = 'pfz-message-nav-action';
-    actionRow.innerHTML = `
-      <button type="button" class="pfz-msg-compass-btn">
-        🧭 Open Compass Dial for this target
-      </button>
-    `;
-
-    const targetLat = parseDmsCoordinate(message.latitude);
-    const targetLon = parseDmsCoordinate(message.longitude);
-    const bearingVal = parseFloat(message.bearing) || 0;
-    const distVal = parseFloat(message.distance) || 0;
-    const distNm = (distVal * 0.539957).toFixed(1);
-
-    actionRow.querySelector('.pfz-msg-compass-btn').addEventListener('click', () => {
-      openPfzCompassModal({
-        sourceLabel: titleCase(center.name) + ' Landing Center',
-        targetSector: titleCase(sectorName),
-        targetLat: targetLat,
-        targetLon: targetLon,
-        targetPoint: (targetLat != null && targetLon != null) ? { lat: targetLat, lon: targetLon } : null,
-        bearingDeg: Math.round(bearingVal),
-        cardinal: getCardinalFromDegrees(bearingVal),
-        distanceKm: distVal.toFixed(1),
-        distanceNm: distNm,
-        depth: message.depth || '',
-        direction: message.direction || ''
-      });
-    });
-
-    panel.append(summary, grid, actionRow);
-    messagesContainer.appendChild(panel);
+  // Wire Primary Open Compass Button
+  headerRow.querySelector('#openCompassBtn').addEventListener('click', () => {
+    if (messages.length > 0) {
+      openCompassForMessage(messages[0], center.name, sectorName);
+    } else {
+      locateLockedPfzCompass();
+    }
   });
+
+  // Wire Individual Compass Buttons (for multi-target landing centers)
+  headerRow.querySelectorAll('.pfz-msg-compass-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.getAttribute('data-msg-idx') || '0', 10);
+      if (messages[idx]) {
+        openCompassForMessage(messages[idx], center.name, sectorName);
+      }
+    });
+  });
+
+  messagesContainer.appendChild(headerRow);
 }
 
 // Parse DMS coordinate string (e.g. "19 10 45 N", "72 35 40 E") to decimal degrees
