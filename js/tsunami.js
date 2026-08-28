@@ -22,6 +22,7 @@ function renderTsunami(message, bulletin, recentBulletin = null, checkedAt = nul
       const status = ids('tsunamiStatus');
       status.classList.remove('advisory-safe','advisory-info','advisory-other','advisory-bulletin','advisory-warning','advisory-alert','advisory-watch');
       status.classList.add(noTsunami ? 'advisory-safe' : 'advisory-info');
+      const messageLink = ids('tsunamiMessage');
       const safeMsg = globalThis.i18n?.t('tsunami.safe', 'No active tsunami threat for India') || 'No active tsunami threat for India';
       messageLink.textContent = noTsunami ? safeMsg : supportingBulletin?.message || message || 'Official ITEWC bulletin information';
       ids('tsunamiMark').textContent = noTsunami ? '✓' : 'i';

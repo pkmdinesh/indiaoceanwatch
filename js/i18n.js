@@ -905,7 +905,7 @@ globalThis.i18n = {
     this.translatePage(langCode);
 
     if (typeof latestStatusData !== 'undefined' && latestStatusData) {
-      if (typeof renderAllStatus === 'function') renderAllStatus(latestStatusData);
+      if (typeof render === 'function') render(latestStatusData);
     }
   },
 
@@ -922,11 +922,12 @@ globalThis.i18n = {
 
   translateSectorName(sectorName) {
     if (!sectorName) return '';
+    const tc = typeof globalThis.titleCase === 'function' ? globalThis.titleCase : (typeof titleCase === 'function' ? titleCase : s => String(s || ''));
     const norm = String(sectorName).toUpperCase().replace(/&/g, 'AND').replace(/\s+/g, ' ').trim();
-    if (this.currentLang === 'en') return titleCase(sectorName);
+    if (this.currentLang === 'en') return tc(sectorName);
     const map = I18N_SECTORS[norm];
     if (map && map[this.currentLang]) return map[this.currentLang];
-    return titleCase(sectorName);
+    return tc(sectorName);
   },
 
   translateDirection(dir) {

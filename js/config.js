@@ -1,7 +1,7 @@
 /* Ocean Watch settings that are expected to change between deployments.
    Edit values here; application modules and the service worker share them. */
 globalThis.OCEAN_WATCH_CONFIG = Object.freeze({
-  CACHE_VERSION: '225',
+  CACHE_VERSION: '226',
   CACHE_PREFIX: 'ocean-watch',
   PUBLIC_URL: 'https://pkmdinesh.github.io/indiaoceanwatch/',
   FIREBASE_COUNTER_URL: 'https://india-ocean-watch-default-rtdb.asia-southeast1.firebasedatabase.app/hits.json',
@@ -34,3 +34,18 @@ globalThis.OCEAN_WATCH_CONFIG = Object.freeze({
     SAFE: '#238269'
   })
 });
+
+// Global helpers and variables shared across classic browser scripts
+globalThis.APP_CONFIG = globalThis.OCEAN_WATCH_CONFIG;
+globalThis.ids = id => (typeof document !== 'undefined' ? document.getElementById(id) : null);
+globalThis.escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+globalThis.titleCase = value => String(value || '').toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace('And Nicobar','& Nicobar');
+globalThis.severityOrder = ['warning','alert','watch','noThreat'];
+globalThis.severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No threat'};
+
+var APP_CONFIG = globalThis.APP_CONFIG;
+var ids = globalThis.ids;
+var escapeHtml = globalThis.escapeHtml;
+var titleCase = globalThis.titleCase;
+var severityOrder = globalThis.severityOrder;
+var severityLabel = globalThis.severityLabel;
