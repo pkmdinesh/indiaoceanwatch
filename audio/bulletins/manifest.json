@@ -1,21 +1,21 @@
 {
-  "updated": "2026-08-28T20:46:39.463Z",
+  "updated": "2026-08-28T21:02:17.559Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 499008,
+      "size": 498816,
       "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN"
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 487104,
+      "size": 487296,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN"
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 335616,
+      "size": 335808,
       "title": "INCOIS கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN"
     },
