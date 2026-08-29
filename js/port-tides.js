@@ -806,35 +806,87 @@ function isTsunamiThreatActive(tsunami) {
   return false;
 }
 
-// Check active warnings for station's state/district in latestStatusData
+// Helper to normalize strings for district/state comparison
+function portNormalizeName(value) {
+  return String(value || '').toUpperCase().replace(/&/g,' AND ').replace(/[^A-Z0-9]+/g,' ').replace(/\bKANNIYAKUMARI\b/g,'KANYAKUMARI').replace(/\s+/g,' ').trim();
+}
+
+function portDistrictMatches(portDist, advDist) {
+  const pName = portNormalizeName(portDist);
+  const aName = portNormalizeName(advDist);
+  if (!pName || !aName) return false;
+  if (pName === aName) return true;
+  const pParts = String(portDist || '').split(/,|\/|&|\bAND\b/i).map(portNormalizeName).filter(Boolean);
+  return pParts.some(part => part === aName || (aName.length >= 5 && part.includes(aName)) || (part.length >= 5 && aName.includes(part)));
+}
+
+// Check active warnings for station's specific district/state in latestStatusData
 function checkPortActiveWarnings(port) {
   if (!globalThis.latestStatusData) return { safe: false, level: 'watch', text: 'Unable to Fetch.....Check the INCOIS PAT link.....' };
 
   const data = globalThis.latestStatusData;
   const matches = [];
+  const sevWeight = { warning: 3, alert: 2, watch: 1, noThreat: 0 };
 
-  // 1. High Wave check
-  (data.highWave?.states || []).forEach(st => {
-    if (st.name && st.name.toLowerCase().includes(port.state.toLowerCase())) {
-      if (Number(st.counts?.warning || 0) > 0) matches.push({ hazard: 'High Wave', level: 'warning', label: 'High Wave Warning (Red)' });
-      else if (Number(st.counts?.alert || 0) > 0) matches.push({ hazard: 'High Wave', level: 'alert', label: 'High Wave Alert (Orange)' });
+  const checkOsfHazard = (hazardData, hazardName) => {
+    if (!hazardData?.states?.length) return;
+    const normState = portNormalizeName(port.state);
+    const st = hazardData.states.find(s => {
+      const sNorm = portNormalizeName(s.name);
+      return sNorm && (sNorm.includes(normState) || normState.includes(sNorm));
+    });
+    if (!st) return;
+
+    // Check specific district advisories first
+    const advisories = st.advisories || [];
+    const districtAdv = advisories.find(adv => 
+      portDistrictMatches(port.district, adv.district) || portDistrictMatches(port.name, adv.district)
+    );
+
+    if (districtAdv) {
+      if (districtAdv.severity === 'warning') {
+        matches.push({ hazard: hazardName, level: 'warning', label: `${hazardName} Warning`, message: districtAdv.message });
+      } else if (districtAdv.severity === 'alert') {
+        matches.push({ hazard: hazardName, level: 'alert', label: `${hazardName} Alert`, message: districtAdv.message });
+      } else if (districtAdv.severity === 'watch') {
+        matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch`, message: districtAdv.message });
+      }
+      // If severity is 'noThreat', this district is safe for this hazard
+    } else if (advisories.length === 0) {
+      // Fallback to state counts only when district-level advisories are not itemized
+      if (Number(st.counts?.warning || 0) > 0) {
+        matches.push({ hazard: hazardName, level: 'warning', label: `${hazardName} Warning` });
+      } else if (Number(st.counts?.alert || 0) > 0) {
+        matches.push({ hazard: hazardName, level: 'alert', label: `${hazardName} Alert` });
+      } else if (Number(st.counts?.watch || 0) > 0) {
+        matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch` });
+      }
     }
-  });
+  };
 
-  // 2. Swell Surge check
-  (data.swellSurge?.states || []).forEach(st => {
-    if (st.name && st.name.toLowerCase().includes(port.state.toLowerCase())) {
-      if (Number(st.counts?.warning || 0) > 0) matches.push({ hazard: 'Swell Surge', level: 'warning', label: 'Swell Surge Warning (Red)' });
-      else if (Number(st.counts?.alert || 0) > 0) matches.push({ hazard: 'Swell Surge', level: 'alert', label: 'Swell Surge Alert (Orange)' });
-    }
-  });
+  // 1. High Wave check (district level)
+  checkOsfHazard(data.highWave, 'High Wave');
 
-  // 3. Cyclone check
+  // 2. Swell Surge check (district level)
+  checkOsfHazard(data.swellSurge, 'Swell Surge');
+
+  // 3. Ocean Currents check (district level)
+  checkOsfHazard(data.oceanCurrent, 'Ocean Currents');
+
+  // 4. Cyclone check (only if cyclone message/title pertains to this station's state or district)
   if (['yellow', 'orange', 'red'].includes(data.cyclone?.level)) {
-    matches.push({ hazard: 'Cyclone', level: data.cyclone.level, label: `Cyclone ${data.cyclone.level.toUpperCase()}` });
+    const cycloneText = portNormalizeName(`${data.cyclone.title || ''} ${data.cyclone.message || ''}`);
+    const normState = portNormalizeName(port.state);
+    const normDist = portNormalizeName(port.district);
+    const isStateMentioned = normState && cycloneText.includes(normState);
+    const isDistrictMentioned = normDist && cycloneText.includes(normDist);
+    if (isStateMentioned || isDistrictMentioned) {
+      const cycLvl = data.cyclone.level === 'red' ? 'warning' : (data.cyclone.level === 'orange' ? 'alert' : 'watch');
+      matches.push({ hazard: 'Cyclone', level: cycLvl, label: `Cyclone ${data.cyclone.level.toUpperCase()}`, message: data.cyclone.title });
+    }
   }
 
-  // 4. Tsunami check
+  // 5. Tsunami check
   if (isTsunamiThreatActive(data.tsunami)) {
     matches.push({ hazard: 'Tsunami', level: 'warning', label: 'Tsunami Warning Active' });
   }
@@ -847,16 +899,22 @@ function checkPortActiveWarnings(port) {
     return { safe: true, level: 'safe', text: `${noWarnLbl} ${port.name} (${translatedPortDistrict}, ${translatedPortState})` };
   }
 
-  const worst = matches.find(m => m.level === 'warning') || matches.find(m => m.level === 'alert') || matches[0];
+  // Sort by highest severity (warning > alert > watch)
+  matches.sort((a, b) => (sevWeight[b.level] || 0) - (sevWeight[a.level] || 0));
+  const worst = matches[0];
+
   const activeForLbl = globalThis.i18n?.t('tide.active_for', 'active for') || 'active for';
   const coastLbl = globalThis.i18n?.t('tide.coast', 'Coast') || 'Coast';
   const sevKey = worst.level === 'warning' ? 'severity.warning' : (worst.level === 'alert' ? 'severity.alert' : 'severity.watch');
-  const localizedLabel = globalThis.i18n?.t(sevKey, worst.label) || worst.label;
+  const localizedSev = globalThis.i18n?.t(sevKey, worst.level.toUpperCase()) || worst.level.toUpperCase();
+  const localizedHazard = worst.hazard ? (globalThis.i18n?.t(`osf.${worst.hazard.toLowerCase().replace(/\\s+/g,'_')}`, worst.hazard) || worst.hazard) : '';
+  const displayLabel = `${localizedHazard} ${localizedSev}`.trim();
 
   return {
     safe: false,
     level: worst.level,
-    text: `⚠️ ${localizedLabel} ${activeForLbl} ${port.name} (${translatedPortState} ${coastLbl})`
+    match: worst,
+    text: `⚠️ ${displayLabel} ${activeForLbl} ${port.name} (${translatedPortDistrict}, ${translatedPortState} ${coastLbl})`
   };
 }
 
@@ -991,10 +1049,20 @@ function renderPortTideCard() {
     
     // Dynamic Sea State based on active INCOIS OSF warnings + baseline
     let seaState = windKmh < 12 ? 'Calm' : windKmh < 20 ? 'Slight' : 'Moderate';
+    let liveParam = '';
     if (warning && !warning.safe) {
       if (warning.level === 'warning') seaState = 'Rough to Very Rough';
       else if (warning.level === 'alert') seaState = 'Moderate to Rough';
       else if (warning.level === 'watch') seaState = 'Moderate';
+
+      if (warning.match?.message) {
+        const heightMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || warning.match.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
+        const periodMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
+        const currentMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
+        if (heightMatch) liveParam = ` · ${heightMatch[1].trim()}m waves`;
+        else if (periodMatch) liveParam = ` · ${periodMatch[1].trim()}s swell`;
+        else if (currentMatch) liveParam = ` · ${currentMatch[1].trim()} m/s`;
+      }
     }
 
     const windSeaLbl = globalThis.i18n?.t('tide.wind_sea', 'Wind & Sea') || 'Wind & Sea';
@@ -1011,7 +1079,7 @@ function renderPortTideCard() {
     windElem.innerHTML = `
       <div class="wind-stat-item">
         <span class="wind-stat-label">${windSeaLbl}</span>
-        <strong>${translatedWindDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState})</span></strong>
+        <strong>${translatedWindDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState}${liveParam})</span></strong>
       </div>
       <div class="wind-stat-item">
         <span class="wind-stat-label">${tideStateLbl}</span>
