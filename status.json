@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-29T06:15:15.9485762+00:00",
-    "lastAttemptAt":  "2026-08-29T06:15:15.9485762+00:00",
+    "updatedAt":  "2026-08-29T06:30:15.7386774+00:00",
+    "lastAttemptAt":  "2026-08-29T06:30:15.7386774+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -12,7 +12,7 @@
     "coralBleaching":  {
                            "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-08-29T06:15:15.9485762+00:00",
+                           "fetchedAt":  "2026-08-29T06:30:15.7386774+00:00",
                            "regions":  [
                                            {
                                                "area":  "Andaman",
@@ -1713,7 +1713,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-29T06:15:30.1812702+00:00",
+                          "fetchedAt":  "2026-08-29T06:30:23.8475430+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6310,7 +6310,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  18.77,
-                      "pfzAgeHours":  18.77
+                      "osfAgeHours":  19.03,
+                      "pfzAgeHours":  19.03
                   }
 }
