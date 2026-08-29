@@ -210,7 +210,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'Disclaimer:',
     'footer.disclaimer': 'Information is fetched from official sources; however, there may be a delay before updates are reflected. For accuracy, always verify the latest official bulletins.',
     'footer.source': 'Data source: INCOIS–MoES ↗',
-    'footer.visits': 'visits'
+    'footer.visits': 'visits',
+    'contact.title': 'Ocean Information Portal',
+    'contact.subtitle': 'Under Beta Testing'
   },
   hi: {
     'brand.title': 'ओशन वॉच',
@@ -405,7 +407,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'अस्वीकरण:',
     'footer.disclaimer': 'जानकारी आधिकारिक स्रोतों से ली गई है; सटीकता के लिए हमेशा नवीनतम आधिकारिक बुलेटिन सत्यापित करें।',
     'footer.source': 'डेटा स्रोत: INCOIS–MoES ↗',
-    'footer.visits': 'विज़िट्स'
+    'footer.visits': 'विज़िट्स',
+    'contact.title': 'महासागर सूचना पोर्टल',
+    'contact.subtitle': 'बीटा परीक्षण के तहत'
   },
   ta: {
     'brand.title': 'ஓஷன் வாட்ச்',
@@ -600,7 +604,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'துறப்பு:',
     'footer.disclaimer': 'தகவல்கள் அதிகாரப்பூர்வ மூலங்களிலிருந்து பெறப்படுகின்றன; துல்லியத்திற்கு எப்போதும் அதிகாரப்பூர்வ அறிக்கைகளைச் சரிபார்க்கவும்.',
     'footer.source': 'தரவு மூலம்: INCOIS–MoES ↗',
-    'footer.visits': 'பார்வைகள்'
+    'footer.visits': 'பார்வைகள்',
+    'contact.title': 'கடல்சார் தகவல் தளம்',
+    'contact.subtitle': 'பீட்டா சோதனையில் உள்ளது'
   },
   te: {
     'brand.title': 'ఓషన్ వాచ్',
@@ -795,7 +801,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'గమనిక:',
     'footer.disclaimer': 'సమాచారం అధికారిక వర్గాల నుండి సేకరించబడింది; తాజా అధికారిక బులెటిన్లను ఎల్లప్పుడూ ధృవీకరించుకోండి.',
     'footer.source': 'సమాచార మూలం: INCOIS–MoES ↗',
-    'footer.visits': 'సందర్శనలు'
+    'footer.visits': 'సందర్శనలు',
+    'contact.title': 'సముద్ర సమాచార పోర్టల్',
+    'contact.subtitle': 'బీటా పరీక్షలో ఉంది'
   },
   ml: {
     'brand.title': 'ഓഷ്യൻ വാച്ച്',
@@ -990,7 +998,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'നിരാകരണം:',
     'footer.disclaimer': 'വിവരങ്ങൾ ഔദ്യോഗിക സ്രോതസ്സുകളിൽ നിന്ന് ലഭ്യമാക്കിയതാണ്; കൂടുതൽ കൃത്യതയ്ക്കായി ഔദ്യോഗിക ബുള്ളറ്റിനുകൾ കാണുക.',
     'footer.source': 'ഡാറ്റ ഉറവിടം: INCOIS–MoES ↗',
-    'footer.visits': 'സന്ദർശനങ്ങൾ'
+    'footer.visits': 'സന്ദർശനങ്ങൾ',
+    'contact.title': 'സമുദ്ര വിവര പോർട്ടൽ',
+    'contact.subtitle': 'ബീറ്റാ പരീക്ഷണത്തിലാണ്'
   },
   bn: {
     'brand.title': 'ওশান ওয়াচ',
@@ -1185,7 +1195,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'দাবিত্যাগ:',
     'footer.disclaimer': 'তথ্য সরকারি উৎস থেকে সংগৃহীত; নির্ভুলতার জন্য সর্বদা অফিসিয়াল বুলেটিন দেখুন।',
     'footer.source': 'তথ্যের উৎস: INCOIS–MoES ↗',
-    'footer.visits': 'ভিজিট'
+    'footer.visits': 'ভিজিট',
+    'contact.title': 'সমুদ্র তথ্য পোর্টাল',
+    'contact.subtitle': 'বিটা পরীক্ষার অধীনে'
   },
   mr: {
     'brand.title': 'ओशन वॉच',
@@ -1380,7 +1392,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'अस्वीकरण:',
     'footer.disclaimer': 'माहिती अधिकृत स्त्रोतांकडून घेतली आहे; अचूकतेसाठी अधिकृत बुलेटिन तपासा.',
     'footer.source': 'माहिती स्त्रोत: INCOIS–MoES ↗',
-    'footer.visits': 'भेटी'
+    'footer.visits': 'भेटी',
+    'contact.title': 'सागरी माहिती पोर्टल',
+    'contact.subtitle': 'बीटा चाचणी अंतर्गत'
   },
   gu: {
     'brand.title': 'ઓશન વોચ',
@@ -1575,7 +1589,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'અસ્વીકરણ:',
     'footer.disclaimer': 'માહિતી સત્તાવાર સ્ત્રોતોમાંથી મેળવેલ છે; સચોટતા માટે સત્તાવાર બુલેટિન ચકાસો.',
     'footer.source': 'ડેટા સ્ત્રોત: INCOIS–MoES ↗',
-    'footer.visits': 'મુલાકાતો'
+    'footer.visits': 'મુલાકાતો',
+    'contact.title': 'સમુદ્ર માહિતી પોર્ટલ',
+    'contact.subtitle': 'બીટા પરીક્ષણ હેઠળ'
   },
   or: {
     'brand.title': 'ଓସେନ୍ ୱାଚ୍',
@@ -1770,7 +1786,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'ଦାୟିତ୍ୱ ମୁକ୍ତି:',
     'footer.disclaimer': 'ତଥ୍ୟ ସରକାରୀ ଉତ୍ସରୁ ସଂଗୃହୀତ; ସଠିକତା ପାଇଁ ସର୍ବଦା ଅଫିସିଆଲ୍ ବୁଲେଟିନ୍ ଯାଞ୍ଚ କରନ୍ତୁ।',
     'footer.source': 'ତଥ୍ୟ ଉତ୍ସ: INCOIS–MoES ↗',
-    'footer.visits': 'ଭିଜିଟ୍ସ'
+    'footer.visits': 'ଭିଜିଟ୍ସ',
+    'contact.title': 'ସମୁଦ୍ର ସୂଚନା ପୋର୍ଟାଲ',
+    'contact.subtitle': 'ବିଟା ପରୀକ୍ଷଣ ଅଧୀନରେ'
   },
   kn: {
     'brand.title': 'ಓಷನ್ ವಾಚ್',
@@ -1965,7 +1983,9 @@ const I18N_DICTIONARY = {
     'footer.disclaimer_title': 'ಹಕ್ಕು ನಿರಾಕರಣೆ:',
     'footer.disclaimer': 'ಮಾಹಿತಿಯನ್ನು ಅಧಿಕೃತ ಮೂಲಗಳಿಂದ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ; ನಿಖರತೆಗಾಗಿ ಅಧಿಕೃತ ಬುಲೆಟಿನ್ ಪರಿಶೀಲಿಸಿ.',
     'footer.source': 'ಮಾಹಿತಿ ಮೂಲ: INCOIS–MoES ↗',
-    'footer.visits': 'ಭೇಟಿಗಳು'
+    'footer.visits': 'ಭೇಟಿಗಳು',
+    'contact.title': 'ಸಾಗರ ಮಾಹಿತಿ ಪೋರ್ಟಲ್',
+    'contact.subtitle': 'ಬೀಟಾ ಪರೀಕ್ಷೆಯಲ್ಲಿದೆ'
   }
 };
 
@@ -2084,6 +2104,18 @@ const I18N_DISTRICTS = {
   'KOMATRA & KATCHAL ISLAND': { hi: 'कोमात्रा और कत्छल द्वीप', ta: 'கொமத்ரா & கட்ச்சல் தீவு', te: 'కోమత్ర & కట్చల్ ద్వీపం', ml: 'കോമാത്ര & കച്ചൽ ദ്വീപ്', bn: 'কোমাত্রা ও কাচাল দ্বীপ', mr: 'कोमात्रा आणि कच्चल बेट', gu: 'કોમાત્રા અને કચલ ટાપુ', or: 'କୋମାତ୍ରା ଓ କଚଲ ଦ୍ୱୀପ', kn: 'ಕೋಮಾತ್ರಾ ಮತ್ತು ಕಟ್ಚಲ್ ದ್ವೀಪ' }
 };
 
+
+const I18N_CORAL_AREAS = {
+  'GULF OF KUTCH': { hi: 'कच्छ की खाड़ी', ta: 'கட்ச் வளைகுடா', te: 'కచ్ గల్ఫ్', ml: 'കച്ച് ഉൾക്കടൽ', bn: 'কচ্ছ উপসাগর', mr: 'कच्छचे आखात', gu: 'કચ્છનો અખાત', or: 'କଚ୍ଛ ଉପସାଗର', kn: 'ಕಛ್ ಕೊಲ್ಲಿ' },
+  'GULF OF MANNAR': { hi: 'मन्नार की खाड़ी', ta: 'மன்னார் வளைகுடா', te: 'మன்னார் வளைகுடா', te: 'మన్నార్ గల్ఫ్', ml: 'മന്നാർ ഉൾക്കടൽ', bn: 'মান্নার উপসাগর', mr: 'मन्नारचे आखात', gu: 'મન્નારનો અખાત', or: 'ମନ୍ନାର ଉପସାଗର', kn: 'ಮನ್ನಾರ್ ಕೊಲ್ಲಿ' },
+  'ANDAMAN': { hi: 'अंडमान', ta: 'அந்தமான்', te: 'అండమాన్', ml: 'ആൻഡമാൻ', bn: 'আন্দামান', mr: 'अंदमान', gu: 'અંદમાન', or: 'ଆଣ୍ଡାମାନ', kn: 'ಅಂಡಮಾನ್' },
+  'NICOBAR': { hi: 'निकोबार', ta: 'நிக்கோபார்', te: 'నికోబార్', ml: 'നിക്കോബാർ', bn: 'নিকোবর', mr: 'निकोबार', gu: 'નિકોબાર', or: 'ନିକୋବର', kn: 'ನಿಕೋಬಾರ್' },
+  'LAKSHADWEEP': { hi: 'लक्षद्वीप', ta: 'லட்சத்தீவு', te: 'లక్షద్వీప్', ml: 'ലക്ഷദ്വീപ്', bn: 'লক্ষদ্বীপ', mr: 'लक्षद्वीप', gu: 'લક્ષદ્વીપ', or: 'ଲାକ୍ଷାଦ୍ୱୀପ', kn: 'ಲಕ್ಷದ್ವೀಪ' },
+  'MALVAN': { hi: 'मालवण', ta: 'மால்வன்', te: 'మల్వాన్', ml: 'മാൽവൻ', bn: 'মালভান', mr: 'मालवण', gu: 'માલવણ', or: 'ମାଲଭାନ', kn: 'ಮಾಲ್ವನ್' },
+  'GOA': { hi: 'गोवा', ta: 'கோவா', te: 'గోవా', ml: 'ഗോവ', bn: 'গোয়া', mr: 'गोवा', gu: 'ગોવા', or: 'ଗୋଆ', kn: 'ಗೋವಾ' },
+  'NETRANI ISLAND': { hi: 'नेत्राणी द्वीप', ta: 'நேத்ராணி தீவு', te: 'నేత్రాని ద్వీపం', ml: 'നേത്രാണി ദ്വീപ്', bn: 'নেত্রানি দ্বীপ', mr: 'नेत्राणी बेट', gu: 'નેત્રાણી ટાપુ', or: 'ନେତ୍ରାଣୀ ଦ୍ୱୀପ', kn: 'ನೇತ್ರಾಣಿ ದ್ವೀಪ' }
+};
+
 const I18N_DIRECTIONS = {
   'N': { hi: 'उत्तर (N)', ta: 'வடக்கு (N)', te: 'ఉత్తరం (N)', ml: 'വടക്ക് (N)', bn: 'উত্তর (N)', mr: 'उत्तर (N)', gu: 'ઉત્તર (N)', or: 'ଉତ୍ତର (N)', kn: 'ಉತ್ತರ (N)' },
   'S': { hi: 'दक्षिण (S)', ta: 'தெற்கு (S)', te: 'దక్షిణం (S)', ml: 'തെക്ക് (S)', bn: 'দক্ষিণ (S)', mr: 'दक्षिण (S)', gu: 'દક્ષિણ (S)', or: 'ଦକ୍ଷିଣ (S)', kn: 'ದಕ್ಷಿಣ (S)' },
@@ -2191,6 +2223,147 @@ globalThis.i18n = {
     const map = I18N_DIRECTIONS[norm];
     if (map && map[this.currentLang]) return map[this.currentLang];
     return dir;
+  },
+
+  
+  translateCoralArea(area) {
+    if (!area) return '';
+    const norm = String(area).toUpperCase().trim();
+    if (this.currentLang === 'en') return area;
+    if (I18N_CORAL_AREAS[norm] && I18N_CORAL_AREAS[norm][this.currentLang]) {
+      return I18N_CORAL_AREAS[norm][this.currentLang];
+    }
+    return this.translateDistrictName(area) || area;
+  },
+
+  translateStressLevel(level) {
+    if (!level) return '';
+    const norm = String(level).toLowerCase().trim();
+    if (norm === 'no stress') return this.t('cbas.no_stress', 'No Stress');
+    if (norm === 'watch') return this.t('severity.watch', 'Watch');
+    if (norm === 'warning') return this.t('severity.warning', 'Warning');
+    if (norm === 'alert' || norm === 'alert level 1' || norm === 'alert level 2') return this.t('severity.alert', 'Alert');
+    return level;
+  },
+
+  translateMhwText(text) {
+    if (!text || typeof text !== 'string') return '';
+    if (this.currentLang === 'en') return text;
+
+    let res = text;
+
+    if (this.currentLang === 'hi') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} पर ${dt} को ${spread} फैलाव क्षेत्र के साथ ${cat} श्रेणी की मरीन हीटवेव की घटना देखी गई है।`)
+        .replace(/Moderate to Extreme/gi, 'मध्यम से अत्यधिक')
+        .replace(/Moderate/gi, 'मध्यम')
+        .replace(/Strong/gi, 'तीव्र')
+        .replace(/Severe/gi, 'गंभीर')
+        .replace(/Extreme/gi, 'अत्यधिक')
+        .replace(/No Heat Wave/gi, 'कोई हीटवेव नहीं')
+        .replace(/ coast/gi, ' तट');
+    } else if (this.currentLang === 'ta') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} பகுதியில் ${dt} அன்று ${spread} பரப்பளவில் ${cat} பிரிவு கடல் வெப்ப அலை பதிவு செய்யப்பட்டுள்ளது.`)
+        .replace(/Moderate to Extreme/gi, 'மிதமான முதல் அதிதீவிர')
+        .replace(/Moderate/gi, 'மிதமான')
+        .replace(/Strong/gi, 'வலுவான')
+        .replace(/Severe/gi, 'தீவிர')
+        .replace(/Extreme/gi, 'அதிதீவிர')
+        .replace(/No Heat Wave/gi, 'வெப்ப அலை இல்லை')
+        .replace(/ coast/gi, ' கடற்கரை');
+    } else if (this.currentLang === 'te') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} ప్రాంతంలో ${dt} న ${spread} విస్తీర్ణంలో ${cat} వర్గం సముద్ర వేడి గాలులు నమోదయ్యాయి.`)
+        .replace(/Moderate to Extreme/gi, 'మధ్యస్థం నుండి తీవ్ర')
+        .replace(/Moderate/gi, 'మధ్యస్థం')
+        .replace(/Strong/gi, 'బలమైన')
+        .replace(/Severe/gi, 'తీవ్ర')
+        .replace(/Extreme/gi, 'అత్యంత తీవ్ర')
+        .replace(/No Heat Wave/gi, 'వేడి గాలులు లేవు')
+        .replace(/ coast/gi, ' తీరం');
+    } else if (this.currentLang === 'ml') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} മേഖലയിൽ ${dt} തീയതിയിൽ ${spread} വിസ്തൃതിയിൽ ${cat} വിഭാഗത്തിലുള്ള മറൈൻ ഹീറ്റ് വേവ് രേഖപ്പെടുത്തി.`)
+        .replace(/Moderate to Extreme/gi, 'ഇടത്തരം മുതൽ അതിതീവ്രം വരെ')
+        .replace(/Moderate/gi, 'ഇടത്തരം')
+        .replace(/Strong/gi, 'ശക്തമായ')
+        .replace(/Severe/gi, 'ഗുരുതരമായ')
+        .replace(/Extreme/gi, 'അതിതീവ്രം')
+        .replace(/No Heat Wave/gi, 'ഹീറ്റ് വേവ് ഇല്ല')
+        .replace(/ coast/gi, ' തീരം');
+    } else if (this.currentLang === 'bn') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} অঞ্চলে ${dt} তারিখে ${spread} এলাকায় ${cat} ক্যাটাগরির সামুদ্রিক তাপপ্রবাহ পরিলক্ষিত হয়েছে।`)
+        .replace(/Moderate to Extreme/gi, 'মাঝারি থেকে চরম')
+        .replace(/Moderate/gi, 'মাঝারি')
+        .replace(/Strong/gi, 'তীব্র')
+        .replace(/Severe/gi, 'মারাত্মক')
+        .replace(/Extreme/gi, 'চরম')
+        .replace(/No Heat Wave/gi, 'তাপপ্রবাহ নেই')
+        .replace(/ coast/gi, ' উপকূল');
+    } else if (this.currentLang === 'mr') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} भागात ${dt} रोजी ${spread} क्षेत्रात ${cat} श्रेणीची सागरी उष्णतेची लाट नोंदवली गेली आहे।`)
+        .replace(/Moderate to Extreme/gi, 'मध्यम ते अत्यंत तीव्र')
+        .replace(/Moderate/gi, 'मध्यम')
+        .replace(/Strong/gi, 'तीव्र')
+        .replace(/Severe/gi, 'गंभीर')
+        .replace(/Extreme/gi, 'अत्यंत तीव्र')
+        .replace(/No Heat Wave/gi, 'उष्णतेची लाट नाही')
+        .replace(/ coast/gi, ' किनारपट्टी');
+    } else if (this.currentLang === 'gu') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} વિસ્તારમાં ${dt} ના રોજ ${spread} વિસ્તારમાં ${cat} શ્રેણીની મરીન હીટવેવ જોવા મળી છે.`)
+        .replace(/Moderate to Extreme/gi, 'મધ્યમથી અતિ તીવ્ર')
+        .replace(/Moderate/gi, 'મધ્યમ')
+        .replace(/Strong/gi, 'મજબૂત')
+        .replace(/Severe/gi, 'ગંભીર')
+        .replace(/Extreme/gi, 'અતિ તીવ્ર')
+        .replace(/No Heat Wave/gi, 'હીટવેવ નથી')
+        .replace(/ coast/gi, ' કાંઠો');
+    } else if (this.currentLang === 'or') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} ଅଞ୍ଚଳରେ ${dt} ରେ ${spread} କ୍ଷେତ୍ରରେ ${cat} ଶ୍ରେଣୀର ସାମୁଦ୍ରିକ ଉତ୍ତାପ ତରଙ୍ଗ ଦେଖାଦେଇଛି।`)
+        .replace(/Moderate to Extreme/gi, 'ମଧ୍ୟମରୁ ଅତ୍ୟଧିକ')
+        .replace(/Moderate/gi, 'ମଧ୍ୟମ')
+        .replace(/Strong/gi, 'ଶକ୍ତିଶାଳୀ')
+        .replace(/Severe/gi, 'ଗୁରୁତର')
+        .replace(/Extreme/gi, 'ଅତ୍ୟଧିକ')
+        .replace(/No Heat Wave/gi, 'ଉତ୍ତାପ ତରଙ୍ଗ ନାହିଁ')
+        .replace(/ coast/gi, ' ଉପକୂଳ');
+    } else if (this.currentLang === 'kn') {
+      res = res
+        .replace(/Marine Heatwave event of (.*?) category with area of spreading (.*?) has been observed on (.*?) over the (.*)/i, (m, cat, spread, dt, loc) => `${loc} ಪ್ರದೇಶದಲ್ಲಿ ${dt} ರಂದು ${spread} ವಿಸ್ತೀರ್ಣದಲ್ಲಿ ${cat} ವರ್ಗದ ಸಾಗರ ಶಾಖದ ಅಲೆ ದಾಖಲಾಗಿದೆ.`)
+        .replace(/Moderate to Extreme/gi, 'ಮಧ್ಯಮದಿಂದ ಅತ್ಯಂತ ತೀವ್ರ')
+        .replace(/Moderate/gi, 'ಮಧ್ಯಮ')
+        .replace(/Strong/gi, 'ಬಲವಾದ')
+        .replace(/Severe/gi, 'ಗಂಭೀರ')
+        .replace(/Extreme/gi, 'ಅತ್ಯಂತ ತೀವ್ರ')
+        .replace(/No Heat Wave/gi, 'ಶಾಖದ ಅಲೆ ಇಲ್ಲ')
+        .replace(/ coast/gi, ' ಕರಾವಳಿ');
+    }
+
+    const regions = {
+      'Arabian Sea': { hi: 'अरब सागर', ta: 'அரபிக்கடல்', te: 'అరేబియా సముద్రం', ml: 'അറബിക്കടൽ', bn: 'আরব সাগর', mr: 'अरबी समुद्र', gu: 'અરબી સમુદ્ર', or: 'ଆରବ ସାଗର', kn: 'ಅರೇಬಿಯನ್ ಸಮುದ್ರ' },
+      'Bay of Bengal': { hi: 'बंगाल की खाड़ी', ta: 'வங்காள விரிகுடா', te: 'బంగాళాఖాతం', ml: 'ബംഗಾൾ ഉൾക്കടൽ', bn: 'বঙ্গোপসাগর', mr: 'बंगालचा उपसागर', gu: 'બંગાળની ખાડી', or: 'ବଙ୍ଗୋପସାଗର', kn: 'ಬಂಗಾಳ ಕೊಲ್ಲಿ' },
+      'Rest of Indian Ocean': { hi: 'शेष हिंद महासागर', ta: 'இந்திய பெருங்கடலின் பிற பகுதிகள்', te: 'మిగిలిన హిందూ మహాసముద్రం', ml: 'ഇന്ത്യൻ മഹാസമുദ്രത്തിന്റെ മറ്റ് ഭാഗങ്ങൾ', bn: 'ভারত মহাসাগরের অবশিষ্টাংশ', mr: 'उर्वरित हिंदी महासागर', gu: 'બાકીનો હિંદ મહಾಸાગર', or: 'ଅବଶିଷ୍ଟ ଭାରତ ମହାସାଗର', kn: 'ಉಳಿದ ಹಿಂದೂ ಮಹಾಸಾಗರ' }
+    };
+
+    for (const [rName, rMap] of Object.entries(regions)) {
+      if (rMap[this.currentLang] && res.includes(rName)) {
+        res = res.replaceAll(rName, rMap[this.currentLang]);
+      }
+    }
+    for (const [sName, sMap] of Object.entries(I18N_SECTORS)) {
+      const tc = sName.charAt(0) + sName.slice(1).toLowerCase();
+      if (sMap[this.currentLang]) {
+        if (res.includes(sName)) res = res.replaceAll(sName, sMap[this.currentLang]);
+        if (res.includes(tc)) res = res.replaceAll(tc, sMap[this.currentLang]);
+      }
+    }
+
+    return res;
   },
 
   translateAdvisoryMessage(msg) {

@@ -35,9 +35,9 @@
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
     .announcement-card{grid-column:1/-1;min-height:98px}
   </style>
-  <link rel="preload" href="css/components.css?v=228" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=228"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=228" media="print">
+  <link rel="preload" href="css/components.css?v=229" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=229"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=229" media="print">
 </head>
 <body>
   <main class="dashboard">
@@ -195,15 +195,15 @@
       <section class="panel contact-card" aria-labelledby="contact-title">
         <div class="contact-copy">
           <p class="panel-kicker"></p>
-          <h2 id="contact-title">Ocean Information Portal</h2>
-          <p class="contact-organisation">Under Beta Testing</p>
+          <h2 id="contact-title" data-i18n="contact.title">Ocean Information Portal</h2>
+          <p class="contact-organisation" data-i18n="contact.subtitle">Under Beta Testing</p>
         </div>
         <img class="contact-image" src="1786177913304.png" alt="Under Beta Testing" height="180" loading="lazy">
       </section>
 
     </div>
 
-    <footer class="footer"><div><strong>Auto-update:</strong> Every 15 mins · <strong>Disclaimer:</strong> Information is fetched from official sources; however, there may be a delay before updates are reflected. For accuracy, always verify the latest official bulletins.</div><div class="footer-meta"><span class="hit-counter-chip" id="hitCounter" title="Live Total Page Visits">👁️ <strong id="hitCount">...</strong> visits</span><a href="https://incois.gov.in/" target="_blank" rel="noopener"><strong>Data source:</strong> INCOIS–MoES ↗</a></div></footer></main>
+    <footer class="footer"><div><strong data-i18n="footer.auto_update">Auto-update:</strong> <span data-i18n="footer.auto_update_val">Every 15 mins</span> · <strong data-i18n="footer.disclaimer_title">Disclaimer:</strong> <span data-i18n="footer.disclaimer">Information is fetched from official sources; however, there may be a delay before updates are reflected. For accuracy, always verify the latest official bulletins.</span></div><div class="footer-meta"><span class="hit-counter-chip" id="hitCounter" title="Live Total Page Visits">👁️ <strong id="hitCount">...</strong> <span data-i18n="footer.visits">visits</span></span><a href="https://incois.gov.in/" target="_blank" rel="noopener"><strong data-i18n="footer.source">Data source: INCOIS–MoES ↗</strong></a></div></footer></main>
   <dialog class="advisory-dialog" id="advisoryDialog" aria-labelledby="advisoryDialogTitle">
     <div class="advisory-dialog-head">
       <div>
@@ -593,23 +593,23 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=228" defer></script>
-  <script src="js/i18n.js?v=228" defer></script>
-  <script src="js/app.js?v=228" defer></script>
-  <script src="js/share.js?v=228" defer></script>
-  <script src="js/map.js?v=228" defer></script>
-  <script src="js/pfz-map.js?v=228" defer></script>
-  <script src="js/pfz.js?v=228" defer></script>
-  <script src="js/advisory.js?v=228" defer></script>
-  <script src="js/tsunami.js?v=228" defer></script>
-  <script src="js/cyclone.js?v=228" defer></script>
-  <script src="js/seismic.js?v=228" defer></script>
-  <script src="js/port-tides.js?v=228" defer></script>
-  <script src="js/voice-summary.js?v=228" defer></script>
-  <script src="js/status.js?v=228" defer></script>
-  <script src="js/notifications.js?v=228" defer></script>
-  <script src="js/pwa.js?v=228" defer></script>
-  <script src="js/tchp.js?v=228" defer></script>
+  <script src="js/config.js?v=229" defer></script>
+  <script src="js/i18n.js?v=229" defer></script>
+  <script src="js/app.js?v=229" defer></script>
+  <script src="js/share.js?v=229" defer></script>
+  <script src="js/map.js?v=229" defer></script>
+  <script src="js/pfz-map.js?v=229" defer></script>
+  <script src="js/pfz.js?v=229" defer></script>
+  <script src="js/advisory.js?v=229" defer></script>
+  <script src="js/tsunami.js?v=229" defer></script>
+  <script src="js/cyclone.js?v=229" defer></script>
+  <script src="js/seismic.js?v=229" defer></script>
+  <script src="js/port-tides.js?v=229" defer></script>
+  <script src="js/voice-summary.js?v=229" defer></script>
+  <script src="js/status.js?v=229" defer></script>
+  <script src="js/notifications.js?v=229" defer></script>
+  <script src="js/pwa.js?v=229" defer></script>
+  <script src="js/tchp.js?v=229" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>

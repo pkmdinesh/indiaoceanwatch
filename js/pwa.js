@@ -81,25 +81,31 @@ let deferredInstallPrompt = null;
 
       const rawMessage = data?.marineHeatWave?.message || '';
       if (!rawMessage) {
-        container.innerHTML = '<article class="district-advisory"><p>Marine Heat Wave message is unavailable. Open the official page for the latest information.</p></article>';
+        const unavailMsg = globalThis.i18n?.t('mhw.unavailable', 'Marine Heat Wave message is unavailable. Open the official page for the latest information.') || 'Marine Heat Wave message is unavailable. Open the official page for the latest information.';
+        container.innerHTML = `<article class="district-advisory"><p>${unavailMsg}</p></article>`;
         return;
       }
 
       const items = parseMhwMessage(rawMessage);
       if (items.length === 0) {
-        container.innerHTML = `<article class="district-advisory"><p>${rawMessage}</p></article>`;
+        const translatedRaw = globalThis.i18n?.translateMhwText(rawMessage) || rawMessage;
+        container.innerHTML = `<article class="district-advisory"><p>${translatedRaw}</p></article>`;
         return;
       }
 
-      container.innerHTML = items.map(item => `
+      container.innerHTML = items.map(item => {
+        const translatedText = globalThis.i18n?.translateMhwText(item.text) || item.text;
+        const translatedTitle = globalThis.i18n?.translateCoralArea(item.title) || globalThis.i18n?.translateSectorName(item.title) || item.title;
+        return `
         <article class="district-advisory severity-${item.severity}">
           <div class="district-advisory-head">
-            <h3>${item.title}</h3>
+            <h3>${translatedTitle}</h3>
             <span class="severity-pill ${item.severity}">${item.category}${item.spreading ? ` · ${item.spreading}` : ''}</span>
           </div>
-          <p>${item.text}</p>
+          <p>${translatedText}</p>
         </article>
-      `).join('');
+      `;
+      }).join('');
     }
 
     async function renderCoralBleachingDialog() {
@@ -120,29 +126,36 @@ let deferredInstallPrompt = null;
 
       const regions = data?.coralBleaching?.regions || [];
       if (!regions.length) {
-        container.innerHTML = '<article class="district-advisory"><p>Coral Bleaching Alert data is currently unavailable. Please verify with the official INCOIS CBAS portal.</p></article>';
+        const unavailMsg = globalThis.i18n?.t('cbas.unavailable', 'Coral Bleaching Alert data is currently unavailable. Please verify with the official INCOIS CBAS portal.') || 'Coral Bleaching Alert data is currently unavailable. Please verify with the official INCOIS CBAS portal.';
+        container.innerHTML = `<article class="district-advisory"><p>${unavailMsg}</p></article>`;
         return;
       }
+
+      const hsLbl = globalThis.i18n?.t('cbas.hotspot_lbl', 'HotSpot (Instant):') || 'HotSpot (Instant):';
+      const dhwLbl = globalThis.i18n?.t('cbas.dhw_lbl', 'DHW (12-Wk Cumulative):') || 'DHW (12-Wk Cumulative):';
 
       container.innerHTML = regions.map(reg => {
         const sev = reg.severity || 'safe';
         const isAlert = sev === 'warning' || sev === 'alert';
         const isWatch = sev === 'watch';
         const icon = isAlert ? '🔴' : (isWatch ? '🟡' : '🟢');
+        const translatedArea = globalThis.i18n?.translateCoralArea(reg.area) || reg.area;
+        const translatedDhw = globalThis.i18n?.translateStressLevel(reg.dhw) || reg.dhw || 'No Stress';
+        const translatedHs = globalThis.i18n?.translateStressLevel(reg.hs) || reg.hs || 'No Stress';
         return `
           <article class="district-advisory coral-region-card severity-${sev}">
             <div class="district-advisory-head">
-              <h3>${icon} ${reg.area}</h3>
-              <span class="severity-pill ${sev}">${reg.dhw || 'No Stress'}</span>
+              <h3>${icon} ${translatedArea}</h3>
+              <span class="severity-pill ${sev}">${translatedDhw}</span>
             </div>
             <div class="coral-card-metrics">
               <div class="coral-metric-row">
-                <span class="coral-metric-label">HotSpot (Instant):</span>
-                <strong class="coral-metric-value">${reg.hs}</strong>
+                <span class="coral-metric-label">${hsLbl}</span>
+                <strong class="coral-metric-value">${translatedHs}</strong>
               </div>
               <div class="coral-metric-row">
-                <span class="coral-metric-label">DHW (12-Wk Cumulative):</span>
-                <strong class="coral-metric-value">${reg.dhw}</strong>
+                <span class="coral-metric-label">${dhwLbl}</span>
+                <strong class="coral-metric-value">${translatedDhw}</strong>
               </div>
             </div>
           </article>
