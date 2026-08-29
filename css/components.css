@@ -355,6 +355,7 @@
 .pfz-locked-bar{margin-top:6px;margin-bottom:6px}
 .pfz-locked-bar[hidden]{display:none}
 .pfz-locked-banner-card{display:grid;gap:8px;padding:9px 12px;border-radius:10px;background:#e8f4f2;border:1px solid #a3dcce;border-left:5px solid var(--teal)}
+.pfz-locked-banner-card .pfz-msg-card{background:#fff;border:1px solid #cbe6df;border-left:3px solid var(--teal);margin-bottom:6px}
 .pfz-locked-top-row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-bottom:6px;border-bottom:1px solid #cbe6df}
 .pfz-locked-top-row .locked-info{display:flex;align-items:center;gap:7px}
 .pfz-locked-top-row .locked-info strong{font-size:12.5px;color:var(--ink);display:block}
@@ -367,8 +368,8 @@
 .pfz-unlock-btn:hover{background:#d9534f;color:#fff}
 .tag.pfz-chip.has-locked{border-color:var(--teal);font-weight:900}
 .landing-chip.is-locked-chip{background:#d1e7dd;color:#0f5132;border:1.5px solid #a3cfbb;font-weight:900}
-.pfz-center-header-row{display:grid;gap:8px;padding:10px 12px;margin-bottom:8px;background:#f8fafc;border-radius:10px;border:1px solid #d0e2dd}
-.pfz-center-top-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1px solid #e2ece9}
+.pfz-center-header-row{display:grid;gap:8px;padding:10px 12px;margin-bottom:8px;background:#e8f4f2;border-radius:10px;border:1px solid #a3dcce;border-left:5px solid var(--teal)}
+.pfz-center-top-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1px solid #cbe6df}
 .pfz-center-title{display:flex;align-items:center;gap:7px}
 .pfz-lc-icon{font-size:18px;flex:none}
 .pfz-lc-kicker{display:block;font-size:9.5px;font-weight:900;letter-spacing:.05em;color:var(--teal);text-transform:uppercase}
@@ -384,7 +385,7 @@
 .pfz-item-val{font-size:12px;font-weight:800;color:var(--ink);line-height:1.35}
 .pfz-item-sub{font-size:10.5px;color:var(--muted)}
 .pfz-item-sub b{color:var(--teal)}
-.pfz-msg-card{background:#f8fafc;border-radius:10px;border:1px solid #d0e2dd;padding:10px 12px;margin-bottom:8px}
+.pfz-msg-card{background:#e8f4f2;border-radius:10px;border:1px solid #a3dcce;border-left:5px solid var(--teal);padding:10px 12px;margin-bottom:8px}
 .pfz-no-msg{font-size:11px;color:var(--muted);font-weight:700;padding:6px 2px}
 .pfz-message-nav-action{margin-top:8px;padding-top:6px;border-top:1px dashed var(--line);display:flex;justify-content:flex-end}
 

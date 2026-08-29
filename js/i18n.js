@@ -82,6 +82,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'Updates',
     'seismic.unavailable': 'No official ITEWC bulletin content is available for this event.',
     'seismic.open_bulletin': 'Open official bulletin ↗',
+    'seismic.fact_magnitude': 'Magnitude',
+    'seismic.fact_depth': 'Depth',
+    'seismic.fact_date': 'Date',
+    'seismic.fact_origin_time': 'Origin time',
+    'seismic.fact_latitude': 'Latitude',
+    'seismic.fact_longitude': 'Longitude',
+    'seismic.fact_location': 'Location',
+    'seismic.fact_bulletin': 'Bulletin',
+    'seismic.tectonic_setting': 'Tectonic Setting',
+    'seismic.setting_land': 'LAND',
+    'seismic.setting_oceanic': 'OCEANIC / MARINE',
+    'seismic.bathymetry': 'Bathymetry',
+    'seismic.bathymetry_nil': 'NIL',
+    'seismic.bathymetry_loading': 'Bathymetry: loading…',
+    'seismic.bathymetry_unavailable': 'Bathymetry: unavailable',
+    'seismic.coast_distance': 'Distance from nearest coast',
+    'seismic.no_advice': 'No advice text was included in this bulletin.',
     'storm.title': 'Storm Surge Advisory',
     'storm.safe': 'No active storm surge bulletin',
     'storm.checking': 'Checking active storm surge status.....',
@@ -295,6 +312,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'अद्यतन जानकारी',
     'seismic.unavailable': 'इस घटना के लिए कोई आधिकारिक ITEWC बुलेटिन उपलब्ध नहीं है।',
     'seismic.open_bulletin': 'आधिकारिक बुलेटिन खोलें ↗',
+    'seismic.fact_magnitude': 'तीव्रता (Magnitude)',
+    'seismic.fact_depth': 'गहराई (Depth)',
+    'seismic.fact_date': 'दिनांक',
+    'seismic.fact_origin_time': 'उत्पत्ति समय (Origin time)',
+    'seismic.fact_latitude': 'अक्षांश (Latitude)',
+    'seismic.fact_longitude': 'देशांतर (Longitude)',
+    'seismic.fact_location': 'स्थान',
+    'seismic.fact_bulletin': 'बुलेटिन (Bulletin)',
+    'seismic.tectonic_setting': 'टेक्टॉनिक स्थिति',
+    'seismic.setting_land': 'स्थलीय (LAND)',
+    'seismic.setting_oceanic': 'सागरीय (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'जल-गहराई (Bathymetry)',
+    'seismic.bathymetry_nil': 'शून्य (NIL)',
+    'seismic.bathymetry_loading': 'गहराई लोड हो रही है…',
+    'seismic.bathymetry_unavailable': 'गहराई अनुपलब्ध',
+    'seismic.coast_distance': 'निकटतम तट से दूरी',
+    'seismic.no_advice': 'इस बुलेटिन में कोई सलाह शामिल नहीं है।',
     'storm.title': 'तूफानी लहरों की चेतावनी',
     'storm.safe': 'कोई सक्रिय तूफान वृद्धि बुलेटिन नहीं',
     'storm.checking': 'सक्रिय तूफान वृद्धि स्थिति की जाँच की जा रही है.....',
@@ -508,6 +542,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'சமீபத்திய புதுப்பிப்புகள்',
     'seismic.unavailable': 'இந்த நிகழ்விற்கு அதிகாரப்பூர்வ ITEWC அறிக்கை கிடைக்கவில்லை.',
     'seismic.open_bulletin': 'அதிகாரப்பூர்வ அறிக்கையைத் திற ↗',
+    'seismic.fact_magnitude': 'அளவு (Magnitude)',
+    'seismic.fact_depth': 'ஆழம் (Depth)',
+    'seismic.fact_date': 'தேதி',
+    'seismic.fact_origin_time': 'உருவான நேரம் (Origin time)',
+    'seismic.fact_latitude': 'அட்சரேகை (Latitude)',
+    'seismic.fact_longitude': 'தீர்க்கரேகை (Longitude)',
+    'seismic.fact_location': 'இடம்',
+    'seismic.fact_bulletin': 'அறிக்கை (Bulletin)',
+    'seismic.tectonic_setting': 'டெக்டோனிக் அமைப்பு',
+    'seismic.setting_land': 'நிலப்பரப்பு (LAND)',
+    'seismic.setting_oceanic': 'கடல்சார் (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'ஆழ்கடல் ஆழம் (Bathymetry)',
+    'seismic.bathymetry_nil': 'இல்லை (NIL)',
+    'seismic.bathymetry_loading': 'ஆழம் கணக்கிடப்படுகிறது…',
+    'seismic.bathymetry_unavailable': 'ஆழம் கிடைக்கவில்லை',
+    'seismic.coast_distance': 'அருகிலுள்ள கடற்கரையிலிருந்து தொலைவு',
+    'seismic.no_advice': 'இந்த அறிக்கையில் ஆலோசனை உரை எதுவும் சேர்க்கப்படவில்லை.',
     'storm.title': 'புயல் அலை சீற்ற எச்சரிக்கை',
     'storm.safe': 'செயலில் உள்ள புயல் அலை அறிக்கை இல்லை',
     'storm.checking': 'புயல் அலை நிலை சரிபார்க்கப்படுகிறது.....',
@@ -721,6 +772,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'తాజా నవీకరణలు',
     'seismic.unavailable': 'ఈ సంఘటనకు ఎటువంటి అధికారిక ITEWC బులెటిన్ సమాచారం అందుబాటులో లేదు.',
     'seismic.open_bulletin': 'అధికారిక బులెటిన్ తెరవండి ↗',
+    'seismic.fact_magnitude': 'తీవ్రత (Magnitude)',
+    'seismic.fact_depth': 'లోతు (Depth)',
+    'seismic.fact_date': 'తేదీ',
+    'seismic.fact_origin_time': 'ప్రారంభ సమయం (Origin time)',
+    'seismic.fact_latitude': 'అక్షాంశం (Latitude)',
+    'seismic.fact_longitude': 'రేఖాంశం (Longitude)',
+    'seismic.fact_location': 'ప్రాంతం',
+    'seismic.fact_bulletin': 'బులెటిన్ (Bulletin)',
+    'seismic.tectonic_setting': 'టెక్టోనిక్ సెట్టింగ్',
+    'seismic.setting_land': 'భూభాగం (LAND)',
+    'seismic.setting_oceanic': 'సముద్రప్రాంతం (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'బాథిమెట్రీ (సముద్ర లోతు)',
+    'seismic.bathymetry_nil': 'శూన్యం (NIL)',
+    'seismic.bathymetry_loading': 'లోతు లోడ్ అవుతోంది…',
+    'seismic.bathymetry_unavailable': 'లోతు అందుబాటులో లేదు',
+    'seismic.coast_distance': 'సమీప తీరం నుండి దూరం',
+    'seismic.no_advice': 'ఈ బులెటిన్‌లో ఎటువంటి సలహా సమాచారం చేర్చబడలేదు.',
     'storm.title': 'తుఫాను అలల హెచ్చరిక',
     'storm.safe': 'ప్రస్తుతం తుఫాను అలల బులెటిన్ ఏదీ లేదు',
     'storm.checking': 'తుఫాను తీవ్రత పరిశీలించబడుతోంది.....',
@@ -934,6 +1002,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'പുതിയ വിവരങ്ങൾ',
     'seismic.unavailable': 'ഈ സംഭവത്തെക്കുറിച്ച് ഔദ്യോഗിക വിവരങ്ങൾ ലഭ്യമല്ല.',
     'seismic.open_bulletin': 'ഔദ്യോഗിക ബുള്ളറ്റിൻ തുറക്കുക ↗',
+    'seismic.fact_magnitude': 'തീവ്രത (Magnitude)',
+    'seismic.fact_depth': 'ആഴം (Depth)',
+    'seismic.fact_date': 'തീയതി',
+    'seismic.fact_origin_time': 'ഉത്ഭവ സമയം (Origin time)',
+    'seismic.fact_latitude': 'അക്ഷാംശം (Latitude)',
+    'seismic.fact_longitude': 'രേഖാംശം (Longitude)',
+    'seismic.fact_location': 'സ്ഥലം',
+    'seismic.fact_bulletin': 'ബുള്ളറ്റിൻ (Bulletin)',
+    'seismic.tectonic_setting': 'ടെക്റ്റോണിക് ക്രമീകരണം',
+    'seismic.setting_land': 'കരഭൂമി (LAND)',
+    'seismic.setting_oceanic': 'സമുദ്രം (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'ബാത്തിമെട്രി (ആഴം)',
+    'seismic.bathymetry_nil': 'ഇല്ല (NIL)',
+    'seismic.bathymetry_loading': 'ആഴം ലോഡ് ചെയ്യുന്നു…',
+    'seismic.bathymetry_unavailable': 'ആഴം ലഭ്യമല്ല',
+    'seismic.coast_distance': 'അടുത്തുള്ള തീരത്തുനിന്നുള്ള ദൂരം',
+    'seismic.no_advice': 'ഈ ബുള്ളറ്റിനിൽ ഉപദേശ വിവരങ്ങൾ ഉൾപ്പെടുത്തിയിട്ടില്ല.',
     'storm.title': 'കടലാക്രമണ മുന്നറിയിപ്പ്',
     'storm.safe': 'കടലാക്രമണ ബുള്ളറ്റിനുകൾ നിലവിലില്ല',
     'storm.checking': 'കടലാക്രമണ നില പരിശോധിക്കുന്നു.....',
@@ -1147,6 +1232,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'সর্বশেষ আপডেট',
     'seismic.unavailable': 'এই ঘটনার জন্য সরকারি কোনো বুলেটিন পাওয়া যায়নি।',
     'seismic.open_bulletin': 'সরকারি বুলেটিন দেখুন ↗',
+    'seismic.fact_magnitude': 'মাত্রা (Magnitude)',
+    'seismic.fact_depth': 'গভীরতা (Depth)',
+    'seismic.fact_date': 'তারিখ',
+    'seismic.fact_origin_time': 'উৎপত্তির সময় (Origin time)',
+    'seismic.fact_latitude': 'অক্ষাংশ (Latitude)',
+    'seismic.fact_longitude': 'দ্রাঘিমাংশ (Longitude)',
+    'seismic.fact_location': 'স্থান',
+    'seismic.fact_bulletin': 'বুলেটিন (Bulletin)',
+    'seismic.tectonic_setting': 'টেকটোনিক বিন্যাস',
+    'seismic.setting_land': 'স্থলভাগ (LAND)',
+    'seismic.setting_oceanic': 'সামুদ্রিক (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'বাথাইমেট্রি (গভীরতা)',
+    'seismic.bathymetry_nil': 'নেই (NIL)',
+    'seismic.bathymetry_loading': 'গভীরতা লোড হচ্ছে…',
+    'seismic.bathymetry_unavailable': 'গভীরতা পাওয়া যায়নি',
+    'seismic.coast_distance': 'নিকটতম উপকূল থেকে দূরত্ব',
+    'seismic.no_advice': 'এই বুলেটিনে কোনো পরামর্শের পাঠ্য অন্তর্ভুক্ত ছিল না।',
     'storm.title': 'জলোচ্ছ্বাস সতর্কবার্তা',
     'storm.safe': 'কোনো সক্রিয় জলোচ্ছ্বাস বুলেটিন নেই',
     'storm.checking': 'জলোচ্ছ্বাসের স্থিতি পরীক্ষা করা হচ্ছে.....',
@@ -1360,6 +1462,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'ताजे अपडेट्स',
     'seismic.unavailable': 'या घटनेसाठी अधिकृत माहिती उपलब्ध नाही.',
     'seismic.open_bulletin': 'अधिकृत बुलेटिन उघडा ↗',
+    'seismic.fact_magnitude': 'तीव्रता (Magnitude)',
+    'seismic.fact_depth': 'खोली (Depth)',
+    'seismic.fact_date': 'दिनांक',
+    'seismic.fact_origin_time': 'उत्पत्ती वेळ (Origin time)',
+    'seismic.fact_latitude': 'अक्षांश (Latitude)',
+    'seismic.fact_longitude': 'रेखांश (Longitude)',
+    'seismic.fact_location': 'स्थान',
+    'seismic.fact_bulletin': 'बुलेटिन (Bulletin)',
+    'seismic.tectonic_setting': 'टेक्टॉनिक रचना',
+    'seismic.setting_land': 'भूभाग (LAND)',
+    'seismic.setting_oceanic': 'सागरी (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'पाण्याची खोली (Bathymetry)',
+    'seismic.bathymetry_nil': 'काहीही नाही (NIL)',
+    'seismic.bathymetry_loading': 'खोली लोड होत आहे…',
+    'seismic.bathymetry_unavailable': 'खोली उपलब्ध नाही',
+    'seismic.coast_distance': 'जवळच्या किनारपट्टीपासून अंतर',
+    'seismic.no_advice': 'या बुलेटिनमध्ये कोणताही सल्ला समाविष्ट केला गेला नाही.',
     'storm.title': 'वादळी लाटांचा इशारा',
     'storm.safe': 'कोणतेही सक्रिय वादळी बुलेटिन नाही',
     'storm.checking': 'वादळी लाटांची स्थिती तपासत आहे.....',
@@ -1573,6 +1692,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'તાજા અપડેટ્સ',
     'seismic.unavailable': 'આ ઘટના માટે સત્તાવાર માહિતી ઉપલબ્ધ નથી.',
     'seismic.open_bulletin': 'સત્તાવાર બુલેટિન ખોલો ↗',
+    'seismic.fact_magnitude': 'તીવ્રતા (Magnitude)',
+    'seismic.fact_depth': 'ઊંડાઈ (Depth)',
+    'seismic.fact_date': 'તારીખ',
+    'seismic.fact_origin_time': 'ઉત્પત્તિ સમય (Origin time)',
+    'seismic.fact_latitude': 'અક્ષાંશ (Latitude)',
+    'seismic.fact_longitude': 'રેખાંશ (Longitude)',
+    'seismic.fact_location': 'સ્થળ',
+    'seismic.fact_bulletin': 'બુલેટિન (Bulletin)',
+    'seismic.tectonic_setting': 'ટેક્ટોનિક સ્થિતિ',
+    'seismic.setting_land': 'જમીન (LAND)',
+    'seismic.setting_oceanic': 'સમુદ્રી (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'દરિયાઈ ઊંડાઈ (Bathymetry)',
+    'seismic.bathymetry_nil': 'શૂન્ય (NIL)',
+    'seismic.bathymetry_loading': 'ઊંડાઈ લોડ થઈ રહી છે…',
+    'seismic.bathymetry_unavailable': 'ઊંડાઈ ઉપલબ્ધ નથી',
+    'seismic.coast_distance': 'નજીકના કાંઠાથી અંતર',
+    'seismic.no_advice': 'આ બુલેટિનમાં કોઈ સલાહ શામેલ કરવામાં આવી ન હતી.',
     'storm.title': 'તોફાની મોજાં ચેતવણી',
     'storm.safe': 'કોઈ સક્રિય મોજાં બુલેટિન નથી',
     'storm.checking': 'તોફાની મોજાં સ્થિતિ તપાસી રહ્યા છીએ.....',
@@ -1774,6 +1910,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'ସର୍ବଶେଷ ଅଦ୍ୟତନ',
     'seismic.unavailable': 'ଏହି ଘଟଣା ପାଇଁ କୌଣସି ସରକାରୀ ବୁଲେଟିନ୍ ଉପଲବ୍ଧ ନାହିଁ।',
     'seismic.open_bulletin': 'ସରକାରୀ ବୁଲେଟିନ୍ ଖୋଲନ୍ତୁ ↗',
+    'seismic.fact_magnitude': 'ତୀବ୍ରତା (Magnitude)',
+    'seismic.fact_depth': 'ଗଭୀରତା (Depth)',
+    'seismic.fact_date': 'ତାରିଖ',
+    'seismic.fact_origin_time': 'ଉତ୍ପତ୍ତି ସମୟ (Origin time)',
+    'seismic.fact_latitude': 'ଅକ୍ଷାଂଶ (Latitude)',
+    'seismic.fact_longitude': 'ଦ୍ରାଘିମା (Longitude)',
+    'seismic.fact_location': 'ସ୍ଥାନ',
+    'seismic.fact_bulletin': 'ବୁଲେଟିନ୍ (Bulletin)',
+    'seismic.tectonic_setting': 'ଟେକ୍ଟୋନିକ୍ ସ୍ଥିତି',
+    'seismic.setting_land': 'ସ୍ଥଳଭାଗ (LAND)',
+    'seismic.setting_oceanic': 'ସାମୁଦ୍ରିକ (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'ଜଳ ଗଭୀରତା (Bathymetry)',
+    'seismic.bathymetry_nil': 'କିଛି ନାହିଁ (NIL)',
+    'seismic.bathymetry_loading': 'ଗଭୀରତା ଲୋଡ୍ ହେଉଛି…',
+    'seismic.bathymetry_unavailable': 'ଗଭୀରତା ଉପଲବ୍ଧ ନାହିଁ',
+    'seismic.coast_distance': 'ନିକଟତମ ଉପକୂଳରୁ ଦୂରତା',
+    'seismic.no_advice': 'ଏହି ବୁଲେଟିନରେ କୌଣସି ପରାମର୍ଶ ପାଠ୍ୟ ଅନ୍ତର୍ଭୁକ୍ତ ନଥିଲା।',
     'storm.title': 'ବାତ୍ୟା ଜୁଆର ସତର୍କତା',
     'storm.safe': 'କୌଣସି ସକ୍ରିୟ ଜୁଆର ବୁଲେଟିନ୍ ନାହିଁ',
     'storm.checking': 'ଜୁଆର ସ୍ଥିତି ଯାଞ୍ଚ କରାଯାଉଛି.....',
@@ -1987,6 +2140,23 @@ const I18N_DICTIONARY = {
     'seismic.updates': 'ಇತ್ತೀಚಿನ ಅಪ್ಡೇಟ್‌ಗಳು',
     'seismic.unavailable': 'ಈ ಘಟನೆಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ಅಧಿಕೃತ ಬುಲೆಟಿನ್ ಲಭ್ಯವಿಲ್ಲ.',
     'seismic.open_bulletin': 'ಅಧಿಕೃತ ಬುಲೆಟಿನ್ ತೆರೆಯಿರಿ ↗',
+    'seismic.fact_magnitude': 'ತೀವ್ರತೆ (Magnitude)',
+    'seismic.fact_depth': 'ಆಳ (Depth)',
+    'seismic.fact_date': 'ದಿನಾಂಕ',
+    'seismic.fact_origin_time': 'ಉಗಮ ಸಮಯ (Origin time)',
+    'seismic.fact_latitude': 'ಅಕ್ಷಾಂಶ (Latitude)',
+    'seismic.fact_longitude': 'ರೇಖಾಂಶ (Longitude)',
+    'seismic.fact_location': 'ಸ್ಥಳ',
+    'seismic.fact_bulletin': 'ಬುಲೆಟಿನ್ (Bulletin)',
+    'seismic.tectonic_setting': 'ಟೆಕ್ಟೋನಿಕ್ ಸಂಯೋಜನೆ',
+    'seismic.setting_land': 'ಭೂಭಾಗ (LAND)',
+    'seismic.setting_oceanic': 'ಸಾಗರ (OCEANIC / MARINE)',
+    'seismic.bathymetry': 'ಸಾಗರದ ಆಳ (Bathymetry)',
+    'seismic.bathymetry_nil': 'ಇಲ್ಲ (NIL)',
+    'seismic.bathymetry_loading': 'ಆಳ ಲೋಡ್ ಆಗುತ್ತಿದೆ…',
+    'seismic.bathymetry_unavailable': 'ಆಳ ಲಭ್ಯವಿಲ್ಲ',
+    'seismic.coast_distance': 'ಹತ್ತಿರದ ಕರಾವಳಿಯಿಂದ ದೂರ',
+    'seismic.no_advice': 'ಈ ಬುಲೆಟಿನ್‌ನಲ್ಲಿ ಯಾವುದೇ ಸಲಹಾ ಪಠ್ಯವನ್ನು ಸೇರಿಸಲಾಗಿಲ್ಲ.',
     'storm.title': 'ಬಿರುಗಾಳಿ ಅಲೆಗಳ ಎಚ್ಚರಿಕೆ',
     'storm.safe': 'ಯಾವುದೇ ಸಕ್ರಿಯ ಅಲೆಗಳ ಬುಲೆಟಿನ್ ಇಲ್ಲ',
     'storm.checking': 'ಅಲೆಗಳ ಸ್ಥಿತಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ.....',
@@ -2651,105 +2821,404 @@ globalThis.i18n = {
     if (this.currentLang === 'hi') {
       res = res
         .replace(/for the coast of/gi, 'तट के लिए:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 मीटर की ऊँचाई वाली लहरें $2 से $3 के दौरान उठने का पूर्वानुमान है।')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'सतही धारा की गति $1 मी/सेकंड $2 से $3 के दौरान रहने की संभावना है।')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 से $4 के दौरान $1 सेकंड अवधि और $2 मीटर ऊँचाई की स्वेल लहरें उठने का पूर्वानुमान है।')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 मीटर की ऊँचाई वाली लहरें $2 से $3 के दौरान उठने का पूर्वानुमान है।')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'सतही धारा की गति $1 मी/सेकंड $2 से $3 के दौरान रहने की संभावना है।')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 मीटर ऊँचाई की स्वेल लहरें')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 से $2 तक।')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'समुद्री गतिविधियों और तटीय मनोरंजन के दौरान सतर्क रहने की सलाह दी जाती है।')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'तत्काल किसी कार्रवाई की आवश्यकता नहीं है। अद्यतन जानकारी देखते रहें।')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 से $2 तक।')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'लहरों के तेज उछाल की संभावना है, नावों को अत्यधिक सतर्कता के साथ चलाने और तटीय मनोरंजन में सावधानी बरतने की सलाह दी जाती है।')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'बंदरगाह और समुद्री गतिविधियों में सावधानी बरतने की सलाह दी जाती है।')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'बंदरगाह और समुद्री गतिविधियों में सावधानी बरतने की सलाह दी जाती है।')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'नावों को अत्यधिक सतर्कता के साथ चलाने और तटीय मनोरंजन में सावधानी बरतने की सलाह दी जाती है।')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'समुद्री गतिविधियों और तटीय मनोरंजन के दौरान सतर्क रहने की सलाह दी जाती है।')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'तत्काल किसी कार्रवाई की आवश्यकता नहीं है। अद्यतन जानकारी देखते रहें।')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'मछुआरों और तटीय आबादी को सतर्क रहने की सलाह दी जाती है')
         .replace(/hours on/gi, 'बजे, दिनांक');
     } else if (this.currentLang === 'ta') {
       res = res
         .replace(/for the coast of/gi, 'கடற்கரைக்கு:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 மீட்டர் உயரத்திற்கு உயர்ந்த அலைகள் $2 முதல் $3 வரை எழக்கூடும் என கணிக்கப்பட்டுள்ளது.')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'நீரோட்ட வேகம் $1 மீ/விநாடி $2 முதல் $3 வரை இருக்கக்கூடும்.')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 முதல் $4 வரை $1 விநாடி கால இடைவெளியில் $2 மீட்டர் உயர கள்ளக்கடல் அலைகள் எழக்கூடும் என கணிக்கப்பட்டுள்ளது.')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 மீட்டர் உயரத்திற்கு உயர்ந்த அலைகள் $2 முதல் $3 வரை எழக்கூடும் என கணிக்கப்பட்டுள்ளது.')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'நீரோட்ட வேகம் $1 மீ/விநாடி $2 முதல் $3 வரை இருக்கக்கூடும்.')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 மீட்டர் உயரத்திற்கு கள்ளக்கடல் அலைகள்')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 முதல் $2 வரை.')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'கடல்சார் தொழில்கள் மற்றும் கடற்கரை பொழுதுபோக்குகளில் ஈடுபடுவோர் எச்சரிக்கையுடன் இருக்குமாறு அறிவுறுத்தப்படுகிறார்கள்.')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'உடனடி நடவடிக்கை எதுவும் தேவையில்லை. புதுப்பிப்புகளைத் தொடர்ந்து கவனிக்கவும்.')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 முதல் $2 வரை.')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'அலைகள் வேகமாக சீறிப்பாய வாய்ப்புள்ளதால், படகுகள் மிகுந்த எச்சரிக்கையுடன் இயக்கப்பட வேண்டும் மற்றும் கடற்கரை பொழுதுபோக்குகளில் மிகுந்த கவனத்துடன் இருக்குமாறு அறிவுறுத்தப்படுகிறார்கள்.')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'துறைமுகம் மற்றும் கடல்சார் செயல்பாடுகளில் ஈடுபடுவோர் எச்சரிக்கையுடன் இருக்குமாறு அறிவுறுத்தப்படுகிறார்கள்.')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'துறைமுகம் மற்றும் கடல்சார் செயல்பாடுகளில் ஈடுபடுவோர் எச்சரிக்கையுடன் இருக்குமாறு அறிவுறுத்தப்படுகிறார்கள்.')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'படகுகள் மிகுந்த எச்சரிக்கையுடன் இயக்கப்பட வேண்டும் மற்றும் கடற்கரை பொழுதுபோக்குகளில் கவனமாக இருக்குமாறு அறிவுறுத்தப்படுகிறார்கள்.')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'கடல்சார் தொழில்கள் மற்றும் கடற்கரை பொழுதுபோக்குகளில் ஈடுபடுவோர் எச்சரிக்கையுடன் இருக்குமாறு அறிவுறுத்தப்படுகிறார்கள்.')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'உடனடி நடவடிக்கை எதுவும் தேவையில்லை. புதுப்பிப்புகளைத் தொடர்ந்து கவனிக்கவும்.')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'மீனவர்கள் மற்றும் கடலோர மக்கள் எச்சரிக்கையுடன் இருக்குமாறு அறிவுறுத்தப்படுகிறார்கள்')
         .replace(/hours on/gi, 'மணிக்கு, தேதி');
     } else if (this.currentLang === 'te') {
       res = res
         .replace(/for the coast of/gi, 'తీరానికి:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 మీటర్ల ఎత్తు వరకు అలలు $2 నుండి $3 వరకు ఎగిసిపడే అవకాశం ఉంది.')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'ప్రవాహ వేగం $1 మీ/సెకను $2 నుండి $3 వరకు ఉండవచ్చు.')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 నుండి $4 వరకు $1 సెకన్ల వ్యవధితో $2 మీటర్ల ఎత్తు వరకు స్వెల్ అలలు ఎగిసిపడే అవకాశం ఉంది.')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 మీటర్ల ఎత్తు వరకు అలలు $2 నుండి $3 వరకు ఎగిసిపడే అవకాశం ఉంది.')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'ప్రవాహ వేగం $1 మీ/సెకను $2 నుండి $3 వరకు ఉండవచ్చు.')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 మీటర్ల ఎత్తు వరకు స్వెల్ అలలు')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 నుండి $2 వరకు.')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'సముద్ర కార్యకలాపాలు మరియు తీరప్రాంత వినోదాలలో జాగ్రత్తగా ఉండాలని సూచించడమైనది.')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'తక్షణ చర్య అవసరం లేదు. తాజా సమాచారం కోసం గమనించండి.')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 నుండి $2 వరకు.')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'అలలు ఉవ్వెత్తున ఎగిసిపడే అవకాశం ఉన్నందున, పడవలు అత్యంత అప్రమత్తంగా ప్రయాణించాలని, వినోద కార్యక్రమాలలో తగిన జాగ్రత్తలు తీసుకోవాలని సూచించడమైనది.')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'హార్బర్ మరియు సముద్ర కార్యకలాపాలలో జాగ్రత్తగా ఉండాలని సూచించడమైనది.')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'హార్బర్ మరియు సముద్ర కార్యకలాపాలలో జాగ్రత్తగా ఉండాలని సూచించడమైనది.')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'పడవలు అత్యంత అప్రమత్తంగా ప్రయాణించాలని, వినోదాలలో జాగ్రత్తగా ఉండాలని సూచించడమైనది.')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'సముద్ర కార్యకలాపాలు మరియు తీరప్రాంత వినోదాలలో జాగ్రత్తగా ఉండాలని సూచించడమైనది.')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'తక్షణ చర్య అవసరం లేదు. తాజా సమాచారం కోసం గమనించండి.')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'మత్స్యకారులు మరియు తీరప్రాంత ప్రజలు అప్రమత్తంగా ఉండాలి')
         .replace(/hours on/gi, 'గంటలకు, తేదీ');
     } else if (this.currentLang === 'ml') {
       res = res
         .replace(/for the coast of/gi, 'തീരത്തിന്:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 മീറ്റർ ഉയരത്തിൽ ഉയർന്ന തിരമാലകൾ $2 മുതൽ $3 വരെ ഉണ്ടാകാൻ സാധ്യതയുണ്ട്.')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'പ്രവാഹ വേഗത $1 മീ/സെക്കൻഡ് $2 മുതൽ $3 വരെയാകാം.')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 മുതൽ $4 വരെ $1 സെക്കൻഡ് ഇടവേളയിൽ $2 മീറ്റർ ഉയരത്തിൽ കള്ളക്കടൽ തിരമാലകൾ ഉണ്ടാകാൻ സാധ്യതയുണ്ട്.')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 മീറ്റർ ഉയരത്തിൽ ഉയർന്ന തിരമാലകൾ $2 മുതൽ $3 വരെ ഉണ്ടാകാൻ സാധ്യതയുണ്ട്.')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'പ്രവാഹ വേഗത $1 മീ/സെക്കൻഡ് $2 മുതൽ $3 വരെയാകാം.')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 മീറ്റർ ഉയരത്തിൽ കള്ളക്കടൽ തിരമാലകൾ')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 മുതൽ $2 വരെ.')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'കടൽ പ്രവർത്തനങ്ങളിലും തീരദേശ വിനോദങ്ങളിലും ഏർപ്പെടുമ്പോൾ ജാഗ്രത പാലിക്കാൻ നിർദ്ദേശിക്കുന്നു.')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'ഉടൻ നടപടിയൊന്നും ആവശ്യമില്ല. വിവരങ്ങൾ പരിശോധിക്കുക.')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 മുതൽ $2 വരെ.')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'തിരമാലകൾ ശക്തമായി അടിക്കാൻ സാധ്യതയുള്ളതിനാൽ ബോട്ടുകൾ അതീവ ജാഗ്രതയോടെ സഞ്ചരിക്കാനും വിനോദങ്ങളിൽ ജാഗ്രത പാലിക്കാനും നിർദ്ദേശിക്കുന്നു.')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'തുറമുഖ, സമുദ്ര പ്രവർത്തനങ്ങളിൽ ജാഗ്രത പാലിക്കാൻ നിർദ്ദേശിക്കുന്നു.')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'തുറമുഖ, സമുദ്ര പ്രവർത്തനങ്ങളിൽ ജാഗ്രത പാലിക്കാൻ നിർദ്ദേശിക്കുന്നു.')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'ബോട്ടുകൾ അതീവ ജാഗ്രതയോടെ സഞ്ചരിക്കാനും വിനോദങ്ങളിൽ ശ്രദ്ധിക്കാനും നിർദ്ദേശിക്കുന്നു.')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'കടൽ പ്രവർത്തനങ്ങളിലും തീരദേശ വിനോദങ്ങളിലും ഏർപ്പെടുമ്പോൾ ജാഗ്രത പാലിക്കാൻ നിർദ്ദേശിക്കുന്നു.')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'ഉടൻ നടപടിയൊന്നും ആവശ്യമില്ല. വിവരങ്ങൾ പരിശോധിക്കുക.')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'മത്സ്യത്തൊഴിലാളികളും തീരവാസികളും ജാഗ്രത പാലിക്കണം')
         .replace(/hours on/gi, 'മണിക്ക്, തീയതി');
     } else if (this.currentLang === 'bn') {
       res = res
         .replace(/for the coast of/gi, 'উপকূলের জন্য:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 মিটার উচ্চতার ঢেউ $2 থেকে $3 পর্যন্ত ওঠার পূর্বাভাস রয়েছে।')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'স্রোতের গতিবেগ $1 মি/সেকেন্ড $2 থেকে $3 পর্যন্ত হতে পারে।')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 থেকে $4 পর্যন্ত $1 সেকেন্ড সময়কালের ব্যবধানে $2 মিটার উচ্চতার সোয়েল ঢেউ ওঠার সম্ভাবনা রয়েছে।')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 মিটার উচ্চতার ঢেউ $2 থেকে $3 পর্যন্ত ওঠার পূর্বাভাস রয়েছে।')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'স্রোতের গতিবেগ $1 মি/সেকেন্ড $2 থেকে $3 পর্যন্ত হতে পারে।')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 মিটার উচ্চতার সোয়েল ঢেউ')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 থেকে $2 পর্যন্ত।')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'সামুদ্রিক কার্যক্রম এবং উপকূলীয় বিনোদনের সময় সতর্ক থাকার পরামর্শ দেওয়া হচ্ছে।')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'তাৎক্ষণিক কোনো পদক্ষেপের প্রয়োজন নেই। আপডেটের জন্য নজর রাখুন।')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 থেকে $2 পর্যন্ত।')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'ঢেউয়ের প্রবল উচ্ছ্বাসের সম্ভাবনা থাকায় নৌকাগুলিকে অত্যন্ত সতর্কতার সাথে চলাচল করতে এবং উপকূলীয় বিনোদনে সতর্ক থাকতে পরামর্শ দেওয়া হচ্ছে।')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'বন্দর ও সামুদ্রিক কার্যকলাপে সতর্ক থাকার পরামর্শ দেওয়া হচ্ছে।')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'বন্দর ও সামুদ্রিক কার্যকলাপে সতর্ক থাকার পরামর্শ দেওয়া হচ্ছে।')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'নৌকাগুলিকে সতর্কতার সাথে চলাচল করতে এবং বিনোদনে সাবধানতা অবলম্বন করতে পরামর্শ দেওয়া হচ্ছে।')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'সামুদ্রিক কার্যক্রম এবং উপকূলীয় বিনোদনের সময় সতর্ক থাকার পরামর্শ দেওয়া হচ্ছে।')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'তাৎক্ষণিক কোনো পদক্ষেপের প্রয়োজন নেই। আপডেটের জন্য নজর রাখুন।')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'মৎস্যজীবী ও উপকূলবাসীদের সতর্ক থাকার পরামর্শ দেওয়া হচ্ছে')
         .replace(/hours on/gi, 'টার সময়, তারিখ');
     } else if (this.currentLang === 'mr') {
       res = res
         .replace(/for the coast of/gi, 'किनारपट्टीसाठी:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 मीटर उंचीच्या लाटा $2 ते $3 दरम्यान उसळण्याचा अंदाज आहे.')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'प्रवाहाचा वेग $1 मी/सेकंद $2 ते $3 दरम्यान राहण्याची शक्यता आहे.')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 ते $4 दरम्यान $1 सेकंदांच्या कालावधीसह $2 मीटर उंचीच्या स्वेल लाटा उसळण्याचा अंदाज आहे।')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 मीटर उंचीच्या लाटा $2 ते $3 दरम्यान उसळण्याचा अंदाज आहे.')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'प्रवाहाचा वेग $1 मी/सेकंद $2 ते $3 दरम्यान राहण्याची शक्यता आहे.')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 मीटर उंचीच्या स्वेल लाटा')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 ते $2 पर्यंत.')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'सागरी कामकाज आणि किनारपट्टीवरील मनोरंजनादरम्यान सावधगिरी बाळगण्याचा सल्ला दिला आहे.')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'तात्काळ कारवाईची आवश्यकता नाही. अपडेट्स तपासत राहा.')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 ते $2 पर्यंत.')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'लाटांचा वेग वाढण्याची शक्यता असल्याने बोटींनी अत्यंत दक्षतेने प्रवास करावा व पर्यटनादरम्यान काळजी घ्यावी असा सल्ला दिला आहे.')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'बंदर व सागरी कामकाजात सावधगिरी बाळगण्याचा सल्ला दिला आहे.')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'बंदर व सागरी कामकाजात सावधगिरी बाळगण्याचा सल्ला दिला आहे.')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'बोटींनी अत्यंत दक्षतेने प्रवास करावा व पर्यटनादरम्यान काळजी घ्यावी.')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'सागरी कामकाज आणि किनारपट्टीवरील मनोरंजनादरम्यान सावधगिरी बाळगण्याचा सल्ला दिला आहे.')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'तात्काळ कारवाईची आवश्यकता नाही. अपडेट्स तपासत राहा.')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'मच्छीमार आणि नागरिकांना सतर्कतेचा इशारा')
         .replace(/hours on/gi, 'वाजता, दिनांक');
     } else if (this.currentLang === 'gu') {
       res = res
         .replace(/for the coast of/gi, 'કાંઠા માટે:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 મીટર ઊંચાઈના મોજાં $2 થી $3 દરમિયાન ઉછળવાની આગાહી છે.')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'પ્રવાહની ઝડપ $1 મી/સેકન્ડ $2 થી $3 દરમિયાન રહેવાની શક્યતા છે.')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 થી $4 દરમિયાન $1 સેકન્ડના ગાળા સાથે $2 મીટર ઊંચાઈના સ્વેલ મોજાં ઉછળવાની આગાહી છે.')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 મીટર ઊંચાઈના મોજાં $2 થી $3 દરમિયાન ઉછળવાની આગાહી છે.')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'પ્રવાહની ઝડપ $1 મી/સેકન્ડ $2 થી $3 દરમિયાન રહેવાની શક્યતા છે.')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 મીટર ઊંચાઈના સ્વેલ મોજાં')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 થી $2 સુધી.')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'દરિયાઈ કામગીરી અને કાંઠાના મનોરંજન દરમિયાન સાવચેત રહેવાની સલાહ આપવામાં આવે છે.')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'તાત્કાલિક કોઈ પગલાંની જરૂર નથી. અપડેટ્સ તપાસો.')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 થી $2 સુધી.')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'મોજાં ઉછળવાની શક્યતા હોવાથી બોટોને અત્યંત સાવચેતી સાથે ચલાવવા અને કાંઠાના મનોરંજનમાં સાવચેત રહેવાની સલાહ આપવામાં આવે છે.')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'બંદર અને દરિયાઈ કામગીરીમાં સાવચેત રહેવાની સલાહ આપવામાં આવે છે.')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'બંદર અને દરિયાઈ કામગીરીમાં સાવચેત રહેવાની સલાહ આપવામાં આવે છે.')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'બોટોને અત્યંત સાવચેતી સાથે ચલાવવા અને મનોરંજનમાં ધ્યાન રાખવા સલાહ છે.')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'દરિયાઈ કામગીરી અને કાંઠાના મનોરંજન દરમિયાન સાવચેત રહેવાની સલાહ આપવામાં આવે છે.')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'તાત્કાલિક કોઈ પગલાંની જરૂર નથી. અપડેટ્સ તપાસો.')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'માછીમારો અને કાંઠાના લોકોને સાવચેત રહેવા ચેતવણી')
         .replace(/hours on/gi, 'વાગ્યે, તારીખ');
     } else if (this.currentLang === 'or') {
       res = res
         .replace(/for the coast of/gi, 'ଉପକୂଳ ପାଇଁ:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 ମିଟର ଉଚ୍ଚତାର ତରଙ୍ਗ $2 ରୁ $3 ମଧ୍ୟରେ ସୃଷ୍ଟି ହେବାର ପୂର୍ବାନୁମାନ କରାଯାଇଛି।')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'ସ୍ରୋତର ବେଗ $1 ମି/ସେକେଣ୍ଡ $2 ରୁ $3 ମଧ୍ୟରେ ରହିପାରେ।')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 ରୁ $4 ମଧ୍ୟରେ $1 ସେକେଣ୍ଡ ବ୍ୟବଧାନ ସହିତ $2 ମିଟର ଉଚ୍ଚତାର ସ୍ୱେଲ୍ ତରଙ୍ଗ ସୃଷ୍ଟି ହେବାର ପୂର୍ବାନୁମାନ କରାଯାଇଛି।')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 ମିଟର ଉଚ୍ଚତାର ତରଙ୍ଗ $2 ରୁ $3 ମଧ୍ୟରେ ସୃଷ୍ଟି ହେବାର ପୂର୍ବାନୁମାନ କରାଯାଇଛି।')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'ସ୍ରୋତର ବେଗ $1 ମି/ସେକେଣ୍ଡ $2 ରୁ $3 ମଧ୍ୟରେ ରହିପାରେ।')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 ମିଟର ଉଚ୍ଚତାର ସ୍ୱେଲ୍ ତରଙ୍ଗ')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 ରୁ $2 ପର୍ଯ୍ୟନ୍ତ।')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'ସାମୁଦ୍ରିକ କାର୍ଯ୍ୟକଳାପ ଏବଂ ଉପକୂଳ ମନୋରଞ୍ଜନ ସମୟରେ ସତର୍କ ରହିବାକୁ ପରାମର୍ଶ ଦିଆଯାଇଛି।')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'ତୁରନ୍ତ କୌଣସି ପଦକ୍ଷେପ ଆବଶ୍ୟକ ନାହିଁ। ଅଦ୍ୟତନ ସୂଚନା ଯାଞ୍ଚ କରନ୍ତୁ।')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 ରୁ $2 ପର୍ଯ୍ୟନ୍ତ।')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'ତରଙ୍ଗର ତୀବ୍ରତା ବୃଦ୍ଧି ପାଇବାର ସମ୍ଭାବନା ଥିବାରୁ ଡଙ୍ଗାଗୁଡ଼ିକୁ ଅତ୍ୟନ୍ତ ସତର୍କତାର ସହିତ ଚଳାଇବାକୁ ଏବଂ ଉପକୂଳ ମନୋରଞ୍ଜନରେ ସାବଧାନ ରହିବାକୁ ପରାମର୍ଶ ଦିଆଯାଇଛି।')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'ବନ୍ଦର ଏବଂ ସାମୁଦ୍ରିକ କାର୍ଯ୍ୟକଳାପରେ ସତର୍କ ରହିବାକୁ ପରାମର୍ଶ ଦିଆଯାଇଛି।')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'ବନ୍ଦର ଏବଂ ସାମୁଦ୍ରିକ କାର୍ଯ୍ୟକଳାପରେ ସତର୍କ ରହିବାକୁ ପରାମର୍ଶ ଦିଆଯାଇଛି।')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'ଡଙ୍ଗାଗୁଡ଼ିକୁ ସତର୍କତାର ସହିତ ଚଳାଇବାକୁ ଏବଂ ମନୋରଞ୍ଜନରେ ଧ୍ୟାନ ଦେବାକୁ ପରାମର୍ଶ।')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'ସାମୁଦ୍ରିକ କାର୍ଯ୍ୟକଳାପ ଏବଂ ଉପକୂଳ ମନୋରଞ୍ଜନ ସମୟରେ ସତର୍କ ରହିବାକୁ ପରାମର୍ଶ ଦିଆଯାଇଛି।')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'ତୁରନ୍ତ କୌଣସି ପଦକ୍ଷେପ ଆବଶ୍ୟକ ନାହିଁ। ଅଦ୍ୟତନ ସୂଚନା ଯାଞ୍ଚ କରନ୍ତୁ।')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'ମତ୍ସ୍ୟଜୀବୀ ଏବଂ ଉପକୂଳବାସୀଙ୍କୁ ସତର୍କ ରହିବାକୁ ପରାମର୍ଶ')
         .replace(/hours on/gi, 'ଟା ସମୟରେ, ତାରିଖ');
     } else if (this.currentLang === 'kn') {
       res = res
         .replace(/for the coast of/gi, 'ಕರಾವಳಿಗೆ:')
-        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)\./gi, '$1 ಮೀಟರ್ ಎತ್ತರದ ಅಲೆಗಳು $2 ರಿಂದ $3 ರ ಅವಧಿಯಲ್ಲಿ ಏಳುವ ಸಾಧ್ಯತೆಯಿದೆ.')
-        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)\./gi, 'ಪ್ರವಾಹದ ವೇಗ $1 ಮೀ/ಸೆಕೆಂಡ್ $2 ರಿಂದ $3 ರವರೆಗೆ ಇರಬಹುದು.')
+        .replace(/Swell waves in the range of ([0-9.\s-]+) sec period with ([0-9.\s-]+)\s*(?:m|meters)?\s*height are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$3 ರಿಂದ $4 ರ ಅವಧಿಯಲ್ಲಿ $1 ಸೆಕೆಂಡುಗಳ ಕಾಲಾವಧಿಯೊಂದಿಗೆ $2 ಮೀಟರ್ ಎತ್ತರದ ಸ್ವೆಲ್ ಅಲೆಗಳು ಏಳುವ ಮುನ್ಸೂಚನೆಯಿದೆ.')
+        .replace(/High waves in the range of ([0-9.\s-]+) meters are forecasted during (.*?) to (.*?)(?:\.|$)/gi, '$1 ಮೀಟರ್ ಎತ್ತರದ ಅಲೆಗಳು $2 ರಿಂದ $3 ರ ಅವಧಿಯಲ್ಲಿ ಏಳುವ ಸಾಧ್ಯತೆಯಿದೆ.')
+        .replace(/Surface current speeds in the range of ([0-9.\s-]+) m\/sec are forecasted during (.*?) to (.*?)(?:\.|$)/gi, 'ಪ್ರವಾಹದ ವೇಗ $1 ಮೀ/ಸೆಕೆಂಡ್ $2 ರಿಂದ $3 ರವರೆಗೆ ಇರಬಹುದು.')
         .replace(/Swell waves of height ([0-9.\s-]+) meters/gi, '$1 ಮೀಟರ್ ಎತ್ತರದ ಸ್ವೆಲ್ ಅಲೆಗಳು')
-        .replace(/from (.*?) To (.*?)\./gi, '$1 ರಿಂದ $2 ವರೆಗೆ.')
-        .replace(/It advised that to be careful while doing marine operations and nearshore recreation\./gi, 'ಸಾಗರ ಕಾರ್ಯಾಚರಣೆ ಮತ್ತು ಕರಾವಳಿ ಮನರಂಜನೆಯ ಸಮಯದಲ್ಲಿ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಲು ಸಲಹೆ ನೀಡಲಾಗಿದೆ.')
-        .replace(/It advised that no immediate action is required\. Check for updates\./gi, 'ತಕ್ಷಣದ ಯಾವುದೇ ಕ್ರಮ ಅಗತ್ಯವಿಲ್ಲ. ನವೀಕರಣಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.')
+        .replace(/from (.*?) To (.*?)(?:\.|$)/gi, '$1 ರಿಂದ $2 ವರೆಗೆ.')
+        .replace(/It(?: is)? advised that there is a possibility of surging of waves,?\s*boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'ಅಲೆಗಳು ತೀವ್ರವಾಗಿ ಅಪ್ಪಳಿಸುವ ಸಾಧ್ಯತೆಯಿರುವುದರಿಂದ ದೋಣಿಗಳನ್ನು ಅತ್ಯಂತ ಜಾಗರೂಕತೆಯಿಂದ ಚಲಾಯಿಸಲು ಮತ್ತು ಕರಾವಳಿ ಮನರಂಜನೆಯಲ್ಲಿ ಎಚ್ಚರಿಕೆ ವಹಿಸಲು ಸಲಹೆ ನೀಡಲಾಗಿದೆ.')
+        .replace(/It(?: is)? advised that Harbour & [Mm]arine operations to be careful\.?/gi, 'ಬಂದರು ಮತ್ತು ಸಾಗರ ಕಾರ್ಯಾಚರಣೆಗಳಲ್ಲಿ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಲು ಸಲಹೆ ನೀಡಲಾಗಿದೆ.')
+        .replace(/Harbour & [Mm]arine operations to be careful\.?/gi, 'ಬಂದರು ಮತ್ತು ಸಾಗರ ಕಾರ್ಯಾಚರಣೆಗಳಲ್ಲಿ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಲು ಸಲಹೆ ನೀಡಲಾಗಿದೆ.')
+        .replace(/It(?: is)? advised that boats to ply with utmost vigilance,?\s*recreation with due care\.?/gi, 'ದೋಣಿಗಳನ್ನು ಅತ್ಯಂತ ಜಾಗರೂಕತೆಯಿಂದ ಚಲಾಯಿಸಲು ಮತ್ತು ಮನರಂಜನೆಯಲ್ಲಿ ಕಾಳಜಿ ವಹಿಸಲು ಸಲಹೆ.')
+        .replace(/It(?: is)? advised that to be careful while doing marine operations and nearshore recreation\.?/gi, 'ಸಾಗರ ಕಾರ್ಯಾಚರಣೆ ಮತ್ತು ಕರಾವಳಿ ಮನರಂಜನೆಯ ಸಮಯದಲ್ಲಿ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಲು ಸಲಹೆ ನೀಡಲಾಗಿದೆ.')
+        .replace(/It(?: is)? advised that no immediate action is required\.?(?:\s*Check for updates\.?)?/gi, 'ತಕ್ಷಣದ ಯಾವುದೇ ಕ್ರಮ ಅಗತ್ಯವಿಲ್ಲ. ನವೀಕರಣಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.')
         .replace(/Fishermen and coastal population are alerted to be cautious/gi, 'ಮೀನುಗಾರರು ಮತ್ತು ಕರಾವಳಿ ಜನರು ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು')
         .replace(/hours on/gi, 'ಗಂಟೆಗೆ, ದಿನಾಂಕ');
     }
 
     // 3. Translate any district or state names mentioned inside the bulletin text (sort by length desc)
+    const allReplacements = [
+      ...Object.entries(I18N_SECTORS),
+      ...Object.entries(I18N_DISTRICTS)
+    ].sort((a, b) => b[0].length - a[0].length);
+
+    for (const [key, map] of allReplacements) {
+      if (map[this.currentLang] && res.includes(key)) {
+        res = res.replaceAll(key, map[this.currentLang]);
+      }
+    }
+
+    return res;
+  },
+
+  translateTectonicSetting(setting) {
+    if (!setting) return '';
+    const s = String(setting).toUpperCase();
+    const label = this.t('seismic.tectonic_setting', 'Tectonic Setting');
+    if (s.includes('LAND')) {
+      return `${label}: ${this.t('seismic.setting_land', 'LAND')}`;
+    }
+    return `${label}: ${this.t('seismic.setting_oceanic', 'OCEANIC / MARINE')}`;
+  },
+
+  translateBathymetry(bathy) {
+    if (!bathy) return '';
+    const label = this.t('seismic.bathymetry', 'Bathymetry');
+    const s = String(bathy).trim().toUpperCase();
+    if (s === 'NIL' || s.includes('NIL')) {
+      return `${label}: ${this.t('seismic.bathymetry_nil', 'NIL')}`;
+    }
+    if (s.includes('LOADING')) {
+      return this.t('seismic.bathymetry_loading', 'Bathymetry: loading…');
+    }
+    if (s.includes('UNAVAILABLE')) {
+      return this.t('seismic.bathymetry_unavailable', 'Bathymetry: unavailable');
+    }
+    return `${label}: ${bathy}`;
+  },
+
+  translateCoastDistance(dist) {
+    if (!dist) return '';
+    const label = this.t('seismic.coast_distance', 'Distance from nearest coast');
+    return `${label}: ${dist}`;
+  },
+
+  translateItewcText(text) {
+    if (!text || typeof text !== 'string') return '';
+    if (this.currentLang === 'en') return text;
+
+    let res = text;
+
+    const ITEWC_CORPUS = [
+      {
+        pattern: /Based on historical earthquake and tsunami data,?\s*Tsunami Threat does not exist for India\.?\s*ITEWC INCOIS will monitor sea level changes near epicentral region and report in case of tsunami threat\.?/gi,
+        hi: 'ऐतिहासिक भूकंप और सुनामी आंकड़ों के आधार पर, भारत के लिए कोई सुनामी का खतरा नहीं है। ITEWC INCOIS उपरिकेंद्र क्षेत्र के निकट समुद्र स्तर में परिवर्तन की निगरानी करेगा और सुनामी के खतरे की स्थिति में रिपोर्ट करेगा।',
+        ta: 'வரலாற்று நிலநடுக்கம் மற்றும் சுனாமி தரவுகளின் அடிப்படையில், இந்தியாவிற்கு சுனாமி அச்சுறுத்தல் இல்லை. ITEWC INCOIS நிலநடுக்க மையப் பகுதியில் கடல் மட்ட மாற்றங்களை தொடர்ந்து கண்காணித்து, சுனாமி அச்சுறுத்தல் இருப்பின் அறிக்கை வெளியிடும்.',
+        te: 'చారిత్రక భూకంప మరియు సునామీ డేటా ఆధారంగా, భారతదేశానికి ఎటువంటి సునామీ ముప్పు లేదు. ITEWC INCOIS భూకంప కేంద్ర ప్రాంత సమీపంలో సముద్ర మట్టాల మార్పులను పర్యవేక్షిస్తుంది మరియు సునామీ ముప్పు ఉన్నట్లయితే నివేదిస్తుంది.',
+        ml: 'ചരിത്രപരമായ ഭൂകമ്പ, സുനാമി വിവരങ്ങളുടെ അടിസ്ഥാനത്തിൽ, ഇന്ത്യയ്ക്ക് സുനാമി ഭീഷണി നിലനിൽക്കുന്നില്ല. ITEWC INCOIS ഭൂകമ്പ പ്രഭവകേന്ദ്രത്തിന് സമീപമുള്ള സമുദ്രനിരപ്പ് മാറ്റങ്ങൾ നിരീക്ഷിക്കുകയും സുനാമി ഭീഷണിയുണ്ടെങ്കിൽ റിപ്പോർട്ട് ചെയ്യുകയും ചെയ്യും.',
+        bn: 'ঐতিহাসিক ভূমিকম্প ও সুনামি তথ্যের ভিত্তিতে, ভারতের জন্য সুনামির কোনো আশঙ্কা নেই। ITEWC INCOIS উপকেন্দ্রীয় অঞ্চলের কাছে সমুদ্রপৃষ্ঠের পরিবর্তন পর্যবেক্ষণ করবে এবং সুনামির আশঙ্কা থাকলে রিপোর্ট করবে।',
+        mr: 'ऐतिहासिक भूकंप आणि त्सुनामी आकडेवारीच्या आधारे भारताला त्सुनामीचा कोणताही धोका नाही. ITEWC INCOIS केंद्रबिंदू क्षेत्राजवळील समुद्राच्या पातळीतील बदलांवर लक्ष ठेवेल आणि त्सुनामीचा धोका असल्यास अहवाल देईल.',
+        gu: 'ઐતિહાસિક ધરતીકંપ અને સુનામી ડેટાના આધારે, ભારત માટે કોઈ સુનામી જોખમ નથી. ITEWC INCOIS કેન્દ્રબિંદુ વિસ્તાર નજીક સમુદ્ર સપાટીના ફેરફારો પર નજર રાખશે અને સુનામીના જોખમની સ્થિતિમાં જાણ કરશે.',
+        or: 'ଐତିହାସିକ ଭୂକମ୍ପ ଏବଂ ସୁନାମି ତଥ୍ୟ ଆଧାରରେ, ଭାରତ ପାଇଁ କୌଣସି ସୁନାମି ବିପଦ ନାହିଁ। ITEWC INCOIS ଭୂକମ୍ପ କେନ୍ଦ୍ର ଅଞ୍ଚଳ ନିକଟରେ ସମୁଦ୍ର ପତ୍ତନ ପରିବର୍ତ୍ତନ ଉପରେ ନଜର ରଖିବ ଏବଂ ସୁନାମି ବିପଦ ଥିଲେ ସୂଚନା ଦେବ।',
+        kn: 'ಐತಿಹಾಸಿಕ ಭೂಕಂಪ ಮತ್ತು ಸುನಾಮಿ ದತ್ತಾಂಶದ ಆಧಾರದ ಮೇಲೆ, ಭಾರತಕ್ಕೆ ಯಾವುದೇ ಸುನಾಮಿ ಅಪಾಯವಿಲ್ಲ. ITEWC INCOIS ಕೇಂದ್ರಬಿಂದು ಪ್ರದೇಶದ ಬಳಿ ಸಮುದ್ರ ಮಟ್ಟದ ಬದಲಾವಣೆಗಳನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡುತ್ತದೆ ಮತ್ತು ಸುನಾಮಿ ಬೆದರಿಕೆಯ ಸಂದರ್ಭದಲ್ಲಿ ವರದಿ ಮಾಡುತ್ತದೆ.'
+      },
+      {
+        pattern: /Tsunami Threat does not exist for India\.?/gi,
+        hi: 'भारत के लिए कोई सुनामी का खतरा नहीं है।',
+        ta: 'இந்தியாவிற்கு சுனாமி அச்சுறுத்தல் இல்லை.',
+        te: 'భారతదేశానికి ఎటువంటి సునామీ ముప్పు లేదు.',
+        ml: 'ഇന്ത്യയ്ക്ക് സുനാമി ഭീഷണി നിലനിൽക്കുന്നില്ല.',
+        bn: 'ভারতের জন্য কোনো সুনামির আশঙ্কা নেই।',
+        mr: 'भारताला त्सुनामीचा कोणताही धोका नाही.',
+        gu: 'ભારત માટે કોઈ સુનામી જોખમ નથી.',
+        or: 'ଭାରତ ପାଇଁ କୌଣସି ସୁନାମି ବିପଦ ନାହିଁ।',
+        kn: 'ಭಾರತಕ್ಕೆ ಯಾವುದೇ ಸುನಾಮಿ ಅಪಾಯವಿಲ್ಲ.'
+      },
+      {
+        pattern: /This bulletin is being issued as advice\.?\s*Only national\/state\/local authorities and disaster management officers have the authority to make decisions regarding the official threat and warning status in their coastal areas and any action to be taken in response\.?/gi,
+        hi: 'यह बुलेटिन सलाह के रूप में जारी किया जा रहा है। केवल राष्ट्रीय/राज्य/स्थानीय अधिकारियों और आपदा प्रबंधन अधिकारियों को अपने तटीय क्षेत्रों में आधिकारिक खतरे और चेतावनी की स्थिति तथा उसके जवाब में की जाने वाली किसी भी कार्रवाई के संबंध में निर्णय लेने का अधिकार है।',
+        ta: 'இந்த அறிக்கை ஒரு ஆலோசனையாக மட்டுமே வெளியிடப்படுகிறது. தேசிய, மாநில மற்றும் உள்ளூர் பேரிடர் மேலாண்மை அதிகாரிகளுக்கு மட்டுமே தங்களது கடலோரப் பகுதிகளில் அதிகாரப்பூர்வ எச்சரிக்கை நிலை மற்றும் பாதுகாப்பு நடவடிக்கைகள் குறித்த முடிவுகளை எடுக்கும் அதிகாரம் உள்ளது.',
+        te: 'ఈ బులెటిన్ సలహాగా జారీ చేయబడుతోంది. తమ తీర ప్రాంతాలలో అధికారిక ముప్పు మరియు హెచ్చరిక స్థితి అలాగే ప్రతిస్పందనగా తీసుకోవలసిన చర్యల గురించి నిర్ణయాలు తీసుకునే అధికారం జాతీయ/రాష్ట్ర/స్థానిక అధికారులు మరియు విపత్తు నిర్వహణ అధికారులకు మాత్రమే ఉంటుంది.',
+        ml: 'ഈ ബുള്ളറ്റിൻ ഒരു ഉപദേശമായി മാത്രമാണ് നൽകുന്നത്. അതത് തീരപ്രദേശങ്ങളിലെ ഔദ്യോഗിക ഭീഷണിയും മുന്നറിയിപ്പ് നിലയും പ്രതികരണമായി സ്വീകരിക്കേണ്ട നടപടികളും സംബന്ധിച്ച് തീരുമാനമെടുക്കാൻ ദേശീയ/സംസ്ഥാന/പ്രാദേശിക അധികാരികൾക്കും ദുരന്തനിവാരണ ഉദ്യോഗസ്ഥർക്കും മാത്രമേ അധികാരമുള്ളൂ.',
+        bn: 'এই বুলেটিনটি একটি পরামর্শ হিসেবে জারি করা হচ্ছে। শুধুমাত্র জাতীয়/রাজ্য/স্থানীয় কর্তৃপক্ষ এবং দুর্যোগ ব্যবস্থাপনা কর্মকর্তাদের তাদের উপকূলীয় এলাকায় সরকারি সতর্কতা পরিস্থিতি এবং সেই অনুযায়ী ব্যবস্থা গ্রহণের সিদ্ধান্ত নেওয়ার অধিকার রয়েছে।',
+        mr: 'हा बुलेटिन केवळ सल्ला म्हणून जारी केला जात आहे. केवळ राष्ट्रीय/राज्य/स्थानिक अधिकारी आणि आपत्ती व्यवस्थापन अधिकाऱ्यांना त्यांच्या किनारपट्टी भागातील अधिकृत धोक्याची व इशाऱ्याची स्थिती आणि त्यासंदर्भात करावयाच्या कारवाईबाबत निर्णय घेण्याचा अधिकार आहे.',
+        gu: 'આ બુલેટિન સલાહ તરીકે જારી કરવામાં આવી રહ્યું છે. માત્ર રાષ્ટ્રીય/રાજ્ય/સ્થાનિક સત્તાવાળાઓ અને આપત્તિ વ્યવસ્થાપન અધિકારીઓ પાસે તેમના દરિયાકાંઠાના વિસ્તારોમાં સત્તાવાર જોખમ અને ચેતવણીની સ્થિતિ તથા લેવાના પગલાં અંગે નિર્ણય લેવાની સત્તા છે.',
+        or: 'ଏହି ବୁଲେଟିନ୍ ପରାମର୍ଶ ଭାବରେ ଜାରି କରାଯାଉଛି। କେବଳ ଜାତୀୟ/ରାଜ୍ୟ/ସ୍ଥାନୀୟ କର୍ତ୍ତୃପକ୍ଷ ଏବଂ ବିପର୍ଯ୍ୟୟ ପରିଚାଳନା ଅଧିକାରୀଙ୍କ ପାଖରେ ସେମାନଙ୍କ ଉପକୂଳବର୍ତ୍ତୀ ଅଞ୍ଚଳରେ ସରକାରୀ ବିପଦ ସ୍ଥିତି ଏବଂ ପଦକ୍ଷେପ ନେବା ସମ୍ପର୍କରେ ନିଷ୍ପତ୍ତି ନେବାର ଅଧିକାର ରହିଛି।',
+        kn: 'ಈ ಬುಲೆಟಿನ್ ಅನ್ನು ಕೇವಲ ಸಲಹೆಯಾಗಿ ನೀಡಲಾಗುತ್ತಿದೆ. ತಮ್ಮ ಕರಾವಳಿ ಪ್ರದೇಶಗಳಲ್ಲಿ ಅಧಿಕೃತ ಬೆದರಿಕೆ ಮತ್ತು ಎಚ್ಚರಿಕೆಯ ಸ್ಥಿತಿ ಹಾಗೂ ತೆಗೆದುಕೊಳ್ಳಬೇಕಾದ ಯಾವುದೇ ಕ್ರಮಗಳ ಬಗ್ಗೆ ನಿರ್ಧಾರಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳುವ ಅಧಿಕಾರ ರಾಷ್ಟ್ರೀಯ/ರಾಜ್ಯ/ಸ್ಥಳೀಯ ಅಧಿಕಾರಿಗಳು ಮತ್ತು ವಿಪತ್ತು ನಿರ್ವಹಣಾ ಅಧಿಕಾರಿಗಳಿಗೆ ಮಾತ್ರ ಇರುತ್ತದೆ.'
+      },
+      {
+        pattern: /No further bulletins will be issued by ITEWC INCOIS for this event unless additional information becomes available\.?/gi,
+        hi: 'अतिरिक्त जानकारी उपलब्ध होने तक ITEWC INCOIS द्वारा इस घटना के लिए कोई अन्य बुलेटिन जारी नहीं किया जाएगा।',
+        ta: 'கூடுதல் தகவல்கள் கிடைக்கும் வரை, இந்த நிகழ்வுக்காக ITEWC INCOIS மூலம் மேற்கொண்டு எந்த அறிக்கையும் வெளியிடப்படாது.',
+        te: 'మరింత సమాచారం లభ్యమయ్యే వరకు ఈ ఘటనపై ITEWC INCOIS నుండి తదుపరి బులెటిన్లు ఏవీ జారీ చేయబడవు.',
+        ml: 'കൂടുതൽ വിവരങ്ങൾ ലഭ്യമാകുന്നതുവരെ ഈ സംഭവത്തിന് ITEWC INCOIS-ൽ നിന്ന് കൂടുതൽ ബുള്ളറ്റിനുകൾ നൽകുന്നതല്ല.',
+        bn: 'অতিরিক্ত তথ্য না পাওয়া পর্যন্ত এই ঘটনার জন্য ITEWC INCOIS থেকে আর কোনো বুলেটিন জারি করা হবে না।',
+        mr: 'अतिरिक्त माहिती उपलब्ध होईपर्यंत या घटनेसाठी ITEWC INCOIS कडून पुढील कोणतेही बुलेटिन जारी केले जाणार नाही.',
+        gu: 'વધારાની માહિતી ઉપલબ્ધ ન થાય ત્યાં સુધી આ ઘટના માટે ITEWC INCOIS દ્વારા આગળ કોઈ બુલેટિન જારી કરવામાં આવશે નહીં.',
+        or: 'ଅତିରିକ୍ତ ସୂଚନା ଉପଲବ୍ଧ ନହେବା ପର୍ଯ୍ୟନ୍ତ ଏହି ଘଟଣା ପାଇଁ ITEWC INCOIS ଦ୍ୱାରା ଆଉ କୌଣସି ବୁଲେଟିନ୍ ଜାରି କରାଯିବ ନାହିଁ।',
+        kn: 'ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ಲಭ್ಯವಾಗುವವರೆಗೆ ಈ ಘಟನೆಗಾಗಿ ITEWC INCOIS ನಿಂದ ಮುಂದಿನ ಯಾವುದೇ ಬುಲೆಟಿನ್ಗಳನ್ನು ನೀಡಲಾಗುವುದಿಲ್ಲ.'
+      },
+      {
+        pattern: /This is the final bulletin for this event unless additional information becomes available\.?/gi,
+        hi: 'अतिरिक्त जानकारी उपलब्ध होने तक यह इस घटना के लिए अंतिम बुलेटिन है।',
+        ta: 'கூடுதல் தகவல்கள் கிடைக்கும் வரை, இந்த நிகழ்வுக்கான இறுதி அறிக்கை இதுவாகும்.',
+        te: 'మరింత సమాచారం లభ్యమయ్యే వరకు ಈ ಘಟನೆಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ಇದು ಕೊನೆಯ ಬುಲೆಟಿನ್.',
+        ml: 'കൂടുതൽ വിവരങ്ങൾ ലഭ്യമാകുന്നതുവരെ ഈ സംഭവത്തിനായുള്ള അന്തിമ ബുള്ളറ്റിനാണിത്.',
+        bn: 'অতিরিক্ত তথ্য না পাওয়া পর্যন্ত এটি এই ঘটনার জন্য চূড়ান্ত বুলেটিন।',
+        mr: 'अतिरिक्त माहिती उपलब्ध होईपर्यंत या घटनेसाठी हे अंतिम बुलेटिन आहे.',
+        gu: 'વધારાની માહિતી ઉપલબ્ધ ન થાય ત્યાં સુધી આ ઘટના માટે આ અંતિમ બુલેટિન છે.',
+        or: 'ଅତିରିକ୍ତ ସୂଚନା ଉପଲବ୍ଧ ନହେବା ପର୍ଯ୍ୟନ୍ତ ଏହି ଘଟଣା ପାଇଁ ଏହା ଚୂଡ଼ାନ୍ତ ବୁଲେଟିନ୍।',
+        kn: 'ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ಲಭ್ಯವಾಗುವವರೆಗೆ ಈ ಘಟನೆಗೆ ಇದು ಅಂತಿಮ ಬುಲೆಟಿನ್ ಆಗಿದೆ.'
+      }
+    ];
+
+    for (const entry of ITEWC_CORPUS) {
+      if (entry[this.currentLang] && entry.pattern.test(res)) {
+        res = res.replace(entry.pattern, entry[this.currentLang]);
+      }
+    }
+
+    return res;
+  },
+
+  translateCycloneTitle(title) {
+    if (!title || typeof title !== 'string') return '';
+    if (this.currentLang === 'en') return title;
+
+    let res = title;
+
+    const CYCLONE_TERMS = {
+      'Super Cyclonic Storm': {
+        hi: 'सुपर चक्रवाती तूफान', ta: 'சூப்பர் புயல்', te: 'సూపర్ సైక్లోనిక్ తుఫాను',
+        ml: 'സൂപ്പർ ചുഴലിക്കാറ്റ്', bn: 'সুপার সাইক্লোনিক ঝড়', mr: 'सुपर चक्रीवादळ',
+        gu: 'સુપર ચક્રવાતી તોફાન', or: 'ସୁପର ସାଇକ୍ଲୋନିକ୍ ଝଡ଼', kn: 'ಸೂಪರ್ ಚಂಡಮಾರುತ'
+      },
+      'Extremely Severe Cyclonic Storm': {
+        hi: 'अत्यंत गंभीर चक्रवाती तूफान', ta: 'மிக தீவிர புயல்', te: 'అత్యంత తీవ్రమైన సైక్లోనిక్ తుఫాను',
+        ml: 'അതിതീവ്ര ചുഴലിക്കാറ്റ്', bn: 'অত্যন্ত তীব্র সাইক্লোনিক ঝড়', mr: 'अत्यंत तीव्र चक्रीवादळ',
+        gu: 'અત્યંત તીવ્ર ચક્રવાતી તોફાન', or: 'ଅତ୍ୟନ୍ତ ଭୀଷଣ ସାମୁଦ୍ରିକ ଝଡ଼', kn: 'ಅತ್ಯಂತ ತೀವ್ರ ಚಂಡಮಾರುತ'
+      },
+      'Very Severe Cyclonic Storm': {
+        hi: 'बहुत गंभीर चक्रवाती तूफान', ta: 'அதிதீவிர புயல்', te: 'చాలా తీవ్రమైన సైక్లోనిక్ తుఫాను',
+        ml: 'വളരെ തീവ്രമായ ചുഴലിക്കാറ്റ്', bn: 'খুব তীব্র সাইক্লোনিক ঝড়', mr: 'अति तीव्र चक्रीवादळ',
+        gu: 'ખૂબ તીવ્ર ચક્રવાતી તોફાન', or: 'ଅତି ଭୀଷଣ ସାମୁଦ୍ରିକ ଝଡ଼', kn: 'ಬಹಳ ತೀವ್ರ ಚಂಡಮಾರುತ'
+      },
+      'Severe Cyclonic Storm': {
+        hi: 'गंभीर चक्रवाती तूफान', ta: 'தீவிர புயல்', te: 'తీవ్రమైన సైక్లోనిక్ తుఫాను',
+        ml: 'തീവ്ര ചുഴലിക്കാറ്റ്', bn: 'তীব্র সাইক্লোনিক ঝড়', mr: 'तीव्र चक्रीवादळ',
+        gu: 'તીવ્ર ચક્રવાતી તોફાન', or: 'ଭୀଷଣ ସାମୁଦ୍ରିକ ଝଡ଼', kn: 'ತೀವ್ರ ಚಂಡಮಾರುತ'
+      },
+      'Cyclonic Storm': {
+        hi: 'चक्रवाती तूफान', ta: 'புயல் (Cyclonic Storm)', te: 'సైక్లోనిక్ తుఫాను',
+        ml: 'ചുഴലിക്കാറ്റ്', bn: 'ঘূর্ণিঝড় (Cyclonic Storm)', mr: 'चक्रीवादळ',
+        gu: 'ચક્રવાતી તોફાન', or: 'ସାମୁଦ୍ରିକ ବାତ୍ୟା', kn: 'ಚಂಡಮಾರುತ'
+      },
+      'Deep Depression': {
+        hi: 'गहरा दबाव (Deep Depression)', ta: 'ஆழ்ந்த காற்றழுத்த தாழ்வு மண்டலம்', te: 'తీవ్ర వాయుగుండం (Deep Depression)',
+        ml: 'തീവ്ര ന്യൂനമർദ്ദം (Deep Depression)', bn: 'গভীর নিম্নচাপ (Deep Depression)', mr: 'खोल दाबाचे क्षेत्र (Deep Depression)',
+        gu: 'ઊંડું દબાણ (Deep Depression)', or: 'ଗଭୀର ଅବପାତ (Deep Depression)', kn: 'ತೀವ್ರ ವಾಯುಭಾರ ಕುಸಿತ (Deep Depression)'
+      },
+      'Depression': {
+        hi: 'दबाव (Depression)', ta: 'காற்றழுத்த தாழ்வு மண்டலம்', te: 'వాయుగుండం (Depression)',
+        ml: 'ന്യൂനമർദ്ദം (Depression)', bn: 'নিম্নচাপ (Depression)', mr: 'कमी दाबाचे क्षेत्र (Depression)',
+        gu: 'દબાણ (Depression)', or: 'ଅବପାତ (Depression)', kn: 'ವಾಯುಭಾರ ಕುಸಿತ (Depression)'
+      },
+      'Well Marked Low Pressure Area': {
+        hi: 'सुस्पष्ट निम्न दबाव क्षेत्र', ta: 'நன்கு வலுப்பெற்ற காற்றழுத்த தாழ்வு பகுதி', te: 'బాగా బలపడిన అల్పపీడన ప్రాంతం',
+        ml: 'ശക്തമായ ന്യൂനമർദ്ദ മേഖല', bn: 'সুস্পষ্ট নিম্নচাপ অঞ্চল', mr: 'स्पष्ट कमी दाबाचे क्षेत्र',
+        gu: 'સુસ્પષ્ટ નીચા દબાણવાળો વિસ્તાર', or: 'ସୁସ୍ପଷ୍ଟ ଲଘୁଚାପ କ୍ଷେତ୍ର', kn: 'ಉತ್ತಮವಾಗಿ ಗುರುತಿಸಲಾದ ಕಡಿಮೆ ಒತ್ತಡದ ಪ್ರದೇಶ'
+      },
+      'Low Pressure Area': {
+        hi: 'निम्न दबाव क्षेत्र', ta: 'காற்றழுத்த தாழ்வு பகுதி', te: 'అల్పపీడన ప్రాంతం',
+        ml: 'ന്യൂനമർദ്ദ മേഖല', bn: 'নিম্নচাপ অঞ্চল', mr: 'कमी दाबाचे क्षेत्र',
+        gu: 'નીચા દબાણવાળો વિસ્તાર', or: 'ଲଘୁଚାପ କ୍ଷେତ୍ର', kn: 'ಕಡಿಮೆ ಒತ್ತಡದ ಪ್ರದೇಶ'
+      },
+      'Bay of Bengal': {
+        hi: 'बंगाल की खाड़ी', ta: 'வங்காள விரிகுடா', te: 'బంగాళాఖాతం',
+        ml: 'ബംഗാൾ ഉൾക്കടൽ', bn: 'বঙ্গোপসাগর', mr: 'बंगालचा उपसागर',
+        gu: 'બંગાળની ખાડી', or: 'ବଙ୍ଗୋପସାଗର', kn: 'ಬಂಗಾಳಕೊಲ್ಲಿ'
+      },
+      'Arabian Sea': {
+        hi: 'अरब सागर', ta: 'அரபிக்கடல்', te: 'అరేబియా సముద్రం',
+        ml: 'അറബിക്കടൽ', bn: 'আরব সাগর', mr: 'अरबी समुद्र',
+        gu: 'અરબી સમુદ્ર', or: 'ଆରବ ସାଗର', kn: 'ಅರಬ್ಬಿ ಸಮುದ್ರ'
+      },
+      'Indian Ocean': {
+        hi: 'हिंद महासागर', ta: 'இந்தியப் பெருங்கடல்', te: 'హిందూ మహాసముద్రం',
+        ml: 'ഇന്ത്യൻ മഹാസമുദ്രം', bn: 'ভারত মহাসাগর', mr: 'हिंदी महासागर',
+        gu: 'હિંદ મહાસાગર', or: 'ଭାରତ ମହାସାଗର', kn: 'ಹಿಂದೂ ಮಹಾಸಾಗರ'
+      },
+      'northwest': {
+        hi: 'उत्तर-पश्चिम', ta: 'வடமேற்கு', te: 'వాయవ్య',
+        ml: 'വടക്കുപടിഞ്ഞാറൻ', bn: 'উত্তর-পশ্চিম', mr: 'वायव्य',
+        gu: 'ઉત્તર-પશ્ચિમ', or: 'ଉତ୍ତର-ପଶ୍ଚିମ', kn: 'ವಾಯುವ್ಯ'
+      },
+      'northeast': {
+        hi: 'उत्तर-पूर्व', ta: 'வடகிழக்கு', te: 'ఈశాన్య',
+        ml: 'വടക്കുകിഴക്കൻ', bn: 'উত্তর-পূর্ব', mr: 'ईशान्य',
+        gu: 'ઉત્તર-પૂર્વ', or: 'ଉତ୍ତର-ପୂର୍ବ', kn: 'ಈಶಾನ್ಯ'
+      },
+      'southwest': {
+        hi: 'दक्षिण-पश्चिम', ta: 'தென்மேற்கு', te: 'నైరుతి',
+        ml: 'തെക്കുപടിഞ്ഞാറൻ', bn: 'দক্ষিণ-পশ্চিম', mr: 'नैऋत्य',
+        gu: 'દક્ષિણ-પશ્ચિમ', or: 'ଦକ୍ଷିଣ-ପଶ୍ଚିମ', kn: 'ನೈಋತ್ಯ'
+      },
+      'southeast': {
+        hi: 'दक्षिण-पूर्व', ta: 'தென்கிழக்கு', te: 'ఆగ్నేయ',
+        ml: 'തെക്കുകിഴക്കൻ', bn: 'দক্ষিণ-পূর্ব', mr: 'आग्नेय',
+        gu: 'દક્ષિણ-પૂર્વ', or: 'ଦକ୍ଷିଣ-ପୂର୍ବ', kn: 'ಆಗ್ನೇಯ'
+      },
+      'eastcentral': {
+        hi: 'पूर्व-मध्य', ta: 'கிழக்கு-மத்திய', te: 'తూర్పు-మధ్య',
+        ml: 'കിഴക്കൻ-മധ്യ', bn: 'পূর্ব-মধ্য', mr: 'पूर्व-मध्य',
+        gu: 'પૂર્વ-મધ્ય', or: 'ପୂର୍ବ-ମଧ୍ୟ', kn: 'ಪೂರ್ವ-ಮಧ್ಯ'
+      },
+      'westcentral': {
+        hi: 'पश्चिम-मध्य', ta: 'மேற்கு-மத்திய', te: 'పశ్చిಮ-మధ్య',
+        ml: 'പടിഞ്ഞാറൻ-മധ്യ', bn: 'পশ্চিম-মধ্য', mr: 'पश्चिम-मध्य',
+        gu: 'પશ્ચિમ-મધ્ય', or: 'ପଶ୍ଚିಮ-ମଧ୍ୟ', kn: 'ಪಶ್ಚಿಮ-ಮಧ್ಯ'
+      },
+      'and adjoining areas of': {
+        hi: 'और आसपास के क्षेत्रों', ta: 'மற்றும் அதனை ஒட்டியுள்ள பகுதிகள்', te: 'మరియు పరిసర ప్రాంతాలు',
+        ml: 'അതിനോട് ചേർന്ന പ്രദേശങ്ങൾ', bn: 'এবং সংলগ্ন এলাকা', mr: 'आणि लगतचा परिसर',
+        gu: 'અને તેની આસપાસના વિસ્તારો', or: 'ଏବଂ ଏହାର ଆଖପାଖ ଅଞ୍ଚଳ', kn: 'ಮತ್ತು ಪಕ್ಕದ ಪ್ರದೇಶಗಳು'
+      },
+      'adjoining areas of': {
+        hi: 'आसपास के क्षेत्रों', ta: 'ஒட்டியுள்ள பகுதிகள்', te: 'పరిసర ప్రాంతాలు',
+        ml: 'ചേർന്ന പ്രദേശങ്ങൾ', bn: 'সংলগ্ন এলাকা', mr: 'लगतचा परिसर',
+        gu: 'આસપાસના વિસ્તારો', or: 'ଆଖପାଖ ଅଞ୍ଚଳ', kn: 'ಪಕ್ಕದ ಪ್ರದೇಶಗಳು'
+      },
+      'coasts': {
+        hi: 'तट', ta: 'கடற்கரைகள்', te: 'తీరాలు',
+        ml: 'തീരങ്ങൾ', bn: 'উপকূল', mr: 'किनारपट्टी',
+        gu: 'કાંઠો', or: 'ଉପକୂଳ', kn: 'ಕರಾವಳಿ'
+      },
+      'coast': {
+        hi: 'तट', ta: 'கடற்கரை', te: 'తీరం',
+        ml: 'തീരം', bn: 'উপকূল', mr: 'किनारा',
+        gu: 'કાંઠો', or: 'ଉପକୂଳ', kn: 'ಕರಾವಳಿ'
+      },
+      'over': {
+        hi: 'पर', ta: 'மீது', te: 'మీద',
+        ml: 'മീതെ', bn: 'উপর', mr: 'वर',
+        gu: 'પર', or: 'ଉପରେ', kn: 'ಮೇಲೆ'
+      }
+    };
+
+    for (const [term, map] of Object.entries(CYCLONE_TERMS)) {
+      if (map[this.currentLang] && new RegExp(`\\b${term}\\b`, 'i').test(res)) {
+        res = res.replace(new RegExp(`\\b${term}\\b`, 'gi'), map[this.currentLang]);
+      }
+    }
+
     const allReplacements = [
       ...Object.entries(I18N_SECTORS),
       ...Object.entries(I18N_DISTRICTS)

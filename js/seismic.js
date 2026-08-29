@@ -197,50 +197,50 @@ let activeBathymetryRequest = 0;
         (/\bon\s+land\b|\bland\b/i.test(topoBathy) && !/island/i.test(topoBathy));
 
       if (explicitlyLand || (Number.isFinite(storedElevation) && storedElevation >= 0)) {
-        settingElement.textContent = 'Tectonic Setting: LAND';
-        bathymetryElement.textContent = 'Bathymetry: NIL';
+        settingElement.textContent = globalThis.i18n?.translateTectonicSetting('LAND') || 'Tectonic Setting: LAND';
+        bathymetryElement.textContent = globalThis.i18n?.translateBathymetry('NIL') || 'Bathymetry: NIL';
         bathymetryElement.title = 'Land setting; bathymetry is not applicable.';
         return;
       }
 
       if (Number.isFinite(savedDepth) && savedDepth > 0) {
-        settingElement.textContent = 'Tectonic Setting: OCEANIC / MARINE';
-        bathymetryElement.textContent = `Bathymetry: ${Math.round(savedDepth).toLocaleString('en-IN')} m`;
+        settingElement.textContent = globalThis.i18n?.translateTectonicSetting('OCEANIC / MARINE') || 'Tectonic Setting: OCEANIC / MARINE';
+        bathymetryElement.textContent = globalThis.i18n?.translateBathymetry(`${Math.round(savedDepth).toLocaleString('en-IN')} m`) || `Bathymetry: ${Math.round(savedDepth).toLocaleString('en-IN')} m`;
         bathymetryElement.title = 'Bathymetry from ITEWC topo_bathy, with GEBCO_LATEST_2 used only as fallback.';
         return;
       }
 
       if (Number.isFinite(storedElevation) && storedElevation < 0) {
-        settingElement.textContent = 'Tectonic Setting: OCEANIC / MARINE';
-        bathymetryElement.textContent = `Bathymetry: ${Math.round(Math.abs(storedElevation)).toLocaleString('en-IN')} m`;
+        settingElement.textContent = globalThis.i18n?.translateTectonicSetting('OCEANIC / MARINE') || 'Tectonic Setting: OCEANIC / MARINE';
+        bathymetryElement.textContent = globalThis.i18n?.translateBathymetry(`${Math.round(Math.abs(storedElevation)).toLocaleString('en-IN')} m`) || `Bathymetry: ${Math.round(Math.abs(storedElevation)).toLocaleString('en-IN')} m`;
         bathymetryElement.title = `Stored GEBCO elevation at the event coordinates: ${Math.round(storedElevation)} m.`;
         return;
       }
 
-      settingElement.textContent = 'Tectonic Setting: OCEANIC / MARINE';
+      settingElement.textContent = globalThis.i18n?.translateTectonicSetting('OCEANIC / MARINE') || 'Tectonic Setting: OCEANIC / MARINE';
       bathymetryElement.textContent = Number.isFinite(latitude) && Number.isFinite(longitude)
-        ? 'Bathymetry: loading…'
-        : 'Bathymetry: unavailable';
+        ? (globalThis.i18n?.translateBathymetry('LOADING') || 'Bathymetry: loading…')
+        : (globalThis.i18n?.translateBathymetry('UNAVAILABLE') || 'Bathymetry: unavailable');
       bathymetryElement.title = 'GEBCO WMS point value at the event latitude and longitude.';
 
       const elevation = await fetchGebcoElevation(latitude, longitude);
       if (requestId !== activeBathymetryRequest) return;
 
       if (!Number.isFinite(elevation)) {
-        bathymetryElement.textContent = 'Bathymetry: unavailable';
+        bathymetryElement.textContent = globalThis.i18n?.translateBathymetry('UNAVAILABLE') || 'Bathymetry: unavailable';
         bathymetryElement.title = 'The GEBCO WMS point query did not return a usable value.';
         return;
       }
 
       if (elevation >= 0) {
-        settingElement.textContent = 'Tectonic Setting: LAND';
-        bathymetryElement.textContent = 'Bathymetry: NIL';
+        settingElement.textContent = globalThis.i18n?.translateTectonicSetting('LAND') || 'Tectonic Setting: LAND';
+        bathymetryElement.textContent = globalThis.i18n?.translateBathymetry('NIL') || 'Bathymetry: NIL';
         bathymetryElement.title = 'GEBCO elevation is at or above mean sea level.';
         return;
       }
 
-      settingElement.textContent = 'Tectonic Setting: OCEANIC / MARINE';
-      bathymetryElement.textContent = `Bathymetry: ${Math.round(Math.abs(elevation)).toLocaleString('en-IN')} m`;
+      settingElement.textContent = globalThis.i18n?.translateTectonicSetting('OCEANIC / MARINE') || 'Tectonic Setting: OCEANIC / MARINE';
+      bathymetryElement.textContent = globalThis.i18n?.translateBathymetry(`${Math.round(Math.abs(elevation)).toLocaleString('en-IN')} m`) || `Bathymetry: ${Math.round(Math.abs(elevation)).toLocaleString('en-IN')} m`;
       bathymetryElement.title = `GEBCO elevation at the event coordinates: ${Math.round(elevation)} m.`;
     }
 
@@ -260,18 +260,22 @@ let activeBathymetryRequest = 0;
       const savedElevation = event?.gebcoElevationMeters ?? bulletin?.gebcoElevationMeters;
       const coastDistanceMatch = topoBathy.match(/(?:distance|distnace)\s+of\s+([\d,.]+)\s*km\s+from\s+(?:the\s+)?coast(?:line)?/i);
       const coastDistance = coastDistanceMatch ? Number(coastDistanceMatch[1].replace(/,/g,'')) : Number(event?.distanceFromCoastKm ?? bulletin?.distanceFromCoastKm);
-      const coastDistanceText = Number.isFinite(coastDistance) ? `~${Math.round(coastDistance).toLocaleString('en-US')} km` : 'Unavailable';
+      const coastDistanceText = Number.isFinite(coastDistance) ? `~${Math.round(coastDistance).toLocaleString('en-US')} km` : (globalThis.i18n?.t('seismic.unavailable', 'Unavailable') || 'Unavailable');
       const bathymetryRequestId = ++activeBathymetryRequest;
-      ids('seismicDialogTitle').textContent = `M${magnitude} · ${location}`;
-      ids('seismicDialogMeta').textContent = bulletin?.issuedAt ? `${bulletinReference(bulletin)} · Issued ${bulletin.issuedAt}` : 'Earthquake event information';
-      ids('eventCoastDistance').textContent = `Distance from nearest coast: ${coastDistanceText}`;
+      ids('seismicDialogTitle').textContent = `M${magnitude} · ${globalThis.i18n?.translateDistrictName(location) || location}`;
+      ids('seismicDialogMeta').textContent = bulletin?.issuedAt ? `${bulletinReference(bulletin)} · ${globalThis.i18n?.t('severity.issued', 'Issued') || 'Issued'} ${bulletin.issuedAt}` : (globalThis.i18n?.t('seismic.dialog_meta', 'Official ITEWC information') || 'Official ITEWC information');
+      ids('eventCoastDistance').textContent = globalThis.i18n?.translateCoastDistance(coastDistanceText) || `Distance from nearest coast: ${coastDistanceText}`;
       currentSeismicShareData={magnitude,location,origin:[originDate,originTime].filter(Boolean).join(' '),coordinates:Number.isFinite(latitude)&&Number.isFinite(longitude) ? `${latitude}°, ${longitude}°` : '',coastDistance:coastDistanceText,bulletin:bulletinReference(bulletin),evaluation:bulletin?.message || ''};
       void updateTectonicSetting(latitude, longitude, topoBathy, bathymetryRequestId, savedBathymetry, savedSetting, savedElevation);
       const facts = [
-        ['Magnitude',`M${magnitude}`],['Depth',String(depth).includes('km') ? depth : `${depth} km`],
-        ['Date',originDate || String(originTime).split(' ')[0] || '—'],['Origin time',originDate ? originTime : String(originTime).replace(/^\d{4}-\d{2}-\d{2}\s*/, '')],
-        ['Latitude',Number.isFinite(latitude) ? `${latitude}°` : '—'],['Longitude',Number.isFinite(longitude) ? `${longitude}°` : '—'],
-        ['Location',location],['Bulletin',bulletinReference(bulletin)]
+        [globalThis.i18n?.t('seismic.fact_magnitude', 'Magnitude') || 'Magnitude', `M${magnitude}`],
+        [globalThis.i18n?.t('seismic.fact_depth', 'Depth') || 'Depth', String(depth).includes('km') ? depth : `${depth} km`],
+        [globalThis.i18n?.t('seismic.fact_date', 'Date') || 'Date', originDate || String(originTime).split(' ')[0] || '—'],
+        [globalThis.i18n?.t('seismic.fact_origin_time', 'Origin time') || 'Origin time', originDate ? originTime : String(originTime).replace(/^\d{4}-\d{2}-\d{2}\s*/, '')],
+        [globalThis.i18n?.t('seismic.fact_latitude', 'Latitude') || 'Latitude', Number.isFinite(latitude) ? `${latitude}°` : '—'],
+        [globalThis.i18n?.t('seismic.fact_longitude', 'Longitude') || 'Longitude', Number.isFinite(longitude) ? `${longitude}°` : '—'],
+        [globalThis.i18n?.t('seismic.fact_location', 'Location') || 'Location', globalThis.i18n?.translateDistrictName(location) || location],
+        [globalThis.i18n?.t('seismic.fact_bulletin', 'Bulletin') || 'Bulletin', bulletinReference(bulletin)]
       ];
       ids('eventFacts').replaceChildren(...facts.map(([label,value]) => {
         const wrapper=document.createElement('div'); const term=document.createElement('dt'); const detail=document.createElement('dd');
@@ -281,9 +285,9 @@ let activeBathymetryRequest = 0;
       const evaluationSection = ids('eventEvaluation').closest('details');
       const adviceSection = ids('eventAdvice').closest('details');
       evaluationSection.hidden = !hasBulletin; adviceSection.hidden = !hasBulletin;
-      ids('eventEvaluation').textContent = bulletin?.message || '';
-      ids('eventAdvice').textContent = bulletin?.advice || 'No advice text was included in this bulletin.';
-      ids('eventUpdates').textContent = bulletin?.updates || '';
+      ids('eventEvaluation').textContent = globalThis.i18n?.translateItewcText(bulletin?.message) || bulletin?.message || '';
+      ids('eventAdvice').textContent = globalThis.i18n?.translateItewcText(bulletin?.advice) || bulletin?.advice || (globalThis.i18n?.t('seismic.no_advice', 'No advice text was included in this bulletin.') || 'No advice text was included in this bulletin.');
+      ids('eventUpdates').textContent = globalThis.i18n?.translateItewcText(bulletin?.updates) || bulletin?.updates || '';
       ids('eventUpdatesSection').hidden = !bulletin?.updates;
       ids('eventBulletinUnavailable').hidden = hasBulletin;
       const officialLink = ids('eventBulletinLink');

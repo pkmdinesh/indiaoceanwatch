@@ -99,7 +99,7 @@ function renderStormSurge(message, bulletin) {
       card.classList.add(`level-${cycloneLevel}`);
 
       const rawMsg = bulletin?.message || globalThis.i18n?.t('joint_bulletin.default_msg', 'INCOIS-IMD Joint Special Bulletin') || 'INCOIS-IMD Joint Special Bulletin';
-      message.textContent = globalThis.i18n?.translateAdvisoryMessage(rawMsg) || rawMsg;
+      message.textContent = globalThis.i18n?.translateCycloneTitle(globalThis.i18n?.translateAdvisoryMessage(rawMsg) || rawMsg) || rawMsg;
       if (bulletin?.url) {
         message.href = bulletin.url;
         message.setAttribute('aria-label','Open the INCOIS-IMD joint bulletin PDF');
@@ -132,10 +132,12 @@ function renderStormSurge(message, bulletin) {
       status.classList.remove('level-safe','level-yellow','level-orange','level-red');
       status.classList.add(`level-${level}`);
       const cycloneSafeTitle = globalThis.i18n?.t('cyclone.safe', 'No active cyclone advisory') || 'No active cyclone advisory';
-      ids('cycloneMessageTitle').textContent = (level === 'safe' ? cycloneSafeTitle : cyclone?.title) || cycloneSafeTitle;
+      const rawTitle = (level === 'safe' ? cycloneSafeTitle : cyclone?.title) || cycloneSafeTitle;
+      ids('cycloneMessageTitle').textContent = level === 'safe' ? cycloneSafeTitle : (globalThis.i18n?.translateCycloneTitle(rawTitle) || rawTitle);
       const message = ids('cycloneMessage');
       const cycloneCheckedMsg = globalThis.i18n?.t('cyclone.checked', 'When checked IMD CAP Alerts feed.') || 'When checked IMD CAP Alerts feed.';
-      message.textContent = cyclone?.message || (level === 'safe' ? cycloneCheckedMsg : '');
+      const rawMsg = cyclone?.message || (level === 'safe' ? cycloneCheckedMsg : '');
+      message.textContent = level === 'safe' ? cycloneCheckedMsg : (globalThis.i18n?.translateCycloneTitle(rawMsg) || rawMsg);
       message.hidden = !message.textContent;
       const issued = ids('cycloneIssued');
       if (cyclone?.issuedAt) {
