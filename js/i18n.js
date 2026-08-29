@@ -212,7 +212,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'Data source: INCOIS–MoES ↗',
     'footer.visits': 'visits',
     'contact.title': 'Ocean Information Portal',
-    'contact.subtitle': 'Under Beta Testing'
+    'contact.subtitle': 'Under Beta Testing',
+    'joint_bulletin.default_msg': 'INCOIS-IMD Joint Special Bulletin',
+    'joint_bulletin.active_prefix': 'Active Bulletin',
+    'joint_bulletin.issued_prefix': 'Bulletin issued',
+    'tide.wind_sea': 'Wind & Sea',
+    'tide.tide_state': 'Tide State',
+    'tide.moon_tide_type': 'Moon & Tide Type',
+    'tide.rising': '▲ Rising (Flood)',
+    'tide.falling': '▼ Falling (Ebb)',
+    'tide.spring_tide': 'Spring Tide',
+    'tide.neap_tide': 'Neap Tide',
+    'tide.high_tide': 'High Tide (IST)',
+    'tide.low_tide': 'Low Tide (IST)',
+    'tide.no_warnings': '✓ No active coastal warnings for',
+    'tide.active_for': 'active for',
+    'tide.coast': 'Coast',
+    'osf.advisory_note': 'A state may appear under multiple levels because district and coastal-stretch conditions differ.'
   },
   hi: {
     'brand.title': 'ओशन वॉच',
@@ -409,7 +425,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'डेटा स्रोत: INCOIS–MoES ↗',
     'footer.visits': 'विज़िट्स',
     'contact.title': 'महासागर सूचना पोर्टल',
-    'contact.subtitle': 'बीटा परीक्षण के तहत'
+    'contact.subtitle': 'बीटा परीक्षण के तहत',
+    'joint_bulletin.default_msg': 'इन्कॉइस-आईएमडी संयुक्त विशेष बुलेटिन',
+    'joint_bulletin.active_prefix': 'सक्रिय बुलेटिन',
+    'joint_bulletin.issued_prefix': 'बुलेटिन जारी',
+    'tide.wind_sea': 'हवा और समुद्र',
+    'tide.tide_state': 'ज्वार की स्थिति',
+    'tide.moon_tide_type': 'चंद्रमा और ज्वार प्रकार',
+    'tide.rising': '▲ चढ़ता ज्वार (Flood)',
+    'tide.falling': '▼ उतरता भाटा (Ebb)',
+    'tide.spring_tide': 'दीर्घ ज्वार (Spring)',
+    'tide.neap_tide': 'लघु ज्वार (Neap)',
+    'tide.high_tide': 'उच्च ज्वार (High Tide IST)',
+    'tide.low_tide': 'निम्न भाटा (Low Tide IST)',
+    'tide.no_warnings': '✓ कोई सक्रिय तटीय चेतावनी नहीं:',
+    'tide.active_for': 'सक्रिय चेतावनी:',
+    'tide.coast': 'तट',
+    'osf.advisory_note': 'एक राज्य कई स्तरों के तहत दिखाई दे सकता है क्योंकि जिले और तटीय क्षेत्र की स्थितियाँ भिन्न हो सकती हैं।'
   },
   ta: {
     'brand.title': 'ஓஷன் வாட்ச்',
@@ -606,7 +638,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'தரவு மூலம்: INCOIS–MoES ↗',
     'footer.visits': 'பார்வைகள்',
     'contact.title': 'கடல்சார் தகவல் தளம்',
-    'contact.subtitle': 'பீட்டா சோதனையில் உள்ளது'
+    'contact.subtitle': 'பீட்டா சோதனையில் உள்ளது',
+    'joint_bulletin.default_msg': 'இன்காய்ஸ்-ஐஎம்டி கூட்டு சிறப்பு புல்லட்டின்',
+    'joint_bulletin.active_prefix': 'செயலில் உள்ள புல்லட்டின்',
+    'joint_bulletin.issued_prefix': 'புல்லட்டின் வெளியிடப்பட்டது',
+    'tide.wind_sea': 'காற்று மற்றும் கடல்',
+    'tide.tide_state': 'அலை நிலை',
+    'tide.moon_tide_type': 'சந்திரன் & அலை வகை',
+    'tide.rising': '▲ ஏறும் அலை (வளர்பெருக்கு)',
+    'tide.falling': '▼ இறங்கும் அலை (வற்றுப்பெருக்கு)',
+    'tide.spring_tide': 'பேரலை (Spring Tide)',
+    'tide.neap_tide': 'சிற்றலை (Neap Tide)',
+    'tide.high_tide': 'உயர் அலை (High Tide IST)',
+    'tide.low_tide': 'தாழ் அலை (Low Tide IST)',
+    'tide.no_warnings': '✓ தீவிர கடலோர எச்சரிக்கைகள் ஏதுமில்லை:',
+    'tide.active_for': 'எச்சரிக்கை செயலில் உள்ளது:',
+    'tide.coast': 'கடற்கரை',
+    'osf.advisory_note': 'மாவட்டம் மற்றும் கடற்கரை பகுதி நிலைமைகள் மாறுபடுவதால் ஒரு மாநிலம் பல எச்சரிக்கை நிலைகளில் தோன்றக்கூடும்.'
   },
   te: {
     'brand.title': 'ఓషన్ వాచ్',
@@ -803,7 +851,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'సమాచార మూలం: INCOIS–MoES ↗',
     'footer.visits': 'సందర్శనలు',
     'contact.title': 'సముద్ర సమాచార పోర్టల్',
-    'contact.subtitle': 'బీటా పరీక్షలో ఉంది'
+    'contact.subtitle': 'బీటా పరీక్షలో ఉంది',
+    'joint_bulletin.default_msg': 'ఇన్‌కాయిస్-ఐఎండి సంయుక్త ప్రత్యేక బులెటిన్',
+    'joint_bulletin.active_prefix': 'చురుకైన బులెటిన్',
+    'joint_bulletin.issued_prefix': 'బులెటిన్ జారీ చేయబడింది',
+    'tide.wind_sea': 'గాలి మరియు సముద్రం',
+    'tide.tide_state': 'పాటు-పోటు స్థితి',
+    'tide.moon_tide_type': 'చంద్రుడు & పోటు రకం',
+    'tide.rising': '▲ పెరుగుతున్న పోటు (Flood)',
+    'tide.falling': '▼ తగ్గుతున్న పాటు (Ebb)',
+    'tide.spring_tide': 'మహా పోటు (Spring Tide)',
+    'tide.neap_tide': 'లఘు పోటు (Neap Tide)',
+    'tide.high_tide': 'గరిష్ట పోటు (High Tide IST)',
+    'tide.low_tide': 'కనిష్ట పాటు (Low Tide IST)',
+    'tide.no_warnings': '✓ తీరప్రాంత హెచ్చరికలు లేవు:',
+    'tide.active_for': 'హెచ్చరిక అమలులో ఉంది:',
+    'tide.coast': 'తీరం',
+    'osf.advisory_note': 'జిల్లా మరియు తీరప్రాంత పరిస్థితులు భిన్నంగా ఉండటం వల్ల ఒక రాష్ట్రం బహుళ స్థాయిలలో కనిపించవచ్చు.'
   },
   ml: {
     'brand.title': 'ഓഷ്യൻ വാച്ച്',
@@ -1000,7 +1064,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'ഡാറ്റ ഉറവിടം: INCOIS–MoES ↗',
     'footer.visits': 'സന്ദർശനങ്ങൾ',
     'contact.title': 'സമുദ്ര വിവര പോർട്ടൽ',
-    'contact.subtitle': 'ബീറ്റാ പരീക്ഷണത്തിലാണ്'
+    'contact.subtitle': 'ബീറ്റാ പരീക്ഷണത്തിലാണ്',
+    'joint_bulletin.default_msg': 'ഇൻകോയിസ്-ഐഎംഡി സംയുക്ത പ്രത്യേക ബുള്ളറ്റിൻ',
+    'joint_bulletin.active_prefix': 'സജീവ ബുള്ളറ്റിൻ',
+    'joint_bulletin.issued_prefix': 'ബുള്ളറ്റിൻ പ്രസിദ്ധീകരിച്ചു',
+    'tide.wind_sea': 'കാറ്റും കടലും',
+    'tide.tide_state': 'വേലിയേറ്റ നില',
+    'tide.moon_tide_type': 'ചന്ദ്രനും വേലിയേറ്റ തരവും',
+    'tide.rising': '▲ വേലിയേറ്റം (Flood)',
+    'tide.falling': '▼ വേലിയിറക്കം (Ebb)',
+    'tide.spring_tide': 'വാവു വേലിയേറ്റം (Spring)',
+    'tide.neap_tide': 'സപ്തമി വേലിയേറ്റം (Neap)',
+    'tide.high_tide': 'ഉയർന്ന വേലിയേറ്റം (High Tide IST)',
+    'tide.low_tide': 'താഴ്ന്ന വേലിയിറക്കം (Low Tide IST)',
+    'tide.no_warnings': '✓ തീരദേശ മുന്നറിയിപ്പുകൾ ഇല്ല:',
+    'tide.active_for': 'മുന്നറിയിപ്പ് നിലവിലുണ്ട്:',
+    'tide.coast': 'തീരം',
+    'osf.advisory_note': 'ജില്ലാ, തീരദേശ സാഹചര്യങ്ങൾ വ്യത്യസ്തമായതിനാൽ ഒരു സംസ്ഥാനം ഒന്നിലധികം മുന്നറിയിപ്പ് തലങ്ങളിൽ പ്രത്യക്ഷപ്പെടാം.'
   },
   bn: {
     'brand.title': 'ওশান ওয়াচ',
@@ -1197,7 +1277,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'তথ্যের উৎস: INCOIS–MoES ↗',
     'footer.visits': 'ভিজিট',
     'contact.title': 'সমুদ্র তথ্য পোর্টাল',
-    'contact.subtitle': 'বিটা পরীক্ষার অধীনে'
+    'contact.subtitle': 'বিটা পরীক্ষার অধীনে',
+    'joint_bulletin.default_msg': 'ইনকোইস-আইএমডি যৌথ বিশেষ বুলেটিন',
+    'joint_bulletin.active_prefix': 'সক্রিয় বুলেটিন',
+    'joint_bulletin.issued_prefix': 'বুলেটিন প্রকাশিত',
+    'tide.wind_sea': 'বাতাস ও সমুদ্র',
+    'tide.tide_state': 'জোয়ারের অবস্থা',
+    'tide.moon_tide_type': 'চাঁদ ও জোয়ারের ধরন',
+    'tide.rising': '▲ জোয়ার (Flood)',
+    'tide.falling': '▼ ভাঁটা (Ebb)',
+    'tide.spring_tide': 'ভরা কোটাল (Spring Tide)',
+    'tide.neap_tide': 'মরা কোটাল (Neap Tide)',
+    'tide.high_tide': 'পূর্ণ জোয়ার (High Tide IST)',
+    'tide.low_tide': 'ভাঁটা (Low Tide IST)',
+    'tide.no_warnings': '✓ কোন সক্রিয় উপকূলীয় সতর্কতা নেই:',
+    'tide.active_for': 'সতর্কতা সক্রিয়:',
+    'tide.coast': 'উপকূল',
+    'osf.advisory_note': 'জেলা এবং উপকূলীয় অঞ্চলের পরিস্থিতি ভিন্ন হওয়ার কারণে একটি রাজ্য একাধিক সতর্কবার্তার অধীনে উপস্থিত হতে পারে।'
   },
   mr: {
     'brand.title': 'ओशन वॉच',
@@ -1394,7 +1490,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'माहिती स्त्रोत: INCOIS–MoES ↗',
     'footer.visits': 'भेटी',
     'contact.title': 'सागरी माहिती पोर्टल',
-    'contact.subtitle': 'बीटा चाचणी अंतर्गत'
+    'contact.subtitle': 'बीटा चाचणी अंतर्गत',
+    'joint_bulletin.default_msg': 'इन्कॉईस-आयएमडी संयुक्त विशेष बुलेटिन',
+    'joint_bulletin.active_prefix': 'सक्रिय बुलेटिन',
+    'joint_bulletin.issued_prefix': 'बुलेटिन जारी केले',
+    'tide.wind_sea': 'वारा आणि समुद्र',
+    'tide.tide_state': 'भरती-ओहोटी स्थिती',
+    'tide.moon_tide_type': 'चंद्र आणि भरतीचा प्रकार',
+    'tide.rising': '▲ भरती (Flood)',
+    'tide.falling': '▼ ओहोटी (Ebb)',
+    'tide.spring_tide': 'उधाणाची भरती (Spring Tide)',
+    'tide.neap_tide': 'भांगाची भरती (Neap Tide)',
+    'tide.high_tide': 'पूर्ण भरती (High Tide IST)',
+    'tide.low_tide': 'ओहोटी (Low Tide IST)',
+    'tide.no_warnings': '✓ कोणतीही किनारपट्टी चेतावणी नाही:',
+    'tide.active_for': 'चेतावणी लागू:',
+    'tide.coast': 'किनारपट्टी',
+    'osf.advisory_note': 'जिल्हा आणि किनारपट्टीची परिस्थिती भिन्न असल्याने एक राज्य अनेक पातळींमध्ये दिसू शकते.'
   },
   gu: {
     'brand.title': 'ઓશન વોચ',
@@ -1522,18 +1634,6 @@ const I18N_DICTIONARY = {
     'tchp.tab_tchp': 'TCHP (kJ/cm²)',
     'tchp.tab_sst': 'SST (°C)',
     'tchp.tab_ssha': 'SSHA (m)',
-    'tchp.play': '▶ શરૂ કરો',
-    'tchp.pause': '⏸ થોભો',
-    'tchp.loading': 'નકશો લોડ થઈ રહ્યો છે…',
-    'tchp.guide_title': 'ℹ️ વાવાઝોડું તીવ્રતા ઊર્જા માર્ગદર્શિકા:',
-    'tchp.low_unfavorable': 'ઓછું / પ્રતિકૂળ',
-    'tchp.moderate_favorable': 'મધ્યમ / અનુકૂળ',
-    'tchp.rapid_intensification': '⚠️ અતિ તીવ્ર વાવાઝોડું જોખમ',
-    'tchp.guide_desc': 'દરિયાઈ સપાટી નીચે ૨૬°C સુધીની ઉષ્મા ઉર્જાને TCHP કહે છે. ઉચ્ચ TCHP (>80 kJ/cm²) વાવાઝોડાને ભયંકર તાકાત આપે છે.',
-    'map.osf_title': 'દરિયાઈ સ્થિતિ આગાહી નકશો',
-    'map.osf_subtitle': 'ઊંચા મોજાં · સ્વેલ સર્જ · દરિયાઈ પ્રવાહ',
-    'map.osf_note': 'ઇનકોઇસ તરફથી રાજ્યવાર ચેતવણી નકશો.',
-    'map.pfz_title': 'સંભવિત મત્સ્ય ક્ષેત્ર નકશો',
     'map.pfz_subtitle': 'સત્તાવાર INCOIS PFZ સ્તરો',
     'map.pfz_lines': 'PFZ આગાહી રેખાઓ',
     'map.pfz_sectors': 'ક્ષેત્રો (Sectors)',
@@ -1591,7 +1691,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'ડેટા સ્ત્રોત: INCOIS–MoES ↗',
     'footer.visits': 'મુલાકાતો',
     'contact.title': 'સમુદ્ર માહિતી પોર્ટલ',
-    'contact.subtitle': 'બીટા પરીક્ષણ હેઠળ'
+    'contact.subtitle': 'બીટા પરીક્ષણ હેઠળ',
+    'joint_bulletin.default_msg': 'ઇનકોઇસ-આઇએમડી સંયુક્ત વિશેષ બુલેટિન',
+    'joint_bulletin.active_prefix': 'સક્રિય બુલેટિન',
+    'joint_bulletin.issued_prefix': 'બુલેટિન બહાર પડાયું',
+    'tide.wind_sea': 'પવન અને સમુદ્ર',
+    'tide.tide_state': 'ભરતી-ઓટની સ્થિતિ',
+    'tide.moon_tide_type': 'ચંદ્ર અને ભરતી પ્રકાર',
+    'tide.rising': '▲ ભરતી (Flood)',
+    'tide.falling': '▼ ઓટ (Ebb)',
+    'tide.spring_tide': 'મોટી ભરતી (Spring Tide)',
+    'tide.neap_tide': 'નાની ભરતી (Neap Tide)',
+    'tide.high_tide': 'મહત્તમ ભરતી (High Tide IST)',
+    'tide.low_tide': 'ઓટ (Low Tide IST)',
+    'tide.no_warnings': '✓ કોઈ સક્રિય ચેતવણી નથી:',
+    'tide.active_for': 'ચેતવણી સક્રિય:',
+    'tide.coast': 'કાંઠો',
+    'osf.advisory_note': 'જિલ્લા અને દરિયાકાંઠાની પરિસ્થિતિ અલગ હોવાથી એક રાજ્ય બહુવિધ સ્તરો હેઠળ દેખાઈ શકે છે.'
   },
   or: {
     'brand.title': 'ଓସେନ୍ ୱାଚ୍',
@@ -1788,7 +1904,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'ତଥ୍ୟ ଉତ୍ସ: INCOIS–MoES ↗',
     'footer.visits': 'ଭିଜିଟ୍ସ',
     'contact.title': 'ସମୁଦ୍ର ସୂଚନା ପୋର୍ଟାଲ',
-    'contact.subtitle': 'ବିଟା ପରୀକ୍ଷଣ ଅଧୀନରେ'
+    'contact.subtitle': 'ବିଟା ପରୀକ୍ଷଣ ଅଧୀନରେ',
+    'joint_bulletin.default_msg': 'ଇନକଏସ-ଆଇଏମଡି ମିଳିତ ବିଶେଷ ବୁଲେଟିନ୍',
+    'joint_bulletin.active_prefix': 'ସକ୍ରିୟ ବୁଲେଟିନ୍',
+    'joint_bulletin.issued_prefix': 'ବୁଲେଟିନ୍ ଜାରି',
+    'tide.wind_sea': 'ପବନ ଓ ସମୁଦ୍ର',
+    'tide.tide_state': 'ଜୁଆର-ଭଟ୍ଟା ସ୍ଥିତି',
+    'tide.moon_tide_type': 'ଚନ୍ଦ୍ର ଓ ଜୁଆର ପ୍ରକାର',
+    'tide.rising': '▲ ଜୁଆର (Flood)',
+    'tide.falling': '▼ ଭଟ୍ଟା (Ebb)',
+    'tide.spring_tide': 'ମହା ଜୁଆର (Spring Tide)',
+    'tide.neap_tide': 'ମାନ୍ଦା ଜୁଆର (Neap Tide)',
+    'tide.high_tide': 'ପୂର୍ଣ୍ଣ ଜୁଆର (High Tide IST)',
+    'tide.low_tide': 'ଭଟ୍ଟା (Low Tide IST)',
+    'tide.no_warnings': '✓ କୌଣସି ଉପକୂଳ ଚେତାବନୀ ନାହିଁ:',
+    'tide.active_for': 'ଚେତାବନୀ ଜାରି:',
+    'tide.coast': 'ଉପକୂଳ',
+    'osf.advisory_note': 'ଜିଲ୍ଲା ଏବଂ ଉପକୂଳବର୍ତ୍ତୀ ଅଞ୍ଚଳର ପରିସ୍ଥିତି ଭିନ୍ନ ହୋଇଥିବାରୁ ଗୋଟିଏ ରାଜ୍ୟ ଏକାଧିକ ସ୍ତର ଅଧୀନରେ ଦେଖାଯାଇପାରେ।'
   },
   kn: {
     'brand.title': 'ಓಷನ್ ವಾಚ್',
@@ -1985,7 +2117,23 @@ const I18N_DICTIONARY = {
     'footer.source': 'ಮಾಹಿತಿ ಮೂಲ: INCOIS–MoES ↗',
     'footer.visits': 'ಭೇಟಿಗಳು',
     'contact.title': 'ಸಾಗರ ಮಾಹಿತಿ ಪೋರ್ಟಲ್',
-    'contact.subtitle': 'ಬೀಟಾ ಪರೀಕ್ಷೆಯಲ್ಲಿದೆ'
+    'contact.subtitle': 'ಬೀಟಾ ಪರೀಕ್ಷೆಯಲ್ಲಿದೆ',
+    'joint_bulletin.default_msg': 'ಇನ್ಕೋಯಿಸ್-ಐಎಂಡಿ ಜಂಟಿ ವಿಶೇಷ ಬುಲೆಟಿನ್',
+    'joint_bulletin.active_prefix': 'ಸಕ್ರಿಯ ಬುಲೆಟಿನ್',
+    'joint_bulletin.issued_prefix': 'ಬುಲೆಟಿನ್ ಬಿಡುಗಡೆ',
+    'tide.wind_sea': 'ಗಾಳಿ ಮತ್ತು ಸಮುದ್ರ',
+    'tide.tide_state': 'ಉಬ್ಬರ-ವಿಳಿತ ಸ್ಥಿತಿ',
+    'tide.moon_tide_type': 'ಚಂದ್ರ ಮತ್ತು ಉಬ್ಬರವಿಳಿತದ ವಿಧ',
+    'tide.rising': '▲ ಉಬ್ಬರ (Flood)',
+    'tide.falling': '▼ ಇಳಿತ (Ebb)',
+    'tide.spring_tide': 'ದೊಡ್ಡ ಉಬ್ಬರ (Spring Tide)',
+    'tide.neap_tide': 'ಸಣ್ಣ ಉಬ್ಬರ (Neap Tide)',
+    'tide.high_tide': 'ಗರಿಷ್ಠ ಉಬ್ಬರ (High Tide IST)',
+    'tide.low_tide': 'ಕನಿಷ್ಠ ಇಳಿತ (Low Tide IST)',
+    'tide.no_warnings': '✓ ಯಾವುದೇ ಕರಾವಳಿ ಎಚ್ಚರಿಕೆ ಇಲ್ಲ:',
+    'tide.active_for': 'ಎಚ್ಚರಿಕೆ ಜಾರಿಯಲ್ಲಿದೆ:',
+    'tide.coast': 'ಕರಾವಳಿ',
+    'osf.advisory_note': 'ಜಿಲ್ಲೆ ಮತ್ತು ಕರಾವಳಿ ಪ್ರದೇಶದ ಪರಿಸ್ಥಿತಿಗಳು ವಿಭಿನ್ನವಾಗಿರುವುದರಿಂದ ಒಂದು ರಾಜ್ಯವು ಬಹು ಎಚ್ಚರಿಕೆ ಹಂತಗಳಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳಬಹುದು.'
   }
 };
 
@@ -2204,16 +2352,129 @@ globalThis.i18n = {
     return this.translateStateName(sectorName);
   },
 
-  translateLandingCenterName(name) {
+  
+  transliterateIndic(text) {
+    if (!text || this.currentLang === 'en') return text;
+    const lang = this.currentLang;
+    const scripts = {
+      hi: {
+        vowels: { a: '', aa: 'ा', i: 'ि', ee: 'ी', u: 'ु', oo: 'ू', e: 'े', ai: 'ै', o: 'ो', au: 'ौ' },
+        initVowels: { a: 'अ', aa: 'आ', i: 'इ', ee: 'ई', u: 'उ', oo: 'ऊ', e: 'ए', ai: 'ऐ', o: 'ओ', au: 'औ' },
+        cons: { k: 'क', kh: 'ख', g: 'ग', gh: 'घ', ng: 'ङ', ch: 'च', chh: 'छ', j: 'ज', jh: 'झ', ny: 'ञ', t: 'त', th: 'थ', d: 'द', dh: 'ध', n: 'न', p: 'प', ph: 'फ', f: 'फ़', b: 'ब', bh: 'भ', m: 'म', y: 'य', r: 'र', l: 'ल', v: 'व', w: 'व', sh: 'श', s: 'स', h: 'ह' },
+        virama: '्'
+      },
+      ta: {
+        vowels: { a: '', aa: 'ா', i: 'ி', ee: 'ீ', u: 'ு', oo: 'ூ', e: 'ெ', ai: 'ை', o: 'ொ', au: 'ௌ' },
+        initVowels: { a: 'அ', aa: 'ஆ', i: 'இ', ee: 'ஈ', u: 'உ', oo: 'ஊ', e: 'எ', ai: 'ஐ', o: 'ஒ', au: 'ஔ' },
+        cons: { k: 'க', kh: 'க', g: 'க', gh: 'க', ng: 'ங', ch: 'ச', chh: 'ச', j: 'ஜ', jh: 'ஜ', ny: 'ஞ', t: 'த', th: 'த', d: 'ட', dh: 'ட', n: 'ந', p: 'ப', ph: 'ப', f: 'ப', b: 'ப', bh: 'ப', m: 'ம', y: 'ய', r: 'ர', l: 'ல', v: 'வ', w: 'வ', sh: 'ஷ', s: 'ஸ', h: 'ஹ' },
+        virama: '்'
+      },
+      te: {
+        vowels: { a: '', aa: 'ా', i: 'ి', ee: 'ీ', u: 'ు', oo: 'ూ', e: 'ె', ai: 'ై', o: 'ొ', au: 'ౌ' },
+        initVowels: { a: 'అ', aa: 'ఆ', i: 'ఇ', ee: 'ఈ', u: 'ఉ', oo: 'ఊ', e: 'ఎ', ai: 'ఐ', o: 'ఒ', au: 'ఔ' },
+        cons: { k: 'క', kh: 'ఖ', g: 'గ', gh: 'ఘ', ng: 'ఙ', ch: 'చ', chh: 'ఛ', j: 'జ', jh: 'ఝ', ny: 'ఞ', t: 'త', th: 'థ', d: 'ద', dh: 'ధ', n: 'న', p: 'ప', ph: 'ఫ', f: 'ఫ', b: 'బ', bh: 'భ', m: 'మ', y: 'య', r: 'ర', l: 'ల', v: 'వ', w: 'వ', sh: 'శ', s: 'స', h: 'హ' },
+        virama: '్'
+      },
+      ml: {
+        vowels: { a: '', aa: 'ാ', i: 'ി', ee: 'ീ', u: 'ു', oo: 'ൂ', e: 'െ', ai: 'ൈ', o: 'ൊ', au: 'ൌ' },
+        initVowels: { a: 'അ', aa: 'ആ', i: 'ഇ', ee: 'ഈ', u: 'ഉ', oo: 'ഊ', e: 'എ', ai: 'ഐ', o: 'ഒ', au: 'ഔ' },
+        cons: { k: 'ക', kh: 'ഖ', g: 'ഗ', gh: 'ഘ', ng: 'ങ', ch: 'ച', chh: 'ഛ', j: 'ജ', jh: 'ഝ', ny: 'ഞ', t: 'ത', th: 'ഥ', d: 'ദ', dh: 'ധ', n: 'ന', p: 'പ', ph: 'ഫ', f: 'ഫ', b: 'ബ', bh: 'ഭ', m: 'മ', y: 'യ', r: 'ര', l: 'ല', v: 'വ', w: 'വ', sh: 'ശ', s: 'സ', h: 'ഹ' },
+        virama: '്'
+      },
+      bn: {
+        vowels: { a: '', aa: 'া', i: 'ি', ee: 'ী', u: 'ু', oo: 'ূ', e: 'ে', ai: 'ৈ', o: 'ো', au: 'ৌ' },
+        initVowels: { a: 'অ', aa: 'আ', i: 'ই', ee: 'ঈ', u: 'উ', oo: 'ঊ', e: 'এ', ai: 'ঐ', o: 'ও', au: 'ঔ' },
+        cons: { k: 'ক', kh: 'খ', g: 'গ', gh: 'ঘ', ng: 'ঙ', ch: 'চ', chh: 'ছ', j: 'জ', jh: 'ঝ', ny: 'ঞ', t: 'ত', th: 'থ', d: 'দ', dh: 'ধ', n: 'ন', p: 'প', ph: 'ফ', f: 'ফ', b: 'ব', bh: 'ভ', m: 'ম', y: 'য', r: 'র', l: 'ল', v: 'ভ', w: 'ওয়', sh: 'শ', s: 'স', h: 'হ' },
+        virama: '্'
+      },
+      mr: {
+        vowels: { a: '', aa: 'ा', i: 'ि', ee: 'ी', u: 'ु', oo: 'ू', e: 'े', ai: 'ै', o: 'ो', au: 'ौ' },
+        initVowels: { a: 'अ', aa: 'आ', i: 'इ', ee: 'ई', u: 'उ', oo: 'ऊ', e: 'ए', ai: 'ऐ', o: 'ओ', au: 'औ' },
+        cons: { k: 'क', kh: 'ख', g: 'ग', gh: 'घ', ng: 'ङ', ch: 'च', chh: 'छ', j: 'ज', jh: 'झ', ny: 'ञ', t: 'त', th: 'थ', d: 'द', dh: 'ध', n: 'न', p: 'प', ph: 'फ', f: 'फ़', b: 'ब', bh: 'भ', m: 'म', y: 'य', r: 'र', l: 'ल', v: 'व', w: 'व', sh: 'श', s: 'स', h: 'ह' },
+        virama: '्'
+      },
+      gu: {
+        vowels: { a: '', aa: 'ા', i: 'િ', ee: 'ી', u: 'ુ', oo: 'ૂ', e: 'ે', ai: 'ૈ', o: 'ો', au: 'ૌ' },
+        initVowels: { a: 'અ', aa: 'આ', i: 'ઇ', ee: 'ઈ', u: 'ઉ', oo: 'ઊ', e: 'એ', ai: 'ઐ', o: 'ઓ', au: 'ઔ' },
+        cons: { k: 'ક', kh: 'ખ', g: 'ગ', gh: 'ઘ', ng: 'ઙ', ch: 'ચ', chh: 'છ', j: 'જ', jh: 'ઝ', ny: 'ઞ', t: 'ત', th: 'થ', d: 'દ', dh: 'ધ', n: 'ન', p: 'પ', ph: 'ફ', f: 'ફ', b: 'બ', bh: 'ભ', m: 'મ', y: 'ય', r: 'ર', l: 'લ', v: 'વ', w: 'વ', sh: 'શ', s: 'સ', h: 'હ' },
+        virama: '્'
+      },
+      or: {
+        vowels: { a: '', aa: 'ା', i: 'ି', ee: 'ୀ', u: 'ୁ', oo: 'ୂ', e: 'େ', ai: 'ୈ', o: 'ୋ', au: 'ୌ' },
+        initVowels: { a: 'ଅ', aa: 'ଆ', i: 'ଇ', ee: 'ଈ', u: 'ଉ', oo: 'ଊ', e: 'ଏ', ai: 'ଐ', o: 'ଓ', au: 'ଔ' },
+        cons: { k: 'କ', kh: 'ଖ', g: 'ଗ', gh: 'ଘ', ng: 'ଙ', ch: 'ଚ', chh: 'ଛ', j: 'ଜ', jh: 'ଝ', ny: 'ଞ', t: 'ତ', th: 'ଥ', d: 'ଦ', dh: 'ଧ', n: 'ନ', p: 'ପ', ph: 'ଫ', f: 'ଫ', b: 'ବ', bh: 'ଭ', m: 'ମ', y: 'ଯ', r: 'ର', l: 'ଲ', v: 'ଭ', w: 'ୱ', sh: 'ଶ', s: 'ସ', h: 'ହ' },
+        virama: '୍'
+      },
+      kn: {
+        vowels: { a: '', aa: 'ಾ', i: 'ಿ', ee: 'ೀ', u: 'ು', oo: 'ೂ', e: 'ೆ', ai: 'ೈ', o: 'ೊ', au: 'ೌ' },
+        initVowels: { a: 'ಅ', aa: 'ಆ', i: 'ಇ', ee: 'ಈ', u: 'ಉ', oo: 'ಊ', e: 'ಎ', ai: 'ಐ', o: 'ಒ', au: 'ಔ' },
+        cons: { k: 'ಕ', kh: 'ಖ', g: 'ಗ', gh: 'ಘ', ng: 'ಙ', ch: 'ಚ', chh: 'ಛ', j: 'ಜ', jh: 'ಝ', ny: 'ಞ', t: 'ತ', th: 'ಥ', d: 'ದ', dh: 'ಧ', n: 'ನ', p: 'ಪ', ph: 'ಫ', f: 'ಫ', b: 'ಬ', bh: 'ಭ', m: 'ಮ', y: 'ಯ', r: 'ರ', l: 'ಲ', v: 'ವ', w: 'ವ', sh: 'ಶ', s: 'ಸ', h: 'ಹ' },
+        virama: '್'
+      }
+    };
+
+    const s = scripts[lang] || scripts.hi;
+    return String(text).replace(/[A-Za-z]+/g, word => {
+      let w = word.toLowerCase();
+      let out = '';
+      let i = 0;
+      let isStart = true;
+      while (i < w.length) {
+        let sub3 = w.slice(i, i + 3);
+        let sub2 = w.slice(i, i + 2);
+        let sub1 = w.slice(i, i + 1);
+
+        let matchedVowel = null;
+        let vLen = 0;
+        if (['aa', 'ee', 'oo', 'ai', 'au'].includes(sub2)) { matchedVowel = sub2; vLen = 2; }
+        else if (['a', 'i', 'u', 'e', 'o'].includes(sub1)) { matchedVowel = sub1; vLen = 1; }
+
+        if (matchedVowel) {
+          if (isStart) out += s.initVowels[matchedVowel] || matchedVowel;
+          else out += s.vowels[matchedVowel] !== undefined ? s.vowels[matchedVowel] : matchedVowel;
+          i += vLen;
+          isStart = false;
+          continue;
+        }
+
+        let matchedCons = null;
+        let cLen = 0;
+        if (['chh'].includes(sub3)) { matchedCons = sub3; cLen = 3; }
+        else if (['kh', 'gh', 'ng', 'ch', 'jh', 'ny', 'th', 'dh', 'ph', 'bh', 'sh'].includes(sub2)) { matchedCons = sub2; cLen = 2; }
+        else if (s.cons[sub1]) { matchedCons = sub1; cLen = 1; }
+
+        if (matchedCons && s.cons[matchedCons]) {
+          out += s.cons[matchedCons];
+          i += cLen;
+          isStart = false;
+          let next2 = w.slice(i, i + 2);
+          let next1 = w.slice(i, i + 1);
+          if (['aa', 'ee', 'oo', 'ai', 'au'].includes(next2)) { out += s.vowels[next2]; i += 2; }
+          else if (['a', 'i', 'u', 'e', 'o'].includes(next1)) { out += s.vowels[next1]; i += 1; }
+          else if (i < w.length) { out += s.virama; }
+          continue;
+        }
+
+        out += sub1;
+        i += 1;
+        isStart = false;
+      }
+      return out;
+    });
+  },
+
+    translateLandingCenterName(name) {
     if (!name) return '';
     const tc = typeof globalThis.titleCase === 'function' ? globalThis.titleCase : (typeof titleCase === 'function' ? titleCase : s => String(s || ''));
     if (this.currentLang === 'en') return tc(name);
-    // Check if district/sector has direct match
     const norm = String(name).toUpperCase().trim();
     if (I18N_DISTRICTS[norm] && I18N_DISTRICTS[norm][this.currentLang]) {
       return I18N_DISTRICTS[norm][this.currentLang];
     }
-    return tc(name);
+    if (I18N_CORAL_AREAS[norm] && I18N_CORAL_AREAS[norm][this.currentLang]) {
+      return I18N_CORAL_AREAS[norm][this.currentLang];
+    }
+    return this.transliterateIndic(name);
   },
 
   translateDirection(dir) {

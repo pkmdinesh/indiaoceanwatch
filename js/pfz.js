@@ -44,11 +44,15 @@ function unlockLandingCenter() {
 }
 
 var latestPfzSectorsData = [];
+var currentActivePfzSector = null;
+var currentActivePfzCenter = null;
 
 function renderPfzSectors(values) {
   latestPfzSectorsData = values || [];
   const el = ids('pfzStates');
-  ids('pfzDetails').hidden = true;
+  if (!currentActivePfzSector) {
+    ids('pfzDetails').hidden = true;
+  }
   renderLockedLandingCenterBar();
 
   const received = (values || []).map(value => typeof value === 'string' ? {name:value,landingCenters:[]} : value);
@@ -73,19 +77,27 @@ function renderPfzSectors(values) {
     const sector = typeof value === 'string' ? {name:value,landingCenters:[]} : value;
     const hasForecast = sector.hasForecast !== false && Boolean(sector.landingCenters?.length);
     const hasLockedLc = locked && sector.landingCenters?.some(c => c.name.toLowerCase() === locked.name.toLowerCase());
+    const isCurrentlyActive = currentActivePfzSector && currentActivePfzSector.name.toLowerCase() === sector.name.toLowerCase();
 
     const chip = document.createElement('button');
     chip.type = 'button';
     chip.className = 'tag pfz-chip' + (hasForecast ? '' : ' no-forecast') + (hasLockedLc ? ' has-locked' : '');
-    chip.setAttribute('aria-expanded','false');
+    chip.setAttribute('aria-expanded', isCurrentlyActive ? 'true' : 'false');
     const translatedSec = globalThis.i18n?.translateSectorName(sector.name) || titleCase(sector.name);
     chip.textContent = translatedSec + '(' + (sector.landingCenters?.length || 0) + ')' + (hasLockedLc ? ' 🔒' : '');
     chip.addEventListener('click',() => {
       el.querySelectorAll('.pfz-chip').forEach(item => item.setAttribute('aria-expanded',String(item === chip)));
+      currentActivePfzSector = sector;
+      currentActivePfzCenter = null;
       renderPfzLandingCenters(sector);
     });
     return chip;
   }));
+
+  if (currentActivePfzSector) {
+    const updatedSector = sectors.find(s => s.name.toLowerCase() === currentActivePfzSector.name.toLowerCase()) || currentActivePfzSector;
+    renderPfzLandingCenters(updatedSector);
+  }
 }
 
 function formatDmsPretty(str) {
@@ -227,13 +239,15 @@ function renderPfzLandingCenters(sector) {
     const messageCount = center.messages?.length || 0;
     const isLocked = locked && locked.name.toLowerCase() === center.name.toLowerCase();
     const translatedLc = globalThis.i18n?.translateLandingCenterName(center.name) || titleCase(center.name);
+    const isCurrentlyActive = currentActivePfzCenter && currentActivePfzCenter.name.toLowerCase() === center.name.toLowerCase();
 
     chip.type = 'button';
     chip.className = 'tag landing-chip' + (isLocked ? ' is-locked-chip' : '');
     chip.textContent = translatedLc + (messageCount > 1 ? '(' + messageCount + ')' : '') + (isLocked ? ' 🔒' : '');
-    chip.setAttribute('aria-expanded','false');
+    chip.setAttribute('aria-expanded', isCurrentlyActive ? 'true' : 'false');
     chip.addEventListener('click',() => {
       ids('pfzLandingCenters').querySelectorAll('.landing-chip').forEach(item => item.setAttribute('aria-expanded',String(item === chip)));
+      currentActivePfzCenter = center;
       renderPfzMessages(center, sector.name);
     });
     return chip;
@@ -241,6 +255,9 @@ function renderPfzLandingCenters(sector) {
 
   if (!centers.length) {
     ids('pfzLandingCenters').replaceChildren();
+  } else if (currentActivePfzCenter) {
+    const updatedCenter = centers.find(c => c.name.toLowerCase() === currentActivePfzCenter.name.toLowerCase()) || currentActivePfzCenter;
+    renderPfzMessages(updatedCenter, sector.name);
   }
   details.hidden = false;
 }

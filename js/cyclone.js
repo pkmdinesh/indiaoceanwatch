@@ -98,7 +98,8 @@ function renderStormSurge(message, bulletin) {
       card.classList.remove('level-safe','level-yellow','level-orange','level-red','level-expired','level-info');
       card.classList.add(`level-${cycloneLevel}`);
 
-      message.textContent = bulletin?.message || 'INCOIS-IMD Joint Special Bulletin';
+      const rawMsg = bulletin?.message || globalThis.i18n?.t('joint_bulletin.default_msg', 'INCOIS-IMD Joint Special Bulletin') || 'INCOIS-IMD Joint Special Bulletin';
+      message.textContent = globalThis.i18n?.translateAdvisoryMessage(rawMsg) || rawMsg;
       if (bulletin?.url) {
         message.href = bulletin.url;
         message.setAttribute('aria-label','Open the INCOIS-IMD joint bulletin PDF');
@@ -109,7 +110,10 @@ function renderStormSurge(message, bulletin) {
 
       if (bulletinDate) {
         time.dateTime = bulletinDate.toISOString();
-        time.textContent = `${isRecent ? `Active Bulletin (past ${APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN}h)` : 'Bulletin issued'} · ${bulletinDate.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+        const activePrefix = globalThis.i18n?.t('joint_bulletin.active_prefix', 'Active Bulletin') || 'Active Bulletin';
+        const issuedPrefix = globalThis.i18n?.t('joint_bulletin.issued_prefix', 'Bulletin issued') || 'Bulletin issued';
+        const timePrefix = isRecent ? `${activePrefix} (${APP_CONFIG.AGE_HOURS.CYCLONE_BULLETIN}h)` : issuedPrefix;
+        time.textContent = `${timePrefix} · ${bulletinDate.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
         time.hidden = false;
       } else {
         time.removeAttribute('datetime');
@@ -118,7 +122,7 @@ function renderStormSurge(message, bulletin) {
       }
 
       sourceLink.href = JOINT_BULLETIN_PAGE_URL;
-      sourceLink.textContent = 'Joint Bulletin ↗';
+      sourceLink.textContent = globalThis.i18n?.t('joint_bulletin.title', 'Joint Bulletin ↗') || 'Joint Bulletin ↗';
       sourceLink.hidden = false;
     }
 

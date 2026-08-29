@@ -51,7 +51,9 @@ var severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No 
         const row = document.createElement('div'); row.className = 'severity-row';
         const label = document.createElement('span'); label.className = `severity-row-label ${level}`;
         const dot = document.createElement('i'); dot.className = 'dot'; dot.setAttribute('aria-hidden','true');
-        label.append(dot,severityLabel[level]);
+        const sevKey = level === 'warning' ? 'severity.warning' : (level === 'alert' ? 'severity.alert' : (level === 'watch' ? 'severity.watch' : 'severity.no_threat'));
+        const localizedSevLabel = globalThis.i18n?.t(sevKey, severityLabel[level]) || severityLabel[level];
+        label.append(dot, localizedSevLabel);
         const stateList = document.createElement('div'); stateList.className = 'severity-row-states';
         if (level === 'noThreat') {
           const visualize = document.createElement('button'); visualize.type='button'; visualize.className = 'severity-state-chip noThreat';

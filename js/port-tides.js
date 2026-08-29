@@ -839,15 +839,24 @@ function checkPortActiveWarnings(port) {
     matches.push({ hazard: 'Tsunami', level: 'warning', label: 'Tsunami Warning Active' });
   }
 
+  const translatedPortState = globalThis.i18n?.translateStateName(port.state) || port.state;
+  const translatedPortDistrict = globalThis.i18n?.translateDistrictName(port.district) || port.district;
+
   if (matches.length === 0) {
-    return { safe: true, level: 'safe', text: `✓ No active coastal warnings for ${port.name} (${port.district}, ${port.state})` };
+    const noWarnLbl = globalThis.i18n?.t('tide.no_warnings', '✓ No active coastal warnings for') || '✓ No active coastal warnings for';
+    return { safe: true, level: 'safe', text: `${noWarnLbl} ${port.name} (${translatedPortDistrict}, ${translatedPortState})` };
   }
 
   const worst = matches.find(m => m.level === 'warning') || matches.find(m => m.level === 'alert') || matches[0];
+  const activeForLbl = globalThis.i18n?.t('tide.active_for', 'active for') || 'active for';
+  const coastLbl = globalThis.i18n?.t('tide.coast', 'Coast') || 'Coast';
+  const sevKey = worst.level === 'warning' ? 'severity.warning' : (worst.level === 'alert' ? 'severity.alert' : 'severity.watch');
+  const localizedLabel = globalThis.i18n?.t(sevKey, worst.label) || worst.label;
+
   return {
     safe: false,
     level: worst.level,
-    text: `⚠️ ${worst.label} active for ${port.name} (${port.state} Coast)`
+    text: `⚠️ ${localizedLabel} ${activeForLbl} ${port.name} (${translatedPortState} ${coastLbl})`
   };
 }
 
@@ -988,20 +997,29 @@ function renderPortTideCard() {
       else if (warning.level === 'watch') seaState = 'Moderate';
     }
 
+    const windSeaLbl = globalThis.i18n?.t('tide.wind_sea', 'Wind & Sea') || 'Wind & Sea';
+    const tideStateLbl = globalThis.i18n?.t('tide.tide_state', 'Tide State') || 'Tide State';
+    const moonTideTypeLbl = globalThis.i18n?.t('tide.moon_tide_type', 'Moon & Tide Type') || 'Moon & Tide Type';
+    const risingLbl = globalThis.i18n?.t('tide.rising', '▲ Rising (Flood)') || '▲ Rising (Flood)';
+    const fallingLbl = globalThis.i18n?.t('tide.falling', '▼ Falling (Ebb)') || '▼ Falling (Ebb)';
+    const springTideLbl = globalThis.i18n?.t('tide.spring_tide', 'Spring Tide') || 'Spring Tide';
+    const neapTideLbl = globalThis.i18n?.t('tide.neap_tide', 'Neap Tide') || 'Neap Tide';
+    const translatedWindDir = globalThis.i18n?.translateDirection(port.windDir) || port.windDir;
+
     const regimeLabel = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
 
     windElem.innerHTML = `
       <div class="wind-stat-item">
-        <span class="wind-stat-label">Wind &amp; Sea</span>
-        <strong>${port.windDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState})</span></strong>
+        <span class="wind-stat-label">${windSeaLbl}</span>
+        <strong>${translatedWindDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState})</span></strong>
       </div>
       <div class="wind-stat-item">
-        <span class="wind-stat-label">Tide State</span>
-        <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? '▲ Rising (Flood)' : '▼ Falling (Ebb)'}</strong>
+        <span class="wind-stat-label">${tideStateLbl}</span>
+        <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? risingLbl : fallingLbl}</strong>
       </div>
       <div class="wind-stat-item moon-stat-item">
-        <span class="wind-stat-label">Moon &amp; Tide Type</span>
-        <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime}) · Tidal Regime: ${regimeLabel} (~${port.range}m)"><span>${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? 'Spring Tide' : 'Neap Tide'} · ${regimeLabel}</small></strong>
+        <span class="wind-stat-label">${moonTideTypeLbl}</span>
+        <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime}) · Tidal Regime: ${regimeLabel} (~${port.range}m)"><span>${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? springTideLbl : neapTideLbl} · ${regimeLabel}</small></strong>
       </div>
     `;
   }
@@ -1013,16 +1031,18 @@ function renderPortTideCard() {
     const lowTides = events.filter(e => e.type === 'Low');
 
     const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+    const highTideLbl = globalThis.i18n?.t('tide.high_tide', 'High Tide (IST)') || 'High Tide (IST)';
+    const lowTideLbl = globalThis.i18n?.t('tide.low_tide', 'Low Tide (IST)') || 'Low Tide (IST)';
 
     tideTimesElem.innerHTML = `
       <div class="tide-horizontal-row high-row">
-        <span class="tide-event-badge high">High Tide (IST)</span>
+        <span class="tide-event-badge high">${highTideLbl}</span>
         <div class="tide-times-items">
           ${highTides.length > 0 ? highTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
         </div>
       </div>
       <div class="tide-horizontal-row low-row">
-        <span class="tide-event-badge low">Low Tide (IST)</span>
+        <span class="tide-event-badge low">${lowTideLbl}</span>
         <div class="tide-times-items">
           ${lowTides.length > 0 ? lowTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
         </div>
