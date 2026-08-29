@@ -20,44 +20,63 @@
     *,*::before,*::after{box-sizing:border-box}
     body{margin:0;font-family:Arial,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
     .dashboard{max-width:1440px;margin:0 auto;padding:10px 10px 20px}
-    .header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(8,47,60,.06)}
-    .ocean-brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+    .header{position:relative;display:flex;flex-direction:column;gap:6px;padding:10px 16px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(8,47,60,.06)}
+    .header-main-row{display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
+    .ocean-brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);flex:none;text-align:left}
     .brand-image{width:60px;height:60px;flex:none;border-radius:16px;object-fit:contain}
     .brand-copy strong{font-size:16px;font-weight:900;color:var(--ink)}
-    .title{flex:1;min-width:0}
+    .title{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
     .title h1{margin:0;font-size:15px;font-weight:900;line-height:1.2;color:var(--ink)}
     .title p{margin:2px 0 0;font-size:10.5px;color:var(--muted);font-weight:700}
-    .header-actions{display:flex;align-items:center;gap:8px;flex:none}
+    .header-top-right{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-left:auto;flex:none;text-align:right}
+    .header-btn-row{display:flex;align-items:center;justify-content:flex-end;width:100%;gap:6px;margin-left:auto}
     .stamp{text-align:right;font-size:9.5px;font-weight:700;color:var(--muted)}
     .stamp .live{color:var(--safe);font-weight:900}
     .voice-button,.notify-button,.share-button,.install-button{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 10px;border:1px solid #082f3c;border-radius:8px;background:#082f3c;color:#fff;font:800 11px/1 inherit;cursor:pointer}
     .content{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:12px;min-height:75vh;contain:layout style}
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(8,47,60,.05)}
     .announcement-card{grid-column:1/-1;min-height:98px}
+    .active-advisory-item{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:800;line-height:1.2}
+    .active-advisory-item.warning{color:#FF0000}
+    .active-advisory-item.alert{color:#FF8C00}
+    .active-advisory-item.watch{color:#EDC001}
+    .active-advisory-item.resolved,.active-advisory-item.safe,.active-advisory-item.noThreat{color:#238269}
+    .active-advisory-item .dot{width:7px;height:7px;border-radius:50%;flex:none;background:currentColor}
+    .active-advisory-item .dot.watch,.active-advisory-item.watch .dot,.dot.watch{background:#EDC001!important;color:#EDC001!important}
+    .announcement-separator{color:#90a3a7;margin:0 4px;font-size:11px;font-weight:700;user-select:none}
   </style>
-  <link rel="preload" href="css/components.css?v=230" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=230"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=230" media="print">
+  <link rel="preload" href="css/components.css?v=238" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=238"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=238" media="print">
 </head>
 <body>
   <main class="dashboard">
     <header class="header">
-      <a class="ocean-brand" href="./" aria-label="Ocean Watch home"><img class="brand-image" src="icons/ocean-watch-v3-192.png" alt="Ocean Watch" width="60" height="60"><span class="brand-copy"><strong data-i18n="brand.title">Ocean Watch</strong></span></a>
-      <div class="title"><h1 data-i18n="header.title">Coastal Advisory Status</h1><p data-i18n="header.subtitle">Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</p></div>
-      <div class="header-actions">
-        <div class="header-top-row">
-          <div class="stamp"><span class="live" data-i18n="header.snapshot">Official-source snapshot</span><br><time id="lastUpdated"></time></div>
+      <div class="header-main-row">
+        <a class="ocean-brand" href="./" aria-label="Ocean Watch home">
+          <img class="brand-image" src="icons/ocean-watch-v3-192.png" alt="Ocean Watch" width="60" height="60">
+          <span class="brand-copy"><strong data-i18n="brand.title">Ocean Watch</strong></span>
+        </a>
+        <div class="title">
+          <h1 data-i18n="header.title">Coastal Advisory Status</h1>
+          <p data-i18n="header.subtitle">Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone</p>
+        </div>
+        <div class="header-top-right">
           <div class="lang-picker-wrap">
             <label for="appLangSelect" class="lang-picker-label" aria-label="Select Language">🌐</label>
             <select id="appLangSelect" class="app-lang-select" aria-label="Select Language"></select>
           </div>
+          <div class="stamp">
+            <span class="live" data-i18n="header.snapshot">Official-source snapshot</span><br>
+            <time id="lastUpdated"></time>
+          </div>
         </div>
-        <div class="header-btn-row">
-          <button class="voice-button" id="voiceSummaryBtn" type="button" aria-label="Listen to coastal advisory audio summary"><svg class="voice-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><span class="voice-label" data-i18n="header.voice">Voice</span></button>
-          <button class="notify-button" id="notificationHeaderBtn" type="button" aria-label="Configure advisory notifications"><svg class="notify-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg><span class="notify-label" data-i18n="header.alerts">Alerts</span></button>
-          <button class="share-button" id="shareApp" type="button" aria-label="Share Ocean Watch"><svg class="share-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="currentColor" d="M13 14h1v1h-1zm1 1h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm-3-1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm3-1h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm-2 2h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm-1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-2 1h1v1h-1zm-2 0h1v1h-1zm1 0h1v1h-1zm-2 0h1v1h-1zm0 1h1v1h-1zm1 1h1v1h-1zm1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-1-2h1v1h-1zm1 0h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm0 3h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm1 3h1v1h-1zm0-2h1v1h-1zm0 1h1v1h-1zm-2-3h1v1h-1zm-6 1h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm-3 0h1v1h-1zm2 0h1v1h-1zm-2 1h1v1h-1zm0 1h1v1h-1zm0-19h1v1h-1zm1 1h1v1h-1zm-1 2h1v1h-1zm1 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm-1 1h1v1h-1zM1 11h1v1H1zm1 1h1v1H2zm2-1h1v1H4zm0 1h1v1H4zm1-1h1v1H5zm1 1h1v1H6zm1-1h1v1H7zm1 1h1v1H8zm0-1h1v1H8zm1 0h1v1H9zm1 0h1v1h-1zm1 1h1v1h-1zm2 0h1v1h-1zm1-1h1v1h-1zm1 0h1v1h-1zm1 0h1v1h-1zm-1 2h1v1h-1zm-2 9h1v1h-1zm-1 0h1v1h-1zm0-9h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm11-1h1v1h-1zm-1 1h1v1h-1zm1 2h1v1h-1zm-5-4h1v1h-1zm1-1h1v1h-1zm4 0h1v1h-1zm0 1h1v1h-1zm-1 0h1v1h-1zm1 8h1v1h-1zm-1 1h1v1h-1zm-2 0h1v1h-1zm3 0h1v1h-1z"/><path stroke="currentColor" stroke-width="2" d="M15 2h7v7h-7zM2 2h7v7H2zm0 13h7v7H2zM18 5h1v1h-1zM5 5h1v1H5zm0 13h1v1H5z"/></g></svg><span class="share-label" data-i18n="header.share">Share</span></button>
-          <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch"><svg class="install-icon" aria-hidden="true" focusable="false" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M1664 1664h128v384H128v-384h128v256h1408zm-147-531-557 557-557-557 90-90 403 402V128h128v1317l403-402z"/></svg><span class="install-label" data-i18n="header.install">Install</span></button>
-        </div>
+      </div>
+      <div class="header-btn-row">
+        <button class="voice-button" id="voiceSummaryBtn" type="button" aria-label="Listen to coastal advisory audio summary"><svg class="voice-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg><span class="voice-label" data-i18n="header.voice">Voice</span></button>
+        <button class="notify-button" id="notificationHeaderBtn" type="button" aria-label="Configure advisory notifications"><svg class="notify-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg><span class="notify-label" data-i18n="header.alerts">Alerts</span></button>
+        <button class="share-button" id="shareApp" type="button" aria-label="Share Ocean Watch"><svg class="share-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="currentColor" d="M13 14h1v1h-1zm1 1h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm-3-1h1v1h-1zm2 0h1v1h-1zm0 1h1v1h-1zm3-1h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm-2 2h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm-1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-2 1h1v1h-1zm-2 0h1v1h-1zm1 0h1v1h-1zm-2 0h1v1h-1zm0 1h1v1h-1zm1 1h1v1h-1zm1 0h1v1h-1zm2 0h1v1h-1zm1 0h1v1h-1zm-1-2h1v1h-1zm1 0h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm0 3h1v1h-1zm0-1h1v1h-1zm1-1h1v1h-1zm0-1h1v1h-1zm1 3h1v1h-1zm0-2h1v1h-1zm0 1h1v1h-1zm-2-3h1v1h-1zm-6 1h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm2 0h1v1h-1zm-3 0h1v1h-1zm2 0h1v1h-1zm-2 1h1v1h-1zm0 1h1v1h-1zm0-19h1v1h-1zm1 1h1v1h-1zm-1 2h1v1h-1zm1 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm-1 1h1v1h-1zm1 0h1v1h-1zm-1 1h1v1h-1zM1 11h1v1H1zm1 1h1v1H2zm2-1h1v1H4zm0 1h1v1H4zm1-1h1v1H5zm1 1h1v1H6zm1-1h1v1H7zm1 1h1v1H8zm0-1h1v1H8zm1 0h1v1H9zm1 0h1v1h-1zm1 1h1v1h-1zm2 0h1v1h-1zm1-1h1v1h-1zm1 0h1v1h-1zm1 0h1v1h-1zm-1 2h1v1h-1zm-2 9h1v1h-1zm-1 0h1v1h-1zm0-9h1v1h-1zm-1 0h1v1h-1zm0 1h1v1h-1zm0 1h1v1h-1zm11-1h1v1h-1zm-1 1h1v1h-1zm1 2h1v1h-1zm-5-4h1v1h-1zm1-1h1v1h-1zm4 0h1v1h-1zm0 1h1v1h-1zm-1 0h1v1h-1zm1 8h1v1h-1zm-1 1h1v1h-1zm-2 0h1v1h-1zm3 0h1v1h-1z"/><path stroke="currentColor" stroke-width="2" d="M15 2h7v7h-7zM2 2h7v7H2zm0 13h7v7H2zM18 5h1v1h-1zM5 5h1v1H5zm0 13h1v1H5z"/></g></svg><span class="share-label" data-i18n="header.share">Share</span></button>
+        <button class="install-button" id="installApp" type="button" hidden aria-label="Install Ocean Watch"><svg class="install-icon" aria-hidden="true" focusable="false" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M1664 1664h128v384H128v-384h128v256h1408zm-147-531-557 557-557-557 90-90 403 402V128h128v1317l403-402z"/></svg><span class="install-label" data-i18n="header.install">Install</span></button>
       </div>
     </header>
 
@@ -593,23 +612,23 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=230" defer></script>
-  <script src="js/i18n.js?v=230" defer></script>
-  <script src="js/app.js?v=230" defer></script>
-  <script src="js/share.js?v=230" defer></script>
-  <script src="js/map.js?v=230" defer></script>
-  <script src="js/pfz-map.js?v=230" defer></script>
-  <script src="js/pfz.js?v=230" defer></script>
-  <script src="js/advisory.js?v=230" defer></script>
-  <script src="js/tsunami.js?v=230" defer></script>
-  <script src="js/cyclone.js?v=230" defer></script>
-  <script src="js/seismic.js?v=230" defer></script>
-  <script src="js/port-tides.js?v=230" defer></script>
-  <script src="js/voice-summary.js?v=230" defer></script>
-  <script src="js/status.js?v=230" defer></script>
-  <script src="js/notifications.js?v=230" defer></script>
-  <script src="js/pwa.js?v=230" defer></script>
-  <script src="js/tchp.js?v=230" defer></script>
+  <script src="js/config.js?v=238" defer></script>
+  <script src="js/i18n.js?v=238" defer></script>
+  <script src="js/app.js?v=238" defer></script>
+  <script src="js/share.js?v=238" defer></script>
+  <script src="js/map.js?v=238" defer></script>
+  <script src="js/pfz-map.js?v=238" defer></script>
+  <script src="js/pfz.js?v=238" defer></script>
+  <script src="js/advisory.js?v=238" defer></script>
+  <script src="js/tsunami.js?v=238" defer></script>
+  <script src="js/cyclone.js?v=238" defer></script>
+  <script src="js/seismic.js?v=238" defer></script>
+  <script src="js/port-tides.js?v=238" defer></script>
+  <script src="js/voice-summary.js?v=238" defer></script>
+  <script src="js/status.js?v=238" defer></script>
+  <script src="js/notifications.js?v=238" defer></script>
+  <script src="js/pwa.js?v=238" defer></script>
+  <script src="js/tchp.js?v=238" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>

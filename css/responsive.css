@@ -4,24 +4,29 @@
    Switch only the header before its centred title and right-side controls
    collide, while retaining the two-column advisory-card layout. */
 @media(max-width:1280px){
-  .header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px}
-  .ocean-brand{min-width:0}
-  .title{position:static;grid-column:1/-1;grid-row:2;transform:none;width:100%;max-width:none;padding-top:5px;text-align:center;justify-self:center}
+  .header{display:flex;flex-direction:column;gap:6px}
+  .header-main-row{display:flex;align-items:center;justify-content:space-between;width:100%}
+  .ocean-brand{min-width:0;flex:none;text-align:left}
+  .header-top-right{margin-left:auto;text-align:right}
+  .header-btn-row{display:flex;align-items:center;justify-content:flex-end;margin-left:auto}
+  .title{position:static;width:100%;max-width:none;padding-top:5px;text-align:center;justify-self:center}
   .title h1,.title p{text-align:center;width:100%}
   .title h1{white-space:normal}
-  .header-actions{grid-column:2;grid-row:1}
   .content .ocean .panel-head{flex-wrap:wrap;gap:8px 12px}
   .content .ocean .panel-head>div{min-width:0;flex:1 1 200px}
 }
 .advisory-dialog{overflow-x:hidden;overflow-y:auto}
 
 @media(max-width:700px){
-  .header{grid-template-columns:minmax(0,1fr)}
-  .ocean-brand{grid-column:1;grid-row:1;width:max-content;max-width:100%}
-  .title{grid-column:1;grid-row:2}
-  .header-actions{grid-column:1;grid-row:3;width:100%;min-width:0;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;padding-top:8px;border-top:1px solid var(--line)}
-  .header-actions .stamp{min-width:0;margin-right:auto;overflow-wrap:anywhere;text-align:left}
-  .header-actions .voice-button,.header-actions .notify-button,.header-actions .share-button,.header-actions .install-button{flex:none}
+  .header{display:flex;flex-direction:column;gap:6px}
+  .header-main-row{display:flex;align-items:center;justify-content:space-between;width:100%;flex-wrap:wrap;gap:6px 10px}
+  .ocean-brand{order:1;flex:none;text-align:left}
+  .header-top-right{order:2;margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+  .title{order:3;flex:1 0 100%;width:100%;text-align:center;align-items:center;margin:6px 0 0}
+  .title h1,.title p{width:100%;text-align:center}
+  .title h1{font-size:clamp(16px,4.5vw,22px);white-space:normal;line-height:1.2}
+  .header-btn-row{order:4;width:100%;min-width:0;margin-left:auto;display:flex;align-items:center;justify-content:flex-end;flex-wrap:nowrap;padding-top:8px;border-top:1px solid var(--line)}
+  .header-btn-row .voice-button,.header-btn-row .notify-button,.header-btn-row .share-button,.header-btn-row .install-button{flex:none}
   .voice-label,.notify-label{display:none!important}
   .voice-button,.notify-button{width:32px!important;min-width:32px!important;height:32px!important;min-height:32px!important;padding:0!important;justify-content:center!important}
   .title p,.stamp,.stamp time,.live{font-size:13px}

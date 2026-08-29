@@ -2769,7 +2769,7 @@ globalThis.i18n = {
     if (!select) return;
     select.innerHTML = APP_LANGUAGES.map(lang => `
       <option value="${lang.code}" ${lang.code === this.currentLang ? 'selected' : ''}>
-        ${lang.native} (${lang.name})
+        ${lang.native}
       </option>
     `).join('');
 

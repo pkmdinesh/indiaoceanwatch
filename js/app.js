@@ -83,15 +83,18 @@ const isCurrentIstProductDate = value => productDateKey(value) === istDateKey(ne
       if (alertCoral) addActive('Coral', alertCoral.severity, `${alertCoral.area}: DHW ${alertCoral.dhw}`);
       const rank = {warning:3,alert:2,watch:1};
       active.sort((a,b) => rank[b.level] - rank[a.level]);
-      container.replaceChildren(...active.map(item => {
-        const chip = document.createElement('span');
-        chip.className = `active-advisory-chip ${item.level}`;
-        chip.title = item.detail;
-        const dot = document.createElement('i'); dot.className = 'dot'; dot.setAttribute('aria-hidden','true');
-        const labelText = severityLabel[item.level];
-        const label = `${item.service} · ${labelText}${item.count === null ? '' : ` (${item.count})`}`;
-        chip.append(dot,label);
-        return chip;
+      container.replaceChildren(...active.flatMap((item, index) => {
+        const itemSpan = document.createElement('span');
+        itemSpan.className = `active-advisory-item ${item.level}`;
+        itemSpan.title = item.detail;
+        const dot = document.createElement('i'); dot.className = `dot ${item.level}`; dot.setAttribute('aria-hidden','true');
+        const sevKey = item.level === 'warning' ? 'severity.warning' : (item.level === 'alert' ? 'severity.alert' : 'severity.watch');
+        const labelText = globalThis.i18n?.t(sevKey, severityLabel[item.level]) || severityLabel[item.level] || item.level;
+        const label = ` ${item.service} · ${labelText}${item.count === null ? '' : ` (${item.count})`}`;
+        itemSpan.append(dot, label);
+        if (!index) return [itemSpan];
+        const separator = document.createElement('span'); separator.className = 'announcement-separator'; separator.textContent = '|';
+        return [separator, itemSpan];
       }));
       if (!active.length) {
         const none=document.createElement('span'); none.className='announcement-active-none'; none.textContent=globalThis.i18n?.t('announcement.none', 'None') || 'None'; container.replaceChildren(none);
