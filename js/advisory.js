@@ -14,7 +14,9 @@ var severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No 
     function openAdvisoryDetails(hazardName, issueDate, state) {
       currentAdvisoryShareData={hazardName,issueDate,state};
       const translatedState = state.displayName || globalThis.i18n?.translateStateName(state.name) || titleCase(state.name);
-      ids('advisoryDialogTitle').textContent = `${translatedState} \u2014 ${hazardName}`;
+      const hazardKey = String(hazardName).toLowerCase().includes('high wave') ? 'osf.high_wave' : (String(hazardName).toLowerCase().includes('swell') ? 'osf.swell_surge' : 'osf.ocean_currents');
+      const translatedHazard = globalThis.i18n?.t(hazardKey, hazardName) || hazardName;
+      ids('advisoryDialogTitle').textContent = `${translatedState} \u2014 ${translatedHazard}`;
       const issuedLbl = globalThis.i18n?.t('severity.issued', 'Issued') || 'Issued';
       ids('advisoryDialogMeta').textContent = `${countSummary(state.counts)}${issueDate ? ` \u00b7 ${issuedLbl} ${issueDate}` : ''}`;
       const advisories = state.advisories || [];
@@ -26,7 +28,7 @@ var severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No 
           const article = document.createElement('article');
           article.className = `district-advisory severity-${advisory.severity}`;
           const head = document.createElement('div'); head.className = 'district-advisory-head';
-          const districtName = globalThis.i18n?.translateSectorName(advisory.district) || titleCase(advisory.district || globalThis.i18n?.t('dialog.coastal_area', 'Coastal area'));
+          const districtName = globalThis.i18n?.translateDistrictName(advisory.district) || globalThis.i18n?.translateSectorName(advisory.district) || titleCase(advisory.district || globalThis.i18n?.t('dialog.coastal_area', 'Coastal area'));
           const district = document.createElement('h3'); district.textContent = districtName;
           const pill = document.createElement('span'); pill.className = `severity-pill ${advisory.severity}`; pill.textContent = severityLabel[advisory.severity] || advisory.severity;
           head.append(district,pill);

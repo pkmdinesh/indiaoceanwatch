@@ -181,7 +181,7 @@ function renderLockedLandingCenterBar() {
       </div>
     `).join('');
   } else {
-    messagesHtml = `<div class="pfz-no-msg">ℹ️ ${escapeHtml(globalThis.i18n?.t('pfz.no_line_issued', 'No active PFZ line issued today for'))} ${escapeHtml(titleCase(locked.name))}.</div>`;
+    messagesHtml = `<div class="pfz-no-msg">ℹ️ ${escapeHtml(globalThis.i18n?.t('pfz.no_line_issued', 'No active PFZ line issued today for'))} ${escapeHtml(globalThis.i18n?.translateLandingCenterName(locked.name) || titleCase(locked.name))}.</div>`;
   }
 
   banner.hidden = false;
@@ -191,7 +191,7 @@ function renderLockedLandingCenterBar() {
         <div class="locked-info">
           <span class="locked-icon">🔒</span>
           <div>
-            <strong>${escapeHtml(lockedTitleLbl)}: ${escapeHtml(titleCase(locked.name))}</strong>
+            <strong>${escapeHtml(lockedTitleLbl)}: ${escapeHtml(globalThis.i18n?.translateLandingCenterName(locked.name) || titleCase(locked.name))}</strong>
             <span>${escapeHtml(translatedLockedSec)} · ${escapeHtml(homeHarborLbl)}</span>
           </div>
         </div>
@@ -226,10 +226,11 @@ function renderPfzLandingCenters(sector) {
     const chip = document.createElement('button');
     const messageCount = center.messages?.length || 0;
     const isLocked = locked && locked.name.toLowerCase() === center.name.toLowerCase();
+    const translatedLc = globalThis.i18n?.translateLandingCenterName(center.name) || titleCase(center.name);
 
     chip.type = 'button';
     chip.className = 'tag landing-chip' + (isLocked ? ' is-locked-chip' : '');
-    chip.textContent = titleCase(center.name) + (messageCount > 1 ? '(' + messageCount + ')' : '') + (isLocked ? ' 🔒' : '');
+    chip.textContent = translatedLc + (messageCount > 1 ? '(' + messageCount + ')' : '') + (isLocked ? ' 🔒' : '');
     chip.setAttribute('aria-expanded','false');
     chip.addEventListener('click',() => {
       ids('pfzLandingCenters').querySelectorAll('.landing-chip').forEach(item => item.setAttribute('aria-expanded',String(item === chip)));
@@ -267,6 +268,7 @@ function renderPfzMessages(center, sectorName) {
   const lockedFlcLbl = globalThis.i18n?.t('pfz.locked_flc', '🔒 Locked (Home)') || '🔒 Locked (Home)';
   const lcKickerLbl = globalThis.i18n?.t('pfz.landing_center', 'LANDING CENTER') || 'LANDING CENTER';
   const translatedSec = globalThis.i18n?.translateSectorName(sectorName) || titleCase(sectorName || '');
+  const translatedCenter = globalThis.i18n?.translateLandingCenterName(center.name) || titleCase(center.name);
 
   let messagesHtml = '';
   if (messages.length > 0) {
@@ -295,7 +297,7 @@ function renderPfzMessages(center, sectorName) {
       </div>
     `).join('');
   } else {
-    messagesHtml = `<div class="pfz-no-msg">${escapeHtml(globalThis.i18n?.t('pfz.no_line_issued', 'No active PFZ line issued for'))} ${escapeHtml(titleCase(center.name))}.</div>`;
+    messagesHtml = `<div class="pfz-no-msg">${escapeHtml(globalThis.i18n?.t('pfz.no_line_issued', 'No active PFZ line issued for'))} ${escapeHtml(translatedCenter)}.</div>`;
   }
 
   headerRow.innerHTML = `
