@@ -64,8 +64,8 @@
     <div class="content">
       <section class="panel announcement-card" id="announcementCard" aria-label="Active advisories and latest updates" aria-live="polite">
         <span class="announcement-label"><span class="announcement-symbol" aria-hidden="true">&#9989;</span><span data-i18n="announcement.title">Active</span></span>
-        <div class="announcement-message" id="announcementMessage"><span class="announcement-active-none" data-i18n="announcement.checking">Checking advisories…</span></div>
-        <div class="announcement-latest"><span class="announcement-latest-symbol" aria-hidden="true">&#8986;</span><strong data-i18n="announcement.latest">LATEST:</strong><div class="announcement-latest-message" id="announcementLatest"><span class="announcement-latest-link" data-i18n="announcement.checking">Checking latest feeds…</span></div></div>
+        <div class="announcement-message" id="announcementMessage"><span class="announcement-active-none">Checking advisories…</span></div>
+        <div class="announcement-latest"><span class="announcement-latest-symbol" aria-hidden="true">&#8986;</span><strong data-i18n="announcement.latest">LATEST:</strong><div class="announcement-latest-message" id="announcementLatest"><span class="announcement-latest-link">Checking latest feeds…</span></div></div>
       </section>
       <section class="panel ocean" aria-labelledby="ocean-title">
         <div class="panel-head">
@@ -127,12 +127,12 @@
           <div><h2 id="tsunami-title" data-i18n="tsunami.title">Tsunami Advisory</h2><p class="panel-kicker" data-i18n="tsunami.kicker">Indian Tsunami Early Warning Centre</p></div>
           <a class="source card-action-button itews-source" href="https://tsunami.incois.gov.in/TEWS/" target="_blank" rel="noopener">ITEWC ↗</a>
         </div>
-        <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage" data-i18n="tsunami.checking">Checking ITEWC Tsunami threat status.....</strong></div><span id="tsunamiCaption">Last Checked —</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
+        <div class="tsunami-status advisory-safe" id="tsunamiStatus"><span class="safe-mark" id="tsunamiMark" aria-hidden="true">✓</span><div class="tsunami-copy"><div class="tsunami-message-window"><strong class="tsunami-message" id="tsunamiMessage">Checking ITEWC Tsunami threat status.....</strong></div><span id="tsunamiCaption">Last Checked —</span><a class="bulletin-link" id="tsunamiBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel seismic-card" aria-labelledby="seismic-title">
         <div class="panel-head"><img class="service-logo" src="assets/earthquake-network-icon.png" alt="Earthquake Network icon" width="48" height="42" loading="lazy"><div><h2 id="seismic-title" data-i18n="seismic.title">Latest seismic activity ≥ 6.5M</h2></div><a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/National.jsp" target="_blank" rel="noopener">Earthquake ↗</a></div>
-        <div class="seismic-message-wrap" id="seismicMessageWrap"><div class="seismic-message-copy"><button class="seismic-event-link" id="seismicMessage" type="button" disabled data-i18n="seismic.checking">Checking Latest Seismic Activity magnitude &gt;= 6.5M</button><div class="seismic-additional" id="seismicAdditional"></div></div></div>
+        <div class="seismic-message-wrap" id="seismicMessageWrap"><div class="seismic-message-copy"><button class="seismic-event-link" id="seismicMessage" type="button" disabled>Checking Latest Seismic Activity magnitude &gt;= 6.5M</button><div class="seismic-additional" id="seismicAdditional"></div></div></div>
       </section>
 
       <section class="panel storm-card" aria-labelledby="surge-title">
@@ -141,7 +141,7 @@
           <div><h2 id="surge-title" data-i18n="storm.title">Storm Surge Advisory</h2><p class="panel-kicker" data-i18n="osf.storm_surge_kicker">Coastal inundation</p></div>
           <a class="source card-action-button" href="https://tsunami.incois.gov.in/TEWS/stormSurgeIndex.jsp" target="_blank" rel="noopener">Bulletin ↗</a>
         </div>
-        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage" data-i18n="storm.checking">Checking active storm surge status.....</strong></div><span id="stormCaption" data-i18n="storm.caption">Official ITEWC bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
+        <div class="storm-status advisory-safe" id="stormStatus"><span class="storm-mark" id="stormMark" aria-hidden="true">✓</span><div class="storm-copy"><div class="storm-message-window"><strong id="stormMessage">Checking active storm surge status.....</strong></div><span id="stormCaption">Official ITEWC bulletin feed when checked</span><a class="bulletin-link" id="stormBulletin" target="_blank" rel="noopener"></a></div></div>
       </section>
 
       <section class="panel cyclone-card" aria-labelledby="cyclone-title">
@@ -156,9 +156,9 @@
         </div>
         <div class="joint-bulletin-source-row"><a class="source card-action-button joint-bulletin-source" id="jointBulletinLink" href="https://www.incois.gov.in/site/services/jointbulletin.jsp" target="_blank" rel="noopener" data-i18n="joint_bulletin.title">Joint Bulletin ↗</a></div>
         <article class="joint-bulletin-card" id="jointBulletinCard" aria-live="polite">
-          <span class="joint-bulletin-info-mark" aria-hidden="true">i</span><div class="joint-bulletin-copy"><a class="joint-bulletin-message" id="jointBulletinMessage" target="_blank" rel="noopener" data-i18n="joint_bulletin.none">No INCOIS-IMD joint bulletin is currently available.</a><time class="joint-bulletin-time" id="jointBulletinTime" hidden></time></div>
+          <span class="joint-bulletin-info-mark" aria-hidden="true">i</span><div class="joint-bulletin-copy"><a class="joint-bulletin-message" id="jointBulletinMessage" target="_blank" rel="noopener">No INCOIS-IMD joint bulletin is currently available.</a><time class="joint-bulletin-time" id="jointBulletinTime" hidden></time></div>
         </article>
-        <div class="cyclone-status level-safe" id="cycloneStatus"><div class="cyclone-status-copy"><strong id="cycloneMessageTitle" data-i18n="cyclone.safe">No active cyclone advisory</strong><p id="cycloneMessage" data-i18n="cyclone.checked">When checked IMD CAP Alerts feed.</p><time id="cycloneIssued"></time></div><a class="source card-action-button cyclone-imd-source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
+        <div class="cyclone-status level-safe" id="cycloneStatus"><div class="cyclone-status-copy"><strong id="cycloneMessageTitle">No active cyclone advisory</strong><p id="cycloneMessage">When checked IMD CAP Alerts feed.</p><time id="cycloneIssued"></time></div><a class="source card-action-button cyclone-imd-source" href="https://mausam.imd.gov.in/imd_latest/contents/cyclone.php#" target="_blank" rel="noopener">IMD ↗</a></div>
       </section>
 
       <section class="panel pfz-card" aria-labelledby="pfz-title">
