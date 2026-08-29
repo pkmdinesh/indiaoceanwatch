@@ -1013,6 +1013,113 @@ function getMoonPhase(date = new Date()) {
   return { phase, icon, illumination, isSpringTide, tideRegime, tideBadgeClass, age: age.toFixed(1) };
 }
 
+// Wind Direction Angle to Cardinal Name (16-point compass)
+function degreesToCardinal(deg) {
+  if (!Number.isFinite(deg)) return '—';
+  const cardinals = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  const idx = Math.round(((deg % 360) + 360) % 360 / 22.5) % 16;
+  return cardinals[idx];
+}
+
+// In-memory cache for live coordinate wind forecasts (30-minute validity)
+var portLiveWindCache = {};
+
+async function fetchLivePortWind(port) {
+  if (!port || !Number.isFinite(port.lat) || !Number.isFinite(port.lng)) return;
+  const cached = portLiveWindCache[port.id];
+  const now = Date.now();
+  if (cached && (now - cached.timestamp < 30 * 60 * 1000)) return cached;
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${port.lat}&longitude=${port.lng}&current=wind_speed_10m,wind_direction_10m,wind_gusts_10m&wind_speed_unit=kmh&timezone=Asia%2FKolkata`;
+    const res = await fetch(url, { cache: 'default', signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!res.ok) throw new Error(`Wind HTTP ${res.status}`);
+    const data = await res.json();
+    const cur = data?.current;
+    if (cur && Number.isFinite(cur.wind_speed_10m)) {
+      const windKmh = Math.round(cur.wind_speed_10m);
+      const windKnots = (windKmh * 0.539957).toFixed(1);
+      const windDir = degreesToCardinal(cur.wind_direction_10m);
+      const gustsKmh = Number.isFinite(cur.wind_gusts_10m) ? Math.round(cur.wind_gusts_10m) : null;
+      const entry = { windKmh, windKnots, windDir, gustsKmh, isLive: true, timestamp: now };
+      portLiveWindCache[port.id] = entry;
+
+      // If this port is still selected in the UI, re-render its wind & sea display
+      if (selectedPortId === port.id) {
+        updatePortWindDisplay(port, entry);
+      }
+      return entry;
+    }
+  } catch (err) {
+    console.warn(`[PortTides] Live wind forecast unavailable for ${port.name}:`, err?.message);
+  }
+  return null;
+}
+
+function updatePortWindDisplay(port, liveData = null) {
+  const windElem = ids('portWindDisplay');
+  if (!windElem) return;
+
+  const warning = checkPortActiveWarnings(port);
+  const windKmh = liveData?.isLive ? liveData.windKmh : port.baseWind;
+  const windKnots = liveData?.isLive ? liveData.windKnots : (windKmh * 0.539957).toFixed(1);
+  const windDir = liveData?.isLive ? liveData.windDir : port.windDir;
+  const isLive = Boolean(liveData?.isLive);
+
+  // Dynamic Sea State based on active INCOIS OSF warnings + live wind
+  let seaState = windKmh < 12 ? 'Calm' : windKmh < 20 ? 'Slight' : (windKmh < 35 ? 'Moderate' : (windKmh < 50 ? 'Rough' : 'Very Rough'));
+  let liveParam = '';
+  if (warning && !warning.safe) {
+    if (warning.level === 'warning') seaState = 'Rough to Very Rough';
+    else if (warning.level === 'alert') seaState = 'Moderate to Rough';
+    else if (warning.level === 'watch') seaState = 'Moderate';
+
+    if (warning.match?.message) {
+      const heightMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || warning.match.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
+      const periodMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
+      const currentMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
+      if (heightMatch) liveParam = ` · ${heightMatch[1].trim()}m waves`;
+      else if (periodMatch) liveParam = ` · ${periodMatch[1].trim()}s swell`;
+      else if (currentMatch) liveParam = ` · ${currentMatch[1].trim()} m/s`;
+    }
+  }
+
+  const windSeaLbl = globalThis.i18n?.t('tide.wind_sea', 'Wind & Sea') || 'Wind & Sea';
+  const tideStateLbl = globalThis.i18n?.t('tide.tide_state', 'Tide State') || 'Tide State';
+  const moonTideTypeLbl = globalThis.i18n?.t('tide.moon_tide_type', 'Moon & Tide Type') || 'Moon & Tide Type';
+  const risingLbl = globalThis.i18n?.t('tide.rising', '▲ Rising (Flood)') || '▲ Rising (Flood)';
+  const fallingLbl = globalThis.i18n?.t('tide.falling', '▼ Falling (Ebb)') || '▼ Falling (Ebb)';
+  const springTideLbl = globalThis.i18n?.t('tide.spring_tide', 'Spring Tide') || 'Spring Tide';
+  const neapTideLbl = globalThis.i18n?.t('tide.neap_tide', 'Neap Tide') || 'Neap Tide';
+  const translatedWindDir = globalThis.i18n?.translateDirection(windDir) || windDir;
+
+  const now = new Date();
+  const currentHeight = calculateTideElevation(port, now);
+  const futureHeight = calculateTideElevation(port, new Date(now.getTime() + 15 * 60 * 1000));
+  const isRising = futureHeight >= currentHeight;
+  const moon = getMoonPhase(now);
+  const regimeLabel = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
+  const liveIndicator = isLive ? '📡 ' : '';
+
+  windElem.innerHTML = `
+    <div class="wind-stat-item">
+      <span class="wind-stat-label">${windSeaLbl}</span>
+      <strong>${liveIndicator}${translatedWindDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState}${liveParam})</span></strong>
+    </div>
+    <div class="wind-stat-item">
+      <span class="wind-stat-label">${tideStateLbl}</span>
+      <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? risingLbl : fallingLbl}</strong>
+    </div>
+    <div class="wind-stat-item moon-stat-item">
+      <span class="wind-stat-label">${moonTideTypeLbl}</span>
+      <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime}) · Tidal Regime: ${regimeLabel} (~${port.range}m)"><span>${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? springTideLbl : neapTideLbl} · ${regimeLabel}</small></strong>
+    </div>
+  `;
+}
+
 // Main Render Function for Predicted Astronomical Tide Card
 function renderPortTideCard() {
   const port = NATIONAL_TIDE_STATIONS.find(p => p.id === selectedPortId) || NATIONAL_TIDE_STATIONS[0];
@@ -1028,10 +1135,6 @@ function renderPortTideCard() {
     }
     return;
   }
-  const currentHeight = calculateTideElevation(port, now);
-  const futureHeight = calculateTideElevation(port, new Date(now.getTime() + 15 * 60 * 1000));
-  const isRising = futureHeight >= currentHeight;
-  const moon = getMoonPhase(now);
 
   // 2. Check Warnings
   const warning = checkPortActiveWarnings(port);
@@ -1041,55 +1144,11 @@ function renderPortTideCard() {
     warningBanner.textContent = warning.text;
   }
 
-  // 3. Render Wind, Sea State & Moon Phase
-  const windElem = ids('portWindDisplay');
-  if (windElem) {
-    const windKmh = port.baseWind;
-    const windKnots = (windKmh * 0.539957).toFixed(1);
-    
-    // Dynamic Sea State based on active INCOIS OSF warnings + baseline
-    let seaState = windKmh < 12 ? 'Calm' : windKmh < 20 ? 'Slight' : 'Moderate';
-    let liveParam = '';
-    if (warning && !warning.safe) {
-      if (warning.level === 'warning') seaState = 'Rough to Very Rough';
-      else if (warning.level === 'alert') seaState = 'Moderate to Rough';
-      else if (warning.level === 'watch') seaState = 'Moderate';
-
-      if (warning.match?.message) {
-        const heightMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || warning.match.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
-        const periodMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
-        const currentMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
-        if (heightMatch) liveParam = ` · ${heightMatch[1].trim()}m waves`;
-        else if (periodMatch) liveParam = ` · ${periodMatch[1].trim()}s swell`;
-        else if (currentMatch) liveParam = ` · ${currentMatch[1].trim()} m/s`;
-      }
-    }
-
-    const windSeaLbl = globalThis.i18n?.t('tide.wind_sea', 'Wind & Sea') || 'Wind & Sea';
-    const tideStateLbl = globalThis.i18n?.t('tide.tide_state', 'Tide State') || 'Tide State';
-    const moonTideTypeLbl = globalThis.i18n?.t('tide.moon_tide_type', 'Moon & Tide Type') || 'Moon & Tide Type';
-    const risingLbl = globalThis.i18n?.t('tide.rising', '▲ Rising (Flood)') || '▲ Rising (Flood)';
-    const fallingLbl = globalThis.i18n?.t('tide.falling', '▼ Falling (Ebb)') || '▼ Falling (Ebb)';
-    const springTideLbl = globalThis.i18n?.t('tide.spring_tide', 'Spring Tide') || 'Spring Tide';
-    const neapTideLbl = globalThis.i18n?.t('tide.neap_tide', 'Neap Tide') || 'Neap Tide';
-    const translatedWindDir = globalThis.i18n?.translateDirection(port.windDir) || port.windDir;
-
-    const regimeLabel = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
-
-    windElem.innerHTML = `
-      <div class="wind-stat-item">
-        <span class="wind-stat-label">${windSeaLbl}</span>
-        <strong>${translatedWindDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState}${liveParam})</span></strong>
-      </div>
-      <div class="wind-stat-item">
-        <span class="wind-stat-label">${tideStateLbl}</span>
-        <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? risingLbl : fallingLbl}</strong>
-      </div>
-      <div class="wind-stat-item moon-stat-item">
-        <span class="wind-stat-label">${moonTideTypeLbl}</span>
-        <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime}) · Tidal Regime: ${regimeLabel} (~${port.range}m)"><span>${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? springTideLbl : neapTideLbl} · ${regimeLabel}</small></strong>
-      </div>
-    `;
+  // 3. Render Wind, Sea State & Moon Phase (using cached live coordinate forecast or triggering fetch)
+  const cachedWind = portLiveWindCache[port.id];
+  updatePortWindDisplay(port, cachedWind);
+  if (!cachedWind || (Date.now() - cachedWind.timestamp > 30 * 60 * 1000)) {
+    void fetchLivePortWind(port);
   }
 
   // 4. Render High / Low Tide Times Table (Horizontal Row Layout with IST Time Format)
