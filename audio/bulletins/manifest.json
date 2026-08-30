@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30T01:01:28.850Z",
+  "updated": "2026-08-30T01:16:35.982Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -21,13 +21,13 @@
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 310848,
+      "size": 310656,
       "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN"
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 340992,
+      "size": 340800,
       "title": "INCOIS സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN"
     },
@@ -45,7 +45,7 @@
     },
     "gu": {
       "file": "audio/bulletins/bulletin-gu.mp3",
-      "size": 370752,
+      "size": 370944,
       "title": "INCOIS મહાસાગર સ્થિતિ પૂર્વાનુમાન (ગુજરાતી)",
       "langCode": "gu-IN"
     },
