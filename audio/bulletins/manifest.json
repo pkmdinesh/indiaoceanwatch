@@ -1,9 +1,9 @@
 {
-  "updated": "2026-08-30T00:33:11.261Z",
+  "updated": "2026-08-30T00:47:04.905Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 549696,
+      "size": 549888,
       "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN"
     },
@@ -27,7 +27,7 @@
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 340992,
+      "size": 340800,
       "title": "INCOIS സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN"
     },
