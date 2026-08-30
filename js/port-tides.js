@@ -871,25 +871,16 @@ function checkPortActiveWarnings(port) {
         matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch`, message: districtAdv.message, district: districtAdv.district });
       }
       // If severity is 'noThreat', this district is explicitly verified and confirmed safe
-    } else {
-      // Station's district was not explicitly itemized in the advisory list.
-      // Check if the state has active hazards (regional advisory fallback).
+    } else if (advisories.length === 0) {
+      // ONLY fallback to state-level counts if INCOIS published NO district breakdown at all
       const warnCount = Number(st.counts?.warning || 0);
       const alertCount = Number(st.counts?.alert || 0);
       const watchCount = Number(st.counts?.watch || 0);
-      const totalStateAlerts = warnCount + alertCount + watchCount;
-
-      if (totalStateAlerts > 0) {
-        const stLevel = warnCount > 0 ? 'warning' : (alertCount > 0 ? 'alert' : 'watch');
-        matches.push({
-          hazard: hazardName,
-          level: stLevel,
-          isStateLevelFallback: true,
-          label: `${hazardName} ${stLevel.toUpperCase()}`,
-          message: `${hazardName} ${stLevel} active along ${st.name} coast (Regional coastal advisory)`
-        });
-      }
+      if (warnCount > 0) matches.push({ hazard: hazardName, level: 'warning', label: `${hazardName} Warning` });
+      else if (alertCount > 0) matches.push({ hazard: hazardName, level: 'alert', label: `${hazardName} Alert` });
+      else if (watchCount > 0) matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch` });
     }
+    // If advisories.length > 0 and districtAdv is not found, this specific district has NO THREAT for this hazard!
   };
 
   // 1. High Wave check (district level)
@@ -933,22 +924,23 @@ function checkPortActiveWarnings(port) {
 
   const activeForLbl = globalThis.i18n?.t('tide.active_for', 'active for') || 'active for';
   const coastLbl = globalThis.i18n?.t('tide.coast', 'Coast') || 'Coast';
-  const sevKey = worst.level === 'warning' ? 'severity.warning' : (worst.level === 'alert' ? 'severity.alert' : 'severity.watch');
-  const localizedSev = globalThis.i18n?.t(sevKey, worst.level.toUpperCase()) || worst.level.toUpperCase();
-  const localizedHazard = worst.hazard ? (globalThis.i18n?.t(`osf.${worst.hazard.toLowerCase().replace(/\\s+/g,'_')}`, worst.hazard) || worst.hazard) : '';
-  const displayLabel = `${localizedHazard} ${localizedSev}`.trim();
 
-  let bannerText = `⚠️ ${displayLabel} ${activeForLbl} ${port.name} (${translatedPortDistrict}, ${translatedPortState} ${coastLbl})`;
-  if (worst.isStateLevelFallback) {
-    const regAdvLbl = globalThis.i18n?.t('tide.regional_advisory', 'Regional Advisory for') || 'Regional Advisory for';
-    bannerText = `⚠️ ${displayLabel} ${activeForLbl} ${translatedPortState} ${coastLbl} (${regAdvLbl} ${port.name})`;
-  }
+  // Build multi-hazard summary list (e.g. High Wave WARNING · Swell Surge ALERT · Ocean Currents WATCH)
+  const hazardSummaries = matches.map(m => {
+    const sKey = m.level === 'warning' ? 'severity.warning' : (m.level === 'alert' ? 'severity.alert' : 'severity.watch');
+    const localizedSev = globalThis.i18n?.t(sKey, m.level.toUpperCase()) || m.level.toUpperCase();
+    const localizedHazard = m.hazard ? (globalThis.i18n?.t(`osf.${m.hazard.toLowerCase().replace(/\s+/g,'_')}`, m.hazard) || m.hazard) : '';
+    return `${localizedHazard} ${localizedSev}`.trim();
+  });
+
+  const displayLabel = hazardSummaries.join(' · ');
 
   return {
     safe: false,
     level: worst.level,
+    matches: matches,
     match: worst,
-    text: bannerText
+    text: `⚠️ ${displayLabel} ${activeForLbl} ${port.name} (${translatedPortDistrict}, ${translatedPortState} ${coastLbl})`
   };
 }
 
@@ -1111,13 +1103,19 @@ function updatePortWindDisplay(port, liveData = null) {
     else if (warning.level === 'alert') seaState = 'Moderate to Rough';
     else if (warning.level === 'watch') seaState = 'Moderate';
 
-    if (warning.match?.message) {
-      const heightMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || warning.match.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
-      const periodMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
-      const currentMatch = warning.match.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
-      if (heightMatch) liveParam = ` · ${heightMatch[1].trim()}m waves`;
-      else if (periodMatch) liveParam = ` · ${periodMatch[1].trim()}s swell`;
-      else if (currentMatch) liveParam = ` · ${currentMatch[1].trim()} m/s`;
+    const allMatches = warning.matches || (warning.match ? [warning.match] : []);
+    const params = [];
+    allMatches.forEach(m => {
+      if (!m?.message) return;
+      const heightMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || m.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
+      const periodMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
+      const currentMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
+      if (heightMatch && !params.some(p => p.includes('m waves'))) params.push(`${heightMatch[1].trim()}m waves`);
+      if (periodMatch && !params.some(p => p.includes('s swell'))) params.push(`${periodMatch[1].trim()}s swell`);
+      if (currentMatch && !params.some(p => p.includes('m/s'))) params.push(`${currentMatch[1].trim()} m/s`);
+    });
+    if (params.length) {
+      liveParam = ' · ' + params.join(' · ');
     }
   }
 
