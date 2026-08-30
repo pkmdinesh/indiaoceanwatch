@@ -873,7 +873,7 @@ function portDistrictMatches(portDist, advDist) {
 
 // Check active warnings for station's specific district/state in latestStatusData
 function checkPortActiveWarnings(port) {
-  if (!globalThis.latestStatusData) return { safe: false, level: 'watch', text: 'Unable to Fetch.....Check the INCOIS PAT link.....' };
+  if (!globalThis.latestStatusData) return { safe: false, level: 'watch', text: 'Unable to Fetch.....Check the INCOIS OSF link.....' };
 
   const data = globalThis.latestStatusData;
   const matches = [];
@@ -1129,29 +1129,55 @@ function updatePortWindDisplay(port, liveData = null) {
 
   // Dynamic Sea State based on active INCOIS OSF warnings + live wind
   let seaState = windKmh < 12 ? 'Calm' : windKmh < 20 ? 'Slight' : (windKmh < 35 ? 'Moderate' : (windKmh < 50 ? 'Rough' : 'Very Rough'));
-  let liveParam = '';
   if (warning && !warning.safe) {
     if (warning.level === 'warning') seaState = 'Rough to Very Rough';
     else if (warning.level === 'alert') seaState = 'Moderate to Rough';
     else if (warning.level === 'watch') seaState = 'Moderate';
-
-    const allMatches = warning.matches || (warning.match ? [warning.match] : []);
-    const params = [];
-    allMatches.forEach(m => {
-      if (!m?.message) return;
-      const heightMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || m.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
-      const periodMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
-      const currentMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
-      if (heightMatch && !params.some(p => p.includes('m waves'))) params.push(`${heightMatch[1].trim()}m waves`);
-      if (periodMatch && !params.some(p => p.includes('s swell'))) params.push(`${periodMatch[1].trim()}s swell`);
-      if (currentMatch && !params.some(p => p.includes('m/s'))) params.push(`${currentMatch[1].trim()} m/s`);
-    });
-    if (params.length) {
-      liveParam = ' · ' + params.join(' · ');
-    }
   }
 
-  const windSeaLbl = globalThis.i18n?.t('tide.wind_sea', 'Wind & Sea') || 'Wind & Sea';
+  // Extract Wave, Swell, and Current parameters from active advisories
+  let waveVal = null;
+  let swellVal = null;
+  let currentVal = null;
+  let waveIsHazard = false;
+  let swellIsHazard = false;
+  let currentIsHazard = false;
+
+  const allMatches = warning.matches || (warning.match ? [warning.match] : []);
+  allMatches.forEach(m => {
+    if (!m?.message) return;
+    const heightMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || m.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
+    const periodMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
+    const currentMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
+
+    if (m.hazard === 'High Wave' && heightMatch) {
+      waveVal = `${heightMatch[1].trim()}m`;
+      waveIsHazard = true;
+    }
+    if (m.hazard === 'Swell Surge') {
+      if (periodMatch) swellVal = `${periodMatch[1].trim()}s`;
+      if (heightMatch && !waveVal) waveVal = `${heightMatch[1].trim()}m`;
+      swellIsHazard = true;
+    }
+    if (m.hazard === 'Ocean Currents' && currentMatch) {
+      currentVal = `${currentMatch[1].trim()} m/s`;
+      currentIsHazard = true;
+    }
+  });
+
+  const defaultWave = windKmh < 12 ? '0.2 - 0.5m' : windKmh < 20 ? '0.5 - 1.2m' : (windKmh < 35 ? '1.2 - 2.0m' : '2.5 - 3.5m');
+  const defaultSwell = '8.0 - 11.0s';
+  const defaultCurrent = port.range >= 4.0 ? '0.8 - 1.4 m/s' : (port.range >= 2.0 ? '0.4 - 0.7 m/s' : '0.2 - 0.4 m/s');
+
+  const waveDisplay = waveVal || defaultWave;
+  const swellDisplay = swellVal || defaultSwell;
+  const currentDisplay = currentVal || defaultCurrent;
+
+  const windLbl = globalThis.i18n?.t('tide.wind', 'Wind') || 'Wind';
+  const waveLbl = globalThis.i18n?.t('tide.wave', 'Wave') || 'Wave';
+  const swellLbl = globalThis.i18n?.t('tide.swell', 'Swell') || 'Swell';
+  const currentLbl = globalThis.i18n?.t('tide.current', 'Current') || 'Current';
+
   const tideStateLbl = globalThis.i18n?.t('tide.tide_state', 'Tide State') || 'Tide State';
   const moonTideTypeLbl = globalThis.i18n?.t('tide.moon_tide_type', 'Moon & Tide Type') || 'Moon & Tide Type';
   const risingLbl = globalThis.i18n?.t('tide.rising', '▲ Rising (Flood)') || '▲ Rising (Flood)';
@@ -1166,20 +1192,43 @@ function updatePortWindDisplay(port, liveData = null) {
   const isRising = futureHeight >= currentHeight;
   const moon = getMoonPhase(now);
   const regimeLabel = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
-  const liveIndicator = isLive ? '📡 ' : '';
 
   windElem.innerHTML = `
-    <div class="wind-stat-item wind-primary-stat">
-      <span class="wind-stat-label">${windSeaLbl}</span>
-      <strong>${liveIndicator}${translatedWindDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState}${liveParam})</span></strong>
-    </div>
-    <div class="wind-stat-item">
-      <span class="wind-stat-label">${tideStateLbl}</span>
-      <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? risingLbl : fallingLbl}</strong>
-    </div>
-    <div class="wind-stat-item moon-stat-item">
-      <span class="wind-stat-label">${moonTideTypeLbl}</span>
-      <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime}) · Tidal Regime: ${regimeLabel} (~${port.range}m)"><span class="moon-phase-name">${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? springTideLbl : neapTideLbl} · ${regimeLabel}</small></strong>
+    <div class="port-telemetry-container">
+      <div class="port-marine-grid">
+        <div class="marine-stat-item">
+          <span class="stat-prefix"><span class="stat-icon">💨</span> <span class="stat-name">${windLbl}</span> :</span>
+          <strong class="stat-value">${translatedWindDir} ${windKmh} km/h <span class="stat-sub">(${windKnots} kn)</span></strong>
+        </div>
+        <div class="marine-stat-item">
+          <span class="stat-prefix"><span class="stat-icon">🌊</span> <span class="stat-name">${waveLbl}</span> :</span>
+          <strong class="stat-value ${waveIsHazard ? 'has-hazard' : ''}">${waveDisplay}</strong>
+        </div>
+        <div class="marine-stat-item">
+          <span class="stat-prefix"><span class="stat-icon">🌊⏱️</span> <span class="stat-name">${swellLbl}</span> :</span>
+          <strong class="stat-value ${swellIsHazard ? 'has-hazard' : ''}">${swellDisplay}</strong>
+        </div>
+        <div class="marine-stat-item">
+          <span class="stat-prefix"><span class="stat-icon">➜</span> <span class="stat-name">${currentLbl}</span> :</span>
+          <strong class="stat-value ${currentIsHazard ? 'has-hazard' : ''}">${currentDisplay}</strong>
+        </div>
+      </div>
+
+      <div class="port-telemetry-divider"></div>
+
+      <div class="port-tide-meta-grid">
+        <div class="tide-meta-item">
+          <span class="stat-prefix"><span class="stat-name">${tideStateLbl}</span> :</span>
+          <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? risingLbl : fallingLbl}</strong>
+        </div>
+        <div class="tide-meta-item moon-tide-row">
+          <span class="stat-prefix"><span class="stat-name">${moonTideTypeLbl}</span> :</span>
+          <div class="moon-tide-value-wrap">
+            <span class="moon-phase-name">${moon.icon} ${moon.phase}</span>
+            <span class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? springTideLbl : neapTideLbl} · ${regimeLabel}</span>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }

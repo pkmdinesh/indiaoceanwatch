@@ -370,22 +370,26 @@ function handleOsfLayerSelection(event) {
     if (banner) {
       banner.hidden = (event.type === 'overlayremove');
     }
+    if (osfMap) osfMap.invalidateSize({ animate: false });
     return;
   }
   if (event.name.startsWith('Sea Surface Temp')) {
     const leg = ids('osfSstLegend');
     if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    if (osfMap) osfMap.invalidateSize({ animate: false });
     return;
   }
   if (event.name.startsWith('Cyclone Heat')) {
     const leg = ids('osfTchpLegend');
     if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    if (osfMap) osfMap.invalidateSize({ animate: false });
     return;
   }
   if (!osfServiceLayers[event.name]) return;
   if (event.type === 'overlayadd') osfSelectedServices.add(event.name);
   else if (event.type === 'overlayremove') osfSelectedServices.delete(event.name);
   updateOsfComposite();
+  if (osfMap) osfMap.invalidateSize({ animate: false });
   requestAnimationFrame(fitOsfVisibleBounds);
 }
 
