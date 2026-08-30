@@ -1,18 +1,18 @@
 ﻿{
-    "updatedAt":  "2026-08-30T23:15:16.1959219+00:00",
-    "lastAttemptAt":  "2026-08-30T23:15:16.1959219+00:00",
+    "updatedAt":  "2026-08-30T23:30:17.8412245+00:00",
+    "lastAttemptAt":  "2026-08-30T23:30:17.8412245+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
-                           "message":  "Marine Heatwave event of Moderate category with area of spreading 23.44% has been observed on 2026-08-28 over the Arabian Sea; Marine Heatwave event of Moderate category with area of spreading 32.39% has been observed on 2026-08-28 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 26.61% has been observed on 2026-08-28 over the Rest of Indian Ocean; Marine Heatwave event of Extreme category with area of spreading 15.74% has been observed on 2026-08-28 over the Red Sea; Marine Heatwave event of Moderate category with area of spreading 41.38% has been observed on 2026-08-28 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 49.11% has been observed on 2026-08-28 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 93.30% has been observed on 2026-08-28 over the Lakshadweep coast; Marine Heatwave event of Moderate category with area of spreading 24.74% has been observed on 2026-08-28 over the Odisha coast; Marine Heatwave event of Moderate category with area of spreading 32.39% has been observed on 2026-08-28 over the West Bengal coast; Marine Heatwave event of Moderate category with area of spreading 45.75% has been observed on 2026-08-28 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 92.12% has been observed on 2026-08-28 over the Nicobar coast;",
-                           "fetchedAt":  "2026-08-29T23:30:17.2228222+00:00",
+                           "message":  "Marine Heatwave event of Moderate category with area of spreading 25.65% has been observed on 2026-08-29 over the Arabian Sea; Marine Heatwave event of Moderate category with area of spreading 22.79% has been observed on 2026-08-29 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 26.69% has been observed on 2026-08-29 over the Rest of Indian Ocean; Marine Heatwave event of Extreme category with area of spreading 19.14% has been observed on 2026-08-29 over the Red Sea; Marine Heatwave event of No Heat Wave category with area of spreading 16.74% has been observed on 2026-08-29 over the Persian Gulf; Marine Heatwave event of Moderate category with area of spreading 75.86% has been observed on 2026-08-29 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 63.39% has been observed on 2026-08-29 over the Karnataka coast; Marine Heatwave event of No Heat Wave category with area of spreading 15.14% has been observed on 2026-08-29 over the Kerala coast; Marine Heatwave event of Moderate category with area of spreading 92.82% has been observed on 2026-08-29 over the Lakshadweep coast; Marine Heatwave event of Moderate category with area of spreading 27.84% has been observed on 2026-08-29 over the Odisha coast; Marine Heatwave event of Moderate category with area of spreading 22.79% has been observed on 2026-08-29 over the West Bengal coast; Marine Heatwave event of No Heat Wave category with area of spreading 17.00% has been observed on 2026-08-29 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 63.03% has been observed on 2026-08-29 over the Nicobar coast;",
+                           "fetchedAt":  "2026-08-30T23:30:17.8412245+00:00",
                            "ok":  true,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
     "coralBleaching":  {
                            "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-08-30T23:15:16.1959219+00:00",
+                           "fetchedAt":  "2026-08-30T23:30:17.8412245+00:00",
                            "regions":  [
                                            {
                                                "area":  "Andaman",
@@ -1738,7 +1738,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-30T23:15:27.3956076+00:00",
+                          "fetchedAt":  "2026-08-30T23:30:25.3709277+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6011,7 +6011,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  11.78,
-                      "pfzAgeHours":  11.78
+                      "osfAgeHours":  12.03,
+                      "pfzAgeHours":  12.03
                   }
 }
