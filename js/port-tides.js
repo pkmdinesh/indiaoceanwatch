@@ -124,7 +124,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 11.6939,
     "lng": 72.717,
     "state": "Lakshadweep",
-    "district": "Chetlat Island",
+    "district": "Amini / Chetlat Island",
     "range": 1.4,
     "m2Amp": 0.48,
     "s2Amp": 0.17,
@@ -202,7 +202,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 22.55,
     "lng": 88.3,
     "state": "West Bengal",
-    "district": "Kolkata",
+    "district": "South 24 Parganas / Kolkata",
     "range": 4.8,
     "m2Amp": 1.7,
     "s2Amp": 0.6,
@@ -280,7 +280,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 16.9333,
     "lng": 82.25,
     "state": "Andhra Pradesh",
-    "district": "Kakinada",
+    "district": "East Godavari / Kakinada",
     "range": 1.6,
     "m2Amp": 0.55,
     "s2Amp": 0.2,
@@ -293,7 +293,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 10.0884,
     "lng": 73.6467,
     "state": "Lakshadweep",
-    "district": "Kalpeni Island",
+    "district": "Androth / Kalpeni Island",
     "range": 1.3,
     "m2Amp": 0.45,
     "s2Amp": 0.16,
@@ -833,6 +833,7 @@ function portNormalizeName(value) {
     .replace(/\bVILUPPURAM\b/g, 'VILLUPURAM')
     .replace(/\bJAGATSINGHAPUR\b/g, 'JAGATSINGHPUR')
     .replace(/\bBALASORE\b/g, 'BALESWAR')
+    .replace(/\bBALESHWAR\b/g, 'BALESWAR')
     .replace(/\bBHADRAKH\b/g, 'BHADRAK')
     .replace(/\bKUTCH\b/g, 'KACHCHH')
     .replace(/\bDEVBHUMI\s+DWARAKA\b/g, 'DEVBHUMI DWARKA')
@@ -1295,7 +1296,7 @@ function initPortTides() {
     const optGroups = Object.keys(stateGroups).sort().map(state => {
       const sortedInState = stateGroups[state].slice().sort((a, b) => a.name.localeCompare(b.name));
       const options = sortedInState.map(p => `
-        <option value="${p.id}" ${p.id === selectedPortId ? 'selected' : ''}>${p.name} (${p.district})</option>
+        <option value="${p.id}" ${p.id === selectedPortId ? 'selected' : ''}>${p.name}</option>
       `).join('');
 
       return `<optgroup label="${state}">${options}</optgroup>`;
