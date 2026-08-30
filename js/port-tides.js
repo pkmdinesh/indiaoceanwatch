@@ -20,7 +20,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 13.2833,
     "lng": 93.0333,
     "state": "Andaman & Nicobar",
-    "district": "North & Middle Andaman",
+    "district": "Diglipur / Aerial Bay / North Andaman",
     "range": 2.1,
     "m2Amp": 0.75,
     "s2Amp": 0.25,
@@ -85,7 +85,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 7,
     "lng": 93.9333,
     "state": "Andaman & Nicobar",
-    "district": "Nicobar",
+    "district": "Campbell Bay / Indira Point / Great Nicobar / Nicobar",
     "range": 1.8,
     "m2Amp": 0.65,
     "s2Amp": 0.22,
@@ -98,7 +98,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 9.2344,
     "lng": 92.7769,
     "state": "Andaman & Nicobar",
-    "district": "Nicobar",
+    "district": "Car Nicobar / Nicobar",
     "range": 2,
     "m2Amp": 0.7,
     "s2Amp": 0.24,
@@ -228,7 +228,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 10.5914,
     "lng": 92.5625,
     "state": "Andaman & Nicobar",
-    "district": "South Andaman",
+    "district": "Little Andaman / Hut Bay / South Andaman",
     "range": 2.1,
     "m2Amp": 0.75,
     "s2Amp": 0.25,
@@ -410,7 +410,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 12.9265,
     "lng": 92.8975,
     "state": "Andaman & Nicobar",
-    "district": "North & Middle Andaman",
+    "district": "Mayabunder / North Sentinel Island / North & Middle Andaman",
     "range": 2.2,
     "m2Amp": 0.78,
     "s2Amp": 0.26,
@@ -475,7 +475,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 8.05,
     "lng": 93.55,
     "state": "Andaman & Nicobar",
-    "district": "Nicobar",
+    "district": "Nancowry / Komatra & Katchal Island / Kamorta / Nicobar",
     "range": 1.9,
     "m2Amp": 0.68,
     "s2Amp": 0.23,
@@ -553,7 +553,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 11.6833,
     "lng": 92.7667,
     "state": "Andaman & Nicobar",
-    "district": "South Andaman",
+    "district": "Port Blair / South Andaman",
     "range": 2.2,
     "m2Amp": 0.78,
     "s2Amp": 0.26,
@@ -605,7 +605,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 12.4889,
     "lng": 92.9569,
     "state": "Andaman & Nicobar",
-    "district": "North & Middle Andaman",
+    "district": "Rangath Bay / Rangat / Middle Andaman",
     "range": 2.2,
     "m2Amp": 0.78,
     "s2Amp": 0.26,
@@ -813,6 +813,19 @@ function portNormalizeName(value) {
     .replace(/&/g, ' AND ')
     .replace(/[^A-Z0-9]+/g, ' ')
     .replace(/\bTHIRU/g, 'TIRU')
+    .replace(/\bPORT\s*BLAIR\b/g, 'PORT BLAIR')
+    .replace(/\bPORTBLAIR\b/g, 'PORT BLAIR')
+    .replace(/\bHUT\s*BAY\b/g, 'HUT BAY')
+    .replace(/\bHUTBAY\b/g, 'HUT BAY')
+    .replace(/\bRANGAT\s*BAY\b/g, 'RANGAT BAY')
+    .replace(/\bRANGATBAY\b/g, 'RANGAT BAY')
+    .replace(/\bRANGATH\s*BAY\b/g, 'RANGAT BAY')
+    .replace(/\bCAMPBELL\s*BAY\b/g, 'CAMPBELL BAY')
+    .replace(/\bCAMPBELLBAY\b/g, 'CAMPBELL BAY')
+    .replace(/\bCAR\s*NICOBAR\b/g, 'CAR NICOBAR')
+    .replace(/\bCARNICOBAR\b/g, 'CAR NICOBAR')
+    .replace(/\bAERIAL\s*BAY\b/g, 'AERIAL BAY')
+    .replace(/\bAERIALBAY\b/g, 'AERIAL BAY')
     .replace(/\bKANNIYAKUMARI\b/g, 'KANYAKUMARI')
     .replace(/\bTUTICORIN\b/g, 'THOOTHUKKUDI')
     .replace(/\bTHOOTHUKUDI\b/g, 'THOOTHUKKUDI')
