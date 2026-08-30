@@ -1,6 +1,6 @@
 ﻿{
     "updatedAt":  "2026-08-30T18:45:17.4796000+00:00",
-    "lastAttemptAt":  "2026-08-30T19:00:17.4327726+00:00",
+    "lastAttemptAt":  "2026-08-30T19:15:21.8778071+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -12,7 +12,7 @@
     "coralBleaching":  {
                            "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-08-30T19:00:17.4327726+00:00",
+                           "fetchedAt":  "2026-08-30T19:15:21.8778071+00:00",
                            "regions":  [
                                            {
                                                "area":  "Andaman",
@@ -1738,7 +1738,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-30T19:00:26.2171420+00:00",
+                          "fetchedAt":  "2026-08-30T19:15:29.2976362+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -6004,14 +6004,14 @@
                             ]
             },
     "errors":  [
-                   "Storm surge: Unable to read data from the transport connection: The connection was closed."
+                   "Storm surge: The remote server returned an error: (500) Internal Server Error."
                ],
     "healthAlerts":  [
 
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  7.54,
-                      "pfzAgeHours":  7.54
+                      "osfAgeHours":  7.78,
+                      "pfzAgeHours":  7.78
                   }
 }
