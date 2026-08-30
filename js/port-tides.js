@@ -827,8 +827,26 @@ function portNormalizeName(value) {
     .replace(/\bAERIAL\s*BAY\b/g, 'AERIAL BAY')
     .replace(/\bAERIALBAY\b/g, 'AERIAL BAY')
     .replace(/\bKANNIYAKUMARI\b/g, 'KANYAKUMARI')
+    .replace(/\bCAPE\s+COMORIN\b/g, 'KANYAKUMARI')
     .replace(/\bTUTICORIN\b/g, 'THOOTHUKKUDI')
     .replace(/\bTHOOTHUKUDI\b/g, 'THOOTHUKKUDI')
+    .replace(/\bPONDICHERRY\b/g, 'PUDUCHERRY')
+    .replace(/\bPONDICHERY\b/g, 'PUDUCHERRY')
+    .replace(/\bCALICUT\b/g, 'KOZHIKODE')
+    .replace(/\bCOCHIN\b/g, 'ERNAKULAM')
+    .replace(/\bKOCHI\b/g, 'ERNAKULAM')
+    .replace(/\bQUILON\b/g, 'KOLLAM')
+    .replace(/\bTRIVANDRUM\b/g, 'THIRUVANANTHAPURAM')
+    .replace(/\bALLEPPEY\b/g, 'ALAPPUZHA')
+    .replace(/\bCANNANORE\b/g, 'KANNUR')
+    .replace(/\bMANGALORE\b/g, 'DAKSHINA KANNADA')
+    .replace(/\bMANGALURU\b/g, 'DAKSHINA KANNADA')
+    .replace(/\bNEWMANGALORE\b/g, 'DAKSHINA KANNADA')
+    .replace(/\bVIZAG\b/g, 'VISAKHAPATNAM')
+    .replace(/\bWALTAIR\b/g, 'VISAKHAPATNAM')
+    .replace(/\bBOMBAY\b/g, 'MUMBAI')
+    .replace(/\bCALCUTTA\b/g, 'KOLKATA')
+    .replace(/\bMADRAS\b/g, 'CHENNAI')
     .replace(/\bNAGAPPATTINAM\b/g, 'NAGAPATTINAM')
     .replace(/\bVILUPPURAM\b/g, 'VILLUPURAM')
     .replace(/\bJAGATSINGHAPUR\b/g, 'JAGATSINGHPUR')
@@ -1151,7 +1169,7 @@ function updatePortWindDisplay(port, liveData = null) {
   const liveIndicator = isLive ? '📡 ' : '';
 
   windElem.innerHTML = `
-    <div class="wind-stat-item">
+    <div class="wind-stat-item wind-primary-stat">
       <span class="wind-stat-label">${windSeaLbl}</span>
       <strong>${liveIndicator}${translatedWindDir} ${windKmh} km/h <span class="wind-knots-sea">(${windKnots} kn · ${seaState}${liveParam})</span></strong>
     </div>
@@ -1161,7 +1179,7 @@ function updatePortWindDisplay(port, liveData = null) {
     </div>
     <div class="wind-stat-item moon-stat-item">
       <span class="wind-stat-label">${moonTideTypeLbl}</span>
-      <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime}) · Tidal Regime: ${regimeLabel} (~${port.range}m)"><span>${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? springTideLbl : neapTideLbl} · ${regimeLabel}</small></strong>
+      <strong class="moon-tide-text" title="${moon.phase} (${moon.illumination}% lit · ${moon.tideRegime}) · Tidal Regime: ${regimeLabel} (~${port.range}m)"><span class="moon-phase-name">${moon.icon} ${moon.phase}</span> <small class="tide-regime-pill ${moon.tideBadgeClass}">${moon.isSpringTide ? springTideLbl : neapTideLbl} · ${regimeLabel}</small></strong>
     </div>
   `;
 }
