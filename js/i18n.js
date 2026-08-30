@@ -245,6 +245,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ No active coastal warnings for',
     'tide.active_for': 'active for',
     'tide.coast': 'Coast',
+    'tide.regional_advisory': 'Regional Advisory for',
     'osf.advisory_note': 'A state may appear under multiple levels because district and coastal-stretch conditions differ.'
   },
   hi: {
@@ -475,6 +476,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ कोई सक्रिय तटीय चेतावनी नहीं:',
     'tide.active_for': 'सक्रिय चेतावनी:',
     'tide.coast': 'तट',
+    'tide.regional_advisory': 'क्षेत्रीय परामर्श:',
     'osf.advisory_note': 'एक राज्य कई स्तरों के तहत दिखाई दे सकता है क्योंकि जिले और तटीय क्षेत्र की स्थितियाँ भिन्न हो सकती हैं।'
   },
   ta: {
@@ -705,6 +707,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ தீவிர கடலோர எச்சரிக்கைகள் ஏதுமில்லை:',
     'tide.active_for': 'எச்சரிக்கை செயலில் உள்ளது:',
     'tide.coast': 'கடற்கரை',
+    'tide.regional_advisory': 'மண்டல எச்சரிக்கை:',
     'osf.advisory_note': 'மாவட்டம் மற்றும் கடற்கரை பகுதி நிலைமைகள் மாறுபடுவதால் ஒரு மாநிலம் பல எச்சரிக்கை நிலைகளில் தோன்றக்கூடும்.'
   },
   te: {
@@ -935,6 +938,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ తీరప్రాంత హెచ్చరికలు లేవు:',
     'tide.active_for': 'హెచ్చరిక అమలులో ఉంది:',
     'tide.coast': 'తీరం',
+    'tide.regional_advisory': 'ప్రాంతీయ హెచ్చరిక:',
     'osf.advisory_note': 'జిల్లా మరియు తీరప్రాంత పరిస్థితులు భిన్నంగా ఉండటం వల్ల ఒక రాష్ట్రం బహుళ స్థాయిలలో కనిపించవచ్చు.'
   },
   ml: {
@@ -1165,6 +1169,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ തീരദേശ മുന്നറിയിപ്പുകൾ ഇല്ല:',
     'tide.active_for': 'മുന്നറിയിപ്പ് നിലവിലുണ്ട്:',
     'tide.coast': 'തീരം',
+    'tide.regional_advisory': 'പ്രാദേശിക ജാഗ്രതാ നിർദ്ദേശം:',
     'osf.advisory_note': 'ജില്ലാ, തീരദേശ സാഹചര്യങ്ങൾ വ്യത്യസ്തമായതിനാൽ ഒരു സംസ്ഥാനം ഒന്നിലധികം മുന്നറിയിപ്പ് തലങ്ങളിൽ പ്രത്യക്ഷപ്പെടാം.'
   },
   bn: {
@@ -1395,6 +1400,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ কোন সক্রিয় উপকূলীয় সতর্কতা নেই:',
     'tide.active_for': 'সতর্কতা সক্রিয়:',
     'tide.coast': 'উপকূল',
+    'tide.regional_advisory': 'আঞ্চলিক পরামর্শ:',
     'osf.advisory_note': 'জেলা এবং উপকূলীয় অঞ্চলের পরিস্থিতি ভিন্ন হওয়ার কারণে একটি রাজ্য একাধিক সতর্কবার্তার অধীনে উপস্থিত হতে পারে।'
   },
   mr: {
@@ -1625,6 +1631,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ कोणतीही किनारपट्टी चेतावणी नाही:',
     'tide.active_for': 'चेतावणी लागू:',
     'tide.coast': 'किनारपट्टी',
+    'tide.regional_advisory': 'प्रादेशिक सल्लागार:',
     'osf.advisory_note': 'जिल्हा आणि किनारपट्टीची परिस्थिती भिन्न असल्याने एक राज्य अनेक पातळींमध्ये दिसू शकते.'
   },
   gu: {
@@ -1843,6 +1850,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ કોઈ સક્રિય ચેતવણી નથી:',
     'tide.active_for': 'ચેતવણી સક્રિય:',
     'tide.coast': 'કાંઠો',
+    'tide.regional_advisory': 'પ્રાદેશિક સલાહ:',
     'osf.advisory_note': 'જિલ્લા અને દરિયાકાંઠાની પરિસ્થિતિ અલગ હોવાથી એક રાજ્ય બહુવિધ સ્તરો હેઠળ દેખાઈ શકે છે.'
   },
   or: {
@@ -2073,6 +2081,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ କୌଣସି ଉପକୂଳ ଚେତାବନୀ ନାହିଁ:',
     'tide.active_for': 'ଚେତାବନୀ ଜାରି:',
     'tide.coast': 'ଉପକୂଳ',
+    'tide.regional_advisory': 'ଆଞ୍ଚଳିକ ପରାମର୍ଶ:',
     'osf.advisory_note': 'ଜିଲ୍ଲା ଏବଂ ଉପକୂଳବର୍ତ୍ତୀ ଅଞ୍ଚଳର ପରିସ୍ଥିତି ଭିନ୍ନ ହୋଇଥିବାରୁ ଗୋଟିଏ ରାଜ୍ୟ ଏକାଧିକ ସ୍ତର ଅଧୀନରେ ଦେଖାଯାଇପାରେ।'
   },
   kn: {
@@ -2303,6 +2312,7 @@ const I18N_DICTIONARY = {
     'tide.no_warnings': '✓ ಯಾವುದೇ ಕರಾವಳಿ ಎಚ್ಚರಿಕೆ ಇಲ್ಲ:',
     'tide.active_for': 'ಎಚ್ಚರಿಕೆ ಜಾರಿಯಲ್ಲಿದೆ:',
     'tide.coast': 'ಕರಾವಳಿ',
+    'tide.regional_advisory': 'ಪ್ರಾದೇಶಿಕ ಸಲಹೆ:',
     'osf.advisory_note': 'ಜಿಲ್ಲೆ ಮತ್ತು ಕರಾವಳಿ ಪ್ರದೇಶದ ಪರಿಸ್ಥಿತಿಗಳು ವಿಭಿನ್ನವಾಗಿರುವುದರಿಂದ ಒಂದು ರಾಜ್ಯವು ಬಹು ಎಚ್ಚರಿಕೆ ಹಂತಗಳಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳಬಹುದು.'
   }
 };

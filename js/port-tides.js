@@ -189,7 +189,7 @@ var NATIONAL_TIDE_STATIONS = [
     "lat": 13.25,
     "lng": 80.3333,
     "state": "Tamil Nadu",
-    "district": "Tiruvallur",
+    "district": "Thiruvallur / Tiruvallur",
     "range": 1.4,
     "m2Amp": 0.48,
     "s2Amp": 0.17,
@@ -806,9 +806,28 @@ function isTsunamiThreatActive(tsunami) {
   return false;
 }
 
-// Helper to normalize strings for district/state comparison
+// Helper to normalize strings for district/state comparison with phonetic & alias mapping
 function portNormalizeName(value) {
-  return String(value || '').toUpperCase().replace(/&/g,' AND ').replace(/[^A-Z0-9]+/g,' ').replace(/\bKANNIYAKUMARI\b/g,'KANYAKUMARI').replace(/\s+/g,' ').trim();
+  return String(value || '')
+    .toUpperCase()
+    .replace(/&/g, ' AND ')
+    .replace(/[^A-Z0-9]+/g, ' ')
+    .replace(/\bTHIRU/g, 'TIRU')
+    .replace(/\bKANNIYAKUMARI\b/g, 'KANYAKUMARI')
+    .replace(/\bTUTICORIN\b/g, 'THOOTHUKKUDI')
+    .replace(/\bTHOOTHUKUDI\b/g, 'THOOTHUKKUDI')
+    .replace(/\bNAGAPPATTINAM\b/g, 'NAGAPATTINAM')
+    .replace(/\bVILUPPURAM\b/g, 'VILLUPURAM')
+    .replace(/\bJAGATSINGHAPUR\b/g, 'JAGATSINGHPUR')
+    .replace(/\bBALASORE\b/g, 'BALESWAR')
+    .replace(/\bBHADRAKH\b/g, 'BHADRAK')
+    .replace(/\bKUTCH\b/g, 'KACHCHH')
+    .replace(/\bDEVBHUMI\s+DWARAKA\b/g, 'DEVBHUMI DWARKA')
+    .replace(/\bRAIGARH\b/g, 'RAIGAD')
+    .replace(/\bSPS\s+NELLORE\b/g, 'NELLORE')
+    .replace(/\bSRI\s+POTTI\s+SRIRAMULU\s+NELLORE\b/g, 'NELLORE')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function portDistrictMatches(portDist, advDist) {
@@ -845,21 +864,30 @@ function checkPortActiveWarnings(port) {
 
     if (districtAdv) {
       if (districtAdv.severity === 'warning') {
-        matches.push({ hazard: hazardName, level: 'warning', label: `${hazardName} Warning`, message: districtAdv.message });
+        matches.push({ hazard: hazardName, level: 'warning', label: `${hazardName} Warning`, message: districtAdv.message, district: districtAdv.district });
       } else if (districtAdv.severity === 'alert') {
-        matches.push({ hazard: hazardName, level: 'alert', label: `${hazardName} Alert`, message: districtAdv.message });
+        matches.push({ hazard: hazardName, level: 'alert', label: `${hazardName} Alert`, message: districtAdv.message, district: districtAdv.district });
       } else if (districtAdv.severity === 'watch') {
-        matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch`, message: districtAdv.message });
+        matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch`, message: districtAdv.message, district: districtAdv.district });
       }
-      // If severity is 'noThreat', this district is safe for this hazard
-    } else if (advisories.length === 0) {
-      // Fallback to state counts only when district-level advisories are not itemized
-      if (Number(st.counts?.warning || 0) > 0) {
-        matches.push({ hazard: hazardName, level: 'warning', label: `${hazardName} Warning` });
-      } else if (Number(st.counts?.alert || 0) > 0) {
-        matches.push({ hazard: hazardName, level: 'alert', label: `${hazardName} Alert` });
-      } else if (Number(st.counts?.watch || 0) > 0) {
-        matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch` });
+      // If severity is 'noThreat', this district is explicitly verified and confirmed safe
+    } else {
+      // Station's district was not explicitly itemized in the advisory list.
+      // Check if the state has active hazards (regional advisory fallback).
+      const warnCount = Number(st.counts?.warning || 0);
+      const alertCount = Number(st.counts?.alert || 0);
+      const watchCount = Number(st.counts?.watch || 0);
+      const totalStateAlerts = warnCount + alertCount + watchCount;
+
+      if (totalStateAlerts > 0) {
+        const stLevel = warnCount > 0 ? 'warning' : (alertCount > 0 ? 'alert' : 'watch');
+        matches.push({
+          hazard: hazardName,
+          level: stLevel,
+          isStateLevelFallback: true,
+          label: `${hazardName} ${stLevel.toUpperCase()}`,
+          message: `${hazardName} ${stLevel} active along ${st.name} coast (Regional coastal advisory)`
+        });
       }
     }
   };
@@ -910,11 +938,17 @@ function checkPortActiveWarnings(port) {
   const localizedHazard = worst.hazard ? (globalThis.i18n?.t(`osf.${worst.hazard.toLowerCase().replace(/\\s+/g,'_')}`, worst.hazard) || worst.hazard) : '';
   const displayLabel = `${localizedHazard} ${localizedSev}`.trim();
 
+  let bannerText = `⚠️ ${displayLabel} ${activeForLbl} ${port.name} (${translatedPortDistrict}, ${translatedPortState} ${coastLbl})`;
+  if (worst.isStateLevelFallback) {
+    const regAdvLbl = globalThis.i18n?.t('tide.regional_advisory', 'Regional Advisory for') || 'Regional Advisory for';
+    bannerText = `⚠️ ${displayLabel} ${activeForLbl} ${translatedPortState} ${coastLbl} (${regAdvLbl} ${port.name})`;
+  }
+
   return {
     safe: false,
     level: worst.level,
     match: worst,
-    text: `⚠️ ${displayLabel} ${activeForLbl} ${port.name} (${translatedPortDistrict}, ${translatedPortState} ${coastLbl})`
+    text: bannerText
   };
 }
 
