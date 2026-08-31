@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-08-31T15:15:29.6593859+00:00",
-    "lastAttemptAt":  "2026-08-31T15:15:29.6593859+00:00",
+    "updatedAt":  "2026-08-31T15:45:16.9246098+00:00",
+    "lastAttemptAt":  "2026-08-31T15:45:16.9246098+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -12,7 +12,7 @@
     "coralBleaching":  {
                            "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-08-31T15:15:29.6593859+00:00",
+                           "fetchedAt":  "2026-08-31T15:45:16.9246098+00:00",
                            "regions":  [
                                            {
                                                "area":  "Andaman",
@@ -150,19 +150,11 @@
                                         "highestSeverity":  "alert",
                                         "counts":  {
                                                        "warning":  0,
-                                                       "alert":  3,
-                                                       "watch":  8,
+                                                       "alert":  2,
+                                                       "watch":  9,
                                                        "noThreat":  0
                                                    },
                                         "advisories":  [
-                                                           {
-                                                               "state":  "ANDAMAN AND NICOBAR",
-                                                               "district":  "CAR NICOBAR",
-                                                               "severity":  "alert",
-                                                               "color":  "Orange",
-                                                               "issueDate":  "31-08-2026",
-                                                               "message":  "High Wave Alert for the coast of CAR NICOBAR,ANDAMAN AND NICOBAR. High waves in the range of 2.9 - 3.0  meters are forecasted during 14:30 hours on 01-09-2026 to 23:30 hours on 01-09-2026. It advised that to be careful while doing marine operations and nearshore recreation."
-                                                           },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
                                                                "district":  "LITTLE ANDAMAN",
@@ -177,7 +169,7 @@
                                                                "severity":  "alert",
                                                                "color":  "Orange",
                                                                "issueDate":  "31-08-2026",
-                                                               "message":  "High Wave Alert for the coast of NORTH SENTINEL ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 2.9 - 3.1  meters are forecasted during 05:30 hours on 01-09-2026 to 02:30 hours on 02-09-2026. It advised that to be careful while doing marine operations and nearshore recreation."
+                                                               "message":  "High Wave Alert for the coast of NORTH SENTINEL ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 3.0 - 3.1  meters are forecasted during 05:30 hours on 01-09-2026 to 05:30 hours on 02-09-2026. It advised that to be careful while doing marine operations and nearshore recreation."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
@@ -186,6 +178,14 @@
                                                                "color":  "Yellow",
                                                                "issueDate":  "31-08-2026",
                                                                "message":  "High Wave Watch for the coast of BARREN ISLAND,ANDAMAN AND NICOBAR. High waves in the range of 2.1 - 2.2  meters are forecasted during 17:30 hours on 31-08-2026 to 23:30 hours on 02-09-2026. It advised that no immediate action is required. Check for updates."
+                                                           },
+                                                           {
+                                                               "state":  "ANDAMAN AND NICOBAR",
+                                                               "district":  "CAR NICOBAR",
+                                                               "severity":  "watch",
+                                                               "color":  "Yellow",
+                                                               "issueDate":  "31-08-2026",
+                                                               "message":  "High Wave Watch for the coast of CAR NICOBAR,ANDAMAN AND NICOBAR. High waves in the range of 2.7 - 3.0  meters are forecasted during 17:30 hours on 31-08-2026 to 23:30 hours on 02-09-2026. It advised that no immediate action is required. Check for updates."
                                                            },
                                                            {
                                                                "state":  "ANDAMAN AND NICOBAR",
@@ -1379,19 +1379,11 @@
                                             "highestSeverity":  "alert",
                                             "counts":  {
                                                            "warning":  0,
-                                                           "alert":  3,
-                                                           "watch":  4,
+                                                           "alert":  2,
+                                                           "watch":  5,
                                                            "noThreat":  0
                                                        },
                                             "advisories":  [
-                                                               {
-                                                                   "state":  "ANDHRA PRADESH",
-                                                                   "district":  "GUNTUR",
-                                                                   "severity":  "alert",
-                                                                   "color":  "Orange",
-                                                                   "issueDate":  "31-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Surface current speeds in the range of 0.7 - 1.4  m/sec are forecasted during 07:00 hours on 01-09-2026 to 10:00 hours on 02-09-2026. It advised that Harbour \u0026 marine operations to be careful."
-                                                               },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
                                                                    "district":  "KRISHNA",
@@ -1415,6 +1407,14 @@
                                                                    "color":  "Yellow",
                                                                    "issueDate":  "31-08-2026",
                                                                    "message":  "Ocean Currents Watch for the coast of EAST GODAVARI,ANDHRA PRADESH from Antarvedi To Perumallapuram. Surface current speeds in the range of 0.6 - 0.8  m/sec are forecasted during 16:00 hours on 31-08-2026 to 19:00 hours on 02-09-2026. It advised that no immediate action is required. Check for updates."
+                                                               },
+                                                               {
+                                                                   "state":  "ANDHRA PRADESH",
+                                                                   "district":  "GUNTUR",
+                                                                   "severity":  "watch",
+                                                                   "color":  "Yellow",
+                                                                   "issueDate":  "31-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of GUNTUR,ANDHRA PRADESH from Bestapalem Bapatla To Nizampatnam. Surface current speeds in the range of 0.7 - 1.0  m/sec are forecasted during 19:00 hours on 31-08-2026 to 01:00 hours on 02-09-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "ANDHRA PRADESH",
@@ -1447,19 +1447,11 @@
                                             "highestSeverity":  "alert",
                                             "counts":  {
                                                            "warning":  0,
-                                                           "alert":  2,
-                                                           "watch":  3,
+                                                           "alert":  1,
+                                                           "watch":  4,
                                                            "noThreat":  0
                                                        },
                                             "advisories":  [
-                                                               {
-                                                                   "state":  "TAMIL NADU",
-                                                                   "district":  "CHENNAI",
-                                                                   "severity":  "alert",
-                                                                   "color":  "Orange",
-                                                                   "issueDate":  "31-08-2026",
-                                                                   "message":  "Ocean Currents Alert for the coast of CHENNAI,TAMIL NADU from Palavakkam To Lakshmipuram Odaikuppam. Surface current speeds in the range of 0.9 - 1.2  m/sec are forecasted during 19:00 hours on 01-09-2026 to 04:00 hours on 02-09-2026. It advised that Harbour \u0026 marine operations to be careful."
-                                                               },
                                                                {
                                                                    "state":  "TAMIL NADU",
                                                                    "district":  "THIRUVALLUR",
@@ -1467,6 +1459,14 @@
                                                                    "color":  "Orange",
                                                                    "issueDate":  "31-08-2026",
                                                                    "message":  "Ocean Currents Alert for the coast of THIRUVALLUR,TAMIL NADU from Royapuram To Pulicat. Surface current speeds in the range of 1.1 - 1.4  m/sec are forecasted during 22:00 hours on 31-08-2026 to 19:00 hours on 02-09-2026. It advised that Harbour \u0026 marine operations to be careful."
+                                                               },
+                                                               {
+                                                                   "state":  "TAMIL NADU",
+                                                                   "district":  "CHENNAI",
+                                                                   "severity":  "watch",
+                                                                   "color":  "Yellow",
+                                                                   "issueDate":  "31-08-2026",
+                                                                   "message":  "Ocean Currents Watch for the coast of CHENNAI,TAMIL NADU from Palavakkam To Lakshmipuram Odaikuppam. Surface current speeds in the range of 0.6 - 1.0  m/sec are forecasted during 19:00 hours on 31-08-2026 to 19:00 hours on 02-09-2026. It advised that no immediate action is required. Check for updates."
                                                                },
                                                                {
                                                                    "state":  "TAMIL NADU",
@@ -1735,7 +1735,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-08-31T15:15:41.8027239+00:00",
+                          "fetchedAt":  "2026-08-31T15:45:24.6821451+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -11342,7 +11342,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  3.79,
-                      "pfzAgeHours":  3.79
+                      "osfAgeHours":  4.28,
+                      "pfzAgeHours":  4.28
                   }
 }
