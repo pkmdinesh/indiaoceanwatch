@@ -63,9 +63,9 @@
     .active-advisory-item .dot.watch,.active-advisory-item.watch .dot,.dot.watch{background:#EDC001!important;color:#EDC001!important}
     .announcement-separator{color:#90a3a7;margin:0 4px;font-size:11px;font-weight:700;user-select:none}
   </style>
-  <link rel="preload" href="css/components.css?v=258" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=258"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=258" media="print">
+  <link rel="preload" href="css/components.css?v=260" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=260"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=260" media="print">
 </head>
 <body>
   <main class="dashboard">
@@ -210,12 +210,21 @@
         <div class="pfz-details" id="pfzDetails" hidden><h3 id="pfzDetailsTitle"></h3><p class="pfz-inline-message" id="pfzInlineMessage" hidden></p><div class="pfz-landing-centers" id="pfzLandingCenters"></div><div class="pfz-messages" id="pfzMessages"></div></div>
       </section>
 
+      <section class="panel marine-climate-card" aria-labelledby="marine-climate-title">
+        <div class="panel-head">
+          <img class="service-logo" src="assets/marine-climate-icon.png" alt="Marine Climate icon" width="48" height="42" loading="lazy">
+          <div><h2 id="marine-climate-title" data-i18n="climate.title">Marine Climate</h2><p class="panel-kicker" data-i18n="climate.kicker">Ocean Climate &amp; Thermal Advisories</p></div>
+        </div>
+        <nav class="marine-advisory-links" aria-label="Marine climate services">
+          <button class="marine-advisory-chip mhw-chip-first" id="openMarineHeatWave" type="button" data-i18n="other.mhw">Marine Heatwave (MAHAS)</button>
+          <button class="marine-advisory-chip tchp-chip-second" id="openTchpDialog" type="button" data-i18n="other.tchp">Cyclone Heat (TCHP)</button>
+          <button class="marine-advisory-chip cbas-chip-third" id="openCoralBleaching" type="button" data-i18n="other.cbas">Coral Bleaching Alert (CBAS)</button>
+        </nav>
+      </section>
+
       <section class="panel other-advisories-card" aria-labelledby="other-advisories-title">
         <div class="panel-head"><div><h2 id="other-advisories-title" data-i18n="other.title">Other Marine Advisories</h2></div></div>
         <nav class="marine-advisory-links" aria-label="Other marine advisory services">
-          <button class="marine-advisory-chip mhw-chip-first" id="openMarineHeatWave" type="button" data-i18n="other.mhw">Marine Heat Wave (MHW)</button>
-          <button class="marine-advisory-chip tchp-chip-second" id="openTchpDialog" type="button" data-i18n="other.tchp">Cyclone Heat (TCHP)</button>
-          <button class="marine-advisory-chip cbas-chip-third" id="openCoralBleaching" type="button" data-i18n="other.cbas">Coral Bleaching Alert (CBAS)</button>
           <a class="marine-advisory-chip" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=2&amp;request_locale=en" target="_blank" rel="noopener" data-i18n="other.tuna">Tuna ↗</a>
           <a class="marine-advisory-chip" href="https://incois.gov.in/oceanservices/Hilsa/index.jsp" target="_blank" rel="noopener" data-i18n="other.hilsa">Hilsa ↗</a>
           <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/hab_products.jsp" target="_blank" rel="noopener" data-i18n="other.hab">Harmful Algal Bloom ↗</a>
@@ -251,7 +260,7 @@
     <div class="advisory-details" id="advisoryDetails"></div>
   </dialog>
   <dialog class="advisory-dialog" id="marineHeatWaveDialog" aria-labelledby="marineHeatWaveTitle">
-    <div class="advisory-dialog-head"><div><h2 id="marineHeatWaveTitle" data-i18n="mhw.title">Marine Heat Wave</h2><p data-i18n="mhw.subtitle">Official INCOIS Regional Observations</p></div><button class="dialog-close" id="marineHeatWaveClose" type="button" aria-label="Close Marine Heat Wave message">&times;</button></div>
+    <div class="advisory-dialog-head"><div><h2 id="marineHeatWaveTitle" data-i18n="mhw.title">Marine Heatwave Advisory Services</h2><p data-i18n="mhw.subtitle">Official INCOIS Regional Observations</p></div><button class="dialog-close" id="marineHeatWaveClose" type="button" aria-label="Close Marine Heat Wave message">&times;</button></div>
     <div class="advisory-details">
       <div id="marineHeatWaveCards" class="marine-heat-wave-cards" style="display:grid;gap:9px"></div>
       <a class="source" href="https://incois.gov.in/oceanservices/mhw/index.jsp" target="_blank" rel="noopener" data-i18n="mhw.open_page">Open Marine Heat Wave page ↗</a>
@@ -629,23 +638,23 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=258" defer></script>
-  <script src="js/i18n.js?v=258" defer></script>
-  <script src="js/app.js?v=258" defer></script>
-  <script src="js/share.js?v=258" defer></script>
-  <script src="js/map.js?v=258" defer></script>
-  <script src="js/pfz-map.js?v=258" defer></script>
-  <script src="js/pfz.js?v=258" defer></script>
-  <script src="js/advisory.js?v=258" defer></script>
-  <script src="js/tsunami.js?v=258" defer></script>
-  <script src="js/cyclone.js?v=258" defer></script>
-  <script src="js/seismic.js?v=258" defer></script>
-  <script src="js/port-tides.js?v=258" defer></script>
-  <script src="js/voice-summary.js?v=258" defer></script>
-  <script src="js/status.js?v=258" defer></script>
-  <script src="js/notifications.js?v=258" defer></script>
-  <script src="js/pwa.js?v=258" defer></script>
-  <script src="js/tchp.js?v=258" defer></script>
+  <script src="js/config.js?v=260" defer></script>
+  <script src="js/i18n.js?v=260" defer></script>
+  <script src="js/app.js?v=260" defer></script>
+  <script src="js/share.js?v=260" defer></script>
+  <script src="js/map.js?v=260" defer></script>
+  <script src="js/pfz-map.js?v=260" defer></script>
+  <script src="js/pfz.js?v=260" defer></script>
+  <script src="js/advisory.js?v=260" defer></script>
+  <script src="js/tsunami.js?v=260" defer></script>
+  <script src="js/cyclone.js?v=260" defer></script>
+  <script src="js/seismic.js?v=260" defer></script>
+  <script src="js/port-tides.js?v=260" defer></script>
+  <script src="js/voice-summary.js?v=260" defer></script>
+  <script src="js/status.js?v=260" defer></script>
+  <script src="js/notifications.js?v=260" defer></script>
+  <script src="js/pwa.js?v=260" defer></script>
+  <script src="js/tchp.js?v=260" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>

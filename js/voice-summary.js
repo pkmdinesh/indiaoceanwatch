@@ -944,13 +944,34 @@ function playVoiceSummary() {
 }
 
 function renderVoiceSummaryModal() {
+  const currentAppLang = (globalThis.i18n && globalThis.i18n.currentLang) || 'en';
+  const langSelect = ids('voiceLangSelect');
+
+  if (langSelect && !langSelect.children.length) {
+    langSelect.innerHTML = VOICE_LANGUAGES.map(l => '<option value="' + l.code + '">' + l.native + ' (' + l.name + ')</option>').join('');
+    langSelect.addEventListener('change', () => {
+      stopVoiceSummary();
+      selectedVoiceLang = langSelect.value;
+      renderVoiceSummaryModal();
+    });
+  }
+
+  // If user hasn't explicitly chosen a voice lang in the dropdown during this modal session, sync to page language
+  if (selectedVoiceLang && !selectedVoiceLang.startsWith(currentAppLang)) {
+    const matchingVoice = VOICE_LANGUAGES.find(l => l.code.startsWith(currentAppLang)) || VOICE_LANGUAGES[0];
+    selectedVoiceLang = matchingVoice.code;
+  }
+
+  if (langSelect && selectedVoiceLang) {
+    langSelect.value = selectedVoiceLang;
+  }
+
   const data = globalThis.latestStatusData || latestStatusData;
   const bulletin = buildBulletinSummary(data, selectedVoiceLang);
   const langConfig = VOICE_LANGUAGES.find(l => l.code === selectedVoiceLang) || VOICE_LANGUAGES[0];
 
   const titleEl = ids('voiceSummaryTitle');
   const textEl = ids('voiceSummaryText');
-  const langSelect = ids('voiceLangSelect');
   const voiceNoticeEl = ids('voiceNotice');
 
   if (titleEl) titleEl.textContent = bulletin.title;
@@ -959,16 +980,6 @@ function renderVoiceSummaryModal() {
   if (voiceNoticeEl) {
     voiceNoticeEl.textContent = 'Voice engine: Google Text-to-Speech (HQ Audio Stream)';
     voiceNoticeEl.style.color = 'var(--teal)';
-  }
-
-  if (langSelect && !langSelect.children.length) {
-    langSelect.innerHTML = VOICE_LANGUAGES.map(l => '<option value="' + l.code + '">' + l.native + ' (' + l.name + ')</option>').join('');
-    langSelect.value = selectedVoiceLang;
-    langSelect.addEventListener('change', () => {
-      stopVoiceSummary();
-      selectedVoiceLang = langSelect.value;
-      renderVoiceSummaryModal();
-    });
   }
 }
 
@@ -979,6 +990,11 @@ function initVoiceSummary() {
 
   if (btn && dialog) {
     btn.addEventListener('click', () => {
+      const currentAppLang = (globalThis.i18n && globalThis.i18n.currentLang) || 'en';
+      const matchingVoice = VOICE_LANGUAGES.find(l => l.code.startsWith(currentAppLang)) || VOICE_LANGUAGES[0];
+      selectedVoiceLang = matchingVoice.code;
+      const langSelect = ids('voiceLangSelect');
+      if (langSelect) langSelect.value = selectedVoiceLang;
       renderVoiceSummaryModal();
       dialog.showModal();
     });

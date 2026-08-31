@@ -128,8 +128,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'landing centers',
     'pfz.target_line': 'Target Line',
     'pfz.no_line_issued': 'No active PFZ line issued today for',
+    'climate.title': 'Marine Climate',
+    'climate.kicker': 'Ocean Climate & Thermal Advisories',
     'other.title': 'Other Marine Advisories',
-    'other.mhw': 'Marine Heat Wave (MHW)',
+    'other.mhw': 'Marine Heatwave (MAHAS)',
     'other.tchp': 'Cyclone Heat (TCHP)',
     'other.cbas': 'Coral Bleaching Alert (CBAS)',
     'other.tuna': 'Tuna ↗',
@@ -141,7 +143,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'Ports & Harbors ↗',
     'other.ship_route': 'Ship Route Forecast ↗',
     'other.location_specific': 'Location Specific Forecast ↗',
-    'mhw.title': 'Marine Heat Wave',
+    'mhw.title': 'Marine Heatwave Advisory Services',
     'mhw.subtitle': 'Official INCOIS Regional Observations',
     'mhw.open_page': 'Open Marine Heat Wave page ↗',
     'mhw.unavailable': 'Marine Heat Wave message is unavailable. Open the official page for the latest information.',
@@ -364,8 +366,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'लैंडिंग केंद्र',
     'pfz.target_line': 'लक्ष्य रेखा',
     'pfz.no_line_issued': 'के लिए आज कोई सक्रिय PFZ रेखा जारी नहीं की गई है',
+    'climate.title': 'समुद्री जलवायु (Marine Climate)',
+    'climate.kicker': 'महासागरीय जलवायु एवं तापीय परामर्श',
     'other.title': 'अन्य समुद्री सेवाएँ',
-    'other.mhw': 'मरीन हीटवेव (MHW)',
+    'other.mhw': 'मरीन हीटवेव (MAHAS)',
     'other.tchp': 'चक्रवात ऊष्मा (TCHP)',
     'other.cbas': 'मूंगा विरंजन चेतावनी (CBAS)',
     'other.tuna': 'टूना ↗',
@@ -377,7 +381,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'बंदरगाह पूर्वानुमान ↗',
     'other.ship_route': 'जहाज मार्ग ↗',
     'other.location_specific': 'स्थान-विशिष्ट पूर्वानुमान ↗',
-    'mhw.title': 'मरीन हीट वेव',
+    'mhw.title': 'समुद्री हीटवेव सलाहकार सेवाएँ (MAHAS)',
     'mhw.subtitle': 'आधिकारिक INCOIS क्षेत्रीय प्रेक्षण',
     'mhw.open_page': 'मरीन हीट वेव पेज खोलें ↗',
     'mhw.unavailable': 'मरीन हीट वेव संदेश अनुपलब्ध है। नवीनतम जानकारी के लिए आधिकारिक पेज खोलें।',
@@ -600,8 +604,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'இறங்கு தளங்கள்',
     'pfz.target_line': 'இலக்கு கோடு',
     'pfz.no_line_issued': 'இன்று மீன்பிடி மண்டல கோடு எதுவும் வெளியிடப்படவில்லை -',
+    'climate.title': 'கடல் காலநிலை (Marine Climate)',
+    'climate.kicker': 'பெருங்கடல் காலநிலை மற்றும் வெப்ப ஆலோசனைகள்',
     'other.title': 'பிற கடல்சார் சேவைகள்',
-    'other.mhw': 'கடல் வெப்ப அலை (MHW)',
+    'other.mhw': 'கடல் வெப்ப அலை (MAHAS)',
     'other.tchp': 'புயல் வெப்ப ஆற்றல் (TCHP)',
     'other.cbas': 'பவளப்பாறை எச்சரிக்கை (CBAS)',
     'other.tuna': 'சூரை மீன் ↗',
@@ -613,7 +619,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'துறைமுகங்கள் ↗',
     'other.ship_route': 'கப்பல் வழித்தடம் ↗',
     'other.location_specific': 'குறிப்பிட்ட பகுதி முன்னறிவிப்பு ↗',
-    'mhw.title': 'கடல் வெப்ப அலை (Marine Heat Wave)',
+    'mhw.title': 'கடல் வெப்ப அலை ஆலோசனை சேவைகள் (MAHAS)',
     'mhw.subtitle': 'அதிகாரப்பூர்வ இன்காய்ஸ் பிராந்திய கண்காணிப்பு',
     'mhw.open_page': 'கடல் வெப்ப அலை பக்கத்தைத் திற ↗',
     'mhw.unavailable': 'கடல் வெப்ப அலை தகவல் தற்போது கிடைக்கவில்லை.',
@@ -836,8 +842,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'ల్యాండింగ్ కేంద్రాలు',
     'pfz.target_line': 'లక్ష్య రేఖ',
     'pfz.no_line_issued': 'కోసం నేడు ఎటువంటి PFZ రేఖ జారీ కాలేదు -',
+    'climate.title': 'సముద్ర వాతావరణం (Marine Climate)',
+    'climate.kicker': 'సముద్ర వాతావరణం మరియు ఉష్ణ సలహాలు',
     'other.title': 'ఇతర సముద్ర సేవలు',
-    'other.mhw': 'మెరైన్ హీట్‌వేవ్ (MHW)',
+    'other.mhw': 'మెరైన్ హీట్‌వేవ్ (MAHAS)',
     'other.tchp': 'తుఫాను ఉష్ణ శక్తి (TCHP)',
     'other.cbas': 'పగడాల బ్లీచింగ్ హెచ్చరిక (CBAS)',
     'other.tuna': 'ట్యూనా ↗',
@@ -849,7 +857,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'ఓడరేవులు ↗',
     'other.ship_route': 'ఓడల మార్గం ↗',
     'other.location_specific': 'నిర్దిష్ట ప్రాంత సూచన ↗',
-    'mhw.title': 'మెరైన్ హీట్ వేవ్',
+    'mhw.title': 'మెరైన్ హీట్‌వేవ్ సలహా సేవలు (MAHAS)',
     'mhw.subtitle': 'అధికారిక INCOIS ప్రాంతీయ పరిశీలనలు',
     'mhw.open_page': 'మెరైన్ హీట్ వేవ్ పేజీ తెరవండి ↗',
     'mhw.unavailable': 'మెరైన్ హీట్ వేవ్ సమాచారం అందుబాటులో లేదు.',
@@ -1072,8 +1080,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'ലാൻഡിംഗ് കേന്ദ്രങ്ങൾ',
     'pfz.target_line': 'ലക്ഷ്യ രേഖ',
     'pfz.no_line_issued': 'ഇന്ന് മത്സ്യബന്ധന രേഖ ലഭ്യമല്ല -',
+    'climate.title': 'സമുദ്ര കാലാവസ്ഥ (Marine Climate)',
+    'climate.kicker': 'സമുദ്ര കാലാവസ്ഥയും താപ ഉപദേശങ്ങളും',
     'other.title': 'മറ്റ് സമുദ്ര സേവനങ്ങൾ',
-    'other.mhw': 'മറൈൻ ഹീറ്റ്‌വേവ് (MHW)',
+    'other.mhw': 'മറൈൻ ഹീറ്റ്‌വേവ് (MAHAS)',
     'other.tchp': 'ചുഴലിക്കാറ്റ് താപോർജ്ജം (TCHP)',
     'other.cbas': 'പവിഴപ്പുറ്റ് വെളുക്കൽ മുന്നറിയിപ്പ് (CBAS)',
     'other.tuna': 'ചൂര മത്സ്യം ↗',
@@ -1085,7 +1095,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'തുറമുഖ പ്രവചനം ↗',
     'other.ship_route': 'കപ്പൽ റൂട്ട് ↗',
     'other.location_specific': 'പ്രത്യേക മേഖലാ പ്രവചനം ↗',
-    'mhw.title': 'മറൈൻ ഹീറ്റ് വേവ്',
+    'mhw.title': 'മറൈൻ ഹീറ്റ്‌വേവ് ഉപദേശക സേവനങ്ങൾ (MAHAS)',
     'mhw.subtitle': 'ഔദ്യോഗിക INCOIS നിരീക്ഷണങ്ങൾ',
     'mhw.open_page': 'പേജ് തുറക്കുക ↗',
     'mhw.unavailable': 'മറൈൻ ഹീറ്റ് വേവ് വിവരങ്ങൾ ലഭ്യമല്ല.',
@@ -1308,8 +1318,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'ল্যান্ডিং কেন্দ্রসমূহ',
     'pfz.target_line': 'লক্ষ্য রেখা',
     'pfz.no_line_issued': 'এর জন্য আজ কোনো PFZ রেখা নেই -',
+    'climate.title': 'সামুদ্রিক জলবায়ু (Marine Climate)',
+    'climate.kicker': 'মহাসাগরীয় জলবায়ু ও তাপীয় পরামর্শ',
     'other.title': 'অন্যান্য সামুদ্রিক সেবা',
-    'other.mhw': 'সামুদ্রিক তাপপ্রবাহ (MHW)',
+    'other.mhw': 'সামুদ্রিক তাপপ্রবাহ (MAHAS)',
     'other.tchp': 'ঘূর্ণিঝড় তাপশক্তি (TCHP)',
     'other.cbas': 'প্রবাল ব্লিচিং সতর্কতা (CBAS)',
     'other.tuna': 'টুনা মাছ ↗',
@@ -1321,7 +1333,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'বন্দর পূর্বাভাস ↗',
     'other.ship_route': 'জাহাজ রুট ↗',
     'other.location_specific': 'নির্দিষ্ট অঞ্চল পূর্বাভাস ↗',
-    'mhw.title': 'সামুদ্রিক তাপপ্রবাহ',
+    'mhw.title': 'সামুদ্রিক তাপপ্রবাহ পরামর্শ সেবা (MAHAS)',
     'mhw.subtitle': 'সরকারি INCOIS আঞ্চলিক পর্যবেক্ষণ',
     'mhw.open_page': 'পেজ খুলুন ↗',
     'mhw.unavailable': 'সামুদ্রিক তাপপ্রবাহের তথ্য এই মুহূর্তে নেই।',
@@ -1544,8 +1556,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'लँडिंग केंद्रे',
     'pfz.target_line': 'लक्ष्य रेषा',
     'pfz.no_line_issued': 'साठी आज कोणतीही PFZ रेषा जारी केलेली नाही -',
+    'climate.title': 'सागरी हवामान (Marine Climate)',
+    'climate.kicker': 'सागरी हवामान आणि औष्णिक सूचना',
     'other.title': 'इतर सागरी सेवा',
-    'other.mhw': 'सागरी उष्णतेची लाट (MHW)',
+    'other.mhw': 'सागरी उष्णतेची लाट (MAHAS)',
     'other.tchp': 'चक्रीवादळ उष्णता क्षमता (TCHP)',
     'other.cbas': 'प्रवाळ विरंजन इशारा (CBAS)',
     'other.tuna': 'टुना मासे ↗',
@@ -1557,7 +1571,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'बंदर अंदाज ↗',
     'other.ship_route': 'जहाज मार्ग ↗',
     'other.location_specific': 'स्थान-विशिष्ट अंदाज ↗',
-    'mhw.title': 'सागरी उष्णतेची लाट',
+    'mhw.title': 'सागरी उष्णता लाट सल्लागार सेवा (MAHAS)',
     'mhw.subtitle': 'अधिकृत INCOIS प्रादेशिक निरीक्षणे',
     'mhw.open_page': 'पेज उघडा ↗',
     'mhw.unavailable': 'माहिती उपलब्ध नाही.',
@@ -1780,8 +1794,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'લેન્ડિંગ કેન્દ્રો',
     'pfz.target_line': 'લક્ષ્ય રેખા',
     'pfz.no_line_issued': 'માટે આજે કોઈ PFZ રેખા નથી -',
+    'climate.title': 'દરિયાઈ આબોહવા (Marine Climate)',
+    'climate.kicker': 'મહાસાગર આબોહવા અને થર્મલ સલાહ',
     'other.title': 'અન્ય દરિયાઈ સેવાઓ',
-    'other.mhw': 'મરીન હીટવેવ (MHW)',
+    'other.mhw': 'મરીન હીટવેવ (MAHAS)',
     'other.tchp': 'વાવાઝોડું ઉષ્મા ક્ષમતા (TCHP)',
     'other.cbas': 'પરવાળા બ્લીચિંગ ચેતવણી (CBAS)',
     'other.tuna': 'ટુના માછલી ↗',
@@ -1793,7 +1809,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'બંદર આગાહી ↗',
     'other.ship_route': 'જહાજ માર્ગ ↗',
     'other.location_specific': 'સ્થળ આધારિત આગાહી ↗',
-    'mhw.title': 'મરીન હીટ વેવ',
+    'mhw.title': 'મરીન હીટવેવ સલાહકાર સેવાઓ (MAHAS)',
     'mhw.subtitle': 'સત્તાવાર INCOIS પ્રાદેશિક અવલોકનો',
     'mhw.open_page': 'પેજ ખોલો ↗',
     'mhw.unavailable': 'માહિતી ઉપલબ્ધ નથી.',
@@ -2004,8 +2020,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'ଲ୍ୟାଣ୍ଡିଂ କେନ୍ଦ୍ରସମୂହ',
     'pfz.target_line': 'ଲକ୍ଷ୍ୟ ରେଖା',
     'pfz.no_line_issued': 'ପାଇଁ ଆଜି କୌଣସି PFZ ରେଖା ଜାରି ହୋଇନାହିଁ -',
+    'climate.title': 'ସାମୁଦ୍ରିକ ଜଳବାୟୁ (Marine Climate)',
+    'climate.kicker': 'ମହାସାଗର ଜଳବାୟୁ ଏବଂ ତାପମାତ୍ରା ପରାମର୍ଶ',
     'other.title': 'ଅନ୍ୟାନ୍ୟ ସାମୁଦ୍ରିକ ସେବା',
-    'other.mhw': 'ସାମୁଦ୍ରିକ ଉତ୍ତାପ ତରଙ୍ଗ (MHW)',
+    'other.mhw': 'ସାମୁଦ୍ରିକ ଉତ୍ତାପ ତରଙ୍ଗ (MAHAS)',
     'other.tchp': 'ବାତ୍ୟା ତାପଶକ୍ତି (TCHP)',
     'other.cbas': 'ପ୍ରବାଳ ବ୍ଲିଚିଂ ସତର୍କତା (CBAS)',
     'other.tuna': 'ଟୁନା ମାଛ ↗',
@@ -2017,7 +2035,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'ବନ୍ଦର ପୂର୍ବାନୁମାନ ↗',
     'other.ship_route': 'ଜାହାଜ ମାର୍ଗ ↗',
     'other.location_specific': 'ନିର୍ଦ୍ଦିଷ୍ଟ ଅଞ୍ଚଳ ପୂର୍ବାନୁମାନ ↗',
-    'mhw.title': 'ସାମୁଦ୍ରିକ ଉତ୍ତାପ ତରଙ୍ଗ',
+    'mhw.title': 'ସାମୁଦ୍ରିକ ଉତ୍ତାପ ତରଙ୍ଗ ପରାମର୍ଶ ସେବା (MAHAS)',
     'mhw.subtitle': 'ସରକାରୀ INCOIS ଆଞ୍ଚଳିକ ନିରୀକ୍ଷଣ',
     'mhw.open_page': 'ପୃଷ୍ଠା ଖୋଲନ୍ତୁ ↗',
     'mhw.unavailable': 'ସୂଚନା ଉପଲବ୍ଧ ନାହିଁ।',
@@ -2240,8 +2258,10 @@ const I18N_DICTIONARY = {
     'pfz.landing_centers_title': 'ಲ್ಯಾಂಡಿಂಗ್ ಕೇಂದ್ರಗಳು',
     'pfz.target_line': 'ಗುರಿ ರೇಖೆ',
     'pfz.no_line_issued': 'ಗೆ ಇಂದು ಯಾವುದೇ PFZ ರೇಖೆ ಲಭ್ಯವಿಲ್ಲ -',
+    'climate.title': 'ಸಾಗರ ಹವಾಮಾನ (Marine Climate)',
+    'climate.kicker': 'ಸಾಗರ ಹವಾಮಾನ ಮತ್ತು ಉಷ್ಣ ಸಲಹೆಗಳು',
     'other.title': 'ಇತರ ಸಾಗರ ಸೇವೆಗಳು',
-    'other.mhw': 'ಸಾಗರ ಶಾಖದ ಅಲೆ (MHW)',
+    'other.mhw': 'ಸಾಗರ ಶಾಖದ ಅಲೆ (MAHAS)',
     'other.tchp': 'ಚಂಡಮಾರುತ ಉಷ್ಣ ಶಕ್ತಿ (TCHP)',
     'other.cbas': 'ಹವಳ ಬಿಳುಚುವಿಕೆ ಎಚ್ಚರಿಕೆ (CBAS)',
     'other.tuna': 'ಟ್ಯೂನಾ ಮೀನು ↗',
@@ -2253,7 +2273,7 @@ const I18N_DICTIONARY = {
     'other.ports': 'ಬಂದರು ಮುನ್ಸೂಚನೆ ↗',
     'other.ship_route': 'ಹಡಗು ಮಾರ್ಗ ↗',
     'other.location_specific': 'ಸ್ಥಳ ನಿರ್ದಿಷ್ಟ ಮುನ್ಸೂಚನೆ ↗',
-    'mhw.title': 'ಸಾಗರ ಶಾಖದ ಅಲೆ',
+    'mhw.title': 'ಸಾಗರ ಶಾಖದ ಅಲೆ ಸಲಹಾ ಸೇವೆಗಳು (MAHAS)',
     'mhw.subtitle': 'ಅಧಿಕೃತ INCOIS ಪ್ರಾದೇಶಿಕ ವೀಕ್ಷಣೆಗಳು',
     'mhw.open_page': 'ಪುಟ ತೆರೆಯಿರಿ ↗',
     'mhw.unavailable': 'ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ.',
@@ -2538,10 +2558,32 @@ globalThis.i18n = {
       select.value = langCode;
     }
 
+    if (typeof VOICE_LANGUAGES !== 'undefined' && Array.isArray(VOICE_LANGUAGES)) {
+      const match = VOICE_LANGUAGES.find(l => l.code.startsWith(langCode));
+      if (match) {
+        if (typeof selectedVoiceLang !== 'undefined') selectedVoiceLang = match.code;
+        globalThis.selectedVoiceLang = match.code;
+      }
+    }
+
     const voiceSelect = document.getElementById('voiceLangSelect');
     if (voiceSelect) {
+      if (!voiceSelect.children.length && typeof VOICE_LANGUAGES !== 'undefined') {
+        voiceSelect.innerHTML = VOICE_LANGUAGES.map(l => '<option value="' + l.code + '">' + l.native + ' (' + l.name + ')</option>').join('');
+      }
       const match = Array.from(voiceSelect.options).find(opt => opt.value.startsWith(langCode));
-      if (match) voiceSelect.value = match.value;
+      if (match) {
+        voiceSelect.value = match.value;
+        if (typeof selectedVoiceLang !== 'undefined') selectedVoiceLang = match.value;
+        globalThis.selectedVoiceLang = match.value;
+      }
+    }
+
+    if (typeof renderVoiceSummaryModal === 'function') {
+      const voiceDialog = document.getElementById('voiceSummaryDialog');
+      if (voiceDialog && voiceDialog.open) {
+        renderVoiceSummaryModal();
+      }
     }
 
     this.translatePage(langCode);
