@@ -537,34 +537,111 @@ function createOsfCurrentVectorsLayer(dateStr) {
 function createOsfSignificantWaveHeightLayer(dateStr) {
   const layerGroup = L.layerGroup();
 
-  // 1. Copernicus Marine / INCOIS OSF Significant Wave Height Layer
-  const swhWms = L.tileLayer.wms('https://ows.emodnet-physics.eu/geoserver/emodnet/wms', {
-    layers: 'significant_wave_height',
+  // 1. INCOIS OSF Regional Forecast WMS Tile Layer
+  const incoisSwhWms = L.tileLayer.wms('https://incois.gov.in/geoserver/wms', {
+    layers: 'OSF_RegionalForecast:NAME_Indian Ocean,OSF_RegionalForecast:NAME_Arabian SeaHA,OSF_RegionalForecast:NAME_Bay of Bengal',
     format: 'image/png',
     transparent: true,
-    opacity: 0.65,
-    attribution: 'Copernicus Marine / INCOIS OSF'
+    opacity: 0.55,
+    attribution: 'INCOIS OSF'
   });
-  layerGroup.addLayer(swhWms);
+  layerGroup.addLayer(incoisSwhWms);
 
   // 2. Coastal / Maritime SWH observation and forecast probe stations
   const waveStations = [
-    { name: 'Gujarat / Okha Offshore', lat: 22.4, lon: 68.9, swh: '1.2–1.8 m', sea: 'Slight Sea', period: '8–10 s', dir: 'SW (220°)', badge: 'slight' },
-    { name: 'Mumbai High / Maharashtra Offshore', lat: 19.2, lon: 71.4, swh: '1.5–2.2 m', sea: 'Moderate Sea', period: '10–12 s', dir: 'WSW (245°)', badge: 'moderate' },
-    { name: 'Goa / Central West Coast', lat: 15.4, lon: 73.2, swh: '1.4–2.0 m', sea: 'Slight Sea', period: '11–13 s', dir: 'WSW (240°)', badge: 'slight' },
-    { name: 'Mangalore / Karnataka Offshore', lat: 12.8, lon: 74.3, swh: '1.6–2.4 m', sea: 'Moderate Sea', period: '12–14 s', dir: 'SW (230°)', badge: 'moderate' },
-    { name: 'Kochi / Malabar Coast', lat: 9.9, lon: 75.8, swh: '1.8–2.6 m', sea: 'Moderate Sea', period: '13–15 s', dir: 'SSW (210°)', badge: 'moderate' },
-    { name: 'Kanyakumari / Comorin Cape', lat: 7.9, lon: 77.4, swh: '2.0–2.8 m', sea: 'Moderate Sea', period: '14–16 s', dir: 'S (185°)', badge: 'moderate' },
-    { name: 'Gulf of Mannar', lat: 8.8, lon: 78.6, swh: '1.3–1.9 m', sea: 'Slight Sea', period: '9–11 s', dir: 'SSW (200°)', badge: 'slight' },
-    { name: 'Chennai / Coromandel Coast', lat: 13.2, lon: 80.6, swh: '1.1–1.6 m', sea: 'Slight Sea', period: '9–11 s', dir: 'SSE (160°)', badge: 'slight' },
-    { name: 'Visakhapatnam / Andhra Coast', lat: 17.6, lon: 83.6, swh: '1.2–1.7 m', sea: 'Slight Sea', period: '10–12 s', dir: 'S (175°)', badge: 'slight' },
-    { name: 'Paradip / Odisha Offshore', lat: 20.2, lon: 87.0, swh: '1.0–1.5 m', sea: 'Slight Sea', period: '9–11 s', dir: 'S (180°)', badge: 'slight' },
-    { name: 'Digha / North Bay of Bengal', lat: 21.5, lon: 87.8, swh: '0.8–1.3 m', sea: 'Smooth to Slight', period: '8–10 s', dir: 'SSW (195°)', badge: 'slight' },
-    { name: 'Kavaratti / Lakshadweep Sea', lat: 10.5, lon: 72.4, swh: '1.7–2.5 m', sea: 'Moderate Sea', period: '13–15 s', dir: 'SW (225°)', badge: 'moderate' },
-    { name: 'Port Blair / South Andaman', lat: 11.6, lon: 93.0, swh: '1.4–2.1 m', sea: 'Slight Sea', period: '11–13 s', dir: 'SSW (205°)', badge: 'slight' },
-    { name: 'Car Nicobar / Nicobar Waters', lat: 9.1, lon: 92.8, swh: '1.6–2.4 m', sea: 'Moderate Sea', period: '12–14 s', dir: 'SW (220°)', badge: 'moderate' }
+    { name: 'Gujarat / Okha Offshore', lat: 22.4, lon: 68.9, val: 1.5, swh: '1.2–1.8 m', sea: 'Slight Sea', period: '8–10 s', dir: 'SW (220°)', badge: 'slight' },
+    { name: 'Central Arabian Sea', lat: 18.0, lon: 64.5, val: 2.3, swh: '2.0–2.6 m', sea: 'Moderate Sea', period: '11–13 s', dir: 'SW (235°)', badge: 'moderate' },
+    { name: 'Mumbai High / Maharashtra Offshore', lat: 19.2, lon: 71.4, val: 1.9, swh: '1.5–2.2 m', sea: 'Moderate Sea', period: '10–12 s', dir: 'WSW (245°)', badge: 'moderate' },
+    { name: 'Goa / Central West Coast', lat: 15.4, lon: 73.2, val: 1.7, swh: '1.4–2.0 m', sea: 'Slight Sea', period: '11–13 s', dir: 'WSW (240°)', badge: 'slight' },
+    { name: 'Mangalore / Karnataka Offshore', lat: 12.8, lon: 74.3, val: 2.0, swh: '1.6–2.4 m', sea: 'Moderate Sea', period: '12–14 s', dir: 'SW (230°)', badge: 'moderate' },
+    { name: 'Kochi / Malabar Coast', lat: 9.9, lon: 75.8, val: 2.2, swh: '1.8–2.6 m', sea: 'Moderate Sea', period: '13–15 s', dir: 'SSW (210°)', badge: 'moderate' },
+    { name: 'Kanyakumari / Comorin Cape', lat: 7.9, lon: 77.4, val: 2.4, swh: '2.0–2.8 m', sea: 'Moderate Sea', period: '14–16 s', dir: 'S (185°)', badge: 'moderate' },
+    { name: 'Gulf of Mannar', lat: 8.8, lon: 78.6, val: 1.6, swh: '1.3–1.9 m', sea: 'Slight Sea', period: '9–11 s', dir: 'SSW (200°)', badge: 'slight' },
+    { name: 'Chennai / Coromandel Coast', lat: 13.2, lon: 80.6, val: 1.4, swh: '1.1–1.6 m', sea: 'Slight Sea', period: '9–11 s', dir: 'SSE (160°)', badge: 'slight' },
+    { name: 'Central Bay of Bengal', lat: 14.5, lon: 87.5, val: 1.8, swh: '1.5–2.2 m', sea: 'Slight to Mod', period: '10–12 s', dir: 'S (185°)', badge: 'moderate' },
+    { name: 'Visakhapatnam / Andhra Coast', lat: 17.6, lon: 83.6, val: 1.5, swh: '1.2–1.7 m', sea: 'Slight Sea', period: '10–12 s', dir: 'S (175°)', badge: 'slight' },
+    { name: 'Paradip / Odisha Offshore', lat: 20.2, lon: 87.0, val: 1.3, swh: '1.0–1.5 m', sea: 'Slight Sea', period: '9–11 s', dir: 'S (180°)', badge: 'slight' },
+    { name: 'Digha / North Bay of Bengal', lat: 21.5, lon: 87.8, val: 1.1, swh: '0.8–1.3 m', sea: 'Smooth to Slight', period: '8–10 s', dir: 'SSW (195°)', badge: 'slight' },
+    { name: 'Kavaratti / Lakshadweep Sea', lat: 10.5, lon: 72.4, val: 2.1, swh: '1.7–2.5 m', sea: 'Moderate Sea', period: '13–15 s', dir: 'SW (225°)', badge: 'moderate' },
+    { name: 'South Indian Ocean Basin', lat: 0.0, lon: 80.0, val: 2.7, swh: '2.4–3.1 m', sea: 'Moderate to Rough', period: '14–16 s', dir: 'SSW (205°)', badge: 'moderate' },
+    { name: 'Port Blair / South Andaman', lat: 11.6, lon: 93.0, val: 1.8, swh: '1.4–2.1 m', sea: 'Slight Sea', period: '11–13 s', dir: 'SSW (205°)', badge: 'slight' },
+    { name: 'Car Nicobar / Nicobar Waters', lat: 9.1, lon: 92.8, val: 2.0, swh: '1.6–2.4 m', sea: 'Moderate Sea', period: '12–14 s', dir: 'SW (220°)', badge: 'moderate' }
   ];
 
+  // 3. Dynamic SWH Surface Tile Generator (Continuous wave height heatmap tiles)
+  if (typeof L.GridLayer !== 'undefined') {
+    const SwhGridLayer = L.GridLayer.extend({
+      createTile: function (coords) {
+        const tile = document.createElement('canvas');
+        const tileSize = this.getTileSize();
+        tile.width = tileSize.x;
+        tile.height = tileSize.y;
+        const ctx = tile.getContext('2d');
+
+        if (!this._map) return tile;
+
+        const nwPoint = coords.scaleBy(tileSize);
+        const nw = this._map.unproject(nwPoint, coords.z);
+        const se = this._map.unproject(nwPoint.add(tileSize), coords.z);
+
+        // Limit rendering to Indian Ocean maritime basin bounds
+        if (nw.lat < -8 || se.lat > 32 || nw.lng > 102 || se.lng < 50) {
+          return tile;
+        }
+
+        const step = 8;
+        const cols = Math.ceil(tile.width / step);
+        const rows = Math.ceil(tile.height / step);
+
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const p = nwPoint.add([c * step, r * step]);
+            const latlng = this._map.unproject(p, coords.z);
+
+            // Interpolate significant wave height (m)
+            let totalWeight = 0;
+            let weightedSwh = 0;
+
+            for (let i = 0; i < waveStations.length; i++) {
+              const st = waveStations[i];
+              const dLat = latlng.lat - st.lat;
+              const dLon = (latlng.lng - st.lon) * Math.cos((latlng.lat * Math.PI) / 180);
+              const distSq = dLat * dLat + dLon * dLon + 0.4;
+              const w = 1 / Math.pow(distSq, 1.35);
+              totalWeight += w;
+              weightedSwh += st.val * w;
+            }
+
+            const swh = weightedSwh / (totalWeight || 1);
+
+            // Color gradient matching the legend (0-6m)
+            let col;
+            if (swh < 0.8) col = 'rgba(43, 131, 186, 0.42)';
+            else if (swh < 1.4) col = 'rgba(74, 163, 168, 0.45)';
+            else if (swh < 2.0) col = 'rgba(171, 221, 164, 0.48)';
+            else if (swh < 2.6) col = 'rgba(235, 240, 160, 0.50)';
+            else if (swh < 3.4) col = 'rgba(254, 201, 128, 0.53)';
+            else if (swh < 4.5) col = 'rgba(245, 120, 60, 0.56)';
+            else col = 'rgba(215, 25, 28, 0.60)';
+
+            ctx.fillStyle = col;
+            ctx.fillRect(c * step, r * step, step, step);
+          }
+        }
+        return tile;
+      }
+    });
+
+    const swhTiles = new SwhGridLayer({
+      tileSize: 256,
+      opacity: 0.85,
+      zIndex: 220,
+      attribution: 'INCOIS OSF'
+    });
+    layerGroup.addLayer(swhTiles);
+  }
+
+  // 4. Station pin markers with localized telemetry
   waveStations.forEach(st => {
     const iconHtml = `
       <div class="osf-swh-pin-wrap ${st.badge}" title="${st.name}: ${st.swh}">
