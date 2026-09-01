@@ -46,7 +46,14 @@ var severityLabel = {warning:'Warning',alert:'Alert',watch:'Watch',noThreat:'No 
     function renderSeverityBoard(id, hazardName, group) {
       const el = ids(id); if (!el) return;
       const states = group?.states?.length ? group.states : legacyStateSummaries(group || {});
-      if (!states.length) { el.innerHTML = '<span class="empty">No active district advisory</span>'; return; }
+      const hasGroupData = Boolean(group?.issueDate || states.length || group?.warning?.length || group?.alert?.length || group?.watch?.length || group?.noThreat?.length);
+      if (!states.length) {
+        const emptyMsg = hasGroupData 
+          ? (globalThis.i18n?.t('osf.no_active_advisory', 'No active district advisory') || 'No active district advisory') 
+          : (globalThis.i18n?.t('osf.forecast_unavailable', 'Forecast Information Unavailable') || 'Forecast Information Unavailable');
+        el.innerHTML = `<span class="empty">${emptyMsg}</span>`;
+        return;
+      }
       el.replaceChildren(...severityOrder.map(level => {
         const row = document.createElement('div'); row.className = 'severity-row';
         const label = document.createElement('span'); label.className = `severity-row-label ${level}`;

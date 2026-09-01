@@ -18,6 +18,8 @@ const APP_LANGUAGES = Object.freeze([
 
 const I18N_DICTIONARY = {
   en: {
+    'osf.forecast_unavailable': 'Forecast Information Unavailable',
+    'osf.no_active_advisory': 'No active district advisory',
     'brand.title': 'Ocean Watch',
     'header.title': 'Coastal Advisory Status',
     'header.subtitle': 'Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone',
@@ -256,6 +258,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'A state may appear under multiple levels because district and coastal-stretch conditions differ.'
   },
   hi: {
+    'osf.forecast_unavailable': 'पूर्वानुमान जानकारी उपलब्ध नहीं है',
+    'osf.no_active_advisory': 'कोई सक्रिय जिला परामर्श नहीं',
     'brand.title': 'ओशन वॉच',
     'header.title': 'तटीय चेतावनी स्थिति',
     'header.subtitle': 'सुनामी · चक्रवात · तूफान की लहरें · समुद्री राज्य पूर्वानुमान · संभावित मत्स्य पालन क्षेत्र',
@@ -494,6 +498,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'एक राज्य कई स्तरों के तहत दिखाई दे सकता है क्योंकि जिले और तटीय क्षेत्र की स्थितियाँ भिन्न हो सकती हैं।'
   },
   ta: {
+    'osf.forecast_unavailable': 'முன்னறிவிப்பு தகவல் கிடைக்கவில்லை',
+    'osf.no_active_advisory': 'செயலில் உள்ள மாவட்ட எச்சரிக்கை எதுவும் இல்லை',
     'brand.title': 'ஓஷன் வாட்ச்',
     'header.title': 'கடலோர எச்சரிக்கை நிலை',
     'header.subtitle': 'சுனாமி · புயல் · அலை சீற்றம் · கடல் நிலை முன்னறிவிப்பு · மீன்பிடி மண்டலம்',
@@ -732,6 +738,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'மாவட்டம் மற்றும் கடற்கரை பகுதி நிலைமைகள் மாறுபடுவதால் ஒரு மாநிலம் பல எச்சரிக்கை நிலைகளில் தோன்றக்கூடும்.'
   },
   te: {
+    'osf.forecast_unavailable': 'సూచన సమాచారం అందుబాటులో లేదు',
+    'osf.no_active_advisory': 'ఎటువంటి క్రియాశీల జిల్లా హెచ్చరిక లేదు',
     'brand.title': 'ఓషన్ వాచ్',
     'header.title': 'తీరప్రాంత హెచ్చరికల స్థితి',
     'header.subtitle': 'సునామీ · తుఫాను · అలల ఉధృతి · సముద్ర స్థితి సూచన · చేపల వేట మండలం',
@@ -970,6 +978,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'జిల్లా మరియు తీరప్రాంత పరిస్థితులు భిన్నంగా ఉండటం వల్ల ఒక రాష్ట్రం బహుళ స్థాయిలలో కనిపించవచ్చు.'
   },
   ml: {
+    'osf.forecast_unavailable': 'പ്രവചന വിവരങ്ങൾ ലഭ്യമല്ല',
+    'osf.no_active_advisory': 'സജീവമായ ജില്ലാ മുന്നറിയിപ്പുകളൊന്നുമില്ല',
     'brand.title': 'ഓഷ്യൻ വാച്ച്',
     'header.title': 'തീരദേശ മുന്നറിയിപ്പ് നില',
     'header.subtitle': 'സുനാമി · ചുഴലിക്കാറ്റ് · കടലാക്രമണം · സമുദ്രാവസ്ഥ പ്രവചനം · മത്സ്യബന്ധന മേഖല',
@@ -1208,6 +1218,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'ജില്ലാ, തീരദേശ സാഹചര്യങ്ങൾ വ്യത്യസ്തമായതിനാൽ ഒരു സംസ്ഥാനം ഒന്നിലധികം മുന്നറിയിപ്പ് തലങ്ങളിൽ പ്രത്യക്ഷപ്പെടാം.'
   },
   bn: {
+    'osf.forecast_unavailable': 'পূর্বাভাসের তথ্য পাওয়া যায়নি',
+    'osf.no_active_advisory': 'কোনো সক্রিয় জেলা সতর্কতা নেই',
     'brand.title': 'ওশান ওয়াচ',
     'header.title': 'উপকূলীয় সতর্কবার্তা স্থিতি',
     'header.subtitle': 'সুনামি · ঘূর্ণিঝড় · জলোচ্ছ্বাস · সমুদ্রাবস্থার পূর্বাভাস · সম্ভাব্য মৎস্য অঞ্চল',
@@ -1446,6 +1458,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'জেলা এবং উপকূলীয় অঞ্চলের পরিস্থিতি ভিন্ন হওয়ার কারণে একটি রাজ্য একাধিক সতর্কবার্তার অধীনে উপস্থিত হতে পারে।'
   },
   mr: {
+    'osf.forecast_unavailable': 'अंदाज माहिती उपलब्ध नाही',
+    'osf.no_active_advisory': 'कोणताही सक्रिय जिल्हा सल्ला नाही',
     'brand.title': 'ओशन वॉच',
     'header.title': 'किनारपट्टी इशारा स्थिती',
     'header.subtitle': 'सुनामी · चक्रीवादळ · वादळी लाटा · समुद्र स्थिती अंदाज · संभाव्य मत्स्य क्षेत्र',
@@ -1684,6 +1698,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'जिल्हा आणि किनारपट्टीची परिस्थिती भिन्न असल्याने एक राज्य अनेक पातळींमध्ये दिसू शकते.'
   },
   gu: {
+    'osf.forecast_unavailable': 'આગાહી માહિતી ઉપલબ્ધ નથી',
+    'osf.no_active_advisory': 'કોઈ સક્રિય જિલ્લા સલાહ નથી',
     'brand.title': 'ઓશન વોચ',
     'header.title': 'દરિયાકાંઠા ચેતવણી સ્થિતિ',
     'header.subtitle': 'સુનામી · વાવાઝોડું · મોજાનું તોફાન · દરિયાઈ સ્થિતિ આગાહી · સંભવિત મત્સ્ય ક્ષેત્ર',
@@ -1910,6 +1926,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'જિલ્લા અને દરિયાકાંઠાની પરિસ્થિતિ અલગ હોવાથી એક રાજ્ય બહુવિધ સ્તરો હેઠળ દેખાઈ શકે છે.'
   },
   or: {
+    'osf.forecast_unavailable': 'ପୂର୍ବାନୁମାନ ସୂଚନା ଉପଲବ୍ଧ ନାହିଁ',
+    'osf.no_active_advisory': 'କୌଣସି ସକ୍ରିୟ ଜିଲ୍ଲା ପରାମର୍ଶ ନାହିଁ',
     'brand.title': 'ଓସେନ୍ ୱାଚ୍',
     'header.title': 'ଉପକୂଳ ସତର୍କତା ସ୍ଥିତି',
     'header.subtitle': 'ସୁନାମି · ବାତ୍ୟା · ସାମୁଦ୍ରିକ ଜୁଆର · ସମୁଦ୍ର ଅବସ୍ଥା ପୂର୍ବାନୁମାନ · ମତ୍ସ୍ୟ ଧରିବା କ୍ଷେତ୍ର',
@@ -2148,6 +2166,8 @@ const I18N_DICTIONARY = {
     'osf.advisory_note': 'ଜିଲ୍ଲା ଏବଂ ଉପକୂଳବର୍ତ୍ତୀ ଅଞ୍ଚଳର ପରିସ୍ଥିତି ଭିନ୍ନ ହୋଇଥିବାରୁ ଗୋଟିଏ ରାଜ୍ୟ ଏକାଧିକ ସ୍ତର ଅଧୀନରେ ଦେଖାଯାଇପାରେ।'
   },
   kn: {
+    'osf.forecast_unavailable': 'ಮುನ್ಸೂಚನೆ ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ',
+    'osf.no_active_advisory': 'ಯಾವುದೇ ಸಕ್ರಿಯ ಜಿಲ್ಲಾ ಸಲಹೆ ಇಲ್ಲ',
     'brand.title': 'ಓಷನ್ ವಾಚ್',
     'header.title': 'ಕರಾವಳಿ ಎಚ್ಚರಿಕೆ ಸ್ಥಿತಿ',
     'header.subtitle': 'ಸುನಾಮಿ · ಚಂಡಮಾರುತ · ಅಲೆಗಳ ಅಬ್ಬರ · ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ · ಸಂಭಾವ್ಯ ಮೀನುಗಾರಿಕಾ ವಲಯ',

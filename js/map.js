@@ -182,7 +182,8 @@ function renderOsfDistrictPopup(district, state, serviceEntries, cumulativeLevel
         badgesHtml = `<div class="osf-metrics-strip">${badges.join('')}</div>`;
       }
     }
-    const messageHtml = messages.length ? messages.map(m => `<p>${escapeHtml(m)}</p>`).join('') : '<p class="osf-safe-msg">✓ No active threat or advisory in this coastal district.</p>';
+    const hasGroupData = Boolean(entry.group?.issueDate || (entry.group?.states && entry.group.states.length) || (entry.group?.warning && entry.group.warning.length) || (entry.group?.alert && entry.group.alert.length) || (entry.group?.watch && entry.group.watch.length) || (entry.group?.noThreat && entry.group.noThreat.length));
+    const messageHtml = messages.length ? messages.map(m => `<p>${escapeHtml(m)}</p>`).join('') : (hasGroupData ? '<p class="osf-safe-msg">✓ No active advisory issued for this coastal district.</p>' : '<p class="osf-safe-msg" style="color:var(--muted);">ℹ Forecast Information Unavailable</p>');
     const isActive = (idx === activeIdx);
 
     return `
@@ -504,8 +505,10 @@ function createOsfCurrentVectorsLayer(dateStr) {
 
   nodes.forEach(node => {
     const iconHtml = `
-      <div class="osf-cur-arrow-wrap" style="transform: rotate(${node.dir}deg);" title="${node.name}: ${node.speed}">
-        <span class="osf-cur-arrow">➔</span>
+      <div class="osf-cur-arrow-wrap" style="transform: rotate(${node.dir}deg);" title="${escapeHtml(node.name)}: ${escapeHtml(node.speed)} (${node.dir}°)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+          <path d="M12 2L19 11H14V22H10V11H5L12 2Z" fill="#ffffff"/>
+        </svg>
       </div>
     `;
     const icon = L.divIcon({
@@ -542,8 +545,8 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
     layers: 'OSF_RegionalForecast:NAME_Indian Ocean,OSF_RegionalForecast:NAME_Arabian SeaHA,OSF_RegionalForecast:NAME_Bay of Bengal',
     format: 'image/png',
     transparent: true,
-    opacity: 0.55,
-    attribution: 'INCOIS OSF'
+    opacity: 0.35,
+    attribution: `INCOIS SWH ${dateStr}`
   });
   layerGroup.addLayer(incoisSwhWms);
 
@@ -616,13 +619,13 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
 
             // Color gradient matching the legend (0-6m)
             let col;
-            if (swh < 0.8) col = 'rgba(43, 131, 186, 0.42)';
-            else if (swh < 1.4) col = 'rgba(74, 163, 168, 0.45)';
-            else if (swh < 2.0) col = 'rgba(171, 221, 164, 0.48)';
-            else if (swh < 2.6) col = 'rgba(235, 240, 160, 0.50)';
-            else if (swh < 3.4) col = 'rgba(254, 201, 128, 0.53)';
-            else if (swh < 4.5) col = 'rgba(245, 120, 60, 0.56)';
-            else col = 'rgba(215, 25, 28, 0.60)';
+            if (swh < 0.8) col = 'rgba(43, 131, 186, 0.25)';
+            else if (swh < 1.4) col = 'rgba(74, 163, 168, 0.28)';
+            else if (swh < 2.0) col = 'rgba(171, 221, 164, 0.32)';
+            else if (swh < 2.6) col = 'rgba(235, 240, 160, 0.36)';
+            else if (swh < 3.4) col = 'rgba(254, 201, 128, 0.40)';
+            else if (swh < 4.5) col = 'rgba(245, 120, 60, 0.44)';
+            else col = 'rgba(215, 25, 28, 0.48)';
 
             ctx.fillStyle = col;
             ctx.fillRect(c * step, r * step, step, step);
@@ -634,9 +637,9 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
 
     const swhTiles = new SwhGridLayer({
       tileSize: 256,
-      opacity: 0.85,
+      opacity: 0.65,
       zIndex: 220,
-      attribution: 'INCOIS OSF'
+      attribution: `INCOIS SWH ${dateStr}`
     });
     layerGroup.addLayer(swhTiles);
   }
