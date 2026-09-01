@@ -423,6 +423,9 @@ async function buildCumulativeOsfMapLayers(data) {
   if (osfCumulativeLayer && osfMap.hasLayer(osfCumulativeLayer)) osfMap.removeLayer(osfCumulativeLayer);
   if (osfTidalLayer && osfMap.hasLayer(osfTidalLayer)) osfMap.removeLayer(osfTidalLayer);
   Object.values(osfServiceLayers).forEach(layer => { if (osfMap.hasLayer(layer)) osfMap.removeLayer(layer); });
+  if (globalThis._osfOceanLayers) {
+    Object.values(globalThis._osfOceanLayers).forEach(layer => { if (osfMap.hasLayer(layer)) osfMap.removeLayer(layer); });
+  }
   const polygonData = await loadOsfDistrictPolygons();
   const services = [['High Wave',data?.highWave],['Swell Surge',data?.swellSurge],['Ocean Currents',data?.oceanCurrent]];
   osfServiceLayers = {};
@@ -540,12 +543,12 @@ function createOsfCurrentVectorsLayer(dateStr) {
 function createOsfSignificantWaveHeightLayer(dateStr) {
   const layerGroup = L.layerGroup();
 
-  // 1. INCOIS OSF Regional Forecast WMS Tile Layer
+  // 1. INCOIS OSF Regional Forecast WMS Tile Layer (clipped to oceans)
   const incoisSwhWms = L.tileLayer.wms('https://incois.gov.in/geoserver/wms', {
     layers: 'OSF_RegionalForecast:NAME_Indian Ocean,OSF_RegionalForecast:NAME_Arabian SeaHA,OSF_RegionalForecast:NAME_Bay of Bengal',
     format: 'image/png',
     transparent: true,
-    opacity: 0.35,
+    opacity: 0.50,
     attribution: `INCOIS SWH ${dateStr}`
   });
   layerGroup.addLayer(incoisSwhWms);
@@ -571,80 +574,7 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
     { name: 'Car Nicobar / Nicobar Waters', lat: 9.1, lon: 92.8, val: 2.0, swh: '1.6–2.4 m', sea: 'Moderate Sea', period: '12–14 s', dir: 'SW (220°)', badge: 'moderate' }
   ];
 
-  // 3. Dynamic SWH Surface Tile Generator (Continuous wave height heatmap tiles)
-  if (typeof L.GridLayer !== 'undefined') {
-    const SwhGridLayer = L.GridLayer.extend({
-      createTile: function (coords) {
-        const tile = document.createElement('canvas');
-        const tileSize = this.getTileSize();
-        tile.width = tileSize.x;
-        tile.height = tileSize.y;
-        const ctx = tile.getContext('2d');
-
-        if (!this._map) return tile;
-
-        const nwPoint = coords.scaleBy(tileSize);
-        const nw = this._map.unproject(nwPoint, coords.z);
-        const se = this._map.unproject(nwPoint.add(tileSize), coords.z);
-
-        // Limit rendering to Indian Ocean maritime basin bounds
-        if (nw.lat < -8 || se.lat > 32 || nw.lng > 102 || se.lng < 50) {
-          return tile;
-        }
-
-        const step = 8;
-        const cols = Math.ceil(tile.width / step);
-        const rows = Math.ceil(tile.height / step);
-
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            const p = nwPoint.add([c * step, r * step]);
-            const latlng = this._map.unproject(p, coords.z);
-
-            // Interpolate significant wave height (m)
-            let totalWeight = 0;
-            let weightedSwh = 0;
-
-            for (let i = 0; i < waveStations.length; i++) {
-              const st = waveStations[i];
-              const dLat = latlng.lat - st.lat;
-              const dLon = (latlng.lng - st.lon) * Math.cos((latlng.lat * Math.PI) / 180);
-              const distSq = dLat * dLat + dLon * dLon + 0.4;
-              const w = 1 / Math.pow(distSq, 1.35);
-              totalWeight += w;
-              weightedSwh += st.val * w;
-            }
-
-            const swh = weightedSwh / (totalWeight || 1);
-
-            // Color gradient matching the legend (0-6m)
-            let col;
-            if (swh < 0.8) col = 'rgba(43, 131, 186, 0.25)';
-            else if (swh < 1.4) col = 'rgba(74, 163, 168, 0.28)';
-            else if (swh < 2.0) col = 'rgba(171, 221, 164, 0.32)';
-            else if (swh < 2.6) col = 'rgba(235, 240, 160, 0.36)';
-            else if (swh < 3.4) col = 'rgba(254, 201, 128, 0.40)';
-            else if (swh < 4.5) col = 'rgba(245, 120, 60, 0.44)';
-            else col = 'rgba(215, 25, 28, 0.48)';
-
-            ctx.fillStyle = col;
-            ctx.fillRect(c * step, r * step, step, step);
-          }
-        }
-        return tile;
-      }
-    });
-
-    const swhTiles = new SwhGridLayer({
-      tileSize: 256,
-      opacity: 0.65,
-      zIndex: 220,
-      attribution: `INCOIS SWH ${dateStr}`
-    });
-    layerGroup.addLayer(swhTiles);
-  }
-
-  // 4. Station pin markers with localized telemetry
+  // 3. Station pin markers with localized telemetry
   waveStations.forEach(st => {
     const iconHtml = `
       <div class="osf-swh-pin-wrap ${st.badge}" title="${st.name}: ${st.swh}">
@@ -723,6 +653,7 @@ function createIncoisOceanWmsLayers() {
   });
 
   const oceanWmsLayers = createIncoisOceanWmsLayers();
+  globalThis._osfOceanLayers = oceanWmsLayers;
 
   const osfOverlays = {
     ...osfServiceLayers,
@@ -836,8 +767,21 @@ async function openOsfMap(service = null) {
           osfSelectedServices.delete(name);
         }
       });
+      if (globalThis._osfOceanLayers) {
+        Object.entries(globalThis._osfOceanLayers).forEach(([name, layer]) => {
+          if (osfRequestedService && (osfRequestedService === name || name.includes(osfRequestedService))) {
+            if (!map.hasLayer(layer)) map.addLayer(layer);
+          } else {
+            if (map.hasLayer(layer)) map.removeLayer(layer);
+          }
+        });
+      }
       updateOsfComposite();
       fitOsfVisibleBounds();
+    }
+    const swhLeg = ids('osfSwhLegend');
+    if (swhLeg) {
+      swhLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Significant Wave Height (SWH)'] && map.hasLayer(globalThis._osfOceanLayers['Significant Wave Height (SWH)'])) ? 'inline-flex' : 'none';
     }
     const banner = ids('osfTideBanner');
     if (banner) {
