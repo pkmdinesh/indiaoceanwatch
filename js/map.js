@@ -543,15 +543,14 @@ function createOsfCurrentVectorsLayer(dateStr) {
 function createOsfSignificantWaveHeightLayer(dateStr) {
   const layerGroup = L.layerGroup();
 
-  // 1. INCOIS OSF Regional Forecast WMS Tile Layer (clipped to oceans)
-  const incoisSwhWms = L.tileLayer.wms('https://incois.gov.in/geoserver/wms', {
-    layers: 'OSF_RegionalForecast:NAME_Indian Ocean,OSF_RegionalForecast:NAME_Arabian SeaHA,OSF_RegionalForecast:NAME_Bay of Bengal',
+  // 1. Copernicus Marine / Earth Engine WMS Layer (ocean-clipped, no footer attribution)
+  const swhWms = L.tileLayer.wms('https://ows.emodnet-physics.eu/geoserver/emodnet/wms', {
+    layers: 'significant_wave_height',
     format: 'image/png',
     transparent: true,
-    opacity: 0.50,
-    attribution: `INCOIS SWH ${dateStr}`
+    opacity: 0.60
   });
-  layerGroup.addLayer(incoisSwhWms);
+  layerGroup.addLayer(swhWms);
 
   // 2. Coastal / Maritime SWH observation and forecast probe stations
   const waveStations = [
