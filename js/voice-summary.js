@@ -956,12 +956,6 @@ function renderVoiceSummaryModal() {
     });
   }
 
-  // If user hasn't explicitly chosen a voice lang in the dropdown during this modal session, sync to page language
-  if (selectedVoiceLang && !selectedVoiceLang.startsWith(currentAppLang)) {
-    const matchingVoice = VOICE_LANGUAGES.find(l => l.code.startsWith(currentAppLang)) || VOICE_LANGUAGES[0];
-    selectedVoiceLang = matchingVoice.code;
-  }
-
   if (langSelect && selectedVoiceLang) {
     langSelect.value = selectedVoiceLang;
   }

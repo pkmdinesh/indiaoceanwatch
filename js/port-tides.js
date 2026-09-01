@@ -1363,7 +1363,7 @@ function initPortTides() {
     const optGroups = Object.keys(stateGroups).sort().map(state => {
       const sortedInState = stateGroups[state].slice().sort((a, b) => a.name.localeCompare(b.name));
       const options = sortedInState.map(p => `
-        <option value="${p.id}" ${p.id === selectedPortId ? 'selected' : ''}>${p.name}</option>
+        <option value="${p.id}" ${p.id === selectedPortId ? 'selected' : ''} style="font-weight:700;">${p.name}</option>
       `).join('');
 
       return `<optgroup label="${state}">${options}</optgroup>`;

@@ -171,9 +171,15 @@ function createPfzVectorLayers(data) {
     pointToLayer:(feature,latlng) => L.circleMarker(latlng,{pane:'pfzCentrePane',radius:3.5,color:'#fff',weight:1.2,fillColor:'#ff8c00',fillOpacity:1,className:'pfz-landing-centre-marker'}),
     onEachFeature:(feature,layer) => {
       const p=feature.properties || {};
-      layer.bindPopup(pfzPopup(pfzProperty(p,'LC_NAME') || 'Landing centre',[
-        pfzProperty(p,'DIST_NAME'),
-        pfzProperty(p,'SECTOR_NAM'),
+      const lcRaw = pfzProperty(p,'LC_NAME') || 'Landing centre';
+      const lcTrans = globalThis.i18n?.translateLandingCenterName(lcRaw) || lcRaw;
+      const distRaw = pfzProperty(p,'DIST_NAME') || '';
+      const distTrans = distRaw ? (globalThis.i18n?.translateDistrictName(distRaw) || distRaw) : '';
+      const secRaw = pfzProperty(p,'SECTOR_NAM') || '';
+      const secTrans = secRaw ? (globalThis.i18n?.translateSectorName(secRaw) || secRaw) : '';
+      layer.bindPopup(pfzPopup(lcTrans,[
+        distTrans,
+        secTrans,
         pfzProperty(p,'FORECAST_D') ? `Forecast: ${pfzProperty(p,'FORECAST_D')}` : '',
         pfzProperty(p,'VALIDITY_D') ? `Valid: ${pfzProperty(p,'VALIDITY_D')}` : ''
       ]), PFZ_POPUP_OPTIONS);

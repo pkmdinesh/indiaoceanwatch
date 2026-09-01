@@ -101,7 +101,14 @@
 .thermal-bar{display:inline-block;width:65px;height:9px;border-radius:3px;border:1px solid rgba(0,0,0,.15)}
 .thermal-bar.sst-bar{background:linear-gradient(90deg,#0000ff,#00ffff,#00ff00,#ffff00,#ff0000)}
 .thermal-bar.tchp-bar{background:linear-gradient(90deg,#00008b,#0000ff,#00ffff,#ffff00,#ff7f00,#ff0000)}
+.thermal-bar.swh-bar{background:linear-gradient(90deg,#001f5c,#0077be,#00b4d8,#52b788,#ffd166,#ef476f,#7b2cbf)}
 .thermal-range{font-size:9.5px;color:var(--ink);font-weight:700}
+.osf-swh-pin-wrap{display:grid;place-items:center;min-width:32px;height:24px;padding:0 5px;background:rgba(8,47,91,.90);color:#fff;border:1.5px solid #fff;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.35);cursor:pointer;font-size:10px;font-weight:900;white-space:nowrap}
+.osf-swh-pin-wrap.slight{background:#0077be}
+.osf-swh-pin-wrap.moderate{background:#2a9d8f}
+.osf-swh-pin-wrap.rough{background:#e76f51}
+.osf-swh-pin-wrap.very-rough{background:#d62828}
+.osf-swh-pin-wrap.high{background:#6a040f}
 .osf-cur-arrow-wrap{display:grid;place-items:center;width:24px;height:24px;background:rgba(8,127,132,.85);color:#fff;border:1.5px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.25);cursor:pointer;transition:transform .15s}
 .osf-cur-arrow-wrap:hover{background:#004080}
 .osf-cur-arrow{font-size:12px;line-height:1}
@@ -228,8 +235,9 @@
 /* Wind & Tide Port Forecast Card */
 .tide-forecast{display:flex;flex-direction:column;gap:8px}
 .tide-forecast .forecast-title{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
-.port-tide-controls{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;min-width:0;max-width:100%;justify-content:flex-end}
-.port-select-dropdown{flex:1 1 auto;min-width:95px;max-width:145px;min-height:30px;height:30px;padding:3px 5px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font:750 11px/1.2 inherit;cursor:pointer;box-sizing:border-box;text-overflow:ellipsis}
+.port-select-dropdown{flex:1 1 auto;min-width:95px;max-width:145px;min-height:30px;height:30px;padding:3px 5px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font:750 11px/1.2 inherit;font-weight:750;cursor:pointer;box-sizing:border-box;text-overflow:ellipsis}
+.port-select-dropdown option{font-weight:750;color:var(--ink)}
+.port-select-dropdown optgroup{font-weight:800;color:var(--muted)}
 .port-action-btn{min-height:30px!important;height:30px!important;padding:4px 7px!important;font-size:10.5px!important;border-radius:7px!important;margin-left:0!important;flex:0 0 auto!important;box-sizing:border-box;white-space:nowrap}
 @media(max-width:520px){
   .tide-forecast .forecast-title{flex-direction:column;align-items:stretch;gap:5px}

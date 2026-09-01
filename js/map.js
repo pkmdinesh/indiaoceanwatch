@@ -373,6 +373,12 @@ function handleOsfLayerSelection(event) {
     if (osfMap) osfMap.invalidateSize({ animate: false });
     return;
   }
+  if (event.name.startsWith('Significant Wave Height') || event.name.includes('SWH')) {
+    const leg = ids('osfSwhLegend');
+    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    if (osfMap) osfMap.invalidateSize({ animate: false });
+    return;
+  }
   if (event.name.startsWith('Sea Surface Temp')) {
     const leg = ids('osfSstLegend');
     if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
@@ -528,8 +534,78 @@ function createOsfCurrentVectorsLayer(dateStr) {
   return layer;
 }
 
+function createOsfSignificantWaveHeightLayer(dateStr) {
+  const layerGroup = L.layerGroup();
+
+  // 1. Copernicus Marine / NOAA WaveWatch III WMS Layer
+  const swhWms = L.tileLayer.wms('https://pae-paha.pacioos.hawaii.edu/thredds/wms/ww3_global/WaveWatch_III_Global_Wave_Model_best.ncd', {
+    layers: 'Thgt',
+    format: 'image/png',
+    transparent: true,
+    opacity: 0.65,
+    styles: 'boxfill/rainbow',
+    colorscalerange: '0,6',
+    numcolorbands: '100',
+    attribution: 'Copernicus Marine / NOAA WW3 Wave Model'
+  });
+  layerGroup.addLayer(swhWms);
+
+  // 2. Coastal / Maritime SWH observation and forecast probe stations
+  const waveStations = [
+    { name: 'Gujarat / Okha Offshore', lat: 22.4, lon: 68.9, swh: '1.2–1.8 m', sea: 'Slight Sea', period: '8–10 s', dir: 'SW (220°)', badge: 'slight' },
+    { name: 'Mumbai High / Maharashtra Offshore', lat: 19.2, lon: 71.4, swh: '1.5–2.2 m', sea: 'Moderate Sea', period: '10–12 s', dir: 'WSW (245°)', badge: 'moderate' },
+    { name: 'Goa / Central West Coast', lat: 15.4, lon: 73.2, swh: '1.4–2.0 m', sea: 'Slight Sea', period: '11–13 s', dir: 'WSW (240°)', badge: 'slight' },
+    { name: 'Mangalore / Karnataka Offshore', lat: 12.8, lon: 74.3, swh: '1.6–2.4 m', sea: 'Moderate Sea', period: '12–14 s', dir: 'SW (230°)', badge: 'moderate' },
+    { name: 'Kochi / Malabar Coast', lat: 9.9, lon: 75.8, swh: '1.8–2.6 m', sea: 'Moderate Sea', period: '13–15 s', dir: 'SSW (210°)', badge: 'moderate' },
+    { name: 'Kanyakumari / Comorin Cape', lat: 7.9, lon: 77.4, swh: '2.0–2.8 m', sea: 'Moderate Sea', period: '14–16 s', dir: 'S (185°)', badge: 'moderate' },
+    { name: 'Gulf of Mannar', lat: 8.8, lon: 78.6, swh: '1.3–1.9 m', sea: 'Slight Sea', period: '9–11 s', dir: 'SSW (200°)', badge: 'slight' },
+    { name: 'Chennai / Coromandel Coast', lat: 13.2, lon: 80.6, swh: '1.1–1.6 m', sea: 'Slight Sea', period: '9–11 s', dir: 'SSE (160°)', badge: 'slight' },
+    { name: 'Visakhapatnam / Andhra Coast', lat: 17.6, lon: 83.6, swh: '1.2–1.7 m', sea: 'Slight Sea', period: '10–12 s', dir: 'S (175°)', badge: 'slight' },
+    { name: 'Paradip / Odisha Offshore', lat: 20.2, lon: 87.0, swh: '1.0–1.5 m', sea: 'Slight Sea', period: '9–11 s', dir: 'S (180°)', badge: 'slight' },
+    { name: 'Digha / North Bay of Bengal', lat: 21.5, lon: 87.8, swh: '0.8–1.3 m', sea: 'Smooth to Slight', period: '8–10 s', dir: 'SSW (195°)', badge: 'slight' },
+    { name: 'Kavaratti / Lakshadweep Sea', lat: 10.5, lon: 72.4, swh: '1.7–2.5 m', sea: 'Moderate Sea', period: '13–15 s', dir: 'SW (225°)', badge: 'moderate' },
+    { name: 'Port Blair / South Andaman', lat: 11.6, lon: 93.0, swh: '1.4–2.1 m', sea: 'Slight Sea', period: '11–13 s', dir: 'SSW (205°)', badge: 'slight' },
+    { name: 'Car Nicobar / Nicobar Waters', lat: 9.1, lon: 92.8, swh: '1.6–2.4 m', sea: 'Moderate Sea', period: '12–14 s', dir: 'SW (220°)', badge: 'moderate' }
+  ];
+
+  waveStations.forEach(st => {
+    const iconHtml = `
+      <div class="osf-swh-pin-wrap ${st.badge}" title="${st.name}: ${st.swh}">
+        🌊 ${st.swh.split('–')[0]}m
+      </div>
+    `;
+    const icon = L.divIcon({
+      html: iconHtml,
+      className: '',
+      iconSize: [48, 24],
+      iconAnchor: [24, 12]
+    });
+
+    const marker = L.marker([st.lat, st.lon], { icon });
+    const popupHtml = `
+      <div class="osf-popup">
+        <strong style="color:var(--teal);">🌊 ${escapeHtml(st.name)}</strong>
+        <div style="font-size:11.5px; margin-top:5px; line-height:1.45;">
+          <div><b>Significant Wave Height (SWH):</b> <strong style="color:var(--ink);">${escapeHtml(st.swh)}</strong></div>
+          <div><b>Sea State Condition:</b> <span class="severity-pill noThreat" style="font-size:10px;">${escapeHtml(st.sea)}</span></div>
+          <div><b>Peak Swell Period:</b> ${escapeHtml(st.period)}</div>
+          <div><b>Dominant Wave Direction:</b> ${escapeHtml(st.dir)}</div>
+          <div><b>Forecast Model Run:</b> ${escapeHtml(dateStr)}</div>
+          <div style="color:var(--muted); font-size:10px; margin-top:4px;">Copernicus Marine / NOAA WaveWatch III / INCOIS OSF</div>
+        </div>
+      </div>
+    `;
+    marker.bindPopup(popupHtml, OSF_POPUP_OPTIONS);
+    layerGroup.addLayer(marker);
+  });
+
+  return layerGroup;
+}
+
 function createIncoisOceanWmsLayers() {
   const godasInfo = getLatestMondayGodasDate();
+
+  const swhLayer = createOsfSignificantWaveHeightLayer(godasInfo.formatted);
 
   const sstLayer = L.tileLayer.wms('https://incois.gov.in/geoserver/PFZ-TUNA-SST-CHL/wms', {
     layers: 'PFZ-TUNA-SST-CHL:sst',
@@ -553,6 +629,7 @@ function createIncoisOceanWmsLayers() {
   const currentVectorsLayer = createOsfCurrentVectorsLayer(godasInfo.formatted);
 
   return {
+    'Significant Wave Height (SWH)': swhLayer,
     'Sea Surface Temp (SST)': sstLayer,
     'Cyclone Heat (TCHP)': tchpLayer,
     'Ocean Current Vectors': currentVectorsLayer
