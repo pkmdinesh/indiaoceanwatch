@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-01T07:46:54.326Z",
+  "updated": "2026-09-01T08:02:29.086Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -51,7 +51,7 @@
     },
     "or": {
       "file": "audio/bulletins/bulletin-or.mp3",
-      "size": 180480,
+      "size": 180672,
       "title": "INCOIS ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ (ଓଡ଼ିଆ)",
       "langCode": "or-IN"
     },
