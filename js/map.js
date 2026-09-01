@@ -537,16 +537,13 @@ function createOsfCurrentVectorsLayer(dateStr) {
 function createOsfSignificantWaveHeightLayer(dateStr) {
   const layerGroup = L.layerGroup();
 
-  // 1. Copernicus Marine / NOAA WaveWatch III WMS Layer
-  const swhWms = L.tileLayer.wms('https://pae-paha.pacioos.hawaii.edu/thredds/wms/ww3_global/WaveWatch_III_Global_Wave_Model_best.ncd', {
-    layers: 'Thgt',
+  // 1. Copernicus Marine / INCOIS OSF Significant Wave Height Layer
+  const swhWms = L.tileLayer.wms('https://ows.emodnet-physics.eu/geoserver/emodnet/wms', {
+    layers: 'significant_wave_height',
     format: 'image/png',
     transparent: true,
     opacity: 0.65,
-    styles: 'boxfill/rainbow',
-    colorscalerange: '0,6',
-    numcolorbands: '100',
-    attribution: 'Copernicus Marine / NOAA WW3 Wave Model'
+    attribution: 'Copernicus Marine / INCOIS OSF'
   });
   layerGroup.addLayer(swhWms);
 
@@ -591,7 +588,6 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
           <div><b>Peak Swell Period:</b> ${escapeHtml(st.period)}</div>
           <div><b>Dominant Wave Direction:</b> ${escapeHtml(st.dir)}</div>
           <div><b>Forecast Model Run:</b> ${escapeHtml(dateStr)}</div>
-          <div style="color:var(--muted); font-size:10px; margin-top:4px;">Copernicus Marine / NOAA WaveWatch III / INCOIS OSF</div>
         </div>
       </div>
     `;
