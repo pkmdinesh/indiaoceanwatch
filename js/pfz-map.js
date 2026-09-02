@@ -172,10 +172,10 @@ function createPfzVectorLayers(data) {
     onEachFeature:(feature,layer) => {
       const p=feature.properties || {};
       const lcRaw = pfzProperty(p,'LC_NAME') || 'Landing centre';
-      const lcTrans = globalThis.i18n?.translateLandingCenterName(lcRaw) || lcRaw;
+      const secRaw = pfzProperty(p,'SECTOR_NAM') || '';
+      const lcTrans = globalThis.i18n?.translateLandingCenterName(lcRaw, secRaw) || lcRaw;
       const distRaw = pfzProperty(p,'DIST_NAME') || '';
       const distTrans = distRaw ? (globalThis.i18n?.translateDistrictName(distRaw) || distRaw) : '';
-      const secRaw = pfzProperty(p,'SECTOR_NAM') || '';
       const secTrans = secRaw ? (globalThis.i18n?.translateSectorName(secRaw) || secRaw) : '';
       layer.bindPopup(pfzPopup(lcTrans,[
         distTrans,
