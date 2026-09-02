@@ -2,6 +2,10 @@
 
 Ocean Watch is a lightweight, accessible web dashboard for ocean advisories and coastal alerts, focused on the Indian Ocean region. It consolidates advisory severity, potential fishing zones (PFZ), cyclone and offshore forecasts, and delivers responsive, installable (PWA) user experiences for both desktop and mobile.
 
+Lightweight & Resilient: Vanilla JS/CSS without heavy framework bloat ensures fast load times even on slow 2G/3G coastal networks.
+PWA Ready & Localized: Clean multi-language translation architecture (data-i18n), Web Audio voice summary integration, offline PWA caching, and print styles.
+Multi-Hazard Aggregation: Successfully ingesting ITEWC Tsunami advisories, Seismic events (with GEBCO bathymetry & distance-to-coast enrichment), INCOIS High Wave & Swell Surge advisories, Marine Heatwaves (MHW), Coral Bleaching (CBAS), and Potential Fishing Zones (PFZ).
+
 ## Repository layout
 
 - `css/` — base, layout, component, and responsive styles
