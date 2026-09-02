@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02T02:31:59.336Z",
+  "updated": "2026-09-02T02:46:40.901Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -57,7 +57,7 @@
     },
     "kn": {
       "file": "audio/bulletins/bulletin-kn.mp3",
-      "size": 204096,
+      "size": 204288,
       "title": "INCOIS ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ (ಕನ್ನಡ)",
       "langCode": "kn-IN"
     }
