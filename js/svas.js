@@ -207,33 +207,38 @@
     var d = svasData.districts[districtName];
     var lang = getLang();
 
-    // 1. Render Summary Alert / Safe Banner
+    // 1. Render Summary Alert / Safe Banner based on Day-1 Status (Option B)
     var banner = document.getElementById('svasSummaryBanner');
     var bannerTitle = document.getElementById('svasBannerTitle');
     var bannerSub = document.getElementById('svasBannerSubtitle');
 
-    var hasAlert = d.overall.b4 === 'alert' || d.overall.b6 === 'alert' || d.overall.b7 === 'alert';
+    var dates = svasData.dates || [];
+    var day1_b4 = (d.matrix.b4 && d.matrix.b4[0] && d.matrix.b4[0].status === 'alert');
+    var day1_b6 = (d.matrix.b6 && d.matrix.b6[0] && d.matrix.b6[0].status === 'alert');
+    var day1_b7 = (d.matrix.b7 && d.matrix.b7[0] && d.matrix.b7[0].status === 'alert');
+    var hasDay1Alert = day1_b4 || day1_b6 || day1_b7;
 
     if (banner) {
-      banner.className = 'svas-summary-banner ' + (hasAlert ? 'status-alert' : 'status-safe');
+      banner.className = 'svas-summary-banner ' + (hasDay1Alert ? 'status-alert' : 'status-safe');
     }
 
     if (bannerTitle && bannerSub) {
-      if (hasAlert) {
-        bannerTitle.textContent = t('svas.banner_alert_title', '⚠️ High Overturning Risk: Sailing Restrictions in Effect');
+      var day1Date = dates[0] ? ' (' + dates[0] + ')' : '';
+      var day1Prefix = t('svas.day1', 'Day-1') + day1Date;
+      if (hasDay1Alert) {
+        bannerTitle.textContent = '⚠️ ' + day1Prefix + ': ' + t('svas.banner_alert_title', 'High Overturning Risk: Sailing Restrictions in Effect').replace(/^⚠️\s*/, '');
         var affected = [];
-        if (d.overall.b4 === 'alert') affected.push('< 4m');
-        if (d.overall.b6 === 'alert') affected.push('< 6m');
-        if (d.overall.b7 === 'alert') affected.push('< 7m');
+        if (day1_b4) affected.push('< 4m');
+        if (day1_b6) affected.push('< 6m');
+        if (day1_b7) affected.push('< 7m');
         bannerSub.textContent = t('svas.banner_alert_sub', 'Boats with width {sizes} should not venture out into restricted coastal sectors.').replace('{sizes}', affected.join(', '));
       } else {
-        bannerTitle.textContent = t('svas.banner_safe_title', '✅ Safe for All Small Vessel Categories');
-        bannerSub.textContent = t('svas.banner_safe_sub', 'Favorable sea conditions predicted across the 3-day forecast window.');
+        bannerTitle.textContent = '✅ ' + day1Prefix + ': ' + t('svas.banner_safe_title', 'Safe for All Small Vessel Categories').replace(/^✅\s*/, '');
+        bannerSub.textContent = t('svas.banner_safe_sub', 'Favorable sea conditions predicted across coastal waters.');
       }
     }
 
     // 2. Set Forecast Date Column Headers
-    var dates = svasData.dates || [];
     var col1 = document.getElementById('svasColDay1');
     var col2 = document.getElementById('svasColDay2');
     var col3 = document.getElementById('svasColDay3');
@@ -248,12 +253,10 @@
       var bodyHtml = '';
       BOAT_CATEGORIES.forEach(function (cat) {
         var days = d.matrix[cat.key] || [];
-        var overallStatus = d.overall[cat.key] || 'safe';
 
-        bodyHtml += '<tr class="svas-matrix-row ' + (overallStatus === 'alert' ? 'row-alert' : 'row-safe') + '">';
+        bodyHtml += '<tr class="svas-matrix-row">';
         bodyHtml += '<td class="svas-cat-cell">';
-        bodyHtml += '<div class="svas-cat-name"><strong>' + escapeHtml(t('svas.' + cat.id + '_craft', cat.defaultLabel)) + '</strong>';
-        bodyHtml += '<span class="svas-cat-badge ' + (overallStatus === 'alert' ? 'badge-alert' : 'badge-safe') + '">' + (overallStatus === 'alert' ? t('svas.badge_alert', 'Alert') : t('svas.badge_safe', 'Safe')) + '</span></div>';
+        bodyHtml += '<div class="svas-cat-name"><strong>' + escapeHtml(t('svas.' + cat.id + '_craft', cat.defaultLabel)) + '</strong></div>';
         bodyHtml += '<div class="svas-cat-desc">' + escapeHtml(t('svas.' + cat.id + '_craft_desc', cat.desc)) + '</div>';
         bodyHtml += '</td>';
 
@@ -266,13 +269,13 @@
             bodyHtml += '<div class="svas-cell-pill ' + (isAlert ? 'pill-alert' : 'pill-safe') + '">';
             if (isAlert) {
               bodyHtml += '<span class="svas-pill-icon">⚠️</span> <strong>' + t('svas.badge_alert', 'Alert') + '</strong>';
-              if (day.distance) {
-                bodyHtml += '<span class="svas-dist-badge">' + escapeHtml(day.distance) + '</span>';
-              }
             } else {
               bodyHtml += '<span class="svas-pill-icon">✅</span> <strong>' + t('svas.badge_safe', 'Safe') + '</strong>';
             }
             bodyHtml += '</div>';
+            if (isAlert && day.distance) {
+              bodyHtml += '<span class="svas-dist-badge">' + escapeHtml(day.distance) + '</span>';
+            }
             bodyHtml += '</td>';
           } else {
             bodyHtml += '<td class="svas-status-cell cell-empty">—</td>';
