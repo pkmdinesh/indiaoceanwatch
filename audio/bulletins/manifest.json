@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-03T19:01:44.951Z",
+  "updated": "2026-09-03T19:16:36.660Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -15,7 +15,7 @@
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 355584,
+      "size": 355392,
       "title": "INCOIS கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN"
     },
