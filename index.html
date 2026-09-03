@@ -63,9 +63,9 @@
     .active-advisory-item .dot.watch,.active-advisory-item.watch .dot,.dot.watch{background:#EDC001!important;color:#EDC001!important}
     .announcement-separator{color:#90a3a7;margin:0 4px;font-size:11px;font-weight:700;user-select:none}
   </style>
-  <link rel="preload" href="css/components.css?v=274" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=274"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=274" media="print">
+  <link rel="preload" href="css/components.css?v=275" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=275"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=275" media="print">
 </head>
 <body>
   <main class="dashboard">
@@ -299,8 +299,8 @@
       <!-- Flash / Latest Bulletin Image -->
       <div class="abis-flash-banner">
         <div class="abis-flash-header">
-          <span class="abis-badge-live">● LIVE SATELLITE BULLETIN</span>
-          <span class="abis-date-lbl" id="abisRunDate">Latest Model Run: 02 Sep 2026</span>
+          <span class="abis-badge-live" data-i18n="abis.live_bulletin">● LIVE SATELLITE BULLETIN</span>
+          <span class="abis-date-lbl" id="abisRunDate"><span data-i18n="abis.latest_run">Latest Model Run:</span> 02 Sep 2026</span>
         </div>
         <div class="abis-flash-img-container">
           <a href="https://incois.gov.in/datasets/ecosystem/HAB/Products/ABIS/Flash.png" target="_blank" rel="noopener" title="Click to view full resolution flash bulletin">
@@ -311,66 +311,66 @@
 
       <!-- Overview & Thresholds -->
       <div class="abis-overview-box">
-        <p>INCOIS Algal Bloom Information Services (ABIS) provides near real-time spatio-temporal detection and spread monitoring of phytoplankton blooms over the North Indian Ocean (0°–31°N &amp; 35°E–103°E) to safeguard fisheries, mariculture, and marine ecosystems.</p>
+        <p data-i18n="abis.overview">INCOIS Algal Bloom Information Services (ABIS) provides near real-time spatio-temporal detection and spread monitoring of phytoplankton blooms over the North Indian Ocean (0°–31°N &amp; 35°E–103°E) to safeguard fisheries, mariculture, and marine ecosystems.</p>
         <div class="abis-threshold-grid">
           <div class="abis-threshold-item normal">
             <span class="abis-dot" style="background:#32cd32"></span>
-            <div><strong>Normal</strong><small>Bloom Pixels &lt; 50%</small></div>
+            <div><strong data-i18n="abis.normal">Normal</strong><small data-i18n="abis.normal_sub">Bloom Pixels &lt; 50%</small></div>
           </div>
           <div class="abis-threshold-item watch">
             <span class="abis-dot" style="background:#ffd700"></span>
-            <div><strong>Watch</strong><small>Bloom Pixels 50% – 75%</small></div>
+            <div><strong data-i18n="abis.watch">Watch</strong><small data-i18n="abis.watch_sub">Bloom Pixels 50% – 75%</small></div>
           </div>
           <div class="abis-threshold-item warning">
             <span class="abis-dot" style="background:#ff3333"></span>
-            <div><strong>Warning</strong><small>Bloom Pixels &gt; 75%</small></div>
+            <div><strong data-i18n="abis.warning">Warning</strong><small data-i18n="abis.warning_sub">Bloom Pixels &gt; 75%</small></div>
           </div>
           <div class="abis-threshold-item nodata">
             <span class="abis-dot" style="background:#85c1e9"></span>
-            <div><strong>No Sufficient Data</strong><small>Cloud / Satellite Gap</small></div>
+            <div><strong data-i18n="abis.nodata">No Sufficient Data</strong><small data-i18n="abis.nodata_sub">Cloud / Satellite Gap</small></div>
           </div>
         </div>
       </div>
 
       <!-- Identified 4 Ecological Hotspots -->
       <div class="abis-hotspots-section">
-        <h3 class="abis-section-title">📍 Identified Ecological Bloom Hotspots</h3>
+        <h3 class="abis-section-title" data-i18n="abis.hotspots_title">📍 Identified Ecological Bloom Hotspots</h3>
         <div class="abis-hotspots-grid">
           <div class="abis-hotspot-card">
             <div class="abis-hotspot-head">
-              <strong>a) North Eastern Arabian Sea (NEAS)</strong>
+              <strong data-i18n="abis.hotspot_a_title">a) North Eastern Arabian Sea (NEAS)</strong>
               <span class="abis-coord-badge">19°N – 23°N &amp; 62°E – 67°E</span>
             </div>
-            <p class="abis-hotspot-desc">Characterized by seasonal winter-spring green <em>Noctiluca scintillans</em> blooms, high chlorophyll anomalies, and associated subsurface hypoxia.</p>
+            <p class="abis-hotspot-desc" data-i18n="abis.hotspot_a_desc">Characterized by seasonal winter-spring green <em>Noctiluca scintillans</em> blooms, high chlorophyll anomalies, and associated subsurface hypoxia.</p>
           </div>
           <div class="abis-hotspot-card">
             <div class="abis-hotspot-head">
-              <strong>b) Coastal Waters of Kerala (KRL)</strong>
+              <strong data-i18n="abis.hotspot_b_title">b) Coastal Waters of Kerala (KRL)</strong>
               <span class="abis-coord-badge">8°N – 12°N &amp; 73°E – 77°E</span>
             </div>
-            <p class="abis-hotspot-desc">Monsoon coastal upwelling zone susceptible to mixed diatom blooms, red <em>Noctiluca</em>, and localized fish asphyxia.</p>
+            <p class="abis-hotspot-desc" data-i18n="abis.hotspot_b_desc">Monsoon coastal upwelling zone susceptible to mixed diatom blooms, red <em>Noctiluca</em>, and localized fish asphyxia.</p>
           </div>
           <div class="abis-hotspot-card">
             <div class="abis-hotspot-head">
-              <strong>c) Gulf of Mannar (GOM)</strong>
+              <strong data-i18n="abis.hotspot_c_title">c) Gulf of Mannar (GOM)</strong>
               <span class="abis-coord-badge">7°N – 11°N &amp; 78°E – 81°E</span>
             </div>
-            <p class="abis-hotspot-desc">Ecologically sensitive biosphere reserve monitoring coral reef health, mariculture habitats, and micro-plankton surges.</p>
+            <p class="abis-hotspot-desc" data-i18n="abis.hotspot_c_desc">Ecologically sensitive biosphere reserve monitoring coral reef health, mariculture habitats, and micro-plankton surges.</p>
           </div>
           <div class="abis-hotspot-card">
             <div class="abis-hotspot-head">
-              <strong>d) Coastal Waters of Gopalpur (GPLPR)</strong>
+              <strong data-i18n="abis.hotspot_d_title">d) Coastal Waters of Gopalpur (GPLPR)</strong>
               <span class="abis-coord-badge">17°N – 20°N &amp; 84°E – 87°E</span>
             </div>
-            <p class="abis-hotspot-desc">North-Western Bay of Bengal coastal region tracking riverine nutrient discharge, diatom blooms, and pelagic fishery complement.</p>
+            <p class="abis-hotspot-desc" data-i18n="abis.hotspot_d_desc">North-Western Bay of Bengal coastal region tracking riverine nutrient discharge, diatom blooms, and pelagic fishery complement.</p>
           </div>
         </div>
       </div>
 
       <!-- Dialog Action Links -->
       <div class="abis-dialog-actions">
-        <a class="source card-action-button" href="https://incois.gov.in/site/services/hab_products.jsp" target="_blank" rel="noopener">📊 Live Bloom Products ↗</a>
-        <a class="source card-action-button" href="https://incois.gov.in/oceanservices/ABIS/index.html" target="_blank" rel="noopener">🗺️ Large Map Viewer ↗</a>
+        <a class="source card-action-button" href="https://incois.gov.in/site/services/hab_products.jsp" target="_blank" rel="noopener" data-i18n="abis.live_products">📊 Live Bloom Products ↗</a>
+        <a class="source card-action-button" href="https://incois.gov.in/oceanservices/ABIS/index.html" target="_blank" rel="noopener" data-i18n="abis.map_viewer">🗺️ Large Map Viewer ↗</a>
       </div>
     </div>
   </dialog>
@@ -740,23 +740,23 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=274" defer></script>
-  <script src="js/i18n.js?v=274" defer></script>
-  <script src="js/app.js?v=274" defer></script>
-  <script src="js/share.js?v=274" defer></script>
-  <script src="js/map.js?v=274" defer></script>
-  <script src="js/pfz-map.js?v=274" defer></script>
-  <script src="js/pfz.js?v=274" defer></script>
-  <script src="js/advisory.js?v=274" defer></script>
-  <script src="js/tsunami.js?v=274" defer></script>
-  <script src="js/cyclone.js?v=274" defer></script>
-  <script src="js/seismic.js?v=274" defer></script>
-  <script src="js/port-tides.js?v=274" defer></script>
-  <script src="js/voice-summary.js?v=274" defer></script>
-  <script src="js/status.js?v=274" defer></script>
-  <script src="js/notifications.js?v=274" defer></script>
-  <script src="js/pwa.js?v=274" defer></script>
-  <script src="js/tchp.js?v=274" defer></script>
+  <script src="js/config.js?v=275" defer></script>
+  <script src="js/i18n.js?v=275" defer></script>
+  <script src="js/app.js?v=275" defer></script>
+  <script src="js/share.js?v=275" defer></script>
+  <script src="js/map.js?v=275" defer></script>
+  <script src="js/pfz-map.js?v=275" defer></script>
+  <script src="js/pfz.js?v=275" defer></script>
+  <script src="js/advisory.js?v=275" defer></script>
+  <script src="js/tsunami.js?v=275" defer></script>
+  <script src="js/cyclone.js?v=275" defer></script>
+  <script src="js/seismic.js?v=275" defer></script>
+  <script src="js/port-tides.js?v=275" defer></script>
+  <script src="js/voice-summary.js?v=275" defer></script>
+  <script src="js/status.js?v=275" defer></script>
+  <script src="js/notifications.js?v=275" defer></script>
+  <script src="js/pwa.js?v=275" defer></script>
+  <script src="js/tchp.js?v=275" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>
