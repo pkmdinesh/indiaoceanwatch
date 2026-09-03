@@ -90,25 +90,26 @@
       var days = [];
       var lines = html.split('<br>');
       lines.forEach(function (line) {
+        var dayMatch = line.match(/(?:Day|நாள்|दिन|రోజు|ദിവസം|দিন|दिवस|દિવસ|ଦିନ|ದಿನ)[-\s]*([1-3])/i);
+        if (!dayMatch) return;
         var dateMatch = line.match(/\b(\d{2}[-/]\d{2}[-/]\d{4})\b/);
-        if (dateMatch) {
-          var date = dateMatch[1];
-          var dayMatch = line.match(/(?:Day|நாள்|दिन|రోజు|ദിവസം|দিন|दिवस|દિવસ|ଦିନ|ದಿನ)[-\s]*(\d)/i);
-          var dayNum = dayMatch ? parseInt(dayMatch[1], 10) : (days.length + 1);
-          var colorMatch = line.match(/color:([^;'"]+)/i);
-          var color = colorMatch ? colorMatch[1].trim().toLowerCase() : '';
-          var plainText = line.replace(/<[^>]+>/g, '').replace(/&emsp;/g, ' ').replace(/\s+/g, ' ').trim();
-          var isSafe = color === 'green' || plainText.toLowerCase().indexOf('safely sail') !== -1;
-          var distMatch = plainText.match(/\((\d+-\d+)\)\s*(?:km)?/i);
-          var distance = distMatch ? distMatch[1] + ' km' : null;
+        if (!dateMatch) return;
 
-          days.push({
-            day: dayNum,
-            date: date,
-            status: isSafe ? 'safe' : 'alert',
-            distance: distance
-          });
-        }
+        var date = dateMatch[1];
+        var dayNum = parseInt(dayMatch[1], 10);
+        var colorMatch = line.match(/color:([^;'"]+)/i);
+        var color = colorMatch ? colorMatch[1].trim().toLowerCase() : '';
+        var plainText = line.replace(/<[^>]+>/g, '').replace(/&emsp;/g, ' ').replace(/\s+/g, ' ').trim();
+        var isSafe = color === 'green' || plainText.toLowerCase().indexOf('safely sail') !== -1;
+        var distMatch = plainText.match(/\((\d+-\d+)\)\s*(?:km)?/i);
+        var distance = distMatch ? distMatch[1] + ' km' : null;
+
+        days.push({
+          day: dayNum,
+          date: date,
+          status: isSafe ? 'safe' : 'alert',
+          distance: distance
+        });
       });
       return days;
     }
@@ -277,95 +278,11 @@
             bodyHtml += '<td class="svas-status-cell cell-empty">—</td>';
           }
         }
-
         bodyHtml += '</tr>';
       });
 
       tbody.innerHTML = bodyHtml;
     }
-
-    // 4. Render Localized Guidance List
-    var guidanceList = document.getElementById('svasGuidanceList');
-    if (guidanceList) {
-      var listHtml = '';
-      BOAT_CATEGORIES.forEach(function (cat) {
-        var days = d.matrix[cat.key] || [];
-        var overallStatus = d.overall[cat.key];
-
-        listHtml += '<div class="svas-guidance-item ' + (overallStatus === 'alert' ? 'alert-item' : 'safe-item') + '">';
-        listHtml += '<div class="svas-item-header">';
-        listHtml += '<strong class="svas-item-cat">' + escapeHtml(t('svas.' + cat.id + '_craft', cat.defaultLabel)) + ' (' + cat.width + '):</strong> ';
-        listHtml += '<span class="svas-item-badge ' + (overallStatus === 'alert' ? 'badge-alert' : 'badge-safe') + '">' + (overallStatus === 'alert' ? t('svas.guidance_unsafe', 'Restricted') : t('svas.guidance_safe', 'Permitted')) + '</span>';
-        listHtml += '</div>';
-        listHtml += '<ul class="svas-day-bullets">';
-
-        days.forEach(function (day) {
-          var text = generateLocalizedGuidance(districtName, cat.width, day, lang);
-          var bulletIcon = day.status === 'alert' ? '⚠️' : '✅';
-          listHtml += '<li class="' + (day.status === 'alert' ? 'bullet-alert' : 'bullet-safe') + '">';
-          listHtml += '<span class="bullet-icon">' + bulletIcon + '</span> ';
-          listHtml += '<strong>' + t('svas.day', 'Day') + '-' + day.day + ' (' + day.date + '):</strong> ' + escapeHtml(text);
-          listHtml += '</li>';
-        });
-
-        listHtml += '</ul>';
-        listHtml += '</div>';
-      });
-
-      guidanceList.innerHTML = listHtml;
-    }
-  }
-
-  function generateLocalizedGuidance(district, width, day, lang) {
-    var isAlert = day.status === 'alert';
-    var dist = day.distance || t('svas.coastal_waters', 'coastal waters');
-
-    // Multilingual sentence templates
-    var templates = {
-      en: {
-        alert: district + ' district (' + dist + '), boats less than ' + width + ' wide should not sail.',
-        safe: district + ' district boats less than ' + width + ' wide can safely sail.'
-      },
-      ta: {
-        alert: district + ' மாவட்டம் (' + dist + '), ' + width + '-க்கும் குறைவான அகலமுள்ள படகு பயணிக்க பாதுகாப்பற்றவை.',
-        safe: district + ' மாவட்டம், ' + width + '-க்கும் குறைவான அகலமுள்ள படகுகள் பாதுகாப்பாக செல்லலாம்.'
-      },
-      hi: {
-        alert: district + ' ज़िला (' + dist + '), ' + width + ' से कम चौड़ी नावों के लिए समुद्र असुरक्षित है।',
-        safe: district + ' ज़िला, ' + width + ' से कम चौड़ी नावें सुरक्षित रूप से नौकायन कर सकती हैं।'
-      },
-      te: {
-        alert: district + ' జిల్లా (' + dist + '), ' + width + ' కంటే తక్కువ వెడల్పు ఉన్న పడవలు ప్రయాణించకూడదు.',
-        safe: district + ' జిల్లా, ' + width + ' కంటే తక్కువ వెడల్పు ఉన్న పడవలు సురక్షితంగా ప్రయాణించవచ్చు.'
-      },
-      ml: {
-        alert: district + ' ജില്ല (' + dist + '), ' + width + '-ൽ താഴെ വീതിയുള്ള വള്ളങ്ങൾ കടലിൽ പോകരുത്.',
-        safe: district + ' ജില്ല, ' + width + '-ൽ താഴെ വീതിയുള്ള വള്ളങ്ങൾക്ക് സുരക്ഷിതമായി കടലിൽ പോകാം.'
-      },
-      bn: {
-        alert: district + ' জেলা (' + dist + '), ' + width + ' এর চেয়ে কম চওড়া নৌকা চালানো উচিত নয়।',
-        safe: district + ' জেলা, ' + width + ' এর চেয়ে কম চওড়া নৌকা নিরাপদে চলাচল করতে পারে।'
-      },
-      mr: {
-        alert: district + ' जिल्हा (' + dist + '), ' + width + ' पेक्षा कमी रुंद बोटींनी समुद्रात जाऊ नये.',
-        safe: district + ' जिल्हा, ' + width + ' पेक्षा कमी रुंद बोटी सुरक्षितपणे प्रवास करू शकतात.'
-      },
-      gu: {
-        alert: district + ' જિલ્લો (' + dist + '), ' + width + ' કરતાં ઓછી પહોળાઈ ધરાવતી બોટોએ જવું નહીં.',
-        safe: district + ' જિલ્લો, ' + width + ' કરતાં ઓછી પહોળાઈ ધરાવતી બોટો સુરક્ષિત રીતે સફર કરી શકે છે.'
-      },
-      or: {
-        alert: district + ' ଜିଲ୍ଲା (' + dist + '), ' + width + ' ରୁ କମ୍ ମୋଟେଇ ଥିବା ଡଙ୍ଗା ଚଳାଚଳ କରିବା ଉଚିତ୍ ନୁହେଁ।',
-        safe: district + ' ଜିଲ୍ଲା, ' + width + ' ରୁ କମ୍ ମୋଟେଇ ଥିବା ଡଙ୍ଗା ସୁରକ୍ଷିତ ଭାବରେ ଯାତ୍ରା କରିପାରିବେ।'
-      },
-      kn: {
-        alert: district + ' ಜಿಲ್ಲೆ (' + dist + '), ' + width + ' ಗಿಂತ ಕಡಿಮೆ ಅಗಲದ ದೋಣಿಗಳು ಚಲಿಸಬಾರದು.',
-        safe: district + ' ಜಿಲ್ಲೆ, ' + width + ' ಗಿಂತ ಕಡಿಮೆ ಅಗಲದ ದೋಣಿಗಳು ಸುರಕ್ಷಿತವಾಗಿ ಸಂಚರಿಸಬಹುದು.'
-      }
-    };
-
-    var dict = templates[lang] || templates.en;
-    return isAlert ? dict.alert : dict.safe;
   }
 
   function handleGpsLocate() {
