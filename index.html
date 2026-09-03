@@ -63,9 +63,9 @@
     .active-advisory-item .dot.watch,.active-advisory-item.watch .dot,.dot.watch{background:#EDC001!important;color:#EDC001!important}
     .announcement-separator{color:#90a3a7;margin:0 4px;font-size:11px;font-weight:700;user-select:none}
   </style>
-  <link rel="preload" href="css/components.css?v=275" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/components.css?v=275"></noscript>
-  <link rel="stylesheet" href="css/print.css?v=275" media="print">
+  <link rel="preload" href="css/components.css?v=278" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/components.css?v=278"></noscript>
+  <link rel="stylesheet" href="css/print.css?v=278" media="print">
 </head>
 <body>
   <main class="dashboard">
@@ -138,22 +138,80 @@
               <div class="severity-row"><span class="severity-row-label no-threat" data-i18n="severity.no_threat">No Threat</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
             </div>
           </article>
-          <article class="forecast-card tide-forecast" id="portTideCard">
+          <article class="forecast-card svas-forecast" id="svasCard">
             <div class="forecast-title">
-              <h3 data-i18n="osf.astronomical_tide">Predicted Astronomical Tide</h3>
-              <div class="port-tide-controls">
-                <select id="portSelectDropdown" class="port-select-dropdown" aria-label="Select National Tide Gauge Station"></select>
-                <button type="button" id="portGpsBtn" class="source card-action-button port-action-btn" aria-label="Near Me: Find nearest tide station with GPS">📍 Near Me</button>
-                <a id="portPatHeaderLink" href="https://incois.gov.in/oceanservices/PAT/index.html" target="_blank" rel="noopener" class="source card-action-button port-action-btn" title="Open official INCOIS Predicted &amp; Actual Tide (PAT) Portal">INCOIS PAT ↗</a>
+              <div>
+                <h3 data-i18n="osf.svas_title">Small Vessel Advisory Service (SVAS)</h3>
+                <div class="forecast-meta">
+                  <span class="kind" data-i18n="osf.svas_kind">Boat Safety Index (BSI)</span>
+                  <span class="issue-date" id="svasIssueDate">Issue date —</span>
+                </div>
+              </div>
+              <div class="svas-controls">
+                <select id="svasDistrictDropdown" class="svas-select-dropdown" aria-label="Select Coastal District for Small Vessel Advisory"></select>
+                <button type="button" id="svasGpsBtn" class="source card-action-button port-action-btn" aria-label="Near Me: Find nearest coastal district with GPS" data-i18n="svas.near_me">📍 Near Me</button>
+                <a id="svasPortalLink" href="https://incois.gov.in/site/services/SVA_overview.jsp" target="_blank" rel="noopener" class="source card-action-button port-action-btn" title="Open official INCOIS SVAS Portal">INCOIS SVAS ↗</a>
               </div>
             </div>
-            <div id="portWarningBanner" class="port-warning-banner level-safe">Loading Predicted Tide Data…</div>
-            <div id="portWindDisplay" class="port-wind-display"><div class="marine-stat-item"><span class="stat-prefix">💨 Wind :</span><strong class="stat-value">Fetching Marine Telemetry…</strong></div></div>
-            <div class="port-tide-body">
-              <div id="portTideTimesList" class="port-tide-times-list"><div class="tide-horizontal-row"><span class="tide-event-badge high">High Tide (IST)</span><span class="empty">Fetching Tide Events…</span></div></div>
-              <div id="portTideChartContainer" class="port-tide-chart-container"><div class="tide-chart-placeholder">Loading Astronomical Tide Chart…</div></div>
+
+            <!-- District Summary Alert / Safe Banner -->
+            <div id="svasSummaryBanner" class="svas-summary-banner status-safe">
+              <span class="svas-banner-icon">⛵</span>
+              <div class="svas-banner-text">
+                <strong id="svasBannerTitle">Safe for Small Vessels</strong>
+                <span id="svasBannerSubtitle">No sea-condition restrictions across forecast window</span>
+              </div>
+            </div>
+
+            <!-- SVAS Matrix Table -->
+            <div class="svas-matrix-container">
+              <table class="svas-matrix-table" id="svasMatrixTable" aria-label="Small Vessel Advisory Matrix by Boat Size and Date">
+                <thead>
+                  <tr>
+                    <th scope="col" data-i18n="svas.boat_size">Boat Category / Width</th>
+                    <th scope="col" id="svasColDay1">Day-1</th>
+                    <th scope="col" id="svasColDay2">Day-2</th>
+                    <th scope="col" id="svasColDay3">Day-3</th>
+                  </tr>
+                </thead>
+                <tbody id="svasMatrixBody">
+                  <!-- Rendered dynamically by svas.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Detail Guidance Box for Selected Boat Size -->
+            <div class="svas-guidance-box" id="svasGuidanceBox">
+              <div class="svas-guidance-head">
+                <span class="svas-guidance-label" data-i18n="svas.safety_guidance">Navigational Safety Advisory:</span>
+                <span class="svas-guidance-meta" id="svasGuidanceMeta">3-Day Forecast Breakdown</span>
+              </div>
+              <div class="svas-guidance-list" id="svasGuidanceList">
+                <!-- Populated dynamically by svas.js -->
+              </div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section class="panel port-tide-panel" id="portTideCard" aria-labelledby="port-tide-title">
+        <div class="panel-head">
+          <img class="service-img" src="assets/ocean-wave-service-icon.png" alt="Astronomical tide icon" width="48" height="42" loading="lazy">
+          <div>
+            <h2 id="port-tide-title" data-i18n="osf.astronomical_tide">Predicted Astronomical Tide</h2>
+            <p class="panel-kicker">Port Gauge Stations · Tidal Range &amp; Timing</p>
+          </div>
+          <div class="port-tide-controls">
+            <select id="portSelectDropdown" class="port-select-dropdown" aria-label="Select National Tide Gauge Station"></select>
+            <button type="button" id="portGpsBtn" class="source card-action-button port-action-btn" aria-label="Near Me: Find nearest tide station with GPS">📍 Near Me</button>
+            <a id="portPatHeaderLink" href="https://incois.gov.in/oceanservices/PAT/index.html" target="_blank" rel="noopener" class="source card-action-button port-action-btn" title="Open official INCOIS Predicted &amp; Actual Tide (PAT) Portal">INCOIS PAT ↗</a>
+          </div>
+        </div>
+        <div id="portWarningBanner" class="port-warning-banner level-safe">Loading Predicted Tide Data…</div>
+        <div id="portWindDisplay" class="port-wind-display"><div class="marine-stat-item"><span class="stat-prefix">💨 Wind :</span><strong class="stat-value">Fetching Marine Telemetry…</strong></div></div>
+        <div class="port-tide-body">
+          <div id="portTideTimesList" class="port-tide-times-list"><div class="tide-horizontal-row"><span class="tide-event-badge high">High Tide (IST)</span><span class="empty">Fetching Tide Events…</span></div></div>
+          <div id="portTideChartContainer" class="port-tide-chart-container"><div class="tide-chart-placeholder">Loading Astronomical Tide Chart…</div></div>
         </div>
       </section>
 
@@ -229,7 +287,6 @@
           <a class="marine-advisory-chip" href="https://incois.gov.in/MarineFisheries/TextDataHome?mfid=2&amp;request_locale=en" target="_blank" rel="noopener" data-i18n="other.tuna">Tuna ↗</a>
           <a class="marine-advisory-chip" href="https://incois.gov.in/oceanservices/Hilsa/index.jsp" target="_blank" rel="noopener" data-i18n="other.hilsa">Hilsa ↗</a>
           <a class="marine-advisory-chip" href="https://oosa.incois.gov.in/OOSA/" target="_blank" rel="noopener" data-i18n="other.oil_spill">Oil Spill (OOSA) ↗</a>
-          <a class="marine-advisory-chip" href="https://incois.gov.in/site/services/SVA_overview.jsp" target="_blank" rel="noopener" data-i18n="other.svas">Small Vessel (SVAS) ↗</a>
           <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/sarat/home.jsp" target="_blank" rel="noopener" data-i18n="other.sarat">SARAT ↗</a>
           <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/OSF/" target="_blank" rel="noopener" data-i18n="other.ports">Ports &amp; Harbors ↗</a>
           <a class="marine-advisory-chip" href="https://sarat.incois.gov.in/shipforecast/Login.jsp" target="_blank" rel="noopener" data-i18n="other.ship_route">Ship Route Forecast ↗</a>
@@ -740,23 +797,24 @@
       </div>
     </div>
   </dialog>
-  <script src="js/config.js?v=275" defer></script>
-  <script src="js/i18n.js?v=275" defer></script>
-  <script src="js/app.js?v=275" defer></script>
-  <script src="js/share.js?v=275" defer></script>
-  <script src="js/map.js?v=275" defer></script>
-  <script src="js/pfz-map.js?v=275" defer></script>
-  <script src="js/pfz.js?v=275" defer></script>
-  <script src="js/advisory.js?v=275" defer></script>
-  <script src="js/tsunami.js?v=275" defer></script>
-  <script src="js/cyclone.js?v=275" defer></script>
-  <script src="js/seismic.js?v=275" defer></script>
-  <script src="js/port-tides.js?v=275" defer></script>
-  <script src="js/voice-summary.js?v=275" defer></script>
-  <script src="js/status.js?v=275" defer></script>
-  <script src="js/notifications.js?v=275" defer></script>
-  <script src="js/pwa.js?v=275" defer></script>
-  <script src="js/tchp.js?v=275" defer></script>
+  <script src="js/config.js?v=278" defer></script>
+  <script src="js/i18n.js?v=278" defer></script>
+  <script src="js/app.js?v=278" defer></script>
+  <script src="js/share.js?v=278" defer></script>
+  <script src="js/map.js?v=278" defer></script>
+  <script src="js/pfz-map.js?v=278" defer></script>
+  <script src="js/pfz.js?v=278" defer></script>
+  <script src="js/advisory.js?v=278" defer></script>
+  <script src="js/tsunami.js?v=278" defer></script>
+  <script src="js/cyclone.js?v=278" defer></script>
+  <script src="js/seismic.js?v=278" defer></script>
+  <script src="js/port-tides.js?v=278" defer></script>
+  <script src="js/svas.js?v=278" defer></script>
+  <script src="js/voice-summary.js?v=278" defer></script>
+  <script src="js/status.js?v=278" defer></script>
+  <script src="js/notifications.js?v=278" defer></script>
+  <script src="js/pwa.js?v=278" defer></script>
+  <script src="js/tchp.js?v=278" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
 </body>
 </html>

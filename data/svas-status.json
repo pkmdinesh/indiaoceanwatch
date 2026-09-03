@@ -1,0 +1,6200 @@
+{
+  "issueDate": "03-09-2026",
+  "updatedAt": "2026-09-03T16:10:13.407Z",
+  "dates": [
+    "03-09-2026",
+    "04-09-2026",
+    "05-09-2026",
+    "06-09-2026"
+  ],
+  "districts": {
+    "Kozhikode": {
+      "name": "Kozhikode",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 11.3985,
+      "lon": 75.6284
+    },
+    "24 Paraganas South": {
+      "name": "24 Paraganas South",
+      "state": "West Bengal",
+      "overall": {
+        "b4": "alert",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 21.3297,
+      "lon": 88.4717
+    },
+    "Medinipur East": {
+      "name": "Medinipur East",
+      "state": "West Bengal",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 21.644,
+      "lon": 87.8629
+    },
+    "Baleshwar": {
+      "name": "Baleshwar",
+      "state": "Odisha",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 21.4472,
+      "lon": 87.1483
+    },
+    "Bhadrak": {
+      "name": "Bhadrak",
+      "state": "Odisha",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 20.9039,
+      "lon": 86.9771
+    },
+    "Kendrapara": {
+      "name": "Kendrapara",
+      "state": "Odisha",
+      "overall": {
+        "b4": "alert",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 20.4747,
+      "lon": 87.0184
+    },
+    "Jagatsinghapur": {
+      "name": "Jagatsinghapur",
+      "state": "Odisha",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 20.1321,
+      "lon": 86.8031
+    },
+    "Puri": {
+      "name": "Puri",
+      "state": "Odisha",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 19.7666,
+      "lon": 86.1158
+    },
+    "Ganjam": {
+      "name": "Ganjam",
+      "state": "Odisha",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          }
+        ]
+      },
+      "lat": 19.2323,
+      "lon": 85.7609
+    },
+    "Srikakulam": {
+      "name": "Srikakulam",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          }
+        ]
+      },
+      "lat": 18.6169,
+      "lon": 84.6975
+    },
+    "Vizianagaram": {
+      "name": "Vizianagaram",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 17.9895,
+      "lon": 83.7879
+    },
+    "Visakhapatanam": {
+      "name": "Visakhapatanam",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
+          }
+        ]
+      },
+      "lat": 17.7472,
+      "lon": 83.4505
+    },
+    "Anakapalli": {
+      "name": "Anakapalli",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          }
+        ]
+      },
+      "lat": 17.4455,
+      "lon": 83.233
+    },
+    "Kakinada": {
+      "name": "Kakinada",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "25-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "45-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "25-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "45-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "45-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          }
+        ]
+      },
+      "lat": 16.9567,
+      "lon": 82.4999
+    },
+    "West Godavari": {
+      "name": "West Godavari",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "alert",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 15.7834,
+      "lon": 81.785
+    },
+    "Konaseema": {
+      "name": "Konaseema",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "55-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "55-100 km"
+          }
+        ]
+      },
+      "lat": 16.3886,
+      "lon": 82.4216
+    },
+    "SPSR Nellore": {
+      "name": "SPSR Nellore",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 14.6095,
+      "lon": 80.2528
+    },
+    "Tirupati": {
+      "name": "Tirupati",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 13.8687,
+      "lon": 80.5456
+    },
+    "Thiruvallur": {
+      "name": "Thiruvallur",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "alert",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 13.3325,
+      "lon": 80.4314
+    },
+    "Chennai": {
+      "name": "Chennai",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 13.1337,
+      "lon": 80.374
+    },
+    "Chengalpattu": {
+      "name": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-85 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-85 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "70-85 km"
+          }
+        ]
+      },
+      "lat": 12.6334,
+      "lon": 80.4645
+    },
+    "Villupuram": {
+      "name": "Villupuram",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "80-85 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "80-85 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "80-85 km"
+          }
+        ]
+      },
+      "lat": 12.1185,
+      "lon": 80.4347
+    },
+    "Pondicherry": {
+      "name": "Pondicherry",
+      "state": "Puducherry",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 11.9191,
+      "lon": 80.029
+    },
+    "Cuddalore": {
+      "name": "Cuddalore",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 11.5815,
+      "lon": 80.0155
+    },
+    "Mayiladuthurai": {
+      "name": "Mayiladuthurai",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 11.1475,
+      "lon": 80.0056
+    },
+    "Karaikal": {
+      "name": "Karaikal",
+      "state": "Puducherry",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 10.8964,
+      "lon": 80.0123
+    },
+    "Nagapattinam": {
+      "name": "Nagapattinam",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 10.6047,
+      "lon": 79.9633
+    },
+    "Thiruvarur": {
+      "name": "Thiruvarur",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 10.2903,
+      "lon": 79.617
+    },
+    "Thanjavur": {
+      "name": "Thanjavur",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 10.1833,
+      "lon": 79.2713
+    },
+    "Pudukkottai": {
+      "name": "Pudukkottai",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 9.9226,
+      "lon": 79.161
+    },
+    "Ramanathapuram": {
+      "name": "Ramanathapuram",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "5-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "5-90 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "5-90 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "5-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "5-90 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "5-90 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "5-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "5-90 km"
+          }
+        ]
+      },
+      "lat": 9.3352,
+      "lon": 79.0128
+    },
+    "Tuticorin": {
+      "name": "Tuticorin",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "10-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "10-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "5-100 km"
+          }
+        ]
+      },
+      "lat": 8.6715,
+      "lon": 78.1651
+    },
+    "Tirunelveli": {
+      "name": "Tirunelveli",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ]
+      },
+      "lat": 8.1224,
+      "lon": 77.8129
+    },
+    "Kanniyakumari": {
+      "name": "Kanniyakumari",
+      "state": "Tamil Nadu",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ]
+      },
+      "lat": 8.0393,
+      "lon": 77.3644
+    },
+    "Thiruvananthapuram": {
+      "name": "Thiruvananthapuram",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "25-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "40-65 km"
+          }
+        ]
+      },
+      "lat": 8.3325,
+      "lon": 76.8627
+    },
+    "Kollam": {
+      "name": "Kollam",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "40-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 8.8739,
+      "lon": 76.5032
+    },
+    "Alappuzha": {
+      "name": "Alappuzha",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "30-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "50-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 9.5023,
+      "lon": 76.2318
+    },
+    "Ernakulam": {
+      "name": "Ernakulam",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "55-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 9.9923,
+      "lon": 76.1397
+    },
+    "Thrissur": {
+      "name": "Thrissur",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "55-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "55-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 10.4023,
+      "lon": 75.6943
+    },
+    "Jamnagar": {
+      "name": "Jamnagar",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-10 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-10 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-10 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-10 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-10 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-10 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 22.7046,
+      "lon": 70.226
+    },
+    "Devbhumi Dwarka": {
+      "name": "Devbhumi Dwarka",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-95 km"
+          }
+        ]
+      },
+      "lat": 22.2571,
+      "lon": 69.1915
+    },
+    "Porbandar": {
+      "name": "Porbandar",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          }
+        ]
+      },
+      "lat": 21.4711,
+      "lon": 69.4412
+    },
+    "Junagadh": {
+      "name": "Junagadh",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-60 km"
+          }
+        ]
+      },
+      "lat": 21.0282,
+      "lon": 69.8953
+    },
+    "Gir Somnath": {
+      "name": "Gir Somnath",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "10-100 km"
+          }
+        ]
+      },
+      "lat": 20.6324,
+      "lon": 70.6998
+    },
+    "Amreli": {
+      "name": "Amreli",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "65-90 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "25-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "40-90 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "65-90 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "25-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "40-90 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "65-90 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "25-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "40-90 km"
+          }
+        ]
+      },
+      "lat": 20.8218,
+      "lon": 71.4456
+    },
+    "Palghar": {
+      "name": "Palghar",
+      "state": "Maharashtra",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "85-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          }
+        ]
+      },
+      "lat": 19.7232,
+      "lon": 72.6778
+    },
+    "Mumbai": {
+      "name": "Mumbai",
+      "state": "Maharashtra",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          }
+        ]
+      },
+      "lat": 19.1253,
+      "lon": 72.7111
+    },
+    "Raigad": {
+      "name": "Raigad",
+      "state": "Maharashtra",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 18.4324,
+      "lon": 72.8874
+    },
+    "Ratnagiri": {
+      "name": "Ratnagiri",
+      "state": "Maharashtra",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "85-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          }
+        ]
+      },
+      "lat": 17.1303,
+      "lon": 73.1853
+    },
+    "Sindhudurg": {
+      "name": "Sindhudurg",
+      "state": "Maharashtra",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "80-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          }
+        ]
+      },
+      "lat": 16.0793,
+      "lon": 73.4248
+    },
+    "North Goa": {
+      "name": "North Goa",
+      "state": "Goa",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          }
+        ]
+      },
+      "lat": 15.5724,
+      "lon": 73.6466
+    },
+    "South Goa": {
+      "name": "South Goa",
+      "state": "Goa",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          }
+        ]
+      },
+      "lat": 15.1322,
+      "lon": 73.8939
+    },
+    "Uttara Kannada": {
+      "name": "Uttara Kannada",
+      "state": "Karnataka",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "95-100 km"
+          }
+        ]
+      },
+      "lat": 14.5668,
+      "lon": 74.2147
+    },
+    "Udupi": {
+      "name": "Udupi",
+      "state": "Karnataka",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "85-100 km"
+          }
+        ]
+      },
+      "lat": 13.4981,
+      "lon": 74.4648
+    },
+    "Dakshina Kannada": {
+      "name": "Dakshina Kannada",
+      "state": "Karnataka",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "60-95 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "60-95 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "85-90 km"
+          }
+        ]
+      },
+      "lat": 12.844,
+      "lon": 74.6193
+    },
+    "Kasaragod": {
+      "name": "Kasaragod",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "65-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 12.385,
+      "lon": 74.765
+    },
+    "Kannur": {
+      "name": "Kannur",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "65-90 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 11.7997,
+      "lon": 75.36
+    },
+    "Malappuram": {
+      "name": "Malappuram",
+      "state": "Kerala",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "60-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 10.9954,
+      "lon": 75.7307
+    },
+    "Kachchh": {
+      "name": "Kachchh",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "45-100 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
+          }
+        ]
+      },
+      "lat": 23.1781,
+      "lon": 68.8942
+    },
+    "Surat": {
+      "name": "Surat",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 21.099,
+      "lon": 72.6729
+    },
+    "Bapatla": {
+      "name": "Bapatla",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 15.7872,
+      "lon": 80.6979
+    },
+    "Bharuch": {
+      "name": "Bharuch",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 21.3844,
+      "lon": 72.5233
+    },
+    "Bhavnagar": {
+      "name": "Bhavnagar",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 21.1425,
+      "lon": 71.9565
+    },
+    "Daman": {
+      "name": "Daman",
+      "state": "The Dadra And Nagar Haveli And Daman And Diu",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 20.4161,
+      "lon": 72.7866
+    },
+    "Krishna": {
+      "name": "Krishna",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 15.8498,
+      "lon": 81.1702
+    },
+    "Navsari": {
+      "name": "Navsari",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 20.8791,
+      "lon": 72.7858
+    },
+    "Prakasam": {
+      "name": "Prakasam",
+      "state": "Andhra Pradesh",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 15.3121,
+      "lon": 80.1303
+    },
+    "Valsad": {
+      "name": "Valsad",
+      "state": "Gujarat",
+      "overall": {
+        "b4": "safe",
+        "b6": "safe",
+        "b7": "safe"
+      },
+      "matrix": {
+        "b4": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b6": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ],
+        "b7": [
+          {
+            "day": 1,
+            "date": "03-09-2026",
+            "status": "alert",
+            "distance": null
+          },
+          {
+            "day": 1,
+            "date": "04-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 2,
+            "date": "05-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "06-09-2026",
+            "status": "safe",
+            "distance": null
+          }
+        ]
+      },
+      "lat": 20.1832,
+      "lon": 72.5104
+    }
+  }
+}

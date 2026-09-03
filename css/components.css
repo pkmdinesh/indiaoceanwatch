@@ -38,9 +38,10 @@
     .brand-image{width:60px;height:60px;flex:none;border-radius:16px;object-fit:contain}
     @media(max-width:520px){.brand-copy strong{font-size:17px}}
     @media(min-width:851px){.ocean .forecast{height:calc(100% - 74px)}}
-    .content{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start;padding:12px 14px}.content>.panel{padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:#f5f8f6}.content>.panel:last-child{border:1px solid var(--line)}.content .ocean,.content .pfz-card,.content .marine-climate-card,.content .other-advisories-card{grid-column:1/-1}.content .ocean .forecast{height:auto}.content .panel-head{display:flex;min-height:36px;align-items:center;flex-wrap:nowrap;padding-top:0}.content .panel-head>div{min-width:0}.content .panel-head h2{font-size:clamp(16px,1.5vw,21px)!important;white-space:normal;overflow-wrap:anywhere}.content .panel-head>.source{position:static;margin-left:auto;flex:none}.content .advisory-card,.content .cyclone-card,.content .storm-card,.content .seismic-card{display:flex;min-width:0;flex-direction:column}.content .tsunami-status,.content .storm-status,.content .cyclone-status{height:auto;min-height:46px;flex:none;padding:7px 9px}.tsunami-status.advisory-bulletin{color:var(--green)!important;background:var(--safe-bg)!important}.advisory-bulletin .safe-mark{color:#fff!important;background:var(--green)!important}.tsunami-message{display:block;color:currentColor;font-size:15px;font-weight:800}.seismic-message-wrap{display:flex;min-height:46px;flex:1;align-items:center;padding:7px 9px;border-radius:12px;background:var(--safe-bg)}.seismic-message-copy{min-width:0}.seismic-event-link{display:block;color:var(--ink);font-size:12px;font-weight:700;line-height:1.45;text-decoration:underline;text-underline-offset:2px}.seismic-message-wrap .seismic-additional{margin-top:4px}.seismic-additional .seismic-event-link{font-size:10px}.seismic-message-wrap .seismic-additional p{padding-left:0;border-left:0}.seismic-message-wrap.is-recent .seismic-event-link{color:var(--red);font-weight:850}.pfz-card .pfz-states{margin-top:8px}
-    @media(max-width:1100px){.content{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px}.content .ocean{grid-column:1/-1}}
-    @media(max-width:700px){.content{grid-template-columns:1fr;padding:0}.content .ocean,.content .pfz-card{grid-column:auto}.content>.panel{padding:13px}.content .panel-head{min-height:0}.forecast{grid-template-columns:1fr}.forecast-card.current-forecast{grid-column:auto}}
+    .content{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start;padding:12px 14px}.content>.panel{padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:#f5f8f6}.content>.panel:last-child{border:1px solid var(--line)}.content .ocean,.content .pfz-card,.content .marine-climate-card,.content .other-advisories-card{grid-column:1/-1}.content .ocean .forecast{height:auto}.content .panel-head{display:flex;min-height:36px;align-items:center;flex-wrap:nowrap;padding-top:0}.content .panel-head>div{min-width:0}.content .panel-head h2{font-size:clamp(16px,1.5vw,21px)!important;white-space:normal;overflow-wrap:anywhere}.content .panel-head>.source{position:static;margin-left:auto;flex:none}.content .port-tide-panel,.content .advisory-card,.content .cyclone-card,.content .storm-card,.content .seismic-card{display:flex;min-width:0;flex-direction:column}.content .tsunami-status,.content .storm-status,.content .cyclone-status{height:auto;min-height:46px;flex:none;padding:7px 9px}.tsunami-status.advisory-bulletin{color:var(--green)!important;background:var(--safe-bg)!important}.advisory-bulletin .safe-mark{color:#fff!important;background:var(--green)!important}.tsunami-message{display:block;color:currentColor;font-size:15px;font-weight:800}.seismic-message-wrap{display:flex;min-height:46px;flex:1;align-items:center;padding:7px 9px;border-radius:12px;background:var(--safe-bg)}.seismic-message-copy{min-width:0}.seismic-event-link{display:block;color:var(--ink);font-size:12px;font-weight:700;line-height:1.45;text-decoration:underline;text-underline-offset:2px}.seismic-message-wrap .seismic-additional{margin-top:4px}.seismic-additional .seismic-event-link{font-size:10px}.seismic-message-wrap .seismic-additional p{padding-left:0;border-left:0}.seismic-message-wrap.is-recent .seismic-event-link{color:var(--red);font-weight:850}.pfz-card .pfz-states{margin-top:8px}
+    @media(min-width:701px){.content .port-tide-panel{grid-column:1;grid-row:span 2}.content .advisory-card{grid-column:2}.content .seismic-card{grid-column:2}.content .storm-card{grid-column:1}.content .cyclone-card{grid-column:2}}
+    @media(max-width:1100px){.content{padding:12px}.content .ocean{grid-column:1/-1}}
+    @media(max-width:700px){.content{grid-template-columns:1fr;padding:0}.content .ocean,.content .pfz-card{grid-column:auto}.content .port-tide-panel{grid-column:auto;grid-row:auto}.content>.panel{padding:13px}.content .panel-head{min-height:0}.forecast{grid-template-columns:1fr}.forecast-card.current-forecast{grid-column:auto}}
     .seismic-event-link:is(button){width:100%;padding:0;border:0;background:transparent;font-family:inherit;text-align:left;cursor:pointer}.seismic-event-link:is(button):disabled{cursor:default;text-decoration:none}.seismic-dialog{width:min(700px,calc(100% - 28px))}.seismic-dialog-body{display:grid;gap:10px;padding:1px 18px 18px}.event-map{position:relative;height:320px;overflow:hidden;border:1px solid var(--line);border-radius:13px;background:#dce8e5}.event-map-canvas{width:100%;height:100%;min-height:320px}.event-map .leaflet-control-layers{font-family:Arial,sans-serif}.event-map .leaflet-control-attribution{font-size:8px}.earthquake-leaflet-marker{width:22px;height:22px;border:4px solid #fff;border-radius:50%;background:var(--red);box-shadow:0 2px 10px rgba(8,47,60,.6)}.event-map-label{position:absolute;left:10px;bottom:22px;display:flex;flex-direction:column;gap:6px;z-index:500;pointer-events:none}.event-map-label span{display:inline-block;width:max-content;max-width:calc(100% - 20px);box-sizing:border-box;padding:6px 9px;border-radius:7px;background:rgba(8,47,60,.86);color:#fff;font-size:11px;font-weight:800}.map-ctrl-zoom-hint{position:absolute;inset:0;display:grid;place-items:center;background:rgba(8,47,60,.68);color:#fff;font:850 12.5px/1.3 Arial,sans-serif;letter-spacing:.02em;border-radius:12px;pointer-events:none;opacity:0;transition:opacity .2s ease;z-index:600;text-align:center;padding:12px}.map-ctrl-zoom-hint.is-visible{opacity:1}.map-attribution{margin:-4px 0 0;color:var(--muted);font-size:9px;font-weight:700;text-align:right}.event-setting{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;padding:9px 10px;border-radius:10px;background:var(--safe-bg)}.event-setting strong{flex:none;color:var(--green);font-size:12px}.event-setting span{font-size:11px;font-weight:700;line-height:1.4}.bulletin-groups{display:grid;gap:9px}.bulletin-section{border:1px solid var(--line);border-radius:10px;background:#f8faf9}.bulletin-section>summary{padding:11px 12px;color:var(--ink);font-size:12px;font-weight:900;cursor:pointer}.bulletin-content{display:grid;gap:8px;padding:0 10px 10px}.bulletin-field{border-top:1px solid var(--line)}.bulletin-field summary{padding:9px 2px;color:var(--ink);font-size:11px;font-weight:900;cursor:pointer}.bulletin-field p{margin:0;padding:0 2px 9px;color:#294b55;font-size:12px;font-weight:650;line-height:1.5}.event-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;margin:0;padding:0 2px 9px}.event-facts div{min-width:0}.event-facts dt{color:var(--muted);font-size:9px;font-weight:800;text-transform:uppercase}.event-facts dd{margin:2px 0 0;color:var(--ink);font-size:12px;font-weight:800;overflow-wrap:anywhere}.bulletin-unavailable{margin:0;padding:10px 12px;border-radius:10px;background:var(--watch-bg);color:var(--ink);font-size:12px;font-weight:800}.event-bulletin-link{justify-self:end;margin-top:2px}.event-bulletin-link[hidden]{display:none}
     @media(max-width:700px){html{-webkit-text-size-adjust:100%;text-size-adjust:100%}.title p{font-size:12px;line-height:1.45}.stamp{font-size:12px;line-height:1.5}.stamp time{font-size:12px}.live{font-size:12px}.content .panel-head h2{font-size:clamp(18px,5.2vw,21px)!important;line-height:1.15}.panel-kicker{font-size:12px;line-height:1.35}.source{padding:8px 10px;font-size:12px}.forecast-title h3{font-size:18px}.kind{font-size:12px}.issue-date{font-size:13px}.severity-row-label{font-size:12px}.severity-state-chip{padding:6px 8px;font-size:14px;line-height:1.3}.district-count{font-size:1em;font-weight:800}.empty{font-size:12px}.advisory-note{font-size:12px;line-height:1.45}.tsunami-status strong{font-size:21px}.tsunami-copy>span,.seismic-event-link{font-size:14px;font-weight:700;line-height:1.5}.storm-copy strong,.cyclone-status strong{font-size:14px}.storm-copy span,.cyclone-status p{font-size:13px;line-height:1.5}.cyclone-status time{font-size:12px}.joint-bulletin-message{font-size:14px;line-height:1.5}.joint-bulletin-link{font-size:13px}.joint-bulletin-time{font-size:12px}.pfz-date{font-size:14px;font-weight:700;line-height:1.45}.tag{padding:6px 8px;font-size:12px}.pfz-chip{font-size:14px;font-weight:700;color:#082f3c}.pfz-landing-centers .tag{font-size:14px}.pfz-message summary,.pfz-message-grid{font-size:13px}.pfz-message-field strong{font-size:13px}.footer{font-size:11px;line-height:1.55}.seismic-dialog{width:100%;max-width:none;max-height:90dvh;margin:auto 0 0;border-radius:20px 20px 0 0}.seismic-dialog-body{padding:1px 5px 18px;border:10px solid var(--line)}.event-map{min-height:210px}.event-map-canvas{min-height:210px}.seismic-dialog .event-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px}.bulletin-section summary,.bulletin-section p,.event-facts dd,.event-setting strong,.event-setting span{font-size:13px}}
     @media(max-width:700px){.seismic-dialog .event-map{height:260px;min-height:0}.seismic-dialog .event-map-canvas{height:260px;min-height:260px}.seismic-dialog .bulletin-section>summary,.seismic-dialog .bulletin-field summary,.seismic-dialog .bulletin-field p{font-size:13px}}
@@ -232,13 +233,18 @@
 @media(max-width:700px){.notify-label{display:none!important}.notify-button{width:32px;min-width:32px;height:32px;min-height:32px;padding:0;justify-content:center}}
 @media(max-width:520px){.notify-label{display:none!important}.notify-button{width:30px;min-width:30px;height:30px;min-height:30px;padding:0;justify-content:center}.notify-button .notify-icon{width:14px;height:14px}}
 
-/* Wind & Tide Port Forecast Card */
-.tide-forecast{display:flex;flex-direction:column;gap:8px}
+/* Wind & Tide Port Forecast Card / Panel */
+.tide-forecast,.port-tide-panel{display:flex;flex-direction:column;gap:8px}
 .tide-forecast .forecast-title{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
-.port-select-dropdown{flex:1 1 auto;min-width:95px;max-width:145px;min-height:30px;height:30px;padding:3px 5px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font:750 11px/1.2 inherit;font-weight:750;cursor:pointer;box-sizing:border-box;text-overflow:ellipsis}
+.port-tide-panel .panel-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px;min-height:36px}
+.port-tide-panel .panel-head .port-tide-controls{display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap}
+.port-select-dropdown{flex:1 1 auto;min-width:85px;max-width:130px;min-height:30px;height:30px;padding:3px 5px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font:750 10.5px/1.2 inherit;font-weight:750;cursor:pointer;box-sizing:border-box;text-overflow:ellipsis}
 .port-select-dropdown option{font-weight:750;color:var(--ink)}
 .port-select-dropdown optgroup{font-weight:800;color:var(--muted)}
-.port-action-btn{min-height:30px!important;height:30px!important;padding:4px 7px!important;font-size:10.5px!important;border-radius:7px!important;margin-left:0!important;flex:0 0 auto!important;box-sizing:border-box;white-space:nowrap}
+.port-action-btn{min-height:30px!important;height:30px!important;padding:4px 6px!important;font-size:10px!important;border-radius:7px!important;margin-left:0!important;flex:0 0 auto!important;box-sizing:border-box;white-space:nowrap}
+@media(max-width:680px){
+  .port-tide-panel .panel-head .port-tide-controls{width:100%;justify-content:flex-start}
+}
 @media(max-width:520px){
   .tide-forecast .forecast-title{flex-direction:column;align-items:stretch;gap:5px}
   .port-tide-controls{width:100%;display:flex;align-items:center;gap:3px;flex-wrap:nowrap}
@@ -833,11 +839,51 @@
   .severity-row-label{width:auto;padding-top:4px;white-space:normal}
   .severity-row-states{width:100%;overflow-x:visible;padding-bottom:0;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
   .severity-row-states::-webkit-scrollbar{display:none}
-  .severity-state-chip{max-width:none;white-space:nowrap;overflow-wrap:normal;flex:none}
 }
 
-
-
-
-
-
+/* Small Vessel Advisory Service (SVAS) Card & Matrix */
+.svas-forecast{display:flex;flex-direction:column;gap:10px}
+.svas-controls{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.svas-select-dropdown{font-size:11.5px;font-weight:700;padding:4px 8px;border-radius:6px;border:1px solid #cbd5e1;background:#fff;color:var(--ink);cursor:pointer;max-width:220px}
+.svas-summary-banner{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;font-size:12px;line-height:1.4;transition:all .2s ease}
+.svas-summary-banner.status-alert{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.svas-summary-banner.status-safe{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+.svas-banner-icon{font-size:18px;line-height:1;flex:none}
+.svas-banner-text{display:flex;flex-direction:column;gap:2px}
+.svas-banner-text strong{font-size:12.5px;font-weight:850}
+.svas-banner-text span{font-size:11px;opacity:.9}
+.svas-matrix-container{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px;background:#fff}
+.svas-matrix-table{width:100%;border-collapse:collapse;font-size:11.5px;text-align:left}
+.svas-matrix-table th{background:#f8fafc;padding:8px 10px;font-weight:800;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+.svas-matrix-table th:not(:first-child){text-align:center}
+.svas-header-date{display:block;font-size:10px;font-weight:600;color:var(--muted);margin-top:2px}
+.svas-matrix-table td{padding:8px 10px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.svas-matrix-row:last-child td{border-bottom:none}
+.svas-cat-cell{min-width:140px}
+.svas-cat-name{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink)}
+.svas-cat-badge{font-size:9.5px;font-weight:900;padding:2px 5px;border-radius:4px;letter-spacing:.02em}
+.svas-cat-badge.badge-alert{background:#fee2e2;color:#991b1b}
+.svas-cat-badge.badge-safe{background:#dcfce7;color:#166534}
+.svas-cat-desc{font-size:10px;color:var(--muted);margin-top:2px;line-height:1.3}
+.svas-status-cell{text-align:center;min-width:105px}
+.svas-cell-pill{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:800;white-space:nowrap}
+.svas-cell-pill.pill-alert{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
+.svas-cell-pill.pill-safe{background:#dcfce7;color:#15803d;border:1px solid #86efac}
+.svas-dist-badge{font-size:9px;font-weight:900;background:rgba(0,0,0,.08);padding:1px 4px;border-radius:4px;margin-left:3px}
+.svas-pill-icon{font-size:10px;line-height:1}
+.svas-guidance-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:11.5px}
+.svas-guidance-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:6px;border-bottom:1px solid #e2e8f0;padding-bottom:4px}
+.svas-guidance-label{font-weight:850;color:var(--ink);font-size:12px}
+.svas-guidance-meta{font-size:10.5px;color:var(--muted);font-weight:600}
+.svas-guidance-list{display:flex;flex-direction:column;gap:8px}
+.svas-guidance-item{display:flex;flex-direction:column;gap:4px}
+.svas-item-header{display:flex;align-items:center;gap:6px;font-size:11.5px}
+.svas-item-cat{color:var(--ink)}
+.svas-item-badge{font-size:9.5px;font-weight:800;padding:1px 5px;border-radius:4px}
+.svas-item-badge.badge-alert{background:#fee2e2;color:#b91c1c}
+.svas-item-badge.badge-safe{background:#dcfce7;color:#15803d}
+.svas-day-bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
+.svas-day-bullets li{font-size:11px;line-height:1.45;color:#334155;display:flex;align-items:baseline;gap:5px}
+.svas-day-bullets li.bullet-alert{color:#991b1b}
+.svas-day-bullets li.bullet-safe{color:#14532d}
+.bullet-icon{font-size:9.5px;line-height:1;flex:none}
