@@ -853,7 +853,7 @@
 .svas-banner-icon{font-size:18px;line-height:1;flex:none}
 .svas-banner-text{display:flex;flex-direction:column;gap:2px}
 .svas-banner-text strong{font-size:12.5px;font-weight:850}
-.svas-banner-text span{font-size:11px;opacity:.9}
+.svas-banner-text span{font-size:11.5px;font-weight:800;opacity:1}
 .svas-matrix-container{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px;background:#fff}
 .svas-matrix-table{width:100%;border-collapse:collapse;font-size:11.5px;text-align:left}
 .svas-matrix-table th{background:#f8fafc;padding:8px 10px;font-weight:800;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}

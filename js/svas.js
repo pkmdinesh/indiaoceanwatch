@@ -226,7 +226,7 @@
       var day1Date = dates[0] ? ' (' + dates[0] + ')' : '';
       var day1Prefix = t('svas.day1', 'Day-1') + day1Date;
       if (hasDay1Alert) {
-        bannerTitle.textContent = '⚠️ ' + day1Prefix + ': ' + t('svas.banner_alert_title', 'High Overturning Risk: Sailing Restrictions in Effect').replace(/^⚠️\s*/, '');
+        bannerTitle.textContent = '⚠️ ' + day1Prefix + ': ' + t('svas.banner_alert_title', 'Sailing Restrictions in Effect').replace(/^⚠️\s*/, '');
         var affected = [];
         if (day1_b4) affected.push('< 4m');
         if (day1_b6) affected.push('< 6m');
