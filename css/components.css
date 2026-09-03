@@ -312,6 +312,43 @@
 .marine-advisory-chip.cbas-chip-third{background:#e7f5f7;color:#085566;border:1.5px solid #a8dee6;font-weight:850;box-shadow:0 1px 3px rgba(8,85,102,.10)}
 .marine-advisory-chip.cbas-chip-third:hover,.marine-advisory-chip.cbas-chip-third:focus-visible{background:#d3edf1;border-color:#79cddb;color:#053b47}
 
+.marine-advisory-chip.abis-chip-fourth{background:#ecfdf5;color:#065f46;border:1.5px solid #a7f3d0;font-weight:850;box-shadow:0 1px 3px rgba(6,95,70,.10)}
+.marine-advisory-chip.abis-chip-fourth:hover,.marine-advisory-chip.abis-chip-fourth:focus-visible{background:#d1fae5;border-color:#6ee7b7;color:#044e39}
+
+/* ABIS (Algal Bloom Information Services) Dialog Styling */
+.abis-dialog:not([open]){display:none!important}
+.abis-dialog[open]{display:flex;flex-direction:column;max-width:880px;width:min(880px,calc(100vw - 24px));height:min(840px,calc(100dvh - 32px));max-height:calc(100dvh - 32px);margin:auto;border-radius:16px;border:0;padding:0;overflow:hidden;box-shadow:0 25px 80px rgba(8,47,60,.35);overscroll-behavior:contain;touch-action:pan-y}
+.abis-dialog .advisory-dialog-head{flex-shrink:0}
+.abis-dialog .advisory-details{flex:1 1 auto;min-height:0;height:100%;padding:14px 18px 20px;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:14px}
+@media(max-width:520px){
+  .abis-dialog[open]{width:calc(100vw - 12px);height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);border-radius:14px}
+  .abis-dialog .advisory-details{padding:12px 14px 18px}
+}
+.abis-flash-banner{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.abis-flash-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.abis-badge-live{font-size:11px;font-weight:900;color:#047857;background:#d1fae5;padding:3px 8px;border-radius:6px;letter-spacing:.03em}
+.abis-date-lbl{font-size:11px;font-weight:800;color:var(--ink)}
+.abis-flash-img-container{width:100%;overflow-x:auto;display:flex;justify-content:center;background:#0f172a;border-radius:8px;padding:8px}
+.abis-flash-img{max-width:100%;height:auto;border-radius:4px;display:block}
+.abis-overview-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.5;color:#14532d}
+.abis-overview-box p{margin:0 0 10px}
+.abis-threshold-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.abis-threshold-item{display:flex;align-items:center;gap:8px;background:#fff;padding:6px 10px;border-radius:8px;border:1px solid #dcfce7}
+.abis-threshold-item strong{font-size:11.5px;display:block;color:var(--ink)}
+.abis-threshold-item small{font-size:10px;color:var(--muted);display:block}
+.abis-dot{width:10px;height:10px;border-radius:50%;flex:none}
+.abis-hotspots-section{display:flex;flex-direction:column;gap:8px}
+.abis-section-title{font-size:13.5px;font-weight:850;color:var(--ink);margin:0}
+.abis-hotspots-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.abis-hotspot-card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px}
+.abis-hotspot-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:4px}
+.abis-hotspot-head strong{font-size:12px;color:var(--ink)}
+.abis-coord-badge{font-size:10.5px;font-weight:800;color:var(--teal);background:#e6f4f1;padding:2px 6px;border-radius:4px}
+.abis-hotspot-desc{margin:0;font-size:11.5px;line-height:1.45;color:#475569}
+.abis-dialog-actions{display:flex;flex-wrap:wrap;gap:8px;padding-top:6px;border-top:1px solid var(--line)}
+.abis-dialog-actions .card-action-button{flex:1 1 180px;text-align:center;padding:8px 12px;background:#f1f5f9;color:var(--ink);border-radius:8px;text-decoration:none;font-size:11.5px;font-weight:800;border:1px solid #cbd5e1;transition:all .15s ease}
+.abis-dialog-actions .card-action-button:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+
 /* TCHP Dialog & Animation Player */
 .tchp-param-tabs{display:flex;gap:6px;margin-bottom:10px}
 .tchp-tab-btn{padding:6px 12px;border:1px solid #d2dedb;border-radius:8px;background:#f3f6f5;color:var(--ink);font-size:11px;font-weight:800;cursor:pointer;transition:all .15s}

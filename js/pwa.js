@@ -177,6 +177,12 @@ let deferredInstallPrompt = null;
       });
     }
 
+    if (ids('openAbisDialog')) {
+      ids('openAbisDialog').addEventListener('click', () => {
+        ids('abisDialog').showModal();
+      });
+    }
+
 loadStatus().catch(()=>{});
     window.addEventListener('pageshow',()=>loadStatus().catch(()=>{}));
     document.addEventListener('visibilitychange',()=>{ if (!document.hidden) loadStatus().catch(()=>{}); });
@@ -201,6 +207,7 @@ loadStatus().catch(()=>{});
     wireDialog('shareDialog','shareDialogClose');
     wireDialog('marineHeatWaveDialog','marineHeatWaveClose');
     wireDialog('coralBleachingDialog','coralBleachingClose');
+    wireDialog('abisDialog','abisClose');
     wireDialog('notificationDialog','notificationDialogClose');
     wireDialog('voiceSummaryDialog','voiceSummaryClose');
     wireDialog('pfzCompassModal','pfzCompassClose');

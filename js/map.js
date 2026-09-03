@@ -380,6 +380,18 @@ function handleOsfLayerSelection(event) {
     if (osfMap) osfMap.invalidateSize({ animate: false });
     return;
   }
+  if (event.name.startsWith('Peak Wave Period') || event.name.includes('Tper')) {
+    const leg = ids('osfTperLegend');
+    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    if (osfMap) osfMap.invalidateSize({ animate: false });
+    return;
+  }
+  if (event.name.startsWith('Peak Wave Direction') || event.name.includes('Tdir')) {
+    const leg = ids('osfTdirLegend');
+    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    if (osfMap) osfMap.invalidateSize({ animate: false });
+    return;
+  }
   if (event.name.startsWith('Sea Surface Temp')) {
     const leg = ids('osfSstLegend');
     if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
@@ -543,7 +555,6 @@ function createOsfCurrentVectorsLayer(dateStr) {
 function createOsfSignificantWaveHeightLayer(dateStr) {
   const layerGroup = L.layerGroup();
 
-  // 1. Copernicus Marine / NOAA WaveWatch III WMS Layer
   const swhWms = L.tileLayer.wms('https://pae-paha.pacioos.hawaii.edu/thredds/wms/ww3_global/WaveWatch_III_Global_Wave_Model_best.ncd', {
     layers: 'Thgt',
     format: 'image/png',
@@ -552,9 +563,45 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
     styles: 'boxfill/rainbow',
     colorscalerange: '0,6',
     numcolorbands: '100',
-    attribution: 'Copernicus Marine / NOAA WW3 Wave Model'
+    attribution: `WW3 Model-Thgt ${dateStr}`
   });
   layerGroup.addLayer(swhWms);
+
+  return layerGroup;
+}
+
+function createOsfWavePeriodLayer(dateStr) {
+  const layerGroup = L.layerGroup();
+
+  const tperWms = L.tileLayer.wms('https://pae-paha.pacioos.hawaii.edu/thredds/wms/ww3_global/WaveWatch_III_Global_Wave_Model_best.ncd', {
+    layers: 'Tper',
+    format: 'image/png',
+    transparent: true,
+    opacity: 0.65,
+    styles: 'boxfill/rainbow',
+    colorscalerange: '2,20',
+    numcolorbands: '100',
+    attribution: `WW3 Model-Tper ${dateStr}`
+  });
+  layerGroup.addLayer(tperWms);
+
+  return layerGroup;
+}
+
+function createOsfWaveDirectionLayer(dateStr) {
+  const layerGroup = L.layerGroup();
+
+  const tdirWms = L.tileLayer.wms('https://pae-paha.pacioos.hawaii.edu/thredds/wms/ww3_global/WaveWatch_III_Global_Wave_Model_best.ncd', {
+    layers: 'Tdir',
+    format: 'image/png',
+    transparent: true,
+    opacity: 0.65,
+    styles: 'boxfill/rainbow',
+    colorscalerange: '0,360',
+    numcolorbands: '100',
+    attribution: `WW3 Model-Tdir ${dateStr}`
+  });
+  layerGroup.addLayer(tdirWms);
 
   return layerGroup;
 }
@@ -563,6 +610,8 @@ function createIncoisOceanWmsLayers() {
   const godasInfo = getLatestMondayGodasDate();
 
   const swhLayer = createOsfSignificantWaveHeightLayer(godasInfo.formatted);
+  const tperLayer = createOsfWavePeriodLayer(godasInfo.formatted);
+  const tdirLayer = createOsfWaveDirectionLayer(godasInfo.formatted);
 
   const sstLayer = L.tileLayer.wms('https://incois.gov.in/geoserver/PFZ-TUNA-SST-CHL/wms', {
     layers: 'PFZ-TUNA-SST-CHL:sst',
@@ -587,6 +636,8 @@ function createIncoisOceanWmsLayers() {
 
   return {
     'Significant Wave Height (SWH)': swhLayer,
+    'Peak Wave Period (Tper)': tperLayer,
+    'Peak Wave Direction (Tdir)': tdirLayer,
     'Sea Surface Temp (SST)': sstLayer,
     'Cyclone Heat (TCHP)': tchpLayer,
     'Ocean Current Vectors': currentVectorsLayer
@@ -733,6 +784,14 @@ async function openOsfMap(service = null) {
     const swhLeg = ids('osfSwhLegend');
     if (swhLeg) {
       swhLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Significant Wave Height (SWH)'] && map.hasLayer(globalThis._osfOceanLayers['Significant Wave Height (SWH)'])) ? 'inline-flex' : 'none';
+    }
+    const tperLeg = ids('osfTperLegend');
+    if (tperLeg) {
+      tperLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Peak Wave Period (Tper)'] && map.hasLayer(globalThis._osfOceanLayers['Peak Wave Period (Tper)'])) ? 'inline-flex' : 'none';
+    }
+    const tdirLeg = ids('osfTdirLegend');
+    if (tdirLeg) {
+      tdirLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Peak Wave Direction (Tdir)'] && map.hasLayer(globalThis._osfOceanLayers['Peak Wave Direction (Tdir)'])) ? 'inline-flex' : 'none';
     }
     const banner = ids('osfTideBanner');
     if (banner) {
