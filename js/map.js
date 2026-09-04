@@ -486,18 +486,29 @@ async function buildCumulativeOsfMapLayers(data) {
     }
   });
 
-function getLatestMondayGodasDate() {
+function getOceanForecastDate() {
   const now = new Date();
-  const day = now.getDay();
-  const diff = (day >= 1 ? day - 1 : 6);
-  const monday = new Date(now.getTime() - diff * 86400000);
-  const yyyy = monday.getFullYear();
-  const mm = String(monday.getMonth() + 1).padStart(2, '0');
-  const dd = String(monday.getDate()).padStart(2, '0');
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const istNow = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + istOffset);
+  const yyyy = istNow.getFullYear();
+  const mm = String(istNow.getMonth() + 1).padStart(2, '0');
+  const dd = String(istNow.getDate()).padStart(2, '0');
   return {
     raw: `${yyyy}${mm}${dd}`,
     formatted: `${dd}-${mm}-${yyyy}`
   };
+}
+
+function getLatestGodasRawDate() {
+  const now = new Date();
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const istNow = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + istOffset);
+  // Fallback to recent operational reanalysis run (typically 1-2 days prior)
+  const ref = new Date(istNow.getTime() - 2 * 86400000);
+  const yyyy = ref.getFullYear();
+  const mm = String(ref.getMonth() + 1).padStart(2, '0');
+  const dd = String(ref.getDate()).padStart(2, '0');
+  return `${yyyy}${mm}${dd}`;
 }
 
 function createOsfCurrentVectorsLayer(dateStr) {
@@ -540,7 +551,7 @@ function createOsfCurrentVectorsLayer(dateStr) {
         <div style="font-size:11.5px; margin-top:5px; line-height:1.45;">
           <div><b>Estimated Speed:</b> <strong>${escapeHtml(node.speed)}</strong></div>
           <div><b>Circulation Direction:</b> ${escapeHtml(node.label)} (${node.dir}°)</div>
-          <div><b>Model Run Date:</b> ${escapeHtml(dateStr)}</div>
+          <div><b>Forecast Date:</b> <strong>${escapeHtml(dateStr)}</strong></div>
           <div style="color:var(--muted); font-size:10px; margin-top:4px;">INCOIS HOOFS/GODAS ocean circulation</div>
         </div>
       </div>
@@ -563,7 +574,7 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
     styles: 'boxfill/rainbow',
     colorscalerange: '0,6',
     numcolorbands: '100',
-    attribution: `WW3 Model-Thgt ${dateStr}`
+    attribution: `WW3 Forecast-Thgt (${dateStr})`
   });
   layerGroup.addLayer(swhWms);
 
@@ -581,7 +592,7 @@ function createOsfWavePeriodLayer(dateStr) {
     styles: 'boxfill/rainbow',
     colorscalerange: '2,20',
     numcolorbands: '100',
-    attribution: `WW3 Model-Tper ${dateStr}`
+    attribution: `WW3 Forecast-Tper (${dateStr})`
   });
   layerGroup.addLayer(tperWms);
 
@@ -599,7 +610,7 @@ function createOsfWaveDirectionLayer(dateStr) {
     styles: 'boxfill/rainbow',
     colorscalerange: '0,360',
     numcolorbands: '100',
-    attribution: `WW3 Model-Tdir ${dateStr}`
+    attribution: `WW3 Forecast-Tdir (${dateStr})`
   });
   layerGroup.addLayer(tdirWms);
 
@@ -607,21 +618,22 @@ function createOsfWaveDirectionLayer(dateStr) {
 }
 
 function createIncoisOceanWmsLayers() {
-  const godasInfo = getLatestMondayGodasDate();
+  const forecastInfo = getOceanForecastDate();
+  const godasRaw = getLatestGodasRawDate();
 
-  const swhLayer = createOsfSignificantWaveHeightLayer(godasInfo.formatted);
-  const tperLayer = createOsfWavePeriodLayer(godasInfo.formatted);
-  const tdirLayer = createOsfWaveDirectionLayer(godasInfo.formatted);
+  const swhLayer = createOsfSignificantWaveHeightLayer(forecastInfo.formatted);
+  const tperLayer = createOsfWavePeriodLayer(forecastInfo.formatted);
+  const tdirLayer = createOsfWaveDirectionLayer(forecastInfo.formatted);
 
   const sstLayer = L.tileLayer.wms('https://incois.gov.in/geoserver/PFZ-TUNA-SST-CHL/wms', {
     layers: 'PFZ-TUNA-SST-CHL:sst',
     format: 'image/png',
     transparent: true,
     opacity: 0.60,
-    attribution: `INCOIS SST (${godasInfo.formatted})`
+    attribution: `INCOIS SST Forecast (${forecastInfo.formatted})`
   });
 
-  const tchpLayer = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/godas/tchp_${godasInfo.raw}.nc`, {
+  const tchpLayer = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/godas/tchp_${godasRaw}.nc`, {
     layers: 'TCHP',
     format: 'image/png',
     transparent: true,
@@ -629,10 +641,10 @@ function createIncoisOceanWmsLayers() {
     styles: 'raster/x-Rainbow',
     COLORSCALERANGE: '1,148',
     NUMCOLORBANDS: '250',
-    attribution: `INCOIS TCHP (${godasInfo.formatted})`
+    attribution: `INCOIS TCHP Forecast (${forecastInfo.formatted})`
   });
 
-  const currentVectorsLayer = createOsfCurrentVectorsLayer(godasInfo.formatted);
+  const currentVectorsLayer = createOsfCurrentVectorsLayer(forecastInfo.formatted);
 
   return {
     'Significant Wave Height (SWH)': swhLayer,
