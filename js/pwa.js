@@ -183,9 +183,18 @@ let deferredInstallPrompt = null;
       });
     }
 
-loadStatus().catch(()=>{});
-    window.addEventListener('pageshow',()=>loadStatus().catch(()=>{}));
-    document.addEventListener('visibilitychange',()=>{ if (!document.hidden) loadStatus().catch(()=>{}); });
+    let lastResumeRefreshTime = Date.now();
+    function throttledResumeRefresh(force = false) {
+      const now = Date.now();
+      if (force || now - lastResumeRefreshTime >= 30000) {
+        lastResumeRefreshTime = now;
+        if (typeof loadStatus === 'function') loadStatus().catch(() => {});
+        checkAppUpdates();
+      }
+    }
+
+    loadStatus().catch(() => {});
+    window.addEventListener('pageshow', () => throttledResumeRefresh());
     function wireDialog(dialogId, closeButtonId, closeOnBackdrop = true) {
       const dialog = ids(dialogId);
       const closeButton = ids(closeButtonId);
@@ -266,17 +275,11 @@ loadStatus().catch(()=>{});
       printOpenedDetails.forEach(detail => { detail.open = false; });
       printOpenedDetails = [];
     });
-    window.addEventListener('focus', () => {
-      loadStatus().catch(() => {});
-      checkAppUpdates();
-    });
-    window.addEventListener('online', () => {
-      loadStatus().catch(() => {});
-      checkAppUpdates();
-    });
+    window.addEventListener('focus', () => throttledResumeRefresh());
+    window.addEventListener('online', () => throttledResumeRefresh(true));
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) {
-        checkAppUpdates();
+        throttledResumeRefresh();
       }
     });
 

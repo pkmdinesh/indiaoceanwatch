@@ -46,35 +46,10 @@
       .then(function (data) {
         svasData = data;
         initSvasCard();
-        // Background check for live updates from INCOIS if network available
-        fetchLiveIncoisAdvisory();
       })
       .catch(function (err) {
-        console.warn('[SVAS] Failed to load local SVAS data, trying direct fetch:', err);
-        fetchLiveIncoisAdvisory(true);
-      });
-  }
-
-  function fetchLiveIncoisAdvisory(isFallback) {
-    var liveUrl = 'https://incois.gov.in/oceanservices/SVAS/SVAS_Advisory.geojson';
-    fetch(liveUrl, { cache: 'no-store' })
-      .then(function (res) {
-        if (!res.ok) throw new Error('Live INCOIS GeoJSON status ' + res.status);
-        return res.json();
-      })
-      .then(function (geo) {
-        if (!geo || !Array.isArray(geo.features) || !geo.features.length) return;
-        var parsed = parseIncoisGeoJson(geo);
-        if (parsed && Object.keys(parsed.districts).length) {
-          svasData = parsed;
-          initSvasCard();
-        }
-      })
-      .catch(function (err) {
-        if (isFallback) {
-          console.error('[SVAS] Could not load SVAS data:', err);
-          renderErrorState();
-        }
+        console.warn('[SVAS] Failed to load local SVAS data:', err);
+        renderErrorState();
       });
   }
 

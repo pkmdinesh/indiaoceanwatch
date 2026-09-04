@@ -206,13 +206,17 @@ async function initPageHitCounter() {
   // 1. Try Firebase Realtime Database REST API (Option 2)
   if (firebaseUrl) {
     try {
+      const fbCtrl = new AbortController();
+      const fbTimeout = setTimeout(() => fbCtrl.abort(), 4000);
       if (isNewSession) {
         // Atomic increment via Firebase RTDB REST
         const res = await fetch(firebaseUrl, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ count: { '.sv': { 'increment': 1 } } })
+          body: JSON.stringify({ count: { '.sv': { 'increment': 1 } } }),
+          signal: fbCtrl.signal
         });
+        clearTimeout(fbTimeout);
         if (res.ok) {
           const data = await res.json();
           if (typeof data?.count === 'number') {
@@ -224,7 +228,8 @@ async function initPageHitCounter() {
         }
       } else {
         // Read-only GET query on Firebase RTDB
-        const res = await fetch(firebaseUrl, { cache: 'no-store' });
+        const res = await fetch(firebaseUrl, { cache: 'no-store', signal: fbCtrl.signal });
+        clearTimeout(fbTimeout);
         if (res.ok) {
           const data = await res.json();
           const serverCount = typeof data === 'number' ? data : (typeof data?.count === 'number' ? data.count : 0);
@@ -243,7 +248,10 @@ async function initPageHitCounter() {
 
   // 2. High-reliability fallback (VisitorBadge)
   try {
-    const fbRes = await fetch('https://api.visitorbadge.io/api/visitors?path=pkmdinesh.github.io%2Findiaoceanwatch', { cache: 'no-store' });
+    const vbCtrl = new AbortController();
+    const vbTimeout = setTimeout(() => vbCtrl.abort(), 4000);
+    const fbRes = await fetch('https://api.visitorbadge.io/api/visitors?path=pkmdinesh.github.io%2Findiaoceanwatch', { cache: 'no-store', signal: vbCtrl.signal });
+    clearTimeout(vbTimeout);
     if (fbRes.ok) {
       const text = await fbRes.text();
       const match = text.match(/aria-label="VISITORS:\s*([\d,]+)"/i) || text.match(/<text[^>]*>([\d,]+)<\/text>/i);
