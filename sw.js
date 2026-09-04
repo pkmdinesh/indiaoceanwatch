@@ -73,12 +73,32 @@ async function networkFirst(request, fallbackUrl) {
   const cache = await caches.open(CACHE_NAME);
   try {
     const response = await fetch(request,{cache:'no-store'});
-    if (!response.ok) return (await cache.match(request)) || (fallbackUrl ? await cache.match(fallbackUrl) : null) || response;
+    if (!response.ok) {
+      const cached = (await cache.match(request)) || (fallbackUrl ? await cache.match(fallbackUrl) : null);
+      if (cached) return ensureHtmlCharset(cached);
+      return response;
+    }
     await cache.put(request,response.clone());
-    return response;
+    return ensureHtmlCharset(response);
   } catch {
-    return (await cache.match(request)) || (fallbackUrl ? await cache.match(fallbackUrl) : Response.error());
+    const cached = (await cache.match(request)) || (fallbackUrl ? await cache.match(fallbackUrl) : Response.error());
+    return ensureHtmlCharset(cached);
   }
+}
+
+function ensureHtmlCharset(response) {
+  if (!response || !response.headers) return response;
+  const contentType = response.headers.get('content-type') || '';
+  if (contentType.includes('text/html') && !contentType.includes('charset')) {
+    const headers = new Headers(response.headers);
+    headers.set('Content-Type', 'text/html; charset=utf-8');
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: headers
+    });
+  }
+  return response;
 }
 
 async function statusNetworkFirst(request) {
@@ -124,7 +144,7 @@ self.addEventListener('fetch',event => {
     event.respondWith(statusNetworkFirst(event.request));
     return;
   }
-  if (url.pathname.endsWith('/data/tides.json')) {
+  if (url.pathname.endsWith('/data/tides.json') || url.pathname.endsWith('/data/svas-status.json')) {
     event.respondWith(networkFirst(event.request));
     return;
   }

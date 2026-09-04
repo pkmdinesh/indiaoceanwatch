@@ -953,6 +953,20 @@ try {
     if (-not $Quiet) { Write-Warning "PFZ map cache refresh failed: $($_.Exception.Message)" }
 }
 
+# Refresh Small Vessel Advisory Service (SVAS) status data
+try {
+    $svasScript = Join-Path $scriptsRoot 'update-svas.mjs'
+    if (Test-Path -LiteralPath $svasScript) {
+        $nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+        if ($nodeCommand) {
+            & $nodeCommand.Source $svasScript | Out-Null
+            if (-not $Quiet) { Write-Output 'Updated data/svas-status.json' }
+        }
+    }
+} catch {
+    if (-not $Quiet) { Write-Warning "SVAS status update failed: $($_.Exception.Message)" }
+}
+
 # Marine Heat Wave is published as a marquee on the official product page.
 try {
     $mhwUrl = 'https://incois.gov.in/oceanservices/mhw/index.jsp'
