@@ -10,8 +10,8 @@
     "Kozhikode": {
       "name": "Kozhikode",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 11.3985,
+      "lon": 75.6284,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -83,8 +83,8 @@
     "24 Paraganas South": {
       "name": "24 Paraganas South",
       "state": "West Bengal",
-      "lat": null,
-      "lon": null,
+      "lat": 21.3297,
+      "lon": 88.4717,
       "overall": {
         "b4": "alert",
         "b6": "safe",
@@ -156,8 +156,8 @@
     "Medinipur East": {
       "name": "Medinipur East",
       "state": "West Bengal",
-      "lat": null,
-      "lon": null,
+      "lat": 21.644,
+      "lon": 87.8629,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -229,8 +229,8 @@
     "Baleshwar": {
       "name": "Baleshwar",
       "state": "Odisha",
-      "lat": null,
-      "lon": null,
+      "lat": 21.4472,
+      "lon": 87.1483,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -302,8 +302,8 @@
     "Bhadrak": {
       "name": "Bhadrak",
       "state": "Odisha",
-      "lat": null,
-      "lon": null,
+      "lat": 20.9039,
+      "lon": 86.9771,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -375,8 +375,8 @@
     "Kendrapara": {
       "name": "Kendrapara",
       "state": "Odisha",
-      "lat": null,
-      "lon": null,
+      "lat": 20.4747,
+      "lon": 87.0184,
       "overall": {
         "b4": "alert",
         "b6": "safe",
@@ -448,8 +448,8 @@
     "Jagatsinghapur": {
       "name": "Jagatsinghapur",
       "state": "Odisha",
-      "lat": null,
-      "lon": null,
+      "lat": 20.1321,
+      "lon": 86.8031,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -521,8 +521,8 @@
     "Puri": {
       "name": "Puri",
       "state": "Odisha",
-      "lat": null,
-      "lon": null,
+      "lat": 19.7666,
+      "lon": 86.1158,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -594,8 +594,8 @@
     "Ganjam": {
       "name": "Ganjam",
       "state": "Odisha",
-      "lat": null,
-      "lon": null,
+      "lat": 19.2323,
+      "lon": 85.7609,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -667,8 +667,8 @@
     "Srikakulam": {
       "name": "Srikakulam",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 18.6169,
+      "lon": 84.6975,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -740,8 +740,8 @@
     "Vizianagaram": {
       "name": "Vizianagaram",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 17.9895,
+      "lon": 83.7879,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -813,8 +813,8 @@
     "Visakhapatanam": {
       "name": "Visakhapatanam",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 17.7472,
+      "lon": 83.4505,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -886,8 +886,8 @@
     "Anakapalli": {
       "name": "Anakapalli",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 17.4455,
+      "lon": 83.233,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -959,8 +959,8 @@
     "Kakinada": {
       "name": "Kakinada",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 16.9567,
+      "lon": 82.4999,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -1032,8 +1032,8 @@
     "West Godavari": {
       "name": "West Godavari",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 15.7834,
+      "lon": 81.785,
       "overall": {
         "b4": "alert",
         "b6": "safe",
@@ -1105,8 +1105,8 @@
     "Konaseema": {
       "name": "Konaseema",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 16.3886,
+      "lon": 82.4216,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -1178,8 +1178,8 @@
     "SPSR Nellore": {
       "name": "SPSR Nellore",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 14.6095,
+      "lon": 80.2528,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -1251,8 +1251,8 @@
     "Tirupati": {
       "name": "Tirupati",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 13.8687,
+      "lon": 80.5456,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -1324,8 +1324,8 @@
     "Thiruvallur": {
       "name": "Thiruvallur",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 13.3325,
+      "lon": 80.4314,
       "overall": {
         "b4": "alert",
         "b6": "safe",
@@ -1397,8 +1397,8 @@
     "Chennai": {
       "name": "Chennai",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 13.1337,
+      "lon": 80.374,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -1470,8 +1470,8 @@
     "Chengalpattu": {
       "name": "Chengalpattu",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 12.6334,
+      "lon": 80.4645,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -1543,8 +1543,8 @@
     "Villupuram": {
       "name": "Villupuram",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 12.1185,
+      "lon": 80.4347,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -1616,8 +1616,8 @@
     "Pondicherry": {
       "name": "Pondicherry",
       "state": "Puducherry",
-      "lat": null,
-      "lon": null,
+      "lat": 11.9191,
+      "lon": 80.029,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -1689,8 +1689,8 @@
     "Cuddalore": {
       "name": "Cuddalore",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 11.5815,
+      "lon": 80.0155,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -1762,8 +1762,8 @@
     "Mayiladuthurai": {
       "name": "Mayiladuthurai",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 11.1475,
+      "lon": 80.0056,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -1835,8 +1835,8 @@
     "Karaikal": {
       "name": "Karaikal",
       "state": "Puducherry",
-      "lat": null,
-      "lon": null,
+      "lat": 10.8964,
+      "lon": 80.0123,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -1908,8 +1908,8 @@
     "Nagapattinam": {
       "name": "Nagapattinam",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 10.6047,
+      "lon": 79.9633,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -1981,8 +1981,8 @@
     "Thiruvarur": {
       "name": "Thiruvarur",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 10.2903,
+      "lon": 79.617,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -2054,8 +2054,8 @@
     "Thanjavur": {
       "name": "Thanjavur",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 10.1833,
+      "lon": 79.2713,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -2127,8 +2127,8 @@
     "Pudukkottai": {
       "name": "Pudukkottai",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 9.9226,
+      "lon": 79.161,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -2200,8 +2200,8 @@
     "Ramanathapuram": {
       "name": "Ramanathapuram",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 9.3352,
+      "lon": 79.0128,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2273,8 +2273,8 @@
     "Tuticorin": {
       "name": "Tuticorin",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 8.6715,
+      "lon": 78.1651,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2346,8 +2346,8 @@
     "Tirunelveli": {
       "name": "Tirunelveli",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 8.1224,
+      "lon": 77.8129,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2419,8 +2419,8 @@
     "Kanniyakumari": {
       "name": "Kanniyakumari",
       "state": "Tamil Nadu",
-      "lat": null,
-      "lon": null,
+      "lat": 8.0393,
+      "lon": 77.3644,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2492,8 +2492,8 @@
     "Thiruvananthapuram": {
       "name": "Thiruvananthapuram",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 8.3325,
+      "lon": 76.8627,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2565,8 +2565,8 @@
     "Kollam": {
       "name": "Kollam",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 8.8739,
+      "lon": 76.5032,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2638,8 +2638,8 @@
     "Alappuzha": {
       "name": "Alappuzha",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 9.5023,
+      "lon": 76.2318,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2711,8 +2711,8 @@
     "Ernakulam": {
       "name": "Ernakulam",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 9.9923,
+      "lon": 76.1397,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2784,8 +2784,8 @@
     "Thrissur": {
       "name": "Thrissur",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 10.4023,
+      "lon": 75.6943,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2857,8 +2857,8 @@
     "Jamnagar": {
       "name": "Jamnagar",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 22.7046,
+      "lon": 70.226,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -2930,8 +2930,8 @@
     "Devbhumi Dwarka": {
       "name": "Devbhumi Dwarka",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 22.2571,
+      "lon": 69.1915,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3003,8 +3003,8 @@
     "Porbandar": {
       "name": "Porbandar",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 21.4711,
+      "lon": 69.4412,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3076,8 +3076,8 @@
     "Junagadh": {
       "name": "Junagadh",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 21.0282,
+      "lon": 69.8953,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3149,8 +3149,8 @@
     "Gir Somnath": {
       "name": "Gir Somnath",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 20.6324,
+      "lon": 70.6998,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3222,8 +3222,8 @@
     "Amreli": {
       "name": "Amreli",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 20.8218,
+      "lon": 71.4456,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3295,8 +3295,8 @@
     "Palghar": {
       "name": "Palghar",
       "state": "Maharashtra",
-      "lat": null,
-      "lon": null,
+      "lat": 19.7232,
+      "lon": 72.6778,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3368,8 +3368,8 @@
     "Mumbai": {
       "name": "Mumbai",
       "state": "Maharashtra",
-      "lat": null,
-      "lon": null,
+      "lat": 19.1253,
+      "lon": 72.7111,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3441,8 +3441,8 @@
     "Raigad": {
       "name": "Raigad",
       "state": "Maharashtra",
-      "lat": null,
-      "lon": null,
+      "lat": 18.4324,
+      "lon": 72.8874,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3514,8 +3514,8 @@
     "Ratnagiri": {
       "name": "Ratnagiri",
       "state": "Maharashtra",
-      "lat": null,
-      "lon": null,
+      "lat": 17.1303,
+      "lon": 73.1853,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3587,8 +3587,8 @@
     "Sindhudurg": {
       "name": "Sindhudurg",
       "state": "Maharashtra",
-      "lat": null,
-      "lon": null,
+      "lat": 16.0793,
+      "lon": 73.4248,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3660,8 +3660,8 @@
     "North Goa": {
       "name": "North Goa",
       "state": "Goa",
-      "lat": null,
-      "lon": null,
+      "lat": 15.5724,
+      "lon": 73.6466,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3733,8 +3733,8 @@
     "South Goa": {
       "name": "South Goa",
       "state": "Goa",
-      "lat": null,
-      "lon": null,
+      "lat": 15.1322,
+      "lon": 73.8939,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3806,8 +3806,8 @@
     "Uttara Kannada": {
       "name": "Uttara Kannada",
       "state": "Karnataka",
-      "lat": null,
-      "lon": null,
+      "lat": 14.5668,
+      "lon": 74.2147,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3879,8 +3879,8 @@
     "Udupi": {
       "name": "Udupi",
       "state": "Karnataka",
-      "lat": null,
-      "lon": null,
+      "lat": 13.4981,
+      "lon": 74.4648,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -3952,8 +3952,8 @@
     "Dakshina Kannada": {
       "name": "Dakshina Kannada",
       "state": "Karnataka",
-      "lat": null,
-      "lon": null,
+      "lat": 12.844,
+      "lon": 74.6193,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -4025,8 +4025,8 @@
     "Kasaragod": {
       "name": "Kasaragod",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 12.385,
+      "lon": 74.765,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -4098,8 +4098,8 @@
     "Kannur": {
       "name": "Kannur",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 11.7997,
+      "lon": 75.36,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -4171,8 +4171,8 @@
     "Malappuram": {
       "name": "Malappuram",
       "state": "Kerala",
-      "lat": null,
-      "lon": null,
+      "lat": 10.9954,
+      "lon": 75.7307,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -4244,8 +4244,8 @@
     "Kachchh": {
       "name": "Kachchh",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 23.1781,
+      "lon": 68.8942,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -4317,8 +4317,8 @@
     "Surat": {
       "name": "Surat",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 21.099,
+      "lon": 72.6729,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -4390,8 +4390,8 @@
     "Bapatla": {
       "name": "Bapatla",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 15.7872,
+      "lon": 80.6979,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -4463,8 +4463,8 @@
     "Bharuch": {
       "name": "Bharuch",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 21.3844,
+      "lon": 72.5233,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -4536,8 +4536,8 @@
     "Bhavnagar": {
       "name": "Bhavnagar",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 21.1425,
+      "lon": 71.9565,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -4609,8 +4609,8 @@
     "Daman": {
       "name": "Daman",
       "state": "The Dadra And Nagar Haveli And Daman And Diu",
-      "lat": null,
-      "lon": null,
+      "lat": 20.4161,
+      "lon": 72.7866,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -4682,8 +4682,8 @@
     "Krishna": {
       "name": "Krishna",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 15.8498,
+      "lon": 81.1702,
       "overall": {
         "b4": "alert",
         "b6": "alert",
@@ -4755,8 +4755,8 @@
     "Navsari": {
       "name": "Navsari",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 20.8791,
+      "lon": 72.7858,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -4828,8 +4828,8 @@
     "Prakasam": {
       "name": "Prakasam",
       "state": "Andhra Pradesh",
-      "lat": null,
-      "lon": null,
+      "lat": 15.3121,
+      "lon": 80.1303,
       "overall": {
         "b4": "safe",
         "b6": "safe",
@@ -4901,8 +4901,8 @@
     "Valsad": {
       "name": "Valsad",
       "state": "Gujarat",
-      "lat": null,
-      "lon": null,
+      "lat": 20.1832,
+      "lon": 72.5104,
       "overall": {
         "b4": "safe",
         "b6": "safe",

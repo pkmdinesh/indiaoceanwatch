@@ -107,9 +107,34 @@
         output.dates = b4.map(function (d) { return d.date; });
       }
 
+      // Compute centroid from feature polygon geometry
+      var featLat = null;
+      var featLon = null;
+      if (f.geometry && f.geometry.coordinates) {
+        var sumLat = 0;
+        var sumLon = 0;
+        var count = 0;
+        var walkCoords = function (coords) {
+          if (typeof coords[0] === 'number') {
+            sumLon += coords[0];
+            sumLat += coords[1];
+            count++;
+          } else if (Array.isArray(coords)) {
+            coords.forEach(walkCoords);
+          }
+        };
+        walkCoords(f.geometry.coordinates);
+        if (count > 0) {
+          featLat = parseFloat((sumLat / count).toFixed(4));
+          featLon = parseFloat((sumLon / count).toFixed(4));
+        }
+      }
+
       output.districts[name] = {
         name: name,
         state: p.state || '',
+        lat: featLat,
+        lon: featLon,
         overall: {
           b4: p.Color4 === 'green' ? 'safe' : 'alert',
           b6: p.Color6 === 'green' ? 'safe' : 'alert',
