@@ -959,7 +959,7 @@ try {
     if (Test-Path -LiteralPath $svasScript) {
         $nodeCommand = Get-Command node -ErrorAction SilentlyContinue
         if ($nodeCommand) {
-            & $nodeCommand.Source $svasScript | Out-Null
+            & $nodeCommand.Source $svasScript $projectRoot | Out-Null
             if (-not $Quiet) { Write-Output 'Updated data/svas-status.json' }
         }
     }

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const projectRoot = 'd:\\INCOIS-OCEANWATCH';
+const projectRoot = process.argv[2] ? path.resolve(process.argv[2]) : path.resolve(__dirname, '..');
 
 const svasUrl = 'https://incois.gov.in/oceanservices/SVAS/SVAS_Advisory.geojson';
 const targetFile = path.join(projectRoot, 'data', 'svas-status.json');
