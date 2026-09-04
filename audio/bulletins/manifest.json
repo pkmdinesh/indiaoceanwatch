@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04T17:16:51.438Z",
+  "updated": "2026-09-04T18:52:30.349Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -45,7 +45,7 @@
     },
     "gu": {
       "file": "audio/bulletins/bulletin-gu.mp3",
-      "size": 309120,
+      "size": 308928,
       "title": "INCOIS મહાસાગર સ્થિતિ પૂર્વાનુમાન (ગુજરાતી)",
       "langCode": "gu-IN"
     },
