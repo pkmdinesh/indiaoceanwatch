@@ -1,18 +1,18 @@
 ﻿{
     "updatedAt":  "2026-09-05T07:15:17.9701747+00:00",
-    "lastAttemptAt":  "2026-09-05T07:15:17.9701747+00:00",
+    "lastAttemptAt":  "2026-09-05T07:30:16.4557829+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
                            "message":  "Marine Heatwave event of Moderate category with area of spreading 37.89% has been observed on 2026-09-03 over the Arabian Sea; Marine Heatwave event of Moderate category with area of spreading 26.00% has been observed on 2026-09-03 over the Bay of Bengal; Marine Heatwave event of Moderate to Extreme category with area of spreading 25.77% has been observed on 2026-09-03 over the Rest of Indian Ocean; Marine Heatwave event of Extreme category with area of spreading 19.53% has been observed on 2026-09-03 over the Red Sea; Marine Heatwave event of Moderate category with area of spreading 22.87% has been observed on 2026-09-03 over the Maharashtra coast; Marine Heatwave event of Moderate category with area of spreading 72.41% has been observed on 2026-09-03 over the Goa coast; Marine Heatwave event of Moderate category with area of spreading 75.89% has been observed on 2026-09-03 over the Karnataka coast; Marine Heatwave event of Moderate category with area of spreading 38.92% has been observed on 2026-09-03 over the Kerala coast; Marine Heatwave event of Moderate to Extreme category with area of spreading 100.00% has been observed on 2026-09-03 over the Lakshadweep coast; Marine Heatwave event of Moderate category with area of spreading 29.15% has been observed on 2026-09-03 over the Andaman coast; Marine Heatwave event of Moderate category with area of spreading 74.55% has been observed on 2026-09-03 over the Nicobar coast;",
                            "fetchedAt":  "2026-09-04T23:30:16.8845025+00:00",
-                           "ok":  true,
+                           "ok":  false,
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
     "coralBleaching":  {
                            "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-09-05T07:15:17.9701747+00:00",
+                           "fetchedAt":  "2026-09-05T07:30:16.4557829+00:00",
                            "regions":  [
                                            {
                                                "area":  "Andaman",
@@ -1301,7 +1301,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-09-05T07:15:26.2151147+00:00",
+                          "fetchedAt":  "2026-09-05T07:30:23.7805183+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -10150,14 +10150,14 @@
                             ]
             },
     "errors":  [
-
+                   "Marine Heat Wave: Unable to read data from the transport connection: The connection was closed."
                ],
     "healthAlerts":  [
 
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  19.78,
-                      "pfzAgeHours":  19.78
+                      "osfAgeHours":  20.05,
+                      "pfzAgeHours":  20.05
                   }
 }
