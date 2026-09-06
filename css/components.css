@@ -39,8 +39,8 @@
     @media(max-width:520px){.brand-copy strong{font-size:17px}}
     @media(min-width:851px){.ocean .forecast{height:calc(100% - 74px)}}
     .content{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start;padding:12px 14px}.content>.panel{padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:#f5f8f6}.content>.panel:last-child{border:1px solid var(--line)}.content .ocean,.content .svas-panel,.content .pfz-card,.content .marine-climate-card,.content .other-advisories-card{grid-column:1/-1}.content .ocean .forecast{height:auto}.content .panel-head{display:flex;min-height:36px;align-items:center;flex-wrap:nowrap;padding-top:0}.content .panel-head>div{min-width:0}.content .panel-head h2{font-size:clamp(16px,1.5vw,21px)!important;white-space:normal;overflow-wrap:anywhere}.content .panel-head>.source{position:static;margin-left:auto;flex:none}.content .svas-panel,.content .advisory-card,.content .cyclone-card,.content .storm-card,.content .seismic-card{display:flex;min-width:0;flex-direction:column}.content .tsunami-status,.content .storm-status,.content .cyclone-status{height:auto;min-height:46px;flex:none;padding:7px 9px}.tsunami-status.advisory-bulletin{color:var(--green)!important;background:var(--safe-bg)!important}.advisory-bulletin .safe-mark{color:#fff!important;background:var(--green)!important}.tsunami-message{display:block;color:currentColor;font-size:15px;font-weight:800}.seismic-message-wrap{display:flex;min-height:46px;flex:1;align-items:center;padding:7px 9px;border-radius:12px;background:var(--safe-bg)}.seismic-message-copy{min-width:0}.seismic-event-link{display:block;color:var(--ink);font-size:12px;font-weight:700;line-height:1.45;text-decoration:underline;text-underline-offset:2px}.seismic-message-wrap .seismic-additional{margin-top:4px}.seismic-additional .seismic-event-link{font-size:10px}.seismic-message-wrap .seismic-additional p{padding-left:0;border-left:0}.seismic-message-wrap.is-recent .seismic-event-link{color:var(--red);font-weight:850}.pfz-card .pfz-states{margin-top:8px}
-    @media(min-width:901px){.ocean .forecast{grid-template-columns:repeat(3,minmax(0,1fr))}.ocean .forecast-card.dsle-card,.ocean .forecast-card.port-tide-forecast{grid-column:1/-1}}
-    @media(max-width:900px) and (min-width:701px){.ocean .forecast{grid-template-columns:repeat(2,minmax(0,1fr))}.ocean .forecast-card.current-forecast,.ocean .forecast-card.dsle-card,.ocean .forecast-card.port-tide-forecast{grid-column:1/-1}}
+    @media(min-width:901px){.ocean .forecast{grid-template-columns:repeat(6,minmax(0,1fr))}.ocean .forecast>.forecast-card{grid-column:span 2}.ocean .forecast>.forecast-card.dsle-card{grid-column:span 3}.ocean .forecast>.forecast-card.port-tide-forecast{grid-column:span 3}}
+    @media(max-width:900px) and (min-width:701px){.ocean .forecast{grid-template-columns:repeat(2,minmax(0,1fr))}.ocean .forecast-card.current-forecast{grid-column:1/-1}.ocean .forecast-card.dsle-card{grid-column:1}.ocean .forecast-card.port-tide-forecast{grid-column:2}}
     @media(min-width:701px){.content .advisory-card{grid-column:1}.content .seismic-card{grid-column:2}.content .storm-card{grid-column:1}.content .cyclone-card{grid-column:2}}
     @media(max-width:1100px){.content{padding:12px}.content .ocean{grid-column:1/-1}}
     @media(max-width:700px){.content{grid-template-columns:1fr;padding:0}.content .ocean,.content .svas-panel,.content .pfz-card{grid-column:auto}.content>.panel{padding:13px}.content .panel-head{min-height:0}.forecast{grid-template-columns:1fr}.forecast-card.current-forecast,.forecast-card.dsle-card,.forecast-card.port-tide-forecast{grid-column:auto}}
@@ -850,26 +850,25 @@
 }
 
 /* Dynamic Sea-Level Envelope (DSLE) Card */
-.dsle-card{display:flex;flex-direction:column;gap:10px}
+.dsle-card{display:flex;flex-direction:column;gap:10px;height:100%}
 .dsle-header{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .dsle-title-wrap{display:flex;align-items:center;gap:8px}
-.dsle-badge-icon{font-size:22px;line-height:1}
-.dsle-title-wrap h3{margin:0;font-size:16px}
+.dsle-badge-icon{font-size:20px;line-height:1}
+.dsle-title-wrap h3{margin:0;font-size:15.5px}
 .dsle-kicker{margin:2px 0 0;font-size:11px;color:var(--muted);font-weight:700}
-.dsle-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-@media(max-width:600px){.dsle-grid{grid-template-columns:1fr}}
-.dsle-metric-card{display:flex;flex-direction:column;gap:6px;padding:10px 14px;border-radius:12px;background:#fff;border:1px solid var(--line);transition:border-color .2s,background .2s}
-.dsle-metric-header{display:flex;align-items:center;gap:6px}
-.dsle-icon{font-size:16px;line-height:1}
-.dsle-metric-label{font-size:12px;font-weight:800;color:var(--ink)}
-.dsle-metric-val-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.dsle-value{font-size:22px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
-.dsle-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:850;letter-spacing:.02em}
+.dsle-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.dsle-metric-card{display:flex;flex-direction:column;gap:5px;padding:9px 12px;border-radius:11px;background:#fff;border:1px solid var(--line);transition:border-color .2s,background .2s}
+.dsle-metric-header{display:flex;align-items:center;gap:5px}
+.dsle-icon{font-size:15px;line-height:1}
+.dsle-metric-label{font-size:11.5px;font-weight:800;color:var(--ink)}
+.dsle-metric-val-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dsle-value{font-size:15px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.2}
+.dsle-badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:6px;font-size:10px;font-weight:850;letter-spacing:.02em}
 .dsle-badge.level-safe{background:#e6f6ed;color:#0b7a42}
 .dsle-badge.level-watch{background:#fff8e6;color:#b25e00}
 .dsle-badge.level-warning{background:#fde8e8;color:#c51616}
-.dsle-metric-desc{font-size:11px;font-weight:650;color:var(--muted);line-height:1.35}
-.dsle-telemetry-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 12px;background:#eef4f1;border-radius:8px;font-size:11px;color:var(--ink)}
+.dsle-metric-desc{font-size:10.5px;font-weight:650;color:var(--muted);line-height:1.35}
+.dsle-telemetry-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:6px 12px;background:#eef4f1;border-radius:8px;font-size:11px;color:var(--ink);margin-top:auto}
 .dsle-param-item{display:inline-flex;align-items:center;gap:4px}
 .dsle-param-label{color:var(--muted);font-weight:700}
 .dsle-dot{color:#9cb5ad;font-weight:900}
