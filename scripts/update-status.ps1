@@ -971,6 +971,20 @@ try {
     if (-not $Quiet) { Write-Warning "SVAS status update failed: $($_.Exception.Message)" }
 }
 
+# Refresh INCOIS Predicted & Actual Tide (PAT) data
+try {
+    $tidesScript = Join-Path $scriptsRoot 'update-tides.mjs'
+    if (Test-Path -LiteralPath $tidesScript) {
+        $nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+        if ($nodeCommand) {
+            & $nodeCommand.Source $tidesScript $projectRoot | Out-Null
+            if (-not $Quiet) { Write-Output 'Updated data/tides.json' }
+        }
+    }
+} catch {
+    if (-not $Quiet) { Write-Warning "Tides PAT update failed: $($_.Exception.Message)" }
+}
+
 # Marine Heat Wave is published as a marquee on the official product page.
 try {
     $mhwUrl = 'https://incois.gov.in/oceanservices/mhw/index.jsp'

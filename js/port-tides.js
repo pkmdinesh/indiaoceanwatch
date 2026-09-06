@@ -654,6 +654,158 @@ var NATIONAL_TIDE_STATIONS = [
 ];
 var MAJOR_COASTAL_PORTS = NATIONAL_TIDE_STATIONS;
 
+// Exact mapping to official INCOIS PAT station regions
+var STATION_PAT_REGION_MAP = {
+  adan: 'Hazira-2nd',
+  aeri: 'Port-Cornwallis',
+  agatt: 'Kavaratti-Laccadive-Is',
+  astra: 'Devi-River-Entrance',
+  bahab: 'Dhamra',
+  beyp: 'Beypore',
+  camp: 'South-Galatea-Bay',
+  carn: 'Car-Nicobar',
+  chenn: 'Chennai',
+  chetl: 'Kavaratti-Laccadive-Is',
+  coch: 'Kochi',
+  daman: 'Bulsar',
+  dham: 'Dhamra',
+  dosin: 'Dhamra',
+  enno: 'Chennai',
+  gard: 'Kolkata-Kidderpore-docks',
+  gopa: 'Gopalpur',
+  hutb: 'The-Sisters',
+  jaig: 'Jaigarh',
+  jakh: 'Godia-Creek',
+  jnpt: 'Mumbai-Apollo-Bandar',
+  kaki: 'Kakinada',
+  kalpe: 'Kavaratti-Laccadive-Is',
+  kand: 'Kandla-Harbour',
+  kanya: 'Muttam',
+  karw: 'Karwar',
+  kava: 'Kavaratti-Laccadive-Is',
+  koll: 'Kollam',
+  kris: 'Chennai',
+  mach: 'Surya-Lanka',
+  marm: 'Marmagao',
+  mayab: 'Stewart-Sound',
+  mini: 'Minicoy',
+  mumba: 'Mumbai-Apollo-Bandar',
+  murud: 'Janjira-Dangri-Bandar',
+  naga: 'Nagapatnam',
+  nagc: 'Nancowry-Harbour',
+  newm: 'Mangalore',
+  okha: 'Okha',
+  panaj: 'Marmagao',
+  para: 'Paradip',
+  porb: 'Porbandar',
+  ptbl: 'Port-Blair',
+  pudu: 'Puducherry',
+  ramaya: 'Surya-Lanka',
+  rames: 'Pamban-Pass',
+  rang: 'Long-Island',
+  tuti: 'Tuticorin',
+  verav: 'Kotra',
+  vish: 'Visakhapatnam'
+};
+
+NATIONAL_TIDE_STATIONS.forEach(function (p) {
+  p.patRegion = STATION_PAT_REGION_MAP[p.id] || p.name;
+});
+
+// Official INCOIS PAT Cache & Loader
+var patTidesCache = null;
+var patTidesFetchPromise = null;
+
+function loadPatTidesData() {
+  if (patTidesCache) return Promise.resolve(patTidesCache);
+  if (patTidesFetchPromise) return patTidesFetchPromise;
+
+  patTidesFetchPromise = fetch('data/tides.json')
+    .then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      patTidesCache = data;
+      renderPortTideCard();
+      return data;
+    })
+    .catch(function (err) {
+      console.warn('[PortTides] Official PAT data unavailable, using harmonic model:', err?.message);
+      return null;
+    });
+
+  return patTidesFetchPromise;
+}
+
+// Automatically start fetching official PAT tides in browser environment
+if (typeof window !== 'undefined') {
+  void loadPatTidesData();
+}
+
+// Cosine interpolation between discrete hourly PAT points
+function interpolatePatHeight(pts, timestamp) {
+  if (!pts || !pts.length) return 0;
+  if (timestamp <= pts[0].t) return pts[0].h;
+  if (timestamp >= pts[pts.length - 1].t) return pts[pts.length - 1].h;
+  for (var i = 0; i < pts.length - 1; i++) {
+    var p0 = pts[i];
+    var p1 = pts[i + 1];
+    if (timestamp >= p0.t && timestamp <= p1.t) {
+      var mu = (timestamp - p0.t) / (p1.t - p0.t);
+      var mu2 = (1 - Math.cos(mu * Math.PI)) / 2;
+      return Number((p0.h * (1 - mu2) + p1.h * mu2).toFixed(2));
+    }
+  }
+  return pts[0].h;
+}
+
+// Retrieve official Survey of India / INCOIS PAT predictions for today
+function getPatDayData(port, now = new Date()) {
+  var patStation = patTidesCache?.stations?.[port.id];
+  if (!patStation || !patStation.events || !patStation.events.length) return null;
+
+  var todayDateStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  var todayEvents = patStation.events
+    .filter(function (e) { return e.time && e.time.startsWith(todayDateStr); })
+    .map(function (e) {
+      return {
+        type: e.type,
+        time: new Date(e.time),
+        height: e.height
+      };
+    });
+
+  if (!todayEvents.length) return null;
+
+  var pts = (patStation.series || []).map(function (p) {
+    return { t: new Date(p.time).getTime(), h: p.height };
+  });
+
+  var elevations = [];
+  var istStartMs = new Date(todayDateStr + 'T00:00:00+05:30').getTime();
+  if (pts.length) {
+    for (var min = 0; min <= 24 * 60; min += 5) {
+      var timeMs = istStartMs + min * 60 * 1000;
+      var time = new Date(timeMs);
+      var h = interpolatePatHeight(pts, timeMs);
+      elevations.push({ time: time, height: h, minutes: min });
+    }
+  }
+
+  var nowMs = now.getTime();
+  var currentHeight = pts.length ? interpolatePatHeight(pts, nowMs) : null;
+  var futureHeight = pts.length ? interpolatePatHeight(pts, nowMs + 15 * 60 * 1000) : null;
+  var isRising = (currentHeight !== null && futureHeight !== null) ? (futureHeight >= currentHeight) : null;
+
+  return {
+    events: todayEvents,
+    elevations: elevations.length ? elevations : null,
+    currentHeight: currentHeight,
+    isRising: isRising
+  };
+}
+
 var selectedPortId = 'chenn';
 var userLocationData = null;
 
@@ -977,7 +1129,7 @@ function checkPortActiveWarnings(port) {
 }
 
 // Render SVG Tide Curve
-function renderTideChartSvg(elevations, port, now = new Date()) {
+function renderTideChartSvg(elevations, port, now = new Date(), currentHeightOverride = null, isOfficialPat = false) {
   const width = 340;
   const height = 90;
   const padTop = 16;
@@ -1004,8 +1156,10 @@ function renderTideChartSvg(elevations, port, now = new Date()) {
   // Current time position
   const nowM = now.getHours() * 60 + now.getMinutes();
   const nowX = getX(Math.min(24 * 60, Math.max(0, nowM))).toFixed(1);
-  const currentHeight = calculateTideElevation(port, now);
-  const nowY = getY(currentHeight).toFixed(1);
+  const currentHeight = (currentHeightOverride !== null)
+    ? Number(currentHeightOverride).toFixed(2)
+    : calculateTideElevation(port, now);
+  const nowY = getY(Number(currentHeight)).toFixed(1);
 
   // Time markers at 00h, 06h, 12h, 18h, 24h
   const timeLabels = [
@@ -1022,6 +1176,7 @@ function renderTideChartSvg(elevations, port, now = new Date()) {
   `).join('');
 
   const dateStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+  const sourceBadge = isOfficialPat ? ' · SOI Official' : '';
 
   return `
     <svg viewBox="0 0 ${width} ${height}" class="tide-curve-svg" aria-hidden="true">
@@ -1034,7 +1189,7 @@ function renderTideChartSvg(elevations, port, now = new Date()) {
       <line x1="${padSide}" y1="${height - padBottom}" x2="${width - padSide}" y2="${height - padBottom}" stroke="#cbd3d4" stroke-width="1" />
       <path d="${fillD}" fill="url(#tideFillGrad)" />
       <path d="${pathD}" fill="none" stroke="#087f84" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-      <text x="${width - padSide}" y="11" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="end" opacity="0.9">🌊 ${port.name} · ${dateStr}</text>
+      <text x="${width - padSide}" y="11" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="end" opacity="0.9">🌊 ${port.name} · ${dateStr}${sourceBadge}</text>
       ${markersSvg}
       <line x1="${nowX}" y1="${padTop}" x2="${nowX}" y2="${height - padBottom}" stroke="#f97316" stroke-width="1.6" stroke-dasharray="2,2" />
       <circle cx="${nowX}" cy="${nowY}" r="4" fill="#ea580c" stroke="#ffffff" stroke-width="1.8" />
@@ -1189,9 +1344,13 @@ function updatePortWindDisplay(port, liveData = null) {
   const translatedWindDir = globalThis.i18n?.translateDirection(windDir) || windDir;
 
   const now = new Date();
-  const currentHeight = calculateTideElevation(port, now);
-  const futureHeight = calculateTideElevation(port, new Date(now.getTime() + 15 * 60 * 1000));
-  const isRising = futureHeight >= currentHeight;
+  const patDay = getPatDayData(port, now);
+  const currentHeight = (patDay && patDay.currentHeight !== null)
+    ? patDay.currentHeight
+    : calculateTideElevation(port, now);
+  const isRising = (patDay && typeof patDay.isRising === 'boolean')
+    ? patDay.isRising
+    : (calculateTideElevation(port, new Date(now.getTime() + 15 * 60 * 1000)) >= currentHeight);
   const moon = getMoonPhase(now);
   const regimeLabel = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
 
@@ -1240,8 +1399,24 @@ function renderPortTideCard() {
   const port = NATIONAL_TIDE_STATIONS.find(p => p.id === selectedPortId) || NATIONAL_TIDE_STATIONS[0];
   const now = new Date();
 
-  // 1. Calculate Daily Tides
-  const { events, elevations } = calculateDailyTideEvents(port, now);
+  // 1. Check for official Survey of India (SOI) / INCOIS PAT predictions first
+  const patDay = getPatDayData(port, now);
+  const isOfficialPat = Boolean(patDay && patDay.events && patDay.events.length);
+
+  let events = [];
+  let elevations = [];
+  let currentHeight = null;
+
+  if (isOfficialPat) {
+    events = patDay.events;
+    elevations = patDay.elevations;
+    currentHeight = patDay.currentHeight;
+  } else {
+    const calc = calculateDailyTideEvents(port, now);
+    events = calc.events;
+    elevations = calc.elevations;
+  }
+
   if (!port || !events || !events.length) {
     const warningBanner = ids('portWarningBanner');
     if (warningBanner) {
@@ -1295,13 +1470,14 @@ function renderPortTideCard() {
   // 5. Render SVG Harmonic Tide Graph
   const chartElem = ids('portTideChartContainer');
   if (chartElem) {
-    chartElem.innerHTML = renderTideChartSvg(elevations, port, now);
+    chartElem.innerHTML = renderTideChartSvg(elevations, port, now, currentHeight, isOfficialPat);
   }
 
   // 6. Update direct INCOIS PAT link in header
   const patHeaderLink = ids('portPatHeaderLink');
   if (patHeaderLink) {
-    patHeaderLink.href = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}`;
+    const patRegionName = port.patRegion || port.name;
+    patHeaderLink.href = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(patRegionName)}`;
     patHeaderLink.title = `Open official INCOIS Predicted & Actual Tide (PAT) interactive graph for ${port.name}`;
   }
 }
@@ -1385,5 +1561,6 @@ function initPortTides() {
     gpsBtn.addEventListener('click', locateUserNearMe);
   }
 
+  void loadPatTidesData();
   renderPortTideCard();
 }
