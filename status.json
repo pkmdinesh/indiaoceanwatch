@@ -1,4 +1,4 @@
-﻿{
+{
     "updatedAt":  "2026-09-06T14:00:14.7997333+00:00",
     "lastAttemptAt":  "2026-09-06T14:00:14.7997333+00:00",
     "updateIntervalHours":  0.25,
@@ -47,6 +47,12 @@
                                        ],
                            "mapUrl":  "https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg"
                        },
+    "abis":  {
+                 "ok":  true,
+                 "url":  "https://incois.gov.in/site/services/hab_products.jsp",
+                 "lastUpdated":  "05 Sep 2026",
+                 "fetchedAt":  "2026-09-06T18:49:00+05:30"
+             },
     "tsunami":  {
                     "message":  "No Tsunami threat reported by ITEWC",
                     "ok":  true,

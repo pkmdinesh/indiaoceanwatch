@@ -42,6 +42,7 @@
     "jointBulletin": { "type": ["object", "null"] },
     "marineHeatWave": { "type": ["object", "null"] },
     "coralBleaching": { "type": ["object", "null"] },
+    "abis": { "type": ["object", "null"] },
     "pfz": {
       "type": "object",
       "required": ["sectors"],

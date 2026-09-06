@@ -452,6 +452,7 @@ $status = [ordered]@{
     source = 'INCOIS / ITEWC'
     marineHeatWave = [ordered]@{ message = $null; fetchedAt = $null; ok = $false; url = 'https://incois.gov.in/oceanservices/mhw/index.jsp' }
     coralBleaching = [ordered]@{ ok = $false; fetchedAt = $null; url = 'https://incois.gov.in/site/services/coralwarning.jsp'; regions = @(); mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg' }
+    abis = [ordered]@{ ok = $false; fetchedAt = $null; url = 'https://incois.gov.in/site/services/hab_products.jsp'; lastUpdated = $null }
     tsunami = [ordered]@{ message = 'Status unavailable'; state = 'watch'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
@@ -507,6 +508,9 @@ if (Test-Path -LiteralPath $outputPath) {
         }
         if ($status.PSObject.Properties.Name -notcontains 'marineHeatWave') {
             $status | Add-Member -NotePropertyName marineHeatWave -NotePropertyValue ([pscustomobject]@{ message = $null; fetchedAt = $null; ok = $false; url = 'https://incois.gov.in/oceanservices/mhw/index.jsp' })
+        }
+        if ($status.PSObject.Properties.Name -notcontains 'abis') {
+            $status | Add-Member -NotePropertyName abis -NotePropertyValue ([pscustomobject]@{ ok = $false; fetchedAt = $null; url = 'https://incois.gov.in/site/services/hab_products.jsp'; lastUpdated = $null })
         }
         if ($status.tsunami.PSObject.Properties.Name -notcontains 'state') {
             $status.tsunami | Add-Member -NotePropertyName state -NotePropertyValue 'watch'
@@ -1034,6 +1038,29 @@ try {
         mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg'
     }
     $status.errors += "Coral Bleaching: $($_.Exception.Message)"
+}
+
+# Algal Bloom Information Services (ABIS) / HAB last updated date
+try {
+    $abisUrl = 'https://incois.gov.in/site/services/hab_products.jsp'
+    $abisHtml = Get-TextContent $abisUrl
+    $abisMatch = [regex]::Match($abisHtml, '(?is)Last Updated:\s*(?:<[^>]+>)*\s*([0-9]{1,2}\s+[A-Za-z]+\s+[0-9]{4})')
+    $abisDate = if ($abisMatch.Success) { $abisMatch.Groups[1].Value.Trim() } else { $null }
+    $status.abis = [ordered]@{
+        ok = [bool]$abisDate
+        url = $abisUrl
+        lastUpdated = $abisDate
+        fetchedAt = $attemptedAt
+    }
+    $incoisPageAccessible = $true
+} catch {
+    $status.abis = [ordered]@{
+        ok = $false
+        url = 'https://incois.gov.in/site/services/hab_products.jsp'
+        lastUpdated = if ($null -ne $status.abis -and $null -ne $status.abis.lastUpdated) { $status.abis.lastUpdated } else { $null }
+        fetchedAt = $attemptedAt
+    }
+    $status.errors += "ABIS: $($_.Exception.Message)"
 }
 
 # Public health alerts intentionally differ from the diagnostic scraper errors.

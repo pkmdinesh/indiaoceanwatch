@@ -53,6 +53,7 @@ const APP_SHELL = [
   './assets/cyclone-service-icon.png',
   './assets/storm-surge-icon.png',
   './assets/potential-fishing-zone-icon.jpg',
+  './assets/predicted-tide-icon.png',
   './assets/marine-climate-icon.png',
   './1786177913304.png'
 ];

@@ -72,6 +72,12 @@ function render(data) {
       if (typeof renderPortTideCard === 'function') renderPortTideCard();
       if (typeof checkAndDispatchAlerts === 'function') checkAndDispatchAlerts(data);
 
+      const abisEl = ids('abisRunDate');
+      if (abisEl && data?.abis?.lastUpdated) {
+        const lbl = globalThis.i18n?.t('abis.latest_run', 'Last Updated:') || 'Last Updated:';
+        abisEl.innerHTML = `<span data-i18n="abis.latest_run">${lbl}</span> ${data.abis.lastUpdated}`;
+      }
+
       if (new URLSearchParams(location.search).get('print') === 'earthquake' && data.seismic?.latest && !ids('seismicDialog').open) {
         openSeismicDetails(data.seismic.latest,data.tsunami.recentBulletin);
       }
