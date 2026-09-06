@@ -1394,6 +1394,133 @@ function updatePortWindDisplay(port, liveData = null) {
   `;
 }
 
+// Render Dynamic Sea-Level Envelope (DSLE) Card
+function renderDsleCard(port, patDay, warning) {
+  const dsleCard = ids('dsleCard');
+  if (!dsleCard) return;
+
+  const isPatAvailable = Boolean(patDay && patDay.events && patDay.events.length);
+  const stationNameEl = ids('dsleStationName');
+  const stationBadgeEl = ids('dsleStationBadge');
+  const overtoppingValEl = ids('dsleOvertoppingVal');
+  const overtoppingBadgeEl = ids('dsleOvertoppingBadge');
+  const overtoppingDescEl = ids('dsleOvertoppingDesc');
+  const groundingValEl = ids('dsleGroundingVal');
+  const groundingBadgeEl = ids('dsleGroundingBadge');
+  const groundingDescEl = ids('dsleGroundingDesc');
+  const crestValEl = ids('dsleCrestVal');
+  const troughValEl = ids('dsleTroughVal');
+  const hsValEl = ids('dsleHsVal');
+
+  if (stationNameEl) stationNameEl.textContent = port.name;
+  if (stationBadgeEl) stationBadgeEl.textContent = port.name;
+
+  if (!isPatAvailable) {
+    if (overtoppingValEl) overtoppingValEl.innerHTML = '<span style="font-size:15px;color:var(--muted);font-weight:750;">PAT data is unavailable</span>';
+    if (overtoppingBadgeEl) {
+      overtoppingBadgeEl.className = 'dsle-badge level-watch';
+      overtoppingBadgeEl.textContent = 'Unavailable';
+    }
+    if (overtoppingDescEl) overtoppingDescEl.textContent = 'Official PAT astronomical predictions required to calculate water level crest.';
+
+    if (groundingValEl) groundingValEl.innerHTML = '<span style="font-size:15px;color:var(--muted);font-weight:750;">PAT data is unavailable</span>';
+    if (groundingBadgeEl) {
+      groundingBadgeEl.className = 'dsle-badge level-watch';
+      groundingBadgeEl.textContent = 'Unavailable';
+    }
+    if (groundingDescEl) groundingDescEl.textContent = 'Official PAT astronomical predictions required to calculate under-keel clearance.';
+
+    if (crestValEl) crestValEl.textContent = '—';
+    if (troughValEl) troughValEl.textContent = '—';
+    if (hsValEl) hsValEl.textContent = '—';
+    return;
+  }
+
+  // 1. Calculate Crest (Max High Tide) and Trough (Min Low Tide) from PAT events
+  const highEvents = patDay.events.filter(e => e.type === 'High');
+  const lowEvents = patDay.events.filter(e => e.type === 'Low');
+  const highHeights = highEvents.map(e => e.height).filter(h => typeof h === 'number' && !isNaN(h));
+  const lowHeights = lowEvents.map(e => e.height).filter(h => typeof h === 'number' && !isNaN(h));
+
+  const crest = highHeights.length ? Math.max(...highHeights) : (patDay.events[0]?.height || 1.0);
+  const trough = lowHeights.length ? Math.min(...lowHeights) : (patDay.events[0]?.height || 0.2);
+
+  // 2. Extract Significant Wave Height (Hs)
+  let hs = 1.0;
+  const allMatches = warning?.matches || (warning?.match ? [warning.match] : []);
+  let matchedHs = null;
+  allMatches.forEach(m => {
+    if (!m?.message) return;
+    const heightMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || m.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
+    if (heightMatch) {
+      const nums = heightMatch[1].match(/(\d+(?:\.\d+)?)/g);
+      if (nums && nums.length) {
+        matchedHs = Math.max(...nums.map(Number));
+      }
+    }
+  });
+
+  if (matchedHs !== null && !isNaN(matchedHs)) {
+    hs = matchedHs;
+  } else {
+    const liveData = portLiveWindCache[port.id];
+    const windKmh = liveData?.isLive ? liveData.windKmh : port.baseWind;
+    hs = windKmh < 12 ? 0.5 : (windKmh < 20 ? 1.2 : (windKmh < 35 ? 2.0 : 3.0));
+  }
+
+  // 3. Formulate DSLE:
+  // Overtopping risk: Crest + Hs
+  const overtopping = crest + hs;
+  // Grounding risk: Trough - Hs/2
+  const grounding = trough - (hs / 2);
+
+  // 4. Overtopping Risk Evaluation
+  let overtoppingLevel = 'safe';
+  let overtoppingBadgeText = 'Low Risk (Safe)';
+  let overtoppingDescText = 'Total water level well within coastal seawall / freeboard margin.';
+  if (overtopping >= 2.5) {
+    overtoppingLevel = 'warning';
+    overtoppingBadgeText = 'High Overtopping Risk';
+    overtoppingDescText = 'Total water level crests high — coastal splash & inundation alert!';
+  } else if (overtopping >= 1.6) {
+    overtoppingLevel = 'watch';
+    overtoppingBadgeText = 'Moderate Risk';
+    overtoppingDescText = 'Elevated water level with wave run-up and splash over low structures.';
+  }
+
+  // 5. Grounding Risk Evaluation
+  let groundingLevel = 'safe';
+  let groundingBadgeText = 'Safe Keel Clearance';
+  let groundingDescText = 'Sufficient water depth above chart datum during wave troughs.';
+  if (grounding < 0.0) {
+    groundingLevel = 'warning';
+    groundingBadgeText = 'High Grounding Hazard';
+    groundingDescText = 'Wave trough drops below Chart Datum — bottom strike danger for vessels!';
+  } else if (grounding < 0.5) {
+    groundingLevel = 'watch';
+    groundingBadgeText = 'Caution (Shallow Bar)';
+    groundingDescText = 'Marginal clearance across shallow harbor bars, reef heads, or river mouths.';
+  }
+
+  if (overtoppingValEl) overtoppingValEl.textContent = `${overtopping.toFixed(2)} m`;
+  if (overtoppingBadgeEl) {
+    overtoppingBadgeEl.className = `dsle-badge level-${overtoppingLevel}`;
+    overtoppingBadgeEl.textContent = overtoppingBadgeText;
+  }
+  if (overtoppingDescEl) overtoppingDescEl.textContent = overtoppingDescText;
+
+  if (groundingValEl) groundingValEl.textContent = `${grounding.toFixed(2)} m`;
+  if (groundingBadgeEl) {
+    groundingBadgeEl.className = `dsle-badge level-${groundingLevel}`;
+    groundingBadgeEl.textContent = groundingBadgeText;
+  }
+  if (groundingDescEl) groundingDescEl.textContent = groundingDescText;
+
+  if (crestValEl) crestValEl.textContent = `${crest.toFixed(2)} m`;
+  if (troughValEl) troughValEl.textContent = `${trough.toFixed(2)} m`;
+  if (hsValEl) hsValEl.textContent = `${hs.toFixed(2)} m`;
+}
+
 // Main Render Function for Predicted Astronomical Tide Card
 function renderPortTideCard() {
   const port = NATIONAL_TIDE_STATIONS.find(p => p.id === selectedPortId) || NATIONAL_TIDE_STATIONS[0];
@@ -1402,6 +1529,12 @@ function renderPortTideCard() {
   // 1. Check for official Survey of India (SOI) / INCOIS PAT predictions
   const patDay = getPatDayData(port, now);
   const isPatAvailable = Boolean(patDay && patDay.events && patDay.events.length);
+
+  // 2. Check Warnings
+  const warning = checkPortActiveWarnings(port);
+
+  // 3. Render Dynamic Sea-Level Envelope (DSLE) Card
+  renderDsleCard(port, patDay, warning);
 
   // Update direct INCOIS PAT link in header
   const patHeaderLink = ids('portPatHeaderLink');
@@ -1412,8 +1545,6 @@ function renderPortTideCard() {
     patHeaderLink.title = `Open official INCOIS Predicted & Actual Tide (PAT) interactive graph for ${port.name}`;
   }
 
-  // 2. Check Warnings
-  const warning = checkPortActiveWarnings(port);
   const warningBanner = ids('portWarningBanner');
   if (warningBanner) {
     if (!isPatAvailable) {

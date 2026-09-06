@@ -152,69 +152,126 @@
               <div class="severity-row"><span class="severity-row-label no-threat" data-i18n="severity.no_threat">No Threat</span><div class="severity-row-states"><span class="severity-state-chip empty">—</span></div></div>
             </div>
           </article>
-          <article class="forecast-card svas-forecast" id="svasCard">
-            <div class="forecast-title">
-              <h3 data-i18n="osf.svas_title">Small Vessel Advisory Service (SVAS)</h3>
+          <!-- Dynamic Sea-Level Envelope (DSLE) Card -->
+          <article class="forecast-card dsle-card" id="dsleCard">
+            <div class="forecast-title dsle-header">
+              <div class="dsle-title-wrap">
+                <span class="dsle-badge-icon">🌊</span>
+                <div>
+                  <h3 data-i18n="dsle.title">Dynamic Sea-Level Envelope (DSLE)</h3>
+                  <p class="dsle-kicker">Total Water Level · Coastal Operations</p>
+                </div>
+              </div>
               <div class="forecast-meta">
-                <span class="kind" data-i18n="osf.svas_kind">Boat Safety Index (BSI)</span>
-                <span class="issue-date" id="svasIssueDate">Issue date —</span>
+                <span class="kind">Total Water Level Envelope</span>
+                <span class="issue-date" id="dsleStationName">—</span>
               </div>
             </div>
-
-            <!-- Single-Line Controls: Dropdown + Near Me + INCOIS SVAS -->
-            <div class="svas-controls">
-              <select id="svasDistrictDropdown" class="svas-select-dropdown" aria-label="Select Coastal District for Small Vessel Advisory"></select>
-              <button type="button" id="svasGpsBtn" class="source card-action-button svas-action-btn" aria-label="Near Me: Find nearest coastal district with GPS" data-i18n="svas.near_me">📍 Near Me</button>
-              <a id="svasPortalLink" href="https://incois.gov.in/site/services/SVA_overview.jsp" target="_blank" rel="noopener" class="source card-action-button svas-action-btn" title="Open official INCOIS SVAS Portal">INCOIS SVAS ↗</a>
-            </div>
-
-            <!-- District Summary Alert / Safe Banner -->
-            <div id="svasSummaryBanner" class="svas-summary-banner status-safe">
-              <span class="svas-banner-icon">⛵</span>
-              <div class="svas-banner-text">
-                <strong id="svasBannerTitle">Safe for Small Vessels</strong>
-                <span id="svasBannerSubtitle">No sea-condition restrictions across forecast window</span>
+            <div class="dsle-grid">
+              <div class="dsle-metric-card" id="dsleOvertoppingCard">
+                <div class="dsle-metric-header">
+                  <span class="dsle-icon">🌊</span>
+                  <strong class="dsle-metric-label" data-i18n="dsle.overtopping">Overtopping risk (Crest + Hs):</strong>
+                </div>
+                <div class="dsle-metric-val-row">
+                  <span class="dsle-value" id="dsleOvertoppingVal">—</span>
+                  <span class="dsle-badge" id="dsleOvertoppingBadge">Checking…</span>
+                </div>
+                <div class="dsle-metric-desc" id="dsleOvertoppingDesc">Assessing crest combined with significant wave height</div>
+              </div>
+              <div class="dsle-metric-card" id="dsleGroundingCard">
+                <div class="dsle-metric-header">
+                  <span class="dsle-icon">⚓</span>
+                  <strong class="dsle-metric-label" data-i18n="dsle.grounding">Grounding risk (Trough - Hs/2):</strong>
+                </div>
+                <div class="dsle-metric-val-row">
+                  <span class="dsle-value" id="dsleGroundingVal">—</span>
+                  <span class="dsle-badge" id="dsleGroundingBadge">Checking…</span>
+                </div>
+                <div class="dsle-metric-desc" id="dsleGroundingDesc">Assessing trough clearance reduced by half wave height</div>
               </div>
             </div>
+            <div class="dsle-telemetry-strip" id="dsleTelemetryStrip">
+              <span class="dsle-param-item"><span class="dsle-param-label">Crest:</span> <strong id="dsleCrestVal">—</strong></span>
+              <span class="dsle-dot">•</span>
+              <span class="dsle-param-item"><span class="dsle-param-label">Trough:</span> <strong id="dsleTroughVal">—</strong></span>
+              <span class="dsle-dot">•</span>
+              <span class="dsle-param-item"><span class="dsle-param-label">Hs:</span> <strong id="dsleHsVal">—</strong></span>
+              <span class="dsle-dot">•</span>
+              <span class="dsle-param-item"><span class="dsle-param-label">Station:</span> <strong id="dsleStationBadge">—</strong></span>
+            </div>
+          </article>
 
-            <!-- SVAS Matrix Table -->
-            <div class="svas-matrix-container">
-              <table class="svas-matrix-table" id="svasMatrixTable" aria-label="Small Vessel Advisory Matrix by Boat Size and Date">
-                <thead>
-                  <tr>
-                    <th scope="col" data-i18n="svas.boat_size">Boat Category / Width</th>
-                    <th scope="col" id="svasColDay1">Day-1</th>
-                    <th scope="col" id="svasColDay2">Day-2</th>
-                    <th scope="col" id="svasColDay3">Day-3</th>
-                  </tr>
-                </thead>
-                <tbody id="svasMatrixBody">
-                  <!-- Rendered dynamically by svas.js -->
-                </tbody>
-              </table>
+          <!-- Predicted Astronomical Tide Card (Inside OSF) -->
+          <article class="forecast-card port-tide-forecast" id="portTideCard">
+            <div class="forecast-title port-tide-header">
+              <div class="port-tide-title-wrap">
+                <img class="port-tide-icon" src="assets/predicted-tide-icon.png" alt="Astronomical tide icon" width="28" height="28" loading="lazy">
+                <div>
+                  <h3 id="port-tide-title" data-i18n="osf.astronomical_tide">Predicted Astronomical Tide</h3>
+                  <p class="port-tide-kicker">Tide Gauge Stations · Tidal Range &amp; Timing</p>
+                </div>
+              </div>
+              <div class="port-tide-controls">
+                <select id="portSelectDropdown" class="port-select-dropdown" aria-label="Select National Tide Gauge Station"></select>
+                <button type="button" id="portGpsBtn" class="source card-action-button port-action-btn" aria-label="Near Me: Find nearest tide station with GPS">📍 Near Me</button>
+                <a id="portPatHeaderLink" href="https://incois.gov.in/oceanservices/PAT/index.html" target="_blank" rel="noopener" class="source card-action-button port-action-btn" title="Open official INCOIS Predicted &amp; Actual Tide (PAT) Portal">INCOIS PAT ↗</a>
+              </div>
+            </div>
+            <div id="portWarningBanner" class="port-warning-banner level-safe">Loading Predicted Tide Data…</div>
+            <div id="portWindDisplay" class="port-wind-display"><div class="marine-stat-item"><span class="stat-prefix">💨 Wind :</span><strong class="stat-value">Fetching Marine Telemetry…</strong></div></div>
+            <div class="port-tide-body">
+              <div id="portTideTimesList" class="port-tide-times-list"><div class="tide-horizontal-row"><span class="tide-event-badge high">High Tide (IST)</span><span class="empty">Fetching Tide Events…</span></div></div>
+              <div id="portTideChartContainer" class="port-tide-chart-container"><div class="tide-chart-placeholder">Loading Astronomical Tide Chart…</div></div>
             </div>
           </article>
         </div>
       </section>
 
-      <section class="panel port-tide-panel" id="portTideCard" aria-labelledby="port-tide-title">
+      <!-- Small Vessel Advisory Service (SVAS) Standalone Panel -->
+      <section class="panel svas-panel" id="svasCard" aria-labelledby="svas-title">
         <div class="panel-head">
-          <img class="service-img" src="assets/predicted-tide-icon.png" alt="Astronomical tide icon" width="48" height="42" loading="lazy">
+          <img class="service-img" src="assets/ocean-current-icon.png" alt="Small Vessel Advisory icon" width="48" height="42" loading="lazy">
           <div>
-            <h2 id="port-tide-title" data-i18n="osf.astronomical_tide">Predicted Astronomical Tide</h2>
-            <p class="panel-kicker">Tide Gauge Stations · Tidal Range &amp; Timing</p>
+            <h2 id="svas-title" data-i18n="osf.svas_title">Small Vessel Advisory Service (SVAS)</h2>
+            <p class="panel-kicker" data-i18n="osf.svas_kind">Boat Safety Index (BSI) · Coastal Operations</p>
           </div>
-          <div class="port-tide-controls">
-            <select id="portSelectDropdown" class="port-select-dropdown" aria-label="Select National Tide Gauge Station"></select>
-            <button type="button" id="portGpsBtn" class="source card-action-button port-action-btn" aria-label="Near Me: Find nearest tide station with GPS">📍 Near Me</button>
-            <a id="portPatHeaderLink" href="https://incois.gov.in/oceanservices/PAT/index.html" target="_blank" rel="noopener" class="source card-action-button port-action-btn" title="Open official INCOIS Predicted &amp; Actual Tide (PAT) Portal">INCOIS PAT ↗</a>
+          <div class="svas-header-controls">
+            <span class="issue-date" id="svasIssueDate">Issue date —</span>
+            <a id="svasPortalLink" href="https://incois.gov.in/site/services/SVA_overview.jsp" target="_blank" rel="noopener" class="source card-action-button svas-action-btn" title="Open official INCOIS SVAS Portal">INCOIS SVAS ↗</a>
           </div>
         </div>
-        <div id="portWarningBanner" class="port-warning-banner level-safe">Loading Predicted Tide Data…</div>
-        <div id="portWindDisplay" class="port-wind-display"><div class="marine-stat-item"><span class="stat-prefix">💨 Wind :</span><strong class="stat-value">Fetching Marine Telemetry…</strong></div></div>
-        <div class="port-tide-body">
-          <div id="portTideTimesList" class="port-tide-times-list"><div class="tide-horizontal-row"><span class="tide-event-badge high">High Tide (IST)</span><span class="empty">Fetching Tide Events…</span></div></div>
-          <div id="portTideChartContainer" class="port-tide-chart-container"><div class="tide-chart-placeholder">Loading Astronomical Tide Chart…</div></div>
+
+        <!-- Single-Line Controls: Dropdown + Near Me -->
+        <div class="svas-controls">
+          <select id="svasDistrictDropdown" class="svas-select-dropdown" aria-label="Select Coastal District for Small Vessel Advisory"></select>
+          <button type="button" id="svasGpsBtn" class="source card-action-button svas-action-btn" aria-label="Near Me: Find nearest coastal district with GPS" data-i18n="svas.near_me">📍 Near Me</button>
+        </div>
+
+        <!-- District Summary Alert / Safe Banner -->
+        <div id="svasSummaryBanner" class="svas-summary-banner status-safe">
+          <span class="svas-banner-icon">⛵</span>
+          <div class="svas-banner-text">
+            <strong id="svasBannerTitle">Safe for Small Vessels</strong>
+            <span id="svasBannerSubtitle">No sea-condition restrictions across forecast window</span>
+          </div>
+        </div>
+
+        <!-- SVAS Matrix Table -->
+        <div class="svas-matrix-container">
+          <table class="svas-matrix-table" id="svasMatrixTable" aria-label="Small Vessel Advisory Matrix by Boat Size and Date">
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="svas.boat_size">Boat Category / Width</th>
+                <th scope="col" id="svasColDay1">Day-1</th>
+                <th scope="col" id="svasColDay2">Day-2</th>
+                <th scope="col" id="svasColDay3">Day-3</th>
+              </tr>
+            </thead>
+            <tbody id="svasMatrixBody">
+              <!-- Rendered dynamically by svas.js -->
+            </tbody>
+          </table>
         </div>
       </section>
 
