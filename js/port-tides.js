@@ -731,7 +731,9 @@ function loadPatTidesData() {
       return data;
     })
     .catch(function (err) {
-      console.warn('[PortTides] Official PAT data unavailable, using harmonic model:', err?.message);
+      console.warn('[PortTides] Official PAT data unavailable:', err?.message);
+      patTidesCache = null;
+      renderPortTideCard();
       return null;
     });
 
@@ -1129,7 +1131,7 @@ function checkPortActiveWarnings(port) {
 }
 
 // Render SVG Tide Curve
-function renderTideChartSvg(elevations, port, now = new Date(), currentHeightOverride = null, isOfficialPat = false) {
+function renderTideChartSvg(elevations, port, now = new Date(), currentHeightOverride = null) {
   const width = 340;
   const height = 90;
   const padTop = 16;
@@ -1176,7 +1178,6 @@ function renderTideChartSvg(elevations, port, now = new Date(), currentHeightOve
   `).join('');
 
   const dateStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
-  const sourceBadge = isOfficialPat ? ' · SOI Official' : '';
 
   return `
     <svg viewBox="0 0 ${width} ${height}" class="tide-curve-svg" aria-hidden="true">
@@ -1189,7 +1190,7 @@ function renderTideChartSvg(elevations, port, now = new Date(), currentHeightOve
       <line x1="${padSide}" y1="${height - padBottom}" x2="${width - padSide}" y2="${height - padBottom}" stroke="#cbd3d4" stroke-width="1" />
       <path d="${fillD}" fill="url(#tideFillGrad)" />
       <path d="${pathD}" fill="none" stroke="#087f84" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-      <text x="${width - padSide}" y="11" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="end" opacity="0.9">🌊 ${port.name} · ${dateStr}${sourceBadge}</text>
+      <text x="${width - padSide}" y="11" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="end" opacity="0.9">🌊 ${port.name} · ${dateStr}</text>
       ${markersSvg}
       <line x1="${nowX}" y1="${padTop}" x2="${nowX}" y2="${height - padBottom}" stroke="#f97316" stroke-width="1.6" stroke-dasharray="2,2" />
       <circle cx="${nowX}" cy="${nowY}" r="4" fill="#ea580c" stroke="#ffffff" stroke-width="1.8" />
@@ -1345,14 +1346,13 @@ function updatePortWindDisplay(port, liveData = null) {
 
   const now = new Date();
   const patDay = getPatDayData(port, now);
-  const currentHeight = (patDay && patDay.currentHeight !== null)
-    ? patDay.currentHeight
-    : calculateTideElevation(port, now);
-  const isRising = (patDay && typeof patDay.isRising === 'boolean')
-    ? patDay.isRising
-    : (calculateTideElevation(port, new Date(now.getTime() + 15 * 60 * 1000)) >= currentHeight);
+  const isPatAvailable = Boolean(patDay && patDay.currentHeight !== null);
+
   const moon = getMoonPhase(now);
   const regimeLabel = port.range >= 4.0 ? 'Macro-tidal' : port.range >= 2.0 ? 'Meso-tidal' : 'Micro-tidal';
+  const tideStateHtml = isPatAvailable
+    ? `<strong class="tide-direction ${patDay.isRising ? 'rising' : 'falling'}">${patDay.isRising ? risingLbl : fallingLbl}</strong>`
+    : `<span class="empty" style="font-size:0.82rem;font-weight:600;">PAT data is unavailable</span>`;
 
   windElem.innerHTML = `
     <div class="port-telemetry-container">
@@ -1380,7 +1380,7 @@ function updatePortWindDisplay(port, liveData = null) {
       <div class="port-tide-meta-grid">
         <div class="tide-meta-item">
           <span class="stat-prefix"><span class="stat-name">${tideStateLbl}</span> :</span>
-          <strong class="tide-direction ${isRising ? 'rising' : 'falling'}">${isRising ? risingLbl : fallingLbl}</strong>
+          ${tideStateHtml}
         </div>
         <div class="tide-meta-item moon-tide-row">
           <span class="stat-prefix"><span class="stat-name">${moonTideTypeLbl}</span> :</span>
@@ -1399,39 +1399,32 @@ function renderPortTideCard() {
   const port = NATIONAL_TIDE_STATIONS.find(p => p.id === selectedPortId) || NATIONAL_TIDE_STATIONS[0];
   const now = new Date();
 
-  // 1. Check for official Survey of India (SOI) / INCOIS PAT predictions first
+  // 1. Check for official Survey of India (SOI) / INCOIS PAT predictions
   const patDay = getPatDayData(port, now);
-  const isOfficialPat = Boolean(patDay && patDay.events && patDay.events.length);
+  const isPatAvailable = Boolean(patDay && patDay.events && patDay.events.length);
 
-  let events = [];
-  let elevations = [];
-  let currentHeight = null;
-
-  if (isOfficialPat) {
-    events = patDay.events;
-    elevations = patDay.elevations;
-    currentHeight = patDay.currentHeight;
-  } else {
-    const calc = calculateDailyTideEvents(port, now);
-    events = calc.events;
-    elevations = calc.elevations;
-  }
-
-  if (!port || !events || !events.length) {
-    const warningBanner = ids('portWarningBanner');
-    if (warningBanner) {
-      warningBanner.className = 'port-warning-banner level-watch';
-      warningBanner.textContent = 'Unable to Fetch.....Check the INCOIS PAT link.....';
-    }
-    return;
+  // Update direct INCOIS PAT link in header
+  const patHeaderLink = ids('portPatHeaderLink');
+  const patRegionName = port.patRegion || port.name;
+  const patUrl = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(patRegionName)}`;
+  if (patHeaderLink) {
+    patHeaderLink.href = patUrl;
+    patHeaderLink.title = `Open official INCOIS Predicted & Actual Tide (PAT) interactive graph for ${port.name}`;
   }
 
   // 2. Check Warnings
   const warning = checkPortActiveWarnings(port);
   const warningBanner = ids('portWarningBanner');
   if (warningBanner) {
-    warningBanner.className = `port-warning-banner level-${warning.level || 'safe'}`;
-    warningBanner.textContent = warning.text;
+    if (!isPatAvailable) {
+      warningBanner.className = 'port-warning-banner level-watch';
+      warningBanner.textContent = (!warning.safe && warning.text)
+        ? `PAT data is unavailable · ${warning.text}`
+        : 'PAT data is unavailable · Check INCOIS PAT link';
+    } else {
+      warningBanner.className = `port-warning-banner level-${warning.level || 'safe'}`;
+      warningBanner.textContent = warning.text;
+    }
   }
 
   // 3. Render Wind, Sea State & Moon Phase (using cached live coordinate forecast or triggering fetch)
@@ -1441,44 +1434,57 @@ function renderPortTideCard() {
     void fetchLivePortWind(port);
   }
 
-  // 4. Render High / Low Tide Times Table (Horizontal Row Layout with IST Time Format)
+  // 4. Render High / Low Tide Times Table
   const tideTimesElem = ids('portTideTimesList');
   if (tideTimesElem) {
-    const highTides = events.filter(e => e.type === 'High');
-    const lowTides = events.filter(e => e.type === 'Low');
-
-    const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
     const highTideLbl = globalThis.i18n?.t('tide.high_tide', 'High Tide (IST)') || 'High Tide (IST)';
     const lowTideLbl = globalThis.i18n?.t('tide.low_tide', 'Low Tide (IST)') || 'Low Tide (IST)';
 
-    tideTimesElem.innerHTML = `
-      <div class="tide-horizontal-row high-row">
-        <span class="tide-event-badge high">${highTideLbl}</span>
-        <div class="tide-times-items">
-          ${highTides.length > 0 ? highTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
+    if (!isPatAvailable) {
+      tideTimesElem.innerHTML = `
+        <div class="tide-horizontal-row high-row">
+          <span class="tide-event-badge high">${highTideLbl}</span>
+          <div class="tide-times-items"><span class="empty">PAT data is unavailable</span></div>
         </div>
-      </div>
-      <div class="tide-horizontal-row low-row">
-        <span class="tide-event-badge low">${lowTideLbl}</span>
-        <div class="tide-times-items">
-          ${lowTides.length > 0 ? lowTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
+        <div class="tide-horizontal-row low-row">
+          <span class="tide-event-badge low">${lowTideLbl}</span>
+          <div class="tide-times-items"><span class="empty">PAT data is unavailable</span></div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      const highTides = patDay.events.filter(e => e.type === 'High');
+      const lowTides = patDay.events.filter(e => e.type === 'Low');
+      const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+
+      tideTimesElem.innerHTML = `
+        <div class="tide-horizontal-row high-row">
+          <span class="tide-event-badge high">${highTideLbl}</span>
+          <div class="tide-times-items">
+            ${highTides.length > 0 ? highTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
+          </div>
+        </div>
+        <div class="tide-horizontal-row low-row">
+          <span class="tide-event-badge low">${lowTideLbl}</span>
+          <div class="tide-times-items">
+            ${lowTides.length > 0 ? lowTides.map(t => `<span class="tide-time-pill"><strong class="tide-time">${formatTime(t.time)}</strong> <span class="tide-height-val">${t.height}m</span></span>`).join('') : '<span class="empty">—</span>'}
+          </div>
+        </div>
+      `;
+    }
   }
 
-  // 5. Render SVG Harmonic Tide Graph
+  // 5. Render SVG Harmonic Tide Graph or Unavailable Placeholder
   const chartElem = ids('portTideChartContainer');
   if (chartElem) {
-    chartElem.innerHTML = renderTideChartSvg(elevations, port, now, currentHeight, isOfficialPat);
-  }
-
-  // 6. Update direct INCOIS PAT link in header
-  const patHeaderLink = ids('portPatHeaderLink');
-  if (patHeaderLink) {
-    const patRegionName = port.patRegion || port.name;
-    patHeaderLink.href = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(patRegionName)}`;
-    patHeaderLink.title = `Open official INCOIS Predicted & Actual Tide (PAT) interactive graph for ${port.name}`;
+    if (!isPatAvailable || !patDay.elevations || !patDay.elevations.length) {
+      chartElem.innerHTML = `
+        <div class="tide-chart-placeholder" style="padding: 24px 12px; text-align: center; color: #5b7279; font-weight: 700; font-size: 0.9rem;">
+          ⚠️ PAT data is unavailable · <a href="${patUrl}" target="_blank" rel="noopener" style="color:#087f84; text-decoration: underline;">View on INCOIS PAT</a>
+        </div>
+      `;
+    } else {
+      chartElem.innerHTML = renderTideChartSvg(patDay.elevations, port, now, patDay.currentHeight);
+    }
   }
 }
 
