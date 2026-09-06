@@ -1021,6 +1021,8 @@ function renderTideChartSvg(elevations, port, now = new Date()) {
     <line x1="${getX(t.m).toFixed(1)}" y1="${height - padBottom}" x2="${getX(t.m).toFixed(1)}" y2="${height - padBottom + 3}" stroke="#d9e5e1" stroke-width="1" />
   `).join('');
 
+  const dateStr = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+
   return `
     <svg viewBox="0 0 ${width} ${height}" class="tide-curve-svg" aria-hidden="true">
       <defs>
@@ -1032,7 +1034,7 @@ function renderTideChartSvg(elevations, port, now = new Date()) {
       <line x1="${padSide}" y1="${height - padBottom}" x2="${width - padSide}" y2="${height - padBottom}" stroke="#cbd3d4" stroke-width="1" />
       <path d="${fillD}" fill="url(#tideFillGrad)" />
       <path d="${pathD}" fill="none" stroke="#087f84" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-      <text x="${width - padSide}" y="11" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="end" opacity="0.9">🌊 ${port.name}</text>
+      <text x="${width - padSide}" y="11" font-size="8.5" font-weight="900" fill="#082f3c" text-anchor="end" opacity="0.9">🌊 ${port.name} · ${dateStr}</text>
       ${markersSvg}
       <line x1="${nowX}" y1="${padTop}" x2="${nowX}" y2="${height - padBottom}" stroke="#f97316" stroke-width="1.6" stroke-dasharray="2,2" />
       <circle cx="${nowX}" cy="${nowY}" r="4" fill="#ea580c" stroke="#ffffff" stroke-width="1.8" />
