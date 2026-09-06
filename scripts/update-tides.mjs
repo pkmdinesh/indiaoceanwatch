@@ -91,12 +91,12 @@ function parsePatTime(timeStr) {
   return `${y}-${m}-${d}T${h}:${min}:00+05:30`;
 }
 
-// Fetch and parse data for a given PAT region
-async function fetchPatRegion(region) {
-  const url = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(region)}`;
+// Fetch and parse 24-hour data of current date for a given PAT region
+async function fetchPatRegion(region, fromDate, toDate) {
+  const url = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(region)}&fromDate=${fromDate}&toDate=${toDate}`;
   const html = await fetchWithRetry(url);
 
-  // 1. Parse Highcharts hourly series
+  // 1. Parse Highcharts hourly series for the 24-hour period (00:00 to 24:00)
   const series = [];
   const seriesMatch = html.match(/name:\s*['"]Predicted Tide['"][\s\S]*?data:\s*(\[\[[\s\S]*?\]\])/);
   if (seriesMatch) {
@@ -111,10 +111,15 @@ async function fetchPatRegion(region) {
           const day = String(d.getUTCDate()).padStart(2, '0');
           const h = String(d.getUTCHours()).padStart(2, '0');
           const min = String(d.getUTCMinutes()).padStart(2, '0');
-          series.push({
-            time: `${y}-${m}-${day}T${h}:${min}:00+05:30`,
-            height: Number(val.toFixed(2))
-          });
+          const iso = `${y}-${m}-${day}T${h}:${min}:00+05:30`;
+
+          // Keep strictly within current 24-hour date window [00:00, 24:00]
+          if (iso.startsWith(fromDate) || iso === `${toDate}T00:00:00+05:30`) {
+            series.push({
+              time: iso,
+              height: Number(val.toFixed(2))
+            });
+          }
         }
       }
     } catch (err) {
@@ -122,7 +127,7 @@ async function fetchPatRegion(region) {
     }
   }
 
-  // 2. Parse High/Low tide phases table
+  // 2. Parse High/Low tide phases table strictly for current date
   const events = [];
   const rows = [...html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)];
   // Row 0 and Row 1 are table headers
@@ -133,7 +138,7 @@ async function fetchPatRegion(region) {
 
       const highIso = parsePatTime(highTimeStr);
       const highH = parseFloat(highHeightStr);
-      if (highIso && !isNaN(highH)) {
+      if (highIso && highIso.startsWith(fromDate) && !isNaN(highH)) {
         events.push({
           type: 'High',
           time: highIso,
@@ -143,7 +148,7 @@ async function fetchPatRegion(region) {
 
       const lowIso = parsePatTime(lowTimeStr);
       const lowH = parseFloat(lowHeightStr);
-      if (lowIso && !isNaN(lowH)) {
+      if (lowIso && lowIso.startsWith(fromDate) && !isNaN(lowH)) {
         events.push({
           type: 'Low',
           time: lowIso,
@@ -160,9 +165,14 @@ async function fetchPatRegion(region) {
 }
 
 async function main() {
-  console.log('[PAT] Starting INCOIS Predicted & Actual Tide (PAT) ingestion...');
+  const now = new Date();
+  const todayStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  const nextDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+  const nextStr = nextDate.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
 
-  // Read existing tides.json if available to retain metadata
+  console.log(`[PAT] Ingesting 24-hour PAT data for current date: ${todayStr} (to ${nextStr})...`);
+
+  // Read existing tides.json if available to retain cached state if offline
   let existingData = { totalStations: 50, stations: {} };
   if (fs.existsSync(targetPath)) {
     try {
@@ -187,7 +197,7 @@ async function main() {
     while (queue.length > 0) {
       const region = queue.shift();
       try {
-        const data = await fetchPatRegion(region);
+        const data = await fetchPatRegion(region, todayStr, nextStr);
         regionCache.set(region, data);
         successCount++;
         console.log(`[PAT] ✓ ${region}: ${data.events.length} events, ${data.series.length} series points`);
@@ -201,7 +211,7 @@ async function main() {
   await Promise.all(Array.from({ length: concurrency }, () => worker()));
   console.log(`[PAT] Fetch phase complete: ${successCount} succeeded, ${failCount} failed.`);
 
-  // Build the stations dictionary
+  // Build lightweight stations dictionary
   const nowIso = new Date().toISOString();
   const stationsOutput = {};
 
@@ -217,13 +227,7 @@ async function main() {
       id,
       name: info.name,
       patRegion: info.region,
-      lat: existing.lat ?? null,
-      lng: existing.lng ?? null,
-      state: existing.state ?? null,
-      district: existing.district ?? null,
-      range: existing.range ?? null,
-      baseWind: existing.baseWind ?? null,
-      windDir: existing.windDir ?? null,
+      date: todayStr,
       hasData: events.length > 0 || series.length > 0,
       events,
       series,
@@ -233,6 +237,7 @@ async function main() {
 
   const outputPayload = {
     updatedAt: nowIso,
+    date: todayStr,
     source: 'INCOIS Predicted & Actual Tide (PAT) / Survey of India',
     sourceUrl: 'https://incois.gov.in/oceanservices/PAT/index.html',
     totalStations: stationEntries.length,
