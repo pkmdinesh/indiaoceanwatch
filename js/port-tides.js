@@ -1422,55 +1422,66 @@ function updatePortWindDisplay(port, liveData = null) {
     else if (warning.level === 'watch') seaState = 'Moderate';
   }
 
-  // Check active warning bulletin messages first for emergency thresholds
-  let waveVal = null;
-  let swellVal = null;
-  let currentVal = null;
+  // Check active warning bulletin messages for hazard indicators
   let waveIsHazard = false;
+  let swellVal = null;
   let swellIsHazard = false;
+  let currentVal = null;
   let currentIsHazard = false;
 
   const allMatches = warning.matches || (warning.match ? [warning.match] : []);
   allMatches.forEach(m => {
     if (!m?.message) return;
-    const heightMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || m.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
-    const periodMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
-    const currentMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
-
-    if (m.hazard === 'High Wave' && heightMatch) {
-      waveVal = `${heightMatch[1].trim()}m`;
+    if (m.hazard === 'High Wave') {
       waveIsHazard = true;
     }
     if (m.hazard === 'Swell Surge') {
-      if (periodMatch) swellVal = `${periodMatch[1].trim()}s`;
-      if (heightMatch && !waveVal) waveVal = `${heightMatch[1].trim()}m`;
       swellIsHazard = true;
+      const periodMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
+      const heightMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\s*height/i) || m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\b/i);
+      if (periodMatch && heightMatch) {
+        swellVal = `${heightMatch[1].trim()}m (${periodMatch[1].trim()}s)`;
+      } else if (heightMatch) {
+        swellVal = `${heightMatch[1].trim()}m`;
+      } else if (periodMatch) {
+        swellVal = `${periodMatch[1].trim()}s`;
+      }
     }
-    if (m.hazard === 'Ocean Currents' && currentMatch) {
-      currentVal = `${currentMatch[1].trim()} m/s`;
+    if (m.hazard === 'Ocean Currents') {
       currentIsHazard = true;
+      const currentMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
+      if (currentMatch) {
+        currentVal = `${currentMatch[1].trim()} m/s`;
+      }
     }
   });
 
-  // If live INCOIS numerical model data is available and not in explicit warning state, display live model values
-  if (!waveVal && liveData?.isLive && typeof liveData.waveHs === 'number') {
-    waveVal = `${liveData.waveHs.toFixed(2)} m`;
+  // Always use official live INCOIS numerical model values for Wave, Swell, and Currents
+  let waveDisplay = null;
+  if (liveData?.isLive && typeof liveData.waveHs === 'number') {
+    waveDisplay = `${liveData.waveHs.toFixed(2)} m`;
+  } else {
+    waveDisplay = windKmh < 12 ? '0.2 - 0.5m' : (windKmh < 20 ? '0.5 - 1.2m' : (windKmh < 35 ? '1.2 - 2.0m' : '2.5 - 3.5m'));
   }
-  if (!swellVal && liveData?.isLive && typeof liveData.swellHs === 'number') {
+
+  let swellDisplay = null;
+  if (liveData?.isLive && typeof liveData.swellHs === 'number') {
     const tpStr = typeof liveData.swellTp === 'number' ? ` (${liveData.swellTp.toFixed(1)}s)` : '';
-    swellVal = `${liveData.swellHs.toFixed(2)} m${tpStr}`;
-  }
-  if (!currentVal && liveData?.isLive && typeof liveData.currentMs === 'number') {
-    currentVal = `${liveData.currentMs.toFixed(2)} m/s`;
+    swellDisplay = `${liveData.swellHs.toFixed(2)} m${tpStr}`;
+  } else if (swellVal) {
+    swellDisplay = swellVal;
+  } else {
+    swellDisplay = '8.0 - 11.0s';
   }
 
-  const defaultWave = windKmh < 12 ? '0.2 - 0.5m' : windKmh < 20 ? '0.5 - 1.2m' : (windKmh < 35 ? '1.2 - 2.0m' : '2.5 - 3.5m');
-  const defaultSwell = '8.0 - 11.0s';
-  const defaultCurrent = port.range >= 4.0 ? '0.8 - 1.4 m/s' : (port.range >= 2.0 ? '0.4 - 0.7 m/s' : '0.2 - 0.4 m/s');
-
-  const waveDisplay = waveVal || defaultWave;
-  const swellDisplay = swellVal || defaultSwell;
-  const currentDisplay = currentVal || defaultCurrent;
+  let currentDisplay = null;
+  if (liveData?.isLive && typeof liveData.currentMs === 'number') {
+    currentDisplay = `${liveData.currentMs.toFixed(2)} m/s`;
+  } else if (currentVal) {
+    currentDisplay = currentVal;
+  } else {
+    currentDisplay = port.range >= 4.0 ? '0.8 - 1.4 m/s' : (port.range >= 2.0 ? '0.4 - 0.7 m/s' : '0.2 - 0.4 m/s');
+  }
 
   const windLbl = globalThis.i18n?.t('tide.wind', 'Wind') || 'Wind';
   const waveLbl = globalThis.i18n?.t('tide.wave', 'Wave') || 'Wave';
@@ -1587,25 +1598,10 @@ function renderDsleCard(port, patDay, warning) {
   const trough = lowHeights.length ? Math.min(...lowHeights) : (patDay.events[0]?.height || 0.2);
 
   // 2. Extract Significant Wave Height (Hs)
-  // Priority: 1. Active high-threshold Hazard Warning -> 2. Live INCOIS OSF numerical model -> 3. Beaufort wind-bracket fallback
+  // Irrespective of warnings, strictly consume official INCOIS OSF numerical model data
   let hs = 1.0;
-  const allMatches = warning?.matches || (warning?.match ? [warning.match] : []);
-  let matchedHs = null;
-  allMatches.forEach(m => {
-    if (!m?.message) return;
-    const heightMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\s*(?:height|waves|high)/i) || m.message.match(/([0-9.\s-]+)\s*(?:m|meters)\b/i);
-    if (heightMatch) {
-      const nums = heightMatch[1].match(/(\d+(?:\.\d+)?)/g);
-      if (nums && nums.length) {
-        matchedHs = Math.max(...nums.map(Number));
-      }
-    }
-  });
-
   const liveData = portLiveOsfCache[port.id];
-  if (matchedHs !== null && !isNaN(matchedHs)) {
-    hs = matchedHs;
-  } else if (liveData?.isLive && typeof liveData.waveHs === 'number' && !isNaN(liveData.waveHs)) {
+  if (liveData?.isLive && typeof liveData.waveHs === 'number' && !isNaN(liveData.waveHs)) {
     hs = liveData.waveHs;
   } else {
     const windKmh = liveData?.isLive ? liveData.windKmh : port.baseWind;
