@@ -1,6 +1,6 @@
-{
-    "updatedAt":  "2026-09-06T14:00:14.7997333+00:00",
-    "lastAttemptAt":  "2026-09-06T14:00:14.7997333+00:00",
+﻿{
+    "updatedAt":  "2026-09-06T14:15:12.8048456+00:00",
+    "lastAttemptAt":  "2026-09-06T14:15:12.8048456+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -12,7 +12,7 @@
     "coralBleaching":  {
                            "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-09-06T14:00:14.7997333+00:00",
+                           "fetchedAt":  "2026-09-06T14:15:12.8048456+00:00",
                            "regions":  [
                                            {
                                                "area":  "Andaman",
@@ -51,7 +51,7 @@
                  "ok":  true,
                  "url":  "https://incois.gov.in/site/services/hab_products.jsp",
                  "lastUpdated":  "05 Sep 2026",
-                 "fetchedAt":  "2026-09-06T18:49:00+05:30"
+                 "fetchedAt":  "2026-09-06T14:15:12.8048456+00:00"
              },
     "tsunami":  {
                     "message":  "No Tsunami threat reported by ITEWC",
@@ -212,9 +212,7 @@
     "swellSurge":  {
                        "issueDate":  "06 Sep 2026",
                        "alert":  [
-                                     "ANDAMAN AND NICOBAR",
-                                     "ODISHA",
-                                     "TAMIL NADU"
+                                     "ANDAMAN AND NICOBAR"
                                  ],
                        "watch":  [
                                      "ANDAMAN AND NICOBAR",
@@ -230,7 +228,7 @@
                                      "WEST BENGAL"
                                  ],
                        "warning":  [
-                                       "ANDAMAN AND NICOBAR"
+
                                    ],
                        "noThreat":  [
 
@@ -238,22 +236,14 @@
                        "states":  [
                                       {
                                           "name":  "ANDAMAN AND NICOBAR",
-                                          "highestSeverity":  "warning",
+                                          "highestSeverity":  "alert",
                                           "counts":  {
-                                                         "warning":  1,
-                                                         "alert":  7,
+                                                         "warning":  0,
+                                                         "alert":  8,
                                                          "watch":  5,
                                                          "noThreat":  0
                                                      },
                                           "advisories":  [
-                                                             {
-                                                                 "state":  "ANDAMAN AND NICOBAR",
-                                                                 "district":  "INDIRA POINT",
-                                                                 "severity":  "warning",
-                                                                 "color":  "Red",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Warning for the coast of INDIRA POINT,ANDAMAN AND NICOBAR. Swell waves in the range of 18.0 - 19.0 sec period with 1.4 - 1.5 m height are forecasted during  05:30 hours on 07-09-2026 to 23:30 hours on 08-09-2026. It advised that Surging of waves nearshore possible, small vessels not to ply, no activities at beach/ nearshore waters and nearshore erosion possible. No exit/entry of small boats at coastline."
-                                                             },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
                                                                  "district":  "CAR NICOBAR",
@@ -269,6 +259,14 @@
                                                                  "color":  "Orange",
                                                                  "issueDate":  "06-09-2026",
                                                                  "message":  "Swell Surge Alert for the coast of FLAT ISLAND,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 16.0 sec period with 1.0 - 1.1 m height are forecasted during  05:30 hours on 07-09-2026 to 23:30 hours on 07-09-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
+                                                             },
+                                                             {
+                                                                 "state":  "ANDAMAN AND NICOBAR",
+                                                                 "district":  "INDIRA POINT",
+                                                                 "severity":  "alert",
+                                                                 "color":  "Orange",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Alert for the coast of INDIRA POINT,ANDAMAN AND NICOBAR. Swell waves in the range of 15.0 - 16.0 sec period with 1.0 - 1.1 m height are forecasted during  05:30 hours on 07-09-2026 to 23:30 hours on 08-09-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
                                                              },
                                                              {
                                                                  "state":  "ANDAMAN AND NICOBAR",
@@ -349,102 +347,6 @@
                                                                  "color":  "Yellow",
                                                                  "issueDate":  "06-09-2026",
                                                                  "message":  "Swell Surge Watch for the coast of RANGATH BAY,ANDAMAN AND NICOBAR. Swell waves in the range of 16.0 - 17.0 sec period with 0.5 - 0.6 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
-                                                             }
-                                                         ]
-                                      },
-                                      {
-                                          "name":  "ODISHA",
-                                          "highestSeverity":  "alert",
-                                          "counts":  {
-                                                         "warning":  0,
-                                                         "alert":  2,
-                                                         "watch":  4,
-                                                         "noThreat":  0
-                                                     },
-                                          "advisories":  [
-                                                             {
-                                                                 "state":  "ODISHA",
-                                                                 "district":  "JAGATSINGHAPUR",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of JAGATSINGHAPUR,ODISHA from Bandar To Atharabanki. Swell waves in the range of 14.0 - 18.0 sec period with 0.9 - 1.0 m height are forecasted during  17:30 hours on 07-09-2026 to 20:30 hours on 08-09-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             },
-                                                             {
-                                                                 "state":  "ODISHA",
-                                                                 "district":  "PURI",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of PURI,ODISHA from Ramalanka To Nuagar. Swell waves in the range of 14.0 - 18.0 sec period with 0.9 - 1.0 m height are forecasted during  17:30 hours on 07-09-2026 to 23:30 hours on 08-09-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             },
-                                                             {
-                                                                 "state":  "ODISHA",
-                                                                 "district":  "BALESHWAR",
-                                                                 "severity":  "watch",
-                                                                 "color":  "Yellow",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of BALESHWAR,ODISHA from Panchubisa To Talasari. Swell waves in the range of 14.0 - 18.0 sec period with 0.7 - 0.8 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
-                                                             },
-                                                             {
-                                                                 "state":  "ODISHA",
-                                                                 "district":  "BHADRAK",
-                                                                 "severity":  "watch",
-                                                                 "color":  "Yellow",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of BHADRAK,ODISHA from Talchua To Chudamani. Swell waves in the range of 15.0 - 19.0 sec period with 0.7 - 0.8 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
-                                                             },
-                                                             {
-                                                                 "state":  "ODISHA",
-                                                                 "district":  "GANJAM",
-                                                                 "severity":  "watch",
-                                                                 "color":  "Yellow",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of GANJAM,ODISHA from Anantaraipur To Prayagi. Swell waves in the range of 13.0 - 18.0 sec period with 0.8 - 0.9 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
-                                                             },
-                                                             {
-                                                                 "state":  "ODISHA",
-                                                                 "district":  "KENDRAPARA",
-                                                                 "severity":  "watch",
-                                                                 "color":  "Yellow",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of KENDRAPARA,ODISHA from Chumuhani To Ahirajpur. Swell waves in the range of 14.0 - 18.0 sec period with 0.8 - 0.9 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
-                                                             }
-                                                         ]
-                                      },
-                                      {
-                                          "name":  "TAMIL NADU",
-                                          "highestSeverity":  "alert",
-                                          "counts":  {
-                                                         "warning":  0,
-                                                         "alert":  2,
-                                                         "watch":  1,
-                                                         "noThreat":  0
-                                                     },
-                                          "advisories":  [
-                                                             {
-                                                                 "state":  "TAMIL NADU",
-                                                                 "district":  "KANNIYAKUMARI",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of KANNIYAKUMARI,TAMIL NADU from Neerodi To Arockiyapuram. Swell waves in the range of 13.0 - 17.0 sec period with 1.0 - 1.2 m height are forecasted during  02:30 hours on 07-09-2026 to 23:30 hours on 08-09-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             },
-                                                             {
-                                                                 "state":  "TAMIL NADU",
-                                                                 "district":  "RAMANATHAPURAM",
-                                                                 "severity":  "alert",
-                                                                 "color":  "Orange",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Alert for the coast of RAMANATHAPURAM,TAMIL NADU from Rojma Nagar To Theerthaandathanam. Swell waves in the range of 16.0 - 18.0 sec period with 0.9 - 1.0 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that there is a possibility of surging of waves, boats to ply with utmost vigilance, recreation with due care."
-                                                             },
-                                                             {
-                                                                 "state":  "TAMIL NADU",
-                                                                 "district":  "TIRUNELVELI",
-                                                                 "severity":  "watch",
-                                                                 "color":  "Yellow",
-                                                                 "issueDate":  "06-09-2026",
-                                                                 "message":  "Swell Surge Watch for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. Swell waves in the range of 12.0 - 16.0 sec period with 1.0 - 1.2 m height are forecasted during  02:30 hours on 07-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
                                                              }
                                                          ]
                                       },
@@ -681,6 +583,66 @@
                                                          ]
                                       },
                                       {
+                                          "name":  "ODISHA",
+                                          "highestSeverity":  "watch",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  6,
+                                                         "noThreat":  0
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "ODISHA",
+                                                                 "district":  "BALESHWAR",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of BALESHWAR,ODISHA from Panchubisa To Talasari. Swell waves in the range of 14.0 - 18.0 sec period with 0.7 - 0.8 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ODISHA",
+                                                                 "district":  "BHADRAK",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of BHADRAK,ODISHA from Talchua To Chudamani. Swell waves in the range of 15.0 - 19.0 sec period with 0.7 - 0.8 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ODISHA",
+                                                                 "district":  "GANJAM",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of GANJAM,ODISHA from Anantaraipur To Prayagi. Swell waves in the range of 13.0 - 18.0 sec period with 0.8 - 0.9 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ODISHA",
+                                                                 "district":  "JAGATSINGHAPUR",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of JAGATSINGHAPUR,ODISHA from Bandar To Atharabanki. Swell waves in the range of 14.0 - 15.0 sec period with 0.9 - 1.0 m height are forecasted during  17:30 hours on 07-09-2026 to 20:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ODISHA",
+                                                                 "district":  "KENDRAPARA",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of KENDRAPARA,ODISHA from Chumuhani To Ahirajpur. Swell waves in the range of 14.0 - 18.0 sec period with 0.8 - 0.9 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "ODISHA",
+                                                                 "district":  "PURI",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of PURI,ODISHA from Ramalanka To Nuagar. Swell waves in the range of 14.0 - 15.0 sec period with 0.9 - 1.0 m height are forecasted during  17:30 hours on 07-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             }
+                                                         ]
+                                      },
+                                      {
                                           "name":  "PUDUCHERRY",
                                           "highestSeverity":  "watch",
                                           "counts":  {
@@ -697,6 +659,42 @@
                                                                  "color":  "Yellow",
                                                                  "issueDate":  "06-09-2026",
                                                                  "message":  "Swell Surge Watch for the coast of MAHE,PUDUCHERRY from Koloth To Azhikal. Swell waves in the range of 11.0 - 18.0 sec period with 0.7 - 0.9 m height are forecasted during  08:30 hours on 08-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             }
+                                                         ]
+                                      },
+                                      {
+                                          "name":  "TAMIL NADU",
+                                          "highestSeverity":  "watch",
+                                          "counts":  {
+                                                         "warning":  0,
+                                                         "alert":  0,
+                                                         "watch":  3,
+                                                         "noThreat":  0
+                                                     },
+                                          "advisories":  [
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "KANNIYAKUMARI",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of KANNIYAKUMARI,TAMIL NADU from Neerodi To Arockiyapuram. Swell waves in the range of 13.0 - 15.0 sec period with 1.0 - 1.2 m height are forecasted during  02:30 hours on 07-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "RAMANATHAPURAM",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of RAMANATHAPURAM,TAMIL NADU from Rojma Nagar To Theerthaandathanam. Swell waves in the range of 14.0 - 15.0 sec period with 0.9 - 1.0 m height are forecasted during  17:30 hours on 06-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
+                                                             },
+                                                             {
+                                                                 "state":  "TAMIL NADU",
+                                                                 "district":  "TIRUNELVELI",
+                                                                 "severity":  "watch",
+                                                                 "color":  "Yellow",
+                                                                 "issueDate":  "06-09-2026",
+                                                                 "message":  "Swell Surge Watch for the coast of TIRUNELVELI,TAMIL NADU from Kuttapulli To Kooduthalai. Swell waves in the range of 12.0 - 16.0 sec period with 1.0 - 1.2 m height are forecasted during  02:30 hours on 07-09-2026 to 23:30 hours on 08-09-2026. It advised that no immediate action is required. Check for updates."
                                                              }
                                                          ]
                                       },
@@ -1116,7 +1114,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-09-06T14:00:22.1167834+00:00",
+                          "fetchedAt":  "2026-09-06T14:15:21.2222039+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -7541,7 +7539,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  2.53,
-                      "pfzAgeHours":  2.53
+                      "osfAgeHours":  2.78,
+                      "pfzAgeHours":  2.78
                   }
 }
