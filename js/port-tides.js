@@ -1237,41 +1237,171 @@ function degreesToCardinal(deg) {
   return cardinals[idx];
 }
 
-// In-memory cache for live coordinate wind forecasts (30-minute validity)
-var portLiveWindCache = {};
+// In-memory cache for live INCOIS OSF forecasts (30-minute validity)
+var portLiveOsfCache = {};
+var portLiveWindCache = portLiveOsfCache; // Backward compatibility alias
+var incoisModelFilesCache = null;
+var incoisModelFilesPromise = null;
 
-async function fetchLivePortWind(port) {
+// Dynamically discover active INCOIS THREDDS netCDF model files
+async function getIncoisModelFileNames() {
+  const now = Date.now();
+  if (incoisModelFilesCache && (now - incoisModelFilesCache.timestamp < 30 * 60 * 1000)) {
+    return incoisModelFilesCache;
+  }
+  if (incoisModelFilesPromise) return incoisModelFilesPromise;
+
+  incoisModelFilesPromise = (async () => {
+    // Default fallback based on current/yesterday date
+    const d = new Date();
+    d.setDate(d.getDate() - 1);
+    const yyyymmdd = d.toISOString().slice(0, 10).replace(/-/g, '');
+    let ww3File = `rsmc_combined_ww3_${yyyymmdd}.nc`;
+    let currentsFile = `CURRENTS_NIO_${yyyymmdd}.nc`;
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      const [ww3Res, curRes] = await Promise.allSettled([
+        fetch('https://incois.gov.in/thredds/catalog/osf/ww3/catalog.html', { signal: controller.signal }),
+        fetch('https://incois.gov.in/thredds/catalog/osf/currents/catalog.html', { signal: controller.signal })
+      ]);
+      clearTimeout(timeoutId);
+
+      if (ww3Res.status === 'fulfilled' && ww3Res.value.ok) {
+        const text = await ww3Res.value.text();
+        const matches = text.match(/rsmc_combined_ww3_(\d{8})\.nc/g);
+        if (matches && matches.length) ww3File = matches[matches.length - 1];
+      }
+      if (curRes.status === 'fulfilled' && curRes.value.ok) {
+        const text = await curRes.value.text();
+        const matches = text.match(/CURRENTS_NIO_(\d{8})\.nc/g);
+        if (matches && matches.length) currentsFile = matches[matches.length - 1];
+      }
+    } catch (err) {
+      console.warn('[PortTides] Catalog discovery fallback:', err?.message);
+    }
+
+    incoisModelFilesCache = { ww3File, currentsFile, timestamp: Date.now() };
+    return incoisModelFilesCache;
+  })();
+
+  return incoisModelFilesPromise;
+}
+
+// Parse single-layer GetTimeseries CSV returned by INCOIS THREDDS WMS
+function parseIncoisTimeseriesCsv(csvText) {
+  if (!csvText || typeof csvText !== 'string') return null;
+  const rows = csvText.split('\n').filter(r => r && !r.startsWith('#')).slice(1);
+  if (!rows.length) return null;
+
+  const nowMs = Date.now();
+  let closestVal = null;
+  let minDiff = Infinity;
+
+  for (const row of rows) {
+    const parts = row.split(',');
+    if (parts.length < 2) continue;
+    const timeStr = parts[0].trim();
+    const val = parseFloat(parts[1].trim());
+    if (isNaN(val) || parts[1].trim() === 'null') continue;
+
+    const rowMs = new Date(timeStr).getTime();
+    if (isNaN(rowMs)) continue;
+    const diff = Math.abs(rowMs - nowMs);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closestVal = val;
+    }
+  }
+  return closestVal;
+}
+
+// Fetch a single layer from INCOIS THREDDS GetTimeseries endpoint
+async function fetchIncoisLayer(baseUrl, layer, lat, lng, signal) {
+  try {
+    const url = `${baseUrl}?REQUEST=GetTimeseries&LAYERS=${layer}&QUERY_LAYERS=${layer}&BBOX=${lng},${lat},${lng},${lat}&SRS=CRS:84&FEATURE_COUNT=5&HEIGHT=1&WIDTH=1&X=0&Y=0&ELEVATION=0&VERSION=1.1.1&INFO_FORMAT=text/csv`;
+    const res = await fetch(url, { signal, cache: 'default' });
+    if (!res.ok) return null;
+    const csv = await res.text();
+    return parseIncoisTimeseriesCsv(csv);
+  } catch {
+    return null;
+  }
+}
+
+// Fetch official live INCOIS OSF numerical model data (Wave, Wind, Swell, Currents)
+async function fetchLivePortOsf(port) {
   if (!port || !Number.isFinite(port.lat) || !Number.isFinite(port.lng)) return;
-  const cached = portLiveWindCache[port.id];
+  const cached = portLiveOsfCache[port.id];
   const now = Date.now();
   if (cached && (now - cached.timestamp < 30 * 60 * 1000)) return cached;
 
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${port.lat}&longitude=${port.lng}&current=wind_speed_10m,wind_direction_10m,wind_gusts_10m&wind_speed_unit=kmh&timezone=Asia%2FKolkata`;
-    const res = await fetch(url, { cache: 'default', signal: controller.signal });
-    clearTimeout(timeoutId);
-    if (!res.ok) throw new Error(`Wind HTTP ${res.status}`);
-    const data = await res.json();
-    const cur = data?.current;
-    if (cur && Number.isFinite(cur.wind_speed_10m)) {
-      const windKmh = Math.round(cur.wind_speed_10m);
-      const windKnots = (windKmh * 0.539957).toFixed(1);
-      const windDir = degreesToCardinal(cur.wind_direction_10m);
-      const gustsKmh = Number.isFinite(cur.wind_gusts_10m) ? Math.round(cur.wind_gusts_10m) : null;
-      const entry = { windKmh, windKnots, windDir, gustsKmh, isLive: true, timestamp: now };
-      portLiveWindCache[port.id] = entry;
+    const files = await getIncoisModelFileNames();
+    const ww3Base = `https://incois.gov.in/thredds/wms/osf/ww3/${files.ww3File}`;
+    const curBase = `https://incois.gov.in/thredds/wms/osf/currents/${files.currentsFile}`;
 
-      // If this port is still selected in the UI, re-render its wind & sea display
+    // Offshore seaward adjustment for nearshore cells affected by land masks
+    const offLng = port.lng > 78 ? port.lng + 0.15 : port.lng - 0.15;
+    const curLng = port.lng > 78 ? port.lng + 0.25 : port.lng - 0.25;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+    const queryWithFallback = async (base, layer, primaryLng, fallbackLng) => {
+      let val = await fetchIncoisLayer(base, layer, port.lat, primaryLng, controller.signal);
+      if (val === null && fallbackLng !== null && fallbackLng !== primaryLng) {
+        val = await fetchIncoisLayer(base, layer, port.lat, fallbackLng, controller.signal);
+      }
+      return val;
+    };
+
+    const [rawHs, rawWindMag, rawWindDir, rawSwellHs, rawSwellTp, rawCur] = await Promise.all([
+      queryWithFallback(ww3Base, 'HS', port.lng, offLng),
+      queryWithFallback(ww3Base, 'UWND:VWND-mag', port.lng, offLng),
+      queryWithFallback(ww3Base, 'MWD', port.lng, offLng),
+      queryWithFallback(ww3Base, 'PHS01', port.lng, offLng),
+      queryWithFallback(ww3Base, 'PTP01', port.lng, offLng),
+      queryWithFallback(curBase, 'CURRENT', curLng, port.lng)
+    ]);
+
+    clearTimeout(timeoutId);
+
+    const hasAny = rawHs !== null || rawWindMag !== null || rawCur !== null;
+    if (hasAny) {
+      const windKmh = rawWindMag !== null ? Math.round(rawWindMag * 3.6) : port.baseWind;
+      const windKnots = rawWindMag !== null ? (rawWindMag * 1.94384).toFixed(1) : (windKmh * 0.539957).toFixed(1);
+      const windDir = rawWindDir !== null ? degreesToCardinal(rawWindDir) : port.windDir;
+
+      const entry = {
+        waveHs: rawHs,
+        windKmh: windKmh,
+        windKnots: windKnots,
+        windDir: windDir,
+        windDeg: rawWindDir,
+        swellHs: rawSwellHs,
+        swellTp: rawSwellTp,
+        currentMs: rawCur,
+        isLive: true,
+        source: 'INCOIS-OSF',
+        timestamp: now
+      };
+
+      portLiveOsfCache[port.id] = entry;
+
       if (selectedPortId === port.id) {
         updatePortWindDisplay(port, entry);
+        const patDay = getPatDayData(port, new Date());
+        const warning = checkPortActiveWarnings(port);
+        renderDsleCard(port, patDay, warning);
       }
       return entry;
     }
   } catch (err) {
-    console.warn(`[PortTides] Live wind forecast unavailable for ${port.name}:`, err?.message);
+    console.warn(`[PortTides] Live INCOIS OSF forecast unavailable for ${port.name}:`, err?.message);
   }
+
   return null;
 }
 
@@ -1280,10 +1410,9 @@ function updatePortWindDisplay(port, liveData = null) {
   if (!windElem) return;
 
   const warning = checkPortActiveWarnings(port);
-  const windKmh = liveData?.isLive ? liveData.windKmh : port.baseWind;
-  const windKnots = liveData?.isLive ? liveData.windKnots : (windKmh * 0.539957).toFixed(1);
-  const windDir = liveData?.isLive ? liveData.windDir : port.windDir;
-  const isLive = Boolean(liveData?.isLive);
+  const windKmh = liveData?.isLive && liveData.windKmh !== undefined ? liveData.windKmh : port.baseWind;
+  const windKnots = liveData?.isLive && liveData.windKnots !== undefined ? liveData.windKnots : (windKmh * 0.539957).toFixed(1);
+  const windDir = liveData?.isLive && liveData.windDir ? liveData.windDir : port.windDir;
 
   // Dynamic Sea State based on active INCOIS OSF warnings + live wind
   let seaState = windKmh < 12 ? 'Calm' : windKmh < 20 ? 'Slight' : (windKmh < 35 ? 'Moderate' : (windKmh < 50 ? 'Rough' : 'Very Rough'));
@@ -1293,7 +1422,7 @@ function updatePortWindDisplay(port, liveData = null) {
     else if (warning.level === 'watch') seaState = 'Moderate';
   }
 
-  // Extract Wave, Swell, and Current parameters from active advisories
+  // Check active warning bulletin messages first for emergency thresholds
   let waveVal = null;
   let swellVal = null;
   let currentVal = null;
@@ -1322,6 +1451,18 @@ function updatePortWindDisplay(port, liveData = null) {
       currentIsHazard = true;
     }
   });
+
+  // If live INCOIS numerical model data is available and not in explicit warning state, display live model values
+  if (!waveVal && liveData?.isLive && typeof liveData.waveHs === 'number') {
+    waveVal = `${liveData.waveHs.toFixed(2)} m`;
+  }
+  if (!swellVal && liveData?.isLive && typeof liveData.swellHs === 'number') {
+    const tpStr = typeof liveData.swellTp === 'number' ? ` (${liveData.swellTp.toFixed(1)}s)` : '';
+    swellVal = `${liveData.swellHs.toFixed(2)} m${tpStr}`;
+  }
+  if (!currentVal && liveData?.isLive && typeof liveData.currentMs === 'number') {
+    currentVal = `${liveData.currentMs.toFixed(2)} m/s`;
+  }
 
   const defaultWave = windKmh < 12 ? '0.2 - 0.5m' : windKmh < 20 ? '0.5 - 1.2m' : (windKmh < 35 ? '1.2 - 2.0m' : '2.5 - 3.5m');
   const defaultSwell = '8.0 - 11.0s';
@@ -1446,6 +1587,7 @@ function renderDsleCard(port, patDay, warning) {
   const trough = lowHeights.length ? Math.min(...lowHeights) : (patDay.events[0]?.height || 0.2);
 
   // 2. Extract Significant Wave Height (Hs)
+  // Priority: 1. Active high-threshold Hazard Warning -> 2. Live INCOIS OSF numerical model -> 3. Beaufort wind-bracket fallback
   let hs = 1.0;
   const allMatches = warning?.matches || (warning?.match ? [warning.match] : []);
   let matchedHs = null;
@@ -1460,10 +1602,12 @@ function renderDsleCard(port, patDay, warning) {
     }
   });
 
+  const liveData = portLiveOsfCache[port.id];
   if (matchedHs !== null && !isNaN(matchedHs)) {
     hs = matchedHs;
+  } else if (liveData?.isLive && typeof liveData.waveHs === 'number' && !isNaN(liveData.waveHs)) {
+    hs = liveData.waveHs;
   } else {
-    const liveData = portLiveWindCache[port.id];
     const windKmh = liveData?.isLive ? liveData.windKmh : port.baseWind;
     hs = windKmh < 12 ? 0.5 : (windKmh < 20 ? 1.2 : (windKmh < 35 ? 2.0 : 3.0));
   }
@@ -1558,11 +1702,11 @@ function renderPortTideCard() {
     }
   }
 
-  // 3. Render Wind, Sea State & Moon Phase (using cached live coordinate forecast or triggering fetch)
-  const cachedWind = portLiveWindCache[port.id];
-  updatePortWindDisplay(port, cachedWind);
-  if (!cachedWind || (Date.now() - cachedWind.timestamp > 30 * 60 * 1000)) {
-    void fetchLivePortWind(port);
+  // 3. Render Wind, Sea State & Moon Phase (using cached live INCOIS OSF forecast or triggering fetch)
+  const cachedOsf = portLiveOsfCache[port.id];
+  updatePortWindDisplay(port, cachedOsf);
+  if (!cachedOsf || (Date.now() - cachedOsf.timestamp > 30 * 60 * 1000)) {
+    void fetchLivePortOsf(port);
   }
 
   // 4. Render High / Low Tide Times Table
