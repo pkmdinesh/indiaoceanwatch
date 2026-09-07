@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-07T20:47:48.707Z",
+  "updated": "2026-09-07T21:04:35.137Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -9,7 +9,7 @@
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 398400,
+      "size": 398592,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN"
     },
