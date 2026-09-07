@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T14:16:46.067Z",
+  "updatedAt": "2026-09-07T14:31:25.978Z",
   "date": "2026-09-07",
   "source": "INCOIS Predicted & Actual Tide (PAT) / Survey of India",
   "sourceUrl": "https://incois.gov.in/oceanservices/PAT/index.html",
@@ -185,7 +185,7 @@
           "height": 0.41
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "camp": {
       "id": "camp",
@@ -327,7 +327,7 @@
           "height": 0.66
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "chenn": {
       "id": "chenn",
@@ -459,7 +459,7 @@
           "height": 0.29
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "chetl": {
       "id": "chetl",
@@ -601,7 +601,7 @@
           "height": 0.29
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "daman": {
       "id": "daman",
@@ -743,7 +743,7 @@
           "height": 1.53
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "dosin": {
       "id": "dosin",
@@ -895,7 +895,7 @@
           "height": 4.68
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "gopa": {
       "id": "gopa",
@@ -1022,7 +1022,7 @@
           "height": 0.75
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "hutb": {
       "id": "hutb",
@@ -1164,7 +1164,7 @@
           "height": 1.04
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "jakh": {
       "id": "jakh",
@@ -1311,7 +1311,7 @@
           "height": 0.5
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "kalpe": {
       "id": "kalpe",
@@ -1453,7 +1453,7 @@
           "height": 5.89
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "kanya": {
       "id": "kanya",
@@ -1595,7 +1595,7 @@
           "height": 0.58
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "kava": {
       "id": "kava",
@@ -1727,7 +1727,7 @@
           "height": 0.29
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "koll": {
       "id": "koll",
@@ -1859,7 +1859,7 @@
           "height": 0.51
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "kris": {
       "id": "kris",
@@ -2011,7 +2011,7 @@
           "height": 0.57
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "mayab": {
       "id": "mayab",
@@ -2153,7 +2153,7 @@
           "height": 1.2
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "mumba": {
       "id": "mumba",
@@ -2285,7 +2285,7 @@
           "height": 2.08
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "murud": {
       "id": "murud",
@@ -2427,7 +2427,7 @@
           "height": 0
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "nagc": {
       "id": "nagc",
@@ -2559,7 +2559,7 @@
           "height": 0.82
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "newm": {
       "id": "newm",
@@ -2691,7 +2691,7 @@
           "height": 0.58
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "okha": {
       "id": "okha",
@@ -2823,7 +2823,7 @@
           "height": 2.08
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "panaj": {
       "id": "panaj",
@@ -2965,7 +2965,7 @@
           "height": 1.23
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "porb": {
       "id": "porb",
@@ -3097,7 +3097,7 @@
           "height": 1.09
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "ptbl": {
       "id": "ptbl",
@@ -3224,7 +3224,7 @@
           "height": 1.22
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "pudu": {
       "id": "pudu",
@@ -3356,7 +3356,7 @@
           "height": 0.48
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "ramaya": {
       "id": "ramaya",
@@ -3498,7 +3498,7 @@
           "height": 0.31
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "rang": {
       "id": "rang",
@@ -3650,7 +3650,7 @@
           "height": 0.59
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     },
     "verav": {
       "id": "verav",
@@ -3792,7 +3792,7 @@
           "height": 0.45
         }
       ],
-      "updatedAt": "2026-09-07T14:16:46.067Z"
+      "updatedAt": "2026-09-07T14:31:25.978Z"
     }
   }
 }
