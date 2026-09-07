@@ -1679,11 +1679,9 @@ function renderPortTideCard() {
 }
 
   // Update direct INCOIS PAT link in header
-  const patHeaderLink = ids('portPatHeaderLink');
-  const patRegionName = port.patRegion || port.name;
-  const patUrl = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(patRegionName)}`;
+  const patHeaderLink = ids('portPatHeaderLink'); 
   if (patHeaderLink) {
-    patHeaderLink.href = patUrl;
+    patHeaderLink.href = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}`;
     patHeaderLink.title = `Open official INCOIS Predicted & Actual Tide (PAT) interactive graph for ${port.name}`;
   }
 
