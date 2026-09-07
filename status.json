@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-09-07T12:30:16.4127712+00:00",
-    "lastAttemptAt":  "2026-09-07T12:45:15.4077628+00:00",
+    "updatedAt":  "2026-09-07T13:00:20.1768209+00:00",
+    "lastAttemptAt":  "2026-09-07T13:00:20.1768209+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -10,19 +10,48 @@
                            "url":  "https://incois.gov.in/oceanservices/mhw/index.jsp"
                        },
     "coralBleaching":  {
-                           "ok":  false,
+                           "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-09-07T12:45:15.4077628+00:00",
+                           "fetchedAt":  "2026-09-07T13:00:20.1768209+00:00",
                            "regions":  [
-
+                                           {
+                                               "area":  "Andaman",
+                                               "hs":  "No Stress",
+                                               "dhw":  "No Stress",
+                                               "severity":  "safe"
+                                           },
+                                           {
+                                               "area":  "Gulf of Kutch",
+                                               "hs":  "No Stress",
+                                               "dhw":  "Severe",
+                                               "severity":  "warning"
+                                           },
+                                           {
+                                               "area":  "Gulf of Mannar",
+                                               "hs":  "No Stress",
+                                               "dhw":  "No Stress",
+                                               "severity":  "safe"
+                                           },
+                                           {
+                                               "area":  "Lakshadweep",
+                                               "hs":  "No Stress",
+                                               "dhw":  "Low",
+                                               "severity":  "watch"
+                                           },
+                                           {
+                                               "area":  "Nicobar",
+                                               "hs":  "No Stress",
+                                               "dhw":  "No Stress",
+                                               "severity":  "safe"
+                                           }
                                        ],
                            "mapUrl":  "https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg"
                        },
     "abis":  {
-                 "ok":  false,
+                 "ok":  true,
                  "url":  "https://incois.gov.in/site/services/hab_products.jsp",
                  "lastUpdated":  "06 Sep 2026",
-                 "fetchedAt":  "2026-09-07T12:45:15.4077628+00:00"
+                 "fetchedAt":  "2026-09-07T13:00:20.1768209+00:00"
              },
     "tsunami":  {
                     "message":  "No Tsunami threat reported by ITEWC",
@@ -1085,7 +1114,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-09-07T12:45:24.4967523+00:00",
+                          "fetchedAt":  "2026-09-07T13:00:34.4357231+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -9141,15 +9170,14 @@
                             ]
             },
     "errors":  [
-                   "Coral Bleaching: Unable to connect to the remote server",
-                   "ABIS: Unable to connect to the remote server"
+
                ],
     "healthAlerts":  [
 
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  25.32,
-                      "pfzAgeHours":  1.32
+                      "osfAgeHours":  25.55,
+                      "pfzAgeHours":  1.55
                   }
 }
