@@ -4,58 +4,89 @@ import path from 'node:path';
 const projectRoot = process.argv[2] ? path.resolve(process.argv[2]) : path.resolve('.');
 const targetPath = path.join(projectRoot, 'data', 'tides.json');
 
-// Exact mapping from Ocean Watch station ID / name to official INCOIS PAT region
+// Canonical mapping from Ocean Watch station ID to official INCOIS PAT station region
+// Only genuine alternate spellings / suffixes are mapped. Stations without dedicated PAT gauges use their own name.
+const CANONICAL_PAT_REGIONS = {
+  chenn: 'Chennai',
+  coch: 'Kochi',
+  kand: 'Kandla-Harbour',
+  mumba: 'Mumbai-Apollo-Bandar',
+  para: 'Paradip',
+  porb: 'Porbandar',
+  ptbl: 'Port-Blair',
+  naga: 'Nagapatnam',
+  newm: 'Mangalore',
+  marm: 'Marmagao',
+  carn: 'Car-Nicobar',
+  nagc: 'Nancowry-Harbour',
+  rames: 'Pamban-Pass',
+  gard: 'Kolkata-Kidderpore-docks',
+  kava: 'Kavaratti-Laccadive-Is',
+  mini: 'Minicoy',
+  vish: 'Visakhapatnam',
+  dham: 'Dhamra',
+  gopa: 'Gopalpur',
+  jaig: 'Jaigarh',
+  kaki: 'Kakinada',
+  karw: 'Karwar',
+  koll: 'Kollam',
+  okha: 'Okha',
+  pudu: 'Puducherry',
+  tuti: 'Tuticorin',
+  beyp: 'Beypore'
+};
+
 const STATION_PAT_MAPPING = {
-  adan: { name: 'Adani', region: 'Hazira-2nd' },
-  aeri: { name: 'Aerialbay', region: 'Port-Cornwallis' },
-  agatt: { name: 'Agatti', region: 'Kavaratti-Laccadive-Is' },
-  astra: { name: 'Astranga', region: 'Devi-River-Entrance' },
-  bahab: { name: 'Bahabalpur', region: 'Dhamra' },
-  beyp: { name: 'Beypore', region: 'Beypore' },
-  camp: { name: 'Campbellbay', region: 'South-Galatea-Bay' },
-  carn: { name: 'Carnicobar', region: 'Car-Nicobar' },
-  chenn: { name: 'Chennai', region: 'Chennai' },
-  chetl: { name: 'Chetlat', region: 'Kavaratti-Laccadive-Is' },
-  coch: { name: 'Cochin', region: 'Kochi' },
-  daman: { name: 'Daman', region: 'Bulsar' },
-  dham: { name: 'Dhamra', region: 'Dhamra' },
-  dosin: { name: 'Dosinga', region: 'Dhamra' },
-  enno: { name: 'Ennore', region: 'Chennai' },
-  gard: { name: 'Gardenreach', region: 'Kolkata-Kidderpore-docks' },
-  gopa: { name: 'Gopalpur', region: 'Gopalpur' },
-  hutb: { name: 'Hutbay', region: 'The-Sisters' },
-  jaig: { name: 'Jaigarh', region: 'Jaigarh' },
-  jakh: { name: 'Jakhau', region: 'Godia-Creek' },
-  jnpt: { name: 'Jnpt', region: 'Mumbai-Apollo-Bandar' },
-  kaki: { name: 'Kakinada', region: 'Kakinada' },
-  kalpe: { name: 'Kalpeni', region: 'Kavaratti-Laccadive-Is' },
-  kand: { name: 'Kandla', region: 'Kandla-Harbour' },
-  kanya: { name: 'Kanyakumari', region: 'Muttam' },
-  karw: { name: 'Karwar', region: 'Karwar' },
-  kava: { name: 'Kavaratti', region: 'Kavaratti-Laccadive-Is' },
-  koll: { name: 'Kollam', region: 'Kollam' },
-  kris: { name: 'Krishnapatnam', region: 'Chennai' },
-  mach: { name: 'Machilipatnam', region: 'Surya-Lanka' },
-  marm: { name: 'Marmagoa', region: 'Marmagao' },
-  mayab: { name: 'Mayabunder', region: 'Stewart-Sound' },
-  mini: { name: 'Minicoy', region: 'Minicoy' },
-  mumba: { name: 'Mumbai', region: 'Mumbai-Apollo-Bandar' },
-  murud: { name: 'Murud', region: 'Janjira-Dangri-Bandar' },
-  naga: { name: 'Nagapattinam', region: 'Nagapatnam' },
-  nagc: { name: 'Nancowry', region: 'Nancowry-Harbour' },
-  newm: { name: 'Newmangalore', region: 'Mangalore' },
-  okha: { name: 'Okha', region: 'Okha' },
-  panaj: { name: 'Panaji', region: 'Marmagao' },
-  para: { name: 'Paradeep', region: 'Paradip' },
-  porb: { name: 'Porbander', region: 'Porbandar' },
-  ptbl: { name: 'Portblair', region: 'Port-Blair' },
-  pudu: { name: 'Puducherry', region: 'Puducherry' },
-  ramaya: { name: 'Ramayapatnam', region: 'Surya-Lanka' },
-  rames: { name: 'Rameshwaram', region: 'Pamban-Pass' },
-  rang: { name: 'Rangatbay', region: 'Long-Island' },
-  tuti: { name: 'Tuticorin', region: 'Tuticorin' },
-  verav: { name: 'Veraval', region: 'Kotra' },
-  vish: { name: 'Visakhapatnam', region: 'Visakhapatnam' }
+  adan: { name: 'Adani', region: CANONICAL_PAT_REGIONS.adan || 'Adani' },
+  aeri: { name: 'Aerialbay', region: CANONICAL_PAT_REGIONS.aeri || 'Aerialbay' },
+  agatt: { name: 'Agatti', region: CANONICAL_PAT_REGIONS.agatt || 'Agatti' },
+  astra: { name: 'Astranga', region: CANONICAL_PAT_REGIONS.astra || 'Astranga' },
+  bahab: { name: 'Bahabalpur', region: CANONICAL_PAT_REGIONS.bahab || 'Bahabalpur' },
+  beyp: { name: 'Beypore', region: CANONICAL_PAT_REGIONS.beyp || 'Beypore' },
+  camp: { name: 'Campbellbay', region: CANONICAL_PAT_REGIONS.camp || 'Campbellbay' },
+  carn: { name: 'Carnicobar', region: CANONICAL_PAT_REGIONS.carn || 'Carnicobar' },
+  chenn: { name: 'Chennai', region: CANONICAL_PAT_REGIONS.chenn || 'Chennai' },
+  chetl: { name: 'Chetlat', region: CANONICAL_PAT_REGIONS.chetl || 'Chetlat' },
+  coch: { name: 'Cochin', region: CANONICAL_PAT_REGIONS.coch || 'Cochin' },
+  daman: { name: 'Daman', region: CANONICAL_PAT_REGIONS.daman || 'Daman' },
+  dham: { name: 'Dhamra', region: CANONICAL_PAT_REGIONS.dham || 'Dhamra' },
+  dosin: { name: 'Dosinga', region: CANONICAL_PAT_REGIONS.dosin || 'Dosinga' },
+  enno: { name: 'Ennore', region: CANONICAL_PAT_REGIONS.enno || 'Ennore' },
+  gard: { name: 'Gardenreach', region: CANONICAL_PAT_REGIONS.gard || 'Gardenreach' },
+  gopa: { name: 'Gopalpur', region: CANONICAL_PAT_REGIONS.gopa || 'Gopalpur' },
+  hutb: { name: 'Hutbay', region: CANONICAL_PAT_REGIONS.hutb || 'Hutbay' },
+  jaig: { name: 'Jaigarh', region: CANONICAL_PAT_REGIONS.jaig || 'Jaigarh' },
+  jakh: { name: 'Jakhau', region: CANONICAL_PAT_REGIONS.jakh || 'Jakhau' },
+  jnpt: { name: 'Jnpt', region: CANONICAL_PAT_REGIONS.jnpt || 'Jnpt' },
+  kaki: { name: 'Kakinada', region: CANONICAL_PAT_REGIONS.kaki || 'Kakinada' },
+  kalpe: { name: 'Kalpeni', region: CANONICAL_PAT_REGIONS.kalpe || 'Kalpeni' },
+  kand: { name: 'Kandla', region: CANONICAL_PAT_REGIONS.kand || 'Kandla' },
+  kanya: { name: 'Kanyakumari', region: CANONICAL_PAT_REGIONS.kanya || 'Kanyakumari' },
+  karw: { name: 'Karwar', region: CANONICAL_PAT_REGIONS.karw || 'Karwar' },
+  kava: { name: 'Kavaratti', region: CANONICAL_PAT_REGIONS.kava || 'Kavaratti' },
+  koll: { name: 'Kollam', region: CANONICAL_PAT_REGIONS.koll || 'Kollam' },
+  kris: { name: 'Krishnapatnam', region: CANONICAL_PAT_REGIONS.kris || 'Krishnapatnam' },
+  mach: { name: 'Machilipatnam', region: CANONICAL_PAT_REGIONS.mach || 'Machilipatnam' },
+  marm: { name: 'Marmagoa', region: CANONICAL_PAT_REGIONS.marm || 'Marmagoa' },
+  mayab: { name: 'Mayabunder', region: CANONICAL_PAT_REGIONS.mayab || 'Mayabunder' },
+  mini: { name: 'Minicoy', region: CANONICAL_PAT_REGIONS.mini || 'Minicoy' },
+  mumba: { name: 'Mumbai', region: CANONICAL_PAT_REGIONS.mumba || 'Mumbai' },
+  murud: { name: 'Murud', region: CANONICAL_PAT_REGIONS.murud || 'Murud' },
+  naga: { name: 'Nagapattinam', region: CANONICAL_PAT_REGIONS.naga || 'Nagapattinam' },
+  nagc: { name: 'Nancowry', region: CANONICAL_PAT_REGIONS.nagc || 'Nancowry' },
+  newm: { name: 'Newmangalore', region: CANONICAL_PAT_REGIONS.newm || 'Newmangalore' },
+  okha: { name: 'Okha', region: CANONICAL_PAT_REGIONS.okha || 'Okha' },
+  panaj: { name: 'Panaji', region: CANONICAL_PAT_REGIONS.panaj || 'Panaji' },
+  para: { name: 'Paradeep', region: CANONICAL_PAT_REGIONS.para || 'Paradeep' },
+  porb: { name: 'Porbander', region: CANONICAL_PAT_REGIONS.porb || 'Porbander' },
+  ptbl: { name: 'Portblair', region: CANONICAL_PAT_REGIONS.ptbl || 'Portblair' },
+  pudu: { name: 'Puducherry', region: CANONICAL_PAT_REGIONS.pudu || 'Puducherry' },
+  ramaya: { name: 'Ramayapatnam', region: CANONICAL_PAT_REGIONS.ramaya || 'Ramayapatnam' },
+  rames: { name: 'Rameshwaram', region: CANONICAL_PAT_REGIONS.rames || 'Rameshwaram' },
+  rang: { name: 'Rangatbay', region: CANONICAL_PAT_REGIONS.rang || 'Rangatbay' },
+  tuti: { name: 'Tuticorin', region: CANONICAL_PAT_REGIONS.tuti || 'Tuticorin' },
+  verav: { name: 'Veraval', region: CANONICAL_PAT_REGIONS.verav || 'Veraval' },
+  vish: { name: 'Visakhapatnam', region: CANONICAL_PAT_REGIONS.vish || 'Visakhapatnam' }
 };
 
 // Fetch with retry and timeout
@@ -84,7 +115,7 @@ async function fetchWithRetry(url, retries = 3, timeoutMs = 15000) {
 
 // Convert DD-MM-YYYY HH:mm to ISO string with +05:30 offset
 function parsePatTime(timeStr) {
-  if (!timeStr || timeStr === '-' || timeStr === '--') return null;
+  if (!timeStr || timeStr === '-' || timeStr === '--' || timeStr.startsWith('---')) return null;
   const match = timeStr.match(/^(\d{2})-(\d{2})-(\d{4})\s+(\d{2}):(\d{2})$/);
   if (!match) return null;
   const [, d, m, y, h, min] = match;
@@ -92,8 +123,10 @@ function parsePatTime(timeStr) {
 }
 
 // Fetch and parse 24-hour data of current date for a given PAT region
+// Note: Omitting fromDate and toDate query params is required because INCOIS PAT JSP
+// fails to render evening high/low tide table rows when date query params are supplied.
 async function fetchPatRegion(region, fromDate, toDate) {
-  const url = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(region)}&fromDate=${fromDate}&toDate=${toDate}`;
+  const url = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(region)}`;
   const html = await fetchWithRetry(url);
 
   // 1. Parse Highcharts hourly series for the 24-hour period (00:00 to 24:00)
@@ -220,8 +253,9 @@ async function main() {
     const patData = regionCache.get(info.region);
 
     const hasNewData = Boolean(patData && (patData.events.length > 0 || patData.series.length > 0));
-    const events = hasNewData ? patData.events : (existing.events || []);
-    const series = hasNewData ? patData.series : (existing.series || []);
+    const existingMatchesRegion = existing?.patRegion === info.region;
+    const events = hasNewData ? patData.events : (existingMatchesRegion ? (existing.events || []) : []);
+    const series = hasNewData ? patData.series : (existingMatchesRegion ? (existing.series || []) : []);
 
     stationsOutput[id] = {
       id,
@@ -231,7 +265,7 @@ async function main() {
       hasData: events.length > 0 || series.length > 0,
       events,
       series,
-      updatedAt: hasNewData ? nowIso : (existing.updatedAt || nowIso)
+      updatedAt: hasNewData ? nowIso : (existingMatchesRegion ? (existing.updatedAt || nowIso) : nowIso)
     };
   }
 

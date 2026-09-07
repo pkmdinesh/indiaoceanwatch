@@ -654,58 +654,36 @@ var NATIONAL_TIDE_STATIONS = [
 ];
 var MAJOR_COASTAL_PORTS = NATIONAL_TIDE_STATIONS;
 
-// Exact mapping to official INCOIS PAT station regions
+// Canonical mapping to official INCOIS PAT station regions.
+// Only genuine alternate spellings / suffixes are mapped. Stations without dedicated PAT gauges use their own name.
 var STATION_PAT_REGION_MAP = {
-  adan: 'Hazira-2nd',
-  aeri: 'Port-Cornwallis',
-  agatt: 'Kavaratti-Laccadive-Is',
-  astra: 'Devi-River-Entrance',
-  bahab: 'Dhamra',
-  beyp: 'Beypore',
-  camp: 'South-Galatea-Bay',
-  carn: 'Car-Nicobar',
   chenn: 'Chennai',
-  chetl: 'Kavaratti-Laccadive-Is',
   coch: 'Kochi',
-  daman: 'Bulsar',
-  dham: 'Dhamra',
-  dosin: 'Dhamra',
-  enno: 'Chennai',
-  gard: 'Kolkata-Kidderpore-docks',
-  gopa: 'Gopalpur',
-  hutb: 'The-Sisters',
-  jaig: 'Jaigarh',
-  jakh: 'Godia-Creek',
-  jnpt: 'Mumbai-Apollo-Bandar',
-  kaki: 'Kakinada',
-  kalpe: 'Kavaratti-Laccadive-Is',
   kand: 'Kandla-Harbour',
-  kanya: 'Muttam',
-  karw: 'Karwar',
-  kava: 'Kavaratti-Laccadive-Is',
-  koll: 'Kollam',
-  kris: 'Chennai',
-  mach: 'Surya-Lanka',
-  marm: 'Marmagao',
-  mayab: 'Stewart-Sound',
-  mini: 'Minicoy',
   mumba: 'Mumbai-Apollo-Bandar',
-  murud: 'Janjira-Dangri-Bandar',
-  naga: 'Nagapatnam',
-  nagc: 'Nancowry-Harbour',
-  newm: 'Mangalore',
-  okha: 'Okha',
-  panaj: 'Marmagao',
   para: 'Paradip',
   porb: 'Porbandar',
   ptbl: 'Port-Blair',
-  pudu: 'Puducherry',
-  ramaya: 'Surya-Lanka',
+  naga: 'Nagapatnam',
+  newm: 'Mangalore',
+  marm: 'Marmagao',
+  carn: 'Car-Nicobar',
+  nagc: 'Nancowry-Harbour',
   rames: 'Pamban-Pass',
-  rang: 'Long-Island',
+  gard: 'Kolkata-Kidderpore-docks',
+  kava: 'Kavaratti-Laccadive-Is',
+  mini: 'Minicoy',
+  vish: 'Visakhapatnam',
+  dham: 'Dhamra',
+  gopa: 'Gopalpur',
+  jaig: 'Jaigarh',
+  kaki: 'Kakinada',
+  karw: 'Karwar',
+  koll: 'Kollam',
+  okha: 'Okha',
+  pudu: 'Puducherry',
   tuti: 'Tuticorin',
-  verav: 'Kotra',
-  vish: 'Visakhapatnam'
+  beyp: 'Beypore'
 };
 
 NATIONAL_TIDE_STATIONS.forEach(function (p) {
@@ -962,61 +940,21 @@ function isTsunamiThreatActive(tsunami) {
 
 // Helper to normalize strings for district/state comparison with phonetic & alias mapping
 function portNormalizeName(value) {
+  if (typeof globalThis.normalizeOsfName === 'function') {
+    return globalThis.normalizeOsfName(value);
+  }
   return String(value || '')
     .toUpperCase()
     .replace(/&/g, ' AND ')
     .replace(/[^A-Z0-9]+/g, ' ')
-    .replace(/\bTHIRU/g, 'TIRU')
-    .replace(/\bPORT\s*BLAIR\b/g, 'PORT BLAIR')
-    .replace(/\bPORTBLAIR\b/g, 'PORT BLAIR')
-    .replace(/\bHUT\s*BAY\b/g, 'HUT BAY')
-    .replace(/\bHUTBAY\b/g, 'HUT BAY')
-    .replace(/\bRANGAT\s*BAY\b/g, 'RANGAT BAY')
-    .replace(/\bRANGATBAY\b/g, 'RANGAT BAY')
-    .replace(/\bRANGATH\s*BAY\b/g, 'RANGAT BAY')
-    .replace(/\bCAMPBELL\s*BAY\b/g, 'CAMPBELL BAY')
-    .replace(/\bCAMPBELLBAY\b/g, 'CAMPBELL BAY')
-    .replace(/\bCAR\s*NICOBAR\b/g, 'CAR NICOBAR')
-    .replace(/\bCARNICOBAR\b/g, 'CAR NICOBAR')
-    .replace(/\bAERIAL\s*BAY\b/g, 'AERIAL BAY')
-    .replace(/\bAERIALBAY\b/g, 'AERIAL BAY')
-    .replace(/\bKANNIYAKUMARI\b/g, 'KANYAKUMARI')
-    .replace(/\bCAPE\s+COMORIN\b/g, 'KANYAKUMARI')
-    .replace(/\bTUTICORIN\b/g, 'THOOTHUKKUDI')
-    .replace(/\bTHOOTHUKUDI\b/g, 'THOOTHUKKUDI')
-    .replace(/\bPONDICHERRY\b/g, 'PUDUCHERRY')
-    .replace(/\bPONDICHERY\b/g, 'PUDUCHERRY')
-    .replace(/\bCALICUT\b/g, 'KOZHIKODE')
-    .replace(/\bCOCHIN\b/g, 'ERNAKULAM')
-    .replace(/\bKOCHI\b/g, 'ERNAKULAM')
-    .replace(/\bQUILON\b/g, 'KOLLAM')
-    .replace(/\bTRIVANDRUM\b/g, 'THIRUVANANTHAPURAM')
-    .replace(/\bALLEPPEY\b/g, 'ALAPPUZHA')
-    .replace(/\bCANNANORE\b/g, 'KANNUR')
-    .replace(/\bMANGALORE\b/g, 'DAKSHINA KANNADA')
-    .replace(/\bMANGALURU\b/g, 'DAKSHINA KANNADA')
-    .replace(/\bNEWMANGALORE\b/g, 'DAKSHINA KANNADA')
-    .replace(/\bVIZAG\b/g, 'VISAKHAPATNAM')
-    .replace(/\bWALTAIR\b/g, 'VISAKHAPATNAM')
-    .replace(/\bBOMBAY\b/g, 'MUMBAI')
-    .replace(/\bCALCUTTA\b/g, 'KOLKATA')
-    .replace(/\bMADRAS\b/g, 'CHENNAI')
-    .replace(/\bNAGAPPATTINAM\b/g, 'NAGAPATTINAM')
-    .replace(/\bVILUPPURAM\b/g, 'VILLUPURAM')
-    .replace(/\bJAGATSINGHAPUR\b/g, 'JAGATSINGHPUR')
-    .replace(/\bBALASORE\b/g, 'BALESWAR')
-    .replace(/\bBALESHWAR\b/g, 'BALESWAR')
-    .replace(/\bBHADRAKH\b/g, 'BHADRAK')
-    .replace(/\bKUTCH\b/g, 'KACHCHH')
-    .replace(/\bDEVBHUMI\s+DWARAKA\b/g, 'DEVBHUMI DWARKA')
-    .replace(/\bRAIGARH\b/g, 'RAIGAD')
-    .replace(/\bSPS\s+NELLORE\b/g, 'NELLORE')
-    .replace(/\bSRI\s+POTTI\s+SRIRAMULU\s+NELLORE\b/g, 'NELLORE')
     .replace(/\s+/g, ' ')
     .trim();
 }
 
 function portDistrictMatches(portDist, advDist) {
+  if (typeof globalThis.osfDistrictMatches === 'function') {
+    return globalThis.osfDistrictMatches(portDist, advDist);
+  }
   const pName = portNormalizeName(portDist);
   const aName = portNormalizeName(advDist);
   if (!pName || !aName) return false;
@@ -1042,7 +980,7 @@ function checkPortActiveWarnings(port) {
     });
     if (!st) return;
 
-    // Check specific district advisories first
+    // Check specific district advisories for this station's district or port name
     const advisories = st.advisories || [];
     const districtAdv = advisories.find(adv => 
       portDistrictMatches(port.district, adv.district) || portDistrictMatches(port.name, adv.district)
@@ -1056,17 +994,7 @@ function checkPortActiveWarnings(port) {
       } else if (districtAdv.severity === 'watch') {
         matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch`, message: districtAdv.message, district: districtAdv.district });
       }
-      // If severity is 'noThreat', this district is explicitly verified and confirmed safe
-    } else if (advisories.length === 0) {
-      // ONLY fallback to state-level counts if INCOIS published NO district breakdown at all
-      const warnCount = Number(st.counts?.warning || 0);
-      const alertCount = Number(st.counts?.alert || 0);
-      const watchCount = Number(st.counts?.watch || 0);
-      if (warnCount > 0) matches.push({ hazard: hazardName, level: 'warning', label: `${hazardName} Warning` });
-      else if (alertCount > 0) matches.push({ hazard: hazardName, level: 'alert', label: `${hazardName} Alert` });
-      else if (watchCount > 0) matches.push({ hazard: hazardName, level: 'watch', label: `${hazardName} Watch` });
     }
-    // If advisories.length > 0 and districtAdv is not found, this specific district has NO THREAT for this hazard!
   };
 
   // 1. High Wave check (district level)
@@ -1370,9 +1298,9 @@ async function fetchLivePortOsf(port) {
 
     const hasAny = rawHs !== null || rawWindMag !== null || rawCur !== null;
     if (hasAny) {
-      const windKmh = rawWindMag !== null ? Math.round(rawWindMag * 3.6) : port.baseWind;
-      const windKnots = rawWindMag !== null ? (rawWindMag * 1.94384).toFixed(1) : (windKmh * 0.539957).toFixed(1);
-      const windDir = rawWindDir !== null ? degreesToCardinal(rawWindDir) : port.windDir;
+      const windKmh = rawWindMag !== null ? Math.round(rawWindMag * 3.6) : null;
+      const windKnots = rawWindMag !== null ? (rawWindMag * 1.94384).toFixed(1) : null;
+      const windDir = rawWindDir !== null ? degreesToCardinal(rawWindDir) : null;
 
       const entry = {
         waveHs: rawHs,
@@ -1392,9 +1320,6 @@ async function fetchLivePortOsf(port) {
 
       if (selectedPortId === port.id) {
         updatePortWindDisplay(port, entry);
-        const patDay = getPatDayData(port, new Date());
-        const warning = checkPortActiveWarnings(port);
-        renderDsleCard(port, patDay, warning);
       }
       return entry;
     }
@@ -1410,77 +1335,45 @@ function updatePortWindDisplay(port, liveData = null) {
   if (!windElem) return;
 
   const warning = checkPortActiveWarnings(port);
-  const windKmh = liveData?.isLive && liveData.windKmh !== undefined ? liveData.windKmh : port.baseWind;
-  const windKnots = liveData?.isLive && liveData.windKnots !== undefined ? liveData.windKnots : (windKmh * 0.539957).toFixed(1);
-  const windDir = liveData?.isLive && liveData.windDir ? liveData.windDir : port.windDir;
-
-  // Dynamic Sea State based on active INCOIS OSF warnings + live wind
-  let seaState = windKmh < 12 ? 'Calm' : windKmh < 20 ? 'Slight' : (windKmh < 35 ? 'Moderate' : (windKmh < 50 ? 'Rough' : 'Very Rough'));
-  if (warning && !warning.safe) {
-    if (warning.level === 'warning') seaState = 'Rough to Very Rough';
-    else if (warning.level === 'alert') seaState = 'Moderate to Rough';
-    else if (warning.level === 'watch') seaState = 'Moderate';
-  }
 
   // Check active warning bulletin messages for hazard indicators
-  let waveIsHazard = false;
-  let swellVal = null;
-  let swellIsHazard = false;
-  let currentVal = null;
-  let currentIsHazard = false;
-
   const allMatches = warning.matches || (warning.match ? [warning.match] : []);
-  allMatches.forEach(m => {
-    if (!m?.message) return;
-    if (m.hazard === 'High Wave') {
-      waveIsHazard = true;
-    }
-    if (m.hazard === 'Swell Surge') {
-      swellIsHazard = true;
-      const periodMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*sec/i);
-      const heightMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\s*height/i) || m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*(?:m|meter|meters)\b/i);
-      if (periodMatch && heightMatch) {
-        swellVal = `${heightMatch[1].trim()}m (${periodMatch[1].trim()}s)`;
-      } else if (heightMatch) {
-        swellVal = `${heightMatch[1].trim()}m`;
-      } else if (periodMatch) {
-        swellVal = `${periodMatch[1].trim()}s`;
-      }
-    }
-    if (m.hazard === 'Ocean Currents') {
-      currentIsHazard = true;
-      const currentMatch = m.message.match(/(\d+(?:\.\d+)?\s*(?:-\s*\d+(?:\.\d+)?)?)\s*m\/sec/i);
-      if (currentMatch) {
-        currentVal = `${currentMatch[1].trim()} m/s`;
-      }
-    }
-  });
+  const waveIsHazard = allMatches.some(m => m.hazard === 'High Wave' && m.level !== 'noThreat');
+  const swellIsHazard = allMatches.some(m => m.hazard === 'Swell Surge' && m.level !== 'noThreat');
+  const currentIsHazard = allMatches.some(m => m.hazard === 'Ocean Currents' && m.level !== 'noThreat');
+
+  // Live Wind Telemetry (Strictly from INCOIS numerical models - no calculation/fallback)
+  let windDisplay = '—';
+  if (liveData?.isLive && typeof liveData.windKmh === 'number' && !isNaN(liveData.windKmh)) {
+    const windDir = liveData.windDir || '';
+    const translatedWindDir = globalThis.i18n?.translateDirection(windDir) || windDir;
+    const knotsStr = liveData.windKnots !== null && liveData.windKnots !== undefined ? ` <span class="stat-sub">(${liveData.windKnots} kn)</span>` : '';
+    windDisplay = `${translatedWindDir ? translatedWindDir + ' ' : ''}${liveData.windKmh} km/h${knotsStr}`;
+  } else if (!liveData) {
+    windDisplay = 'Fetching…';
+  }
 
   // Always use official live INCOIS numerical model values for Wave, Swell, and Currents
-  let waveDisplay = null;
-  if (liveData?.isLive && typeof liveData.waveHs === 'number') {
+  let waveDisplay = '—';
+  if (liveData?.isLive && typeof liveData.waveHs === 'number' && !isNaN(liveData.waveHs)) {
     waveDisplay = `${liveData.waveHs.toFixed(2)} m`;
-  } else {
-    waveDisplay = windKmh < 12 ? '0.2 - 0.5m' : (windKmh < 20 ? '0.5 - 1.2m' : (windKmh < 35 ? '1.2 - 2.0m' : '2.5 - 3.5m'));
+  } else if (!liveData) {
+    waveDisplay = 'Fetching…';
   }
 
-  let swellDisplay = null;
-  if (liveData?.isLive && typeof liveData.swellHs === 'number') {
-    const tpStr = typeof liveData.swellTp === 'number' ? ` (${liveData.swellTp.toFixed(1)}s)` : '';
+  let swellDisplay = '—';
+  if (liveData?.isLive && typeof liveData.swellHs === 'number' && !isNaN(liveData.swellHs)) {
+    const tpStr = typeof liveData.swellTp === 'number' && !isNaN(liveData.swellTp) ? ` (${liveData.swellTp.toFixed(1)}s)` : '';
     swellDisplay = `${liveData.swellHs.toFixed(2)} m${tpStr}`;
-  } else if (swellVal) {
-    swellDisplay = swellVal;
-  } else {
-    swellDisplay = '8.0 - 11.0s';
+  } else if (!liveData) {
+    swellDisplay = 'Fetching…';
   }
 
-  let currentDisplay = null;
-  if (liveData?.isLive && typeof liveData.currentMs === 'number') {
+  let currentDisplay = '—';
+  if (liveData?.isLive && typeof liveData.currentMs === 'number' && !isNaN(liveData.currentMs)) {
     currentDisplay = `${liveData.currentMs.toFixed(2)} m/s`;
-  } else if (currentVal) {
-    currentDisplay = currentVal;
-  } else {
-    currentDisplay = port.range >= 4.0 ? '0.8 - 1.4 m/s' : (port.range >= 2.0 ? '0.4 - 0.7 m/s' : '0.2 - 0.4 m/s');
+  } else if (!liveData) {
+    currentDisplay = 'Fetching…';
   }
 
   const windLbl = globalThis.i18n?.t('tide.wind', 'Wind') || 'Wind';
@@ -1494,7 +1387,6 @@ function updatePortWindDisplay(port, liveData = null) {
   const fallingLbl = globalThis.i18n?.t('tide.falling', '▼ Falling (Ebb)') || '▼ Falling (Ebb)';
   const springTideLbl = globalThis.i18n?.t('tide.spring_tide', 'Spring Tide') || 'Spring Tide';
   const neapTideLbl = globalThis.i18n?.t('tide.neap_tide', 'Neap Tide') || 'Neap Tide';
-  const translatedWindDir = globalThis.i18n?.translateDirection(windDir) || windDir;
 
   const now = new Date();
   const patDay = getPatDayData(port, now);
@@ -1511,7 +1403,7 @@ function updatePortWindDisplay(port, liveData = null) {
       <div class="port-marine-grid">
         <div class="marine-stat-item">
           <span class="stat-prefix"><span class="stat-icon">💨</span> <span class="stat-name">${windLbl}</span> :</span>
-          <strong class="stat-value">${translatedWindDir} ${windKmh} km/h <span class="stat-sub">(${windKnots} kn)</span></strong>
+          <strong class="stat-value">${windDisplay}</strong>
         </div>
         <div class="marine-stat-item">
           <span class="stat-prefix"><span class="stat-icon">🌊</span> <span class="stat-name">${waveLbl}</span> :</span>
@@ -1546,120 +1438,6 @@ function updatePortWindDisplay(port, liveData = null) {
   `;
 }
 
-// Render Dynamic Sea-Level Envelope (DSLE) Card
-function renderDsleCard(port, patDay, warning) {
-  const dsleCard = ids('dsleCard');
-  if (!dsleCard) return;
-
-  const isPatAvailable = Boolean(patDay && patDay.events && patDay.events.length);
-  const stationNameEl = ids('dsleStationName');
-  const stationBadgeEl = ids('dsleStationBadge');
-  const overtoppingValEl = ids('dsleOvertoppingVal');
-  const overtoppingBadgeEl = ids('dsleOvertoppingBadge');
-  const overtoppingDescEl = ids('dsleOvertoppingDesc');
-  const groundingValEl = ids('dsleGroundingVal');
-  const groundingBadgeEl = ids('dsleGroundingBadge');
-  const groundingDescEl = ids('dsleGroundingDesc');
-  const crestValEl = ids('dsleCrestVal');
-  const troughValEl = ids('dsleTroughVal');
-  const hsValEl = ids('dsleHsVal');
-
-  if (stationNameEl) stationNameEl.textContent = port.name;
-  if (stationBadgeEl) stationBadgeEl.textContent = port.name;
-
-  if (!isPatAvailable) {
-    if (overtoppingValEl) overtoppingValEl.innerHTML = '<span style="font-size:15px;color:var(--muted);font-weight:750;">PAT data is unavailable</span>';
-    if (overtoppingBadgeEl) {
-      overtoppingBadgeEl.className = 'dsle-badge level-watch';
-      overtoppingBadgeEl.textContent = 'Unavailable';
-    }
-    if (overtoppingDescEl) overtoppingDescEl.textContent = 'Official PAT astronomical predictions required to calculate water level crest.';
-
-    if (groundingValEl) groundingValEl.innerHTML = '<span style="font-size:15px;color:var(--muted);font-weight:750;">PAT data is unavailable</span>';
-    if (groundingBadgeEl) {
-      groundingBadgeEl.className = 'dsle-badge level-watch';
-      groundingBadgeEl.textContent = 'Unavailable';
-    }
-    if (groundingDescEl) groundingDescEl.textContent = 'Official PAT astronomical predictions required to calculate under-keel clearance.';
-
-    if (crestValEl) crestValEl.textContent = '—';
-    if (troughValEl) troughValEl.textContent = '—';
-    if (hsValEl) hsValEl.textContent = '—';
-    return;
-  }
-
-  // 1. Calculate Crest (Max High Tide) and Trough (Min Low Tide) from PAT events
-  const highEvents = patDay.events.filter(e => e.type === 'High');
-  const lowEvents = patDay.events.filter(e => e.type === 'Low');
-  const highHeights = highEvents.map(e => e.height).filter(h => typeof h === 'number' && !isNaN(h));
-  const lowHeights = lowEvents.map(e => e.height).filter(h => typeof h === 'number' && !isNaN(h));
-
-  const crest = highHeights.length ? Math.max(...highHeights) : (patDay.events[0]?.height || 1.0);
-  const trough = lowHeights.length ? Math.min(...lowHeights) : (patDay.events[0]?.height || 0.2);
-
-  // 2. Extract Significant Wave Height (Hs)
-  // Irrespective of warnings, strictly consume official INCOIS OSF numerical model data
-  let hs = 1.0;
-  const liveData = portLiveOsfCache[port.id];
-  if (liveData?.isLive && typeof liveData.waveHs === 'number' && !isNaN(liveData.waveHs)) {
-    hs = liveData.waveHs;
-  } else {
-    hs = null;
-  }
-
-  // 3. Formulate DSLE:
-  // Overtopping risk: Crest + Hs
-  const overtopping = crest + hs;
-  // Grounding risk: Trough - Hs/2
-  const grounding = trough - (hs / 2);
-
-  // 4. Overtopping Risk Evaluation
-  let overtoppingLevel = 'safe';
-  let overtoppingBadgeText = 'Low Risk (Safe)';
-  let overtoppingDescText = 'Total water level well within coastal seawall / freeboard margin.';
-  if (overtopping >= 2.5) {
-    overtoppingLevel = 'warning';
-    overtoppingBadgeText = 'High Overtopping Risk';
-    overtoppingDescText = 'Total water level crests high — coastal splash & inundation alert!';
-  } else if (overtopping >= 1.6) {
-    overtoppingLevel = 'watch';
-    overtoppingBadgeText = 'Moderate Risk';
-    overtoppingDescText = 'Elevated water level with wave run-up and splash over low structures.';
-  }
-
-  // 5. Grounding Risk Evaluation
-  let groundingLevel = 'safe';
-  let groundingBadgeText = 'Safe Keel Clearance';
-  let groundingDescText = 'Sufficient water depth above chart datum during wave troughs.';
-  if (grounding < 0.0) {
-    groundingLevel = 'warning';
-    groundingBadgeText = 'High Grounding Hazard';
-    groundingDescText = 'Wave trough drops below Chart Datum — bottom strike danger for vessels!';
-  } else if (grounding < 0.5) {
-    groundingLevel = 'watch';
-    groundingBadgeText = 'Caution (Shallow Bar)';
-    groundingDescText = 'Marginal clearance across shallow harbor bars, reef heads, or river mouths.';
-  }
-
-  if (overtoppingValEl) overtoppingValEl.textContent = `${overtopping.toFixed(2)} m`;
-  if (overtoppingBadgeEl) {
-    overtoppingBadgeEl.className = `dsle-badge level-${overtoppingLevel}`;
-    overtoppingBadgeEl.textContent = overtoppingBadgeText;
-  }
-  if (overtoppingDescEl) overtoppingDescEl.textContent = overtoppingDescText;
-
-  if (groundingValEl) groundingValEl.textContent = `${grounding.toFixed(2)} m`;
-  if (groundingBadgeEl) {
-    groundingBadgeEl.className = `dsle-badge level-${groundingLevel}`;
-    groundingBadgeEl.textContent = groundingBadgeText;
-  }
-  if (groundingDescEl) groundingDescEl.textContent = groundingDescText;
-
-  if (crestValEl) crestValEl.textContent = `${crest.toFixed(2)} m`;
-  if (troughValEl) troughValEl.textContent = `${trough.toFixed(2)} m`;
-  if (hsValEl) hsValEl.textContent = `${hs.toFixed(2)} m`;
-}
-
 // Main Render Function for Predicted Astronomical Tide Card
 function renderPortTideCard() {
   const port = NATIONAL_TIDE_STATIONS.find(p => p.id === selectedPortId) || NATIONAL_TIDE_STATIONS[0];
@@ -1672,16 +1450,12 @@ function renderPortTideCard() {
   // 2. Check Warnings
   const warning = checkPortActiveWarnings(port);
 
-  // 3. Render Dynamic Sea-Level Envelope (DSLE) Card
-  const SHOW_DSLE = false;
-  if (SHOW_DSLE) {
-  renderDsleCard(port, patDay, warning);
-}
-
   // Update direct INCOIS PAT link in header
-  const patHeaderLink = ids('portPatHeaderLink'); 
+  const patHeaderLink = ids('portPatHeaderLink');
+  const patRegionName = port.patRegion || port.name;
+  const patUrl = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(patRegionName)}`;
   if (patHeaderLink) {
-    patHeaderLink.href = `https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}`;
+    patHeaderLink.href = patUrl;
     patHeaderLink.title = `Open official INCOIS Predicted & Actual Tide (PAT) interactive graph for ${port.name}`;
   }
 

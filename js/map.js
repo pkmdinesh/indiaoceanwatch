@@ -21,6 +21,7 @@ function osfStateCoordinates(name) {
 }
 
 const normalizeOsfName = value => String(value || '').toUpperCase().replace(/&/g,' AND ').replace(/[^A-Z0-9]+/g,' ').replace(/\bKANNIYAKUMARI\b/g,'KANYAKUMARI').replace(/\s+/g,' ').trim();
+globalThis.normalizeOsfName = normalizeOsfName;
 
 function osfDistrictMatches(apiDistrict,advisoryDistrict) {
   const polygonName = normalizeOsfName(apiDistrict);
@@ -30,6 +31,7 @@ function osfDistrictMatches(apiDistrict,advisoryDistrict) {
   const polygonParts = String(apiDistrict || '').split(/,|&|\bAND\b/i).map(normalizeOsfName).filter(Boolean);
   return polygonParts.includes(advisoryName) || (advisoryName.length >= 5 && polygonName.includes(advisoryName)) || (polygonName.length >= 5 && advisoryName.includes(polygonName));
 }
+globalThis.osfDistrictMatches = osfDistrictMatches;
 
 function loadOsfDistrictPolygons() {
   if (!osfDistrictPolygonsPromise) {
@@ -291,12 +293,14 @@ function createOsfTidalStationLayer() {
     const pinClass = moon.tideBadgeClass || 'spring';
 
     let highTideStr = '—';
-    if (typeof calculateDailyTideEvents === 'function') {
-      const { events } = calculateDailyTideEvents(port, now);
-      const highTides = (events || []).filter(e => e.type === 'High');
-      const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
-      if (highTides.length > 0) {
-        highTideStr = highTides.map(t => `${formatTime(t.time)} - ${t.height}m`).join('<br>');
+    if (typeof getPatDayData === 'function') {
+      const patDay = getPatDayData(port, now);
+      if (patDay && patDay.events && patDay.events.length) {
+        const highTides = patDay.events.filter(e => e.type === 'High');
+        const formatTime = d => d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+        if (highTides.length > 0) {
+          highTideStr = highTides.map(t => `${formatTime(t.time)} - ${t.height}m`).join('<br>');
+        }
       }
     }
 
@@ -328,7 +332,7 @@ function createOsfTidalStationLayer() {
           <div class="osf-tide-row"><span>Coordinates:</span> <span>${lat.toFixed(4)}°N, ${lon.toFixed(4)}°E</span></div>
         </div>
         <div style="margin-top:6px;text-align:right;">
-          <a href="https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.name)}" target="_blank" rel="noopener" style="font-size:10.5px;font-weight:800;color:var(--teal);text-decoration:underline;">INCOIS PAT Tide Graph ↗</a>
+          <a href="https://incois.gov.in/oceanservices/PAT/tidegraphphases.jsp?region=${encodeURIComponent(port.patRegion || port.name)}" target="_blank" rel="noopener" style="font-size:10.5px;font-weight:800;color:var(--teal);text-decoration:underline;">INCOIS PAT Tide Graph ↗</a>
         </div>
       </div>
     `;
