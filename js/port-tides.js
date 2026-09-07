@@ -1674,7 +1674,10 @@ function renderPortTideCard() {
   const warning = checkPortActiveWarnings(port);
 
   // 3. Render Dynamic Sea-Level Envelope (DSLE) Card
+  const SHOW_DSLE = false;
+  if (SHOW_DSLE) {
   renderDsleCard(port, patDay, warning);
+}
 
   // Update direct INCOIS PAT link in header
   const patHeaderLink = ids('portPatHeaderLink');
