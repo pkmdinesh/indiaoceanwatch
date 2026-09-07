@@ -1604,8 +1604,7 @@ function renderDsleCard(port, patDay, warning) {
   if (liveData?.isLive && typeof liveData.waveHs === 'number' && !isNaN(liveData.waveHs)) {
     hs = liveData.waveHs;
   } else {
-    const windKmh = liveData?.isLive ? liveData.windKmh : port.baseWind;
-    hs = windKmh < 12 ? 0.5 : (windKmh < 20 ? 1.2 : (windKmh < 35 ? 2.0 : 3.0));
+    hs = null;
   }
 
   // 3. Formulate DSLE:
