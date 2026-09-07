@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-09-07T21:30:15.5010198+00:00",
-    "lastAttemptAt":  "2026-09-07T21:30:15.5010198+00:00",
+    "updatedAt":  "2026-09-07T21:45:17.8591434+00:00",
+    "lastAttemptAt":  "2026-09-07T21:45:17.8591434+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -12,7 +12,7 @@
     "coralBleaching":  {
                            "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-09-07T21:30:15.5010198+00:00",
+                           "fetchedAt":  "2026-09-07T21:45:17.8591434+00:00",
                            "regions":  [
                                            {
                                                "area":  "Andaman",
@@ -51,7 +51,7 @@
                  "ok":  true,
                  "url":  "https://incois.gov.in/site/services/hab_products.jsp",
                  "lastUpdated":  "06 Sep 2026",
-                 "fetchedAt":  "2026-09-07T21:30:15.5010198+00:00"
+                 "fetchedAt":  "2026-09-07T21:45:17.8591434+00:00"
              },
     "tsunami":  {
                     "message":  "No Tsunami threat reported by ITEWC",
@@ -1334,7 +1334,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-09-07T21:30:22.4941261+00:00",
+                          "fetchedAt":  "2026-09-07T21:45:25.5074756+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -9397,7 +9397,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  10.04,
-                      "pfzAgeHours":  10.04
+                      "osfAgeHours":  10.3,
+                      "pfzAgeHours":  10.3
                   }
 }
