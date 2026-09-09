@@ -1,15 +1,15 @@
 {
-  "updated": "2026-09-09T06:17:54.251Z",
+  "updated": "2026-09-09T06:32:52.120Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 382464,
+      "size": 382656,
       "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN"
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 381312,
+      "size": 381504,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN"
     },
