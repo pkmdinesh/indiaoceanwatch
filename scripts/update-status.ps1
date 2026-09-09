@@ -1159,6 +1159,15 @@ if ($originalStatusJson) {
 }
 
 if (-not $hasDataChanges) {
+    try {
+        $dataDiff = git status --porcelain data/
+        if (-not [string]::IsNullOrWhiteSpace("$dataDiff")) {
+            $hasDataChanges = $true
+        }
+    } catch { }
+}
+
+if (-not $hasDataChanges) {
     if (-not $Quiet) { Write-Output "[Status] No advisory or forecast changes detected; status.json remains unchanged." }
 } else {
     $tempPath = "$outputPath.tmp"

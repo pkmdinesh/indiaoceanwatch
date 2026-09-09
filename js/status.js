@@ -1,32 +1,48 @@
+function updateLastCheckedDisplay(data) {
+  const lastUpdatedEl = ids('lastUpdated');
+  if (!lastUpdatedEl) return;
+  const checkTime = globalThis.lastStatusCheckTime || (data?.lastAttemptAt || data?.updatedAt ? new Date(data.lastAttemptAt || data.updatedAt) : new Date());
+  const sourceTime = data?.updatedAt || data?.lastAttemptAt;
+  const sourceDate = sourceTime ? new Date(sourceTime) : null;
+
+  if (checkTime && !Number.isNaN(checkTime.getTime())) {
+    lastUpdatedEl.dateTime = checkTime.toISOString();
+    lastUpdatedEl.textContent = `${checkTime.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+  } else {
+    lastUpdatedEl.removeAttribute('datetime');
+    lastUpdatedEl.textContent = 'No source check available';
+  }
+
+  if (sourceDate && !Number.isNaN(sourceDate.getTime())) {
+    lastUpdatedEl.title = `Official bulletin: ${sourceDate.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST · Advisories verified live`;
+  } else {
+    lastUpdatedEl.title = 'Advisories verified live with INCOIS official sources';
+  }
+}
+
+function updateFooterDot(isRecentDeploy) {
+  const footerDot = ids('footerUpdateDot');
+  if (!footerDot) return;
+  if (isRecentDeploy) {
+    footerDot.className = 'update-status-dot dot-orange';
+    footerDot.title = 'Data changes committed & deployed to Ocean Watch';
+  } else {
+    footerDot.className = 'update-status-dot dot-green';
+    footerDot.title = '15-minute check routine · Advisories current';
+  }
+}
+
 function render(data) {
   globalThis.latestStatusData = data;
   latestStatusData = data;
 
   // Phase 1: Critical top viewport card (Header, Tsunami & Active Bulletins)
   renderActiveAdvisories(data);
-  const checkedAtValue = data.lastAttemptAt || data.updatedAt;
-  const checkedAt = checkedAtValue ? new Date(checkedAtValue) : null;
-  if (checkedAt && !Number.isNaN(checkedAt.getTime())) {
-    ids('lastUpdated').dateTime = checkedAtValue;
-    ids('lastUpdated').textContent = `${checkedAt.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
-  } else {
-    ids('lastUpdated').removeAttribute('datetime');
-    ids('lastUpdated').textContent = 'No source check available';
-  }
+  updateLastCheckedDisplay(data);
 
   // Footer Update Dot: green for routine, orange if fresh data deployment
-  const footerDot = ids('footerUpdateDot');
   const isRecentDeploy = Boolean(data?.dataChanged || (data?.lastDataChangeAt && Math.abs(Date.now() - new Date(data.lastDataChangeAt).getTime()) < 2 * 3600 * 1000));
-
-  if (footerDot) {
-    if (isRecentDeploy) {
-      footerDot.className = 'update-status-dot dot-orange';
-      footerDot.title = 'Data changes committed & deployed to Ocean Watch';
-    } else {
-      footerDot.className = 'update-status-dot dot-green';
-      footerDot.title = '15-minute check routine · No data changes';
-    }
-  }
+  updateFooterDot(isRecentDeploy);
 
   const demoMode = new URLSearchParams(location.search).get('demo');
   const bulletinTwoDemo = {
@@ -102,43 +118,22 @@ function render(data) {
 }
     let statusRefreshTimer;
     let statusLoadPromise;
-    function scheduleStatusRefresh(data, retryDelay = 0) {
+    function scheduleStatusRefresh(data) {
       clearTimeout(statusRefreshTimer);
-      const intervalMs = Math.max(60000,Number(data?.updateIntervalHours || 0.25) * 3600000);
-      const baseTime = new Date(data?.updatedAt || data?.lastAttemptAt || Date.now()).getTime();
-      const now = Date.now();
-      const nextUpdate = Number.isFinite(baseTime)
-        ? baseTime + (Math.floor(Math.max(0,now - baseTime) / intervalMs) + 1) * intervalMs
-        : now + intervalMs;
-      const delay = retryDelay || Math.max(1000,nextUpdate - now + 5000);
+      const intervalMs = Math.max(60000, Number(data?.updateIntervalHours || 0.25) * 3600000);
       const previousUpdate = data?.updatedAt;
       statusRefreshTimer = setTimeout(async () => {
         try {
           const fresh = await loadStatus();
-          const footerDot = ids('footerUpdateDot');
-          const lastUpdatedEl = ids('lastUpdated');
-          const now = new Date();
-
-          // Update time without getting stale when update status run completes successfully in background
-          if (lastUpdatedEl) {
-            lastUpdatedEl.dateTime = now.toISOString();
-            lastUpdatedEl.textContent = `${now.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+          const hasFreshDeploy = Boolean(previousUpdate && fresh?.updatedAt !== previousUpdate);
+          if (hasFreshDeploy) {
+            updateFooterDot(true);
           }
-
-          if (previousUpdate && fresh?.updatedAt !== previousUpdate) {
-            if (footerDot) {
-              footerDot.className = 'update-status-dot dot-orange';
-              footerDot.title = 'Data changes committed & deployed to Ocean Watch';
-            }
-          } else {
-            if (footerDot) {
-              footerDot.className = 'update-status-dot dot-green';
-              footerDot.title = '15-minute check routine · No data changes';
-            }
-            if (previousUpdate && fresh?.updatedAt === previousUpdate) scheduleStatusRefresh(fresh, 60000);
-          }
-        } catch { scheduleStatusRefresh(data, 60000); }
-      }, delay);
+        } catch (err) {
+          console.warn('Status refresh retry:', err);
+          statusRefreshTimer = setTimeout(() => scheduleStatusRefresh(data), 60000);
+        }
+      }, intervalMs);
     }
     async function loadStatus(url='status.json') {
       if (statusLoadPromise) return statusLoadPromise;
@@ -147,6 +142,7 @@ function render(data) {
         const response = await fetch(`${url}${separator}t=${Date.now()}`,{cache:'no-store'});
         if (!response.ok) throw new Error(`Status unavailable (${response.status})`);
         const data = await response.json();
+        globalThis.lastStatusCheckTime = new Date();
         render(data);
         scheduleStatusRefresh(data);
         return data;
