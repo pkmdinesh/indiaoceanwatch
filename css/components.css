@@ -915,13 +915,13 @@ button:active:not(:disabled), .source:active, .severity-state-chip:active {
   transform: translateY(-1px);
 }
 
-/* 15-Minute Run Status & Footer Update Dot */
+/* Footer Update Dot */
 .update-status-dot {
   display: inline-block;
-  width: 9px;
-  height: 9px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  margin-right: 6px;
+  margin-right: 5px;
   vertical-align: middle;
   flex: none;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -937,20 +937,7 @@ button:active:not(:disabled), .source:active, .severity-state-chip:active {
 }
 @keyframes dot-pulse-orange {
   0% { box-shadow: 0 0 0 0 rgba(253, 126, 20, 0.5); }
-  70% { box-shadow: 0 0 0 6px rgba(253, 126, 20, 0); }
+  70% { box-shadow: 0 0 0 5px rgba(253, 126, 20, 0); }
   100% { box-shadow: 0 0 0 0 rgba(253, 126, 20, 0); }
 }
-.run-status {
-  margin-top: 3px;
-  font-size: 9px;
-  font-weight: 700;
-  color: var(--muted);
-  text-align: right;
-  line-height: 1.2;
-}
-.run-status-text.changed {
-  color: #d97706;
-}
-.run-status-text.routine {
-  color: var(--muted);
-}
+

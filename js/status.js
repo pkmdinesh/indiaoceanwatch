@@ -14,9 +14,8 @@ function render(data) {
     ids('lastUpdated').textContent = 'No source check available';
   }
 
-  // 15-Minute Run Status below official snapshot & Footer Update Dot
+  // Footer Update Dot: green for routine, orange if fresh data deployment
   const footerDot = ids('footerUpdateDot');
-  const runStatusText = ids('runStatusText');
   const isRecentDeploy = Boolean(data?.dataChanged || (data?.lastDataChangeAt && Math.abs(Date.now() - new Date(data.lastDataChangeAt).getTime()) < 2 * 3600 * 1000));
 
   if (footerDot) {
@@ -26,16 +25,6 @@ function render(data) {
     } else {
       footerDot.className = 'update-status-dot dot-green';
       footerDot.title = '15-minute check routine · No data changes';
-    }
-  }
-
-  if (runStatusText) {
-    if (isRecentDeploy) {
-      runStatusText.textContent = globalThis.i18n?.t('header.run_status_updated', '15m run: Advisories updated') || '15m run: Advisories updated';
-      runStatusText.className = 'run-status-text changed';
-    } else {
-      runStatusText.textContent = globalThis.i18n?.t('header.run_status_routine', '15m check: Routine') || '15m check: Routine';
-      runStatusText.className = 'run-status-text routine';
     }
   }
 
@@ -127,26 +116,24 @@ function render(data) {
         try {
           const fresh = await loadStatus();
           const footerDot = ids('footerUpdateDot');
-          const runStatusText = ids('runStatusText');
-          const timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' });
+          const lastUpdatedEl = ids('lastUpdated');
+          const now = new Date();
+
+          // Update time without getting stale when update status run completes successfully in background
+          if (lastUpdatedEl) {
+            lastUpdatedEl.dateTime = now.toISOString();
+            lastUpdatedEl.textContent = `${now.toLocaleString('en-IN',{dateStyle:'long',timeStyle:'short',timeZone:'Asia/Kolkata'})} IST`;
+          }
 
           if (previousUpdate && fresh?.updatedAt !== previousUpdate) {
             if (footerDot) {
               footerDot.className = 'update-status-dot dot-orange';
               footerDot.title = 'Data changes committed & deployed to Ocean Watch';
             }
-            if (runStatusText) {
-              runStatusText.textContent = `15m run: Updated (${timeStr} IST)`;
-              runStatusText.className = 'run-status-text changed';
-            }
           } else {
             if (footerDot) {
               footerDot.className = 'update-status-dot dot-green';
               footerDot.title = '15-minute check routine · No data changes';
-            }
-            if (runStatusText) {
-              runStatusText.textContent = `15m check: Routine (${timeStr} IST)`;
-              runStatusText.className = 'run-status-text routine';
             }
             if (previousUpdate && fresh?.updatedAt === previousUpdate) scheduleStatusRefresh(fresh, 60000);
           }
