@@ -24,6 +24,8 @@ const I18N_DICTIONARY = {
     'header.title': 'Coastal Advisory Status',
     'header.subtitle': 'Tsunami · Cyclone · Storm Surge · Ocean State Forecast · Potential Fishing Zone',
     'header.snapshot': 'Official-source snapshot',
+    'header.run_status_routine': '15m check: Routine',
+    'header.run_status_updated': '15m run: Advisories updated',
     'header.voice': 'Voice',
     'header.alerts': 'Alerts',
     'header.share': 'Share',

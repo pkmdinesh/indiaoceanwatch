@@ -4,8 +4,14 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$scriptsRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$projectRoot = Split-Path -Parent $scriptsRoot
+$commandDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+if (Test-Path (Join-Path $commandDir 'scripts')) {
+    $projectRoot = $commandDir
+    $scriptsRoot = Join-Path $projectRoot 'scripts'
+} else {
+    $scriptsRoot = $commandDir
+    $projectRoot = Split-Path -Parent $scriptsRoot
+}
 $outputPath = Join-Path $projectRoot 'status.json'
 $attemptedAt = (Get-Date).ToString('o')
 
@@ -471,10 +477,11 @@ $status = [ordered]@{
     freshness = [ordered]@{ thresholdHours = 36; osfAgeHours = $null; pfzAgeHours = $null }
 }
 
-# Preserve the last successful values when an official endpoint is temporarily unavailable.
+$originalStatusJson = $null
 if (Test-Path -LiteralPath $outputPath) {
     try {
-        $savedStatus = Get-Content -Raw -LiteralPath $outputPath | ConvertFrom-Json
+        $originalStatusJson = Get-Content -Raw -LiteralPath $outputPath
+        $savedStatus = $originalStatusJson | ConvertFrom-Json
         if ($savedStatus.PSObject.Properties.Name -notcontains 'lastAttemptAt') {
             $savedStatus | Add-Member -NotePropertyName lastAttemptAt -NotePropertyValue $attemptedAt
         } else {
@@ -838,7 +845,11 @@ try {
 } catch { $status.errors += "Cyclone: $($_.Exception.Message)" }
 
 try {
-    $status.jointBulletin = Get-JointBulletinSummary
+    $jb = Get-JointBulletinSummary
+    if ($null -ne $status.jointBulletin -and $status.jointBulletin.url -eq $jb.url -and $status.jointBulletin.issuedAt -eq $jb.issuedAt -and $status.jointBulletin.fetchedAt) {
+        $jb.fetchedAt = $status.jointBulletin.fetchedAt
+    }
+    $status.jointBulletin = $jb
     $incoisPageAccessible = $true
 } catch {
     $status.errors += "Joint bulletin: $($_.Exception.Message)"
@@ -1035,10 +1046,13 @@ try {
     }
     if ($cbasRegions.Count -eq 0) { throw 'Coral Bleaching table rows were not found.' }
     
+    $cbasChanged = ($null -eq $status.coralBleaching -or ($status.coralBleaching.regions | ConvertTo-Json -Depth 5 -Compress) -ne ($cbasRegions | ConvertTo-Json -Depth 5 -Compress))
+    $cbasFetchedAt = if ($cbasChanged -or -not $status.coralBleaching.fetchedAt) { $attemptedAt } else { $status.coralBleaching.fetchedAt }
+
     $status.coralBleaching = [ordered]@{
         ok = $true
         url = $cbasUrl
-        fetchedAt = $attemptedAt
+        fetchedAt = $cbasFetchedAt
         regions = $cbasRegions
         mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg'
     }
@@ -1047,7 +1061,7 @@ try {
     $status.coralBleaching = [ordered]@{
         ok = $false
         url = 'https://incois.gov.in/site/services/coralwarning.jsp'
-        fetchedAt = $attemptedAt
+        fetchedAt = if ($null -ne $status.coralBleaching -and $status.coralBleaching.fetchedAt) { $status.coralBleaching.fetchedAt } else { $attemptedAt }
         regions = @()
         mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg'
     }
@@ -1060,11 +1074,13 @@ try {
     $abisHtml = Get-TextContent $abisUrl
     $abisMatch = [regex]::Match($abisHtml, '(?is)Last Updated:\s*(?:<[^>]+>)*\s*([0-9]{1,2}\s+[A-Za-z]+\s+[0-9]{4})')
     $abisDate = if ($abisMatch.Success) { $abisMatch.Groups[1].Value.Trim() } else { $null }
+    $abisChanged = ($null -eq $status.abis -or "$($status.abis.lastUpdated)" -ne "$abisDate")
+    $abisFetchedAt = if ($abisChanged -or -not $status.abis.fetchedAt) { $attemptedAt } else { $status.abis.fetchedAt }
     $status.abis = [ordered]@{
         ok = [bool]$abisDate
         url = $abisUrl
         lastUpdated = $abisDate
-        fetchedAt = $attemptedAt
+        fetchedAt = $abisFetchedAt
     }
     $incoisPageAccessible = $true
 } catch {
@@ -1072,7 +1088,7 @@ try {
         ok = $false
         url = 'https://incois.gov.in/site/services/hab_products.jsp'
         lastUpdated = if ($null -ne $status.abis -and $null -ne $status.abis.lastUpdated) { $status.abis.lastUpdated } else { $null }
-        fetchedAt = $attemptedAt
+        fetchedAt = if ($null -ne $status.abis -and $status.abis.fetchedAt) { $status.abis.fetchedAt } else { $attemptedAt }
     }
     $status.errors += "ABIS: $($_.Exception.Message)"
 }
@@ -1115,8 +1131,44 @@ if (-not $incoisPageAccessible) {
     }
 }
 
-$tempPath = "$outputPath.tmp"
-if (@($status.errors).Count -eq 0) { $status.updatedAt = $attemptedAt }
-$status | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $tempPath -Encoding UTF8
-Move-Item -LiteralPath $tempPath -Destination $outputPath -Force
-if (-not $Quiet) { Write-Output "Updated $outputPath at $($status.updatedAt)" }
+function Get-NormalizedPayloadJson($obj) {
+    if ($null -eq $obj) { return '' }
+    $copy = $obj | ConvertTo-Json -Depth 12 | ConvertFrom-Json
+    $copy.updatedAt = $null
+    $copy.lastAttemptAt = $null
+    if ($copy.PSObject.Properties.Name -contains 'freshness') { $copy.freshness = $null }
+    if ($copy.PSObject.Properties.Name -contains 'dataChanged') { $copy.dataChanged = $null }
+    if ($copy.PSObject.Properties.Name -contains 'lastDataChangeAt') { $copy.lastDataChangeAt = $null }
+    if ($copy.coralBleaching) { $copy.coralBleaching.fetchedAt = $null }
+    if ($copy.abis) { $copy.abis.fetchedAt = $null }
+    if ($copy.marineHeatWave) { $copy.marineHeatWave.fetchedAt = $null }
+    if ($copy.jointBulletin) { $copy.jointBulletin.fetchedAt = $null }
+    return ($copy | ConvertTo-Json -Depth 12 -Compress)
+}
+
+$hasDataChanges = $true
+if ($originalStatusJson) {
+    try {
+        $existingObj = $originalStatusJson | ConvertFrom-Json
+        $normCurrent = Get-NormalizedPayloadJson $status
+        $normExisting = Get-NormalizedPayloadJson $existingObj
+        if ($normCurrent -eq $normExisting) {
+            $hasDataChanges = $false
+        }
+    } catch { }
+}
+
+if (-not $hasDataChanges) {
+    if (-not $Quiet) { Write-Output "[Status] No advisory or forecast changes detected; status.json remains unchanged." }
+} else {
+    $tempPath = "$outputPath.tmp"
+    if (@($status.errors).Count -eq 0) {
+        $status.updatedAt = $attemptedAt
+        $status.lastAttemptAt = $attemptedAt
+        $status.dataChanged = $true
+        $status.lastDataChangeAt = $attemptedAt
+    }
+    $status | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $tempPath -Encoding UTF8
+    Move-Item -LiteralPath $tempPath -Destination $outputPath -Force
+    if (-not $Quiet) { Write-Output "Updated $outputPath at $($status.updatedAt)" }
+}

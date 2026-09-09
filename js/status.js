@@ -14,6 +14,31 @@ function render(data) {
     ids('lastUpdated').textContent = 'No source check available';
   }
 
+  // 15-Minute Run Status below official snapshot & Footer Update Dot
+  const footerDot = ids('footerUpdateDot');
+  const runStatusText = ids('runStatusText');
+  const isRecentDeploy = Boolean(data?.dataChanged || (data?.lastDataChangeAt && Math.abs(Date.now() - new Date(data.lastDataChangeAt).getTime()) < 2 * 3600 * 1000));
+
+  if (footerDot) {
+    if (isRecentDeploy) {
+      footerDot.className = 'update-status-dot dot-orange';
+      footerDot.title = 'Data changes committed & deployed to Ocean Watch';
+    } else {
+      footerDot.className = 'update-status-dot dot-green';
+      footerDot.title = '15-minute check routine · No data changes';
+    }
+  }
+
+  if (runStatusText) {
+    if (isRecentDeploy) {
+      runStatusText.textContent = globalThis.i18n?.t('header.run_status_updated', '15m run: Advisories updated') || '15m run: Advisories updated';
+      runStatusText.className = 'run-status-text changed';
+    } else {
+      runStatusText.textContent = globalThis.i18n?.t('header.run_status_routine', '15m check: Routine') || '15m check: Routine';
+      runStatusText.className = 'run-status-text routine';
+    }
+  }
+
   const demoMode = new URLSearchParams(location.search).get('demo');
   const bulletinTwoDemo = {
     type: 'II',
@@ -101,9 +126,32 @@ function render(data) {
       statusRefreshTimer = setTimeout(async () => {
         try {
           const fresh = await loadStatus();
-          if (previousUpdate && fresh?.updatedAt === previousUpdate) scheduleStatusRefresh(fresh,60000);
-        } catch { scheduleStatusRefresh(data,60000); }
-      },delay);
+          const footerDot = ids('footerUpdateDot');
+          const runStatusText = ids('runStatusText');
+          const timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' });
+
+          if (previousUpdate && fresh?.updatedAt !== previousUpdate) {
+            if (footerDot) {
+              footerDot.className = 'update-status-dot dot-orange';
+              footerDot.title = 'Data changes committed & deployed to Ocean Watch';
+            }
+            if (runStatusText) {
+              runStatusText.textContent = `15m run: Updated (${timeStr} IST)`;
+              runStatusText.className = 'run-status-text changed';
+            }
+          } else {
+            if (footerDot) {
+              footerDot.className = 'update-status-dot dot-green';
+              footerDot.title = '15-minute check routine · No data changes';
+            }
+            if (runStatusText) {
+              runStatusText.textContent = `15m check: Routine (${timeStr} IST)`;
+              runStatusText.className = 'run-status-text routine';
+            }
+            if (previousUpdate && fresh?.updatedAt === previousUpdate) scheduleStatusRefresh(fresh, 60000);
+          }
+        } catch { scheduleStatusRefresh(data, 60000); }
+      }, delay);
     }
     async function loadStatus(url='status.json') {
       if (statusLoadPromise) return statusLoadPromise;

@@ -101,6 +101,9 @@
           <div class="stamp">
             <span class="live" data-i18n="header.snapshot">Official-source snapshot</span><br>
             <time id="lastUpdated"></time>
+            <div class="run-status" id="runStatus">
+              <span class="run-status-text routine" id="runStatusText" data-i18n="header.run_status_routine">15m check: Routine</span>
+            </div>
           </div>
         </div>
       </div>
@@ -317,7 +320,7 @@
 
     </div>
 
-    <footer class="footer"><div><strong data-i18n="footer.auto_update">Auto-update:</strong> <span data-i18n="footer.auto_update_val">Every 15 mins</span> · <strong data-i18n="footer.disclaimer_title">Disclaimer:</strong> <span data-i18n="footer.disclaimer">Information is fetched from official sources; however, there may be a delay before updates are reflected. For accuracy, always verify the latest official bulletins.</span></div><div class="footer-meta"><span class="hit-counter-chip" id="hitCounter" title="Live Total Page Visits">👁️ <strong id="hitCount">...</strong> <span data-i18n="footer.visits">visits</span></span><a href="https://incois.gov.in/" target="_blank" rel="noopener"><strong data-i18n="footer.source">Data source: INCOIS–MoES ↗</strong></a></div></footer></main>
+    <footer class="footer"><div><span class="update-status-dot dot-green" id="footerUpdateDot" title="15-minute check status" aria-hidden="true"></span><strong data-i18n="footer.auto_update">Auto-update:</strong> <span data-i18n="footer.auto_update_val">Every 15 mins</span> · <strong data-i18n="footer.disclaimer_title">Disclaimer:</strong> <span data-i18n="footer.disclaimer">Information is fetched from official sources; however, there may be a delay before updates are reflected. For accuracy, always verify the latest official bulletins.</span></div><div class="footer-meta"><span class="hit-counter-chip" id="hitCounter" title="Live Total Page Visits">👁️ <strong id="hitCount">...</strong> <span data-i18n="footer.visits">visits</span></span><a href="https://incois.gov.in/" target="_blank" rel="noopener"><strong data-i18n="footer.source">Data source: INCOIS–MoES ↗</strong></a></div></footer></main>
   <dialog class="advisory-dialog" id="advisoryDialog" aria-labelledby="advisoryDialogTitle">
     <div class="advisory-dialog-head">
       <div>

@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -94,18 +95,41 @@ async function fetchGoogleTtsChunkWithRetry(text, ttsLang, retries = 3) {
 }
 
 async function generateAllBulletins() {
-  console.log('Starting Google Text-to-Speech audio bulletin generation...');
+  console.log('Starting Google Text-to-Speech audio bulletin check...');
+  const manifestPath = path.join(audioDir, 'manifest.json');
+  let existingManifest = null;
+  if (fs.existsSync(manifestPath)) {
+    try {
+      existingManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    } catch {}
+  }
+
   const manifest = {
-    updated: new Date().toISOString(),
+    updated: existingManifest?.updated || new Date().toISOString(),
     bulletins: {}
   };
+
+  let anyAudioChanged = false;
 
   for (const lang of VOICE_LANGUAGES) {
     const langPrefix = lang.voicePrefix;
     const ttsLang = TTS_LANG_MAP[langPrefix] || 'en';
     const bulletin = buildBulletinSummary(statusData, lang.code);
     const text = bulletin.text;
+    const textHash = crypto.createHash('sha256').update(text).digest('hex');
+    const fileName = `bulletin-${langPrefix}.mp3`;
+    const filePath = path.join(audioDir, fileName);
 
+    const existingEntry = existingManifest?.bulletins?.[langPrefix];
+    const fileExists = fs.existsSync(filePath) && fs.statSync(filePath).size > 0;
+
+    if (fileExists && existingEntry?.textHash === textHash) {
+      manifest.bulletins[langPrefix] = existingEntry;
+      console.log(`✓ [${lang.name}] (${langPrefix}) text unchanged; keeping existing bulletin.`);
+      continue;
+    }
+
+    anyAudioChanged = true;
     console.log(`Generating [${lang.name}] (${langPrefix}) - text length: ${text.length} chars...`);
     const chunks = splitTextIntoChunks(text);
     const audioBuffers = [];
@@ -123,21 +147,28 @@ async function generateAllBulletins() {
 
     if (audioBuffers.length > 0) {
       const combinedBuffer = Buffer.concat(audioBuffers);
-      const fileName = `bulletin-${langPrefix}.mp3`;
-      const filePath = path.join(audioDir, fileName);
       fs.writeFileSync(filePath, combinedBuffer);
 
       manifest.bulletins[langPrefix] = {
         file: `audio/bulletins/${fileName}`,
         size: combinedBuffer.length,
         title: bulletin.title,
-        langCode: lang.code
+        langCode: lang.code,
+        textHash: textHash
       };
       console.log(`✓ Saved ${fileName} (${(combinedBuffer.length / 1024).toFixed(1)} KB)`);
+    } else if (existingEntry) {
+      manifest.bulletins[langPrefix] = existingEntry;
     }
   }
 
-  fs.writeFileSync(path.join(audioDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
+  if (!anyAudioChanged && existingManifest) {
+    console.log('✓ All audio bulletins are up to date; skipping audio manifest write.');
+    return;
+  }
+
+  manifest.updated = new Date().toISOString();
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
   console.log('✓ Audio bulletin generation complete! Manifest written to audio/bulletins/manifest.json');
 }
 

@@ -30,8 +30,26 @@ function Save-WfsGeoJson(
             Copy-Item -LiteralPath $download -Destination $temporary -Force
             $featureCount = 'raw'
         }
-        Move-Item -LiteralPath $temporary -Destination $target -Force
-        if (-not $Quiet) { Write-Output "Updated $FileName ($featureCount features)" }
+        $shouldUpdate = $true
+        if (Test-Path -LiteralPath $target) {
+            try {
+                $existingGeo = Get-Content -Raw -LiteralPath $target | ConvertFrom-Json
+                $newGeo = Get-Content -Raw -LiteralPath $temporary | ConvertFrom-Json
+                $existingFeat = ($existingGeo.features | ConvertTo-Json -Depth 10 -Compress)
+                $newFeat = ($newGeo.features | ConvertTo-Json -Depth 10 -Compress)
+                if ($existingFeat -eq $newFeat) {
+                    $shouldUpdate = $false
+                }
+            } catch { }
+        }
+
+        if ($shouldUpdate) {
+            Move-Item -LiteralPath $temporary -Destination $target -Force
+            if (-not $Quiet) { Write-Output "Updated $FileName ($featureCount features)" }
+        } else {
+            Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+            if (-not $Quiet) { Write-Output "No changes detected for $FileName ($featureCount features); skipping write." }
+        }
     } finally {
         Remove-Item -LiteralPath $download -Force -ErrorAction SilentlyContinue
         Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue

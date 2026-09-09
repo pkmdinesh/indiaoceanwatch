@@ -91,6 +91,18 @@ try {
   }
 
   const dates = Array.from(datesSet);
+  if (fs.existsSync(targetFile)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(targetFile, 'utf8'));
+      const existingCore = JSON.stringify({ issueDate: existing.issueDate, dates: existing.dates, districts: existing.districts });
+      const newCore = JSON.stringify({ issueDate, dates, districts });
+      if (existingCore === newCore) {
+        console.log(`[SVAS] No forecast changes detected (Issue: ${issueDate}); skipping write.`);
+        process.exit(0);
+      }
+    } catch {}
+  }
+
   const output = {
     issueDate: issueDate,
     updatedAt: new Date().toISOString(),

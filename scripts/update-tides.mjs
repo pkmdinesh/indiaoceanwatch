@@ -269,6 +269,30 @@ async function main() {
     };
   }
 
+  // Check if events, series, or date have actually changed compared to existingData
+  let tidesChanged = false;
+  if (!existingData || !existingData.stations || existingData.date !== todayStr) {
+    tidesChanged = true;
+  } else {
+    for (const [id, st] of Object.entries(stationsOutput)) {
+      const ex = existingData.stations[id];
+      if (!ex) { tidesChanged = true; break; }
+      const newEvt = JSON.stringify(st.events || []);
+      const exEvt = JSON.stringify(ex.events || []);
+      const newSer = JSON.stringify(st.series || []);
+      const exSer = JSON.stringify(ex.series || []);
+      if (newEvt !== exEvt || newSer !== exSer) {
+        tidesChanged = true;
+        break;
+      }
+    }
+  }
+
+  if (!tidesChanged && fs.existsSync(targetPath)) {
+    console.log(`[PAT] No tide prediction changes detected for ${todayStr}; skipping write.`);
+    return;
+  }
+
   const outputPayload = {
     updatedAt: nowIso,
     date: todayStr,

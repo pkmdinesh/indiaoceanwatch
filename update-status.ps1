@@ -4,8 +4,14 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$scriptsRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$projectRoot = Split-Path -Parent $scriptsRoot
+$commandDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+if (Test-Path (Join-Path $commandDir 'scripts')) {
+    $projectRoot = $commandDir
+    $scriptsRoot = Join-Path $projectRoot 'scripts'
+} else {
+    $scriptsRoot = $commandDir
+    $projectRoot = Split-Path -Parent $scriptsRoot
+}
 $outputPath = Join-Path $projectRoot 'status.json'
 $attemptedAt = (Get-Date).ToString('o')
 
@@ -430,83 +436,6 @@ function Get-BulletinSequence([string]$LatestDetailUrl, [string]$EventId, [int]$
     return @($sequence)
 }
 
-function Get-IstNow {
-    [TimeZoneInfo]::ConvertTimeFromUtc([DateTime]::UtcNow, [TimeZoneInfo]::FindSystemTimeZoneById('India Standard Time'))
-}
-
-function Get-SeismicRetentionHours([int]$BulletinCount) {
-    if ($BulletinCount -le 1) { return 24 }
-    if ($BulletinCount -eq 2) { return 48 }
-    return 72
-}
-
-function Get-SeismicOriginTime($Event) {
-    $origin = if ($Event.PSObject.Properties.Name -contains 'ORIGINTIME') { "$($Event.ORIGINTIME)".Trim() }
-              elseif ($Event.PSObject.Properties.Name -contains 'originTime') { "$($Event.originTime)".Trim() }
-              else { '' }
-    if (-not $origin) { return $null }
-    try {
-        return [DateTime]::ParseExact($origin, 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
-    } catch { return $null }
-}
-
-function Get-SeismicBulletinCount($Event) {
-    if ($Event.PSObject.Properties.Name -contains 'BULNO' -and "$($Event.BULNO)".Trim()) {
-        $count = [int]"$($Event.BULNO)".Trim()
-        if ($count -ge 1) { return $count }
-    }
-    if ($Event.PSObject.Properties.Name -contains 'bulletinCount') {
-        $count = [int]$Event.bulletinCount
-        if ($count -ge 1) { return $count }
-    }
-    if ($Event.PSObject.Properties.Name -contains 'bulletin' -and $null -ne $Event.bulletin -and $Event.bulletin.number) {
-        $count = [int]$Event.bulletin.number
-        if ($count -ge 1) { return $count }
-    }
-    return 1
-}
-
-function Test-SeismicEventRetained($Event, [DateTime]$NowIst) {
-    $eventTime = Get-SeismicOriginTime $Event
-    if ($null -eq $eventTime) { return $false }
-    $retentionHours = Get-SeismicRetentionHours (Get-SeismicBulletinCount $Event)
-    $ageHours = ($NowIst - $eventTime).TotalHours
-    return ($ageHours -ge 0) -and ($ageHours -le $retentionHours)
-}
-
-function Get-SeismicEventBulletin($Event) {
-    $eventBulletin = $null
-    if ("$($Event.detail)".Trim() -and "$($Event.EVID)".Trim() -and "$($Event.BULNO)".Trim()) {
-        try {
-            $eventBulletin = Get-BulletinSummary "$($Event.detail)" "$($Event.EVID)" ([int]$Event.BULNO)
-            $eventBulletin.sequence = @(Get-BulletinSequence "$($Event.detail)" "$($Event.EVID)" ([int]$Event.BULNO))
-        } catch { }
-    }
-    return $eventBulletin
-}
-
-function Build-SeismicEventRecord($Event) {
-    $bulno = Get-SeismicBulletinCount $Event
-    $bulletinUrl = if ("$($Event.EVID)".Trim() -and "$($Event.BULNO)".Trim()) {
-        "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC&eventId=$($Event.EVID)&aos=public&currBullNo=$($Event.BULNO)&latestBullNo=$($Event.BULNO)"
-    } else { $null }
-    $eventBulletin = Get-SeismicEventBulletin $Event
-    $eventRecord = [pscustomobject][ordered]@{
-        magnitude = $Event.MAGNITUDE
-        region = $Event.REGIONNAME
-        originTime = $Event.ORIGINTIME
-        depth = $Event.DEPTH
-        latitude = $Event.LATITUDE
-        longitude = $Event.LONGITUDE
-        bulletinCount = $bulno
-        EVID = $Event.EVID
-        bulletinUrl = $bulletinUrl
-        bulletin = $eventBulletin
-    }
-    $eventTopoBathy = if ($null -ne $eventBulletin) { "$($eventBulletin.topographyBathymetry)" } else { '' }
-    Add-GebcoEventMetadata -Event $eventRecord -TopoBathy $eventTopoBathy
-}
-
 function Get-StormSurgeBulletinSummary([string]$CycloneName, [int]$BulletinNumber) {
     $url = "https://tsunami.incois.gov.in/TEWS/SSMBulletin.jsp?cyclone=$([uri]::EscapeDataString($CycloneName))&bno=$BulletinNumber"
     $html = Get-TextContent $url
@@ -529,6 +458,7 @@ $status = [ordered]@{
     source = 'INCOIS / ITEWC'
     marineHeatWave = [ordered]@{ message = $null; fetchedAt = $null; ok = $false; url = 'https://incois.gov.in/oceanservices/mhw/index.jsp' }
     coralBleaching = [ordered]@{ ok = $false; fetchedAt = $null; url = 'https://incois.gov.in/site/services/coralwarning.jsp'; regions = @(); mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg' }
+    abis = [ordered]@{ ok = $false; fetchedAt = $null; url = 'https://incois.gov.in/site/services/hab_products.jsp'; lastUpdated = $null }
     tsunami = [ordered]@{ message = 'Status unavailable'; state = 'watch'; ok = $false; bulletin = $null; recentBulletin = $null }
     seismic = [ordered]@{ message = 'Status unavailable'; count = $null; latest = $null; recentEvents = @() }
     highWave = [ordered]@{ issueDate = $null; alert = @(); watch = @(); warning = @(); noThreat = @(); states = @() }
@@ -547,10 +477,11 @@ $status = [ordered]@{
     freshness = [ordered]@{ thresholdHours = 36; osfAgeHours = $null; pfzAgeHours = $null }
 }
 
-# Preserve the last successful values when an official endpoint is temporarily unavailable.
+$originalStatusJson = $null
 if (Test-Path -LiteralPath $outputPath) {
     try {
-        $savedStatus = Get-Content -Raw -LiteralPath $outputPath | ConvertFrom-Json
+        $originalStatusJson = Get-Content -Raw -LiteralPath $outputPath
+        $savedStatus = $originalStatusJson | ConvertFrom-Json
         if ($savedStatus.PSObject.Properties.Name -notcontains 'lastAttemptAt') {
             $savedStatus | Add-Member -NotePropertyName lastAttemptAt -NotePropertyValue $attemptedAt
         } else {
@@ -584,6 +515,9 @@ if (Test-Path -LiteralPath $outputPath) {
         }
         if ($status.PSObject.Properties.Name -notcontains 'marineHeatWave') {
             $status | Add-Member -NotePropertyName marineHeatWave -NotePropertyValue ([pscustomobject]@{ message = $null; fetchedAt = $null; ok = $false; url = 'https://incois.gov.in/oceanservices/mhw/index.jsp' })
+        }
+        if ($status.PSObject.Properties.Name -notcontains 'abis') {
+            $status | Add-Member -NotePropertyName abis -NotePropertyValue ([pscustomobject]@{ ok = $false; fetchedAt = $null; url = 'https://incois.gov.in/site/services/hab_products.jsp'; lastUpdated = $null })
         }
         if ($status.tsunami.PSObject.Properties.Name -notcontains 'state') {
             $status.tsunami | Add-Member -NotePropertyName state -NotePropertyValue 'watch'
@@ -680,39 +614,41 @@ try {
         $status.seismic.latest = $null
     } else {
         $eventList = @($eventList | Sort-Object { [DateTime]::ParseExact("$($_.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture) } -Descending)
-        $nowIst = Get-IstNow
-        $chronologicalLatest = $eventList | Select-Object -First 1
-        if ($chronologicalLatest.PSObject.Properties.Name -contains 'detail' -and "$($chronologicalLatest.detail)".Trim()) {
+        $latest = $eventList | Select-Object -First 1
+        $latestTopoBathy = ''
+        if ($latest.PSObject.Properties.Name -contains 'detail' -and "$($latest.detail)".Trim()) {
             try {
-                $status.tsunami.recentBulletin = Get-BulletinSummary "$($chronologicalLatest.detail)" "$($chronologicalLatest.EVID)" ([int]$chronologicalLatest.BULNO)
-                $status.tsunami.recentBulletin.sequence = @(Get-BulletinSequence "$($chronologicalLatest.detail)" "$($chronologicalLatest.EVID)" ([int]$chronologicalLatest.BULNO))
+                $status.tsunami.recentBulletin = Get-BulletinSummary "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO)
+                $status.tsunami.recentBulletin.sequence = @(Get-BulletinSequence "$($latest.detail)" "$($latest.EVID)" ([int]$latest.BULNO))
+                $latestTopoBathy = "$($status.tsunami.recentBulletin.topographyBathymetry)"
             } catch { }
         }
-        $retainedEvents = @($eventList | Where-Object { Test-SeismicEventRetained $_ $nowIst })
-        if ($retainedEvents.Count -eq 0) {
-            $status.seismic.message = if ($eventList.Count -gt 0) {
-                'No seismic events within the current bulletin retention window'
-            } else {
-                'No Seismic Activity for the past 90 days with magnitude >= 6.5M'
-            }
-            $status.seismic.latest = $null
+        $status.seismic.latest = Add-GebcoEventMetadata -Event $latest -TopoBathy $latestTopoBathy
+        if ($latest.PSObject.Properties.Name -contains 'MAGNITUDE') {
+            $originWithZone = "$($latest.ORIGINTIME)".Trim()
+            if ($originWithZone -and $originWithZone -notmatch '(?i)\bIST\b') { $originWithZone += ' IST' }
+            $status.seismic.message = "Latest: M$($latest.MAGNITUDE), $($latest.REGIONNAME), $originWithZone"
+            $latestTime = [DateTime]::ParseExact("$($latest.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
+            $status.seismic.recentEvents = @($eventList | Select-Object -Skip 1 | Where-Object {
+                $eventTime = [DateTime]::ParseExact("$($_.ORIGINTIME)", 'yyyy-MM-dd HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
+                [math]::Abs(($latestTime - $eventTime).TotalHours) -le 24
+            } | ForEach-Object {
+                $bulletinUrl = if ("$($_.EVID)".Trim() -and "$($_.BULNO)".Trim()) {
+                    "https://tsunami.incois.gov.in/TEWS/displaybulletinslatest.jsp?type=NTWC&eventId=$($_.EVID)&aos=public&currBullNo=$($_.BULNO)&latestBullNo=$($_.BULNO)"
+                } else { $null }
+                $eventBulletin = $null
+                if ("$($_.detail)".Trim() -and "$($_.EVID)".Trim() -and "$($_.BULNO)".Trim()) {
+                    try {
+                        $eventBulletin = Get-BulletinSummary "$($_.detail)" "$($_.EVID)" ([int]$_.BULNO)
+                        $eventBulletin.sequence = @(Get-BulletinSequence "$($_.detail)" "$($_.EVID)" ([int]$_.BULNO))
+                    } catch { }
+                }
+                $eventRecord = [pscustomobject][ordered]@{ magnitude = $_.MAGNITUDE; region = $_.REGIONNAME; originTime = $_.ORIGINTIME; depth = $_.DEPTH; latitude = $_.LATITUDE; longitude = $_.LONGITUDE; bulletinUrl = $bulletinUrl; bulletin = $eventBulletin }
+                $eventTopoBathy = if ($null -ne $eventBulletin) { "$($eventBulletin.topographyBathymetry)" } else { '' }
+                Add-GebcoEventMetadata -Event $eventRecord -TopoBathy $eventTopoBathy
+            })
         } else {
-            $displayLatest = $retainedEvents | Select-Object -First 1
-            $latestTopoBathy = ''
-            $latestBulletin = Get-SeismicEventBulletin $displayLatest
-            if ($null -ne $latestBulletin) {
-                $latestTopoBathy = "$($latestBulletin.topographyBathymetry)"
-                $displayLatest | Add-Member -NotePropertyName bulletin -NotePropertyValue $latestBulletin -Force
-            }
-            $status.seismic.latest = Add-GebcoEventMetadata -Event $displayLatest -TopoBathy $latestTopoBathy
-            if ($displayLatest.PSObject.Properties.Name -contains 'MAGNITUDE') {
-                $originWithZone = "$($displayLatest.ORIGINTIME)".Trim()
-                if ($originWithZone -and $originWithZone -notmatch '(?i)\bIST\b') { $originWithZone += ' IST' }
-                $status.seismic.message = "Latest: M$($displayLatest.MAGNITUDE), $($displayLatest.REGIONNAME), $originWithZone"
-                $status.seismic.recentEvents = @($retainedEvents | Select-Object -Skip 1 | ForEach-Object { Build-SeismicEventRecord $_ })
-            } else {
-                $status.seismic.message = "$($retainedEvents.Count) event(s) listed; open the national table for details"
-            }
+            $status.seismic.message = "$($eventList.Count) event(s) listed; open the national table for details"
         }
     }
 } catch { $status.errors += "Seismic: $($_.Exception.Message)" }
@@ -909,7 +845,11 @@ try {
 } catch { $status.errors += "Cyclone: $($_.Exception.Message)" }
 
 try {
-    $status.jointBulletin = Get-JointBulletinSummary
+    $jb = Get-JointBulletinSummary
+    if ($null -ne $status.jointBulletin -and $status.jointBulletin.url -eq $jb.url -and $status.jointBulletin.issuedAt -eq $jb.issuedAt -and $status.jointBulletin.fetchedAt) {
+        $jb.fetchedAt = $status.jointBulletin.fetchedAt
+    }
+    $status.jointBulletin = $jb
     $incoisPageAccessible = $true
 } catch {
     $status.errors += "Joint bulletin: $($_.Exception.Message)"
@@ -1028,6 +968,34 @@ try {
     if (-not $Quiet) { Write-Warning "PFZ map cache refresh failed: $($_.Exception.Message)" }
 }
 
+# Refresh Small Vessel Advisory Service (SVAS) status data
+try {
+    $svasScript = Join-Path $scriptsRoot 'update-svas.mjs'
+    if (Test-Path -LiteralPath $svasScript) {
+        $nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+        if ($nodeCommand) {
+            & $nodeCommand.Source $svasScript $projectRoot | Out-Null
+            if (-not $Quiet) { Write-Output 'Updated data/svas-status.json' }
+        }
+    }
+} catch {
+    if (-not $Quiet) { Write-Warning "SVAS status update failed: $($_.Exception.Message)" }
+}
+
+# Refresh INCOIS Predicted & Actual Tide (PAT) data
+try {
+    $tidesScript = Join-Path $scriptsRoot 'update-tides.mjs'
+    if (Test-Path -LiteralPath $tidesScript) {
+        $nodeCommand = Get-Command node -ErrorAction SilentlyContinue
+        if ($nodeCommand) {
+            & $nodeCommand.Source $tidesScript $projectRoot | Out-Null
+            if (-not $Quiet) { Write-Output 'Updated data/tides.json' }
+        }
+    }
+} catch {
+    if (-not $Quiet) { Write-Warning "Tides PAT update failed: $($_.Exception.Message)" }
+}
+
 # Marine Heat Wave is published as a marquee on the official product page.
 try {
     $mhwUrl = 'https://incois.gov.in/oceanservices/mhw/index.jsp'
@@ -1078,10 +1046,13 @@ try {
     }
     if ($cbasRegions.Count -eq 0) { throw 'Coral Bleaching table rows were not found.' }
     
+    $cbasChanged = ($null -eq $status.coralBleaching -or ($status.coralBleaching.regions | ConvertTo-Json -Depth 5 -Compress) -ne ($cbasRegions | ConvertTo-Json -Depth 5 -Compress))
+    $cbasFetchedAt = if ($cbasChanged -or -not $status.coralBleaching.fetchedAt) { $attemptedAt } else { $status.coralBleaching.fetchedAt }
+
     $status.coralBleaching = [ordered]@{
         ok = $true
         url = $cbasUrl
-        fetchedAt = $attemptedAt
+        fetchedAt = $cbasFetchedAt
         regions = $cbasRegions
         mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg'
     }
@@ -1090,11 +1061,36 @@ try {
     $status.coralBleaching = [ordered]@{
         ok = $false
         url = 'https://incois.gov.in/site/services/coralwarning.jsp'
-        fetchedAt = $attemptedAt
+        fetchedAt = if ($null -ne $status.coralBleaching -and $status.coralBleaching.fetchedAt) { $status.coralBleaching.fetchedAt } else { $attemptedAt }
         regions = @()
         mapUrl = 'https://incois.gov.in/datasets/ecosystem/coralReef/zimages/current-HS-India.jpg'
     }
     $status.errors += "Coral Bleaching: $($_.Exception.Message)"
+}
+
+# Algal Bloom Information Services (ABIS) / HAB last updated date
+try {
+    $abisUrl = 'https://incois.gov.in/site/services/hab_products.jsp'
+    $abisHtml = Get-TextContent $abisUrl
+    $abisMatch = [regex]::Match($abisHtml, '(?is)Last Updated:\s*(?:<[^>]+>)*\s*([0-9]{1,2}\s+[A-Za-z]+\s+[0-9]{4})')
+    $abisDate = if ($abisMatch.Success) { $abisMatch.Groups[1].Value.Trim() } else { $null }
+    $abisChanged = ($null -eq $status.abis -or "$($status.abis.lastUpdated)" -ne "$abisDate")
+    $abisFetchedAt = if ($abisChanged -or -not $status.abis.fetchedAt) { $attemptedAt } else { $status.abis.fetchedAt }
+    $status.abis = [ordered]@{
+        ok = [bool]$abisDate
+        url = $abisUrl
+        lastUpdated = $abisDate
+        fetchedAt = $abisFetchedAt
+    }
+    $incoisPageAccessible = $true
+} catch {
+    $status.abis = [ordered]@{
+        ok = $false
+        url = 'https://incois.gov.in/site/services/hab_products.jsp'
+        lastUpdated = if ($null -ne $status.abis -and $null -ne $status.abis.lastUpdated) { $status.abis.lastUpdated } else { $null }
+        fetchedAt = if ($null -ne $status.abis -and $status.abis.fetchedAt) { $status.abis.fetchedAt } else { $attemptedAt }
+    }
+    $status.errors += "ABIS: $($_.Exception.Message)"
 }
 
 # Public health alerts intentionally differ from the diagnostic scraper errors.
@@ -1135,8 +1131,44 @@ if (-not $incoisPageAccessible) {
     }
 }
 
-$tempPath = "$outputPath.tmp"
-if (@($status.errors).Count -eq 0) { $status.updatedAt = $attemptedAt }
-$status | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $tempPath -Encoding UTF8
-Move-Item -LiteralPath $tempPath -Destination $outputPath -Force
-if (-not $Quiet) { Write-Output "Updated $outputPath at $($status.updatedAt)" }
+function Get-NormalizedPayloadJson($obj) {
+    if ($null -eq $obj) { return '' }
+    $copy = $obj | ConvertTo-Json -Depth 12 | ConvertFrom-Json
+    $copy.updatedAt = $null
+    $copy.lastAttemptAt = $null
+    if ($copy.PSObject.Properties.Name -contains 'freshness') { $copy.freshness = $null }
+    if ($copy.PSObject.Properties.Name -contains 'dataChanged') { $copy.dataChanged = $null }
+    if ($copy.PSObject.Properties.Name -contains 'lastDataChangeAt') { $copy.lastDataChangeAt = $null }
+    if ($copy.coralBleaching) { $copy.coralBleaching.fetchedAt = $null }
+    if ($copy.abis) { $copy.abis.fetchedAt = $null }
+    if ($copy.marineHeatWave) { $copy.marineHeatWave.fetchedAt = $null }
+    if ($copy.jointBulletin) { $copy.jointBulletin.fetchedAt = $null }
+    return ($copy | ConvertTo-Json -Depth 12 -Compress)
+}
+
+$hasDataChanges = $true
+if ($originalStatusJson) {
+    try {
+        $existingObj = $originalStatusJson | ConvertFrom-Json
+        $normCurrent = Get-NormalizedPayloadJson $status
+        $normExisting = Get-NormalizedPayloadJson $existingObj
+        if ($normCurrent -eq $normExisting) {
+            $hasDataChanges = $false
+        }
+    } catch { }
+}
+
+if (-not $hasDataChanges) {
+    if (-not $Quiet) { Write-Output "[Status] No advisory or forecast changes detected; status.json remains unchanged." }
+} else {
+    $tempPath = "$outputPath.tmp"
+    if (@($status.errors).Count -eq 0) {
+        $status.updatedAt = $attemptedAt
+        $status.lastAttemptAt = $attemptedAt
+        $status.dataChanged = $true
+        $status.lastDataChangeAt = $attemptedAt
+    }
+    $status | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $tempPath -Encoding UTF8
+    Move-Item -LiteralPath $tempPath -Destination $outputPath -Force
+    if (-not $Quiet) { Write-Output "Updated $outputPath at $($status.updatedAt)" }
+}
