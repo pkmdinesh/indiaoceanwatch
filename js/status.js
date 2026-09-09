@@ -36,6 +36,9 @@ function render(data) {
   globalThis.latestStatusData = data;
   latestStatusData = data;
 
+  const checkedAtValue = data?.lastAttemptAt || data?.updatedAt;
+  const checkedAt = checkedAtValue ? new Date(checkedAtValue) : null;
+
   // Phase 1: Critical top viewport card (Header, Tsunami & Active Bulletins)
   renderActiveAdvisories(data);
   updateLastCheckedDisplay(data);
