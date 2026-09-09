@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09T13:02:43.612Z",
+  "updated": "2026-09-09T13:18:27.213Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -33,7 +33,7 @@
     },
     "bn": {
       "file": "audio/bulletins/bulletin-bn.mp3",
-      "size": 160128,
+      "size": 159936,
       "title": "INCOIS সমুদ্র পরিস্থিতি পূর্বাভাস (বাংলা)",
       "langCode": "bn-IN"
     },
