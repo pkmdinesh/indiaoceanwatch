@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-09-09T04:45:18.5349404+00:00",
-    "lastAttemptAt":  "2026-09-09T04:45:18.5349404+00:00",
+    "updatedAt":  "2026-09-09T05:00:28.3403141+00:00",
+    "lastAttemptAt":  "2026-09-09T05:00:28.3403141+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -12,7 +12,7 @@
     "coralBleaching":  {
                            "ok":  true,
                            "url":  "https://incois.gov.in/site/services/coralwarning.jsp",
-                           "fetchedAt":  "2026-09-09T04:45:18.5349404+00:00",
+                           "fetchedAt":  "2026-09-09T05:00:28.3403141+00:00",
                            "regions":  [
                                            {
                                                "area":  "Andaman",
@@ -51,7 +51,7 @@
                  "ok":  true,
                  "url":  "https://incois.gov.in/site/services/hab_products.jsp",
                  "lastUpdated":  "07 Sep 2026",
-                 "fetchedAt":  "2026-09-09T04:45:18.5349404+00:00"
+                 "fetchedAt":  "2026-09-09T05:00:28.3403141+00:00"
              },
     "tsunami":  {
                     "message":  "No Tsunami threat reported by ITEWC",
@@ -1314,7 +1314,7 @@
                           "url":  "https://incois.gov.in/WEBSITE_FILES/Incois_docs/JointBulletin/joint_1785154408150.pdf",
                           "issuedAt":  "2026-07-27T17:43:28.1500000+05:30",
                           "isRecent":  false,
-                          "fetchedAt":  "2026-09-09T04:45:26.5416170+00:00",
+                          "fetchedAt":  "2026-09-09T05:00:36.5731243+00:00",
                           "ok":  true,
                           "sourcePage":  "https://incois.gov.in/site/services/jointbulletin.jsp",
                           "lastError":  null
@@ -9117,7 +9117,7 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  17.3,
-                      "pfzAgeHours":  17.3
+                      "osfAgeHours":  17.56,
+                      "pfzAgeHours":  17.56
                   }
 }
