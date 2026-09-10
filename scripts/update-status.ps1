@@ -1174,8 +1174,7 @@ if (-not $hasDataChanges) {
     if (@($status.errors).Count -eq 0) {
         $status.updatedAt = $attemptedAt
         $status.lastAttemptAt = $attemptedAt
-        $status.dataChanged = $true
-        $status.lastDataChangeAt = $attemptedAt
+        $status | Add-Member -NotePropertyName 'dataChanged' -NotePropertyValue $true -Force`n        $status | Add-Member -NotePropertyName 'lastDataChangeAt' -NotePropertyValue $attemptedAt -Force
     }
     $status | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $tempPath -Encoding UTF8
     Move-Item -LiteralPath $tempPath -Destination $outputPath -Force
