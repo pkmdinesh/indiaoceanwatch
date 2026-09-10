@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-09-10T16:30:16.6405503+00:00",
-    "lastAttemptAt":  "2026-09-10T16:30:16.6405503+00:00",
+    "updatedAt":  "2026-09-10T18:30:17.3886779+00:00",
+    "lastAttemptAt":  "2026-09-10T18:30:17.3886779+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -7599,9 +7599,9 @@
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  5.05,
-                      "pfzAgeHours":  5.05
+                      "osfAgeHours":  7.06,
+                      "pfzAgeHours":  7.06
                   },
     "dataChanged":  true,
-    "lastDataChangeAt":  "2026-09-10T16:30:16.6405503+00:00"
+    "lastDataChangeAt":  "2026-09-10T18:30:17.3886779+00:00"
 }
