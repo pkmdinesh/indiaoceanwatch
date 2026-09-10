@@ -6,10 +6,7 @@ const APP_SHELL = [
   './',
   './index.html',
   './favicon.ico',
-  './css/base.css',
-  './css/layout.css',
   './css/components.css',
-  './css/responsive.css',
   './css/print.css',
   './js/config.js',
   './js/i18n.js',
@@ -30,36 +27,28 @@ const APP_SHELL = [
   './js/pwa.js',
   './js/tchp.js',
   './js/announcements.js',
-  './vendor/leaflet/leaflet.js',
-  './vendor/leaflet/leaflet.css',
-  './vendor/qrcode.min.js',
-  './vendor/html2canvas.min.js',
-  './data/pfz-lines.geojson',
-  './data/pfz-sectors.geojson',
-  './data/pfz-eez.geojson',
-  './data/pfz-landing-centres.geojson',
-  './data/osf-district-polygons.geojson',
-  './data/tides.json',
-  './data/svas-status.json',
   './manifest.webmanifest',
   './icons/ocean-watch-v3-192.png',
   './icons/ocean-watch-v3-512.png',
   './icons/ocean-watch-v3-maskable.png',
-  './icons/ocean-watch-v3-apple.png',
-  './assets/ocean-watch-v3-512.png',
-  './assets/earthquake-network-icon.png',
-  './assets/ocean-wave-service-icon.png',
-  './assets/tsunami-service-icon.png',
-  './assets/cyclone-service-icon.png',
-  './assets/storm-surge-icon.png',
-  './assets/potential-fishing-zone-icon.jpg',
-  './assets/predicted-tide-icon.png',
-  './assets/marine-climate-icon.png',
-  './1786177913304.png'
+  './icons/ocean-watch-v3-apple.png'
 ];
 
-self.addEventListener('install',event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(async cache => {
+      await Promise.allSettled(
+        APP_SHELL.map(url =>
+          fetch(url, { cache: 'no-cache' }).then(response => {
+            if (response.ok) return cache.put(url, response);
+            console.warn(`[SW] Pre-cache failed for: ${url} (${response.status})`);
+          }).catch(err => {
+            console.warn(`[SW] Pre-cache error for: ${url}`, err);
+          })
+        )
+      );
+    }).then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate',event => {
@@ -134,6 +123,17 @@ async function vendorCacheFirst(request) {
   return response;
 }
 
+async function staleWhileRevalidate(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
+  const fetchPromise = fetch(request).then(response => {
+    if (response.ok) cache.put(request, response.clone());
+    return response;
+  }).catch(() => null);
+
+  return cached || (await fetchPromise) || Response.error();
+}
+
 self.addEventListener('fetch',event => {
   const url = new URL(event.request.url);
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
@@ -146,7 +146,11 @@ self.addEventListener('fetch',event => {
     return;
   }
   if (url.pathname.endsWith('/data/tides.json') || url.pathname.endsWith('/data/svas-status.json')) {
-    event.respondWith(networkFirst(event.request));
+    event.respondWith(staleWhileRevalidate(event.request));
+    return;
+  }
+  if (url.pathname.endsWith('.geojson') || url.pathname.includes('/data/')) {
+    event.respondWith(staleWhileRevalidate(event.request));
     return;
   }
   if (url.pathname.includes('/vendor/')) {
@@ -157,10 +161,6 @@ self.addEventListener('fetch',event => {
     event.respondWith(networkFirst(event.request,'./js/announcements.js'));
     return;
   }
-  if (/\/data\/pfz-[^/]+\.geojson$/.test(url.pathname)) {
-    event.respondWith(networkFirst(event.request));
-    return;
-  }
   if (url.pathname.includes('/audio/bulletins/')) {
     event.respondWith(fetch(event.request));
     return;
@@ -169,17 +169,25 @@ self.addEventListener('fetch',event => {
     event.respondWith(networkFirst(event.request));
     return;
   }
+  if (url.pathname.includes('/assets/') || url.pathname.includes('/icons/')) {
+    event.respondWith(staleWhileRevalidate(event.request));
+    return;
+  }
   event.respondWith((async () => {
     const cached = await caches.match(event.request);
     if (cached) {
       return cached;
     }
-    const response = await fetch(event.request);
-    if (response.ok) {
-      const cache = await caches.open(CACHE_NAME);
-      await cache.put(event.request,response.clone());
+    try {
+      const response = await fetch(event.request);
+      if (response.ok) {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(event.request,response.clone());
+      }
+      return response;
+    } catch {
+      return cached || Response.error();
     }
-    return response;
   })());
 });
 

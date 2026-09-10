@@ -239,16 +239,52 @@ let deferredInstallPrompt = null;
       if (typeof initNotifications === 'function') initNotifications();
       if (typeof initVoiceSummary === 'function') initVoiceSummary();
       if ('serviceWorker' in navigator) {
-        let swRefreshing = false;
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-          if (!swRefreshing) {
-            swRefreshing = true;
+        const hadController = Boolean(navigator.serviceWorker.controller);
+
+        function showUpdateBanner() {
+          if (ids('swUpdateBanner')) return;
+          const banner = document.createElement('aside');
+          banner.id = 'swUpdateBanner';
+          banner.className = 'sw-update-banner';
+          banner.setAttribute('role', 'alert');
+          banner.setAttribute('aria-live', 'assertive');
+          const updateMsg = globalThis.i18n?.t('sw.update_available', 'Advisory update available') || 'Advisory update available';
+          const refreshLbl = globalThis.i18n?.t('sw.refresh', 'Refresh') || 'Refresh';
+          banner.innerHTML = `
+            <div class="sw-update-content">
+              <span class="sw-update-icon" aria-hidden="true">⚠️</span>
+              <span class="sw-update-text" data-i18n="sw.update_available">${updateMsg}</span>
+            </div>
+            <button type="button" class="sw-update-btn" id="swRefreshBtn" data-i18n="sw.refresh">${refreshLbl}</button>
+          `;
+          document.body.appendChild(banner);
+
+          banner.querySelector('#swRefreshBtn')?.addEventListener('click', () => {
             window.location.reload();
+          });
+        }
+
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (hadController) {
+            showUpdateBanner();
           }
         });
 
         navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
           .then(registration => {
+            if (registration.waiting && hadController) {
+              showUpdateBanner();
+            }
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              if (newWorker) {
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    showUpdateBanner();
+                  }
+                });
+              }
+            });
             registration.update().catch(() => {});
           })
           .catch(() => {});
