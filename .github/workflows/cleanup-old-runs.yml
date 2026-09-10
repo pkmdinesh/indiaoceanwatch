@@ -3,6 +3,7 @@ name: Cleanup old workflow runs
 on:
   schedule:
     - cron: '23 */6 * * *'
+    - cron: '47 3 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -103,4 +104,56 @@ jobs:
 
           # A target workflow changing state while we inspect/cancel it
           # should not cause this maintenance workflow itself to fail.
+          exit 0
+
+  delete-old-history:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '47 3 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Delete completed workflow runs older than 30 days
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+
+        run: |
+          $cutoff = [DateTimeOffset]::UtcNow.AddDays(-30)
+          Write-Host "Deleting completed workflow runs created before $cutoff"
+
+          # --paginate follows every page, so repositories with more than
+          # 500 old runs are fully cleaned instead of only trimming one page.
+          $pages = gh api --paginate --slurp `
+            "repos/$env:GH_REPO/actions/runs?status=completed&per_page=100" |
+            ConvertFrom-Json
+
+          $oldRuns = @(
+            foreach ($page in @($pages)) {
+              foreach ($run in @($page.workflow_runs)) {
+                if ([DateTimeOffset]::Parse($run.created_at) -lt $cutoff) {
+                  $run
+                }
+              }
+            }
+          )
+
+          if ($oldRuns.Count -eq 0) {
+            Write-Host 'No completed workflow runs are older than 30 days.'
+            exit 0
+          }
+
+          $deletedCount = 0
+          foreach ($run in $oldRuns) {
+            Write-Host "Deleting $($run.name) run $($run.id), created $($run.created_at)"
+            gh api --method DELETE "repos/$env:GH_REPO/actions/runs/$($run.id)"
+
+            if ($LASTEXITCODE -eq 0) {
+              $deletedCount++
+            } else {
+              Write-Warning "Could not delete workflow run $($run.id); continuing."
+            }
+          }
+
+          Write-Host "Deleted $deletedCount completed workflow run(s) older than 30 days."
           exit 0
