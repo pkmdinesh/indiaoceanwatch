@@ -1,6 +1,6 @@
 ﻿{
-    "updatedAt":  "2026-09-10T13:45:17.6958112+00:00",
-    "lastAttemptAt":  "2026-09-10T16:15:16.8364700+00:00",
+    "updatedAt":  "2026-09-10T16:30:16.6405503+00:00",
+    "lastAttemptAt":  "2026-09-10T16:30:16.6405503+00:00",
     "updateIntervalHours":  0.25,
     "source":  "INCOIS / ITEWC",
     "marineHeatWave":  {
@@ -7592,17 +7592,16 @@
                             ]
             },
     "errors":  [
-                   "High wave/swell: Unable to connect to the remote server",
-                   "Ocean current: Unable to connect to the remote server"
+
                ],
     "healthAlerts":  [
 
                      ],
     "freshness":  {
                       "thresholdHours":  36,
-                      "osfAgeHours":  4.82,
-                      "pfzAgeHours":  4.82
+                      "osfAgeHours":  5.05,
+                      "pfzAgeHours":  5.05
                   },
     "dataChanged":  true,
-    "lastDataChangeAt":  "2026-09-10T13:45:17.6958112+00:00"
+    "lastDataChangeAt":  "2026-09-10T16:30:16.6405503+00:00"
 }
