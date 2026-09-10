@@ -1177,7 +1177,9 @@ if (-not $hasDataChanges) {
         $status | Add-Member -NotePropertyName 'dataChanged' -NotePropertyValue $true -Force
         $status | Add-Member -NotePropertyName 'lastDataChangeAt' -NotePropertyValue $attemptedAt -Force
     }
-    $status | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $tempPath -Encoding UTF8
+    $jsonContent = $status | ConvertTo-Json -Depth 12 -Compress
+    $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+    [System.IO.File]::WriteAllText($tempPath, $jsonContent, $utf8NoBom)
     Move-Item -LiteralPath $tempPath -Destination $outputPath -Force
     if (-not $Quiet) { Write-Output "Updated $outputPath at $($status.updatedAt)" }
 }
