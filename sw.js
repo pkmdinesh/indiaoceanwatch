@@ -28,6 +28,7 @@ const APP_SHELL = [
   './js/tchp.js',
   './js/announcements.js',
   './manifest.webmanifest',
+  './locales/en.json',
   './icons/ocean-watch-v3-192.png',
   './icons/ocean-watch-v3-512.png',
   './icons/ocean-watch-v3-maskable.png',
@@ -167,6 +168,10 @@ self.addEventListener('fetch',event => {
   }
   if (url.pathname.includes('/js/') || url.pathname.includes('/css/')) {
     event.respondWith(networkFirst(event.request));
+    return;
+  }
+  if (url.pathname.includes('/locales/')) {
+    event.respondWith(staleWhileRevalidate(event.request));
     return;
   }
   if (url.pathname.includes('/assets/') || url.pathname.includes('/icons/')) {

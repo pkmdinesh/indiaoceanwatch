@@ -13,6 +13,12 @@ for (const file of [...javascriptFiles,'sw.js']) {
   new vm.Script(readText(file),{filename:file});
 }
 
+const localeFiles = fs.existsSync(path.join(root, 'locales'))
+  ? fs.readdirSync(path.join(root, 'locales'))
+      .filter(file => file.endsWith('.json'))
+      .map(file => `locales/${file}`)
+  : [];
+
 const jsonFiles = [
   'manifest.webmanifest',
   'status.json',
@@ -24,7 +30,8 @@ const jsonFiles = [
   'data/pfz-landing-centres.geojson',
   'data/osf-district-polygons.geojson',
   'data/svas-status.json',
-  'data/tides.json'
+  'data/tides.json',
+  ...localeFiles
 ];
 for (const file of jsonFiles) {
   JSON.parse(readText(file));
