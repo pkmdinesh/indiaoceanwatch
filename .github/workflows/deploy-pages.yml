@@ -25,6 +25,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Synchronize cache version
+        run: node scripts/sync-cache-version.mjs
+
+      - name: Validate assets & cache version
+        run: node tests/validation/validate-assets.mjs
+
       - uses: actions/upload-pages-artifact@v4
         with:
           path: .

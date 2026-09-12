@@ -2,5 +2,9 @@
   "type": "module",
   "name": "indiaoceanwatch",
   "license": "GPL-3.0-or-later",
-  "private": true
+  "private": true,
+  "scripts": {
+    "test": "node tests/validation/validate-assets.mjs",
+    "sync-version": "node scripts/sync-cache-version.mjs"
+  }
 }

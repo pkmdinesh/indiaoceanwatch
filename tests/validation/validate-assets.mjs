@@ -57,4 +57,16 @@ const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
 const duplicateIds = [...new Set(ids.filter((id,index) => ids.indexOf(id) !== index))];
 if (duplicateIds.length) throw new Error(`Duplicate HTML ids: ${duplicateIds.join(', ')}`);
 
-console.log(`Validated ${javascriptFiles.length + 1} scripts, ${jsonFiles.length} JSON files, ${htmlReferences.length} HTML paths, and ${cachedAssets.length} cached assets.`);
+const configJs = readText('js/config.js');
+const cacheVersionMatch = configJs.match(/CACHE_VERSION:\s*['"]([^'"]+)['"]/);
+if (!cacheVersionMatch) throw new Error('CACHE_VERSION not found in js/config.js');
+const expectedCacheVersion = cacheVersionMatch[1];
+
+const versionQueryMatches = [...html.matchAll(/(?:href|src)=["'][^"']+\.(?:css|js)\?v=([^"']+)["']/g)];
+for (const match of versionQueryMatches) {
+  if (match[1] !== expectedCacheVersion) {
+    throw new Error(`Outdated cache version ?v=${match[1]} in index.html; expected ?v=${expectedCacheVersion}. Run 'node scripts/sync-cache-version.mjs' to sync.`);
+  }
+}
+
+console.log(`Validated ${javascriptFiles.length + 1} scripts, ${jsonFiles.length} JSON files, ${htmlReferences.length} HTML paths, ${cachedAssets.length} cached assets, and verified cache version ?v=${expectedCacheVersion}.`);
