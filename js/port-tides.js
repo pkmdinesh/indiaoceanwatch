@@ -201,6 +201,8 @@ var NATIONAL_TIDE_STATIONS = [
     "name": "Gardenreach",
     "lat": 22.55,
     "lng": 88.3,
+    "osfLat": 21.6,
+    "osfLng": 88.1,
     "state": "West Bengal",
     "district": "South 24 Parganas / Kolkata",
     "range": 4.8,
@@ -305,6 +307,8 @@ var NATIONAL_TIDE_STATIONS = [
     "name": "Kandla",
     "lat": 23.017,
     "lng": 70.217,
+    "osfLat": 22.8,
+    "osfLng": 70.0,
     "state": "Gujarat",
     "district": "Kachchh",
     "range": 6.4,
@@ -1270,28 +1274,31 @@ async function fetchLivePortOsf(port) {
     const ww3Base = `https://incois.gov.in/thredds/wms/osf/ww3/${files.ww3File}`;
     const curBase = `https://incois.gov.in/thredds/wms/osf/currents/${files.currentsFile}`;
 
+    const targetLat = Number.isFinite(port.osfLat) ? port.osfLat : port.lat;
+    const targetLng = Number.isFinite(port.osfLng) ? port.osfLng : port.lng;
+
     // Offshore seaward adjustment for nearshore cells affected by land masks
-    const offLng = port.lng > 78 ? port.lng + 0.15 : port.lng - 0.15;
-    const curLng = port.lng > 78 ? port.lng + 0.25 : port.lng - 0.25;
+    const offLng = targetLng > 78 ? targetLng + 0.15 : targetLng - 0.15;
+    const curLng = targetLng > 78 ? targetLng + 0.25 : targetLng - 0.25;
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 6000);
 
     const queryWithFallback = async (base, layer, primaryLng, fallbackLng) => {
-      let val = await fetchIncoisLayer(base, layer, port.lat, primaryLng, controller.signal);
+      let val = await fetchIncoisLayer(base, layer, targetLat, primaryLng, controller.signal);
       if (val === null && fallbackLng !== null && fallbackLng !== primaryLng) {
-        val = await fetchIncoisLayer(base, layer, port.lat, fallbackLng, controller.signal);
+        val = await fetchIncoisLayer(base, layer, targetLat, fallbackLng, controller.signal);
       }
       return val;
     };
 
     const [rawHs, rawWindMag, rawWindDir, rawSwellHs, rawSwellTp, rawCur] = await Promise.all([
-      queryWithFallback(ww3Base, 'HS', port.lng, offLng),
-      queryWithFallback(ww3Base, 'UWND:VWND-mag', port.lng, offLng),
-      queryWithFallback(ww3Base, 'MWD', port.lng, offLng),
-      queryWithFallback(ww3Base, 'PHS01', port.lng, offLng),
-      queryWithFallback(ww3Base, 'PTP01', port.lng, offLng),
-      queryWithFallback(curBase, 'CURRENT', curLng, port.lng)
+      queryWithFallback(ww3Base, 'HS', targetLng, offLng),
+      queryWithFallback(ww3Base, 'UWND:VWND-mag', targetLng, offLng),
+      queryWithFallback(ww3Base, 'MWD', targetLng, offLng),
+      queryWithFallback(ww3Base, 'PHS01', targetLng, offLng),
+      queryWithFallback(ww3Base, 'PTP01', targetLng, offLng),
+      queryWithFallback(curBase, 'CURRENT', curLng, targetLng)
     ]);
 
     clearTimeout(timeoutId);
@@ -1322,9 +1329,20 @@ async function fetchLivePortOsf(port) {
         updatePortWindDisplay(port, entry);
       }
       return entry;
+    } else {
+      const fallbackEntry = { isLive: false, unavailable: true, timestamp: now };
+      portLiveOsfCache[port.id] = fallbackEntry;
+      if (selectedPortId === port.id) {
+        updatePortWindDisplay(port, fallbackEntry);
+      }
     }
   } catch (err) {
     console.warn(`[PortTides] Live INCOIS OSF forecast unavailable for ${port.name}:`, err?.message);
+    const fallbackEntry = { isLive: false, unavailable: true, timestamp: now };
+    portLiveOsfCache[port.id] = fallbackEntry;
+    if (selectedPortId === port.id) {
+      updatePortWindDisplay(port, fallbackEntry);
+    }
   }
 
   return null;
