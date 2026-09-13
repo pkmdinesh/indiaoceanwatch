@@ -105,6 +105,19 @@ async function statusNetworkFirst(request) {
   }
 }
 
+async function tidesNetworkFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cacheKey = new Request(new URL('./data/tides.json', self.location.href));
+  try {
+    const response = await fetch(request, { cache: 'no-store' });
+    if (!response.ok) return (await cache.match(cacheKey)) || response;
+    await cache.put(cacheKey, response.clone());
+    return response;
+  } catch {
+    return (await cache.match(cacheKey)) || Response.error();
+  }
+}
+
 async function vendorCacheFirst(request) {
   const cache = await caches.open(CACHE_NAME);
   const cached = await cache.match(request);
@@ -146,7 +159,11 @@ self.addEventListener('fetch',event => {
     event.respondWith(statusNetworkFirst(event.request));
     return;
   }
-  if (url.pathname.endsWith('/data/tides.json') || url.pathname.endsWith('/data/svas-status.json')) {
+  if (url.pathname.endsWith('/data/tides.json')) {
+    event.respondWith(tidesNetworkFirst(event.request));
+    return;
+  }
+  if (url.pathname.endsWith('/data/svas-status.json')) {
     event.respondWith(staleWhileRevalidate(event.request));
     return;
   }

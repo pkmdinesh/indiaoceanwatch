@@ -697,26 +697,37 @@ NATIONAL_TIDE_STATIONS.forEach(function (p) {
 // Official INCOIS PAT Cache & Loader
 var patTidesCache = null;
 var patTidesFetchPromise = null;
+var patTidesLastFetchedAt = 0;
 
-function loadPatTidesData() {
-  if (patTidesCache) return Promise.resolve(patTidesCache);
-  if (patTidesFetchPromise) return patTidesFetchPromise;
+function loadPatTidesData(force = false) {
+  const now = Date.now();
+  if (!force && patTidesCache && (now - patTidesLastFetchedAt < 15 * 60 * 1000)) {
+    return Promise.resolve(patTidesCache);
+  }
+  if (!force && patTidesFetchPromise) return patTidesFetchPromise;
 
-  patTidesFetchPromise = fetch('data/tides.json')
+  const url = `data/tides.json?t=${now}`;
+  patTidesFetchPromise = fetch(url, { cache: 'no-store' })
     .then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
     })
     .then(function (data) {
       patTidesCache = data;
+      patTidesLastFetchedAt = Date.now();
       renderPortTideCard();
       return data;
     })
     .catch(function (err) {
       console.warn('[PortTides] Official PAT data unavailable:', err?.message);
-      patTidesCache = null;
-      renderPortTideCard();
-      return null;
+      if (!patTidesCache) {
+        patTidesCache = null;
+        renderPortTideCard();
+      }
+      return patTidesCache;
+    })
+    .finally(function () {
+      patTidesFetchPromise = null;
     });
 
   return patTidesFetchPromise;
@@ -1460,6 +1471,12 @@ function updatePortWindDisplay(port, liveData = null) {
 function renderPortTideCard() {
   const port = NATIONAL_TIDE_STATIONS.find(p => p.id === selectedPortId) || NATIONAL_TIDE_STATIONS[0];
   const now = new Date();
+
+  // If PAT cache is from an older date or missing/expired, proactively revalidate
+  const todayDateStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  if (!patTidesCache || (patTidesCache.date && patTidesCache.date !== todayDateStr) || (Date.now() - patTidesLastFetchedAt > 15 * 60 * 1000)) {
+    void loadPatTidesData(Boolean(patTidesCache && patTidesCache.date && patTidesCache.date !== todayDateStr));
+  }
 
   // 1. Check for official Survey of India (SOI) / INCOIS PAT predictions
   const patDay = getPatDayData(port, now);

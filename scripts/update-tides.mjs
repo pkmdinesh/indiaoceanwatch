@@ -222,7 +222,7 @@ async function main() {
 
   const regionCache = new Map();
   const queue = [...uniqueRegions];
-  const concurrency = 5;
+  const concurrency = 2;
   let successCount = 0;
   let failCount = 0;
 
