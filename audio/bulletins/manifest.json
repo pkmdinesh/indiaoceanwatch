@@ -1,26 +1,26 @@
 {
-  "updated": "2026-09-15T15:34:21.208Z",
+  "updated": "2026-09-15T15:49:12.703Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 481152,
+      "size": 337344,
       "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN",
-      "textHash": "8d686e64e35d126f09f500e26df3539b1233780110b5035079ae34791852c130"
+      "textHash": "35012e7581768be337405961cd6b57c287bc9c5d9c4c5f681bdcaa82c92753b8"
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 474816,
+      "size": 413568,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN",
-      "textHash": "39a64d2c2afca4a4f84810e16a3f2aa2a92dd6b28d3bbda69a295f4ad75a0e1b"
+      "textHash": "99eecea33e8320dbb023182590fbb12bf3c42940cbe23108c9974935da359027"
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 374016,
+      "size": 334080,
       "title": "INCOIS கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN",
-      "textHash": "716b22f7d573c4cc96c65d7c0d7cb11c71d0f2685ee69c9d004e7a0780675b45"
+      "textHash": "acbbb48b2afb4232f49a9138937fec808719f021af1453d7314d9f58c2814c77"
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
@@ -31,10 +31,10 @@
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 187968,
+      "size": 173952,
       "title": "INCOIS സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN",
-      "textHash": "8879f6c8a1061db13e49ccb182e4e26d881131857e005f8104d1dd106c405e1c"
+      "textHash": "be7258c2792c77b4c0cea659823337b570b2bf041a1a32b134f7024cbdf34792"
     },
     "bn": {
       "file": "audio/bulletins/bulletin-bn.mp3",
@@ -52,10 +52,10 @@
     },
     "gu": {
       "file": "audio/bulletins/bulletin-gu.mp3",
-      "size": 297792,
+      "size": 277440,
       "title": "INCOIS મહાસાગર સ્થિતિ પૂર્વાનુમાન (ગુજરાતી)",
       "langCode": "gu-IN",
-      "textHash": "d1ef62f51f7e01222dea00e7cb2b5c4b7e42d803fcb097584325810541f550dd"
+      "textHash": "0ba44dfd1d8d3a8544ae52e7b64505b39aa8b5414690f650db5798e1f90b401b"
     },
     "or": {
       "file": "audio/bulletins/bulletin-or.mp3",
