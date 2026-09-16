@@ -37,20 +37,40 @@
     return R * c;
   }
 
-  function loadSvasData() {
-    return fetch('data/svas-status.json')
+  var svasLastFetchedAt = 0;
+  var svasFetchPromise = null;
+
+  function loadSvasData(force) {
+    var now = Date.now();
+    if (!force && svasData && (now - svasLastFetchedAt < 15 * 60 * 1000)) {
+      return Promise.resolve(svasData);
+    }
+    if (!force && svasFetchPromise) return svasFetchPromise;
+
+    var url = 'data/svas-status.json?t=' + now;
+    svasFetchPromise = fetch(url, { cache: 'no-store' })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
       })
       .then(function (data) {
         svasData = data;
+        svasLastFetchedAt = Date.now();
         initSvasCard();
+        return data;
       })
       .catch(function (err) {
         console.warn('[SVAS] Failed to load local SVAS data:', err);
-        renderErrorState();
+        if (!svasData) {
+          renderErrorState();
+        }
+        return svasData;
+      })
+      .finally(function () {
+        svasFetchPromise = null;
       });
+
+    return svasFetchPromise;
   }
 
   function parseIncoisGeoJson(geo) {

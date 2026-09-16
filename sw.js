@@ -118,6 +118,19 @@ async function tidesNetworkFirst(request) {
   }
 }
 
+async function svasNetworkFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cacheKey = new Request(new URL('./data/svas-status.json', self.location.href));
+  try {
+    const response = await fetch(request, { cache: 'no-store' });
+    if (!response.ok) return (await cache.match(cacheKey)) || response;
+    await cache.put(cacheKey, response.clone());
+    return response;
+  } catch {
+    return (await cache.match(cacheKey)) || Response.error();
+  }
+}
+
 async function vendorCacheFirst(request) {
   const cache = await caches.open(CACHE_NAME);
   const cached = await cache.match(request);
@@ -164,7 +177,7 @@ self.addEventListener('fetch',event => {
     return;
   }
   if (url.pathname.endsWith('/data/svas-status.json')) {
-    event.respondWith(staleWhileRevalidate(event.request));
+    event.respondWith(svasNetworkFirst(event.request));
     return;
   }
   if (url.pathname.endsWith('.geojson') || url.pathname.includes('/data/')) {

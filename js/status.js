@@ -103,6 +103,9 @@ function render(data) {
       renderJointBulletin(data?.jointBulletin || data?.cyclone?.jointBulletin);
 
       if (typeof renderPortTideCard === 'function') renderPortTideCard();
+      if (globalThis.svasService && typeof globalThis.svasService.load === 'function') {
+        globalThis.svasService.load();
+      }
       if (typeof checkAndDispatchAlerts === 'function') checkAndDispatchAlerts(data);
 
       const abisEl = ids('abisRunDate');
