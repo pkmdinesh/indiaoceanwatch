@@ -1,10 +1,10 @@
 {
-  "issueDate": "17-09-2026",
-  "updatedAt": "2026-09-17T14:30:58.656Z",
+  "issueDate": "18-09-2026",
+  "updatedAt": "2026-09-18T15:30:53.831Z",
   "dates": [
-    "18-09-2026",
     "19-09-2026",
-    "20-09-2026"
+    "20-09-2026",
+    "21-09-2026"
   ],
   "districts": {
     "Kozhikode": {
@@ -21,19 +21,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -41,19 +41,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -61,19 +61,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -87,68 +87,68 @@
       "lon": 88.4717,
       "overall": {
         "b4": "alert",
-        "b6": "safe",
-        "b7": "safe"
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "alert",
             "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ]
       }
@@ -159,69 +159,69 @@
       "lat": 21.644,
       "lon": 87.8629,
       "overall": {
-        "b4": "safe",
-        "b6": "safe",
-        "b7": "safe"
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "50-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "50-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "50-100 km"
           }
         ]
       }
@@ -232,69 +232,69 @@
       "lat": 21.4472,
       "lon": 87.1483,
       "overall": {
-        "b4": "safe",
-        "b6": "safe",
-        "b7": "safe"
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "20-100 km"
           }
         ]
       }
@@ -305,69 +305,69 @@
       "lat": 20.9039,
       "lon": 86.9771,
       "overall": {
-        "b4": "safe",
-        "b6": "safe",
-        "b7": "safe"
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "5-95 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "5-95 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "10-95 km"
           }
         ]
       }
@@ -379,68 +379,68 @@
       "lon": 87.0184,
       "overall": {
         "b4": "alert",
-        "b6": "safe",
-        "b7": "safe"
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "alert",
             "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ]
       }
@@ -451,69 +451,69 @@
       "lat": 20.1321,
       "lon": 86.8031,
       "overall": {
-        "b4": "safe",
-        "b6": "safe",
-        "b7": "safe"
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ]
       }
@@ -526,67 +526,67 @@
       "overall": {
         "b4": "alert",
         "b6": "alert",
-        "b7": "safe"
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "alert",
             "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ]
       }
@@ -597,69 +597,69 @@
       "lat": 19.2323,
       "lon": 85.7609,
       "overall": {
-        "b4": "safe",
-        "b6": "safe",
-        "b7": "safe"
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
           }
         ]
       }
@@ -671,68 +671,68 @@
       "lon": 84.6975,
       "overall": {
         "b4": "alert",
-        "b6": "safe",
-        "b7": "safe"
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "alert",
             "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "15-100 km"
           }
         ]
       }
@@ -743,69 +743,69 @@
       "lat": 17.9895,
       "lon": 83.7879,
       "overall": {
-        "b4": "safe",
-        "b6": "safe",
-        "b7": "safe"
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "55-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "55-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "55-100 km"
           }
         ]
       }
@@ -816,69 +816,69 @@
       "lat": 17.7472,
       "lon": 83.4505,
       "overall": {
-        "b4": "safe",
-        "b6": "safe",
-        "b7": "safe"
+        "b4": "alert",
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "65-100 km"
           }
         ]
       }
@@ -890,68 +890,68 @@
       "lon": 83.233,
       "overall": {
         "b4": "alert",
-        "b6": "safe",
-        "b7": "safe"
+        "b6": "alert",
+        "b7": "alert"
       },
       "matrix": {
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "alert",
             "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
           }
         ]
       }
@@ -962,7 +962,7 @@
       "lat": 16.9567,
       "lon": 82.4999,
       "overall": {
-        "b4": "safe",
+        "b4": "alert",
         "b6": "safe",
         "b7": "safe"
       },
@@ -970,39 +970,39 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "safe",
             "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1010,19 +1010,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1043,19 +1043,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -1063,19 +1063,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1083,19 +1083,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1116,39 +1116,39 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "alert",
             "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "safe",
+            "distance": null
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1156,19 +1156,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1189,19 +1189,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1209,19 +1209,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1229,19 +1229,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1262,19 +1262,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -1282,19 +1282,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -1302,19 +1302,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1335,19 +1335,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -1355,19 +1355,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1375,19 +1375,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1408,19 +1408,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1428,19 +1428,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1448,19 +1448,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1481,19 +1481,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -1501,19 +1501,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -1521,19 +1521,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1554,19 +1554,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1574,19 +1574,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1594,19 +1594,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1627,19 +1627,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1647,19 +1647,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1667,19 +1667,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1700,19 +1700,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1720,19 +1720,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1740,19 +1740,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1773,19 +1773,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1793,19 +1793,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1813,19 +1813,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1846,19 +1846,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1866,19 +1866,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1886,19 +1886,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1919,19 +1919,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1939,19 +1939,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1959,19 +1959,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -1992,19 +1992,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2012,19 +2012,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2032,19 +2032,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2065,19 +2065,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2085,19 +2085,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2105,19 +2105,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2138,19 +2138,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2158,19 +2158,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2178,19 +2178,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2211,19 +2211,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-90 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-90 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-90 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-90 km"
           }
@@ -2231,41 +2231,41 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
+            "date": "19-09-2026",
+            "status": "alert",
+            "distance": "20-90 km"
+          },
+          {
+            "day": 2,
+            "date": "20-09-2026",
             "status": "alert",
             "distance": "5-90 km"
           },
           {
-            "day": 2,
-            "date": "19-09-2026",
-            "status": "alert",
-            "distance": "55-90 km"
-          },
-          {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "alert",
-            "distance": "20-90 km"
+            "distance": "0-90 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
+            "date": "19-09-2026",
+            "status": "alert",
+            "distance": "20-90 km"
+          },
+          {
+            "day": 2,
+            "date": "20-09-2026",
             "status": "alert",
             "distance": "5-90 km"
           },
           {
-            "day": 2,
-            "date": "19-09-2026",
-            "status": "alert",
-            "distance": "55-90 km"
-          },
-          {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "alert",
-            "distance": "20-90 km"
+            "distance": "5-90 km"
           }
         ]
       }
@@ -2284,19 +2284,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           }
@@ -2304,19 +2304,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           }
@@ -2324,21 +2324,21 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "10-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "5-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
             "status": "alert",
             "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "5-100 km"
           }
         ]
       }
@@ -2357,19 +2357,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           }
@@ -2377,19 +2377,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           }
@@ -2397,19 +2397,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           }
@@ -2430,19 +2430,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           }
@@ -2450,19 +2450,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           }
@@ -2470,19 +2470,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-100 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           }
@@ -2503,61 +2503,61 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
+            "date": "19-09-2026",
             "status": "alert",
-            "distance": "70-90 km"
+            "distance": "10-100 km"
           },
           {
             "day": 2,
-            "date": "19-09-2026",
+            "date": "20-09-2026",
             "status": "alert",
-            "distance": "5-100 km"
+            "distance": "45-100 km"
           },
           {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "alert",
-            "distance": "65-100 km"
+            "distance": "15-100 km"
           }
         ],
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
+            "date": "19-09-2026",
             "status": "alert",
-            "distance": "70-90 km"
+            "distance": "10-100 km"
           },
           {
             "day": 2,
-            "date": "19-09-2026",
+            "date": "20-09-2026",
             "status": "alert",
-            "distance": "5-100 km"
+            "distance": "45-100 km"
           },
           {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "alert",
-            "distance": "65-100 km"
+            "distance": "15-100 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
+            "date": "19-09-2026",
             "status": "alert",
-            "distance": "70-90 km"
+            "distance": "10-100 km"
           },
           {
             "day": 2,
-            "date": "19-09-2026",
+            "date": "20-09-2026",
             "status": "alert",
-            "distance": "5-100 km"
+            "distance": "45-100 km"
           },
           {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "alert",
-            "distance": "65-100 km"
+            "distance": "15-100 km"
           }
         ]
       }
@@ -2576,19 +2576,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
+            "date": "19-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
           },
           {
             "day": 2,
-            "date": "19-09-2026",
+            "date": "20-09-2026",
             "status": "alert",
-            "distance": "25-100 km"
+            "distance": "85-100 km"
           },
           {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "65-100 km"
           }
@@ -2596,19 +2596,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
+            "date": "19-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
           },
           {
             "day": 2,
-            "date": "19-09-2026",
+            "date": "20-09-2026",
             "status": "alert",
-            "distance": "25-100 km"
+            "distance": "85-100 km"
           },
           {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "65-100 km"
           }
@@ -2616,19 +2616,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
+            "date": "19-09-2026",
+            "status": "alert",
+            "distance": "35-100 km"
           },
           {
             "day": 2,
-            "date": "19-09-2026",
+            "date": "20-09-2026",
             "status": "alert",
-            "distance": "25-100 km"
+            "distance": "85-100 km"
           },
           {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "65-100 km"
           }
@@ -2649,19 +2649,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "50-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "75-100 km"
           }
@@ -2669,19 +2669,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "50-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "75-100 km"
           }
@@ -2689,19 +2689,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "50-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "90-100 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "75-100 km"
           }
@@ -2722,19 +2722,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -2742,19 +2742,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-100 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -2762,19 +2762,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
+            "date": "19-09-2026",
+            "status": "alert",
+            "distance": "75-100 km"
+          },
+          {
+            "day": 2,
+            "date": "20-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 2,
-            "date": "19-09-2026",
-            "status": "alert",
-            "distance": "65-100 km"
-          },
-          {
             "day": 3,
-            "date": "20-09-2026",
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2795,19 +2795,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2815,19 +2815,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2835,19 +2835,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2868,19 +2868,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-10 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-10 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-10 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-10 km"
           }
@@ -2888,19 +2888,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-10 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-10 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-10 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-10 km"
           }
@@ -2908,19 +2908,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -2941,19 +2941,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -2961,19 +2961,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -2981,19 +2981,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3014,19 +3014,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3034,19 +3034,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3054,19 +3054,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3087,19 +3087,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3107,19 +3107,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3127,19 +3127,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3160,19 +3160,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3180,19 +3180,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3200,19 +3200,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3233,19 +3233,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3253,19 +3253,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3273,19 +3273,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3306,19 +3306,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3326,19 +3326,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3346,19 +3346,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3379,19 +3379,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3399,19 +3399,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3419,19 +3419,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3452,19 +3452,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3472,19 +3472,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3492,19 +3492,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3525,19 +3525,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3545,19 +3545,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3565,19 +3565,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3598,19 +3598,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3618,19 +3618,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3638,19 +3638,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3671,19 +3671,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3691,19 +3691,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3711,19 +3711,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3744,19 +3744,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3764,19 +3764,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3784,19 +3784,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3817,19 +3817,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3837,19 +3837,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3857,19 +3857,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3890,19 +3890,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3910,19 +3910,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -3930,19 +3930,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3963,19 +3963,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -3983,19 +3983,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4003,19 +4003,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4036,19 +4036,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -4056,19 +4056,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -4076,19 +4076,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4109,19 +4109,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -4129,19 +4129,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -4149,19 +4149,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4182,19 +4182,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4202,19 +4202,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4222,19 +4222,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4255,19 +4255,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -4275,19 +4275,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -4295,19 +4295,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4328,19 +4328,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4348,19 +4348,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4368,19 +4368,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4401,19 +4401,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4421,19 +4421,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4441,19 +4441,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4474,19 +4474,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4494,19 +4494,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4514,19 +4514,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4547,19 +4547,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4567,19 +4567,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4587,19 +4587,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4620,19 +4620,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4640,19 +4640,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4660,19 +4660,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4693,19 +4693,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           }
@@ -4713,39 +4713,39 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "alert",
-            "distance": "0-5 km"
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "alert",
             "distance": "0-5 km"
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
-            "status": "safe",
-            "distance": null
+            "status": "alert",
+            "distance": "0-5 km"
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
+            "status": "alert",
+            "distance": "0-5 km"
           }
         ],
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4766,19 +4766,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4786,19 +4786,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4806,19 +4806,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4839,19 +4839,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4859,19 +4859,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4879,19 +4879,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4912,19 +4912,19 @@
         "b4": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4932,19 +4932,19 @@
         "b6": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
@@ -4952,19 +4952,19 @@
         "b7": [
           {
             "day": 1,
-            "date": "18-09-2026",
-            "status": "safe",
-            "distance": null
-          },
-          {
-            "day": 2,
             "date": "19-09-2026",
             "status": "safe",
             "distance": null
           },
           {
-            "day": 3,
+            "day": 2,
             "date": "20-09-2026",
+            "status": "safe",
+            "distance": null
+          },
+          {
+            "day": 3,
+            "date": "21-09-2026",
             "status": "safe",
             "distance": null
           }
