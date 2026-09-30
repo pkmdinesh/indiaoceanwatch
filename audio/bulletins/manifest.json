@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-29T13:18:59.248Z",
+  "updated": "2026-09-30T16:33:48.346Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 326400,
+      "size": 301056,
       "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN",
-      "textHash": "ec321cc97c5a9de4bdb3208e4f107ee2f206d73a10fce1ca8a4c6f8d0ea5f6b9"
+      "textHash": "09f4b9857e9ed6b418e80db05b254e6cf21b94af610dceb7b4d727da7f02d8c7"
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 277824,
+      "size": 219840,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN",
-      "textHash": "2ab7cb0248aac9b35ab58a2f5c3fdf33c66e64064a71280860bf89ec04150b19"
+      "textHash": "c180db216aee0f97285307d07efcf160ff10c15068f1ebb2ae5037a72afe6ca5"
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 383232,
+      "size": 283584,
       "title": "INCOIS கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN",
-      "textHash": "7217238c3b6ee373e5992fcd2a2f65ccb8abc8a7c57f3d63d5ea4d42108698d1"
+      "textHash": "17ec0874ad69b1793d2b49c7c3f1a320f73fe6d01988e58aa6aff8a2ca818e1b"
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 269376,
+      "size": 201408,
       "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN",
-      "textHash": "5954c35db4b59f4702f56c8769154c5eb83a2c899276457b61f8b3a2f8b60723"
+      "textHash": "4a16e9b2f7b6fe2238040d215fa29df9b201d780d10880882f46c084a417d84a"
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 187968,
+      "size": 220416,
       "title": "INCOIS സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN",
-      "textHash": "8879f6c8a1061db13e49ccb182e4e26d881131857e005f8104d1dd106c405e1c"
+      "textHash": "49b6ae5de33d2ce1cfedc56c6072607b00a3936dbedd4f6de4f5b696e16923df"
     },
     "bn": {
       "file": "audio/bulletins/bulletin-bn.mp3",
