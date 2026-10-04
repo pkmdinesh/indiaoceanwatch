@@ -1,33 +1,33 @@
 {
-  "updated": "2026-10-03T16:48:43.247Z",
+  "updated": "2026-10-04T15:49:27.548Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 285120,
+      "size": 293952,
       "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN",
-      "textHash": "17e157b7ed097bd0648b2973c7820e10e01d28c572571bfba4e680bcc20b6e7c"
+      "textHash": "99d8c5bbd3543f643699f20fa62b3f47c40b39301212a6caf91534883c52895d"
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 224640,
+      "size": 219648,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN",
-      "textHash": "8a4d75a1147d4b550d00128ff5430ba83f6972071fc13334301b3ccfdd44363f"
+      "textHash": "f73b0962f4ef0d0d4fef217024fe1bd45e1f0386ea3be481415f02bda6addffd"
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 235008,
+      "size": 285696,
       "title": "INCOIS கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN",
-      "textHash": "cf7b9a20685c2752e3bc3e7e9911499249a4eccbe99c3a414e502b0f0304374f"
+      "textHash": "3b66464d155f0c27dc77379000af55578dd6ba46b750124dfe2d9ae9977c397f"
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 210816,
+      "size": 232320,
       "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN",
-      "textHash": "daef5c1f9d308a46f6c28eba17106fa20653f66762be03fd2e1af51b18c4714a"
+      "textHash": "29cbd7d11810e03fb85eb183bc3f8fa1e248d97cc398f73c825815846e3de7c4"
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
@@ -52,10 +52,10 @@
     },
     "gu": {
       "file": "audio/bulletins/bulletin-gu.mp3",
-      "size": 194112,
+      "size": 182976,
       "title": "INCOIS મહાસાગર સ્થિતિ પૂર્વાનુમાન (ગુજરાતી)",
       "langCode": "gu-IN",
-      "textHash": "7023beb175bacadd24066f58ed3b3af49566ea42e1f83219b3b102f4a341f0ea"
+      "textHash": "eeaa462f27b6ee5f33e1702e11e7bed083a7e4bea4e038b790a3916c4cf0904e"
     },
     "or": {
       "file": "audio/bulletins/bulletin-or.mp3",
