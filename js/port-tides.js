@@ -834,107 +834,6 @@ function getNearestTideStation(lat, lng) {
   return { port: nearest, distanceKm: Math.round(minDistance) };
 }
 
-// Astronomical Harmonic Tide Elevation calculation (unrounded float)
-function calculateTideElevationRaw(port, date) {
-  const tHours = date.getHours() + date.getMinutes() / 60 + date.getSeconds() / 3600;
-  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-  
-  // Principal Lunar Semidiurnal M2 (Period ~12.42h)
-  const m2Speed = 2 * Math.PI / 12.4206;
-  const m2Phase = (port.lng * Math.PI / 180) + (dayOfYear * 0.08);
-  const m2 = port.m2Amp * Math.cos(m2Speed * tHours - m2Phase);
-
-  // Principal Solar Semidiurnal S2 (Period ~12.00h)
-  const s2Speed = 2 * Math.PI / 12.0;
-  const s2Phase = (port.lng * Math.PI / 180) * 0.8;
-  const s2 = port.s2Amp * Math.cos(s2Speed * tHours - s2Phase);
-
-  // Lunar Diurnal K1 (Period ~23.93h)
-  const k1Speed = 2 * Math.PI / 23.9344;
-  const k1 = (port.range * 0.12) * Math.sin(k1Speed * tHours);
-
-  // Mean Sea Level
-  const msl = port.range * 0.55;
-
-  return msl + m2 + s2 + k1;
-}
-
-function calculateTideElevation(port, date) {
-  const rawHeight = calculateTideElevationRaw(port, date);
-  return Number(Math.max(0.05, rawHeight).toFixed(2));
-}
-
-var dailyTideCache = new Map();
-
-// Generate 24-hour tide predictions (High Tides & Low Tides) for today with robust extremum detection
-function calculateDailyTideEvents(port, baseDate = new Date()) {
-  const dateKey = `${port.id}_${baseDate.getFullYear()}-${baseDate.getMonth()}-${baseDate.getDate()}`;
-  if (dailyTideCache.has(dateKey)) {
-    return dailyTideCache.get(dateKey);
-  }
-
-  const startOfDay = new Date(baseDate);
-  startOfDay.setHours(0, 0, 0, 0);
-
-  // 1. Sample elevations for the SVG chart (every 5 mins)
-  const elevations = [];
-  for (let m = 0; m <= 24 * 60; m += 5) {
-    const time = new Date(startOfDay.getTime() + m * 60 * 1000);
-    const rawH = calculateTideElevationRaw(port, time);
-    elevations.push({ time, height: Number(Math.max(0.05, rawH).toFixed(2)), minutes: m });
-  }
-
-  // 2. High-resolution sampling (every 2 mins with a 60-min buffer) on continuous floats
-  const samples = [];
-  for (let m = -60; m <= 24 * 60 + 60; m += 2) {
-    const time = new Date(startOfDay.getTime() + m * 60 * 1000);
-    samples.push({ minutes: m, time, h: calculateTideElevationRaw(port, time) });
-  }
-
-  // 3. Detect candidate peaks and troughs using 5-point slope comparison
-  const rawExtrema = [];
-  for (let i = 2; i < samples.length - 2; i++) {
-    const prev2 = samples[i - 2].h;
-    const prev1 = samples[i - 1].h;
-    const curr = samples[i].h;
-    const next1 = samples[i + 1].h;
-    const next2 = samples[i + 2].h;
-
-    if (curr >= prev1 && curr > prev2 && curr >= next1 && curr > next2) {
-      rawExtrema.push({ type: 'High', minutes: samples[i].minutes, time: samples[i].time, height: Number(Math.max(0.05, curr).toFixed(2)), raw: curr });
-    } else if (curr <= prev1 && curr < prev2 && curr <= next1 && curr < next2) {
-      rawExtrema.push({ type: 'Low', minutes: samples[i].minutes, time: samples[i].time, height: Number(Math.max(0.05, curr).toFixed(2)), raw: curr });
-    }
-  }
-
-  // 4. Filter events strictly within [00:00, 24:00], merging adjacent micro-ripples and enforcing alternating sequence
-  const filteredEvents = [];
-  for (const ext of rawExtrema) {
-    if (ext.minutes < 0 || ext.minutes > 1440) continue;
-
-    const last = filteredEvents[filteredEvents.length - 1];
-    if (!last) {
-      filteredEvents.push(ext);
-    } else if (last.type === ext.type) {
-      if (ext.type === 'High' && ext.raw > last.raw) {
-        filteredEvents[filteredEvents.length - 1] = ext;
-      } else if (ext.type === 'Low' && ext.raw < last.raw) {
-        filteredEvents[filteredEvents.length - 1] = ext;
-      }
-    } else {
-      if (Math.abs(ext.minutes - last.minutes) >= 150) {
-        if (Math.abs(ext.raw - last.raw) >= 0.12) {
-          filteredEvents.push(ext);
-        }
-      }
-    }
-  }
-
-  const result = { events: filteredEvents, elevations };
-  dailyTideCache.set(dateKey, result);
-  return result;
-}
-
 function isTsunamiThreatActive(tsunami) {
   if (!tsunami) return false;
   const msg = String(tsunami.message || '').trim().toLowerCase();
@@ -1101,9 +1000,9 @@ function renderTideChartSvg(elevations, port, now = new Date(), currentHeightOve
   // Current time position
   const nowM = now.getHours() * 60 + now.getMinutes();
   const nowX = getX(Math.min(24 * 60, Math.max(0, nowM))).toFixed(1);
-  const currentHeight = (currentHeightOverride !== null)
+  const currentHeight = (currentHeightOverride !== null && currentHeightOverride !== undefined)
     ? Number(currentHeightOverride).toFixed(2)
-    : calculateTideElevation(port, now);
+    : '0.00';
   const nowY = getY(Number(currentHeight)).toFixed(1);
 
   // Time markers at 00h, 06h, 12h, 18h, 24h

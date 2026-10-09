@@ -38,6 +38,7 @@ jobs:
         run: .\scripts\validate-status.ps1 -Path .\status.json
 
       - name: Generate Google TTS audio bulletins
+        continue-on-error: true
         run: node scripts/generate-audio-bulletins.mjs
 
       - name: Commit updated snapshot

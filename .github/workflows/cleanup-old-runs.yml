@@ -136,7 +136,7 @@ jobs:
                 }
               }
             }
-          )
+          ) | Select-Object -First 500
 
           if ($oldRuns.Count -eq 0) {
             Write-Host 'No completed workflow runs are older than 30 days.'

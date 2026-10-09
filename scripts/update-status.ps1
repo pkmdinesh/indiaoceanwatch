@@ -867,103 +867,115 @@ try {
     $pfzHtml = (Invoke-WebRequest -UseBasicParsing -WebSession $pfzSession -Uri 'https://incois.gov.in/MarineFisheries/TextDataHome?mfid=1&request_locale=en' -TimeoutSec 45).Content
     $incoisPageAccessible = $true
     $dates = [regex]::Matches($pfzHtml, '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') | ForEach-Object { $_.Value.ToUpperInvariant() } | Select-Object -Unique
-    if ($dates.Count -ge 1) { $status.pfz.forecastDate = $dates[0] }
-    if ($dates.Count -ge 2) { $status.pfz.validUntil = $dates[1] }
+    $newForecastDate = if ($dates.Count -ge 1) { $dates[0] } else { $null }
+    $newValidUntil = if ($dates.Count -ge 2) { $dates[1] } else { $null }
+    if ($newForecastDate) { $status.pfz.forecastDate = $newForecastDate }
+    if ($newValidUntil) { $status.pfz.validUntil = $newValidUntil }
 
-    # INCOIS always lists every sector in the selector, including sectors for
-    # which no PFZ advisory was issued. Follow the session-based detail links
-    # and publish only sectors whose pages contain current advisory data.
-    $sectorNames = @{
-        'SEC001' = 'Gujarat'; 'SEC002' = 'Maharashtra'; 'SEC003' = 'Goa'
-        'SEC004' = 'Karnataka'; 'SEC005' = 'Kerala'; 'SEC006' = 'South Tamil Nadu'
-        'SEC007' = 'North Tamil Nadu'; 'SEC008' = 'South Andhra Pradesh'
-        'SEC009' = 'North Andhra Pradesh'; 'SEC010' = 'Odisha'; 'SEC011' = 'West Bengal'
-        'SEC012' = 'Andaman'; 'SEC013' = 'Nicobar'; 'SEC014' = 'Lakshadweep'
+    $existingPfzDate = if ($null -ne $savedStatus -and $null -ne $savedStatus.pfz) { "$($savedStatus.pfz.forecastDate)".Trim().ToUpperInvariant() } else { '' }
+    $hasExistingSectors = ($null -ne $savedStatus -and $null -ne $savedStatus.pfz -and @($savedStatus.pfz.sectors).Count -gt 0)
+
+    if ($MinimumAgeHours -gt 0 -and $newForecastDate -and $newForecastDate -eq $existingPfzDate -and $hasExistingSectors) {
+        $status.pfz.sectors = @($savedStatus.pfz.sectors)
+        if (-not $Quiet) { Write-Output "[PFZ] Forecast date ($newForecastDate) matches existing snapshot; skipping 14 sector page re-scrape." }
+    } else {
+        # INCOIS always lists every sector in the selector, including sectors for
+        # which no PFZ advisory was issued. Follow the session-based detail links
+        # and publish only sectors whose pages contain current advisory data.
+        $sectorNames = @{
+            'SEC001' = 'Gujarat'; 'SEC002' = 'Maharashtra'; 'SEC003' = 'Goa'
+            'SEC004' = 'Karnataka'; 'SEC005' = 'Kerala'; 'SEC006' = 'South Tamil Nadu'
+            'SEC007' = 'North Tamil Nadu'; 'SEC008' = 'South Andhra Pradesh'
+            'SEC009' = 'North Andhra Pradesh'; 'SEC010' = 'Odisha'; 'SEC011' = 'West Bengal'
+            'SEC012' = 'Andaman'; 'SEC013' = 'Nicobar'; 'SEC014' = 'Lakshadweep'
+        }
+        $sectorOptions = [regex]::Matches($pfzHtml, '(?is)<option\s+value=[''"]([^''"]*TextData[^''"]*\?secid=(SEC\d+))[''"][^>]*>')
+        if ($sectorOptions.Count -eq 0) { throw 'PFZ sector links were not found' }
+
+        $pfzSectors = @()
+        $seenSectorIds = @{}
+        foreach ($option in $sectorOptions) {
+            $relativeUrl = $option.Groups[1].Value
+            $sectorId = $option.Groups[2].Value.ToUpperInvariant()
+            if ($seenSectorIds.ContainsKey($sectorId) -or -not $sectorNames.ContainsKey($sectorId)) { continue }
+            $seenSectorIds[$sectorId] = $true
+
+            $detailUrl = "https://incois.gov.in/MarineFisheries/$relativeUrl"
+            $detailHtml = (Invoke-WebRequest -UseBasicParsing -WebSession $pfzSession -Uri $detailUrl -TimeoutSec 45).Content
+            $detailText = [Net.WebUtility]::HtmlDecode(($detailHtml -replace '(?is)<script\b.*?</script>', ' ' -replace '(?is)<style\b.*?</style>', ' ' -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+            $noDataMessage = $null
+            foreach ($paragraphMatch in [regex]::Matches($detailHtml, '(?is)<p\b[^>]*>(.*?)</p>')) {
+                $paragraphText = [Net.WebUtility]::HtmlDecode(($paragraphMatch.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+                if ($paragraphText -match '(?i)^no\s+data\s+available\s+for\s+this\s+sector\b') {
+                    $noDataMessage = $paragraphText
+                    break
+                }
+            }
+            if ($noDataMessage) {
+                $pfzSectors += [ordered]@{
+                    id = $sectorId
+                    name = $sectorNames[$sectorId]
+                    url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
+                    hasForecast = $false
+                    message = $noDataMessage
+                    landingCenters = @()
+                }
+                continue
+            }
+
+            $landingCenters = [ordered]@{}
+            foreach ($rowMatch in [regex]::Matches($detailHtml, '(?is)<tr\b[^>]*>(.*?)</tr>')) {
+                $cells = @([regex]::Matches($rowMatch.Groups[1].Value, '(?is)<td\b[^>]*>(.*?)</td>') | ForEach-Object {
+                    [Net.WebUtility]::HtmlDecode(($_.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
+                })
+                if ($cells.Count -ne 7 -or [string]::IsNullOrWhiteSpace($cells[0])) { continue }
+
+                $landingName = $cells[0]
+                if (-not $landingCenters.Contains($landingName)) {
+                    $landingCenters[$landingName] = [ordered]@{ name = $landingName; messages = @() }
+                }
+                $landingCenters[$landingName].messages += [ordered]@{
+                    direction = $cells[1]
+                    bearing = $cells[2]
+                    distance = $cells[3]
+                    depth = $cells[4]
+                    latitude = $cells[5]
+                    longitude = $cells[6]
+                }
+            }
+
+            # A parsed advisory row is stronger evidence than a date alone and
+            # prevents redirects or generic background pages becoming sectors.
+            if ($landingCenters.Count -gt 0 -and $detailText -match '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') {
+                $pfzSectors += [ordered]@{
+                    id = $sectorId
+                    name = $sectorNames[$sectorId]
+                    url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
+                    hasForecast = $true
+                    message = $null
+                    landingCenters = @($landingCenters.Values)
+                }
+            } else {
+                $pfzSectors += [ordered]@{
+                    id = $sectorId
+                    name = $sectorNames[$sectorId]
+                    url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
+                    hasForecast = $false
+                    message = 'No forecast is available for this sector in the latest fetched PFZ data.'
+                    landingCenters = @()
+                }
+            }
+        }
+        $status.pfz.sectors = @($pfzSectors)
     }
-    $sectorOptions = [regex]::Matches($pfzHtml, '(?is)<option\s+value=[''"]([^''"]*TextData[^''"]*\?secid=(SEC\d+))[''"][^>]*>')
-    if ($sectorOptions.Count -eq 0) { throw 'PFZ sector links were not found' }
-
-    $pfzSectors = @()
-    $seenSectorIds = @{}
-    foreach ($option in $sectorOptions) {
-        $relativeUrl = $option.Groups[1].Value
-        $sectorId = $option.Groups[2].Value.ToUpperInvariant()
-        if ($seenSectorIds.ContainsKey($sectorId) -or -not $sectorNames.ContainsKey($sectorId)) { continue }
-        $seenSectorIds[$sectorId] = $true
-
-        $detailUrl = "https://incois.gov.in/MarineFisheries/$relativeUrl"
-        $detailHtml = (Invoke-WebRequest -UseBasicParsing -WebSession $pfzSession -Uri $detailUrl -TimeoutSec 45).Content
-        $detailText = [Net.WebUtility]::HtmlDecode(($detailHtml -replace '(?is)<script\b.*?</script>', ' ' -replace '(?is)<style\b.*?</style>', ' ' -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
-        $noDataMessage = $null
-        foreach ($paragraphMatch in [regex]::Matches($detailHtml, '(?is)<p\b[^>]*>(.*?)</p>')) {
-            $paragraphText = [Net.WebUtility]::HtmlDecode(($paragraphMatch.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
-            if ($paragraphText -match '(?i)^no\s+data\s+available\s+for\s+this\s+sector\b') {
-                $noDataMessage = $paragraphText
-                break
-            }
-        }
-        if ($noDataMessage) {
-            $pfzSectors += [ordered]@{
-                id = $sectorId
-                name = $sectorNames[$sectorId]
-                url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
-                hasForecast = $false
-                message = $noDataMessage
-                landingCenters = @()
-            }
-            continue
-        }
-
-        $landingCenters = [ordered]@{}
-        foreach ($rowMatch in [regex]::Matches($detailHtml, '(?is)<tr\b[^>]*>(.*?)</tr>')) {
-            $cells = @([regex]::Matches($rowMatch.Groups[1].Value, '(?is)<td\b[^>]*>(.*?)</td>') | ForEach-Object {
-                [Net.WebUtility]::HtmlDecode(($_.Groups[1].Value -replace '(?is)<[^>]+>', ' ' -replace '\s+', ' ')).Trim()
-            })
-            if ($cells.Count -ne 7 -or [string]::IsNullOrWhiteSpace($cells[0])) { continue }
-
-            $landingName = $cells[0]
-            if (-not $landingCenters.Contains($landingName)) {
-                $landingCenters[$landingName] = [ordered]@{ name = $landingName; messages = @() }
-            }
-            $landingCenters[$landingName].messages += [ordered]@{
-                direction = $cells[1]
-                bearing = $cells[2]
-                distance = $cells[3]
-                depth = $cells[4]
-                latitude = $cells[5]
-                longitude = $cells[6]
-            }
-        }
-
-        # A parsed advisory row is stronger evidence than a date alone and
-        # prevents redirects or generic background pages becoming sectors.
-        if ($landingCenters.Count -gt 0 -and $detailText -match '(?i)\b\d{1,2}\s+(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\s+\d{4}\b') {
-            $pfzSectors += [ordered]@{
-                id = $sectorId
-                name = $sectorNames[$sectorId]
-                url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
-                hasForecast = $true
-                message = $null
-                landingCenters = @($landingCenters.Values)
-            }
-        } else {
-            $pfzSectors += [ordered]@{
-                id = $sectorId
-                name = $sectorNames[$sectorId]
-                url = "https://incois.gov.in/MarineFisheries/TextData?secid=$sectorId"
-                hasForecast = $false
-                message = 'No forecast is available for this sector in the latest fetched PFZ data.'
-                landingCenters = @()
-            }
-        }
-    }
-    $status.pfz.sectors = @($pfzSectors)
 } catch { $status.errors += "PFZ: $($_.Exception.Message)" }
 
 # Cache official PFZ vector layers locally for the interactive map, sharing,
 # and an offline fallback. A failed map refresh must not block advisory data.
 try {
-    & (Join-Path $scriptsRoot 'update-pfz-map.ps1') -ProjectRoot $projectRoot -Quiet
+    $pfzMapArgs = @{ ProjectRoot = $projectRoot; Quiet = $Quiet }
+    if ($MinimumAgeHours -eq 0) { $pfzMapArgs['Force'] = $true }
+    & (Join-Path $scriptsRoot 'update-pfz-map.ps1') @pfzMapArgs
 } catch {
     if (-not $Quiet) { Write-Warning "PFZ map cache refresh failed: $($_.Exception.Message)" }
 }
@@ -988,7 +1000,9 @@ try {
     if (Test-Path -LiteralPath $tidesScript) {
         $nodeCommand = Get-Command node -ErrorAction SilentlyContinue
         if ($nodeCommand) {
-            & $nodeCommand.Source $tidesScript $projectRoot | Out-Null
+            $tidesArgs = @($tidesScript, $projectRoot)
+            if ($MinimumAgeHours -eq 0) { $tidesArgs += '--force' }
+            & $nodeCommand.Source @tidesArgs | Out-Null
             if (-not $Quiet) { Write-Output 'Updated data/tides.json' }
         }
     }

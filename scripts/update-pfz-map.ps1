@@ -1,6 +1,7 @@
 param(
     [string]$ProjectRoot = (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)),
-    [switch]$Quiet
+    [switch]$Quiet,
+    [switch]$Force
 )
 
 $ErrorActionPreference = 'Stop'
@@ -56,7 +57,26 @@ function Save-WfsGeoJson(
     }
 }
 
+# Dynamic PFZ advisory lines are always updated on routine runs
 Save-WfsGeoJson 'PFZ_Automation' 'PFZ_Automation:pfzlines' 'pfz-lines.geojson' @('SECTORNAME','Julian_day','Year','UID','Length') -SimplifyLines
-Save-WfsGeoJson 'PFZ_EEZ' 'PFZ_EEZ:indiaeez' 'pfz-eez.geojson' @('OBJECTID','Length') -SimplifyLines
-Save-WfsGeoJson 'PFZ_Sectors' 'PFZ_Sectors:sector_new' 'pfz-sectors.geojson' @('SECTORNAME','SEC_ID')
-Save-WfsGeoJson 'PFZ_LandingCentres' 'PFZ_LandingCentres:LandingCenters_29Apr2024' 'pfz-landing-centres.geojson' @('SECTOR_NAM','SECTOR_ID','DIST_NAME','LC_NAME','LONGITUDE','LATITUDE','FORECAST_D','VALIDITY_D','STATUS')
+
+# Static GIS layers (EEZ boundary, administrative sectors, and landing centers)
+$staticLayers = @(
+    [pscustomobject]@{ Workspace = 'PFZ_EEZ'; TypeName = 'PFZ_EEZ:indiaeez'; FileName = 'pfz-eez.geojson'; Properties = @('OBJECTID','Length'); Simplify = $true },
+    [pscustomobject]@{ Workspace = 'PFZ_Sectors'; TypeName = 'PFZ_Sectors:sector_new'; FileName = 'pfz-sectors.geojson'; Properties = @('SECTORNAME','SEC_ID'); Simplify = $false },
+    [pscustomobject]@{ Workspace = 'PFZ_LandingCentres'; TypeName = 'PFZ_LandingCentres:LandingCenters_29Apr2024'; FileName = 'pfz-landing-centres.geojson'; Properties = @('SECTOR_NAM','SECTOR_ID','DIST_NAME','LC_NAME','LONGITUDE','LATITUDE','FORECAST_D','VALIDITY_D','STATUS'); Simplify = $false }
+)
+
+foreach ($layer in $staticLayers) {
+    $layerPath = Join-Path $dataRoot $layer.FileName
+    $needsFetch = $Force.IsPresent -or (-not (Test-Path -LiteralPath $layerPath)) -or ((Get-Item -LiteralPath $layerPath).Length -eq 0)
+    if ($needsFetch) {
+        if ($layer.Simplify) {
+            Save-WfsGeoJson $layer.Workspace $layer.TypeName $layer.FileName $layer.Properties -SimplifyLines
+        } else {
+            Save-WfsGeoJson $layer.Workspace $layer.TypeName $layer.FileName $layer.Properties
+        }
+    } else {
+        if (-not $Quiet) { Write-Output "Static layer $($layer.FileName) already exists; skipping WFS query." }
+    }
+}
