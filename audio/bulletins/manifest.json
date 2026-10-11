@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10T17:02:25.497Z",
+  "updated": "2026-10-11T17:34:10.887Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -10,10 +10,10 @@
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 365760,
+      "size": 348096,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN",
-      "textHash": "d8414ca189eaac6aef5f660077b9edd9652ca21322cad271856cbb838f2acada"
+      "textHash": "fb4adc7964d79cf6f84d00a62c38726ce124aefa9b17c1213dd8c7ef45770def"
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
@@ -59,10 +59,10 @@
     },
     "or": {
       "file": "audio/bulletins/bulletin-or.mp3",
-      "size": 140544,
+      "size": 145920,
       "title": "INCOIS ମହାସାଗର ସ୍ଥିତି ପୂର୍ବାନୁମାନ (ଓଡ଼ିଆ)",
       "langCode": "or-IN",
-      "textHash": "58ffaba3775402e16c480983f8c29bb0ab9a766f446ab0a20a9908fc448467e0"
+      "textHash": "1e8b8d46736c37c98c875ccec5e280ff20446cd3979baad629cb0129f03373f0"
     },
     "kn": {
       "file": "audio/bulletins/bulletin-kn.mp3",
