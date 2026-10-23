@@ -23,7 +23,7 @@ function renderTsunami(message, bulletin, recentBulletin = null, checkedAt = nul
       status.classList.remove('advisory-safe','advisory-info','advisory-other','advisory-bulletin','advisory-warning','advisory-alert','advisory-watch');
       status.classList.add(noTsunami ? 'advisory-safe' : 'advisory-info');
       const messageLink = ids('tsunamiMessage');
-      const safeMsg = globalThis.i18n?.t('tsunami.safe', 'No active tsunami threat for India') || 'No active tsunami threat for India';
+      const safeMsg = globalThis.i18n?.t('tsunami.safe', 'No active tsunami bulletin') || 'No active tsunami bulletin';
       messageLink.textContent = noTsunami ? safeMsg : supportingBulletin?.message || message || 'Official ITEWC bulletin information';
       ids('tsunamiMark').textContent = noTsunami ? '✓' : 'i';
       const eventParts = supportingBulletin ? [supportingBulletin.magnitude ? `M${supportingBulletin.magnitude}` : '',supportingBulletin.location || '',[supportingBulletin.originDate,supportingBulletin.originTime].filter(Boolean).join(' ')].filter(Boolean) : [];
