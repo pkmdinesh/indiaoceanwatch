@@ -201,7 +201,8 @@ function Get-NearestCoastDistanceKm([double]$Latitude, [double]$Longitude) {
 function Add-GebcoEventMetadata {
     param(
         [Parameter(Mandatory=$true)]$Event,
-        [string]$TopoBathy = ''
+        [string]$TopoBathy = '',
+        $Bulletin = $null
     )
 
     $latitudeText = if ($Event.PSObject.Properties.Name -contains 'LATITUDE') { "$($Event.LATITUDE)" } else { "$($Event.latitude)" }
@@ -210,7 +211,29 @@ function Add-GebcoEventMetadata {
     $longitude = 0.0
     $hasLatitude = [double]::TryParse($latitudeText,[Globalization.NumberStyles]::Float,[Globalization.CultureInfo]::InvariantCulture,[ref]$latitude)
     $hasLongitude = [double]::TryParse($longitudeText,[Globalization.NumberStyles]::Float,[Globalization.CultureInfo]::InvariantCulture,[ref]$longitude)
-    $explicitlyLand = $TopoBathy -match '(?i)\bon\s+land\b|\bland\b' -and $TopoBathy -notmatch '(?i)island'
+
+    $bulletinObj = if ($null -ne $Bulletin) { $Bulletin } elseif ($Event.PSObject.Properties.Name -contains 'bulletin') { $Event.bulletin } else { $null }
+    $oceanParam = ''
+    if ($Event.PSObject.Properties.Name -contains 'oceanParameter' -and "$($Event.oceanParameter)".Trim()) {
+        $oceanParam = "$($Event.oceanParameter)".Trim()
+    } elseif ($Event.PSObject.Properties.Name -contains 'ocean_para' -and "$($Event.ocean_para)".Trim()) {
+        $oceanParam = "$($Event.ocean_para)".Trim()
+    } elseif ($null -ne $bulletinObj -and "$($bulletinObj.oceanParameter)".Trim()) {
+        $oceanParam = "$($bulletinObj.oceanParameter)".Trim()
+    } elseif ($null -ne $bulletinObj -and "$($bulletinObj.ocean_para)".Trim()) {
+        $oceanParam = "$($bulletinObj.ocean_para)".Trim()
+    }
+    $bulletinMsg = if ($null -ne $bulletinObj -and "$($bulletinObj.message)".Trim()) {
+        "$($bulletinObj.message)".Trim()
+    } elseif ($null -ne $bulletinObj -and "$($bulletinObj.evaluation)".Trim()) {
+        "$($bulletinObj.evaluation)".Trim()
+    } else { '' }
+
+    $isExplicitlyLandText = ($TopoBathy -match '(?i)\bon\s+land\b|\bland\b' -and $TopoBathy -notmatch '(?i)island')
+    $isOceanParamLand = ($oceanParam -eq 'OL')
+    $isBulletinMsgLand = ($bulletinMsg -match '(?i)\b(?:happened|occurred|located|is)\s+on\s+land\b|\bon\s+land\s+part\b|\bon\s+land\b')
+
+    $explicitlyLand = $isExplicitlyLandText -or $isOceanParamLand -or $isBulletinMsgLand
 
     $setting = if ($explicitlyLand) { 'LAND' } else { 'OCEANIC / MARINE' }
     $elevation = $null
@@ -247,6 +270,9 @@ function Add-GebcoEventMetadata {
         $distanceFromCoast = Get-NearestCoastDistanceKm -Latitude $latitude -Longitude $longitude
     }
 
+    if ($oceanParam) {
+        $Event | Add-Member -NotePropertyName oceanParameter -NotePropertyValue $oceanParam -Force
+    }
     $Event | Add-Member -NotePropertyName tectonicSetting -NotePropertyValue $setting -Force
     $Event | Add-Member -NotePropertyName gebcoElevationMeters -NotePropertyValue $elevation -Force
     $Event | Add-Member -NotePropertyName bathymetryMeters -NotePropertyValue $bathymetry -Force
@@ -623,7 +649,7 @@ try {
                 $latestTopoBathy = "$($status.tsunami.recentBulletin.topographyBathymetry)"
             } catch { }
         }
-        $status.seismic.latest = Add-GebcoEventMetadata -Event $latest -TopoBathy $latestTopoBathy
+        $status.seismic.latest = Add-GebcoEventMetadata -Event $latest -TopoBathy $latestTopoBathy -Bulletin $status.tsunami.recentBulletin
         if ($latest.PSObject.Properties.Name -contains 'MAGNITUDE') {
             $originWithZone = "$($latest.ORIGINTIME)".Trim()
             if ($originWithZone -and $originWithZone -notmatch '(?i)\bIST\b') { $originWithZone += ' IST' }
@@ -645,7 +671,7 @@ try {
                 }
                 $eventRecord = [pscustomobject][ordered]@{ magnitude = $_.MAGNITUDE; region = $_.REGIONNAME; originTime = $_.ORIGINTIME; depth = $_.DEPTH; latitude = $_.LATITUDE; longitude = $_.LONGITUDE; bulletinUrl = $bulletinUrl; bulletin = $eventBulletin }
                 $eventTopoBathy = if ($null -ne $eventBulletin) { "$($eventBulletin.topographyBathymetry)" } else { '' }
-                Add-GebcoEventMetadata -Event $eventRecord -TopoBathy $eventTopoBathy
+                Add-GebcoEventMetadata -Event $eventRecord -TopoBathy $eventTopoBathy -Bulletin $eventBulletin
             })
         } else {
             $status.seismic.message = "$($eventList.Count) event(s) listed; open the national table for details"

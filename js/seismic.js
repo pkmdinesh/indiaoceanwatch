@@ -183,7 +183,7 @@ let activeBathymetryRequest = 0;
       return null;
     }
 
-    async function updateTectonicSetting(latitude, longitude, topoBathy, requestId, savedBathymetry, savedSetting, savedElevation) {
+    async function updateTectonicSetting(latitude, longitude, topoBathy, requestId, savedBathymetry, savedSetting, savedElevation, bulletin = null, event = null) {
       const settingElement = ids('eventSetting');
       const bathymetryElement = ids('eventBathymetry');
       const normalizedSavedSetting = String(savedSetting || '').trim().toUpperCase();
@@ -193,8 +193,15 @@ let activeBathymetryRequest = 0;
       const storedElevation = savedElevation === '' || savedElevation == null
         ? Number.NaN
         : Number(savedElevation);
-      const explicitlyLand = normalizedSavedSetting === 'LAND' ||
-        (/\bon\s+land\b|\bland\b/i.test(topoBathy) && !/island/i.test(topoBathy));
+
+      const oceanParameter = String(bulletin?.oceanParameter || event?.oceanParameter || event?.ocean_para || '').trim().toUpperCase();
+      const bulletinMessage = String(bulletin?.message || '').trim();
+
+      const isLandFromBulletin = oceanParameter === 'OL' ||
+        (/\bon\s+land\b|\bland\b/i.test(topoBathy) && !/island/i.test(topoBathy)) ||
+        /\b(?:happened|occurred|located|is)\s+on\s+land\b|\bon\s+land\s+part\b/i.test(bulletinMessage);
+
+      const explicitlyLand = isLandFromBulletin || normalizedSavedSetting === 'LAND';
 
       if (explicitlyLand || (Number.isFinite(storedElevation) && storedElevation >= 0)) {
         settingElement.textContent = globalThis.i18n?.translateTectonicSetting('LAND') || 'Tectonic Setting: LAND';
@@ -245,28 +252,29 @@ let activeBathymetryRequest = 0;
     }
 
     async function openSeismicDetails(event, bulletin = null) {
-      const magnitude = bulletin?.magnitude || event?.MAGNITUDE || event?.magnitude || '—';
-      const location = bulletin?.location || event?.REGIONNAME || event?.region || 'Location unavailable';
-      const depth = bulletin?.depth || (event?.DEPTH ?? event?.depth) || '—';
-      const latitudeValue = bulletin?.latitude ?? event?.LATITUDE ?? event?.latitude;
-      const longitudeValue = bulletin?.longitude ?? event?.LONGITUDE ?? event?.longitude;
+      const activeBulletin = bulletin || event?.bulletin || null;
+      const magnitude = activeBulletin?.magnitude || event?.MAGNITUDE || event?.magnitude || '—';
+      const location = activeBulletin?.location || event?.REGIONNAME || event?.region || 'Location unavailable';
+      const depth = activeBulletin?.depth || (event?.DEPTH ?? event?.depth) || '—';
+      const latitudeValue = activeBulletin?.latitude ?? event?.LATITUDE ?? event?.latitude;
+      const longitudeValue = activeBulletin?.longitude ?? event?.LONGITUDE ?? event?.longitude;
       const latitude = latitudeValue === '' || latitudeValue == null ? Number.NaN : Number(latitudeValue);
       const longitude = longitudeValue === '' || longitudeValue == null ? Number.NaN : Number(longitudeValue);
-      const originDate = bulletin?.originDate || '';
-      const originTime = bulletin?.originTime || event?.ORIGINTIME || event?.originTime || '—';
-      const topoBathy = String(bulletin?.topographyBathymetry || '').trim();
-      const savedBathymetry = event?.bathymetryMeters ?? bulletin?.bathymetryMeters;
-      const savedSetting = event?.tectonicSetting ?? bulletin?.tectonicSetting;
-      const savedElevation = event?.gebcoElevationMeters ?? bulletin?.gebcoElevationMeters;
+      const originDate = activeBulletin?.originDate || '';
+      const originTime = activeBulletin?.originTime || event?.ORIGINTIME || event?.originTime || '—';
+      const topoBathy = String(activeBulletin?.topographyBathymetry || '').trim();
+      const savedBathymetry = event?.bathymetryMeters ?? activeBulletin?.bathymetryMeters;
+      const savedSetting = event?.tectonicSetting ?? activeBulletin?.tectonicSetting;
+      const savedElevation = event?.gebcoElevationMeters ?? activeBulletin?.gebcoElevationMeters;
       const coastDistanceMatch = topoBathy.match(/(?:distance|distnace)\s+of\s+([\d,.]+)\s*km\s+from\s+(?:the\s+)?coast(?:line)?/i);
-      const coastDistance = coastDistanceMatch ? Number(coastDistanceMatch[1].replace(/,/g,'')) : Number(event?.distanceFromCoastKm ?? bulletin?.distanceFromCoastKm);
+      const coastDistance = coastDistanceMatch ? Number(coastDistanceMatch[1].replace(/,/g,'')) : Number(event?.distanceFromCoastKm ?? activeBulletin?.distanceFromCoastKm);
       const coastDistanceText = Number.isFinite(coastDistance) ? `~${Math.round(coastDistance).toLocaleString('en-US')} km` : (globalThis.i18n?.t('seismic.unavailable', 'Unavailable') || 'Unavailable');
       const bathymetryRequestId = ++activeBathymetryRequest;
       ids('seismicDialogTitle').textContent = `M${magnitude} · ${globalThis.i18n?.translateDistrictName(location) || location}`;
-      ids('seismicDialogMeta').textContent = bulletin?.issuedAt ? `${bulletinReference(bulletin)} · ${globalThis.i18n?.t('severity.issued', 'Issued') || 'Issued'} ${bulletin.issuedAt}` : (globalThis.i18n?.t('seismic.dialog_meta', 'Official ITEWC information') || 'Official ITEWC information');
+      ids('seismicDialogMeta').textContent = activeBulletin?.issuedAt ? `${bulletinReference(activeBulletin)} · ${globalThis.i18n?.t('severity.issued', 'Issued') || 'Issued'} ${activeBulletin.issuedAt}` : (globalThis.i18n?.t('seismic.dialog_meta', 'Official ITEWC information') || 'Official ITEWC information');
       ids('eventCoastDistance').textContent = globalThis.i18n?.translateCoastDistance(coastDistanceText) || `Distance from nearest coast: ${coastDistanceText}`;
-      currentSeismicShareData={magnitude,location,origin:[originDate,originTime].filter(Boolean).join(' '),coordinates:Number.isFinite(latitude)&&Number.isFinite(longitude) ? `${latitude}°, ${longitude}°` : '',coastDistance:coastDistanceText,bulletin:bulletinReference(bulletin),evaluation:bulletin?.message || ''};
-      void updateTectonicSetting(latitude, longitude, topoBathy, bathymetryRequestId, savedBathymetry, savedSetting, savedElevation);
+      currentSeismicShareData={magnitude,location,origin:[originDate,originTime].filter(Boolean).join(' '),coordinates:Number.isFinite(latitude)&&Number.isFinite(longitude) ? `${latitude}°, ${longitude}°` : '',coastDistance:coastDistanceText,bulletin:bulletinReference(activeBulletin),evaluation:activeBulletin?.message || ''};
+      void updateTectonicSetting(latitude, longitude, topoBathy, bathymetryRequestId, savedBathymetry, savedSetting, savedElevation, activeBulletin, event);
       const facts = [
         [globalThis.i18n?.t('seismic.fact_magnitude', 'Magnitude') || 'Magnitude', `M${magnitude}`],
         [globalThis.i18n?.t('seismic.fact_depth', 'Depth') || 'Depth', String(depth).includes('km') ? depth : `${depth} km`],
@@ -275,24 +283,24 @@ let activeBathymetryRequest = 0;
         [globalThis.i18n?.t('seismic.fact_latitude', 'Latitude') || 'Latitude', Number.isFinite(latitude) ? `${latitude}°` : '—'],
         [globalThis.i18n?.t('seismic.fact_longitude', 'Longitude') || 'Longitude', Number.isFinite(longitude) ? `${longitude}°` : '—'],
         [globalThis.i18n?.t('seismic.fact_location', 'Location') || 'Location', globalThis.i18n?.translateDistrictName(location) || location],
-        [globalThis.i18n?.t('seismic.fact_bulletin', 'Bulletin') || 'Bulletin', bulletinReference(bulletin)]
+        [globalThis.i18n?.t('seismic.fact_bulletin', 'Bulletin') || 'Bulletin', bulletinReference(activeBulletin)]
       ];
       ids('eventFacts').replaceChildren(...facts.map(([label,value]) => {
         const wrapper=document.createElement('div'); const term=document.createElement('dt'); const detail=document.createElement('dd');
         term.textContent=label; detail.textContent=value; wrapper.append(term,detail); return wrapper;
       }));
-      const hasBulletin = Boolean(bulletin);
+      const hasBulletin = Boolean(activeBulletin);
       const evaluationSection = ids('eventEvaluation').closest('details');
       const adviceSection = ids('eventAdvice').closest('details');
       evaluationSection.hidden = !hasBulletin; adviceSection.hidden = !hasBulletin;
-      ids('eventEvaluation').textContent = globalThis.i18n?.translateItewcText(bulletin?.message) || bulletin?.message || '';
-      ids('eventAdvice').textContent = globalThis.i18n?.translateItewcText(bulletin?.advice) || bulletin?.advice || (globalThis.i18n?.t('seismic.no_advice', 'No advice text was included in this bulletin.') || 'No advice text was included in this bulletin.');
-      ids('eventUpdates').textContent = globalThis.i18n?.translateItewcText(bulletin?.updates) || bulletin?.updates || '';
-      ids('eventUpdatesSection').hidden = !bulletin?.updates;
+      ids('eventEvaluation').textContent = globalThis.i18n?.translateItewcText(activeBulletin?.message) || activeBulletin?.message || '';
+      ids('eventAdvice').textContent = globalThis.i18n?.translateItewcText(activeBulletin?.advice) || activeBulletin?.advice || (globalThis.i18n?.t('seismic.no_advice', 'No advice text was included in this bulletin.') || 'No advice text was included in this bulletin.');
+      ids('eventUpdates').textContent = globalThis.i18n?.translateItewcText(activeBulletin?.updates) || activeBulletin?.updates || '';
+      ids('eventUpdatesSection').hidden = !activeBulletin?.updates;
       ids('eventBulletinUnavailable').hidden = hasBulletin;
       const officialLink = ids('eventBulletinLink');
-      officialLink.hidden = !bulletin?.url;
-      if (bulletin?.url) officialLink.href = bulletin.url; else officialLink.removeAttribute('href');
+      officialLink.hidden = !activeBulletin?.url;
+      if (activeBulletin?.url) officialLink.href = activeBulletin.url; else officialLink.removeAttribute('href');
       const map = ids('eventMap');
       const hasCoordinates = Number.isFinite(latitude) && Number.isFinite(longitude);
 

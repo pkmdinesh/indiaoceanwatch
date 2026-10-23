@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T18:31:48.950Z",
+  "updatedAt": "2026-10-23T05:26:04.644Z",
   "date": "2026-10-23",
   "source": "INCOIS Predicted & Actual Tide (PAT) / Survey of India",
   "sourceUrl": "https://incois.gov.in/oceanservices/PAT/index.html",
@@ -13,7 +13,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "aeri": {
       "id": "aeri",
@@ -23,7 +23,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "agatt": {
       "id": "agatt",
@@ -33,7 +33,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "astra": {
       "id": "astra",
@@ -43,7 +43,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "bahab": {
       "id": "bahab",
@@ -53,7 +53,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "beyp": {
       "id": "beyp",
@@ -185,7 +185,7 @@
           "height": 1.02
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "camp": {
       "id": "camp",
@@ -195,7 +195,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "carn": {
       "id": "carn",
@@ -327,7 +327,7 @@
           "height": 0.62
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "chenn": {
       "id": "chenn",
@@ -459,7 +459,7 @@
           "height": 0.51
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "chetl": {
       "id": "chetl",
@@ -469,7 +469,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "coch": {
       "id": "coch",
@@ -601,7 +601,7 @@
           "height": 0.75
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "daman": {
       "id": "daman",
@@ -611,7 +611,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "dham": {
       "id": "dham",
@@ -743,7 +743,7 @@
           "height": 1.78
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "dosin": {
       "id": "dosin",
@@ -753,7 +753,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "enno": {
       "id": "enno",
@@ -763,7 +763,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "gard": {
       "id": "gard",
@@ -895,7 +895,7 @@
           "height": 5.32
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "gopa": {
       "id": "gopa",
@@ -1027,7 +1027,7 @@
           "height": 0.84
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "hutb": {
       "id": "hutb",
@@ -1037,7 +1037,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "jaig": {
       "id": "jaig",
@@ -1169,7 +1169,7 @@
           "height": 1.77
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "jakh": {
       "id": "jakh",
@@ -1179,7 +1179,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "jnpt": {
       "id": "jnpt",
@@ -1189,7 +1189,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "kaki": {
       "id": "kaki",
@@ -1321,7 +1321,7 @@
           "height": 0.81
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "kalpe": {
       "id": "kalpe",
@@ -1331,7 +1331,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "kand": {
       "id": "kand",
@@ -1458,7 +1458,7 @@
           "height": 6.06
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "kanya": {
       "id": "kanya",
@@ -1468,7 +1468,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "karw": {
       "id": "karw",
@@ -1600,7 +1600,7 @@
           "height": 1.37
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "kava": {
       "id": "kava",
@@ -1732,7 +1732,7 @@
           "height": 0.78
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "koll": {
       "id": "koll",
@@ -1864,7 +1864,7 @@
           "height": 0.78
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "kris": {
       "id": "kris",
@@ -1874,7 +1874,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "mach": {
       "id": "mach",
@@ -1884,7 +1884,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "marm": {
       "id": "marm",
@@ -2016,7 +2016,7 @@
           "height": 1.42
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "mayab": {
       "id": "mayab",
@@ -2026,7 +2026,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "mini": {
       "id": "mini",
@@ -2158,7 +2158,7 @@
           "height": 1.7
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "mumba": {
       "id": "mumba",
@@ -2290,7 +2290,7 @@
           "height": 3.3
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "murud": {
       "id": "murud",
@@ -2300,7 +2300,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "naga": {
       "id": "naga",
@@ -2432,7 +2432,7 @@
           "height": 0.5
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "nagc": {
       "id": "nagc",
@@ -2564,7 +2564,7 @@
           "height": 0.75
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "newm": {
       "id": "newm",
@@ -2696,7 +2696,7 @@
           "height": 1.25
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "okha": {
       "id": "okha",
@@ -2828,7 +2828,7 @@
           "height": 3.23
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "panaj": {
       "id": "panaj",
@@ -2838,7 +2838,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "para": {
       "id": "para",
@@ -2970,7 +2970,7 @@
           "height": 1.16
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "porb": {
       "id": "porb",
@@ -3102,7 +3102,7 @@
           "height": 1.9
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "ptbl": {
       "id": "ptbl",
@@ -3234,7 +3234,7 @@
           "height": 1.22
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "pudu": {
       "id": "pudu",
@@ -3361,7 +3361,7 @@
           "height": 0.72
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "ramaya": {
       "id": "ramaya",
@@ -3371,7 +3371,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "rames": {
       "id": "rames",
@@ -3503,7 +3503,7 @@
           "height": 0.68
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "rang": {
       "id": "rang",
@@ -3513,7 +3513,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "tuti": {
       "id": "tuti",
@@ -3645,7 +3645,7 @@
           "height": 0.96
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "verav": {
       "id": "verav",
@@ -3655,7 +3655,7 @@
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     },
     "vish": {
       "id": "vish",
@@ -3787,7 +3787,7 @@
           "height": 0.64
         }
       ],
-      "updatedAt": "2026-10-22T18:31:48.950Z"
+      "updatedAt": "2026-10-23T05:26:04.644Z"
     }
   }
 }
