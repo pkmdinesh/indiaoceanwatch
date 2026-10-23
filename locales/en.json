@@ -41,7 +41,7 @@
   "severity.loading": "Loading advisory data…",
   "tsunami.title": "Tsunami Advisory",
   "tsunami.kicker": "Indian Tsunami Early Warning Centre",
-  "tsunami.safe": "No active tsunami threat for India",
+  "tsunami.safe": "No active tsunami bulletin",
   "tsunami.checking": "Checking ITEWC Tsunami threat status.....",
   "tsunami.last_checked": "Last Checked",
   "tsunami.warning": "Tsunami Warning in effect",
