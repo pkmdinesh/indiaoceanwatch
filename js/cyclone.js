@@ -129,6 +129,7 @@ function renderStormSurge(message, bulletin) {
     function renderCyclone(cyclone) {
       const level = ['yellow','orange','red'].includes(cyclone?.level) ? cyclone.level : 'safe';
       const status = ids('cycloneStatus');
+      if (!status) return;
       status.classList.remove('level-safe','level-yellow','level-orange','level-red');
       status.classList.add(`level-${level}`);
       const cycloneSafeTitle = globalThis.i18n?.t('cyclone.safe', 'No active cyclone advisory') || 'No active cyclone advisory';
