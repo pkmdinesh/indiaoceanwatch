@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T15:47:43.343Z",
+  "updated": "2026-10-28T16:02:42.845Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -24,10 +24,10 @@
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 363072,
+      "size": 363456,
       "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN",
-      "textHash": "40c2ff45ded8db0540f514ac7565a9eeae851df9de2a2b3bc3c9243910736612"
+      "textHash": "0e9695817c2a23ebf904c554d63bd28062e5ff0e4fce65567c13a4143d52a726"
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
