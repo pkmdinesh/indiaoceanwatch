@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-30T18:31:18.189Z",
-  "date": "2026-10-31",
+  "updatedAt": "2026-10-31T18:35:50.576Z",
+  "date": "2026-11-01",
   "source": "INCOIS Predicted & Actual Tide (PAT) / Survey of India",
   "sourceUrl": "https://incois.gov.in/oceanservices/PAT/index.html",
   "totalStations": 50,
@@ -9,57 +9,57 @@
       "id": "adan",
       "name": "Adani",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "aeri": {
       "id": "aeri",
       "name": "Aerialbay",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "agatt": {
       "id": "agatt",
       "name": "Agatti",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "astra": {
       "id": "astra",
       "name": "Astranga",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "bahab": {
       "id": "bahab",
       "name": "Bahabalpur",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "beyp": {
       "id": "beyp",
       "name": "Beypore",
       "patRegion": "Beypore",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -191,17 +191,17 @@
       "id": "camp",
       "name": "Campbellbay",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "carn": {
       "id": "carn",
       "name": "Carnicobar",
       "patRegion": "Car-Nicobar",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -333,7 +333,7 @@
       "id": "chenn",
       "name": "Chennai",
       "patRegion": "Chennai",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -455,17 +455,17 @@
       "id": "chetl",
       "name": "Chetlat",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "coch": {
       "id": "coch",
       "name": "Cochin",
       "patRegion": "Kochi",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -597,17 +597,17 @@
       "id": "daman",
       "name": "Daman",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "dham": {
       "id": "dham",
       "name": "Dhamra",
       "patRegion": "Dhamra",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -739,27 +739,27 @@
       "id": "dosin",
       "name": "Dosinga",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "enno": {
       "id": "enno",
       "name": "Ennore",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "gard": {
       "id": "gard",
       "name": "Gardenreach",
       "patRegion": "Kolkata-Kidderpore-docks",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -891,7 +891,7 @@
       "id": "gopa",
       "name": "Gopalpur",
       "patRegion": "Gopalpur",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -1013,17 +1013,17 @@
       "id": "hutb",
       "name": "Hutbay",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "jaig": {
       "id": "jaig",
       "name": "Jaigarh",
       "patRegion": "Jaigarh",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -1155,27 +1155,27 @@
       "id": "jakh",
       "name": "Jakhau",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "jnpt": {
       "id": "jnpt",
       "name": "Jnpt",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "kaki": {
       "id": "kaki",
       "name": "Kakinada",
       "patRegion": "Kakinada",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -1297,17 +1297,17 @@
       "id": "kalpe",
       "name": "Kalpeni",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "kand": {
       "id": "kand",
       "name": "Kandla",
       "patRegion": "Kandla-Harbour",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -1429,17 +1429,17 @@
       "id": "kanya",
       "name": "Kanyakumari",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "karw": {
       "id": "karw",
       "name": "Karwar",
       "patRegion": "Karwar",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -1571,7 +1571,7 @@
       "id": "kava",
       "name": "Kavaratti",
       "patRegion": "Kavaratti-Laccadive-Is",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -1703,7 +1703,7 @@
       "id": "koll",
       "name": "Kollam",
       "patRegion": "Kollam",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -1835,27 +1835,27 @@
       "id": "kris",
       "name": "Krishnapatnam",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "mach": {
       "id": "mach",
       "name": "Machilipatnam",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "marm": {
       "id": "marm",
       "name": "Marmagoa",
       "patRegion": "Marmagao",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -1987,17 +1987,17 @@
       "id": "mayab",
       "name": "Mayabunder",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "mini": {
       "id": "mini",
       "name": "Minicoy",
       "patRegion": "Minicoy",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -2129,7 +2129,7 @@
       "id": "mumba",
       "name": "Mumbai",
       "patRegion": "Mumbai-Apollo-Bandar",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -2261,17 +2261,17 @@
       "id": "murud",
       "name": "Murud",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "naga": {
       "id": "naga",
       "name": "Nagapattinam",
       "patRegion": "Nagapatnam",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -2403,7 +2403,7 @@
       "id": "nagc",
       "name": "Nancowry",
       "patRegion": "Nancowry-Harbour",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -2525,7 +2525,7 @@
       "id": "newm",
       "name": "Newmangalore",
       "patRegion": "Mangalore",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -2657,7 +2657,7 @@
       "id": "okha",
       "name": "Okha",
       "patRegion": "Okha",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -2789,17 +2789,17 @@
       "id": "panaj",
       "name": "Panaji",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "para": {
       "id": "para",
       "name": "Paradeep",
       "patRegion": "Paradip",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -2921,7 +2921,7 @@
       "id": "porb",
       "name": "Porbander",
       "patRegion": "Porbandar",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -3053,7 +3053,7 @@
       "id": "ptbl",
       "name": "Portblair",
       "patRegion": "Port-Blair",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -3175,7 +3175,7 @@
       "id": "pudu",
       "name": "Puducherry",
       "patRegion": "Puducherry",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -3297,17 +3297,17 @@
       "id": "ramaya",
       "name": "Ramayapatnam",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "rames": {
       "id": "rames",
       "name": "Rameshwaram",
       "patRegion": "Pamban-Pass",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -3439,17 +3439,17 @@
       "id": "rang",
       "name": "Rangatbay",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "tuti": {
       "id": "tuti",
       "name": "Tuticorin",
       "patRegion": "Tuticorin",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
@@ -3581,17 +3581,17 @@
       "id": "verav",
       "name": "Veraval",
       "patRegion": null,
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": false,
       "events": [],
       "series": [],
-      "updatedAt": "2026-10-30T18:31:18.189Z"
+      "updatedAt": "2026-10-31T18:35:50.576Z"
     },
     "vish": {
       "id": "vish",
       "name": "Visakhapatnam",
       "patRegion": "Visakhapatnam",
-      "date": "2026-10-31",
+      "date": "2026-11-01",
       "hasData": true,
       "events": [
         {
