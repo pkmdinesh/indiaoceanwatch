@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T21:17:58.330Z",
+  "updated": "2026-11-01T21:47:45.575Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -17,10 +17,10 @@
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 217536,
+      "size": 235776,
       "title": "INCOIS கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN",
-      "textHash": "3317bd90ebcd089f321b6d50819ea5620759bdbb5dba9fd66010b5a6ce885b49"
+      "textHash": "cbc2225dcd9fc242f84f19a8ba94a06dcddbf2da653d6f251e457b603a721e06"
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
