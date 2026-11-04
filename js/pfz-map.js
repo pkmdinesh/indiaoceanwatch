@@ -42,6 +42,7 @@ const PFZ_WIND_GRID_COORDINATES = Object.freeze([
   { lat: 15.5, lon: 73.0, label: 'Goa Coastal Waters' },
   { lat: 18.0, lon: 70.0, label: 'Central Arabian Sea' },
   { lat: 16.0, lon: 71.0, label: 'Mid Maharashtra EEZ' },
+  { lat: 14.0, lon: 70.0, label: 'Deep Arabian Sea Basin' },
 
   // Karnataka & Kerala
   { lat: 14.5, lon: 73.5, label: 'Karwar / Uttara Kannada' },
@@ -73,6 +74,9 @@ const PFZ_WIND_GRID_COORDINATES = Object.freeze([
   { lat: 13.5, lon: 81.0, label: 'North Tamil Nadu Waters' },
   { lat: 11.0, lon: 82.5, label: 'South Bay of Bengal' },
   { lat: 13.0, lon: 83.0, label: 'Chennai Deep Waters' },
+  { lat: 10.0, lon: 88.0, label: 'East-Central Bay of Bengal' },
+  { lat: 12.0, lon: 87.0, label: 'Central Bay Basin' },
+  { lat: 14.0, lon: 88.0, label: 'East Central BoB' },
 
   // Andhra Pradesh & Odisha
   { lat: 14.5, lon: 81.0, label: 'Nellore Coast' },
@@ -197,12 +201,34 @@ async function fetchPfzWindForecastData() {
 
   const lats = PFZ_WIND_GRID_COORDINATES.map(p => p.lat).join(',');
   const lons = PFZ_WIND_GRID_COORDINATES.map(p => p.lon).join(',');
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&hourly=wind_speed_10m,wind_direction_10m&wind_speed_unit=kn&timezone=Asia%2FKolkata&forecast_days=3`;
+
+  // Primary URL: 9 km ECMWF IFS model, marine cell selection, current & hourly sustained wind + peak gusts
+  const primaryUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&current=wind_speed_10m,wind_gusts_10m,wind_direction_10m&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&models=ecmwf_ifs&cell_selection=sea&wind_speed_unit=kn&timezone=Asia%2FKolkata&forecast_days=3`;
+
+  // Fallback URL: Best-match model with marine cell selection in case ecmwf_ifs is unreachable
+  const fallbackUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&current=wind_speed_10m,wind_gusts_10m,wind_direction_10m&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&cell_selection=sea&wind_speed_unit=kn&timezone=Asia%2FKolkata&forecast_days=3`;
+
+  const fetchWithTimeout = async (targetUrl, timeoutMs = 12000) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const res = await fetch(targetUrl, { signal: controller.signal });
+      if (!res.ok) throw new Error(`Wind API status ${res.status}`);
+      return await res.json();
+    } finally {
+      clearTimeout(timer);
+    }
+  };
 
   try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Wind API status ${res.status}`);
-    const data = await res.json();
+    let data;
+    try {
+      data = await fetchWithTimeout(primaryUrl, 12000);
+    } catch (primaryErr) {
+      console.warn('ECMWF IFS marine wind fetch failed, attempting fallback:', primaryErr);
+      data = await fetchWithTimeout(fallbackUrl, 12000);
+    }
+
     const dataList = Array.isArray(data) ? data : [data];
 
     if (!dataList.length || !dataList[0].hourly?.time) {
@@ -212,6 +238,7 @@ async function fetchPfzWindForecastData() {
     const times = dataList[0].hourly.time;
     pfzWindTimeSteps = calculateTargetWindSteps(times);
     pfzWindDataCache = dataList;
+    renderPfzWindTimelineTicks();
     return dataList;
   } catch (err) {
     console.warn('Could not fetch Open-Meteo wind forecast:', err);
@@ -219,39 +246,77 @@ async function fetchPfzWindForecastData() {
   }
 }
 
+function formatStepDayLabel(isoStr, isCurrent) {
+  if (isCurrent) {
+    const timeStr = new Date().toLocaleTimeString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+    return `Live Now (${timeStr})`;
+  }
+  if (!isoStr) return '';
+  const [datePart, timePart] = isoStr.split('T');
+  if (!datePart || !timePart) return isoStr;
+  const [year, month, day] = datePart.split('-').map(Number);
+  const [hour, min] = timePart.split(':').map(Number);
+
+  const now = new Date();
+  const todayStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  const tomorrow = new Date(now.getTime() + 86400000);
+  const tomorrowStr = tomorrow.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const h12 = hour % 12 || 12;
+  const timeFormatted = `${String(h12).padStart(2, '0')}:${String(min).padStart(2, '0')} ${ampm}`;
+
+  if (datePart === todayStr) return `Today ${timeFormatted}`;
+  if (datePart === tomorrowStr) return `Tomorrow ${timeFormatted}`;
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${day} ${monthNames[month - 1] || ''} ${timeFormatted}`;
+}
+
 function calculateTargetWindSteps(times) {
   if (!times || !times.length) return [];
 
-  const now = new Date();
-  const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(now);
-  const tomorrow = new Date(now.getTime() + 86400000);
-  const tomorrowStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata' }).format(tomorrow);
+  // Match current hour in IST to prevent midnight index trap
+  const nowIsoHour = new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Kolkata' }).slice(0, 13).replace(' ', 'T') + ':00';
+  let currentIndex = times.indexOf(nowIsoHour);
+  if (currentIndex === -1) {
+    currentIndex = times.findIndex(t => t.startsWith(nowIsoHour.slice(0, 13)));
+    if (currentIndex === -1) currentIndex = 0;
+  }
 
-  // 5 interval timings: 08 PM, 05 AM, 11 AM, 04 PM, 08 PM
-  const targets = [
-    { label: '08 PM', dayLabel: 'Today 08 PM', iso: `${todayStr}T20:00` },
-    { label: '05 AM', dayLabel: 'Tomorrow 05 AM', iso: `${tomorrowStr}T05:00` },
-    { label: '11 AM', dayLabel: 'Tomorrow 11 AM', iso: `${tomorrowStr}T11:00` },
-    { label: '04 PM', dayLabel: 'Tomorrow 04 PM', iso: `${tomorrowStr}T16:00` },
-    { label: '08 PM', dayLabel: 'Tomorrow 08 PM', iso: `${tomorrowStr}T20:00` }
+  // 5 interval steps: Live Now, followed by forecast offsets (+6h, +12h, +24h, +36h)
+  const stepOffsets = [
+    { offset: 0, label: 'Now', isCurrent: true },
+    { offset: 6, label: '+6h', isCurrent: false },
+    { offset: 12, label: '+12h', isCurrent: false },
+    { offset: 24, label: '+24h', isCurrent: false },
+    { offset: 36, label: '+36h', isCurrent: false }
   ];
 
-  return targets.map(t => {
-    let bestIdx = times.indexOf(t.iso);
-    if (bestIdx === -1) {
-      bestIdx = times.findIndex(timeStr => timeStr.startsWith(t.iso.slice(0, 13)));
-      if (bestIdx === -1) bestIdx = 0;
-    }
-    return { ...t, hourIndex: bestIdx, actualTime: times[bestIdx] || t.iso };
+  return stepOffsets.map(so => {
+    const idx = Math.min(times.length - 1, currentIndex + so.offset);
+    const actualIso = times[idx] || nowIsoHour;
+    return {
+      label: so.label,
+      isCurrent: so.isCurrent,
+      hourIndex: idx,
+      actualTime: actualIso,
+      dayLabel: formatStepDayLabel(actualIso, so.isCurrent)
+    };
   });
 }
 
-function getWindTier(speedKnots) {
+function getWindTier(speedKnots, gustKnots = 0) {
   const spd = Number(speedKnots) || 0;
-  if (spd < 10) return { tier: 'calm', color: '#10b981', label: 'Calm / Light (<10 kt)', seaState: 'Smooth Sea' };
-  if (spd < 20) return { tier: 'moderate', color: '#f59e0b', label: 'Moderate (10–20 kt)', seaState: 'Moderate Sea' };
-  if (spd < 30) return { tier: 'strong', color: '#f97316', label: 'Strong (20–30 kt)', seaState: 'Rough Sea' };
-  return { tier: 'gale', color: '#ef4444', label: 'Gale / Extreme (>30 kt)', seaState: 'Very Rough Sea / Squally' };
+  const gst = Number(gustKnots) || spd;
+  if (spd >= 30 || gst >= 35) return { tier: 'gale', color: '#ef4444', label: 'Gale / Squall (>30 kt)', seaState: 'Very Rough / Squally Sea' };
+  if (spd >= 20 || gst >= 25) return { tier: 'strong', color: '#f97316', label: 'Strong (20–30 kt)', seaState: 'Rough Sea' };
+  if (spd >= 10 || gst >= 15) return { tier: 'moderate', color: '#f59e0b', label: 'Moderate (10–20 kt)', seaState: 'Moderate Sea' };
+  return { tier: 'calm', color: '#10b981', label: 'Calm / Light (<10 kt)', seaState: 'Smooth Sea' };
 }
 
 function getCardinalDirection(deg) {
@@ -265,6 +330,7 @@ function renderPfzWindMarkers(intervalIdx = 0) {
 
   pfzWindIntervalIndex = Math.max(0, Math.min(intervalIdx, pfzWindTimeSteps.length - 1));
   const step = pfzWindTimeSteps[pfzWindIntervalIndex];
+  const isCurrent = Boolean(step.isCurrent);
   const hourIdx = step.hourIndex;
 
   pfzWindLayerGroup.clearLayers();
@@ -273,17 +339,30 @@ function renderPfzWindMarkers(intervalIdx = 0) {
     const coordMeta = PFZ_WIND_GRID_COORDINATES[i];
     if (!coordMeta) return;
 
-    const spd = pointData.hourly?.wind_speed_10m?.[hourIdx] ?? 0;
-    const dir = pointData.hourly?.wind_direction_10m?.[hourIdx] ?? 0;
+    // Prefer live current observation when on the "Now" step; otherwise use the matched hourly index
+    const spd = isCurrent
+      ? (pointData.current?.wind_speed_10m ?? pointData.hourly?.wind_speed_10m?.[hourIdx] ?? 0)
+      : (pointData.hourly?.wind_speed_10m?.[hourIdx] ?? 0);
+
+    const gust = isCurrent
+      ? (pointData.current?.wind_gusts_10m ?? pointData.hourly?.wind_gusts_10m?.[hourIdx] ?? spd)
+      : (pointData.hourly?.wind_gusts_10m?.[hourIdx] ?? spd);
+
+    const dir = isCurrent
+      ? (pointData.current?.wind_direction_10m ?? pointData.hourly?.wind_direction_10m?.[hourIdx] ?? 0)
+      : (pointData.hourly?.wind_direction_10m?.[hourIdx] ?? 0);
+
     const spdKm = (spd * 1.852).toFixed(1);
-    const tier = getWindTier(spd);
+    const gustKm = (gust * 1.852).toFixed(1);
+    const tier = getWindTier(spd, gust);
     const cardinal = getCardinalDirection(dir);
 
     // Wind direction arrow points in the direction the wind is blowing towards: (dir + 180) % 360
     const arrowAngle = (dir + 180) % 360;
 
+    const gustTooltip = gust > spd ? ` (Gusts: ${Math.round(gust)} kt)` : '';
     const iconHtml = `
-      <div class="pfz-wind-marker" title="${coordMeta.label}: ${Math.round(spd)} kt ${cardinal}">
+      <div class="pfz-wind-marker" title="${coordMeta.label}: ${Math.round(spd)} kt${gustTooltip} ${cardinal}">
         <svg class="pfz-wind-arrow-svg" style="transform: rotate(${arrowAngle}deg);" viewBox="0 0 24 24">
           <path d="M12 2L6 18L12 14L18 18L12 2Z" fill="${tier.color}" stroke="#082f3c" stroke-width="1.4" stroke-linejoin="round"/>
         </svg>
@@ -303,14 +382,16 @@ function renderPfzWindMarkers(intervalIdx = 0) {
       pane: 'pfzLinePane'
     });
 
+    const timeLabel = isCurrent ? `${step.dayLabel} IST` : `${step.dayLabel || step.label} IST`;
     const popupHtml = `
       <div class="pfz-map-popup">
         <strong>💨 ${escapeHtml(coordMeta.label)}</strong>
-        <div><strong>Forecast Time:</strong> ${step.dayLabel || step.label} IST</div>
-        <div><strong>Wind Speed:</strong> ${Math.round(spd)} Knots (${spdKm} km/h)</div>
+        <div><strong>Forecast Time:</strong> ${escapeHtml(timeLabel)}</div>
+        <div><strong>Sustained Wind:</strong> ${Math.round(spd)} Knots (${spdKm} km/h)</div>
+        <div><strong>Peak Gusts:</strong> ${Math.round(gust)} Knots (${gustKm} km/h)</div>
         <div><strong>Direction:</strong> ${Math.round(dir)}° (${cardinal})</div>
         <div><strong>Condition:</strong> <span style="color:${tier.color}; font-weight:800;">${tier.seaState}</span></div>
-        <div style="font-size:10px; color:#557a83; margin-top:2px;">Coordinates: ${coordMeta.lat.toFixed(1)}°N, ${coordMeta.lon.toFixed(1)}°E</div>
+        <div style="font-size:10px; color:#557a83; margin-top:2px;">Coordinates: ${coordMeta.lat.toFixed(1)}°N, ${coordMeta.lon.toFixed(1)}°E · ECMWF IFS (9 km Marine)</div>
       </div>
     `;
 
@@ -360,6 +441,30 @@ function togglePfzWindAnimation() {
   }
 }
 
+function renderPfzWindTimelineTicks() {
+  if (!pfzWindTimelineElement || !pfzWindTimeSteps.length) return;
+  const ticksContainer = pfzWindTimelineElement.querySelector('.pfz-wind-ticks');
+  if (!ticksContainer) return;
+
+  ticksContainer.innerHTML = pfzWindTimeSteps.map((step, idx) =>
+    `<span class="pfz-wind-tick${idx === pfzWindIntervalIndex ? ' active' : ''}" data-idx="${idx}">${escapeHtml(step.label)}</span>`
+  ).join('');
+
+  ticksContainer.querySelectorAll('.pfz-wind-tick').forEach(tick => {
+    tick.addEventListener('click', () => {
+      const idx = parseInt(tick.getAttribute('data-idx'), 10);
+      if (pfzWindPlayTimer) togglePfzWindAnimation();
+      renderPfzWindMarkers(idx);
+    });
+  });
+
+  const range = pfzWindTimelineElement.querySelector('.pfz-wind-range');
+  if (range) {
+    range.max = String(Math.max(0, pfzWindTimeSteps.length - 1));
+    range.value = String(pfzWindIntervalIndex);
+  }
+}
+
 function createPfzWindTimelineWidget() {
   const container = ids('pfzMapCanvas');
   if (!container) return;
@@ -379,14 +484,14 @@ function createPfzWindTimelineWidget() {
     <div class="pfz-wind-track-box">
       <input type="range" class="pfz-wind-range" min="0" max="4" value="0" step="1" aria-label="Wind interval">
       <div class="pfz-wind-ticks">
-        <span class="pfz-wind-tick active" data-idx="0">08 PM</span>
-        <span class="pfz-wind-tick" data-idx="1">05 AM</span>
-        <span class="pfz-wind-tick" data-idx="2">11 AM</span>
-        <span class="pfz-wind-tick" data-idx="3">04 PM</span>
-        <span class="pfz-wind-tick" data-idx="4">08 PM</span>
+        <span class="pfz-wind-tick active" data-idx="0">Now</span>
+        <span class="pfz-wind-tick" data-idx="1">+6h</span>
+        <span class="pfz-wind-tick" data-idx="2">+12h</span>
+        <span class="pfz-wind-tick" data-idx="3">+24h</span>
+        <span class="pfz-wind-tick" data-idx="4">+36h</span>
       </div>
     </div>
-    <div class="pfz-wind-active-pill">Today 08 PM</div>
+    <div class="pfz-wind-active-pill">Live Now</div>
   `;
 
   // Wire tick clicks
@@ -415,6 +520,12 @@ function createPfzWindTimelineWidget() {
 
   container.appendChild(widget);
   pfzWindTimelineElement = widget;
+
+  if (pfzWindTimeSteps.length) {
+    renderPfzWindTimelineTicks();
+    updatePfzWindTimelineUi();
+  }
+
   return widget;
 }
 
@@ -519,7 +630,7 @@ function updatePfzMapStatus() {
     const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a','Wind speed & direction'].includes(name));
     const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly date: ${pfzSstDataDate}.` : '';
     const chlDateNote=selected.includes('Chlorophyll-a') && pfzChlorophyllDataDate ? ` Chlorophyll-a date: ${pfzChlorophyllDataDate}.` : '';
-    const windDateNote=selected.includes('Wind speed & direction') ? ` Wind model: Today & Tomorrow 12h forecast.` : '';
+    const windDateNote=selected.includes('Wind speed & direction') ? ' Marine wind: ECMWF IFS (9 km, open-sea grid) live & 36h forecast.' : '';
     const liveNote=liveLayers.length ? ` ${liveLayers.join(', ')} ${liveLayers.length === 1 ? 'is a live overlay' : 'are live overlays'} and ${liveLayers.length === 1 ? 'is' : 'are'} omitted from offline/shared images.${sstDateNote}${chlDateNote}${windDateNote}` : '';
     status.textContent = selected.length
       ? `Showing ${selected.join(' + ')}. Vector layers are cached locally from official INCOIS WFS data.${liveNote}`
@@ -639,7 +750,7 @@ function ensurePfzMap() {
             <span class="pfz-wind-scale-seg c1" title="Calm / Light: <10 kt"></span>
             <span class="pfz-wind-scale-seg c2" title="Moderate: 10-20 kt"></span>
             <span class="pfz-wind-scale-seg c3" title="Strong: 20-30 kt"></span>
-            <span class="pfz-wind-scale-seg c4" title="Gale / Extreme: >30 kt"></span>
+            <span class="pfz-wind-scale-seg c4" title="Gale / Squall: >30 kt / Gusts >35 kt"></span>
           </div>
         </div>
         <div class="pfz-wind-legend-labels">
