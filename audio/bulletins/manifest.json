@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T14:02:20.918Z",
+  "updated": "2026-11-05T16:03:05.553Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -10,10 +10,10 @@
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 244800,
+      "size": 244032,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN",
-      "textHash": "fc009493dc872912aca53211b29db549a74a209f83898663b720fcea2590dd62"
+      "textHash": "42e2822dc7875e9237751e25d6d0ed5d24b71e037e000a6b623ffcec307c1528"
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
