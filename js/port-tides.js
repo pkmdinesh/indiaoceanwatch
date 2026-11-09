@@ -1041,21 +1041,36 @@ function renderTideChartSvg(elevations, port, now = new Date(), currentHeightOve
   `;
 }
 
-// Astronomical Lunar Phase Calculation
+// Astronomical Lunar Phase Calculation (Jean Meeus Astronomical Algorithms)
 function getMoonPhase(date = new Date()) {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  const time = date.getTime();
+  const jd = (time / 86400000) + 2440587.5;
+  const T = (jd - 2451545.0) / 36525; // Julian centuries since J2000.0
 
-  const c = Math.floor(year / 100);
-  const epact = (11 * (year % 19) + Math.floor((8 * c + 13) / 25) - Math.floor(c / 4) + 11) % 30;
-  const jd = (day + (month < 3 ? month + 12 : month) * 30.6 + epact) % 29.53;
-  const age = (jd + 29.53) % 29.53;
-  const illumination = Math.round((1 - Math.cos(2 * Math.PI * (age / 29.53))) / 2 * 100);
+  // Mean elongation of the Moon: D (degrees)
+  const D = 297.8501921 + 445267.1114034 * T - 0.0018819 * T * T + (T * T * T) / 545868 - (T * T * T * T) / 113065000;
+  // Sun's mean anomaly: M (degrees)
+  const M = 357.5291092 + 35999.0502909 * T - 0.0001536 * T * T + (T * T * T) / 24490000;
+  // Moon's mean anomaly: M' (degrees)
+  const Mprime = 134.9633964 + 477198.8675055 * T + 0.0087414 * T * T + (T * T * T) / 69699 - (T * T * T * T) / 14712000;
+
+  const deg2rad = Math.PI / 180;
+  const dRad = D * deg2rad;
+  const mRad = M * deg2rad;
+  const mpRad = Mprime * deg2rad;
+
+  // Longitudinal elongation difference between Moon and Sun (degrees, 0-360)
+  let elongation = D + 6.289 * Math.sin(mpRad) - 2.100 * Math.sin(mRad) + 1.274 * Math.sin(2 * dRad - mpRad) + 0.658 * Math.sin(2 * dRad);
+  elongation = ((elongation % 360) + 360) % 360;
+
+  const synodicMonth = 29.530588853;
+  const age = (elongation / 360) * synodicMonth;
+  // Illumination percentage (0% to 100%)
+  const illumination = Math.round((1 - Math.cos(elongation * deg2rad)) / 2 * 100);
 
   let phase = 'New Moon';
   let icon = '🌑';
-  if (age < 1.84) { phase = 'New Moon'; icon = '🌑'; }
+  if (age < 1.84 || age >= 27.69) { phase = 'New Moon'; icon = '🌑'; }
   else if (age < 7.38) { phase = 'Waxing Crescent'; icon = '🌒'; }
   else if (age < 9.22) { phase = 'First Quarter'; icon = '🌓'; }
   else if (age < 14.76) { phase = 'Waxing Gibbous'; icon = '🌔'; }
@@ -1064,12 +1079,14 @@ function getMoonPhase(date = new Date()) {
   else if (age < 23.99) { phase = 'Last Quarter'; icon = '🌗'; }
   else { phase = 'Waning Crescent'; icon = '🌘'; }
 
-  const isSpringTide = (age <= 3.0 || age >= 26.5 || (age >= 11.5 && age <= 18.0));
+  // Spring tide occurs around Syzygy: New Moon (age <= 3.0 or >= 26.5) and Full Moon (11.8 <= age <= 17.7)
+  const isSpringTide = (age <= 3.0 || age >= 26.5 || (age >= 11.8 && age <= 17.7));
   const tideRegime = isSpringTide ? 'Spring Tide (Max Range)' : 'Neap Tide (Mild Range)';
   const tideBadgeClass = isSpringTide ? 'spring' : 'neap';
 
   return { phase, icon, illumination, isSpringTide, tideRegime, tideBadgeClass, age: age.toFixed(1) };
 }
+globalThis.getMoonPhase = getMoonPhase;
 
 // Wind Direction Angle to Cardinal Name (16-point compass)
 function degreesToCardinal(deg) {
