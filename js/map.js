@@ -570,15 +570,16 @@ function createOsfCurrentVectorsLayer(dateStr) {
 function createOsfSignificantWaveHeightLayer(dateStr) {
   const layerGroup = L.layerGroup();
 
-  const swhWms = L.tileLayer.wms('https://pae-paha.pacioos.hawaii.edu/thredds/wms/ww3_global/WaveWatch_III_Global_Wave_Model_best.ncd', {
-    layers: 'Thgt',
+  const swhWms = L.tileLayer.wms('https://thredds.ucar.edu/thredds/wms/grib/NCEP/WW3/Global/Best', {
+    layers: 'Significant_height_of_combined_wind_waves_and_swell_surface',
     format: 'image/png',
     transparent: true,
+    version: '1.1.1',
     opacity: 0.65,
-    styles: 'boxfill/rainbow',
+    styles: 'raster/x-Rainbow',
     colorscalerange: '0,6',
     numcolorbands: '100',
-    attribution: `WW3 Forecast-Thgt (${dateStr})`
+    attribution: `NOAA GFS-Wave SWH (${dateStr})`
   });
   layerGroup.addLayer(swhWms);
 
@@ -588,15 +589,16 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
 function createOsfWavePeriodLayer(dateStr) {
   const layerGroup = L.layerGroup();
 
-  const tperWms = L.tileLayer.wms('https://pae-paha.pacioos.hawaii.edu/thredds/wms/ww3_global/WaveWatch_III_Global_Wave_Model_best.ncd', {
-    layers: 'Tper',
+  const tperWms = L.tileLayer.wms('https://thredds.ucar.edu/thredds/wms/grib/NCEP/WW3/Global/Best', {
+    layers: 'Primary_wave_mean_period_surface',
     format: 'image/png',
     transparent: true,
+    version: '1.1.1',
     opacity: 0.65,
-    styles: 'boxfill/rainbow',
+    styles: 'raster/x-Rainbow',
     colorscalerange: '2,20',
     numcolorbands: '100',
-    attribution: `WW3 Forecast-Tper (${dateStr})`
+    attribution: `NOAA GFS-Wave Period (${dateStr})`
   });
   layerGroup.addLayer(tperWms);
 
@@ -606,15 +608,16 @@ function createOsfWavePeriodLayer(dateStr) {
 function createOsfWaveDirectionLayer(dateStr) {
   const layerGroup = L.layerGroup();
 
-  const tdirWms = L.tileLayer.wms('https://pae-paha.pacioos.hawaii.edu/thredds/wms/ww3_global/WaveWatch_III_Global_Wave_Model_best.ncd', {
-    layers: 'Tdir',
+  const tdirWms = L.tileLayer.wms('https://thredds.ucar.edu/thredds/wms/grib/NCEP/WW3/Global/Best', {
+    layers: 'Primary_wave_direction_surface',
     format: 'image/png',
     transparent: true,
+    version: '1.1.1',
     opacity: 0.65,
-    styles: 'boxfill/rainbow',
+    styles: 'raster/x-Rainbow',
     colorscalerange: '0,360',
     numcolorbands: '100',
-    attribution: `WW3 Forecast-Tdir (${dateStr})`
+    attribution: `NOAA GFS-Wave Direction (${dateStr})`
   });
   layerGroup.addLayer(tdirWms);
 
