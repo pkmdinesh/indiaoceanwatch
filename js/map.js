@@ -527,25 +527,40 @@ function getLatestGodasRawDate() {
   return `${yyyy}${mm}${dd}`;
 }
 
-function createOsfCurrentVectorsLayer(dateStr) {
-  const layerGroup = L.layerGroup();
+function getLatestCurrentsRawDate() {
+  if (globalThis._latestIncoisCurrentsDate) return globalThis._latestIncoisCurrentsDate;
+  const now = new Date();
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const istNow = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + istOffset);
+  // INCOIS operational currents files (CURRENTS_IO) are published daily with 1-day assimilation offset
+  const ref = new Date(istNow.getTime() - 86400000);
+  const yyyy = ref.getFullYear();
+  const mm = String(ref.getMonth() + 1).padStart(2, '0');
+  const dd = String(ref.getDate()).padStart(2, '0');
+  return `${yyyy}${mm}${dd}`;
+}
 
-  // HYCOM ESPC-D-V02 1/12° Global Ocean Circulation Model (WMS)
-  const curWms = L.tileLayer.wms('https://wms.hycom.org/thredds/wms/FMRC_ESPC-D-V02_uv3z/FMRC_ESPC-D-V02_uv3z_best.ncd', {
-    layers: 'sea_water_velocity',
+function createOsfCurrentSpeedLayer(dateStr) {
+  const layerGroup = L.layerGroup();
+  const rawDate = getLatestCurrentsRawDate();
+
+  // Official INCOIS Ocean State Forecast Currents (Speed Heatmap via Domestic WMS)
+  const curWms = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/osf/currents/CURRENTS_IO_${rawDate}.nc`, {
+    layers: 'CURRENT',
     format: 'image/png',
     transparent: true,
     version: '1.1.1',
-    opacity: 0.75,
-    styles: 'vector/rainbow',
+    opacity: 0.70,
+    styles: 'raster/x-Rainbow',
     colorscalerange: '0,1.5',
     numcolorbands: '100',
-    attribution: `HYCOM ESPC-D-V02 Current Vectors (${dateStr})`
+    attribution: `INCOIS Current Speed (${dateStr})`
   });
   layerGroup.addLayer(curWms);
 
   return layerGroup;
 }
+const createOsfCurrentVectorsLayer = createOsfCurrentSpeedLayer;
 
 function createOsfSignificantWaveHeightLayer(dateStr) {
   const layerGroup = L.layerGroup();
@@ -661,7 +676,7 @@ function createIncoisOceanWmsLayers() {
     'Peak Wave Direction (Tdir)': tdirLayer,
     'Sea Surface Temp (SST)': sstLayer,
     'Cyclone Heat (TCHP)': tchpLayer,
-    'Ocean Current Vectors': currentVectorsLayer
+    'Ocean Currents (Speed)': currentVectorsLayer
   };
 }
 
@@ -820,7 +835,7 @@ async function openOsfMap(service = null) {
     }
     const curLeg = ids('osfCurrentLegend');
     if (curLeg) {
-      curLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Ocean Current Vectors'] && map.hasLayer(globalThis._osfOceanLayers['Ocean Current Vectors'])) ? 'inline-flex' : 'none';
+      curLeg.style.display = (globalThis._osfOceanLayers && (globalThis._osfOceanLayers['Ocean Currents (Speed)'] || globalThis._osfOceanLayers['Ocean Current Vectors']) && map.hasLayer(globalThis._osfOceanLayers['Ocean Currents (Speed)'] || globalThis._osfOceanLayers['Ocean Current Vectors'])) ? 'inline-flex' : 'none';
     }
     const banner = ids('osfTideBanner');
     if (banner) {
