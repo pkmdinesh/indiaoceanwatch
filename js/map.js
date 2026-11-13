@@ -384,6 +384,12 @@ function handleOsfLayerSelection(event) {
     if (osfMap) osfMap.invalidateSize({ animate: false });
     return;
   }
+  if (event.name.startsWith('Swell Height') || event.name.includes('Swell')) {
+    const leg = ids('osfSwellLegend');
+    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    if (osfMap) osfMap.invalidateSize({ animate: false });
+    return;
+  }
   if (event.name.startsWith('Peak Wave Period') || event.name.includes('Tper')) {
     const leg = ids('osfTperLegend');
     if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
@@ -404,6 +410,12 @@ function handleOsfLayerSelection(event) {
   }
   if (event.name.startsWith('Cyclone Heat')) {
     const leg = ids('osfTchpLegend');
+    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
+    if (osfMap) osfMap.invalidateSize({ animate: false });
+    return;
+  }
+  if (event.name.startsWith('Ocean Current') || event.name.includes('Current')) {
+    const leg = ids('osfCurrentLegend');
     if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
     if (osfMap) osfMap.invalidateSize({ animate: false });
     return;
@@ -516,55 +528,23 @@ function getLatestGodasRawDate() {
 }
 
 function createOsfCurrentVectorsLayer(dateStr) {
-  const layer = L.layerGroup();
-  
-  // Key circulation nodes across Indian maritime domains
-  const nodes = [
-    { name: 'North Arabian Sea / Gujarat Offshore', lat: 21.0, lon: 68.0, speed: '0.4–0.7 m/s', dir: 140, label: 'SE Flow' },
-    { name: 'Konkan / Maharashtra Offshore', lat: 17.5, lon: 71.5, speed: '0.5–0.9 m/s', dir: 160, label: 'SSE Flow' },
-    { name: 'Malabar / Kerala Coastal Jet', lat: 10.5, lon: 74.5, speed: '0.6–1.1 m/s', dir: 155, label: 'SE Flow' },
-    { name: 'Lakshadweep Sea', lat: 11.2, lon: 72.0, speed: '0.4–0.8 m/s', dir: 150, label: 'SE Flow' },
-    { name: 'Gulf of Mannar / Comorin', lat: 7.8, lon: 78.5, speed: '0.7–1.2 m/s', dir: 75, label: 'ENE Flow' },
-    { name: 'Tamil Nadu / Coromandel Coast', lat: 12.5, lon: 81.5, speed: '0.5–0.9 m/s', dir: 25, label: 'NNE Flow' },
-    { name: 'Andhra Pradesh Coast', lat: 16.0, lon: 83.5, speed: '0.4–0.8 m/s', dir: 35, label: 'NE Flow' },
-    { name: 'Odisha / Bengal Offshore', lat: 19.5, lon: 87.5, speed: '0.3–0.6 m/s', dir: 45, label: 'NE Flow' },
-    { name: 'Central Bay of Bengal', lat: 14.0, lon: 88.0, speed: '0.5–0.8 m/s', dir: 60, label: 'ENE Flow' },
-    { name: 'Andaman & Nicobar Sea', lat: 11.5, lon: 93.5, speed: '0.4–0.7 m/s', dir: 80, label: 'E Flow' },
-    { name: 'Equatorial Indian Ocean Jet', lat: 4.5, lon: 78.0, speed: '0.8–1.4 m/s', dir: 90, label: 'Eastward Jet' }
-  ];
+  const layerGroup = L.layerGroup();
 
-  nodes.forEach(node => {
-    const iconHtml = `
-      <div class="osf-cur-arrow-wrap" style="transform: rotate(${node.dir}deg);" title="${escapeHtml(node.name)}: ${escapeHtml(node.speed)} (${node.dir}°)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-          <path d="M12 2L19 11H14V22H10V11H5L12 2Z" fill="#ffffff"/>
-        </svg>
-      </div>
-    `;
-    const icon = L.divIcon({
-      html: iconHtml,
-      className: '',
-      iconSize: [24, 24],
-      iconAnchor: [12, 12]
-    });
-
-    const marker = L.marker([node.lat, node.lon], { icon });
-    const popupHtml = `
-      <div class="osf-popup">
-        <strong style="color:var(--teal);">🧭 ${escapeHtml(node.name)}</strong>
-        <div style="font-size:11.5px; margin-top:5px; line-height:1.45;">
-          <div><b>Estimated Speed:</b> <strong>${escapeHtml(node.speed)}</strong></div>
-          <div><b>Circulation Direction:</b> ${escapeHtml(node.label)} (${node.dir}°)</div>
-          <div><b>Forecast Date:</b> <strong>${escapeHtml(dateStr)}</strong></div>
-          <div style="color:var(--muted); font-size:10px; margin-top:4px;">INCOIS HOOFS/GODAS ocean circulation</div>
-        </div>
-      </div>
-    `;
-    marker.bindPopup(popupHtml, OSF_POPUP_OPTIONS);
-    layer.addLayer(marker);
+  // HYCOM ESPC-D-V02 1/12° Global Ocean Circulation Model (WMS)
+  const curWms = L.tileLayer.wms('https://wms.hycom.org/thredds/wms/FMRC_ESPC-D-V02_uv3z/FMRC_ESPC-D-V02_uv3z_best.ncd', {
+    layers: 'sea_water_velocity',
+    format: 'image/png',
+    transparent: true,
+    version: '1.1.1',
+    opacity: 0.75,
+    styles: 'vector/rainbow',
+    colorscalerange: '0,1.5',
+    numcolorbands: '100',
+    attribution: `HYCOM ESPC-D-V02 Current Vectors (${dateStr})`
   });
+  layerGroup.addLayer(curWms);
 
-  return layer;
+  return layerGroup;
 }
 
 function createOsfSignificantWaveHeightLayer(dateStr) {
@@ -582,6 +562,26 @@ function createOsfSignificantWaveHeightLayer(dateStr) {
     attribution: `NOAA GFS-Wave SWH (${dateStr})`
   });
   layerGroup.addLayer(swhWms);
+
+  return layerGroup;
+}
+
+function createOsfSwellWaveHeightLayer(dateStr) {
+  const layerGroup = L.layerGroup();
+
+  // NOAA / NCEP WaveWatch III Global Swell Wave Height via UCAR TDS
+  const swellWms = L.tileLayer.wms('https://thredds.ucar.edu/thredds/wms/grib/NCEP/WW3/Global/Best', {
+    layers: 'Significant_height_of_swell_waves_ordered_sequence_of_data',
+    format: 'image/png',
+    transparent: true,
+    version: '1.1.1',
+    opacity: 0.65,
+    styles: 'raster/x-Rainbow',
+    colorscalerange: '0,6',
+    numcolorbands: '100',
+    attribution: `NOAA GFS-Wave Swell (${dateStr})`
+  });
+  layerGroup.addLayer(swellWms);
 
   return layerGroup;
 }
@@ -629,6 +629,7 @@ function createIncoisOceanWmsLayers() {
   const godasRaw = getLatestGodasRawDate();
 
   const swhLayer = createOsfSignificantWaveHeightLayer(forecastInfo.formatted);
+  const swellLayer = createOsfSwellWaveHeightLayer(forecastInfo.formatted);
   const tperLayer = createOsfWavePeriodLayer(forecastInfo.formatted);
   const tdirLayer = createOsfWaveDirectionLayer(forecastInfo.formatted);
 
@@ -655,6 +656,7 @@ function createIncoisOceanWmsLayers() {
 
   return {
     'Significant Wave Height (SWH)': swhLayer,
+    'Swell Height': swellLayer,
     'Peak Wave Period (Tper)': tperLayer,
     'Peak Wave Direction (Tdir)': tdirLayer,
     'Sea Surface Temp (SST)': sstLayer,
@@ -804,6 +806,10 @@ async function openOsfMap(service = null) {
     if (swhLeg) {
       swhLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Significant Wave Height (SWH)'] && map.hasLayer(globalThis._osfOceanLayers['Significant Wave Height (SWH)'])) ? 'inline-flex' : 'none';
     }
+    const swellLeg = ids('osfSwellLegend');
+    if (swellLeg) {
+      swellLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Swell Height'] && map.hasLayer(globalThis._osfOceanLayers['Swell Height'])) ? 'inline-flex' : 'none';
+    }
     const tperLeg = ids('osfTperLegend');
     if (tperLeg) {
       tperLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Peak Wave Period (Tper)'] && map.hasLayer(globalThis._osfOceanLayers['Peak Wave Period (Tper)'])) ? 'inline-flex' : 'none';
@@ -811,6 +817,10 @@ async function openOsfMap(service = null) {
     const tdirLeg = ids('osfTdirLegend');
     if (tdirLeg) {
       tdirLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Peak Wave Direction (Tdir)'] && map.hasLayer(globalThis._osfOceanLayers['Peak Wave Direction (Tdir)'])) ? 'inline-flex' : 'none';
+    }
+    const curLeg = ids('osfCurrentLegend');
+    if (curLeg) {
+      curLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Ocean Current Vectors'] && map.hasLayer(globalThis._osfOceanLayers['Ocean Current Vectors'])) ? 'inline-flex' : 'none';
     }
     const banner = ids('osfTideBanner');
     if (banner) {
