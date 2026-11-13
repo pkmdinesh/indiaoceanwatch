@@ -5,6 +5,7 @@ var pfzMapLayers = {};
 var pfzSelectedLayers = new Set();
 var pfzDataPromise = null;
 var pfzSstLegendElement = null;
+var pfzActualSstLegendElement = null;
 var pfzSstDataDate = null;
 var pfzWindLegendElement = null;
 var pfzWindTimelineElement = null;
@@ -612,9 +613,14 @@ function updatePfzMapStatus() {
   const selected=[...pfzSelectedLayers];
   const hasWind = selected.includes('Wind speed & direction');
   const hasSst = selected.includes('SST Anomaly');
+  const hasActualSst = selected.includes('Sea Surface Temp (SST)');
   if (pfzSstLegendElement) {
     pfzSstLegendElement.hidden = !hasSst;
     pfzSstLegendElement.style.display = hasSst ? 'block' : 'none';
+  }
+  if (pfzActualSstLegendElement) {
+    pfzActualSstLegendElement.hidden = !hasActualSst;
+    pfzActualSstLegendElement.style.display = hasActualSst ? 'block' : 'none';
   }
   if (pfzWindLegendElement) {
     pfzWindLegendElement.hidden = !hasWind;
@@ -627,7 +633,7 @@ function updatePfzMapStatus() {
 
   const status = ids('pfzMapShareStatus');
   if (status) {
-    const liveLayers=selected.filter(name => ['Bathymetry','SST Anomaly','Chlorophyll-a','Wind speed & direction'].includes(name));
+    const liveLayers=selected.filter(name => ['Bathymetry','Sea Surface Temp (SST)','SST Anomaly','Chlorophyll-a','Wind speed & direction'].includes(name));
     const sstDateNote=selected.includes('SST Anomaly') && pfzSstDataDate ? ` SST Anomaly date: ${pfzSstDataDate}.` : '';
     const chlDateNote=selected.includes('Chlorophyll-a') && pfzChlorophyllDataDate ? ` Chlorophyll-a date: ${pfzChlorophyllDataDate}.` : '';
     const windDateNote=selected.includes('Wind speed & direction') ? ' Marine wind: ECMWF IFS (9 km, open-sea grid) live & 36h forecast.' : '';
@@ -666,6 +672,17 @@ async function buildPfzMapLayers() {
 
   pfzMapLayers.Bathymetry=L.tileLayer.wms(APP_CONFIG.MAP.PFZ_BATHYMETRY_WMS_URL,{
     layers:'BathymteryImage:gebcobathymtery',format:'image/png',transparent:true,version:'1.1.1',sld_body:PFZ_BATHYMETRY_SLD,opacity:.72,attribution:'INCOIS bathymetry'
+  });
+
+  // NASA GIBS JPL Multi-scale Ultra-high Resolution (MUR) 1 km Global Realtime SST
+  pfzMapLayers['Sea Surface Temp (SST)'] = L.tileLayer.wms('https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi', {
+    layers: 'GHRSST_L4_MUR_Sea_Surface_Temperature',
+    format: 'image/png',
+    transparent: true,
+    version: '1.1.1',
+    opacity: 0.70,
+    className: 'pfz-sst-actual-layer',
+    attribution: 'NASA GIBS / JPL MUR SST 1km'
   });
 
   const murDate = getRecentIsoDate(2);
@@ -738,6 +755,18 @@ function ensurePfzMap() {
     };
     sstLegend.addTo(pfzMap);
 
+    // Actual Realtime SST Legend Control (MUR 1km)
+    const actualSstLegend=L.control({position:'bottomright'});
+    actualSstLegend.onAdd=() => {
+      const element=L.DomUtil.create('div','pfz-sst-legend');
+      element.hidden=true;
+      element.setAttribute('aria-label','Sea surface temperature scale in degrees Celsius');
+      element.innerHTML='<strong>SST · °C (MUR 1km)</strong><div class="thermal-bar sst-bar" style="width:100%;height:9px;margin:4px 0;display:block;" aria-hidden="true"></div><div class="pfz-sst-ticks"><span>≤20</span><span>24</span><span>28</span><span>32</span><span>≥35</span></div><small>Cooler → Warmer</small>';
+      pfzActualSstLegendElement=element;
+      return element;
+    };
+    actualSstLegend.addTo(pfzMap);
+
     // Wind Speed & Direction Legend Control
     const windLegend=L.control({position:'bottomright'});
     windLegend.onAdd=() => {
@@ -804,7 +833,7 @@ async function capturePfzMapCanvas() {
 
 async function sharePfzMap() {
   const status=ids('pfzMapShareStatus');
-  const selection=[...pfzSelectedLayers].filter(name => !['Bathymetry','SST Anomaly','Wind speed & direction'].includes(name));
+  const selection=[...pfzSelectedLayers].filter(name => !['Bathymetry','Sea Surface Temp (SST)','SST Anomaly','Wind speed & direction'].includes(name));
   if (status) status.textContent='Preparing current PFZ map image\u2026';
   try {
     const mapCanvas=await capturePfzMapCanvas();

@@ -648,12 +648,14 @@ function createIncoisOceanWmsLayers() {
   const tperLayer = createOsfWavePeriodLayer(forecastInfo.formatted);
   const tdirLayer = createOsfWaveDirectionLayer(forecastInfo.formatted);
 
-  const sstLayer = L.tileLayer.wms('https://incois.gov.in/geoserver/PFZ-TUNA-SST-CHL/wms', {
-    layers: 'PFZ-TUNA-SST-CHL:sst',
+  // NASA GIBS JPL Multi-scale Ultra-high Resolution (MUR) 1 km Global Realtime SST
+  const sstLayer = L.tileLayer.wms('https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi', {
+    layers: 'GHRSST_L4_MUR_Sea_Surface_Temperature',
     format: 'image/png',
     transparent: true,
-    opacity: 0.60,
-    attribution: `INCOIS SST Forecast (${forecastInfo.formatted})`
+    version: '1.1.1',
+    opacity: 0.65,
+    attribution: 'NASA GIBS / JPL MUR SST 1km'
   });
 
   const tchpLayer = L.tileLayer.wms(`https://incois.gov.in/thredds/wms/godas/tchp_${godasRaw}.nc`, {
