@@ -8,6 +8,14 @@ var osfCumulativeLayer = null;
 var osfTidalLayer = null;
 var osfRequestedService = null;
 var osfDistrictPolygonsPromise = null;
+var osfLayersPromise = null;
+var osfCumulativeFeatures = new Map();
+
+const HAZARD_WMS_COMPANIONS = Object.freeze({
+  'High Wave': 'Significant Wave Height (SWH)',
+  'Swell Surge': 'Swell Height',
+  'Ocean Currents': 'Ocean Currents (Speed)'
+});
 
 const OSF_POPUP_OPTIONS = Object.freeze({
   maxWidth: 460,
@@ -91,7 +99,7 @@ function extractIncoisAdvisoryMetrics(msg, serviceName = '') {
 
   // 1. Current speed: "0.4 - 0.6 m/sec", "1.2 - 1.5 m/sec", "20 - 70 cm/sec", "knots"
   let currentSpeed = null;
-  const curMatch = msg.match(/(?:current\s+speeds?(?:\s+in\s+the\s+range\s+of)?|speed\s+of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec|cm\/sec|cm\/s|knots?|kn\b)/i) ||
+  const curMatch = msg.match(/(?:current\s+speeds?(?:\s+in\s+the\s+range\s+of)?|speed\s+of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to|and)\s*(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec|cm\/sec|cm\/s|knots?|kn\b)/i) ||
                    msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec|cm\/sec|cm\/s|knots?|kn\b)/i) ||
                    msg.match(/(\d+(?:\.\d+)?)\s*(?:m\/sec|m\/s|meter\/sec|cm\/sec|cm\/s|knots?|kn\b)/i);
   if (curMatch) {
@@ -108,7 +116,7 @@ function extractIncoisAdvisoryMetrics(msg, serviceName = '') {
   // 2. Wave height: "2.5 - 3.4 meters" or "2.5 to 3.4 m" (ensure m is not followed by /s or /sec)
   let waveHeight = null;
   if (!isCurrentService || isHighWaveService || isSwellService) {
-    const whMatch = msg.match(/(?:waves?(?:\s+heights?)?|heights?|swell(?:\s+waves?)?)?\s*(?:in\s+the\s+range\s+of|of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:meters?|m(?!\s*\/(?:s|sec)))\b/i) ||
+    const whMatch = msg.match(/(?:waves?(?:\s+heights?)?|heights?|swell(?:\s+waves?)?)?\s*(?:in\s+the\s+range\s+of|of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to|and)\s*(\d+(?:\.\d+)?)\s*(?:meters?|m(?!\s*\/(?:s|sec)))\b/i) ||
                     msg.match(/(\d+(?:\.\d+)?)\s*(?:meters?|m(?!\s*\/(?:s|sec)))\b\s*(?:height|wave)/i) ||
                     msg.match(/(?:wave\s+height|height)\s*(?:of)?\s*(\d+(?:\.\d+)?)\s*(?:meters?|m(?!\s*\/(?:s|sec)))\b/i);
     if (whMatch) {
@@ -123,7 +131,7 @@ function extractIncoisAdvisoryMetrics(msg, serviceName = '') {
   // 3. Swell wave period: "16.0 - 20.0 sec period" or "16 - 20 s"
   let swellPeriod = null;
   if (!isCurrentService || isSwellService) {
-    const spMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)\s*(?:period)?/i) ||
+    const spMatch = msg.match(/(\d+(?:\.\d+)?)\s*(?:-|to|and)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)\s*(?:period)?/i) ||
                     msg.match(/period\s*(?:of)?\s*(\d+(?:\.\d+)?)\s*(?:-|to)\s*(\d+(?:\.\d+)?)\s*(?:sec(?:onds?)?|s\b)?/i);
     if (spMatch) {
       const minVal = parseFloat(spMatch[1]);
@@ -144,13 +152,19 @@ function extractIncoisAdvisoryMetrics(msg, serviceName = '') {
 
 let osfPopupCounter = 0;
 
-function renderOsfDistrictPopup(district, state, serviceEntries, cumulativeLevel = null) {
+function renderOsfDistrictPopup(district, state, serviceEntries, cumulativeLevel = null, activeService = null) {
   const uid = ++osfPopupCounter;
   const entries = Array.isArray(serviceEntries) ? serviceEntries : [serviceEntries];
 
-  // Pick active service: first match with cumulative severity if provided, else first entry
+  // Pick active service:
+  // 1. If activeService provided, match that service name
+  // 2. Else if cumulativeLevel provided, find first service matching cumulative severity
+  // 3. Else default to first entry
   let activeIdx = 0;
-  if (cumulativeLevel) {
+  if (activeService) {
+    const matchIdx = entries.findIndex(e => e.service === activeService);
+    if (matchIdx !== -1) activeIdx = matchIdx;
+  } else if (cumulativeLevel) {
     const matchIdx = entries.findIndex(e => osfHighestSeverity(e.advisories) === cumulativeLevel);
     if (matchIdx !== -1) activeIdx = matchIdx;
   }
@@ -213,7 +227,27 @@ function renderOsfDistrictPopup(district, state, serviceEntries, cumulativeLevel
   `;
 }
 
-// Delegated click listener for popup chip selection
+function getOsfDistrictPopup(polygon, preferredService = null) {
+  const key = polygon._districtKey;
+  const item = osfCumulativeFeatures.get(key);
+  const district = polygon.feature?.properties?.District || 'Coastal Area';
+  const state = polygon.feature?.properties?.STATE || '';
+  const services = item?.services || polygon._osfServices || [];
+
+  const selected = [...osfSelectedServices];
+  const useCumulative = selected.length >= 2;
+  const activeService = preferredService || (selected.length === 1 ? selected[0] : null);
+
+  const activeEntries = useCumulative
+    ? services.filter(entry => selected.includes(entry.service))
+    : services;
+  const allAdvisories = activeEntries.flatMap(entry => entry.advisories);
+  const cumulativeLevel = osfHighestSeverity(allAdvisories);
+
+  return renderOsfDistrictPopup(district, state, services, useCumulative ? cumulativeLevel : null, activeService);
+}
+
+// Delegated click & keyboard listeners for popup chip selection (WAI-ARIA Tablist)
 if (typeof document !== 'undefined') {
   document.addEventListener('click', (e) => {
     const chip = e.target.closest('.osf-popup-chip');
@@ -232,6 +266,36 @@ if (typeof document !== 'undefined') {
     chip.setAttribute('aria-selected', 'true');
     const panel = popup.querySelector('#' + targetId);
     if (panel) panel.hidden = false;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const chip = e.target.closest('.osf-popup-chip');
+    if (!chip) return;
+    const list = chip.closest('.osf-popup-chips');
+    if (!list) return;
+    const chips = [...list.querySelectorAll('.osf-popup-chip')];
+    const idx = chips.indexOf(chip);
+    if (idx === -1) return;
+
+    let nextChip = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      nextChip = chips[(idx + 1) % chips.length];
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      nextChip = chips[(idx - 1 + chips.length) % chips.length];
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      nextChip = chips[0];
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      nextChip = chips[chips.length - 1];
+    }
+
+    if (nextChip) {
+      nextChip.focus();
+      nextChip.click();
+    }
   });
 }
 
@@ -344,88 +408,164 @@ function createOsfTidalStationLayer() {
   return layer;
 }
 
+function updateOsfMapMeta(activeServices = null) {
+  const metaEl = ids('osfMapMeta');
+  const titleEl = ids('osfMapTitle');
+  if (!metaEl) return;
+
+  const data = typeof latestStatusData !== 'undefined' ? latestStatusData : {};
+  const serviceGroups = {
+    'High Wave': data?.highWave,
+    'Swell Surge': data?.swellSurge,
+    'Ocean Currents': data?.oceanCurrent
+  };
+
+  const selected = activeServices || [...osfSelectedServices].filter(s => serviceGroups[s]);
+
+  if (selected.length === 1) {
+    const sName = selected[0];
+    const group = serviceGroups[sName];
+    const issueDate = group?.issueDate || '—';
+    if (titleEl) titleEl.textContent = `${sName} Forecast Map`;
+    metaEl.textContent = `${sName} · Issue date: ${issueDate} · INCOIS Ocean State Forecast`;
+  } else if (selected.length > 1) {
+    if (titleEl) titleEl.textContent = 'Ocean State Forecast Map';
+    metaEl.textContent = selected
+      .map(sName => `${sName}: ${serviceGroups[sName]?.issueDate || '—'}`)
+      .join(' · ');
+  } else {
+    if (titleEl) titleEl.textContent = 'Ocean State Forecast Map';
+    const all = ['High Wave', 'Swell Surge', 'Ocean Currents'];
+    metaEl.textContent = all
+      .map(sName => `${sName}: ${serviceGroups[sName]?.issueDate || '—'}`)
+      .join(' · ');
+  }
+}
+
+function syncOsfLegends() {
+  if (!osfMap) return;
+
+  const swhLeg = ids('osfSwhLegend');
+  if (swhLeg) {
+    const hasLayer = Boolean(globalThis._osfOceanLayers?.['Significant Wave Height (SWH)'] && osfMap.hasLayer(globalThis._osfOceanLayers['Significant Wave Height (SWH)']));
+    swhLeg.style.display = hasLayer ? 'inline-flex' : 'none';
+  }
+
+  const swellLeg = ids('osfSwellLegend');
+  if (swellLeg) {
+    const hasLayer = Boolean(globalThis._osfOceanLayers?.['Swell Height'] && osfMap.hasLayer(globalThis._osfOceanLayers['Swell Height']));
+    swellLeg.style.display = hasLayer ? 'inline-flex' : 'none';
+  }
+
+  const tperLeg = ids('osfTperLegend');
+  if (tperLeg) {
+    const hasLayer = Boolean(globalThis._osfOceanLayers?.['Peak Wave Period (Tper)'] && osfMap.hasLayer(globalThis._osfOceanLayers['Peak Wave Period (Tper)']));
+    tperLeg.style.display = hasLayer ? 'inline-flex' : 'none';
+  }
+
+  const tdirLeg = ids('osfTdirLegend');
+  if (tdirLeg) {
+    const hasLayer = Boolean(globalThis._osfOceanLayers?.['Peak Wave Direction (Tdir)'] && osfMap.hasLayer(globalThis._osfOceanLayers['Peak Wave Direction (Tdir)']));
+    tdirLeg.style.display = hasLayer ? 'inline-flex' : 'none';
+  }
+
+  const sstLeg = ids('osfSstLegend');
+  if (sstLeg) {
+    const hasLayer = Boolean(globalThis._osfOceanLayers?.['Sea Surface Temp (SST)'] && osfMap.hasLayer(globalThis._osfOceanLayers['Sea Surface Temp (SST)']));
+    sstLeg.style.display = hasLayer ? 'inline-flex' : 'none';
+  }
+
+  const tchpLeg = ids('osfTchpLegend');
+  if (tchpLeg) {
+    const hasLayer = Boolean(globalThis._osfOceanLayers?.['Cyclone Heat (TCHP)'] && osfMap.hasLayer(globalThis._osfOceanLayers['Cyclone Heat (TCHP)']));
+    tchpLeg.style.display = hasLayer ? 'inline-flex' : 'none';
+  }
+
+  const curLeg = ids('osfCurrentLegend');
+  if (curLeg) {
+    const curLayer = globalThis._osfOceanLayers?.['Ocean Currents (Speed)'] || globalThis._osfOceanLayers?.['Ocean Current Vectors'];
+    const hasLayer = Boolean(curLayer && osfMap.hasLayer(curLayer));
+    curLeg.style.display = hasLayer ? 'inline-flex' : 'none';
+  }
+
+  const banner = ids('osfTideBanner');
+  if (banner) {
+    banner.hidden = !osfTidalLayer || !osfMap.hasLayer(osfTidalLayer);
+  }
+}
+
 function updateOsfComposite() {
   if (!osfMap || !osfCumulativeLayer) return;
   const selectedServices = [...osfSelectedServices].filter(service => osfServiceLayers[service]);
   const useCumulative = selectedServices.length >= 2;
   Object.values(osfServiceLayers).forEach(layer => layer.eachLayer(item => {
-    if (item.setStyle) item.setStyle(useCumulative ? {fillOpacity:0,opacity:0} : {...OSF_POLYGON_BORDER,fillOpacity:1});
+    if (item.setStyle) item.setStyle(useCumulative ? { fillOpacity: 0, opacity: 0 } : { ...OSF_POLYGON_BORDER, fillOpacity: .55 });
     if (item._path) item._path.style.pointerEvents = useCumulative ? 'none' : 'auto';
   }));
   if (useCumulative) {
     osfCumulativeLayer.eachLayer(polygon => {
-      const services = (polygon._osfServices || []).filter(entry => selectedServices.includes(entry.service));
+      const key = polygon._districtKey;
+      const item = osfCumulativeFeatures.get(key);
+      const services = (item?.services || polygon._osfServices || []).filter(entry => selectedServices.includes(entry.service));
       const allAdvisories = services.flatMap(entry => entry.advisories);
       const level = osfHighestSeverity(allAdvisories);
-      polygon.setStyle({...OSF_POLYGON_BORDER,color:'#111',weight:.5,opacity:1,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:1});
-      polygon.bindPopup(renderOsfDistrictPopup(polygon.feature.properties.District, polygon.feature.properties.STATE, services, level), OSF_POPUP_OPTIONS);
+      polygon.setStyle({ ...OSF_POLYGON_BORDER, color: '#111', weight: .5, opacity: 1, fillColor: OSF_SEVERITY_COLORS[level], fillOpacity: 1 });
+      polygon.unbindTooltip();
+      if (level !== 'noThreat') {
+        polygon.bindTooltip(osfDistrictTooltipHtml(polygon.feature.properties.District, polygon.feature.properties.STATE, selectedServices.join(' + '), allAdvisories, level), { sticky: true, className: 'osf-district-tooltip' });
+      }
     });
     if (!osfMap.hasLayer(osfCumulativeLayer)) osfCumulativeLayer.addTo(osfMap);
     if (osfCumulativeLayer.bringToFront) osfCumulativeLayer.bringToFront();
-  } else if (osfMap.hasLayer(osfCumulativeLayer)) osfMap.removeLayer(osfCumulativeLayer);
+  } else if (osfMap.hasLayer(osfCumulativeLayer)) {
+    osfMap.removeLayer(osfCumulativeLayer);
+  }
   ids('osfMapShareStatus').textContent = useCumulative
     ? `Cumulative priority for ${selectedServices.join(' + ')}: Warning → Alert → Watch → No Threat.`
-    : 'Showing the selected service polygons. Select a second layer for the cumulative priority overlay.';
+    : (selectedServices.length === 1
+        ? `Showing ${selectedServices[0]} coastal polygons. Select a second layer for cumulative priority overlay.`
+        : 'Official INCOIS coastal district polygons. Use the layer control to select services.');
 }
 
 function handleOsfLayerSelection(event) {
   if (!event?.name) return;
-  if (event.name === 'Tidal Phase & High Tide') {
-    const banner = ids('osfTideBanner');
-    if (banner) {
-      banner.hidden = (event.type === 'overlayremove');
+
+  // 1. Hazard polygon service layers
+  if (osfServiceLayers && osfServiceLayers[event.name]) {
+    if (event.type === 'overlayadd') {
+      osfSelectedServices.add(event.name);
+
+      // When switching to a single service, auto-switch companion WMS heatmap if one was already active
+      if (osfSelectedServices.size === 1 && globalThis._osfOceanLayers && osfMap) {
+        const targetCompanion = HAZARD_WMS_COMPANIONS[event.name];
+        if (targetCompanion) {
+          const companionNames = Object.values(HAZARD_WMS_COMPANIONS);
+          let prevCompanion = null;
+          companionNames.forEach(cName => {
+            const cLayer = globalThis._osfOceanLayers[cName];
+            if (cName !== targetCompanion && cLayer && osfMap.hasLayer(cLayer)) {
+              prevCompanion = cName;
+              osfMap.removeLayer(cLayer);
+            }
+          });
+          if (prevCompanion && globalThis._osfOceanLayers[targetCompanion] && !osfMap.hasLayer(globalThis._osfOceanLayers[targetCompanion])) {
+            osfMap.addLayer(globalThis._osfOceanLayers[targetCompanion]);
+          }
+        }
+      }
+    } else if (event.type === 'overlayremove') {
+      osfSelectedServices.delete(event.name);
     }
+    updateOsfComposite();
+    updateOsfMapMeta();
+    syncOsfLegends();
     if (osfMap) osfMap.invalidateSize({ animate: false });
     return;
   }
-  if (event.name.startsWith('Significant Wave Height') || event.name.includes('SWH')) {
-    const leg = ids('osfSwhLegend');
-    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
-    if (osfMap) osfMap.invalidateSize({ animate: false });
-    return;
-  }
-  if (event.name.startsWith('Swell Height') || event.name.includes('Swell')) {
-    const leg = ids('osfSwellLegend');
-    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
-    if (osfMap) osfMap.invalidateSize({ animate: false });
-    return;
-  }
-  if (event.name.startsWith('Peak Wave Period') || event.name.includes('Tper')) {
-    const leg = ids('osfTperLegend');
-    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
-    if (osfMap) osfMap.invalidateSize({ animate: false });
-    return;
-  }
-  if (event.name.startsWith('Peak Wave Direction') || event.name.includes('Tdir')) {
-    const leg = ids('osfTdirLegend');
-    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
-    if (osfMap) osfMap.invalidateSize({ animate: false });
-    return;
-  }
-  if (event.name.startsWith('Sea Surface Temp')) {
-    const leg = ids('osfSstLegend');
-    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
-    if (osfMap) osfMap.invalidateSize({ animate: false });
-    return;
-  }
-  if (event.name.startsWith('Cyclone Heat')) {
-    const leg = ids('osfTchpLegend');
-    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
-    if (osfMap) osfMap.invalidateSize({ animate: false });
-    return;
-  }
-  if (event.name.startsWith('Ocean Current') || event.name.includes('Current')) {
-    const leg = ids('osfCurrentLegend');
-    if (leg) leg.style.display = (event.type === 'overlayadd') ? 'inline-flex' : 'none';
-    if (osfMap) osfMap.invalidateSize({ animate: false });
-    return;
-  }
-  if (!osfServiceLayers[event.name]) return;
-  if (event.type === 'overlayadd') osfSelectedServices.add(event.name);
-  else if (event.type === 'overlayremove') osfSelectedServices.delete(event.name);
-  updateOsfComposite();
+
+  // 2. Non-hazard overlays (WMS raster and Tidal overlays)
+  syncOsfLegends();
   if (osfMap) osfMap.invalidateSize({ animate: false });
-  requestAnimationFrame(fitOsfVisibleBounds);
 }
 
 function fitOsfVisibleBounds() {
@@ -438,69 +578,11 @@ function fitOsfVisibleBounds() {
   });
   if (bounds.isValid()) {
     const isMobile = innerWidth < 700;
-    osfMap.fitBounds(bounds,{padding:isMobile ? [8,8] : [20,20],maxZoom:6,animate:false});
+    osfMap.fitBounds(bounds, { padding: isMobile ? [8, 8] : [20, 20], maxZoom: 6, animate: false });
   } else {
-    osfMap.setView([15,79],innerWidth < 700 ? 4 : 5,{animate:false});
+    osfMap.setView([15, 79], innerWidth < 700 ? 4 : 5, { animate: false });
   }
 }
-
-async function buildCumulativeOsfMapLayers(data) {
-  if (!osfMap || !window.L) return;
-  ids('osfMapShareStatus').textContent='Loading coastal district polygons…';
-  if (osfLayerControl) osfLayerControl.remove();
-  if (osfCumulativeLayer && osfMap.hasLayer(osfCumulativeLayer)) osfMap.removeLayer(osfCumulativeLayer);
-  if (osfTidalLayer && osfMap.hasLayer(osfTidalLayer)) osfMap.removeLayer(osfTidalLayer);
-  Object.values(osfServiceLayers).forEach(layer => { if (osfMap.hasLayer(layer)) osfMap.removeLayer(layer); });
-  if (globalThis._osfOceanLayers) {
-    Object.values(globalThis._osfOceanLayers).forEach(layer => { if (osfMap.hasLayer(layer)) osfMap.removeLayer(layer); });
-  }
-  const polygonData = await loadOsfDistrictPolygons();
-  const services = [['High Wave',data?.highWave],['Swell Surge',data?.swellSurge],['Ocean Currents',data?.oceanCurrent]];
-  osfServiceLayers = {};
-  osfSelectedServices = new Set();
-  const cumulativeFeatures = new Map();
-  services.forEach(([service,group]) => {
-    const layer = L.geoJSON(polygonData,{
-      smoothFactor:2.5,
-      style:feature => {
-        const level = osfHighestSeverity(osfFeatureAdvisories(feature,group));
-        return {...OSF_POLYGON_BORDER,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:.55};
-      },
-      onEachFeature:(feature,polygon) => {
-        const advisories = osfFeatureAdvisories(feature,group);
-        const level = osfHighestSeverity(advisories);
-        const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
-        if (!cumulativeFeatures.has(key)) cumulativeFeatures.set(key,{feature,services:[]});
-        cumulativeFeatures.get(key).services.push({service,group,advisories});
-        polygon.bindPopup(renderOsfDistrictPopup(feature.properties.District, feature.properties.STATE, [{service, group, advisories}]), OSF_POPUP_OPTIONS);
-        if (level !== 'noThreat') {
-          polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, service, advisories, level), { sticky: true, className: 'osf-district-tooltip' });
-        }
-      }
-    });
-    osfServiceLayers[service]=layer;
-  });
-  osfCumulativeLayer = L.geoJSON({type:'FeatureCollection',features:[...cumulativeFeatures.values()].map(item => item.feature)}, {
-    smoothFactor:2.5,
-    style:feature => {
-      const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
-      const item = cumulativeFeatures.get(key);
-      const allAdvisories = item.services.flatMap(entry => entry.advisories);
-      const level = osfHighestSeverity(allAdvisories);
-      return {...OSF_POLYGON_BORDER,color:'#111',weight:.5,opacity:1,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:1};
-    },
-    onEachFeature:(feature,polygon) => {
-      const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
-      const item = cumulativeFeatures.get(key);
-      const allAdvisories = item.services.flatMap(entry => entry.advisories);
-      const level = osfHighestSeverity(allAdvisories);
-      polygon._osfServices = item.services;
-      polygon.bindPopup(renderOsfDistrictPopup(polygon.feature.properties.District, polygon.feature.properties.STATE, item.services, level), OSF_POPUP_OPTIONS);
-      if (level !== 'noThreat') {
-        polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, 'Cumulative', allAdvisories, level), { sticky: true, className: 'osf-district-tooltip' });
-      }
-    }
-  });
 
 function getOceanForecastDate() {
   const now = new Date();
@@ -529,6 +611,17 @@ function getLatestGodasRawDate() {
 
 function getLatestCurrentsRawDate() {
   if (globalThis._latestIncoisCurrentsDate) return globalThis._latestIncoisCurrentsDate;
+  // If latestStatusData has oceanCurrent issueDate, e.g. "13 Nov 2026":
+  const issueDate = (typeof latestStatusData !== 'undefined') ? latestStatusData?.oceanCurrent?.issueDate : null;
+  if (issueDate) {
+    const parsed = new Date(issueDate);
+    if (!isNaN(parsed.getTime())) {
+      const yyyy = parsed.getFullYear();
+      const mm = String(parsed.getMonth() + 1).padStart(2, '0');
+      const dd = String(parsed.getDate()).padStart(2, '0');
+      return `${yyyy}${mm}${dd}`;
+    }
+  }
   const now = new Date();
   const istOffset = 5.5 * 60 * 60 * 1000;
   const istNow = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + istOffset);
@@ -669,7 +762,7 @@ function createIncoisOceanWmsLayers() {
     attribution: `INCOIS TCHP Forecast (${forecastInfo.formatted})`
   });
 
-  const currentVectorsLayer = createOsfCurrentVectorsLayer(forecastInfo.formatted);
+  const currentVectorsLayer = createOsfCurrentSpeedLayer(forecastInfo.formatted);
 
   return {
     'Significant Wave Height (SWH)': swhLayer,
@@ -682,10 +775,87 @@ function createIncoisOceanWmsLayers() {
   };
 }
 
+async function buildCumulativeOsfMapLayers(data) {
+  if (!osfMap || !window.L) return;
+  ids('osfMapShareStatus').textContent = 'Loading coastal district polygons…';
+  if (osfLayerControl) osfLayerControl.remove();
+  if (osfCumulativeLayer && osfMap.hasLayer(osfCumulativeLayer)) osfMap.removeLayer(osfCumulativeLayer);
+  if (osfTidalLayer && osfMap.hasLayer(osfTidalLayer)) osfMap.removeLayer(osfTidalLayer);
+  Object.values(osfServiceLayers).forEach(layer => { if (osfMap.hasLayer(layer)) osfMap.removeLayer(layer); });
+  if (globalThis._osfOceanLayers) {
+    Object.values(globalThis._osfOceanLayers).forEach(layer => { if (osfMap.hasLayer(layer)) osfMap.removeLayer(layer); });
+  }
+
+  const polygonData = await loadOsfDistrictPolygons();
+  const services = [['High Wave', data?.highWave], ['Swell Surge', data?.swellSurge], ['Ocean Currents', data?.oceanCurrent]];
+  osfServiceLayers = {};
+  osfSelectedServices = new Set();
+  osfCumulativeFeatures.clear();
+
+  // Pass 1: Aggregate all service advisories per district
+  services.forEach(([service, group]) => {
+    polygonData.features.forEach(feature => {
+      const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
+      if (!osfCumulativeFeatures.has(key)) {
+        osfCumulativeFeatures.set(key, { feature, services: [] });
+      }
+      const advisories = osfFeatureAdvisories(feature, group);
+      osfCumulativeFeatures.get(key).services.push({ service, group, advisories });
+    });
+  });
+
+  // Pass 2: Build individual service layers with click-time dynamic popups
+  services.forEach(([service, group]) => {
+    const layer = L.geoJSON(polygonData, {
+      smoothFactor: 2.5,
+      style: feature => {
+        const level = osfHighestSeverity(osfFeatureAdvisories(feature, group));
+        return { ...OSF_POLYGON_BORDER, fillColor: OSF_SEVERITY_COLORS[level], fillOpacity: .55 };
+      },
+      onEachFeature: (feature, polygon) => {
+        const advisories = osfFeatureAdvisories(feature, group);
+        const level = osfHighestSeverity(advisories);
+        const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
+        polygon._districtKey = key;
+        polygon._osfDefaultService = service;
+        polygon.bindPopup(() => getOsfDistrictPopup(polygon, service), OSF_POPUP_OPTIONS);
+        if (level !== 'noThreat') {
+          polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, service, advisories, level), { sticky: true, className: 'osf-district-tooltip' });
+        }
+      }
+    });
+    osfServiceLayers[service] = layer;
+  });
+
+  // Build cumulative priority layer
+  osfCumulativeLayer = L.geoJSON({ type: 'FeatureCollection', features: [...osfCumulativeFeatures.values()].map(item => item.feature) }, {
+    smoothFactor: 2.5,
+    style: feature => {
+      const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
+      const item = osfCumulativeFeatures.get(key);
+      const allAdvisories = (item?.services || []).flatMap(entry => entry.advisories);
+      const level = osfHighestSeverity(allAdvisories);
+      return { ...OSF_POLYGON_BORDER, color: '#111', weight: .5, opacity: 1, fillColor: OSF_SEVERITY_COLORS[level], fillOpacity: 1 };
+    },
+    onEachFeature: (feature, polygon) => {
+      const key = `${normalizeOsfName(feature.properties.STATE)}|${normalizeOsfName(feature.properties.District)}`;
+      const item = osfCumulativeFeatures.get(key);
+      const allAdvisories = (item?.services || []).flatMap(entry => entry.advisories);
+      const level = osfHighestSeverity(allAdvisories);
+      polygon._districtKey = key;
+      polygon._osfServices = item?.services || [];
+      polygon.bindPopup(() => getOsfDistrictPopup(polygon), OSF_POPUP_OPTIONS);
+      if (level !== 'noThreat') {
+        polygon.bindTooltip(osfDistrictTooltipHtml(feature.properties.District, feature.properties.STATE, 'Cumulative', allAdvisories, level), { sticky: true, className: 'osf-district-tooltip' });
+      }
+    }
+  });
+
   // Add Tidal Phase & High Tide Overlay
   osfTidalLayer = createOsfTidalStationLayer();
 
-  Object.entries(osfServiceLayers).forEach(([service,layer]) => {
+  // Activate requested service or all
+  Object.entries(osfServiceLayers).forEach(([service, layer]) => {
     if (!osfRequestedService || osfRequestedService === service) {
       layer.addTo(osfMap);
       osfSelectedServices.add(service);
@@ -695,38 +865,45 @@ function createIncoisOceanWmsLayers() {
   const oceanWmsLayers = createIncoisOceanWmsLayers();
   globalThis._osfOceanLayers = oceanWmsLayers;
 
+  // Add companion WMS layer if a single hazard service was explicitly requested
+  if (osfRequestedService && HAZARD_WMS_COMPANIONS[osfRequestedService]) {
+    const compName = HAZARD_WMS_COMPANIONS[osfRequestedService];
+    if (oceanWmsLayers[compName]) {
+      oceanWmsLayers[compName].addTo(osfMap);
+    }
+  }
+
   const osfOverlays = {
     ...osfServiceLayers,
     'Tidal Phase & High Tide': osfTidalLayer,
     ...oceanWmsLayers
   };
 
-  osfLayerControl = L.control.layers(null,osfOverlays,{collapsed:true,position:'topright'}).addTo(osfMap);
-  osfMap.off('overlayadd',handleOsfLayerSelection); osfMap.off('overlayremove',handleOsfLayerSelection);
-  osfMap.on('overlayadd',handleOsfLayerSelection); osfMap.on('overlayremove',handleOsfLayerSelection);
-  osfMap.invalidateSize({animate:false});
-  fitOsfVisibleBounds();
-  ids('osfMapMeta').textContent = services.map(([name,group]) => `${name}: ${group?.issueDate || '—'}`).join(' · ');
-  updateOsfComposite();
+  osfLayerControl = L.control.layers(null, osfOverlays, { collapsed: true, position: 'topright' }).addTo(osfMap);
+  osfMap.off('overlayadd', handleOsfLayerSelection);
+  osfMap.off('overlayremove', handleOsfLayerSelection);
+  osfMap.on('overlayadd', handleOsfLayerSelection);
+  osfMap.on('overlayremove', handleOsfLayerSelection);
 
-  const banner = ids('osfTideBanner');
-  if (banner) {
-    banner.hidden = !osfTidalLayer || !osfMap.hasLayer(osfTidalLayer);
-  }
+  osfMap.invalidateSize({ animate: false });
+  fitOsfVisibleBounds();
+  updateOsfComposite();
+  updateOsfMapMeta();
+  syncOsfLegends();
 }
 
 async function buildOsfMapLayers(data) {
   if (!osfMap || !window.L) return;
-  ids('osfMapShareStatus').textContent='Loading coastal district polygons…';
+  ids('osfMapShareStatus').textContent = 'Loading coastal district polygons…';
   if (osfLayerControl) osfLayerControl.remove();
   osfMap.eachLayer(layer => { if (!(layer instanceof L.TileLayer)) osfMap.removeLayer(layer); });
-  const services = [['High Wave',data?.highWave],['Swell Surge',data?.swellSurge],['Ocean Currents',data?.oceanCurrent]];
+  const services = [['High Wave', data?.highWave], ['Swell Surge', data?.swellSurge], ['Ocean Currents', data?.oceanCurrent]];
   const overlays = {};
   const bounds = [];
   let polygonData = null;
   try { polygonData = await loadOsfDistrictPolygons(); }
-  catch { ids('osfMapShareStatus').textContent='District polygons could not be loaded; showing state-level advisory markers.'; }
-  services.forEach(([service,group]) => {
+  catch { ids('osfMapShareStatus').textContent = 'District polygons could not be loaded; showing state-level advisory markers.'; }
+  services.forEach(([service, group]) => {
     const layer = L.layerGroup();
     const states = group?.states?.length ? group.states : legacyStateSummaries(group || {});
     const matchedStateLevels = new Set();
@@ -736,16 +913,16 @@ async function buildOsfMapLayers(data) {
       const matches = [];
       states.forEach(state => {
         if (normalizeOsfName(state.name) !== polygonState) return;
-        (state.advisories || []).forEach(advisory => { if (osfDistrictMatches(polygonDistrict,advisory.district)) matches.push({state,advisory}); });
+        (state.advisories || []).forEach(advisory => { if (osfDistrictMatches(polygonDistrict, advisory.district)) matches.push({ state, advisory }); });
       });
       if (!matches.length) return;
       const level = severityOrder.find(severity => matches.some(match => match.advisory.severity === severity)) || 'noThreat';
       matches.forEach(match => matchedStateLevels.add(`${normalizeOsfName(match.state.name)}|${match.advisory.severity}`));
-      const polygon = L.geoJSON(feature,{smoothFactor:2.5,style:{...OSF_POLYGON_BORDER,fillColor:OSF_SEVERITY_COLORS[level],fillOpacity:.55}});
+      const polygon = L.geoJSON(feature, { smoothFactor: 2.5, style: { ...OSF_POLYGON_BORDER, fillColor: OSF_SEVERITY_COLORS[level], fillOpacity: .55 } });
       const messages = [...new Set(matches.map(match => match.advisory.message).filter(Boolean))];
-      polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(polygonDistrict))} · ${escapeHtml(service)}</strong><p>${escapeHtml(severityLabel[level])} · ${escapeHtml(titleCase(feature.properties.STATE))}<br>Issue date: ${escapeHtml(group?.issueDate || '—')}</p>${messages[0] ? `<p>${escapeHtml(messages[0])}</p>` : ''}</div>`,OSF_POPUP_OPTIONS);
+      polygon.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(polygonDistrict))} · ${escapeHtml(service)}</strong><p>${escapeHtml(severityLabel[level])} · ${escapeHtml(titleCase(feature.properties.STATE))}<br>Issue date: ${escapeHtml(group?.issueDate || '—')}</p>${messages[0] ? `<p>${escapeHtml(messages[0])}</p>` : ''}</div>`, OSF_POPUP_OPTIONS);
       polygon.addTo(layer);
-      const polygonBounds = polygon.getBounds(); if (polygonBounds.isValid()) bounds.push(polygonBounds.getSouthWest(),polygonBounds.getNorthEast());
+      const polygonBounds = polygon.getBounds(); if (polygonBounds.isValid()) bounds.push(polygonBounds.getSouthWest(), polygonBounds.getNorthEast());
     });
     states.forEach(state => {
       const coordinate = osfStateCoordinates(state.name);
@@ -753,37 +930,43 @@ async function buildOsfMapLayers(data) {
       severityOrder.forEach(level => {
         const count = Number(state.counts?.[level] || 0);
         if (!count || matchedStateLevels.has(`${normalizeOsfName(state.name)}|${level}`)) return;
-        const serviceOffset = OSF_SERVICE_OFFSETS[service] || [0,0];
-        const severityOffset = OSF_SEVERITY_OFFSETS[level] || [0,0];
-        const position = [coordinate[0] + serviceOffset[0] + severityOffset[0],coordinate[1] + serviceOffset[1] + severityOffset[1]];
-        const marker = L.marker(position,{icon:L.divIcon({className:'',html:`<span class="osf-map-marker-label" style="background:${OSF_SEVERITY_COLORS[level]}">${count}</span>`,iconSize:[24,24],iconAnchor:[12,12]}),title:`${titleCase(state.name)} · ${service} · ${severityLabel[level]}`});
-        marker.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(state.name))} · ${escapeHtml(service)}</strong><p>${escapeHtml(severityLabel[level])}: ${count} district ${count === 1 ? 'advisory' : 'advisories'}<br>Issue date: ${escapeHtml(group?.issueDate || '—')}</p></div>`,OSF_POPUP_OPTIONS);
+        const serviceOffset = OSF_SERVICE_OFFSETS[service] || [0, 0];
+        const severityOffset = OSF_SEVERITY_OFFSETS[level] || [0, 0];
+        const position = [coordinate[0] + serviceOffset[0] + severityOffset[0], coordinate[1] + serviceOffset[1] + severityOffset[1]];
+        const marker = L.marker(position, { icon: L.divIcon({ className: '', html: `<span class="osf-map-marker-label" style="background:${OSF_SEVERITY_COLORS[level]}">${count}</span>`, iconSize: [24, 24], iconAnchor: [12, 12] }), title: `${titleCase(state.name)} · ${service} · ${severityLabel[level]}` });
+        marker.bindPopup(`<div class="osf-popup"><strong>${escapeHtml(titleCase(state.name))} · ${escapeHtml(service)}</strong><p>${escapeHtml(severityLabel[level])}: ${count} district ${count === 1 ? 'advisory' : 'advisories'}<br>Issue date: ${escapeHtml(group?.issueDate || '—')}</p></div>`, OSF_POPUP_OPTIONS);
         marker.addTo(layer); bounds.push(position);
       });
     });
     overlays[service] = layer;
     layer.addTo(osfMap);
   });
+  osfServiceLayers = overlays;
   overlays['Tidal Phase & High Tide'] = createOsfTidalStationLayer();
-  Object.assign(overlays, createIncoisOceanWmsLayers());
-  osfLayerControl = L.control.layers(null,overlays,{collapsed:true,position:'topright'}).addTo(osfMap);
-  osfMap.invalidateSize({animate:false});
-  if (bounds.length) osfMap.fitBounds(bounds,{padding:innerWidth < 700 ? [8,8] : [20,20],maxZoom:6,animate:false}); else osfMap.setView([15,79],innerWidth < 700 ? 4 : 5);
-  ids('osfMapMeta').textContent = services.map(([name,group]) => `${name}: ${group?.issueDate || '—'}`).join(' · ');
-  if (polygonData) ids('osfMapShareStatus').textContent='Official INCOIS coastal district polygons. Use the layer control to select services.';
+  const oceanWms = createIncoisOceanWmsLayers();
+  globalThis._osfOceanLayers = oceanWms;
+  Object.assign(overlays, oceanWms);
+  osfLayerControl = L.control.layers(null, overlays, { collapsed: true, position: 'topright' }).addTo(osfMap);
+  osfMap.invalidateSize({ animate: false });
+  if (bounds.length) osfMap.fitBounds(bounds, { padding: innerWidth < 700 ? [8, 8] : [20, 20], maxZoom: 6, animate: false }); else osfMap.setView([15, 79], innerWidth < 700 ? 4 : 5);
+  updateOsfMapMeta();
+  syncOsfLegends();
+  if (polygonData) ids('osfMapShareStatus').textContent = 'Official INCOIS coastal district polygons. Use the layer control to select services.';
 }
 
 function ensureOsfMap() {
   if (!window.L) return null;
   if (!osfMap) {
-    osfMap = L.map('osfMapCanvas',{zoomControl:true,attributionControl:true,minZoom:2,maxZoom:9});
-    osfMap.setView([15,79],innerWidth < 700 ? 4 : 5);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,crossOrigin:true,attribution:'&copy; OpenStreetMap contributors'}).addTo(osfMap);
+    osfMap = L.map('osfMapCanvas', { zoomControl: true, attributionControl: true, minZoom: 2, maxZoom: 9 });
+    osfMap.setView([15, 79], innerWidth < 700 ? 4 : 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, crossOrigin: true, attribution: '&copy; OpenStreetMap contributors' }).addTo(osfMap);
   }
-  void buildCumulativeOsfMapLayers(latestStatusData).catch(err => {
-    console.warn('[OSF] Cumulative map layers failed, falling back to basic layer:', err);
-    buildOsfMapLayers(latestStatusData);
-  });
+  if (!osfLayersPromise) {
+    osfLayersPromise = buildCumulativeOsfMapLayers(latestStatusData).catch(err => {
+      console.warn('[OSF] Cumulative map layers failed, falling back to basic layer:', err);
+      return buildOsfMapLayers(latestStatusData);
+    });
+  }
   return osfMap;
 }
 
@@ -793,58 +976,52 @@ async function openOsfMap(service = null) {
   if (!dialog) return;
   if (!dialog.open) dialog.showModal();
   if (typeof ensureLeaflet === 'function') await ensureLeaflet();
-  requestAnimationFrame(() => {
-    const map=ensureOsfMap();
-    if (!map) return;
-    map.invalidateSize({animate:false});
-    if (osfServiceLayers && Object.keys(osfServiceLayers).length > 0) {
-      Object.entries(osfServiceLayers).forEach(([name,layer]) => {
-        if (!osfRequestedService || osfRequestedService === name) {
+
+  const map = ensureOsfMap();
+  if (!map) return;
+
+  if (osfLayersPromise) {
+    try { await osfLayersPromise; } catch {}
+  }
+
+  if (osfServiceLayers && Object.keys(osfServiceLayers).length > 0) {
+    Object.entries(osfServiceLayers).forEach(([name, layer]) => {
+      if (!osfRequestedService || osfRequestedService === name) {
+        if (!map.hasLayer(layer)) map.addLayer(layer);
+        osfSelectedServices.add(name);
+      } else {
+        if (map.hasLayer(layer)) map.removeLayer(layer);
+        osfSelectedServices.delete(name);
+      }
+    });
+
+    if (globalThis._osfOceanLayers) {
+      const companion = osfRequestedService ? HAZARD_WMS_COMPANIONS[osfRequestedService] : null;
+      Object.entries(globalThis._osfOceanLayers).forEach(([name, layer]) => {
+        if (companion && name === companion) {
           if (!map.hasLayer(layer)) map.addLayer(layer);
-          osfSelectedServices.add(name);
         } else {
           if (map.hasLayer(layer)) map.removeLayer(layer);
-          osfSelectedServices.delete(name);
         }
       });
-      if (globalThis._osfOceanLayers) {
-        Object.entries(globalThis._osfOceanLayers).forEach(([name, layer]) => {
-          if (osfRequestedService && (osfRequestedService === name || name.includes(osfRequestedService))) {
-            if (!map.hasLayer(layer)) map.addLayer(layer);
-          } else {
-            if (map.hasLayer(layer)) map.removeLayer(layer);
-          }
-        });
-      }
-      updateOsfComposite();
-      fitOsfVisibleBounds();
     }
-    const swhLeg = ids('osfSwhLegend');
-    if (swhLeg) {
-      swhLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Significant Wave Height (SWH)'] && map.hasLayer(globalThis._osfOceanLayers['Significant Wave Height (SWH)'])) ? 'inline-flex' : 'none';
-    }
-    const swellLeg = ids('osfSwellLegend');
-    if (swellLeg) {
-      swellLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Swell Height'] && map.hasLayer(globalThis._osfOceanLayers['Swell Height'])) ? 'inline-flex' : 'none';
-    }
-    const tperLeg = ids('osfTperLegend');
-    if (tperLeg) {
-      tperLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Peak Wave Period (Tper)'] && map.hasLayer(globalThis._osfOceanLayers['Peak Wave Period (Tper)'])) ? 'inline-flex' : 'none';
-    }
-    const tdirLeg = ids('osfTdirLegend');
-    if (tdirLeg) {
-      tdirLeg.style.display = (globalThis._osfOceanLayers && globalThis._osfOceanLayers['Peak Wave Direction (Tdir)'] && map.hasLayer(globalThis._osfOceanLayers['Peak Wave Direction (Tdir)'])) ? 'inline-flex' : 'none';
-    }
-    const curLeg = ids('osfCurrentLegend');
-    if (curLeg) {
-      curLeg.style.display = (globalThis._osfOceanLayers && (globalThis._osfOceanLayers['Ocean Currents (Speed)'] || globalThis._osfOceanLayers['Ocean Current Vectors']) && map.hasLayer(globalThis._osfOceanLayers['Ocean Currents (Speed)'] || globalThis._osfOceanLayers['Ocean Current Vectors'])) ? 'inline-flex' : 'none';
-    }
-    const banner = ids('osfTideBanner');
-    if (banner) {
-      banner.hidden = !osfTidalLayer || !map.hasLayer(osfTidalLayer);
-    }
-  });
+
+    updateOsfComposite();
+    updateOsfMapMeta();
+    syncOsfLegends();
+    map.invalidateSize({ animate: false });
+    fitOsfVisibleBounds();
+  }
 }
+
+function refreshOsfMapLayers(data) {
+  if (osfMap) {
+    osfLayersPromise = buildCumulativeOsfMapLayers(data || latestStatusData).catch(err => {
+      console.warn('[OSF] Refresh cumulative layers failed:', err);
+    });
+  }
+}
+globalThis.refreshOsfMapLayers = refreshOsfMapLayers;
 
 const nextOsfMapPaint = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 

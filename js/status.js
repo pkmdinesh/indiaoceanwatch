@@ -119,6 +119,9 @@ function render(data) {
       }
       if (new URLSearchParams(location.search).get('view') === 'osf-map' && !osfMapOpenedFromUrl) { osfMapOpenedFromUrl=true; openOsfMap(); }
       if (new URLSearchParams(location.search).get('view') === 'pfz-map' && !pfzMapOpenedFromUrl) { pfzMapOpenedFromUrl=true; openPfzMap(); }
+      if (typeof refreshOsfMapLayers === 'function' && ids('osfMapDialog')?.open) {
+        refreshOsfMapLayers(data);
+      }
     }, 0);
   });
 }
