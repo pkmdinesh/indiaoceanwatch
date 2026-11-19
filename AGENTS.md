@@ -25,11 +25,26 @@
 ## Cache & Service Worker Rules
 - **Cache Invalidation**:
   - When modifying any HTML, CSS, JS, or GeoJSON asset, bump `CACHE_VERSION` in `js/config.js`.
+  - Immediately synchronize asset query strings across `index.html` by running:
+    ```powershell
+    npm run sync-version
+    ```
 - **App Shell Synchronisation**:
   - All static assets listed in `sw.js` (`APP_SHELL`) must match `tests/validation/validate-assets.mjs`.
+
+## Snapshot Schema & Multi-Hazard Rules
+- **Schema Adherence**:
+  - Generated `status.json` must strictly conform to `data/status.schema.json`.
+  - Always run snapshot validation before committing data changes:
+    ```powershell
+    powershell -NoProfile -File scripts/validate-status.ps1 -Path .\status.json
+    ```
+- **GeoJSON Integrity**:
+  - GeoJSON datasets in `data/` (`pfz-*.geojson`, `osf-district-polygons.geojson`) must retain valid `FeatureCollection` structures with non-empty feature coordinates.
 
 ## Verification Protocol
 - After making any code or asset changes, always run:
   ```powershell
-  node tests/validation/validate-assets.mjs
+  npm test
   ```
+  Ensure asset paths, JSON/GeoJSON syntax, and cache query parameters pass without warnings.
