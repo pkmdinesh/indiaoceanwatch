@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T16:32:50.198Z",
+  "updated": "2026-11-25T16:46:47.308Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
@@ -24,17 +24,17 @@
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 176448,
+      "size": 191808,
       "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN",
-      "textHash": "946ecb15e5356b7e10461373d48dd939741a9363ef7720d2871ea06b3e7afa07"
+      "textHash": "f223c4805d0d166b675786ce32e3eb5e90705523652bf512fadffd2c8b1482c2"
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 148800,
+      "size": 155712,
       "title": "INCOIS സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN",
-      "textHash": "694006f2625905268de85992efad4207aae7431eded1a71f1aef9f6a80e476a6"
+      "textHash": "ac156d414e310ae6178b352271e25121729243602646c06be3f59808937ea541"
     },
     "bn": {
       "file": "audio/bulletins/bulletin-bn.mp3",
