@@ -1,40 +1,40 @@
 {
-  "updated": "2026-11-26T14:16:59.554Z",
+  "updated": "2026-11-27T14:46:42.665Z",
   "bulletins": {
     "en": {
       "file": "audio/bulletins/bulletin-en.mp3",
-      "size": 224832,
+      "size": 243264,
       "title": "INCOIS Ocean State Forecast Advisory (English)",
       "langCode": "en-IN",
-      "textHash": "98193bfcbf92c4851f04bcc4e368e6169230ae23bf91b684dcda42bae6623d11"
+      "textHash": "2b4b9029a869d1883b0fe05c76ad2b7a203e26f43ea308e3e1007595944ba6b5"
     },
     "hi": {
       "file": "audio/bulletins/bulletin-hi.mp3",
-      "size": 231552,
+      "size": 272064,
       "title": "INCOIS महासागर स्थिति पूर्वानुमान (हिन्दी)",
       "langCode": "hi-IN",
-      "textHash": "94d94351d54d4f5cc92c8e441fa77abc861f0c48b84ee2e2ab7890317829cc92"
+      "textHash": "3c069b339dcd4968f635970c3b5ed7c04706a358d2a822e2ef602e3ca7c2cf6a"
     },
     "ta": {
       "file": "audio/bulletins/bulletin-ta.mp3",
-      "size": 238656,
+      "size": 198912,
       "title": "INCOIS கடல் நிலை முன்னறிவிப்பு ஆலோசனை (தமிழ்)",
       "langCode": "ta-IN",
-      "textHash": "8c7abb28c4f035cecb25bbfbc9ff3031d71cdef00cdb0c1b445bdc738127759b"
+      "textHash": "790694d5090b4493eb1a26f4a5dec812e6a2294579f5acae489589b72c8f8793"
     },
     "te": {
       "file": "audio/bulletins/bulletin-te.mp3",
-      "size": 207168,
+      "size": 210048,
       "title": "INCOIS సముద్ర స్థితి సూచన (తెలుగు)",
       "langCode": "te-IN",
-      "textHash": "7453fbbb988ac2cc90c36cc3906c0338cfe849d5577df2363e7042500e0ac14d"
+      "textHash": "cfbace3e22428a62d759495b4cd37e69ed9fa5e52361a9093f5f2a197c2f5a91"
     },
     "ml": {
       "file": "audio/bulletins/bulletin-ml.mp3",
-      "size": 69312,
+      "size": 119616,
       "title": "INCOIS സമുദ്രാവസ്ഥ പ്രവചനം (മലയാളം)",
       "langCode": "ml-IN",
-      "textHash": "4f26a953590c1f75e8fb532c0abd69bf63febd36c719ffa9d0e6c6cf6a3b8ba4"
+      "textHash": "edb37fc56fd1a78fd7824c2d617cc17d71368fe17444e839f92b782975637fa9"
     },
     "bn": {
       "file": "audio/bulletins/bulletin-bn.mp3",
@@ -45,17 +45,17 @@
     },
     "mr": {
       "file": "audio/bulletins/bulletin-mr.mp3",
-      "size": 57984,
+      "size": 56448,
       "title": "INCOIS महासागर स्थिती अंदाज (मराठी)",
       "langCode": "mr-IN",
-      "textHash": "986783f847a85a5f3115d9b4332a805573d1f26dd891e6b8ac6640c83e3d1f90"
+      "textHash": "246486f28a92498528b3e96a42e0167b568a5d8c5092d948b17dc7556feed1bf"
     },
     "gu": {
       "file": "audio/bulletins/bulletin-gu.mp3",
-      "size": 125760,
+      "size": 76224,
       "title": "INCOIS મહાસાગર સ્થિતિ પૂર્વાનુમાન (ગુજરાતી)",
       "langCode": "gu-IN",
-      "textHash": "84d0d889d53cd2f3002492ebbba78556bab2502c34cf3c809cc09435c1383e10"
+      "textHash": "b48935f7083ceb26f5a47139c22d53c203908f4e14e3defeb318cb0cfd176c81"
     },
     "or": {
       "file": "audio/bulletins/bulletin-or.mp3",
@@ -66,10 +66,10 @@
     },
     "kn": {
       "file": "audio/bulletins/bulletin-kn.mp3",
-      "size": 92928,
+      "size": 77568,
       "title": "INCOIS ಸಾಗರ ಸ್ಥಿತಿ ಮುನ್ಸೂಚನೆ (ಕನ್ನಡ)",
       "langCode": "kn-IN",
-      "textHash": "eed1c511c97067fe036733e5ee24d007b6cc19f8e895c79e8954bd76820d2b12"
+      "textHash": "75691c29640c96d0acfcdfbaf3a7a2e89f7db3c419ae418a6910508dd2f67e2e"
     }
   }
 }
